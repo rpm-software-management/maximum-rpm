@@ -44,10 +44,9 @@
 	<arg><synopfragmentref linkend="select-options">
 	    select-options
 	  </synopfragmentref></arg>
-	<arg><option>--nodeps</option></arg>
-	<arg><option>--nofiles</option></arg>
-	<arg><option>--nomd5</option></arg>
-	<arg><option>--noscripts</option></arg>
+	<arg><synopfragmentref linkend="verify-options">
+	    verify-options
+	  </synopfragmentref></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
@@ -155,7 +154,13 @@
     <arg><option>-g,--group</option> <replaceable>GROUP</replaceable></arg>
     <arg><option>-p,--package</option> <replaceable>PACKAGE_FILE</replaceable></arg>
 	<sbr>
-    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--fileid</option> <replaceable>MD5</replaceable></arg>
+    <arg><option>--hdrid</option> <replaceable>SHA1</replaceable></arg>
+    <arg><option>--pkgid</option> <replaceable>MD5</replaceable></arg>
+	<sbr>
+
+    <arg><option>--querybynumber</option> <replaceable>HDRNUM</replaceable></arg>
+    <arg><option>--tid</option> <replaceable>TID</replaceable></arg>
     <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
 	<sbr>
     <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
@@ -204,6 +209,41 @@
     </simplelist>
   </para>
   </refsect2><refsect2>
+  <title>verify-options</title>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command></command>
+
+<!-- ================================ -->
+  <synopfragment id="verify-options">
+  <group choice="plain">
+    <arg><option>--nodeps</option></arg>
+    <arg><option>--nofiles</option></arg>
+    <arg><option>--noscripts</option></arg>
+	<sbr>
+    <arg><option>--nodigest</option></arg>
+    <arg><option>--nosignature</option></arg>
+	<sbr>
+    <arg><option>--nolinkto</option></arg>
+    <arg><option>--nomd5</option></arg>
+    <arg><option>--nosize</option></arg>
+    <arg><option>--nouser</option></arg>
+	<sbr>
+    <arg><option>--nogroup</option></arg>
+    <arg><option>--nomtime</option></arg>
+    <arg><option>--nomode</option></arg>
+    <arg><option>--nordev</option></arg>
+  </group>
+  </synopfragment>
+<!-- ================================ -->
+
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+  </refsect2><refsect2>
   <title>install-options</title>
   <para>
     <simplelist>
@@ -227,8 +267,12 @@
     <arg><option>--includedocs</option></arg>
     <arg><option>--justdb</option></arg>
 	<sbr>
+    <arg><option>--nodigest</option></arg>
+    <arg><option>--nosignature</option></arg>
     <arg><option>--nodeps</option></arg>
+    <arg><option>--nosuggest</option></arg>
     <arg><option>--noorder</option></arg>
+	<sbr>
     <arg><option>--noscripts</option></arg>
     <arg><option>--notriggers</option></arg>
 	<sbr>
@@ -491,10 +535,25 @@ systems of the binary package and host don't match.
 	Update only the database, not the filesystem.
       </para></listitem>
     </varlistentry><varlistentry>
+    <term><option>--nodigest</option></term>
+    <listitem><para>
+	Don't verify package or header digests when reading.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nosignature</option></term>
+    <listitem><para>
+	Don't verify package or header signatures when reading.
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>--nodeps</option></term>
     <listitem><para>
 	Don't do a dependency check before installing or upgrading
 	a package.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nosuggest</option></term>
+    <listitem><para>
+	Don't suggest package(s) that provide a missing dependency.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noorder</option></term>
@@ -685,10 +744,22 @@ systems of the binary package and host don't match.
 	Query package owning <replaceable>FILE</replaceable>.
     </para></listitem>
     </varlistentry><varlistentry>
+    <term><option>--fileid</option> <replaceable>MD5</replaceable></term>
+    <listitem><para>
+	Query package that contains a given file identifier, i.e. the
+	<replaceable>MD5</replaceable> digest of the file contents.
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>-g, --group</option> <replaceable>GROUP</replaceable></term>
     <listitem><para>
 	Query packages with the group of <replaceable>GROUP</replaceable>.
     </para></ListItem>
+    </varlistentry><varlistentry>
+    <term><option>--hdrid</option> <replaceable>SHA1</replaceable></term>
+    <listitem><para>
+	Query package that contains a given header identifier, i.e. the
+	<replaceable>SHA1</replaceable> digest of the immutable header region.
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-p, --package</option> <replaceable>PACKAGE_FILE</replaceable></term>
     <listitem><para>
@@ -710,9 +781,16 @@ systems of the binary package and host don't match.
 	arguments to the query.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--querybynumber</option> <replaceable>NUMBER</replaceable></term>
+    <term><option>--pkgid</option> <replaceable>MD5</replaceable></term>
     <listitem><para>
-	Query the <replaceable>NUMBER</replaceable>th database entry
+	Query package that contains a given package identifier, i.e. the
+	<replaceable>MD5</replaceable> digest of the combined header and
+	payload contents.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--querybynumber</option> <replaceable>HDRNUM</replaceable></term>
+    <listitem><para>
+	Query the <replaceable>HDRNUM</replaceable>th database entry
 	directly; this is useful only for debugging.
     </para></listitem>
     </varlistentry><varlistentry>
@@ -723,6 +801,14 @@ systems of the binary package and host don't match.
 	is available, this type of query permits rpm to be used to extract
 	information from spec files without having to write a specfile
 	parser.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--tid</option> <replaceable>TID</replaceable></term>
+    <listitem><para>
+	Query package(s) that have a given <replaceable>TID</replaceable>
+	transaction identifier. A unix time stamp is currently used as a
+	transaction identifier. All package(s) installed or erased within
+	a single transaction have a common identifier.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></term>
@@ -847,10 +933,9 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	<arg><synopfragmentref linkend="select-options">
 	    select-options
 	  </synopfragmentref></arg>
-	<arg><option>--nodeps</option></arg>
-	<arg><option>--nofiles</option></arg>
-	<arg><option>--nomd5</option></arg>
-	<arg><option>--noscripts</option></arg>
+	<arg><synopfragmentref linkend="verify-options">
+	    verify-options
+	  </synopfragmentref></arg>
       </cmdsynopsis>
     </para>
  
@@ -869,27 +954,44 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     <para>
 	The package selection options are the same as for package
 	querying (including package manifest files as arguments).
-	Other options that can be used only in verify mode are:
+	Other options unique to verify mode are:
     <variablelist>
     <varlistentry>
     <term><option>--nodeps</option></term>
     <listitem><para>
-	Don't verify dependencies.
+	Don't verify dependencies of packages.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nodigest</option></term>
+    <listitem><para>
+	Don't verify package or header digests when reading.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--nofiles</option></term>
     <listitem><para>
-	Don't verify files.
+	Don't verify any attributes of package files.
     </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><option>--nomd5</option></term>
-    <listitem><para>
-	Don't verify file MD5 checksums.
-    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
     <listitem><para>
 	Don't execute the <command>%verifyscript</command> scriptlet (if any).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nosignature</option></term>
+    <listitem><para>
+	Don't verify package or header signatures when reading.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nolinkto</option></term>
+    <term><option>--nomd5</option></term>
+    <term><option>--nosize</option></term>
+    <term><option>--nouser</option></term>
+    <term><option>--nogroup</option></term>
+    <term><option>--nomtime</option></term>
+    <term><option>--nomode</option></term>
+    <term><option>--nordev</option></term>
+    <listitem><para>
+	Don't verify the corresponding file attribute.
     </para></listitem>
     </varlistentry>
     </variablelist>
@@ -901,17 +1003,24 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	<simplelist>
 	<member>
 		<command>c</command>
-		<command>%config</command> configuration file
+		<command>%config</command> configuration file.
 	</member><member>
 		<command>d</command>
-		<command>%doc</command> documentation file
+		<command>%doc</command> documentation file.
 	</member><member>
 		<command>g</command>
-		<command>%ghost</command> file (i.e. the file contents were not included in the package)
+		<command>%ghost</command> file (i.e. the file contents are
+		not included in the package payload).
+	</member><member>
+		<command>l</command>
+		<command>%license</command> license file.
+	</member><member>
+		<command>r</command>
+		<command>%readme</command> readme file.
 	</member>
 	</simplelist>
     </para><para>
-	from the package header and then the file name.
+	from the package header, followed by the file name.
     </para><para>
 	Each of the 8 characters denotes the result of a comparison of
 	attribute(s) of the file to the value of those attribute(s) recorded
