@@ -96,86 +96,96 @@
       </para>
     </sect1>
 
-<sect1 id="s1-rpm-depend-">
-<title>Automatic Dependencies</title>
-<indexterm>
-<primary>dependencies!automatically added</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-depend-auto-depend">
+      <title>Automatic Dependencies</title>
+      <indexterm>
+        <primary>dependencies!automatically added</primary>
+        <secondary></secondary>
+      </indexterm>
 
-When a package is built by RPM, if any file in the package's
-<command>%files</command> list is a shared library, the library's "soname" is
-automatically added to the list of capabilities the package provides.  The
-soname is the name used to determine compatibility between different
-versions of a library.
+      <para>
+        When a package is built by RPM, if any file in the package's
+        <command>%files</command> list is a shared library, the library's
+        "soname" is automatically added to the list of capabilities the package
+        provides.  The soname is the name used to determine compatibility
+        between different versions of a library.
+      </para>
+      <para>
+        Note that this is <emphasis>not</emphasis> a filename.  In fact, no
+        aspect of RPM's dependency processing is based on filenames.  Many
+        people new to RPM often make the assumption that a failed dependency
+        represents a missing file.  This is not the case.
+      </para>
+      <para>
+        Remember that RPM's dependency processing is based on knowing what
+        capabilities are provided by a package and what capabilities a package
+        requires.  We've seen how RPM automatically determines what shared
+        library resources a package provides.  But does it automatically
+        determine what shared libraries a package <emphasis>requires</emphasis>?
+      </para>
+      <para>
+        Yes!  RPM does this by running <command>ldd</command> on every
+        executable program in a package's <command>%files</command> list.  Since
+        <command>ldd</command> provides a list of the shared libraries each
+        program requires, both halves of the equation are complete --- that is,
+        the packages that make shared libraries available,
+        <emphasis>and</emphasis> the packages that require those shared
+        libraries, are tracked by RPM.  RPM can then take that information into
+        account when packages are installed, upgraded, or erased.
+      </para>
 
-Note that this is <emphasis>not</emphasis> a filename.  In fact, no aspect of RPM's
-dependency processing is based on filenames.  Many people new to RPM often
-make the assumption that a failed dependency represents a missing file.
-This is not the case.
+      <sect2 id="s2-rpm-depend-auto-depend-scripts">
+        <title>The Automatic Dependency Scripts</title>
+        <indexterm>
+          <primary>dependencies!scripts related to</primary>
+          <secondary></secondary>
+        </indexterm>
 
-Remember that RPM's dependency processing is based on knowing what
-capabilities are provided by a package and what capabilities a package
-requires.  We've seen how RPM automatically determines what shared library
-resources a package provides.  But does it automatically determine what
-shared libraries a package <emphasis>requires</emphasis>?
+        <para>
+          RPM uses two scripts to handle automatic dependency processing.  They
+          reside in <filename>/usr/bin</filename> and are called
+          <filename>find-requires</filename>, and
+          <filename>find-provides</filename>.  We'll take a look at them in a
+          minute, but first let's look at why there are scripts to do this sort
+          of thing.  Wouldn't it be better to have this built into RPM itself?
+        </para>
+        <para>
+          Actually, creating scripts for this sort of thing
+          <emphasis>is</emphasis> a better idea.  The reason?  RPM has already
+          been ported to a variety of different operating systems.  Determining
+          what shared libraries an executable requires, and the soname of shared
+          libraries, is simple, but the exact steps required vary widely from
+          one operating system to another.  Putting this part of RPM into a
+          script makes it easier to port RPM.
+        </para>
+        <para>
+          Let's take a look at the scripts that are used by RPM under the Linux
+          operating system.
+        </para>
 
-Yes!  RPM does this by running <command>ldd</command> on every executable program in
-a package's <command>%files</command> list.  Since <command>ldd</command> provides a list of
-the shared libraries each program requires, both halves of the equation are
-complete --- that is, the packages that make shared libraries available,
-<emphasis>and</emphasis> the packages that require those shared libraries, are tracked by
-RPM.  RPM can then take that information into account when packages are
-installed, upgraded, or erased.
+        <sect3 id="s3-rpm-depend-find-requires">
+          <title>
+            <filename>find-requires</filename> --- Automatically Determine
+            Shared Library Requirements
+          </title>
+          <indexterm>
+            <primary>dependencies!scripts related to!<filename>find-requires</filename></primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-<sect2 id="s2-rpm-depend-">
-<title>The Automatic Dependency Scripts</title>
-<indexterm>
-<primary>dependencies!scripts related to</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <indexterm>
+            <primary><filename>find-requires</filename> script</primary>
+          </indexterm>
 
-RPM uses two scripts to handle automatic dependency processing.  They
-reside in <filename>/usr/bin</filename> and are called <filename>find-requires</filename>, and
-<filename>find-provides</filename>.  We'll take a look at them in a minute, but first
-let's look at why there are scripts to do this sort of thing.  Wouldn't it
-be better to have this built into RPM itself?
+          <para>
+            The <filename>find-requires</filename> script for Linux is quite
+            simple:
 
-Actually, creating scripts for this sort of thing <emphasis>is</emphasis> a better idea.
-The reason?  RPM has already been ported to a variety of different
-operating systems.  Determining what shared libraries an executable
-requires, and the soname of shared libraries, is simple, but the exact
-steps required vary widely from one operating system to another.  Putting
-this part of RPM into a script makes it easier to port RPM.
-
-Let's take a look at the scripts that are used by RPM under the Linux
-operating system.
-
-<sect3 id="s3-rpm-depend-">
-<title><filename>find-requires</filename> --- Automatically Determine Shared Library Requirements</title>
-<indexterm>
-<primary>dependencies!scripts related to!<filename>find-requires</filename></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>find-requires@<filename>find-requires</filename> script</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <filename>find-requires</filename> script for Linux is quite simple:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-depend-find-requires-listing">
+              <title><filename>find-requires</filename> Script Listing</title>
+              <screen width="60">
+<computeroutput>
 #!/bin/sh
 
 # note this works for both a.out and ELF executables
@@ -187,51 +197,43 @@ filelist=`xargs -r file | fgrep executable | cut -d: -f1 `
 for f in $filelist; do
     ldd $f | awk '/=&gt;/ { print $1 }'
 done | sort -u | xargs -r -n 1 basename | sort -u
-</screen>
-</figure>
-This script first creates a list of executable files.  Then, for each file
-in the list, <command>ldd</command> determines the file's shared library
-requirements, producing a list of sonames.  Finally, the list of sonames
-is sanitized by removing duplicates, and removing any paths.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
 
-<indexterm>
-<primary>dependencies!scripts related to!<filename>find-requires</filename>|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            This script first creates a list of executable files.  Then, for
+            each file in the list, <command>ldd</command> determines the file's
+            shared library requirements, producing a list of sonames.  Finally,
+            the list of sonames is sanitized by removing duplicates, and
+            removing any paths.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary>find-requires@<filename>find-requires</filename> script|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-depend-find-provides">
+          <title>
+            <filename>find-provides</filename> --- Automatically Determine
+            Shared Library Sonames
+          </title>
+          <indexterm>
+            <primary>dependencies!scripts related to!<filename>find-provides</filename></primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-</sect3>
+          <indexterm>
+            <primary><filename>find-provides</filename> script</primary>
+          </indexterm>
 
-<sect3 id="s3-rpm-depend-">
-<title><filename>find-provides</filename> --- Automatically Determine Shared Library Sonames</title>
-<indexterm>
-<primary>dependencies!scripts related to!<filename>find-provides</filename></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <filename>find-provides</filename> script for Linux is a bit
+            more complex, but still pretty straightforward:
 
-<indexterm>
-<primary>find-provides@<filename>find-provides</filename> script</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <filename>find-provides</filename> script for Linux is a bit more complex, but
-still pretty straightforward:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-depend-find-provides-script-listing">
+              <title><filename>find-provides</filename> Script Listing</title>
+              <screen width="60">
+<computeroutput>
 #!/bin/bash
 
 # This script reads filenames from STDIN and outputs any relevant
@@ -251,662 +253,630 @@ for f in $filelist; do
         echo ${f##*/}
     fi
 done | sort -u
-</screen>
-</figure>
-First, a list of shared libraries is created.  Then, for each file on the
-list, the soname is extracted, cleaned up, and duplicates removed.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
 
-<indexterm>
-<primary>dependencies!scripts related to!<filename>find-provides</filename>|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            First, a list of shared libraries is created.  Then, for each file
+            on the list, the soname is extracted, cleaned up, and duplicates
+            removed.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>find-provides@<filename>find-provides</filename> script|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-depend-auto-depend-example">
+        <title>Automatic Dependencies: An Example</title>
+        <indexterm>
+          <primary>dependencies!automatically added!example of</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Let's take a widely used program, <command>ls</command>, the directory
+          lister, as an example.  On a &RHL; system, <command>ls</command> is
+          part of the <filename>fileutils</filename> package and is installed in
+          <filename>/bin</filename>.  Let's play the part of RPM during
+          <filename>fileutils</filename>' package build and run
+          <filename>find-requires</filename> on <filename>/bin/ls</filename>.
+          Here's what we'll see:
 
-</sect2>
-
-<sect2 id="s2-rpm-depend-">
-<title>Automatic Dependencies: An Example</title>
-<indexterm>
-<primary>dependencies!automatically added!example of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Let's take a widely used program, <command>ls</command>, the directory lister, as an
-example.  On a Red Hat <!-- *** RED HAT *** -->Linux system, <command>ls</command> is part of the
-<filename>fileutils</filename> package and is installed in <filename>/bin</filename>.  Let's play
-the part of RPM during <filename>fileutils</filename>' package build and run
-<filename>find-requires</filename> on <filename>/bin/ls</filename>.  Here's what we'll see:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>find-requires</userinput>
+          <figure id="sc-rpm-depend-find-requires-by-hand">
+            <title>Running <filename>find-requires</filename> by Hand</title>
+            <screen width="60">
+<prompt># </prompt><userinput>find-requires</userinput>
 <userinput>/bin/ls</userinput>
 <userinput>&lt;ctrl-d&gt;</userinput>
+<computeroutput>
 libc.so.5
-#
-</screen>
-</figure>
-The <filename>find-requires</filename> script returned <filename>libc.so.5</filename>.  Therefore,
-RPM should add a requirement for <filename>libc.so.5</filename> when the
-<filename>fileutils</filename> package is built.  We can verify that RPM did add
-<command>ls</command>' requirement for <filename>libc.so.5</filename> by using RPM's
-<command>--requires</command> option to  display <filename>fileutils</filename>' requirements:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -q --requires fileutils</userinput>
+        <para>
+          The <filename>find-requires</filename> script returned
+          <filename>libc.so.5</filename>.  Therefore, RPM should add a
+          requirement for <filename>libc.so.5</filename> when the
+          <filename>fileutils</filename> package is built.  We can verify that
+          RPM did add <command>ls</command>' requirement for
+          <filename>libc.so.5</filename> by using RPM's
+          <command>--requires</command> option to display
+          <filename>fileutils</filename>' requirements:
+
+          <figure id="sc-rpm-depend-find-requires-rpm-example">
+            <title>
+              RPM Query Using the <command>--requires</command> Option </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -q --requires fileutils</userinput>
+<computeroutput>
 libc.so.5
-#
-</screen>
-</figure>
-OK, that's the first half of the equation --- RPM automatically detecting a
-package's shared library requirements.  Now let's look at the second half
-of the equation -- RPM detecting packages that provide shared libraries.
-Since the <filename>libc</filename> package includes, among others, the shared library
-<filename>/lib/libc.so.5.3.12</filename>, RPM would obtain its soname.  We can simulate
-this by using <filename>find-provides</filename> to print out the library's soname:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>find-provides</userinput>
+        <para>
+          OK, that's the first half of the equation --- RPM automatically
+          detecting a package's shared library requirements.  Now let's look at
+          the second half of the equation -- RPM detecting packages that provide
+          shared libraries.  Since the <filename>libc</filename> package
+          includes, among others, the shared library
+          <filename>/lib/libc.so.5.3.12</filename>, RPM would obtain its soname.
+          We can simulate this by using <filename>find-provides</filename> to
+          print out the library's soname:
+
+          <figure id="sc-rpm-depend-find-provides-by-hand">
+            <title>Running <filename>find-provides</filename> by Hand</title>
+            <screen width="60">
+<prompt># </prompt><userinput>find-provides</userinput>
 <userinput>/lib/libc.so.5.3.12</userinput>
 <userinput>&lt;ctrl-d&gt;</userinput>
+<computeroutput>
 libc.so.5
-#
-</screen>
-</figure>
-OK, so <filename>/lib/libc.so.5.3.12</filename>'s soname is <filename>libc.so.5</filename>.  Let's
-see if the <filename>libc</filename> package really does "provide" the
-<filename>libc.so.5</filename> soname:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          OK, so <filename>/lib/libc.so.5.3.12</filename>'s soname is
+          <filename>libc.so.5</filename>.  Let's see if the
+          <filename>libc</filename> package really does "provide" the
+          <filename>libc.so.5</filename> soname:
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -q --provides libc</userinput>
+          <figure id="sc-rpm-depend-find-provides-rpm-example">
+            <title>
+              RPM Query Using the <command>--provides</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -q --provides libc</userinput>
+<computeroutput>
 libm.so.5
 libc.so.5
-#
-</screen>
-</figure>
-Yes, there it is, along with the soname of another library contained in the
-package.  In this way, RPM can ensure that any package requiring
-<filename>libc.so.5</filename> will have a compatible library available as long as the
-<filename>libc</filename> package, which provides <filename>libc.so.5</filename>, is installed.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
 
-In most cases, automatic dependencies are enough to fill the bill.  However,
-there are circumstances when the package builder has to manually add
-dependency information to a package.  Fortunately, RPM's approach to manual
-dependencies is both simple and flexible.
+        <para>
+          Yes, there it is, along with the soname of another library contained
+          in the package.  In this way, RPM can ensure that any package
+          requiring <filename>libc.so.5</filename> will have a compatible
+          library available as long as the <filename>libc</filename> package,
+          which provides <filename>libc.so.5</filename>, is installed.
+        </para>
+        <para>
+          In most cases, automatic dependencies are enough to fill the bill.
+          However, there are circumstances when the package builder has to
+          manually add dependency information to a package.  Fortunately, RPM's
+          approach to manual dependencies is both simple and flexible.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>dependencies!automatically added!example of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-depend-autoreqprov">
+        <title>
+          The <command>autoreqprov</command> Tag --- Disable Automatic
+          Dependency Processing
+        </title>
+        <indexterm>
+          <primary>dependencies!<command>autoreqprov</command> tag</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<indexterm>
-<primary>dependencies!scripts related to|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <indexterm>
+          <primary><command>autoreqprov</command> tag</primary>
+        </indexterm>
 
-</sect2>
+        <para>
+          There may be times when RPM's automatic dependency processing is not
+          desired.  In these cases, the <command>autoreqprov</command> tag may
+          be used to disable it.  This tag takes a <command>yes/no</command> or
+          <command>0/1</command> value.  For example, to disable automatic
+          dependency processing, the following line may be used:
 
-<sect2 id="s2-rpm-depend-">
-<title>The <command>autoreqprov</command> Tag --- Disable Automatic Dependency Processing</title>
-<indexterm>
-<primary>dependencies!<command>autoreqprov</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>autoreqprov@<command>autoreqprov</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-There may be times when RPM's automatic dependency processing is not
-desired.  In these cases, the <command>autoreqprov</command> tag may be used to
-disable it.  This tag takes a <command>yes/no</command> or <command>0/1</command> value.  For
-example, to disable automatic dependency processing, the following line may
-be used:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-depend-autoreqprov-example">
+            <title>The <command>autoreqprov</command> Tag</title>
+            <screen width="60">
+<computeroutput>
 AutoReqProv: no
-</screen>
-</figure>
-<indexterm>
-<primary>dependencies!<command>autoreqprov</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary>autoreqprov@<command>autoreqprov</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-depend-manual-dependencies">
+      <title>Manual Dependencies</title>
+      <indexterm>
+        <primary>dependencies!manually added</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<indexterm>
-<primary>dependencies!automatically added|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        You might have noticed that we've been using the words "requires" and
+        "provides" to describe the dependency relationships between packages.
+        As it turns out, these are the exact words used in spec files to
+        manually add dependency information.  Let's look at the first tag:
+        <command>requires</command>.
+      </para>
 
-</sect2>
+      <sect2 id="s2-rpm-depend-requires-tag">
+        <title>The <command>requires</command> Tag</title>
+        <indexterm>
+          <primary>dependencies!<command>requires</command> tag</primary>
+          <secondary></secondary>
+        </indexterm>
 
-</sect1>
+        <indexterm>
+          <primary><command>requires</command> tag</primary>
+        </indexterm>
 
-<sect1 id="s1-rpm-depend-">
-<title>Manual Dependencies</title>
-<indexterm>
-<primary>dependencies!manually added</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          We've been deliberately vague when discussing exactly what it is that
+          a package requires.  Although we've used the word "capabilities", in
+          fact, manual dependency requirements are always represented in terms
+          of packages.  For example, if package <filename>foo</filename>
+          requires that package <filename>bar</filename> is installed, it's only
+          necessary to add the following line to <filename>foo</filename>'s spec
+          file:
 
-You might have noticed that we've been using the words "requires" and
-"provides" to describe the dependency relationships between packages.  As
-it turns out, these are the exact words used in spec files to manually add
-dependency information.  Let's look at the first tag: <command>requires</command>.
-
-<sect2 id="s2-rpm-depend-">
-<title>The <command>requires</command> Tag</title>
-<indexterm>
-<primary>dependencies!<command>requires</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>requires@<command>requires</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-We've been deliberately vague when discussing exactly what it is that a
-package requires.  Although we've used the word "capabilities", in fact,
-manual dependency requirements are always represented in terms of packages.
-For example, if package <filename>foo</filename> requires that package <filename>bar</filename> is
-installed, it's only necessary to add the following line to <filename>foo</filename>'s
-spec file:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-depend-requires-example">
+            <title>The <command>requires</command> Tag</title>
+            <screen width="60">
+<computeroutput>
 requires: bar
-</screen>
-</figure>
-Later, when the <filename>foo</filename> package is being installed, RPM will consider
-<filename>foo</filename>'s dependency requirements met if any version of package
-<filename>bar</filename> is already installed.
-<footnote>
-<para>
-As long as the requiring
-<emphasis>and</emphasis> the providing packages are installed using the same invocation
-of RPM, the dependency checking will succeed.  For example, the command
-<command>rpm -ivh *.rpm</command> will properly check for dependencies, even if the
-requiring package ends up being installed <emphasis>before</emphasis> the providing
-package.
-</para>
-</footnote>
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Later, when the <filename>foo</filename> package is being installed,
+          RPM will consider <filename>foo</filename>'s dependency requirements
+          met if any version of package <filename>bar</filename> is already
+          installed.
+          <footnote>
+            <para>
+              As long as the requiring <emphasis>and</emphasis> the providing
+              packages are installed using the same invocation of RPM, the
+              dependency checking will succeed.  For example, the command
+              <command>rpm -ivh *.rpm</command> will properly check for
+              dependencies, even if the requiring package ends up being
+              installed <emphasis>before</emphasis> the providing package.
+            </para>
+          </footnote>
+        </para>
 
-If more than one package is required, they can be added to the
-<command>requires</command> tag, one after another, separated by commas and/or
-spaces.  So if package <filename>foo</filename> requires packages <filename>bar</filename>
-<emphasis>and</emphasis> <filename>baz</filename>, the following line will do the trick:
+        <para>
+          If more than one package is required, they can be added to the
+          <command>requires</command> tag, one after another, separated by
+          commas and/or spaces.  So if package <filename>foo</filename> requires
+          packages <filename>bar</filename> <emphasis>and</emphasis>
+          <filename>baz</filename>, the following line will do the trick:
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-depend-requires-example2">
+            <title>Specifying Multiple Package Dependencies</title>
+            <screen width="60">
+<computeroutput>
 requires: bar, baz
-</screen>
-</figure>
-As long as any version of <filename>bar</filename> and <filename>baz</filename> is installed,
-<filename>foo</filename>'s dependencies will be met.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As long as any version of <filename>bar</filename> and
+          <filename>baz</filename> is installed, <filename>foo</filename>'s
+          dependencies will be met.
+        </para>
 
-<sect3 id="s3-rpm-depend-">
-<title>Adding Version Requirements</title>
-<indexterm>
-<primary>dependencies!version requirements, adding</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-depend-version-requirements">
+          <title>Adding Version Requirements</title>
+          <indexterm>
+            <primary>dependencies!version requirements, adding</primary>
+            <secondary></secondary>
+          </indexterm>
 
-When a package has slightly more stringent needs, it's possible to
-require certain versions of a package.  All that's necessary is to add the
-desired version number, preceded by one of the following comparison
-operators:
+          <para>
+            When a package has slightly more stringent needs, it's possible to
+            require certain versions of a package.  All that's necessary is to
+            add the desired version number, preceded by one of the following
+            comparison operators:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Requires package with a version less than the specified
-version.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Requires package with a version less than the specified
+                  version.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  Requires package with a version less than or equal to the
+                  specified version.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-Requires package with a version less than or equal to
-the specified version.
+              <listitem>
+                <para>
+                  Requires package with a version equal to the specified
+                  version.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  Requires package with a version equal to or greater than the
+                  specified version.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-Requires package with a version equal to the specified
-version.
+              <listitem>
+                <para>
+                  Requires package with a version greater than the specified
+                  version.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
 
-</para>
-</listitem>
+          <para>
+            Continuing with our example, let's suppose that the required version
+            of package <filename>bar</filename> actually needs to be at least
+            2.7, and that the <filename>baz</filename> package must be version
+            2.1 --- no other version will do.  Here's what the
+            <command>requires</command> tag line would look like:
 
-<listitem>
-<para>
-Requires package with a version equal to or greater
-than the specified version.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Requires package with a version greater than the
-specified version.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Continuing with our example, let's suppose that the required version of
-package <filename>bar</filename> actually needs to be at least 2.7, and that the
-<filename>baz</filename> package must be version 2.1 --- no other version will do.
-Here's what the <command>requires</command> tag line would look like:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-depend-requires-version-example">
+              <title>Specifying Version-Specific Dependencies</title>
+              <screen width="60">
+<computeroutput>
 requires: bar &gt;= 2.7, baz = 2.1
-</screen>
-</figure>
-We can get even more specific and require a particular <emphasis>release</emphasis> of a
-package:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            We can get even more specific and require a particular
+            <emphasis>release</emphasis> of a package:
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-depend-requires-version-example2">
+              <title>Specifying Release-Specific Dependencies</title>
+              <screen width="60">
+<computeroutput>
 requires: bar &gt;= 2.7-4, baz = 2.1-1
-</screen>
-</figure>
-</sect3>
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-depend-">
-<title>When Version Numbers Aren't Enough</title>
-You might think that with all these features, RPM's dependency processing
-can handle every conceivable situation.  You'd be right, except for the
-problem of version numbers.  RPM needs to be able to determine which
-version numbers are more recent than others, in order to perform its
-version comparisons.
+        <sect3 id="s3-rpm-depend-version-not-enough">
+          <title>When Version Numbers Aren't Enough</title>
 
-It's pretty simple to determine that version 1.5 is older than version
-1.6.  But what about 2.01 and 2.1?  Or 7.6a and 7.6?  There's no way for
-RPM to keep up with all the different version-numbering schemes in use.
-But there <emphasis>is</emphasis> a solution; two, in fact&hellip;
+          <para>
+            You might think that with all these features, RPM's dependency
+            processing can handle every conceivable situation.  You'd be right,
+            except for the problem of version numbers.  RPM needs to be able to
+            determine which version numbers are more recent than others, in
+            order to perform its version comparisons.
+          </para>
+          <para>
+            It's pretty simple to determine that version 1.5 is older than
+            version 1.6.  But what about 2.01 and 2.1?  Or 7.6a and 7.6?
+            There's no way for RPM to keep up with all the different
+            version-numbering schemes in use.  But there <emphasis>is</emphasis>
+            a solution; two, in fact&hellip;
+          </para>
 
-<sect4 id="s4-rpm-depend-">
-<title>Solution Number 1: Serial numbers</title>
-<indexterm>
-<primary>dependencies!serial numbers, using</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <sect4 id="s4-rpm-depend-version-serial">
+            <title>Solution Number 1: Serial numbers</title>
+            <indexterm>
+              <primary>dependencies!serial numbers, using</primary>
+              <secondary></secondary>
+            </indexterm>
 
-When RPM can't decipher a package's version number, it's time to pull out
-the <command>serial</command> tag.  This tag is used to help RPM determine version
-number ordering.  Here's a sample <command>serial</command> tag line:
+            <para>
+              When RPM can't decipher a package's version number, it's time to
+              pull out the <command>serial</command> tag.  This tag is used to
+              help RPM determine version number ordering.  Here's a sample
+              <command>serial</command> tag line:
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+              <figure id="sc-rpm-depend-version-serial-example">
+                <title>The <command>serial</command> Tag</title>
+                <screen width="60">
+<computeroutput>
 Serial: 42
-</screen>
-</figure>
-This line indicates that the package has a serial number of 42.  What does
-the 42 mean?  Only that this version of the package is older than the same
-package with a serial number of 41, but younger than the same package with
-a serial number of 43.  If you think of serial numbers as being nothing
-more than very simple version numbers, you'll be on the mark.
+</computeroutput>
+                </screen>
+              </figure>
+            </para>
 
-In order to direct RPM to look at the serial number instead of the version
-number when doing dependency checking, it's necessary to append an
-"<command>S</command>" to the end of the conditional operator in the
-<command>requires</command> tag line.  So if a package requires package <filename>foo</filename>
-to have a serial number equal to 42, the following tag line would be used:
+            <para>
+              This line indicates that the package has a serial number of 42.
+              What does the 42 mean?  Only that this version of the package is
+              older than the same package with a serial number of 41, but
+              younger than the same package with a serial number of 43.  If you
+              think of serial numbers as being nothing more than very simple
+              version numbers, you'll be on the mark.
+            </para>
+            <para>
+              In order to direct RPM to look at the serial number instead of the
+              version number when doing dependency checking, it's necessary to
+              append an "<command>S</command>" to the end of the conditional
+              operator in the <command>requires</command> tag line.  So if a
+              package requires package <filename>foo</filename> to have a serial
+              number equal to 42, the following tag line would be used:
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+              <figure id="sc-rpm-depend-serial-example2">
+                <title>Specifying a Particular Serial Number</title>
+                <screen width="60">
+<computeroutput>
 Requires: foo =S 42
-</screen>
-</figure>
-If the <filename>foo</filename> package needs to have a serial number greater than or
-equal to 42, this line would work:
+</computeroutput>
+                </screen>
+              </figure>
+            </para>
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <para>
+              If the <filename>foo</filename> package needs to have a serial
+              number greater than or equal to 42, this line would work:
+
+              <figure id="sc-rpm-depend-serial-example3">
+                <title>Specifying a Minimum Acceptable Serial Number</title>
+                <screen width="60">
+<computeroutput>
 Requires: foo &gt;=S 42
-</screen>
-</figure>
-It might seem that using serial numbers is a lot of extra trouble, and
-you're right.  But there is an alternative:
+</computeroutput>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              It might seem that using serial numbers is a lot of extra trouble,
+              and you're right.  But there is an alternative:
+            </para>
+          </sect4>
 
-<indexterm>
-<primary>dependencies!serial numbers, using|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <sect4 id="s4-rpm-depend-say-no">
+            <title>Solution Number 2: Just Say No!</title>
 
-</sect4>
+            <para>
+              If you have the option between changing the software's
+              version-numbering scheme, or using serial numbers in RPM, please
+              consider changing the version-numbering scheme.  Chances are, if
+              RPM can't figure it out, most of the people using your software
+              can't, either.  But in case you aren't the author of the software
+              you're packaging, and its version numbering scheme is giving RPM
+              fits, the <command>serial</command> tag can help you out.
+            </para>
+          </sect4>
+        </sect3>
+      </sect2>
 
-<sect4 id="s4-rpm-depend-">
-<title>Solution Number 2: Just Say No!</title>
-If you have the option between changing the software's version-numbering
-scheme, or using serial numbers in RPM, please consider changing the
-version-numbering scheme.  Chances are, if RPM can't figure it out, most of
-the people using your software can't, either.  But in case you aren't the
-author of the software you're packaging, and its version numbering scheme
-is giving RPM fits, the <command>serial</command> tag can help you out.
+      <sect2 id="s2-rpm-depend-conflicts-tag">
+        <title>The <command>conflicts</command> Tag</title>
+        <indexterm>
+          <primary>dependencies!<command>conflicts</command> tag</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<indexterm>
-<primary>dependencies!version requirements, adding|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <indexterm>
+          <primary><command>conflicts</command> tag</primary>
+        </indexterm>
 
-<indexterm>
-<primary>dependencies!<command>requires</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          The <command>conflicts</command> tag is the logical complement to the
+          <command>requires</command> tag.  It is used to specify which packages
+          conflict with the current package.  RPM will not permit conflicting
+          packages to be installed unless overridden with the
+          <command>--nodeps</command> option.
+        </para>
+        <para>
+          The <command>conflicts</command> tag has the same format as
+          <command>requires</command>.  It accepts a real or virtual package
+          name and can optionally include version and release specifications or
+          a serial number.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>requires@<command>requires</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-depend-provides-tag">
+        <title>The <command>provides</command> Tag</title>
+        <indexterm>
+          <primary>dependencies!<command>provides</command> tag</primary>
+          <secondary></secondary>
+        </indexterm>
 
-</sect4>
+        <indexterm>
+          <primary><command>provides</command> tag</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Now that you've seen how it's possible to require a package using the
+          <command>requires</command> tag, you're probably expecting that you'll
+          need to use the <command>provides</command> tag in every single
+          package.  After all, RPM has to get those package names from
+          <emphasis>somewhere</emphasis>, right?
+        </para>
+        <para>
+          While it is true that RPM needs to have the package names available,
+          the <command>provides</command> tag is normally not required.  It
+          would actually be redundant, because the RPM database already contains
+          the name of every package installed.  There's no need to duplicate
+          that information.
+        </para>
+        <para>
+          But wait --- We said earlier that manual dependency requirements are
+          <emphasis>always</emphasis> represented in terms of packages.  If RPM
+          doesn't require the package builder to use the
+          <command>provides</command> tag to provide the package name, then what
+          is the <command>provides</command> tag used for?
+        </para>
 
-</sect2>
+        <sect3 id="s3-rpm-depend-virtual-packages">
+          <title>Virtual Packages</title>
+          <indexterm>
+            <primary>dependencies!virtual packages</primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect2 id="s2-rpm-depend-">
-<title>The <command>conflicts</command> Tag</title>
-<indexterm>
-<primary>dependencies!<command>conflicts</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            Enter the virtual package.  A virtual package is nothing more than a
+            name specified with the <command>provides</command> tag.  Virtual
+            packages are handy when a package requires a certain capability, and
+            that capability can be provided by any one of several packages.
+            Here's an example:
+          </para>
+          <para>
+            In order to work properly, <command>sendmail</command> needs a local
+            delivery agent to handle mail delivery.  There are a number of
+            different local delivery agents available ---
+            <command>sendmail</command> will work just fine with any of them.
+          </para>
+          <para>
+            In this case, it doesn't make sense to force the use of a particular
+            local delivery agent; as long as one's installed,
+            <filename>sendmail</filename>'s requirements will have been
+            satisfied.  So <filename>sendmail</filename>'s package builder adds
+            the following line to <filename>sendmail</filename>'s spec file:
 
-<indexterm>
-<primary>conflicts@<command>conflicts</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>conflicts</command> tag is the logical complement to the
-<command>requires</command> tag.  It is used to specify which packages conflict with
-the current package.  RPM will not permit conflicting packages to be
-installed unless overridden with the <command>--nodeps</command> option.
-
-The <command>conflicts</command> tag has the same format as <command>requires</command>.  It
-accepts a real or virtual package name and can optionally include version
-and release specifications or a serial number.
-
-<indexterm>
-<primary>dependencies!<command>conflicts</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>conflicts@<command>conflicts</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-<sect2 id="s2-rpm-depend-">
-<title>The <command>provides</command> Tag</title>
-<indexterm>
-<primary>dependencies!<command>provides</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>provides@<command>provides</command> tag</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Now that you've seen how it's possible to require a package using the
-<command>requires</command> tag, you're probably expecting that you'll need to use
-the <command>provides</command> tag in every single package.  After all, RPM has to
-get those package names from <emphasis>somewhere</emphasis>, right?
-
-While it is true that RPM needs to have the package names available, the
-<command>provides</command> tag is normally not required.  It would actually be
-redundant, because the RPM database already contains the name of every
-package installed.  There's no need to duplicate that information.
-
-But wait -- We said earlier that manual dependency requirements are
-<emphasis>always</emphasis> represented in terms of packages.  If RPM doesn't require the
-package builder to use the <command>provides</command> tag to provide the package
-name, then what is the <command>provides</command> tag used for?
-
-<sect3 id="s3-rpm-depend-">
-<title>Virtual Packages</title>
-<indexterm>
-<primary>dependencies!virtual packages</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Enter the virtual package.  A virtual package is nothing more than a name
-specified with the <command>provides</command> tag.  Virtual packages are handy when
-a package requires a certain capability, and that capability can be
-provided by any one of several packages.  Here's an example:
-
-In order to work properly, <command>sendmail</command> needs a local delivery agent
-to handle mail delivery.  There are a number of different local delivery
-agents available --- <command>sendmail</command> will work just fine with any of
-them.
-
-In this case, it doesn't make sense to force the use of a particular local
-delivery agent; as long as one's installed, <filename>sendmail</filename>'s
-requirements will have been satisfied.  So <filename>sendmail</filename>'s package
-builder adds the following line to <filename>sendmail</filename>'s spec file:
-
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-depend-virtual-packages-example">
+              <title>Specifying a Virtual Package Requirement</title>
+              <screen width="60">
+<computeroutput>
 requires: lda
-</screen>
-</figure>
-There is no package with that name available, so <filename>sendmail</filename>'s
-requirements must be met with a virtual package.  The creators of the
-various local delivery agents indicate that their packages satisfy the
-requirements of the <filename>lda</filename> virtual package by adding the following
-line to <emphasis>their</emphasis> packages' spec files:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
 
-<figure id="sc-rpm-depend-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <para>
+            There is no package with that name available, so
+            <filename>sendmail</filename>'s requirements must be met with a
+            virtual package.  The creators of the various local delivery agents
+            indicate that their packages satisfy the requirements of the
+            <filename>lda</filename> virtual package by adding the following
+            line to <emphasis>their</emphasis> packages' spec files:
+
+            <figure id="sc-rpm-depend-virtual-packages-example2">
+              <title>Providing a Virtual Package</title>
+              <screen width="60">
+<computeroutput>
 provides: lda
-</screen>
-</figure>
-(Note that virtual packages may not have version numbers.)  Now, when
-<filename>sendmail</filename> is installed, as long as there is a package installed
-that provides the <filename>lda</filename> virtual package, there will be no problem.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
 
-<indexterm>
-<primary>dependencies!virtual packages|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            (Note that virtual packages may not have version numbers.)  Now,
+            when <filename>sendmail</filename> is installed, as long as there is
+            a package installed that provides the <filename>lda</filename>
+            virtual package, there will be no problem.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary>dependencies!<command>provides</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+<sect1 id="s1-rpm-depend-summary">
+<title>To Summarize&hellip;</title>
 
-<indexterm>
-<primary>provides@<command>provides</command> tag|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        RPM's dependency processing is based on tracking the capabilities a
+        package provides, and the capabilities a package requires.  A package's
+        requirements can come from two places:
 
-<indexterm>
-<primary>dependencies!manually added|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <orderedlist>
+          <listitem>
+            <para>
+              Shared library requirements, automatically determined by RPM.
+            </para>
+          </listitem>
 
-</sect3>
+          <listitem>
+            <para>
+              The <command>requires</command> tag line, manually added to the
+              package's spec file.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
 
-</sect2>
+      <para>
+        These requirements can be viewed by using RPM's
+        <command>--requires</command> query option.  A specific requirement can
+        be viewed by using the <command>--whatrequires</command> query option.
+        Both options are fully described in chapter <xref
+        linkend="ch-rpm-query">.
+      </para>
+      <para>
+        The capabilities a package provides, can come from three places:
 
-</sect1>
+        <orderedlist>
+          <listitem>
+            <para>
+              Shared library sonames, automatically determined by RPM.
+            </para>
+          </listitem>
 
-<sect1 id="s1-rpm-depend-">
-<title>To Summarize\dots</title>
-RPM's dependency processing is based on tracking the capabilities a package
-provides, and the capabilities a package requires.  A package's
-requirements can come from two places:
+          <listitem>
+            <para>
+              The <command>provides</command> tag line, manually added to the
+              package's spec file.
+            </para>
+          </listitem>
 
-<orderedlist>
-<listitem>
-<para>
-Shared library requirements, automatically determined by RPM.
+          <listitem>
+            <para>
+              The package's name (and optionally, version/serial number).
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <command>requires</command> tag line,  manually added to the package's spec
-file.
-
-</para>
-</listitem>
-
-</orderedlist>
-These requirements can be viewed by using RPM's <command>--requires</command> query
-option.  A specific requirement can be viewed by using the
-<command>--whatrequires</command> query option.  Both options are fully described
-in chapter <xref linkend="rpm-q">.
-
-The capabilities a package provides, can come from three places:
-
-<orderedlist>
-<listitem>
-<para>
-Shared library sonames, automatically determined by RPM.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <command>provides</command> tag line, manually added to the package's spec
-file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The package's name (and optionally, version/serial number).
-
-</para>
-</listitem>
-
-</orderedlist>
-The first two types of information can be viewed by using RPM's
-<command>--provides</command> query option.  A specific capability can be viewed by
-using the <command>--whatprovides</command> query option.  Both options are fully
-described in chapter <xref linkend="rpm-q">.
-
-The package name and version are not considered capabilities that are
-explicitly provided.  Therefore, if a search using <command>--provides</command> or
-<command>--whatprovides</command> comes up dry, try simply looking for a package by
-that name.
-
-As you've probably gathered by now, using manual dependencies requires some
-level of synchronization between packages.  This can be tricky,
-particularly if you're not responsible for both packages.  But RPM's
-dependency processing can make life easier for your users.
-
-<indexterm>
-<primary>dependencies!adding|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect1>
-
-</chapter>
-
+      <para>
+        The first two types of information can be viewed by using RPM's
+        <command>--provides</command> query option.  A specific capability can
+        be viewed by using the <command>--whatprovides</command> query option.
+        Both options are fully described in chapter <xref
+        linkend="ch-rpm-query">.
+      </para>
+      <para>
+        The package name and version are not considered capabilities that are
+        explicitly provided.  Therefore, if a search using
+        <command>--provides</command> or <command>--whatprovides</command> comes
+        up dry, try simply looking for a package by that name.
+      </para>
+      <para>
+        As you've probably gathered by now, using manual dependencies requires
+        some level of synchronization between packages.  This can be tricky,
+        particularly if you're not responsible for both packages.  But RPM's
+        dependency processing can make life easier for your users.
+      </para>
+    </sect1>
+  </chapter>

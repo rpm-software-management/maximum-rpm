@@ -731,7 +731,7 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           using the following tags.  Note, however, that adding dependency
           information to a package requires some forethought.  For additional
           information on RPM's dependency processing, please review chapter
-          <xref linkend="rpm-depend">.
+          <xref linkend="ch-rpm-depend">.
         </para>
 
         <sect3 id="s3-rpm-inside-provides-tag">
