@@ -992,7 +992,7 @@ rpm-2.2.1-1
           that the offset of the next section starts at offset 150, in hex.
           Say, wasn't the size in the size signature off by 150 hex?  Yes, the
           size in the signature is the size of the file ---
-          <emphasis>minus</emphasis> the size of the lead and the signature
+          <emphasis>less</emphasis> the size of the lead and the signature
           sections.
         </para>
       </sect3>
