@@ -52,9 +52,7 @@
         </footnote>
         :
 
-        <figure id="sc-pgp-intro-sample-key-block">
-          <title>A Sample Public Key Block</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 Version: 2.6.2
@@ -80,8 +78,7 @@ HZR2wSWSBteKezB5uK47A6uhwtvPokV0Owk9xPmBV+LPXkW4
 =pnqV
 -----END PGP PUBLIC KEY BLOCK-----
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         PGP uses two different types of keys: public and private.  The public
@@ -183,9 +180,7 @@ HZR2wSWSBteKezB5uK47A6uhwtvPokV0Owk9xPmBV+LPXkW4
         method of determining the authenticity of a document.  Here is an
         example of a digital signature turned into printable text:
 
-        <figure id="sc-pgp-intro-digital-signature">
-          <title>A Sample Digital Signature</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -----BEGIN PGP SIGNATURE-----
 Version: 2.6.3a
@@ -198,8 +193,7 @@ rML3TxQSwdA=
 =T9Mc
 -----END PGP SIGNATURE-----
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
     </sect2>
 
@@ -379,14 +373,11 @@ rML3TxQSwdA=
           convoluted.  The easiest way to obtain PGP from the official MIT
           archive is to use the World Wide Web.  Point your web browser at:
 
-          <figure id="sc-pgp-intro-pgp-mit-archive">
-            <title>MIT's PGP Archive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 http://web.mit.edu/network/pgp.html
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Simply follow the steps, and you'll have the necessary software on
@@ -400,26 +391,20 @@ http://web.mit.edu/network/pgp.html
           containing the PGP software.  Finally, you can use anonymous ftp to
           retrieve the software.  To start this process, ftp to:
 
-          <figure id="sc-pgp-intro-mit-ftp-site">
-            <title>MIT's Anonymous FTP Site</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 net-dist.mit.edu
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Then change directory to:
 
-          <figure id="sc-pgp-intro-ftp-site-dire">
-            <title>PGP Directory</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 /pub/PGP
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Obtain a copy of the file <filename>README</filename> and follow the
@@ -475,50 +460,38 @@ net-dist.mit.edu
         or a <command>#ifdef</command> for <literal>SYSV</literal>.  If you
         find:
 
-        <figure id="sc-pgp-intro-ifndef-before">
-          <title><command>#ifndef</command> Line: Before</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #ifndef SYSV
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         It should be changed to read:
 
-        <figure id="sc-pgp-intro-ifndef-after">
-          <title><command>#ifndef</command> Line: After</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #if !defined(SYSV) && !defined(__ELF__)
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         If you find:
 
-        <figure id="sc-pgp-intro-ifdef-before">
-          <title><command>#ifdef</command> Line: Before</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #ifdef SYSV
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         It should be changed to read:
 
-        <figure id="sc-pgp-intro-ifdef-after">
-          <title><command>#ifdef</command> Line: After</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #if defined(SYSV) || defined(__ELF__)
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         After making these changes, PGP should build with no problems.
@@ -531,13 +504,13 @@ net-dist.mit.edu
       <para>
         After building and installing PGP, you're ready to start using RPM's
         package signature capabilities.  If your primary interest is in checking
-        the signatures on packages built by someone else, chapter <xref
+        the signatures on packages built by someone else, <xref
         linkend="ch-rpm-checksig"> will tell you everything you need to know.
       </para>
       <para>
         On the other hand, if you are a package builder and would like to start
-        signing packages, chapter <xref linkend="ch-rpm-pgp"> will have you
-        signing packages in no time.
+        signing packages, <xref linkend="ch-rpm-pgp"> will have you signing
+        packages in no time.
       </para>
     </sect2>
   </sect1>

@@ -217,7 +217,7 @@
           following <filename>rpmrc</filename> file entries.  They can be
           overridden by entries in <filename>/etc/rpmrc</filename> or
           <filename>~/.rpmrc</filename>.  This is discussed more completely in
-          Appendix <xref linkend="ch-rpmrc-file">.
+          <xref linkend="ch-rpmrc-file">.
         </para>
         <para>
           Because each entry type is available in both architecture and
@@ -262,16 +262,11 @@
             into a canonical name and number that RPM will use internally.
             Here's the format:
 
-            <figure id="sc-rpm-multi-xxx-canon-format">
-              <title>
-                <command><userinput>xxx</userinput>_canon</command> Entry Format
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 <userinput>xxx</userinput>_canon:&lt;label&gt;: &lt;string&gt; &lt;value&gt;
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <filename>&lt;label&gt;</filename> is compared against
@@ -280,17 +275,12 @@
             canonical name, and <filename>&lt;value&gt;</filename> is used as a
             unique numeric value.  Here are two examples:
 
-            <figure id="sc-rpm-multi-xxx-canon-examples">
-              <title>
-                <command><userinput>xxx</userinput>_canon</command> Examples
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 arch_canon: sun4:  sparc  3
 os_canon:  Linux:  Linux  1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>arch_canon</command> tag above is used to define the
@@ -358,15 +348,9 @@ os_canon:  Linux:  Linux  1
             The <command>build<userinput>xxx</userinput>translate</command>
             entry looks like this:
 
-            <figure id="sc-rpm-multi-buildxxxtranslate-format">
-              <title>
-                <command>build<userinput>xxx</userinput>translate</command>
-                Format
-              </title>
-              <screen width="60">
+            <screen width="60">
 <command>build<userinput>xxx</userinput>translate:&lt;label&gt;: &lt;string&gt;</command>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>&lt;label&gt;</command> is compared against information
@@ -376,18 +360,12 @@ os_canon:  Linux:  Linux  1
             <command><userinput>xxx</userinput>_canon</command>.  Here are two
             examples:
 
-            <figure id="sc-rpm-multi-buildxxxtranslate-example">
-              <title>Examples of
-                <command>build<userinput>xxx</userinput>translate</command>
-                Entries
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 buildarchtranslate: i586: i386
 buildostranslate: Linux: Linux
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>buildarchtranslate</command> tag shown above is used to
@@ -440,14 +418,9 @@ buildostranslate: Linux: Linux
             compatible with one another.  It is used at install-time only.  The
             format of the entry is:
 
-            <figure id="sc-rpm-multi-xxx-compat-format">
-              <title>
-                <command><userinput>xxx</userinput>_compat</command> Format
-              </title>
-              <screen width="60">
+            <screen width="60">
 <command><userinput>xxx</userinput>_compat:&lt;label&gt;: &lt;list&gt;</command>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>&lt;label&gt;</command> is a name string as defined by
@@ -460,19 +433,13 @@ buildostranslate: Linux: Linux
             The names in the list are considered compatible to the name
             specified in the label.
 
-            <figure id="sc-rpm-multi-xxx-compat-examples">
-              <title>
-                Example <command><userinput>xxx</userinput>_compat</command>
-                Lines
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 arch_compat: i586: i486
 arch_compat: i486: i386
 os_compat: Linux: AIX
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>arch_compat</command> lines shown above illustrate how
@@ -578,26 +545,20 @@ os_compat: Linux: AIX
       <para>
         The <command>optflags</command> entry looks like this:
 
-        <figure id="sc-rpm-multi-optflags-format">
-          <title><command>optflags</command> Entry Format</title>
-          <screen width="60">
+        <screen width="60">
 <command>optflags:&lt;architecture&gt; &lt;value&gt;</command>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         For example, assume the following <command>optflags</command> entries
         were placed in an <filename>rpmrc</filename> file:
 
-        <figure id="sc-rpm-multi-optflags-example">
-          <title>Sample <command>optflags</command> Entries</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 optflags: i386 -O2 -m486 -fno-strength-reduce
 optflags: sparc -O2
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         If RPM was running on an Intel 80386-compatible architecture, the
@@ -677,17 +638,12 @@ optflags: sparc -O2
           <command>exclude<userinput>xxx</userinput></command> tags, separated
           by either spaces or commas.  Here are two examples:
 
-          <figure id="sc-rpm-multi-excludexxx-examples">
-            <title>
-              <command>exclude<userinput>xxx</userinput></command> Examples
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExcludeArch: sparc alpha
 ExcludeOS: Irix
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The first line prevents systems based on the Sun SPARC and Digital
@@ -700,17 +656,14 @@ ExcludeOS: Irix
           system, the following message will be displayed, and the build will
           fail:
 
-          <figure id="sc-rpm-multi-arch-mismatch-example">
-            <title>Architecture Mismatch Error</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 Arch mismatch!
 cdplayer-1.0.spec doesn't build on this architecture
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>exclude<userinput>xxx</userinput></command> tags are
@@ -758,18 +711,12 @@ cdplayer-1.0.spec doesn't build on this architecture
           <command>exclusive<userinput>xxx</userinput></command> tags is
           identical to <command>exclude<userinput>xxx</userinput></command>:
 
-          <figure id="sc-rpm-multi-exclusivexxx-examples">
-            <title>
-              Example <command>exclusive<userinput>xxx</userinput></command>
-              Tags
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExclusiveArch: sparc alpha
 ExclusiveOS: Irix
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In the first line, the package will only build on a Sun SPARC or
@@ -845,16 +792,13 @@ ExclusiveOS: Irix
             Ignoring the platform-related conditions for a moment, here's an
             example of a conditional block:
 
-            <figure id="sc-rpm-multi-conditional-example">
-              <title>Example of a Conditional Block</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %ifos Linux
 Summary: This is a package for the Linux operating system
 %endif
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             It's a one-line block, but a block nonetheless.
@@ -864,9 +808,7 @@ Summary: This is a package for the Linux operating system
             starts with a <command>%if</command>, and ends with a
             <command>%endif</command>.  But there's something new in the middle:
 
-            <figure id="sc-rpm-multi-conditional-block-with-else">
-              <title>A Conditional Block With Something Extra</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %ifos Linux
 Summary: This is a package for the Linux operating system
@@ -874,8 +816,7 @@ Summary: This is a package for the Linux operating system
 Summary: This is a package for some other operating system
 %endif
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here we've replaced one <command>summary</command> tag with another.
@@ -894,9 +835,7 @@ Summary: This is a package for some other operating system
             Conditionals can be nested --- That is, the block formed by one
             conditional can enclose another conditional.  Here's an example:
 
-            <figure id="sc-rpm-multi-nested-conditionals-example">
-              <title>An Example of Nested Conditionals</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %ifarch i386
 
@@ -914,8 +853,7 @@ echo "This is not an i386"
 
 %endif
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, the first conditional block formed by the
@@ -972,9 +910,7 @@ echo "This is not an i386"
           used to control the inclusion of a block, as long as the
           platform-dependent information is true.  Here are two examples:
 
-          <figure id="sc-rpm-multi-ifarch-example">
-            <title>The <command>ifarch</command> Conditional in Action</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifarch i386 alpha
 </computeroutput>
@@ -986,14 +922,11 @@ echo "This is not an i386"
           only if the build architecture was <command>i386</command> or
           <command>alpha</command>.
 
-          <figure id="sc-rpm-multi-ifos-example">
-            <title>The <command>ifos</command> Conditional in Action</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifos Linux
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This example would include the block following the conditional only if
@@ -1029,28 +962,22 @@ echo "This is not an i386"
           platform-dependent information is <emphasis>not</emphasis> true.  Here
           are two examples:
 
-          <figure id="sc-rpm-multi-ifnarch-example">
-            <title>The <command>ifnarch</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifnarch i386 alpha
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this case, the block following the conditional would be included
           only if the build architecture was <emphasis>not</emphasis>
           <command>i386</command> or <command>alpha</command>.
 
-          <figure id="sc-rpm-multi-ifnos">
-            <title>The <command>ifnos</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifnos Linux
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This example would include the block following the conditional only if

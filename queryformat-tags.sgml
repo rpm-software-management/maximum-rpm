@@ -12,16 +12,11 @@
     latest list of available queryformat tags, please issue the following
     command:
 
-    <figure id="sc-queryformat-tags-querytags-example">
-      <title>
-        Using the <command>--querytags</command> Option to List Available Tags
-      </title>
-      <screen width="60">
+    <screen width="60">
 <computeroutput>
 rpm --querytags
 </computeroutput>
-      </screen>
-    </figure>
+    </screen>
   </para>
   <para>
     Keep in mind that the list of tags produced by the

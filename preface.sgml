@@ -108,12 +108,9 @@
         including people that are new to Linux, or even UNIX.  So those of you
         that think that
 
-        <figure id="sc-preface-ls-command">
-          <title>What is this?</title>
-          <screen width="60">
-            <userinput>ls -FAl !*|less</userinput>
-          </screen>
-        </figure>
+        <screen width="60">
+<userinput>ls -FAl !*|less</userinput>
+        </screen>
 
          is serious magic (or maybe even a typing error), relax --- we'll
          explain everything you'll need to know in the first section.

@@ -532,7 +532,7 @@ Build failed.
       </para>
       <para>
         Take a closer look at the <command>%files</command> list.  See the line
-        that reads <command>%doc README</command>?  In section <xref
+        that reads <command>%doc README</command>?  In <xref
         linkend="s3-rpm-inside-flist-doc-directive">, we discussed how the
         <command>%doc</command> directive creates a directory under
         <filename>/usr/doc</filename>.  That's the file that killed the build
@@ -593,7 +593,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         absolute path, and that path started with the prefix
         <filename>/usr/local</filename>, there was no problem.  A more complete
         discussion of the <command>%doc</command> directive can be found in
-        section <xref linkend="s3-rpm-inside-flist-doc-directive">.
+        <xref linkend="s3-rpm-inside-flist-doc-directive">.
       </para>
 
       <sect2 id="s2-rpm-reloc-tying-loose-ends">
@@ -636,8 +636,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           <footnote>
             <para>
               For more information on the <command>%docdir</command> directive,
-              please see section <xref
-              linkend="s3-rpm-inside-docdir-directive">.
+              please see <xref linkend="s3-rpm-inside-docdir-directive">.
             </para>
           </footnote>
         </para>
@@ -663,8 +662,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
               Install and erase-time scripts have an environment variable,
               <envar>RPM_INSTALL_PREFIX</envar>, that can be used to write
               scripts that are able to act appropriately if the package is
-              relocated.  See section <xref
-              linkend="s2-rpm-inside-erase-time-scripts"> for more information.
+              relocated.  See <xref linkend="s2-rpm-inside-erase-time-scripts">
+              for more information.
             </para>
           </footnote>
           A <command>%verifyscript</command> that made sure the files were in
@@ -717,7 +716,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           The <command>DEFAULTPREFIX</command> tag directs RPM to display the
           prefix used during the build.  As we can see, it's
           <filename>/usr/local</filename>, just as we intended.  The
-          <command>--queryformat</command> option is discussed in section <xref
+          <command>--queryformat</command> option is discussed in <xref
           linkend="s3-rpm-query-queryformat-option">.
         </para>
         <para>

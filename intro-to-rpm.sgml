@@ -905,7 +905,7 @@
         parts of an RPM package
         <footnote>
           <para>
-            See Appendix <xref linkend="ch-rpm-file-format"> for complete
+            See <xref linkend="ch-rpm-file-format"> for complete
             details on the contents of a .rpm file.
           </para>
         </footnote>
@@ -1008,8 +1008,7 @@
           However, a package file may be renamed, and the new filename won't
           confuse RPM in the least.  That's because the package label is
           contained within the file.  For a fairly technical view of the inside
-          of a package file, refer to Appendix <xref
-          linkend="ch-rpm-file-format">.
+          of a package file, refer to <xref linkend="ch-rpm-file-format">.
         </para>
       </sect2>
 
@@ -1057,8 +1056,7 @@
                 <footnote>
                   <para>
                     For more information on RPM's signature checking capability,
-                    refer to section <xref
-                    linkend="s1-rpm-checksig-what-it-does">.
+                    refer to <xref linkend="s1-rpm-checksig-what-it-does">.
                   </para>
                 </footnote>
               </para>
@@ -1102,8 +1100,8 @@
                 The MD5 checksum of each file.
                 <footnote>
                   <para>
-                    We'll discuss MD5 checksums in greater detail in section
-                    <xref linkend="s3-rpm-verify-md5-checksum">.
+                    We'll discuss MD5 checksums in greater detail in <xref
+                    linkend="s3-rpm-verify-md5-checksum">.
                   </para>
                 </footnote>
               </para>

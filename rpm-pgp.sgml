@@ -16,9 +16,9 @@
     </para>
     <para>
       On the other hand, if you feel you need a bit more information on PGP
-      before starting, please refer to Appendix <xref linkend="ch-pgp-intro">
-      for a brief introduction.  Once you feel comfortable with PGP, come on
-      back and learn how easy signing packages is&hellip;
+      before starting, please refer to <xref linkend="ch-pgp-intro"> for a brief
+      introduction.  Once you feel comfortable with PGP, come on back and learn
+      how easy signing packages is&hellip;
     </para>
 
     <sect1 id="s1-rpm-pgp-why-sign">
@@ -75,9 +75,7 @@
           a <command>pgp -kg</command> command, enter some information, and
           create some random bits.  Here's an example key generating session:
 
-          <figure id="sc-rpm-pgp-key-generation">
-            <title>Using PGP to Generate a Key</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>pgp -kg</userinput>
 <computeroutput>
 Pretty Good Privacy(tm) 2.6.3a - Public-key encryption for the masses.
@@ -132,8 +130,7 @@ Key signature certificate added.
 Key generation completed.
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Let's review each of the times PGP required information.  The first
@@ -180,9 +177,7 @@ Key generation completed.
           find, in a subdirectory of your login directory called
           <filename>.pgp</filename>, the following files:
 
-          <figure id="sc-rpm-pgp-pgp-directory-contents">
-            <title>The Contents of <filename>~/.pgp</filename></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al ~/.pgp</userinput>
 <computeroutput>
 total 6
@@ -194,8 +189,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
 -rw-------   1 root     root          509 Oct 30 19:44 secring.pgp
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           For those interested in learning exactly what each file is, feel free
@@ -220,7 +214,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
           RPM's configuration process is quite straightforward.  It consists of
           adding a few <filename>rpmrc</filename> entries in a file of your
           choice.  For more information on rpmrc files in general, please see
-          Appendix <xref linkend="ch-rpmrc-file">.
+          <xref linkend="ch-rpmrc-file">.
         </para>
         <para>
           The entries that need to be added to an rpmrc file are:
@@ -257,14 +251,11 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
             signature that RPM is to use.  At the time this book was written,
             the only legal value is <command>pgp</command>.  So you would enter:
 
-            <figure id="sc-rpm-pgp-signature-example">
-              <title>The <command>signature</command> Entry In Action</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 signature: pgp
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -277,14 +268,11 @@ signature: pgp
             user ID of the key we created was <userinput>Example Key for RPM
             Book</userinput>, so this is what our entry should look like:
 
-            <figure id="sc-rpm-pgp-pgp-name-example">
-              <title>The <command>pgp_name</command> Entry</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 pgp_name: Example Key for RPM Book
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -302,14 +290,11 @@ pgp_name: Example Key for RPM Book
             <filename>/root/.pgp</filename>.  Therefore, our entry would look
             like this:
 
-            <figure id="sc-rpm-pgp-pgp-entry-example">
-              <title>Example of the <command>pgp_path</command> Entry</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 pgp_path: /root/.pgp
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             And that's it.  Now it's time to sign some packages.
@@ -371,9 +356,7 @@ pgp_path: /root/.pgp
         <para>
           Here's an example of <command>--sign</command> in action:
 
-          <figure id="sc-rpm-pgp-sign-option-example">
-            <title>The <command>--sign</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --sign blather-7.9.spec</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -393,8 +376,7 @@ Generating signature: 1002
 Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Once the pass phrase is entered, there's very little that is different
@@ -422,19 +404,13 @@ Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
           <command>--checksig</command> option, we can see that there is, in
           fact, a PGP signature present:
 
-          <figure id="sc-rpm-pgp-checksig-example">
-            <title>
-              Using the <command>--checksig</command> Option to Confirm
-              That a Package Has Been Signed
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --checksig blather-7.9-1.i386.rpm</userinput>
 <computeroutput>
 blather-7.9-1.i386.rpm: size pgp md5 OK
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           It's clear to see that, in addition to the usual size and MD5
@@ -455,12 +431,7 @@ blather-7.9-1.i386.rpm: size pgp md5 OK
             answer is no, as long as you build the packages with a single RPM
             command.  Here's an example:
 
-            <figure id="sc-rpm-pgp-multi-build-sign">
-              <title>
-                Using the <command>--sign</command> Option When Building
-                Multiple Packages
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --sign b*.spec</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -491,8 +462,7 @@ Generating signature: 1002
 Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Using the <command>--sign</command> option makes it as easy to sign
@@ -522,9 +492,7 @@ Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
           signature on an already-built package, with a new one.  The option is
           called <command>--resign</command>, and here's an example of its use:
 
-          <figure id="sc-rpm-pgp-resign-exampe">
-            <title>An Example of the <command>--resign</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --resign blather-7.9-1.i386.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -533,8 +501,7 @@ Pass phrase is good.
 blather-7.9-1.i386.rpm:
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           While the output is not as exciting as a package build, the
@@ -545,12 +512,7 @@ blather-7.9-1.i386.rpm:
           As you might have guessed, the <command>--resign</command> option
           works properly on multiple package files:
 
-          <figure id="sc-rpm-pgp-multi-resigns">
-            <title>
-              Resigning Multiple Packages With the <command>--resign</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --resign b*.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -560,8 +522,7 @@ blather-7.9-1.i386.rpm:
 bother-3.5-1.i386.rpm:
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
 
         <sect3 id="s3-rpm-pgp-resign-limitations">
@@ -576,9 +537,7 @@ bother-3.5-1.i386.rpm:
             file must be in version 3 format, at least.  If you attempt to
             resign a package that is too old, here's what you'll see:
 
-            <figure id="sc-rpm-pgp-resign-too-old">
-              <title>Attempting to Re-sign a Too-Old Package</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm --resign blah.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -588,26 +547,19 @@ blah.rpm:
 blah.rpm: Can't re-sign v2.0 RPM
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Not sure what version your package files are at?  Just use the
             <command>file</command> command to check:
 
-            <figure id="sc-rpm-pgp-file-command-example">
-              <title>
-                Using the <command>file</command> Command to Determine a Package
-                File's Format
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>file blather-7.9-1.i386.rpm</userinput>
 <computeroutput>
 blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The "<computeroutput>v3</computeroutput>" in
@@ -660,9 +612,7 @@ blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
           After this lengthy example, the actual output from the
           <command>--addsign</command> option is a bit anti-climactic:
 
-          <figure id="sc-rpm-pgp-addsign-example">
-            <title>Using the <command>--addsign</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --addsign blather-7.9-1.i386.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -671,23 +621,19 @@ Pass phrase is good.
 blather-7.9-1.i386.rpm:
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If we check the signatures of this package, we'll be able to see the
           multiple signatures:
 
-          <figure id="sc-rpm-pgp-addsign-multi">
-            <title>Using the <command>--checksig</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --checksig blather-7.9-1.i386.rpm</userinput>
 <computeroutput>
 blather-7.9-1.i386.rpm: size pgp pgp md5 OK
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The two <computeroutput>pgp</computeroutput>'s in
@@ -707,12 +653,7 @@ blather-7.9-1.i386.rpm: size pgp pgp md5 OK
             <command>--addsign</command> option cannot do its magic on pre-V3
             package files:
 
-            <figure id="sc-rpm-pgp-addsign-too-old">
-              <title>
-                Attempting to Use <command>--addsign</command> On a Too-Old
-                Package
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm --addsign blah.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -722,8 +663,7 @@ blah.rpm:
 blah.rpm: Can't re-sign v2.0 RPM
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             OK, the error message may not be 100% accurate, but you get the
@@ -736,9 +676,7 @@ blah.rpm: Can't re-sign v2.0 RPM
             RPM will happily let you add the same signature as many times as
             you'd like:
 
-            <figure id="sc-rpm-pgp-multiple-addsigns">
-              <title>Using <command>--addsign</command> More Than Once</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
 <prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
 <computeroutput>
@@ -765,8 +703,7 @@ blather-7.9-1.i386.rpm:
 blather-7.9-1.i386.rpm: size pgp pgp pgp pgp md5 OK
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As we can see from <command>--checksig</command>'s output, the

@@ -113,14 +113,11 @@
         The first part is easy.  It entails adding the following line to the
         spec file:
 
-        <figure id="sc-rpm-anywhere-buildroot-format">
-          <title>Format for the <command>buildroot</command> Tag Line</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 BuildRoot: &lt;root&gt;
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Of course, you would replace "<command>&lt;root&gt;</command>" with the
@@ -130,7 +127,7 @@ BuildRoot: &lt;root&gt;
             Keep in mind that the build root can be overridden at build-time
             using the <command>--buildroot</command> option or the
             <command>buildroot</command> <filename>rpmrc</filename> file entry.
-            See chapter <xref linkend="ch-rpm-b-command"> for more details.
+            See <xref linkend="ch-rpm-b-command"> for more details.
           </para>
         </footnote>
         If, for example, you specify a build root of
@@ -187,14 +184,11 @@ BuildRoot: &lt;root&gt;
         build root.  First, there's the definition of the build root in the spec
         file:
 
-        <figure id="sc-rpm-anywhere-buildroot-example">
-          <title>A Sample <command>buildroot</command> Tag Line</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 BuildRoot: /tmp/cdplayer
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         This line defines the build root as being
@@ -202,15 +196,12 @@ BuildRoot: /tmp/cdplayer
         software will be placed under the <filename>cdplayer</filename>
         directory.  Next is the spec file's <command>%install</command> section:
 
-        <figure id="sc-rpm-anywhere-install-section">
-          <title>The <command>%install</command> Section</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %install
 make ROOT="$RPM_BUILD_ROOT" install
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Since the software we're packaging uses <command>make</command> to
@@ -219,9 +210,7 @@ make ROOT="$RPM_BUILD_ROOT" install
         <envar>RPM_BUILD_ROOT</envar>.  So far, so good.  Things really start to
         get interesting in the software's <filename>Makefile</filename>, though:
 
-        <figure id="sc-rpm-anywhere-makefile">
-          <title>The <filename>Makefile</filename></title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 install: cdp cdp.1.Z
 #       chmod 755 cdp
@@ -234,8 +223,7 @@ install: cdp cdp.1.Z
         install -m 755 -o 0 -g 0 -d $(ROOT)/usr/local/man/man1/
         install -m 755 -o 0 -g 0 cdp.1 $(ROOT)/usr/local/man/man1/cdp.1
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In the example above, the commented lines were the original ones.  The
@@ -254,9 +242,7 @@ install: cdp cdp.1.Z
       <para>
         Let's see how it works:
 
-        <figure id="sc-rpm-anywhere-build-output">
-          <title>Output From a Build</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
@@ -313,8 +299,7 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Looking over the output from the <command>%install</command> section, we
@@ -408,15 +393,12 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           idea to include the necessary commands in the spec file's
           <command>%clean</command> section.  Here's an example:
 
-          <figure id="sc-rpm-anywhere-clean-section">
-            <title>The <command>%clean</command> Section</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %clean
 rm -rf $RPM_BUILD_ROOT
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Since RPM executes the <command>%clean</command> section after the
@@ -441,14 +423,9 @@ rm -rf $RPM_BUILD_ROOT
           build root.  It's possible to use the <command>--buildroot</command>
           option to specify a dangerous build root, too:
 
-          <figure id="sc-rpm-anywhere-buildroot-danger">
-            <title>
-              A Dangerous Use of the <command>--buildroot</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --buildroot / cdplayer-1.0.spec</userinput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           But for all the possible hazards using build roots can pose for the
@@ -535,9 +512,7 @@ rm -rf $RPM_BUILD_ROOT
           Let's start by creating the directories.  We can even do it with one
           command:
 
-          <figure id="sc-rpm-anywhere-creating-build-area">
-            <title>Creating the Build Directories</title>
-            <screen width="60">
+          <screen width="60">
 <prompt>% </prompt><userinput>pwd</userinput>
 /home/ed
 % <userinput>mkdir mybuild\</userinput>
@@ -548,8 +523,7 @@ rm -rf $RPM_BUILD_ROOT
 <prompt>?  </prompt><userinput>mybuild/SPECS\</userinput>
 <prompt>?  </prompt><userinput>mybuild/SRPMS\</userinput>
 <prompt>%</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That's all there is to it.  You may have noticed that we created a
@@ -580,14 +554,11 @@ rm -rf $RPM_BUILD_ROOT
           a file called <filename>.rpmrc</filename>, located in your home
           directory:
 
-          <figure id="sc-rpm-anywhere-rpmrc-entry">
-            <title>Format of the <command>topdir</command> Tag Line</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 topdir: &lt;path&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           By replacing "<command>&lt;path&gt;</command>" with the path to the
@@ -596,17 +567,11 @@ topdir: &lt;path&gt;
           an example, we'll set <command>topdir</command> to
           <filename>/home/ed/mybuild</filename>:
 
-          <figure id="sc-rpm-anywhere-">
-            <title>
-              Adding the <command>topdir</command> Tag to
-              <filename>~/.rpmrc</filename>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 topdir: /home/ed/mybuild
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That's all there is to it.  Now it's time to try a build.
@@ -629,11 +594,7 @@ topdir: /home/ed/mybuild
           just like the one used by a root user.  Otherwise, the
           <command>--buildroot</command> option will need to be used:
 
-          <figure id="sc-rpm-anywhere-build-in-new-area">
-            <title>
-              Output From a Build in <filename>/home/ed/mybuildroot</filename>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt>% </prompt><userinput>cd /home/ed/mybuild/SPECS</userinput>
 <prompt>% </prompt><userinput>rpm -ba --buildroot /home/ed/mybuildroot cdplayer-1.0.spec</userinput>
 <computeroutput>
@@ -672,8 +633,7 @@ make: *** [install] Error 1
 Bad exit status
 </computeroutput>
 <prompt>% </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Things started off pretty well --- The <command>%prep</command>
@@ -695,11 +655,7 @@ Bad exit status
           OK, let's remove the offending options and see where that gets us.
           Here's the install section of the make file after our modifications:
 
-          <figure id="sc-rpm-anywhere-build-in-new-area2">
-            <title>
-              A Second Build in <filename>/home/ed/mybuildroot</filename>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 install: cdp cdp.1.Z
 	install -m 755 -d $(ROOT)/usr/local/bin/
@@ -709,26 +665,20 @@ install: cdp cdp.1.Z
 	install -m 755 -d $(ROOT)/usr/local/man/man1/
 	install -m 755 cdp.1 $(ROOT)/usr/local/man/man1/cdp.1
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           We'll spare you from having to read through another build, but this
           time it completed successfully.  Now, let's put our sysadmin hat on
           and install the newly built package:
 
-          <figure id="sc-rpm-anywhere-installing-package">
-            <title>
-              Installing the <command>--buildroot</command>'ed Package
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 cdplayer       ##################################################
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Well, that was easy enough.  Let's take a look at some of the files
@@ -736,20 +686,14 @@ cdplayer       ##################################################
           installed in <filename>/usr/local/bin</filename>, so let's check
           those:
 
-          <figure id="sc-rpm-anywhere-file-listing">
-            <title>
-              Listing of Files Installed From
-              <command>--buildroot</command>'ed Package
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/local/bin</userinput>
 <computeroutput>
 -rwxr-xr-x   1 ed       ed          40739 Sep 13 20:16 cdp*
 lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Looks pretty good&hellip; Wait a minute!  What's up with the owner and
@@ -785,14 +729,11 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
         <para>
           The <command>%attr</command> macro has the following format:
 
-          <figure id="sc-rpm-anywhere-attr-format">
-            <title>Format of the <command>%attr</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>&lt;file&gt;</userinput>
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <itemizedlist mark="bullet">
             <listitem>
@@ -839,14 +780,11 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
           each and every file, each file can have the same
           <command>%attr</command>:
 
-          <figure id="sc-rpm-anywhere-attr-dash-usage">
-            <title>Using a Deash With the <command>%attr</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %attr(-, root, root)
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This works for user and group specifications, as well.
@@ -863,12 +801,7 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
           <command>%files</command> list looks like after we've had our way with
           it:
 
-          <figure id="sc-rpm-anywhere-attr-in-file-list">
-            <title>
-              <command>%attr</command> Macros in the <command>%files</command>
-              List
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %files
 %attr(-, root, root) %doc README
@@ -876,8 +809,7 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
 %attr(-, root, root) /usr/local/bin/cdplay
 %attr(-, root, rot) /usr/local/man/man1/cdp.1
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           A couple points are worth noting here.  The line for
@@ -895,12 +827,7 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
           and should be issued on any package file whose creators you don't
           trust:
 
-          <figure id="sc-rpm-anywhere-setuid-file">
-            <title>
-              Finding a File That is
-              <command>setuid</command> <filename>root</filename>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt>% </prompt><userinput>rpm -qlvp ../RPMS/i386/cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 drwxr-xr-x-  root  root   1024 Sep 13 20:16 /usr/doc/cdplayer-1.0-1
@@ -910,24 +837,20 @@ lrwxrwxrwx-  root  root     47 Sep 13 21:32 /usr/local/bin/cdplay -&gt; ./cdp
 -rwxr-xr-x-  root   rot   4550 Sep 13 21:32 /usr/local/man/man1/cdp.1
 </computeroutput>
 <prompt>% </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Sure enough --- there's that setuid root file.  In this case we trust
           the package builder, so let's install it:
 
-          <figure id="sc-rpm-anywhere-installing-rot-package">
-            <title>Installing the Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 cdplayer       ##################################################
 group rot does not exist - using root
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           What's this about group "<filename>rot</filename>"?  Looking back at
@@ -944,9 +867,7 @@ group rot does not exist - using root
           Let's look at some of the files the package installed, including that
           worrisome setuid root file:
 
-          <figure id="sc-rpm-anywhere-setuid-file-listing">
-            <title>Listing of Files Installed</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls /usr/local/bin</userinput>
 <computeroutput>
 total 558
@@ -954,8 +875,7 @@ total 558
 lrwxrwxrwx   1 root     root           47 Sep 13 21:36 cdplay -&gt; ./cdp*
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           RPM did just what it was supposed to --- It gave the files the

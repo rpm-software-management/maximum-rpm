@@ -182,9 +182,7 @@
             The <filename>find-requires</filename> script for Linux is quite
             simple:
 
-            <figure id="sc-rpm-depend-find-requires-listing">
-              <title><filename>find-requires</filename> Script Listing</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 #!/bin/sh
 
@@ -198,8 +196,7 @@ for f in $filelist; do
     ldd $f | awk '/=&gt;/ { print $1 }'
 done | sort -u | xargs -r -n 1 basename | sort -u
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <para>
@@ -230,9 +227,7 @@ done | sort -u | xargs -r -n 1 basename | sort -u
             The <filename>find-provides</filename> script for Linux is a bit
             more complex, but still pretty straightforward:
 
-            <figure id="sc-rpm-depend-find-provides-script-listing">
-              <title><filename>find-provides</filename> Script Listing</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 #!/bin/bash
 
@@ -254,8 +249,7 @@ for f in $filelist; do
     fi
 done | sort -u
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <para>
@@ -283,9 +277,7 @@ done | sort -u
           <filename>find-requires</filename> on <filename>/bin/ls</filename>.
           Here's what we'll see:
 
-          <figure id="sc-rpm-depend-find-requires-by-hand">
-            <title>Running <filename>find-requires</filename> by Hand</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>find-requires</userinput>
 <userinput>/bin/ls</userinput>
 <userinput>&lt;ctrl-d&gt;</userinput>
@@ -293,8 +285,7 @@ done | sort -u
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
 
         <para>
@@ -307,17 +298,13 @@ libc.so.5
           <command>--requires</command> option to display
           <filename>fileutils</filename>' requirements:
 
-          <figure id="sc-rpm-depend-find-requires-rpm-example">
-            <title>
-              RPM Query Using the <command>--requires</command> Option </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -q --requires fileutils</userinput>
 <computeroutput>
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
 
         <para>
@@ -330,9 +317,7 @@ libc.so.5
           We can simulate this by using <filename>find-provides</filename> to
           print out the library's soname:
 
-          <figure id="sc-rpm-depend-find-provides-by-hand">
-            <title>Running <filename>find-provides</filename> by Hand</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>find-provides</userinput>
 <userinput>/lib/libc.so.5.3.12</userinput>
 <userinput>&lt;ctrl-d&gt;</userinput>
@@ -340,8 +325,7 @@ libc.so.5
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           OK, so <filename>/lib/libc.so.5.3.12</filename>'s soname is
@@ -349,19 +333,14 @@ libc.so.5
           <filename>libc</filename> package really does "provide" the
           <filename>libc.so.5</filename> soname:
 
-          <figure id="sc-rpm-depend-find-provides-rpm-example">
-            <title>
-              RPM Query Using the <command>--provides</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -q --provides libc</userinput>
 <computeroutput>
 libm.so.5
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
 
         <para>
@@ -400,14 +379,11 @@ libc.so.5
           <command>0/1</command> value.  For example, to disable automatic
           dependency processing, the following line may be used:
 
-          <figure id="sc-rpm-depend-autoreqprov-example">
-            <title>The <command>autoreqprov</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 AutoReqProv: no
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
     </sect1>
@@ -447,14 +423,11 @@ AutoReqProv: no
           necessary to add the following line to <filename>foo</filename>'s spec
           file:
 
-          <figure id="sc-rpm-depend-requires-example">
-            <title>The <command>requires</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 requires: bar
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Later, when the <filename>foo</filename> package is being installed,
@@ -480,14 +453,11 @@ requires: bar
           packages <filename>bar</filename> <emphasis>and</emphasis>
           <filename>baz</filename>, the following line will do the trick:
 
-          <figure id="sc-rpm-depend-requires-example2">
-            <title>Specifying Multiple Package Dependencies</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 requires: bar, baz
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As long as any version of <filename>bar</filename> and
@@ -553,27 +523,21 @@ requires: bar, baz
             2.1 --- no other version will do.  Here's what the
             <command>requires</command> tag line would look like:
 
-            <figure id="sc-rpm-depend-requires-version-example">
-              <title>Specifying Version-Specific Dependencies</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 requires: bar &gt;= 2.7, baz = 2.1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We can get even more specific and require a particular
             <emphasis>release</emphasis> of a package:
 
-            <figure id="sc-rpm-depend-requires-version-example2">
-              <title>Specifying Release-Specific Dependencies</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 requires: bar &gt;= 2.7-4, baz = 2.1-1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -608,14 +572,11 @@ requires: bar &gt;= 2.7-4, baz = 2.1-1
               help RPM determine version number ordering.  Here's a sample
               <command>serial</command> tag line:
 
-              <figure id="sc-rpm-depend-version-serial-example">
-                <title>The <command>serial</command> Tag</title>
-                <screen width="60">
+              <screen width="60">
 <computeroutput>
 Serial: 42
 </computeroutput>
-                </screen>
-              </figure>
+              </screen>
             </para>
 
             <para>
@@ -634,28 +595,22 @@ Serial: 42
               package requires package <filename>foo</filename> to have a serial
               number equal to 42, the following tag line would be used:
 
-              <figure id="sc-rpm-depend-serial-example2">
-                <title>Specifying a Particular Serial Number</title>
-                <screen width="60">
+              <screen width="60">
 <computeroutput>
 Requires: foo =S 42
 </computeroutput>
-                </screen>
-              </figure>
+              </screen>
             </para>
 
             <para>
               If the <filename>foo</filename> package needs to have a serial
               number greater than or equal to 42, this line would work:
 
-              <figure id="sc-rpm-depend-serial-example3">
-                <title>Specifying a Minimum Acceptable Serial Number</title>
-                <screen width="60">
+              <screen width="60">
 <computeroutput>
 Requires: foo &gt;=S 42
 </computeroutput>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               It might seem that using serial numbers is a lot of extra trouble,
@@ -765,14 +720,11 @@ Requires: foo &gt;=S 42
             satisfied.  So <filename>sendmail</filename>'s package builder adds
             the following line to <filename>sendmail</filename>'s spec file:
 
-            <figure id="sc-rpm-depend-virtual-packages-example">
-              <title>Specifying a Virtual Package Requirement</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 requires: lda
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <para>
@@ -783,14 +735,11 @@ requires: lda
             <filename>lda</filename> virtual package by adding the following
             line to <emphasis>their</emphasis> packages' spec files:
 
-            <figure id="sc-rpm-depend-virtual-packages-example2">
-              <title>Providing a Virtual Package</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 provides: lda
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <para>
@@ -831,8 +780,7 @@ provides: lda
         These requirements can be viewed by using RPM's
         <command>--requires</command> query option.  A specific requirement can
         be viewed by using the <command>--whatrequires</command> query option.
-        Both options are fully described in chapter <xref
-        linkend="ch-rpm-query">.
+        Both options are fully described in <xref linkend="ch-rpm-query">.
       </para>
       <para>
         The capabilities a package provides, can come from three places:
@@ -863,8 +811,7 @@ provides: lda
         The first two types of information can be viewed by using RPM's
         <command>--provides</command> query option.  A specific capability can
         be viewed by using the <command>--whatprovides</command> query option.
-        Both options are fully described in chapter <xref
-        linkend="ch-rpm-query">.
+        Both options are fully described in <xref linkend="ch-rpm-query">.
       </para>
       <para>
         The package name and version are not considered capabilities that are

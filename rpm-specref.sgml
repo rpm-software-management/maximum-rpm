@@ -31,7 +31,7 @@
       Comments can be placed in any section of the spec file.
     </para>
     <para>
-      See also: Section <xref linkend="s1-rpm-inside-comments">.
+      See also: <xref linkend="s1-rpm-inside-comments">.
     </para>
   </sect1>
 
@@ -75,7 +75,7 @@ Name: cdplayer
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-name-tag">.
+          See also: <xref linkend="s3-rpm-inside-name-tag">.
         </para>
       </sect3>
 
@@ -105,7 +105,7 @@ Version: 1.2
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-version-tag">.
+          See also: <xref linkend="s3-rpm-inside-version-tag">.
         </para>
       </sect3>
 
@@ -135,7 +135,7 @@ Release: 5
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-release-tag">.
+          See also: <xref linkend="s3-rpm-inside-release-tag">.
         </para>
       </sect3>
     </sect2>
@@ -200,7 +200,7 @@ more mundane software...
           match those defined with the <command>%package</command> directive.
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-description-tag">.
+          See also: <xref linkend="s3-rpm-inside-description-tag">.
         </para>
       </sect3>
 
@@ -230,7 +230,7 @@ Summary: A CD player app that rocks!
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-summary-tag">.
+          See also: <xref linkend="s3-rpm-inside-summary-tag">.
         </para>
       </sect3>
 
@@ -260,7 +260,7 @@ Copyright: GPL
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-copyright-tag">.
+          See also: <xref linkend="s3-rpm-inside-copyright-tag">.
         </para>
       </sect3>
 
@@ -290,7 +290,7 @@ Distribution: Doors '95
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-distribution-tag">.
+          See also: <xref linkend="s3-rpm-inside-distribution-tag">.
         </para>
       </sect3>
 
@@ -322,7 +322,7 @@ Icon: foo.xpm
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-icon-tag">.
+          See also: <xref linkend="s3-rpm-inside-icon-tag">.
         </para>
       </sect3>
 
@@ -352,7 +352,7 @@ Vendor: White Socks Software, Inc.
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-vendor-tag">.
+          See also: <xref linkend="s3-rpm-inside-vendor-tag">.
         </para>
       </sect3>
 
@@ -383,7 +383,7 @@ URL: http://www.gnomovision.com/cdplayer.html
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-url-tag">.
+          See also: <xref linkend="s3-rpm-inside-url-tag">.
         </para>
       </sect3>
 
@@ -413,7 +413,7 @@ Group: Applications/Editors
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-group-tag">.
+          See also: <xref linkend="s3-rpm-inside-group-tag">.
         </para>
       </sect3>
 
@@ -443,7 +443,7 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-packager-tag">.
+          See also: <xref linkend="s3-rpm-inside-packager-tag">.
         </para>
       </sect3>
     </sect2>
@@ -477,7 +477,7 @@ Provides: module-info
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-provides-tag">.
+          See also: <xref linkend="s3-rpm-inside-provides-tag">.
         </para>
       </sect3>
 
@@ -548,7 +548,7 @@ Requires: playmidi =S 4
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-requires-tag">.
+          See also: <xref linkend="s3-rpm-inside-requires-tag">.
         </para>
       </sect3>
 
@@ -579,7 +579,7 @@ Serial: 4
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-serial-tag">.
+          See also: <xref linkend="s3-rpm-inside-serial-tag">.
         </para>
       </sect3>
 
@@ -649,7 +649,7 @@ Conflicts: playmidi =S 4
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-conflicts-tag">.
+          See also: <xref linkend="s3-rpm-inside-conflicts-tag">.
         </para>
       </sect3>
 
@@ -689,7 +689,7 @@ AutoReqProv: no
           <literal>1</literal> may be used instead of <literal>yes</literal>)
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-autoreqprov-tag">.
+          See also: <xref linkend="s3-rpm-inside-autoreqprov-tag">.
         </para>
       </sect3>
     </sect2>
@@ -723,7 +723,7 @@ ExcludeArch: sparc alpha
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-excludearch-tag">.
+          See also: <xref linkend="s3-rpm-inside-excludearch-tag">.
         </para>
       </sect3>
 
@@ -754,7 +754,7 @@ ExclusiveArch: sparc alpha
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-exclusivearch-tag">.
+          See also: <xref linkend="s3-rpm-inside-exclusivearch-tag">.
         </para>
       </sect3>
 
@@ -785,7 +785,7 @@ ExcludeOS: linux irix
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-excludeos">.
+          See also: <xref linkend="s3-rpm-inside-excludeos">.
         </para>
       </sect3>
 
@@ -816,7 +816,7 @@ ExclusiveOS: linux
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-exclusiveos-tag">.
+          See also: <xref linkend="s3-rpm-inside-exclusiveos-tag">.
         </para>
       </sect3>
     </sect2>
@@ -851,7 +851,7 @@ Prefix: /opt
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-prefix-tag">.
+          See also: <xref linkend="s3-rpm-inside-prefix-tag">.
         </para>
       </sect3>
 
@@ -882,7 +882,7 @@ BuildRoot: /tmp/cdplayer
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-buildroot-tag">.
+          See also: <xref linkend="s3-rpm-inside-buildroot-tag">.
         </para>
       </sect3>
     </sect2>
@@ -925,7 +925,7 @@ Source1: foo.tgz
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-source-tag">.
+          See also: <xref linkend="s3-rpm-inside-source-tag">.
         </para>
       </sect3>
 
@@ -958,7 +958,7 @@ NoSource: 0, 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-nosource-tag">.
+          See also: <xref linkend="s3-rpm-inside-nosource-tag">.
         </para>
       </sect3>
 
@@ -988,7 +988,7 @@ Patch: cdp-0.33-fsstnd.patch
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-patch-tag">.
+          See also: <xref linkend="s3-rpm-inside-patch-tag">.
         </para>
       </sect3>
 
@@ -1015,7 +1015,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-nopatch-tag">.
+          See also: <xref linkend="s3-rpm-inside-nopatch-tag">.
         </para>
       </sect3>
     </sect2>
@@ -1104,7 +1104,7 @@ NoPatch: 2 3
       </para>
       <para>
         For more information on these environment variables, and build-time
-        scripts in general, please see section <xref
+        scripts in general, please see <xref
         linkend="s2-rpm-inside-build-time-scripts">.
       </para>
 
@@ -1136,7 +1136,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-prep-script">.
+          See also: <xref linkend="s3-rpm-inside-prep-script">.
         </para>
       </sect3>
 
@@ -1168,7 +1168,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-build-script">.
+          See also: <xref linkend="s3-rpm-inside-build-script">.
         </para>
       </sect3>
 
@@ -1200,7 +1200,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-install-script">.
+          See also: <xref linkend="s3-rpm-inside-install-script">.
         </para>
       </sect3>
 
@@ -1234,7 +1234,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-clean-script">.
+          See also: <xref linkend="s3-rpm-inside-clean-script">.
         </para>
       </sect3>
     </sect2>
@@ -1281,8 +1281,8 @@ NoPatch: 2 3
         </itemizedlist>
       </para>
       <para>
-        For more information on this environment variable please see section
-        <xref linkend="s2-rpm-inside-erase-time-scripts">.
+        For more information on this environment variable please see <xref
+        linkend="s2-rpm-inside-erase-time-scripts">.
       </para>
 
       <sect3 id="s3-rpm-specref-pre">
@@ -1311,7 +1311,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-pre-script">.
+          See also: <xref linkend="s3-rpm-inside-pre-script">.
         </para>
       </sect3>
 
@@ -1341,7 +1341,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s4-rpm-inside-post-script">.
+          See also: <xref linkend="s4-rpm-inside-post-script">.
         </para>
       </sect3>
 
@@ -1371,7 +1371,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-preun-script">.
+          See also: <xref linkend="s3-rpm-inside-preun-script">.
         </para>
       </sect3>
 
@@ -1401,7 +1401,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-postun-script">.
+          See also: <xref linkend="s3-rpm-inside-postun-script">.
         </para>
       </sect3>
     </sect2>
@@ -1431,7 +1431,7 @@ NoPatch: 2 3
           script can consist of any valid <command>sh</command> commands.
         </para>
         <para>
-          See also: Section <xref linkend="s2-rpm-inside-verifyscript-script">.
+          See also: <xref linkend="s2-rpm-inside-verifyscript-script">.
         </para>
       </sect3>
     </sect2>
@@ -1472,7 +1472,7 @@ NoPatch: 2 3
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-setup-macro">.
+        See also: <xref linkend="s2-rpm-inside-setup-macro">.
       </para>
 
       <sect3 id="s3-rpm-specref-setup-n-option">
@@ -1511,7 +1511,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-n-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-n-option">.
         </para>
       </sect3>
 
@@ -1533,7 +1533,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-c-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-c-option">.
         </para>
       </sect3>
 
@@ -1557,7 +1557,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-d-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-d-option">.
         </para>
       </sect3>
 
@@ -1581,7 +1581,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-t-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-t-option">.
         </para>
       </sect3>
 
@@ -1606,7 +1606,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-b-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-b-option">.
         </para>
       </sect3>
 
@@ -1631,7 +1631,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-setup-a-option">.
+          See also: <xref linkend="s3-rpm-inside-setup-a-option">.
         </para>
       </sect3>
     </sect2>
@@ -1679,7 +1679,7 @@ NoPatch: 2 3
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-patch-macro">.
+        See also: <xref linkend="s2-rpm-inside-patch-macro">.
       </para>
 
       <sect3 id="s3-rpm-specref-patch-p-option">
@@ -1716,7 +1716,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-which-patch-tag">.
+          See also: <xref linkend="s3-rpm-inside-which-patch-tag">.
         </para>
       </sect3>
 
@@ -1741,7 +1741,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-patch-p-option">.
+          See also: <xref linkend="s3-rpm-inside-patch-p-option">.
         </para>
       </sect3>
 
@@ -1768,7 +1768,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-b-option">.
+          See also: <xref linkend="s3-rpm-inside-b-option">.
         </para>
       </sect3>
 
@@ -1782,7 +1782,7 @@ NoPatch: 2 3
           have been applied.
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-e-option">.
+          See also: <xref linkend="s3-rpm-inside-e-option">.
         </para>
       </sect3>
     </sect2>
@@ -1848,7 +1848,7 @@ NoPatch: 2 3
       </figure>
     </para>
     <para>
-      See also: Section <xref linkend="s1-rpm-inside-files-list">.
+      See also: <xref linkend="s1-rpm-inside-files-list">.
     </para>
   </sect1>
 
@@ -1893,7 +1893,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-flist-doc-directive">.
+          See also: <xref linkend="s3-rpm-inside-flist-doc-directive">.
         </para>
       </sect3>
 
@@ -1923,8 +1923,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref
-          linkend="s3-rpm-inside-flist-config-directive">.
+          See also: <xref linkend="s3-rpm-inside-flist-config-directive">.
         </para>
       </sect3>
 
@@ -1970,8 +1969,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref
-          linkend="s3-rpm-inside-flist-attr-directive">.
+          See also: <xref linkend="s3-rpm-inside-flist-attr-directive">.
         </para>
       </sect3>
 
@@ -2062,8 +2060,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref
-          linkend="s3-rpm-inside-flist-verify-directive">.
+          See also: <xref linkend="s3-rpm-inside-flist-verify-directive">.
         </para>
       </sect3>
     </sect2>
@@ -2090,7 +2087,7 @@ NoPatch: 2 3
           be marked as documentation.
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-docdir-directive">.
+          See also: <xref linkend="s3-rpm-inside-docdir-directive">.
         </para>
       </sect3>
 
@@ -2121,7 +2118,7 @@ NoPatch: 2 3
           </figure>
         </para>
         <para>
-          See also: Section <xref linkend="s3-rpm-inside-dir-directive">.
+          See also: <xref linkend="s3-rpm-inside-dir-directive">.
         </para>
       </sect3>
     </sect2>
@@ -2168,7 +2165,7 @@ Name: foo
       the subpackage name will be <filename>foo-bar</filename>.
     </para>
     <para>
-      See also: Section <xref linkend="s1-rpm-inside-package-directive">.
+      See also: <xref linkend="s1-rpm-inside-package-directive">.
     </para>
 
     <sect2 id="s2-rpm-specref-package-n-option">
@@ -2204,7 +2201,7 @@ Name: foo
         the subpackage name will be <filename>bar</filename>.
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-package-n-option">.
+        See also: <xref linkend="s2-rpm-inside-package-n-option">.
       </para>
     </sect2>
   </sect1>
@@ -2252,7 +2249,7 @@ Name: foo
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-ifarch-conditional">.
+        See also: <xref linkend="s2-rpm-inside-ifarch-conditional">.
       </para>
     </sect2>
 
@@ -2284,7 +2281,7 @@ Name: foo
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-ifnarch-conditional">.
+        See also: <xref linkend="s2-rpm-inside-ifnarch-conditional">.
       </para>
     </sect2>
 
@@ -2316,7 +2313,7 @@ Name: foo
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-ifos-conditional">.
+        See also: <xref linkend="s2-rpm-inside-ifos-conditional">.
       </para>
     </sect2>
 
@@ -2348,7 +2345,7 @@ Name: foo
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-ifnos-conditional">.
+        See also: <xref linkend="s2-rpm-inside-ifnos-conditional">.
       </para>
     </sect2>
 
@@ -2384,7 +2381,7 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-else-conditional">.
+        See also: <xref linkend="s2-rpm-inside-else-conditional">.
       </para>
     </sect2>
 
@@ -2417,7 +2414,7 @@ make INTELFLAG=-DINTEL
         </figure>
       </para>
       <para>
-        See also: Section <xref linkend="s2-rpm-inside-endif-conditional">.
+        See also: <xref linkend="s2-rpm-inside-endif-conditional">.
       </para>
     </sect2>
   </sect1>

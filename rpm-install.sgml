@@ -397,9 +397,8 @@
           config files, even if they weren't originally installed by RPM!
           <footnote>
             <para>
-              Are you interested in what exactly "the right thing" means?
-              Section <xref linkend="s2-rpm-upgrade-config-file-magic"> has all
-              the details.
+              Are you interested in what exactly "the right thing" means?  <xref
+              linkend="s2-rpm-upgrade-config-file-magic"> has all the details.
             </para>
           </footnote>
         </para>
@@ -452,27 +451,21 @@
         the command (<command>rpm -i</command>) followed by the name of the
         package file:
 
-        <figure id="sc-rpm-install-sample-install">
-          <title>A Sample Install Command</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -i eject-1.2-2.i386.rpm</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         At this point, all the steps outlined above have been performed.  The
         package is now installed.  Note that the file name need not adhere to
         RPM's file naming convention:
 
-        <figure id="sc-rpm-install-changed-filename">
-          <title>Installing With a Changed Filename</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>mv eject-1.2-2.i386.rpm baz.txt</userinput>
 <prompt># </prompt><userinput>rpm -i baz.txt</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this case, we changed the name of the package file
@@ -507,23 +500,17 @@
           If you've surfed the World Wide Web, you've no doubt noticed the way
           web pages are identified:
 
-          <figure id="sc-rpm-install-sample-url">
-            <title>A Uniform Resource Locator (URL)</title>
-            <screen width="60">
+          <screen width="60">
 http://www.redhat.com/support/docs/rpm/RPM-HOWTO/RPM-HOWTO.html
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This is called a Uniform Resource Locator, or URL.  RPM can also use
           URLs, although they look a little bit different.  Here's one:
 
-          <figure id="sc-rpm-install-ftp-url">
-            <title>An FTP URL</title>
-            <screen width="60">
+          <screen width="60">
 ftp://ftp.redhat.com/pub/redhat/code/rpm/rpm-2.3-1.i386.rpm
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <computeroutput>ftp:</computeroutput> signifies that this URL is a
@@ -542,13 +529,10 @@ ftp://ftp.redhat.com/pub/redhat/code/rpm/rpm-2.3-1.i386.rpm
           RPM's use of URLs gives us the ability to install a package located on
           the other side of the world, with a single command:
 
-          <figure id="sc-rpm-install-rpm-command-with-url">
-            <title>An <command>rpm</command> Command Using a URL</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i ftp://ftp.gnomovision.com/pub/rpms/foobar-1.0-1.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This command would use anonymous FTP to obtain the
@@ -567,37 +551,26 @@ ftp://ftp.redhat.com/pub/redhat/code/rpm/rpm-2.3-1.i386.rpm
           </indexterm>
           username and password preceding the hostname:
 
-          <figure id="sc-rpm-install-ftp-url-with-password">
-            <title>A URL With Username and Password</title>
-            <screen width="60">
+          <screen width="60">
 ftp://smith:mypass@ftp.gnomovision.com/pub/rpms/foobar-1.0-1.i386.rpm
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           However, entering a password where it can be seen by anyone looking at
           your screen is a bad idea.  So try this format:
 
-          <figure id="sc-rpm-install-ftp-url-no-password">
-            <title>A URL With Username, but no Password</title>
-            <screen width="60">
+          <screen width="60">
 ftp://smith@ftp.gnomovision.com/pub/rpms/foobar-1.0-1.i386.rpm
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           RPM will prompt you for your password, and you'll be in business:
 
-          <figure id="sc-rpm-install-rpm-ftp-url-prompt">
-            <title>
-              A <command>rpm</command> Command Prompting for a Password
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i ftp://smith@ftp.gnomovision.com/pub/rpms/apmd-2.4-1.i386.rpm</userinput>
 <prompt>Password for smith@ftp.gnomovision.com: </prompt><userinput>mypass</userinput> (not echoed)
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
           After entering a valid password, RPM installs the package.
         </para>
         <para>
@@ -615,16 +588,13 @@ ftp://smith@ftp.gnomovision.com/pub/rpms/foobar-1.0-1.i386.rpm
           </indexterm>
           port in a URL:
 
-          <figure id="sc-rpm-install-url-with-port">
-            <title>A URL Specifying a Non-Standard Port</title>
-            <screen width="60">
+          <screen width="60">
 ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
-            </screen>
-          </figure>
+          </screen>
 
           This URL will direct the FTP request to port 1024.  The
           <command>--ftpport</command> option is another way to specify the
-          port.  This option is discussed later, in section <xref
+          port.  This option is discussed later, in <xref
           linkend="s2-rpm-install-ftpport">.
         </para>
       </sect2>
@@ -640,14 +610,11 @@ ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
           very common.  While performing an ordinary install, RPM prints a
           warning message:
 
-          <figure id="sc-rpm-install-example-warning">
-            <title>A Warning Message</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i cdp-0.33-100.i386.rpm</userinput>
 <computeroutput>warning: /etc/cdp-config saved as /etc/cdp-config.rpmorig</computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
           What does it mean?  It has to do with RPM's handling of config files.
           <indexterm>
             <primary>config files</primary>
@@ -681,17 +648,14 @@ ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
           Continuing our example, if we look in <filename>/etc</filename>, we
           see that this is exactly what has happened:
 
-          <figure id="sc-rpm-install-saved-config-file">
-            <title>A Saved Config File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /etc/cdp*</userinput>
 <computeroutput>
 -rw-r--r--   1 root     root      119 Jun 23 16:00 /etc/cdp-config
 -rw-rw-r--   1 root     root       56 Jun 14 21:44 /etc/cdp-config.rpmorig
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
           This is the best possible solution to a tricky problem.
           <indexterm>
             <primary>config files</primary>
@@ -730,23 +694,18 @@ ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
           unless something goes wrong.  However, we can ask for a bit more
           output by adding <command>-v</command> to the command:
 
-          <figure id="sc-rpm-install-sample-v">
-            <title>Using the <command>-v</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv eject-1.2-2.i386.rpm</userinput>
 <computeroutput>Installing eject-1.2-2.i386.rpm</computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           By adding <command>-v</command>, RPM displayed a simple status line.
           Using <command>-v</command> is a good idea, particularly if you're
           going to use a single command to install more than one package:
 
-          <figure id="sc-rpm-install-example-with-v-option">
-            <title>An Example Title</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv *.rpm</userinput>
 <computeroutput>
 Installing eject-1.2-2.i386.rpm
@@ -754,8 +713,7 @@ Installing iBCS-1.2-3.i386.rpm
 Installing logrotate-1.0-1.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this case, there were three .rpm files in the directory.  By using
@@ -777,14 +735,11 @@ Installing logrotate-1.0-1.i386.rpm
           will print fifty hash marks ("<computeroutput>#</computeroutput>") as
           the install proceeds:
 
-         <figure id="sc-rpm-install-h-option">
-            <title>Using the <command>-h</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ih eject-1.2-2.i386.rpm</userinput>
 <computeroutput>##################################################</computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Once all fifty hash marks are printed, the package is completely
@@ -792,9 +747,7 @@ Installing logrotate-1.0-1.i386.rpm
           results in a very nice display, particularly when installing more than
           one package:
 
-          <figure id="sc-rpm-install-v-and-h-options">
-            <title>An Example Title</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ivh *.rpm</userinput>
 <computeroutput>
 eject          ##################################################
@@ -802,8 +755,7 @@ iBCS           ##################################################
 logrotate      ##################################################
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
     </sect1>
@@ -833,9 +785,7 @@ logrotate      ##################################################
           another <command>v</command>, we can start to see more of RPM's inner
           workings:
 
-          <figure id="sc-rpm-install-example-using-vv">
-            <title>Using the <command>-vv</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ivv eject-1.2-2.i386.rpm</userinput>
 <computeroutput>
 D: installing eject-1.2-2.i386.rpm
@@ -848,8 +798,7 @@ D: ///usr/man/man1/eject.1 owned by root (0), group root (0) mode 644
 D: running postinstall script (if any)
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The lines starting with <computeroutput>D:</computeroutput> have been
@@ -859,8 +808,7 @@ D: running postinstall script (if any)
           it would mean that the <command>--test</command> option was present,
           and RPM would not actually perform the installation.  For more
           information on using <command>--test</command> with <command>rpm
-          -i</command>, see section <xref
-          linkend="s2-rpm-install-test-option">.
+          -i</command>, see <xref linkend="s2-rpm-install-test-option">.
         </para>
         <para>
           Continuing with the above example, we see that RPM next executes a
@@ -871,7 +819,7 @@ D: running postinstall script (if any)
           larger packages, the output from <command>-vv</command> can get quite
           lengthy!  Finally, RPM runs a post-install script, if one exists for
           the package.  We'll be discussing pre- and post-install scripts in
-          more detail in section <xref linkend="s2-rpm-install-noscripts">.
+          more detail in <xref linkend="s2-rpm-install-noscripts">.
         </para>
         <para>
           In the vast majority of cases, it will not be necessary to use
@@ -895,22 +843,17 @@ D: running postinstall script (if any)
           stops short of actually performing the steps necessary to install the
           package:
 
-          <figure id="sc-rpm-install-test-option">
-            <title>Using the <command>--test</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i --test eject-1.2-2.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Once again, there's not very much output.  This is because the test
           succeeded; had there been a problem, the output would have been a bit
           more interesting.  In this example, there are some problems:
 
-          <figure id="sc-rpm-install-problems-with-test">
-            <title>Using the <command>--test</command> Option (With Problems)</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i --test rpm-2.0.11-1.i386.rpm</userinput>
 <computeroutput>
 /bin/rpm conflicts with file from rpm-2.3-1
@@ -921,8 +864,7 @@ D: running postinstall script (if any)
 error: rpm-2.0.11-1.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If you'll note the version numbers, we're trying to install an older
@@ -935,17 +877,14 @@ error: rpm-2.0.11-1.i386.rpm cannot be installed
           The <command>--test</command> option will also catch
           dependency-related problems:
 
-          <figure id="sc-rpm-install-dependency-and-test">
-            <title><command>--test</command> Catching a Dependency Problem</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i --test blather-7.9-1.i386.rpm</userinput>
 <computeroutput>
 failed dependencies:
         bother >= 3.1 is needed by blather-7.9-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here's a tip for all you script-writers out there: RPM will return a
@@ -970,25 +909,20 @@ failed dependencies:
           To see how the <command>--replacepkgs</command> option works, let's
           first install some software:
 
-         <figure id="sc-rpm-install-replacepkgs-setup">
-            <title>Installing a Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           OK, now that we have <filename>cdp-0.33-2</filename> installed, let's
           see what happens if we try to install the same version "on top of"
           itself:
 
-          <figure id="sc-rpm-install-replacepkgs-setup2">
-            <title>Attempting to Install A Package "on top of" Another Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
@@ -996,23 +930,19 @@ package cdp-0.33-2 is already installed
 error: cdp-0.33-2.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That didn't go very well.  Let's see what adding
           <command>--replacepkgs</command> will do :
 
-          <figure id="sc-rpm-install-replacepkgs-example">
-            <title>Using the <command>--replacepkgs</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv --replacepkgs cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Much better.  The original package was replaced by a new copy of
@@ -1039,7 +969,7 @@ Installing cdp-0.33-2.i386.rpm
           file, including a means of summarizing the file's contents.
           <footnote>
             <para>
-              We'll get more into this aspect of RPM in section <xref
+              We'll get more into this aspect of RPM in <xref
               linkend="s1-rpm-verify-what-it-does"> when we discuss <command>rpm
               -V</command>.
             </para>
@@ -1064,16 +994,13 @@ Installing cdp-0.33-2.i386.rpm
           MD5 checksums do not match.  What happens if Package B is installed?
           Let's find out.  Here, we've installed a package:
 
-          <figure id="sc-rpm-install-replacefiles-setup">
-            <title>Installing a Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           OK, no problem there.  But we have another package to install.  In
@@ -1084,9 +1011,7 @@ Installing cdp-0.33-2.i386.rpm
           the file's MD5 checksum.  Here's what happens when we try to install
           the package:
 
-          <figure id="sc-rpm-install-replacefiles-setup2">
-            <title>Installing A Package With Conflicting Files</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-3.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-3.i386.rpm
@@ -1094,8 +1019,7 @@ Installing cdp-0.33-3.i386.rpm
 error: cdp-0.33-3.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           What's happening?  The package <filename>cdp-0.33-2</filename> has a
@@ -1103,16 +1027,13 @@ error: cdp-0.33-3.i386.rpm cannot be installed
           enough, there it is.  Let's highlight the size and creation date of
           the file for future reference:
 
-          <figure id="sc-rpm-install-conflicting-file">
-            <title>Listing of a Conflicting File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/bin/cdp</userinput>
 <computeroutput>
 -rwxr-xr-x   1 root     root        <userinput>34460</userinput> <userinput>Feb 25 14:27</userinput> /usr/bin/cdp
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The package we just tried to install,
@@ -1127,32 +1048,26 @@ error: cdp-0.33-3.i386.rpm cannot be installed
           replace the <filename>/usr/bin/cdp</filename> from
           <filename>cdp-0.33-2</filename>:
 
-          <figure id="sc-rpm-install-replacefiles-example">
-            <title>Using the <command>--replacefile</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv --replacefiles cdp-0.33-3.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-3.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Taking a closer look at <filename>/usr/bin/cdp</filename>, we find
           that they certainly <emphasis>are</emphasis> different, both in size
           and creation date:
 
-          <figure id="sc-rpm-install-other-conflicting-file">
-            <title>Listing of Another Conflicting File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/bin/cdp</userinput>
 <computeroutput>
 -rwxr-xr-x   1 root     root        <userinput>34444</userinput> <userinput>Apr 24 22:37</userinput> /usr/bin/cdp
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           File conflicts should be a relatively rare occurrence.  They only
@@ -1172,7 +1087,7 @@ Installing cdp-0.33-3.i386.rpm
                 However, it is usually a <emphasis>bad</emphasis> idea when it
                 comes to doing this as a way to upgrade packages.  RPM has a
                 special option for this (<command>rpm -U</command>) that is
-                discussed in chapter <xref linkend="ch-rpm-upgrade">.
+                discussed in <xref linkend="ch-rpm-upgrade">.
               </para>
             </listitem>
 
@@ -1236,46 +1151,35 @@ Installing cdp-0.33-3.i386.rpm
             using the <filename>etcskel</filename> package.  First you try to
             install it:
 
-            <figure id="sc-rpm-install-etcskel-conflict">
-              <title>Conflicting File During an Install</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -iv etcskel-1.0-100.i386.rpm</userinput>
 <computeroutput>
 etcskel       /etc/skel/.bashrc conflicts with file from etcskel-1.0-3
 error: etcskel-1.0-100.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Hmmm. That didn't work.  Wait a minute!  I can add
             <command>--replacefiles</command> to the command and it should
             install just fine:
 
-            <figure id="sc-rpm-install-replacefiles-saved">
-              <title>
-                The <command>--replacefiles</command> Option Saving A
-                Config File
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -iv --replacefiles etcskel-1.0-100.i386.rpm</userinput>
 <computeroutput>
 Installing etcskel-1.0-100.i386.rpm
 warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Wait a minute&hellip; That's my customized
             <filename>.bashrc</filename>!  Was it <emphasis>really</emphasis>
             saved?
 
-            <figure id="sc-rpm-install-replacefiles-listing">
-              <title>Directory Listing of Saved Config File</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>ls -al /etc/skel/</userinput>
 <computeroutput>
 total 8
@@ -1300,8 +1204,7 @@ if [ -f /etc/bashrc ]; then
 fi
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Whew!  You heave a sigh of relief, and study the new
@@ -1355,9 +1258,7 @@ fi
             we take a look at a file it installed, noting the size and creation
             date.
 
-            <figure id="sc-rpm-install-replacefiles-trouble-setup">
-              <title>Installing a Package</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
@@ -1367,16 +1268,13 @@ Installing cdp-0.33-2.i386.rpm
 -rwxr-xr-x   1 root     root        <userinput>34460</userinput> <userinput>Feb 25 14:27</userinput> /usr/bin/cdp
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Next, we try to install a newer release of the same package.  It
             fails:
 
-            <figure id="sc-rpm-install-replacefiles-trouble-setup2">
-              <title>Attempting to Install a Package With Conflicting Files</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -iv cdp-0.33-3.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-3.i386.rpm
@@ -1384,20 +1282,14 @@ Installing cdp-0.33-3.i386.rpm
 error: cdp-0.33-3.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             So, we use <command>--replacefiles</command> to convince the newer
             package to install.  We note that the newer package installed a file
             on top of the file originally installed:
 
-            <figure id="sc-rpm-install-replacefiles-trouble">
-              <title>
-                Installing a Package With the
-                <command>--replacefiles</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -iv --replacefiles cdp-0.33-3.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-3.i386.rpm
@@ -1407,8 +1299,7 @@ Installing cdp-0.33-3.i386.rpm
 -rwxr-xr-x   1 root     root        34444 Apr 24 22:37 /usr/bin/cdp
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The original <filename>cdp</filename> file, 34,460 bytes long, and
@@ -1421,25 +1312,19 @@ Installing cdp-0.33-3.i386.rpm
            <footnote>
               <para>
                 For more information on erasing packages with <command>rpm
-                -e</command>, see chapter <xref linkend="ch-rpm-erase">.
+                -e</command>, see <xref linkend="ch-rpm-erase">.
               </para>
            </footnote>
            Finally, we tried to find the file:
 
-          <figure id="sc-rpm-install-replacefiles-erase">
-              <title>
-                Losing a File Due to the <command>--replacefiles</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -e cdp-0.33-3</userinput>
 <prompt># </prompt><userinput>ls -al /usr/bin/cdp</userinput>
 <computeroutput>
 ls: /usr/bin/cdp: No such file or directory
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The file is gone.  Why is this?  The reason is that
@@ -1476,17 +1361,14 @@ ls: /usr/bin/cdp: No such file or directory
           One day it'll happen.  You'll be installing a new package, when
           suddenly, the install bombs:
 
-          <figure id="sc-rpm-install-nodeps-problem">
-            <title>A Failed Install</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i blather-7.9-1.i386.rpm</userinput>
 <computeroutput>
 failed dependencies:
         bother >= 3.1 is needed by blather-7.9-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           What happened?  The problem is that the package you're installing
@@ -1512,13 +1394,10 @@ failed dependencies:
           the <command>--nodeps</command> option to the command line and see
           what happens:
 
-<figure id="sc-rpm-install-nodeps-firstuse">
-            <title>Installing a Package With the <command>--nodeps</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i --nodeps blather-7.9-1.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The package was installed without a peep.  Whether it will work
@@ -1610,9 +1489,7 @@ failed dependencies:
           Let's see how <command>--excludedocs</command> keeps it from being
           installed:
 
-          <figure id="sc-rpm-install-excludedocs-example">
-            <title>Using the <command>--excludedocs</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -iv --excludedocs cdp-0.33-3.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-3.i386.rpm
@@ -1622,8 +1499,7 @@ Installing cdp-0.33-3.i386.rpm
 ls: /usr/man/man1/cdp.1: No such file or directory
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The primary reason to use <command>--excludedocs</command> is to save
@@ -1642,7 +1518,7 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           following line to <filename>/etc/rpmrc</filename>,
           <filename>.rpmrc</filename> in your login directory, or the file
           specified with the <command>--rcfile</command> (which is discussed in
-          section <xref linkend="s2-rpm-install-rcfile">) option:
+          <xref linkend="s2-rpm-install-rcfile">) option:
         </para>
         <para>
           <command>excludedocs: 1</command>
@@ -1652,7 +1528,7 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           install any documentation files.
           <footnote>
             <para>
-              For more information on rpmrc files, refer to Appendix <xref
+              For more information on rpmrc files, refer to <xref
               linkend="ch-rpmrc-file">.
             </para>
           </footnote>
@@ -1675,9 +1551,7 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           <filename>/etc/rpmrc</filename> contains "<command>excludedocs:
           1</command>", which directs RPM not to install documentation files:
 
-          <figure id="sc-rpm-install-includedocs-setup">
-            <title>Installing a Package with <command>excludedocs: 1</command></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls /usr/man/man1/cdp.1</userinput>
 <computeroutput>
 ls: /usr/man/man1/cdp.1: No such file or directory
@@ -1691,8 +1565,7 @@ Installing cdp-0.33-3.i386.rpm
 ls: /usr/man/man1/cdp.1: No such file or directory
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've checked to make sure that the cdp man page did not
@@ -1702,9 +1575,7 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           installed.  Let's try it again, this time adding the
           <command>--includedocs</command> option:
 
-          <figure id="sc-rpm-install-includedocs-example">
-            <title>Using the <command>--includedocs</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls /usr/man/man1/cdp.1</userinput>
 <computeroutput>
 ls: /usr/man/man1/cdp.1: No such file or directory
@@ -1718,8 +1589,7 @@ Installing cdp-0.33-3.i386.rpm
 -rw-r--r--   1 root     root         4550 Apr 24 22:37 /usr/man/man1/cdp.1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>--includedocs</command> option overrode the rpmrc file's
@@ -1749,8 +1619,7 @@ Installing cdp-0.33-3.i386.rpm
           command that can be used to find out:
           <footnote>
             <para>
-              We discuss RPM's query commands in chapter <xref
-              linkend="ch-rpm-query">.
+              We discuss RPM's query commands in <xref linkend="ch-rpm-query">.
             </para>
           </footnote>
 
@@ -1759,12 +1628,9 @@ Installing cdp-0.33-3.i386.rpm
             <secondary>example</secondary>
           </indexterm>
 
-          <figure id="sc-rpm-install-prefix-find-out">
-            <title>Determining if a Package is Relocatable</title>
-            <screen width="60">
+          <screen width="60">
 <command>rpm -qp --queryformat "%{defaultprefix}\n" <userinput>&lt;packagefile&gt;</userinput></command>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Just replace
@@ -1780,17 +1646,14 @@ Installing cdp-0.33-3.i386.rpm
           What if you want to specify otherwise?  Easy: just use the
           <command>--prefix</command> option.  Let's give it a try:
 
-          <figure id="sc-rpm-install-prefix-in-use">
-            <title>The <command>--prefix</command> Option in Use</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qp --queryformat "%{defaultprefix}\n" cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 /usr/local
 </computeroutput>
 <prompt># </prompt><userinput>rpm -i --prefix /tmp/test cdplayer-1.0-1.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've used our magic query command to determine that the
@@ -1801,9 +1664,7 @@ Installing cdp-0.33-3.i386.rpm
           If we take a look there, we'll see that RPM created all the necessary
           directories to hold the package's files:
 
-          <figure id="sc-rpm-install-prefix-proof">
-            <title>Files Installed in <filename>/tmp/test</filename></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -lR /tmp/test/</userinput>
 <computeroutput>
 total 2
@@ -1824,8 +1685,7 @@ total 5
 -rwxr-xr-x   1 root     root         4550 Oct 14 20:25 cdp.1*
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -1839,7 +1699,7 @@ total 5
 
         <para>
           Before we talk about the <command>--noscripts</command> option, we
-          need to cover a bit of background.  In section <xref
+          need to cover a bit of background.  In <xref
           linkend="s2-rpm-install-vv-option">, we saw some output from an
           install using the <command>-vv</command> option.  As can be seen,
           there are two lines that mention pre-install and post-install scripts.
@@ -1849,7 +1709,7 @@ total 5
           <footnote>
             <para>
               It's possible to use RPM's query command to see if a package has
-              pre- or post-install scripts.  See section <xref
+              pre- or post-install scripts.  See <xref
               linkend="s3-rpm-query-scripts-option"> for more information.
             </para>
           </footnote>
@@ -1883,9 +1743,7 @@ total 5
           install is.  When the number reaches 100%, the installation is
           complete.
 
-          <figure id="sc-rpm-install-percent-example">
-            <title>Using the <command>--percent</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i --percent iBCS-1.2-3.i386.rpm</userinput>
 <computeroutput>
 %f iBCS:1.2:3
@@ -1900,8 +1758,7 @@ total 5
 %% 100.000000
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           The list of percentages will vary depending on the number of files in
           the package, but every package ends at 100% when completely
@@ -1933,8 +1790,7 @@ total 5
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 
@@ -1965,7 +1821,7 @@ total 5
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2018,8 +1874,8 @@ total 5
         </indexterm>
 
         <para>
-          Back in section <xref linkend="s2-rpm-install-urls"> we showed how RPM
-          can access package files by the use of a URL.
+          Back in <xref linkend="s2-rpm-install-urls"> we showed how RPM can
+          access package files by the use of a URL.
           <indexterm>
             <primary>URL</primary>
           </indexterm>
@@ -2036,8 +1892,8 @@ total 5
           file by using the <command>ftpport</command> entry.
         <footnote>
             <para>
-              The use of <filename>rpmrc</filename> files is described in
-              Appendix <xref linkend="ch-rpmrc-file">.
+              The use of <filename>rpmrc</filename> files is described in <xref
+              linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2075,8 +1931,8 @@ total 5
           <command>ftpproxy</command> entry.
           <footnote>
             <para>
-              The use of <filename>rpmrc</filename> files is described in
-              Appendix <xref linkend="ch-rpmrc-file">.
+              The use of <filename>rpmrc</filename> files is described in <xref
+              linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2107,7 +1963,7 @@ total 5
           <footnote>
             <para>
               If you <emphasis>are</emphasis> porting RPM, you'll find more on
-              <command>arch_compat</command> in section <xref
+              <command>arch_compat</command> in <xref
               linkend="s3-rpm-multi-xxx-compat">.
             </para>
           </footnote>
@@ -2149,7 +2005,7 @@ total 5
           <footnote>
             <para>
               If you <emphasis>are</emphasis> porting RPM, you'll find more on
-              <command>os_compat</command> in section <xref
+              <command>os_compat</command> in <xref
               linkend="s3-rpm-multi-xxx-compat">.
             </para>
           </footnote>

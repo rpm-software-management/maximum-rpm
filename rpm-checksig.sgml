@@ -149,7 +149,7 @@
           started.
         </para>
         <para>
-          If PGP is new to you, a quick glance through Appendix <xref
+          If PGP is new to you, a quick glance through <xref
           linkend="ch-pgp-intro"> should get you well on your way to
           understanding, building, and installing PGP.  If, on the other hand,
           you've got PGP already installed and have sent an encrypted message or
@@ -202,8 +202,7 @@
                       <para>
                         For more information on <filename>rpmrc</filename>
                         files, <filename>rpmrc</filename> file entries, and how
-                        to use them, please see Appendix <xref
-                        linkend="ch-rpmrc-file">.
+                        to use them, please see <xref linkend="ch-rpmrc-file">.
                       </para>
                     </footnote>
                   </para>
@@ -232,9 +231,7 @@
         package builder whose packages you'll want to check.  This is what
         you'll need to do:
 
-        <figure id="sc-rpm-checksig-adding-key">
-          <title>Adding a New Key to PGP's Public Keyring File</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>pgp -ka RPM-PGP-KEY ./pubring.pgp</userinput>
 <computeroutput>
 Pretty Good Privacy(tm) 2.6.3a - Public-key encryption for the masses.
@@ -255,8 +252,7 @@ Keyfile contains:
 One or more of the new keys are not fully certified.
 </computeroutput>
 <prompt>Do you want to certify any of these keys yourself (y/N)? </prompt><userinput>n</userinput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Here we've added &RHI;'s public key, since we're going to check some
@@ -268,16 +264,13 @@ One or more of the new keys are not fully certified.
       <para>
         Next, we'll verify a package file:
 
-        <figure id="sc-rpm-checksig-verifying-package">
-          <title>Verifying a Package Using <command>rpm -K</command></title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size pgp md5 OK
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         While the output might seem somewhat anti-climactic, we can now be nearly
@@ -352,11 +345,7 @@ rpm-2.3-1.i386.rpm: size pgp md5 OK
           Adding <command>v</command> to a verification command will produce
           more interesting output:
 
-          <figure id="sc-rpm-checksig-v-example">
-            <title>
-              Example of Additional Output from the <command>-v</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Kv rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386.rpm:
@@ -370,8 +359,7 @@ actually belongs to: "Red Hat Software, Inc. &lt;redhat@redhat.com&gt;".
 MD5 sum OK: 8873682c5e036a307dee87d990e75349
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           With a bit of digging, we can see that each of the three tests was
@@ -415,16 +403,13 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           As mentioned earlier, not every package you'll run across is going to
           be signed.  If this is the case, here's what you'll see from RPM:
 
-          <figure id="sc-rpm-checksig-unsigned-example">
-            <title>Verification Output From an Unsigned Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K bother-3.5-1.i386.rpm</userinput>
 <computeroutput>
 bother-3.5-1.i386.rpm: size md5 OK
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Note the lack of a <computeroutput>pgp</computeroutput> message.  The
@@ -438,16 +423,13 @@ bother-3.5-1.i386.rpm: size md5 OK
           If you happen to run across an older unsigned package, you'll know it
           right away:
 
-          <figure id="sc-rpm-checksig-older-package">
-            <title>Attempting to Verify an Older Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K apmd-2.4-1.i386.rpm</userinput>
 <computeroutput>
 apmd-2.4-1.i386.rpm: No signature available
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Older package files had only a PGP-based signature; if that was missing,
@@ -467,19 +449,13 @@ apmd-2.4-1.i386.rpm: No signature available
           If you happen to forget to add the right public key to RPM's keyring,
           you'll see the following response:
 
-          <figure id="sc-rpm-checksig-missing-public-key">
-            <title>
-              Attempting to Verify a Package When Missing the Required
-              Public Key
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here the <computeroutput>PGP</computeroutput> in parentheses indicates
@@ -517,9 +493,7 @@ rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
           Although the change was a small one, it still showed up when the
           package file was queried.  Here's a listing from the original package:
 
-          <figure id="sc-rpm-checksig-original-package">
-            <title>Query Output From Original Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
@@ -536,15 +510,12 @@ package consists of an archive of files, and package information,
 including name, version, and description.
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           And here's the same listing from the bogus package file:
 
-          <figure id="sc-rpm-checksig-bogus-package">
-<title>Query Output From Bogus Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386-bogus.rpm</userinput>
 <computeroutput>
 Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
@@ -561,8 +532,7 @@ package consists of an archive of files, and package information,
 including name, version, and description.
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Notice that the build host name changed from
@@ -572,18 +542,13 @@ including name, version, and description.
           the difference occurs at byte 1201, which changed from "p" (octal
           160), to "q" (octal 161):
 
-          <figure id="sc-rpm-checksig-binary-diff-output">
-            <title>
-              Differences Between the Originan and Bogus Packages
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cmp -cl rpm-2.3-1.i386.rpm rpm-2.3-1.i386-bogus.rpm</userinput>
 <computeroutput>
   1201 160 p    161 q
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           People versed in octal numbers will note that only <emphasis>one
@@ -591,16 +556,13 @@ including name, version, and description.
           smallest possible change you can make!  Let's see how our bogus friend
           fares:
 
-          <figure id="sc-rpm-checksig-bogus-example">
-            <title>Attempting to Verify Bogus Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386-bogus.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Given that the command's output ends with <computeroutput>NOT
@@ -640,7 +602,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
           to verify packages?
         </para>
         <para>
-          Certainly --- in fact, we've already done it, in section <xref
+          Certainly --- in fact, we've already done it, in <xref
           linkend="s2-rpm-checksig-missing-public-key">.  You lose the ability
           to verify the package's origins, as well as some level of confidence
           in the package's integrity, but the size and MD5 checksums still give
@@ -650,32 +612,26 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
           Of course, when PGP can't be used, the output from a verification
           always looks like something's wrong:
 
-          <figure id="sc-rpm-checksig-pgp-missing">
-            <title>Verification Output When PGP is Unavailable</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>--nopgp</command> option directs RPM to ignore PGP
           entirely.  If we use the <command>--nopgp</command> option on our
           example above, we find that things look a whole lot better:
 
-          <figure id="sc-rpm-checksig-nopgp-example">
-            <title>Using the <command>--nopgp</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -K --nopgp rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size md5 OK
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -691,11 +647,7 @@ rpm-2.3-1.i386.rpm: size md5 OK
           you're the curious type, the <command>-vv</command> option will give
           you insights into how RPM verifies packages.  Here's an example:
 
-          <figure id="sc-rpm-checksig-vv-example">
-            <title>
-              Verifying a Package With the <command>-vv</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Kvv rpm-2.3-1.i386.rpm</userinput>
 <computeroutput>
 D: New Header signature
@@ -717,8 +669,7 @@ actually belongs to: "Red Hat Software, Inc. &lt;redhat@redhat.com&gt;".
 MD5 sum OK: 8873682c5e036a307dee87d990e75349
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The lines starting with <computeroutput>D:</computeroutput> represent
@@ -759,8 +710,7 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
         </para>
       </sect2>
     </sect1>

@@ -209,26 +209,20 @@
       <para>
         The most basic erase command is:
 
-        <figure id="sc-rpm-erase-basic-erase">
-          <title>Using RPM to Erase a Package</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -e eject</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this case, the <filename>eject</filename> package was erased.  There
         isn't much in the way of feedback, is there?  Could we get more if we
         add -v?
 
-        <figure id="sc-rpm-erase-erase-with-v">
-          <title>Erasing a Package With the <command>-v</command> Option</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ev eject</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Still nothing.  However, there's another option that can be counted on
@@ -253,12 +247,7 @@
           and its output may change, but it is a great way to gain insight into
           RPM's inner workings.  Let's try it with <command>rpm -e</command>:
 
-          <figure id="sc-rpm-erase-vv-option-example">
-            <title>
-              Erasing a Package With the <command>-vv</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -evv eject</userinput>
 <computeroutput>
 D: uninstalling record number 286040
@@ -274,8 +263,7 @@ D: removing file index for /usr/bin/eject
 D: removing file index for /usr/man/man1/eject.1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           Although <command>-v</command> had no effect on RPM's output,
           <command>-vv</command> gave us a torrent of output.  But what does it
@@ -295,9 +283,9 @@ D: removing file index for /usr/man/man1/eject.1
           that RPM is to actually erase the package.  If the number had been
           non-zero, RPM would only be performing a test of the package erasure.
           This happens when the <command>--test</command> option is used.  Refer
-          to section <xref linkend="s2-rpm-erase-test-option"> for more
-          information on the use of the <command>--test</command> option with
-          <command>rpm -e</command>.
+          to <xref linkend="s2-rpm-erase-test-option"> for more information on
+          the use of the <command>--test</command> option with <command>rpm
+          -e</command>.
         </para>
         <para>
           The next two lines log the actual removal of the files comprising the
@@ -344,17 +332,14 @@ D: removing file index for /usr/man/man1/eject.1
           <command>--test</command> option first to see what <command>rpm
           -e</command> would do:
 
-          <figure id="sc-rpm-erase-test-setup">
-            <title>Using the <command>--test</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e --test bother</userinput>
 <computeroutput>
 removing these packages would break dependencies:
         bother &gt;= 3.1 is needed by blather-7.9-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           It's pretty easy to see that the <filename>blather</filename> package
@@ -367,15 +352,10 @@ removing these packages would break dependencies:
           However, if there are no problems erasing the package, you won't see
           very much:
 
-          <figure id="sc-rpm-erase-test-success">
-            <title>
-              Using the <command>--test</command> Option (Successfully)
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e --test eject</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           We know, based on previous experience, that <command>-v</command>
@@ -383,12 +363,7 @@ removing these packages would break dependencies:
           However, we <emphasis>do</emphasis> know that <command>-vv</command>
           works wonders.  Let's see what <emphasis>it</emphasis> has to say:
 
-          <figure id="sc-rpm-erase-test-and-vv">
-            <title>
-              Using the <command>--test</command> and <command>-vv</command>
-              Options Together
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -evv --test eject</userinput>
 <computeroutput>
 D: uninstalling record number 286040
@@ -400,9 +375,8 @@ D: running postuninstall script (if any)
 D: would remove database entry
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
-</para>
+          </screen>
+        </para>
         <para>
           As you can see, the output is similar to that of a regular erase
           command using the <command>-vv</command> option, with the following
@@ -458,17 +432,14 @@ D: would remove database entry
           It's likely that one day while erasing a package, you'll see something
           like this:
 
-          <figure id="sc-rpm-erase-dependency-failure">
-            <title>A Dependency-Related Error Message</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e bother</userinput>
 <computeroutput>
 removing these packages would break dependencies:
         bother &gt;= 3.1 is needed by blather-7.9-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           What happened?  The problem is that one or more of the packages
@@ -494,15 +465,10 @@ removing these packages would break dependencies:
           <command>--nodeps</command> option to the command line and see what
           happens:
 
-          <figure id="sc-rpm-erase-using-nodeps">
-            <title>
-              Erasing a Package Using the <command>--nodeps</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e --nodeps bother</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The package was erased without a peep.  Whether the
@@ -525,7 +491,7 @@ removing these packages would break dependencies:
         </indexterm>
 
         <para>
-          In section <xref linkend="s2-rpm-erase-vv-option">, we used the
+          In <xref linkend="s2-rpm-erase-vv-option">, we used the
           <command>-vv</command> option to see what RPM was actually doing when
           it erased a package.  We noted that there were two scripts, a
           pre-uninstall and a post-uninstall, that were used to execute commands
@@ -567,8 +533,7 @@ removing these packages would break dependencies:
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 
@@ -598,7 +563,7 @@ removing these packages would break dependencies:
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -658,21 +623,16 @@ removing these packages would break dependencies:
         installed as part of the <filename>etcskel</filename> package.  Later,
         we remove <filename>etcskel</filename>:
 
-        <figure id="sc-rpm-erase-config-file-setup">
-          <title>Erasing the <filename>etcskel</filename> Package</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -e etcskel</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         But if we take a look in <filename>/etc/skel</filename>, look what's
         there:
 
-        <figure id="sc-rpm-erase-config-file-payoff">
-          <title>After Erasing the <filename>etcskel</filename> Package</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>ls -al</userinput>
 <computeroutput>
 total 5
@@ -682,15 +642,14 @@ drwxr-xr-x   8 root     root         2048 Jun 17 19:01 ..
 drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
-</para>
+        </screen>
+      </para>
       <para>
         Sure enough: <filename>.bashrc.rpmsave</filename> is a copy of your
         modified <filename>.bashrc</filename> file!  Remember, however, that
         this feature only works with config files.  Not sure how to determine
-        which files RPM thinks are config files?  Chapter <xref
-        linkend="ch-rpm-query"> will show you how.
+        which files RPM thinks are config files?  <xref linkend="ch-rpm-query">
+        will show you how.
       </para>
     </sect1>
 
@@ -736,7 +695,7 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         you'd like to erase.
         <footnote>
           <para>
-            See chapter <xref linkend="ch-rpm-query"> for more information on
+            See <xref linkend="ch-rpm-query"> for more information on
             <command>rpm -q</command>.
           </para>
         </footnote>

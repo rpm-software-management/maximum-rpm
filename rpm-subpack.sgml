@@ -189,7 +189,7 @@ build it...
         <title>The Subpackage's "Preamble"</title>
 
         <para>
-          When we introduced RPM package building in chapter <xref
+          When we introduced RPM package building in <xref
           linkend="ch-rpm-basics">, we said that every spec file contains a
           preamble.  The preamble contains a variety of tags that define all
           sorts of information about the package.  In a single package

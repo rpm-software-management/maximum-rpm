@@ -438,18 +438,13 @@
             Say, for instance, you've recently installed a new version of the C
             libraries, but you can't remember the version number:
 
-            <figure id="sc-rpm-query-query-example">
-              <title>
-                A Simple Package Query Using <command>rpm -q</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q libc</userinput>
 <computeroutput>
 libc-5.2.18-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this type of query, RPM returns the complete package label for
@@ -461,25 +456,20 @@ libc-5.2.18-1
             In this example, we've included the version as well as the package
             name:
 
-            <figure id="sc-rpm-query-example2">
-              <title>Another Package Query</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q rpm-2.3</userinput>
 <computeroutput>
 rpm-2.3-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note, however, that RPM is a bit picky about specifying package
             names.  Here are some queries for the C library that
             <emphasis>won't</emphasis> work:
 
-            <figure id="sc-rpm-query-example3">
-              <title>Query Commands That <emphasis>Won't</emphasis> Work</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q LibC</userinput>
 <computeroutput>
 package LibC is not installed
@@ -505,8 +495,7 @@ package libc-5 is not installed
 package libc-5.2.1 is not installed
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As you can see, RPM is case sensitive about package names and cannot
@@ -538,12 +527,7 @@ package libc-5.2.1 is not installed
             option, you can query every package installed on your system.  For
             example:
 
-            <figure id="sc-rpm-query-query-a-example">
-              <title>
-                Querying All Installed Packages Using the <command>-a</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qa</userinput>
 <computeroutput>
 ElectricFence-2.0.5-2
@@ -553,12 +537,11 @@ tetex-xtexsh-0.3.3-8
 lout-3.06-4
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             (On a system installed using RPM, the number of packages can easily
             number 200 or more; we've deleted most of the output.)
-</para>
+          </para>
           <para>
             The <command>-a</command> option can produce mountains of output,
             which makes it a prime candidate for piping through the many
@@ -572,16 +555,13 @@ lout-3.06-4
             <command>grep</command>, it's possible to get around RPM's lack of
             built-in wildcard processing:
 
-            <figure id="sc-rpm-query-pipe-grep">
-              <title>Piping a Query Through <command>grep</command></title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qa | grep -i sysv</userinput>
 <computeroutput>
 SysVinit-2.64-2
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             In this example, we were able to find the
             <filename>SysVinit</filename> package, even though we didn't have
@@ -609,33 +589,25 @@ SysVinit-2.64-2
             <emphasis>is</emphasis> a contrived example).  Wonder what package
             installed it?  Simple!
 
-            <figure id="sc-rpm-query-f-example">
-              <title>Using the <command>-f</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qf /bin/ls</userinput>
 <computeroutput>
 fileutils-3.12-3
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If you happen to point RPM at a file it didn't install, you'll get a
             message similar to the following:
 
-            <figure id="sc-rpm-query-f-unsuccessful">
-              <title>
-                When the <command>-f</command> Option Doesn't Find a Match
-              </title> 
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qf .cshrc</userinput>
 <computeroutput>
 file /home/ed/.cshrc is not owned by any package
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <sect4 id="s4-rpm-query-tricky-detail">
@@ -650,16 +622,13 @@ file /home/ed/.cshrc is not owned by any package
               It's possible that you'll get the "not owned by any package"
               message in error.  Here's an example of how it can happen:
 
-              <figure id="sc-rpm-query-tricky-detail">
-                <title>The <command>-f</command> Not Finding a Match</title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qf /usr/X11/bin/xterm</userinput>
 <computeroutput>
 file /usr/X11/bin/xterm is not owned by any package
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               As you can see, we're trying to find out what package the
@@ -671,9 +640,7 @@ file /usr/X11/bin/xterm is not owned by any package
             <para>
               However, let's look at a directory listing:
 
-              <figure id="sc-rpm-query-tricky-detail-setup">
-                <title>A Directory Listing</title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>ls -lF /usr</userinput>
 <computeroutput>
 &hellip;
@@ -682,8 +649,7 @@ drwxrwxr-x   7 root     root         1024 Mar 21 00:21 X11R6/
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
 
               (We've truncated the list; normally <filename>/usr</filename> is
               quite a bit more crowded than this.)
@@ -712,9 +678,7 @@ drwxrwxr-x   7 root     root         1024 Mar 21 00:21 X11R6/
                     can be pretty tough, though.  An alternative approach is to
                     use <command>namei</command> to track down symlinks:
 
-                    <figure id="sc-rpm-query-tricky-detail-setup2">
-                      <title>A <command>namei</command> Listing</title>
-                      <screen width="60">
+                    <screen width="60">
 <prompt># </prompt><userinput>namei /usr/X11/bin/xterm</userinput>
 <computeroutput>
 f: /usr/X11/bin/xterm
@@ -726,8 +690,7 @@ f: /usr/X11/bin/xterm
  - xterm
 </computeroutput>
 <prompt>#</prompt>
-                      </screen>
-                    </figure>
+                    </screen>
                   </para>
                   <para>
                     It's pretty easy to see the <filename>X11</filename> to
@@ -735,19 +698,13 @@ f: /usr/X11/bin/xterm
                     can enter the non-symlinked path and get the desired
                     results:
 
-                   <figure id="sc-rpm-query-tricky-detail-payoff">
-                      <title>
-                        Using a Non-Symlinked Path With the
-                        <command>-f</command> Option
-                      </title>
-                      <screen width="60">
+                    <screen width="60">
 <prompt># </prompt><userinput>rpm -qf /usr/X11R6/bin/xterm</userinput>
 <computeroutput>
 XFree86-3.1.2-5
 </computeroutput>
 <prompt>#</prompt>
-                      </screen>
-                    </figure>
+                    </screen>
                   </para>
                 </listitem>
 
@@ -757,20 +714,14 @@ XFree86-3.1.2-5
                     to query.  Even if you use a symlinked path to get there,
                     querying the file should then work as you'd expect:
 
-                    <figure id="sc-rpm-query-tricky-detail-payoff2">
-                      <title>
-                        Another Way to Ensure the <command>-f</command> Option
-                        Works as Desired
-                      </title> 
-                      <screen width="60">
+                    <screen width="60">
 <prompt># </prompt><userinput>cd /usr/X11/bin</userinput>
 <prompt># </prompt><userinput>rpm -qf xterm</userinput>
 <computeroutput>
 XFree86-3.1.2-5
 </computeroutput>
 <prompt>#</prompt>
-                      </screen>
-                    </figure>
+                    </screen>
                   </para>
                 </listitem>
               </orderedlist>
@@ -807,25 +758,19 @@ XFree86-3.1.2-5
             files consistently), we can use this option to find out exactly what
             package a file contains:
 
-            <figure id="sc-rpm-query-p-example">
-              <title>
-                Using the <command>-p</command> Option on an Unknown Package
-                File
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qp foo.bar</userinput>
 <computeroutput>
 rpm-2.3-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             With one command RPM gives you the answer.
             <footnote>
               <para>
                 On most Linux systems, the <command>file</command> command can
-                be used to obtain similar information.  See Appendix <xref
+                be used to obtain similar information.  See <xref
                 linkend="ch-rpm-file-format"> for details on how to add this
                 capability to your system's <command>file</command> command.
               </para>
@@ -837,7 +782,7 @@ rpm-2.3-1
             <indexterm>
               <primary>URL</primary>
             </indexterm>
-            to specify package files.  See section <xref linkend="s2-rpm-install-urls">
+            to specify package files.  See <xref linkend="s2-rpm-install-urls">
             for more information on using URLs.
           </para>
           <para>
@@ -845,16 +790,13 @@ rpm-2.3-1
             also perform a query by reading a package from standard input.
             Here's an example:
 
-            <figure id="sc-rpm-query-p-example2">
-              <title>Querying a Package by Reading From Standard Input</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>cat bother-3.5-1.i386.rpm | rpm -qp -</userinput>
 <computeroutput>
 bother-3.5-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             We piped the output of <command>cat</command> into RPM.  The dash at
             the end of the command line directs RPM to read the package from
@@ -882,11 +824,7 @@ bother-3.5-1
             provide low-level structure for a Linux distribution.  Let's see
             what installed packages make up the <filename>Base</filename> group:
 
-            <figure id="sc-rpm-query-g-example">
-              <title>
-                Using the <command>-g</command> Option to Query By Group
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qg Base</userinput>
 <computeroutput>
 setup-1.5-1
@@ -904,8 +842,7 @@ rootfiles-1.3-1
 termcap-9.12.6-5
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             One thing to keep in mind is that group specifications are
             case-sensitive.  Issuing the command <command>rpm -qg base</command>
@@ -940,16 +877,13 @@ termcap-9.12.6-5
             command, RPM will select those packages that provide the capability.
             Here's an example:
 
-            <figure id="sc-rpm-query-whatprovides-preview">
-              <title>Using the <command>--whatprovides</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --whatprovides module-info</userinput>
 <computeroutput>
 kernel-2.0.18-5
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
               In this case, the only package that provides the
               <filename>module-info</filename> capability is
@@ -976,16 +910,13 @@ kernel-2.0.18-5
             <command>--whatprovides</command>, let's see which packages require
             the <filename>module-info</filename> capability:
 
-            <figure id="sc-rpm-query-whatrequires-example">
-              <title>Using the <command>--whatrequires</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --whatrequires module-info</userinput>
 <computeroutput>
 kernelcfg-0.3-2
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             There's only one package that requires
             <filename>module-info</filename> ---
@@ -1023,9 +954,7 @@ kernelcfg-0.3-2
             selected.  For the sake of clarity, let's take a look at what it
             gives you and explain what you're looking at:
 
-            <figure id="sc-rpm-query-i-example">
-              <title>Using the <command>-i</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qi rpm</userinput>
 <computeroutput>
 Name        : rpm                    Distribution: Red Hat Linux Vanderbilt
@@ -1042,9 +971,8 @@ package consists of an archive of files, and package information, including
 name, version, and description.
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
-</para>
+            </screen>
+          </para>
           <para>
             There's quite a bit of information here, so let's go through it
             entry by entry:
@@ -1223,19 +1151,13 @@ name, version, and description.
             Here's a look at one of the smaller packages on &RHL; ---
             <filename>adduser</filename>: 
 
-            <figure id="sc-rpm-query-l-option">
-              <title>
-                Displaying a Package's File List Using the <command>-l</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ql adduser</userinput>
 <computeroutput>
 /usr/sbin/adduser
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             The <filename>adduser</filename> package consists of only one file,
             so there's only one filename displayed.
@@ -1257,18 +1179,13 @@ name, version, and description.
               of just such a case.  Note how the <command>-v</command> option
               adds verbosity:
 
-              <figure id="sc-rpm-query-v-option">
-                <title>
-                  Displaying More Data With the <command>-v</command> Option
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qlv adduser</userinput>
 <computeroutput>
 -rwxr-xr-x-     root     root       3894 Feb 25 13:45 /usr/sbin/adduser
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
 
               Looks a lot like the output from <command>ls</command>, doesn't
               it?  Looks can be deceiving.  Everything you see here is straight
@@ -1301,11 +1218,7 @@ name, version, and description.
             of the packaged software.  Let's take a look at the list of config
             files for <filename>XFree86</filename>:
 
-            <figure id="sc-rpm-query-c-example">
-              <title>
-                Listing Config Files Using the <command>-c</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qc XFree86</userinput>
 <computeroutput>
 /etc/X11/fs/config
@@ -1324,8 +1237,7 @@ name, version, and description.
 /usr/X11R6/lib/X11/XF86Config
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             These are the files you'd want to look at first if you were looking
@@ -1333,11 +1245,7 @@ name, version, and description.
             <command>-l</command>, we can also add <command>v</command> for more
             information:
 
-            <figure id="sc-rpm-query-c-verbosity">
-              <title>
-                Getting More Information With the <command>-v</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qcv XFree86</userinput>
 <computeroutput>
 -r--r--r---  root  root    423 Mar 21 00:17 /etc/X11/fs/config
@@ -1345,8 +1253,7 @@ name, version, and description.
 lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; ../../../../etc/X11/XF86Config
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             (Note that last file: RPM will display symbolic links, as well.)
           </para>
@@ -1372,9 +1279,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
             list.  Here's an example that might look daunting at first, but
             really isn't:
 
-            <figure id="sc-rpm-query-d-example">
-              <title>Display All Documentation, Config Files</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qdcf /sbin/dump</userinput>
 <computeroutput>
 /etc/dumpdates
@@ -1394,8 +1299,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 /usr/man/man8/rrestore.8
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Let's take that alphabet soup set of options, one letter at a time:
@@ -1519,7 +1423,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
                         <footnote>
                           <para>
                             For more information on <filename>rpmrc</filename>
-                            file entries, please refer to Appendix <xref
+                            file entries, please refer to <xref
                             linkend="ch-rpmrc-file">.
                           </para>
                         </footnote>
@@ -1540,18 +1444,13 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
           <para>
             Here's an example showing how file states appear:
 
-            <figure id="sc-rpm-query-">
-              <title>
-                Viewing File States With the <command>-s</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qs adduser</userinput>
 <computeroutput>
 normal        /usr/sbin/adduser
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             (That <computeroutput>normal</computeroutput> at the start of the
             line is the state, followed by the file name)
@@ -1583,31 +1482,22 @@ normal        /usr/sbin/adduser
             package doesn't provide any capabilities, the
             <command>--provides</command> option produces no output:
 
-            <figure id="sc-rpm-query-provides-example">
-              <title>
-                Sometimes the <command>--provides</command> Option Doesn't
-                Produce Much Output&hellip;
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --provides rpm</userinput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             However, if a package <emphasis>does</emphasis> provide
             capabilities, they will be displayed:
 
-            <figure id="sc-rpm-query-provides-example2">
-              <title>But Sometimes it Does&hellip;</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --provides foonly</userinput>
 <computeroutput>
 index
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             It's important to remember that capabilities are
@@ -1616,20 +1506,14 @@ index
             <filename>index</filename>; it's just a character string the package
             builder chose.  This is no different from the following example:
 
-            <figure id="sc-rpm-query-provides-example3">
-              <title>
-                The Output From <command>--provides</command> is
-                <emphasis>Not</emphasis> Related to Files!
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --provides libc</userinput>
 <computeroutput>
 libm.so.5
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
             While there might be symlinks by those names in
             <filename>/lib</filename>, capabilities are a property of the
@@ -1654,26 +1538,16 @@ libc.so.5
             required by the specified package(s).  If a package has no
             requirements, there's no output:
 
-            <figure id="sc-rpm-query-requires-example">
-              <title>
-                The <command>--requires</command> Option Doesn't Always Produce
-                Output
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --requires adduser</userinput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In cases where there <emphasis>are</emphasis> requirements, they are
             displayed as follows:
 
-            <figure id="sc-rpm-query-requires-example2">
-              <title>
-                Output From the <command>--requires</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --requires rpm</userinput>
 <computeroutput>
 libz.so.1
@@ -1681,24 +1555,18 @@ libdb.so.2
 libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             It's also possible that you'll come across something like this:
 
-            <figure id="sc-rpm-query-requires-example3">
-              <title>
-                Another Kind of Output From <command>--requires</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --requires blather</userinput>
 <computeroutput>
 bother &gt;= 3.1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
 
               Packages may also be built to require another package.  This
               requirement can also include specific versions.  In the example
@@ -1714,16 +1582,13 @@ bother &gt;= 3.1
             <command>--whatprovides</command> package selection option to try to
             find it:
 
-            <figure id="sc-rpm-query-whatprovides-example">
-              <title>Using the <command>--whatprovides</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --whatprovides bother</userinput>
 <computeroutput>
 no package provides bother
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             No dice.  This might lead you to believe that the
@@ -1734,31 +1599,22 @@ no package provides bother
             our example above, let's see if there's a package called
             <filename>bother</filename>:
 
-            <figure id="sc-rpm-query-provides-setup">
-              <title>Looking For the <filename>bother</filename> Package</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q bother</userinput>
 <computeroutput>
 bother-3.5-1
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Bingo!  However, if we see what capabilities the
             <filename>bother</filename> package provides, we come up dry:
 
-            <figure id="sc-rpm-query-provides-setup2">
-              <title>
-                Looking for Capabilities in the <filename>bother</filename>
-                Package
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --provides bother</userinput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The reason for the lack of output is that all packages, by default,
@@ -1785,17 +1641,14 @@ bother-3.5-1
             <command>-c</command>, or <command>-d</command> options (or some
             combination thereof):
 
-            <figure id="sc-rpm-query-dump-example">
-              <title>Using the <command>--dump</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ql --dump adduser</userinput>
 <computeroutput>
 /usr/sbin/adduser 4442 841083888 ca5fa53dc74952aa5b5e3a5fa5d8904b 0100755
 root root 0 0 0 X
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             What does all this stuff mean?  Let's go through it, item-by-item:
@@ -1907,9 +1760,7 @@ root root 0 0 0 X
             <emphasis>two</emphasis> dashes) to a query, you get to see a little
             bit more of RPM's underlying magic:
 
-            <figure id="sc-rpm-query-scripts-example">
-              <title>Output From the <command>--scripts</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -q --scripts XFree86</userinput>
 <computeroutput>
 preinstall script:
@@ -1933,8 +1784,7 @@ verify script:
 
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this particular case, the <filename>XFree86</filename> package
@@ -1988,7 +1838,7 @@ verify script:
                   <footnote>
                     <para>
                       For more information on package verification, please see
-                      section <xref linkend="s1-rpm-verify-what-it-does">.
+                      <xref linkend="s1-rpm-verify-what-it-does">.
                     </para>
                   </footnote>
                 </para>
@@ -2071,14 +1921,11 @@ verify script:
               <command>--queryformat</command> option a try, using a format
               string with nothing but literal text:
 
-              <figure id="sc-rpm-query-queryformat-literal">
-                <title>Literal Text and <command>--queryformat</command></title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat 'This is a test!' rpm</userinput>
 <computeroutput>
 This is a test!</computeroutput><prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               The RPM command might look a little unusual, but if you take out
@@ -2175,18 +2022,13 @@ This is a test!</computeroutput><prompt>#</prompt>
               sequence at the end of the format string will put our shell prompt
               on the next line:
 
-              <figure id="sc-rpm-query-queryformat-cc-example">
-                <title>
-                  Using Carriage Control with <command>--queryformat</command>
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat 'This is a test!\n' rpm</userinput>
 <computeroutput>
 This is a test!
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
 
               Much better&hellip;
             </para>
@@ -2224,33 +2066,25 @@ This is a test!
               enclosed in curly braces and preceded by a percent sign.  Let's
               give it a try:
 
-              <figure id="sc-rpm-query-queryformat-tag-example">
-                <title>Using a Tag With <command>--queryformat</command></title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}%{VERSION}%{RELEASE}\n' rpm</userinput>
 <computeroutput>
 rpm2.31
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               Let's add a dash between the tags and see if that makes the output
               a little easier to read:
 
-              <figure id="sc-rpm-query-tag-example2">
-                <title>
-                  Slightly Nicer Output From <command>--queryformat</command>
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%{VERSION}-%{RELEASE}\n' rpm</userinput>
 <computeroutput>
 rpm-2.3-1
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
 
               Now our format string outputs standard package labels.
             </para>
@@ -2269,18 +2103,13 @@ rpm-2.3-1
                 brace.  Using our package-label-producing format string, let's
                 allocate a 20-character field for the version:
 
-                <figure id="sc-rpm-query-width-example">
-                  <title>
-                    Declaring a Field Width for <command>--queryformat</command>
-                  </title>
-                  <screen width="60">
+                <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%20{VERSION}-%{RELEASE}\n' rpm</userinput>
 <computeroutput>
 rpm-                 2.3-1
 </computeroutput>
 <prompt>#</prompt>
-                  </screen>
-                </figure>
+                </screen>
 
                 The result is a field of 20 characters: 17 spaces, followed by
                 the three characters that make up the version.
@@ -2291,16 +2120,13 @@ rpm-                 2.3-1
                 left justify the field by preceding the field width
                 specification with a dash:
 
-                <figure id="sc-rpm-query-queryformat-justification">
-                  <title>Controlling Justification</title>
-                  <screen width="60">
+                <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%-20{VERSION}-%{RELEASE}\n' rpm</userinput>
 <computeroutput>
 rpm-2.3                 -1
 </computeroutput>
 <prompt>#</prompt>
-                  </screen>
-                </figure>
+                </screen>
               </para>
               <para>
                 Now the version is printed at the far left of the output field.
@@ -2329,11 +2155,7 @@ rpm-2.3                 -1
                 we see <command>INSTALLTIME</command>.  Great!  Looks like this
                 will be simple:
 
-                <figure id="sc-rpm-query-queryformat-modifier-setup">
-                  <title>
-                    <command>--queryformat</command> Output Without Modifiers
-                  </title>
-                  <screen width="60">
+                <screen width="60">
 <prompt># </prompt><userinput>rpm -qa --queryformat '%{NAME} was installed on %{INSTALLTIME}\n'</userinput>
 <computeroutput>
 setup was installed on 845414601
@@ -2344,8 +2166,7 @@ rpm was installed on 851659311
 pgp was installed on 846027549
 </computeroutput>
 <prompt>#</prompt>
-                  </screen>
-                </figure>
+                </screen>
               </para>
               <para>
                 Well, that's a <emphasis>lot</emphasis> of output, but not very
@@ -2361,11 +2182,7 @@ pgp was installed on 846027549
                 the tag name.  Let's try our example again, this time using
                 <command>:date</command>:
 
-                <figure id="sc-rpm-query-queryformat-modifier-payoff">
-                  <title>
-                    <command>--queryformat</command> Output With Modifiers
-                  </title>
-                  <screen width="60">
+                <screen width="60">
 <prompt># </prompt><userinput>rpm -qa --queryformat '%{NAME} was installed on %{INSTALLTIME:date}\n'</userinput>
 <computeroutput>
 setup was installed on Tue Oct 15 17:23:21 1996
@@ -2376,8 +2193,7 @@ rpm was installed on Thu Dec 26 23:01:51 1996
 pgp was installed on Tue Oct 22 19:39:09 1996
 </computeroutput>
 <prompt>#</prompt>
-                  </screen>
-                </figure>
+                </screen>
 
                 That sure is a lot easier to understand, isn't it?
               </para>
@@ -2453,36 +2269,25 @@ pgp was installed on Tue Oct 22 19:39:09 1996
               We'll try it on the <filename>adduser</filename> package first,
               since it contains only one file:
 
-              <figure id="sc-rpm-query-queryformat-iterator-setup">
-                <title>
-                  A Typical Query Using <command>--queryformat</command>
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: %{FILENAMES}\n' adduser</userinput>
 <computeroutput>
 adduser: /usr/sbin/adduser
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               Hey, not bad --- got it on the first try.  Now let's try it on a
               package with more than one file:
 
-              <figure id="sc-rpm-query-queryformat-iterator-ooops">
-                <title>
-                  A <command>--queryformat</command> Query That Didn't Go As
-                  Expected
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: %{FILENAMES}\n' etcskel</userinput>
 <computeroutput>
 etcskel: (array)
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               Hmmm.  What went wrong?  It worked before&hellip; Well, it worked
@@ -2500,30 +2305,20 @@ etcskel: (array)
               <command>FILENAMES</command> array, let's enclose that tag in the
               iterator:
 
-              <figure id="sc-rpm-query-queryformat-iterator-example">
-                <title>
-                  Using an Iterator With <command>--queryformat</command>
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES}]\n' etcskel</userinput>
 <computeroutput>
 etcskel: /etc/skel/etc/skel/.Xclients/etc/skel/.Xdefaults/etc/skel/.ba
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               There was more output --- it went right off the screen in one long
               line.  The problem?  We didn't include a newline escape sequence
               inside the iterator.  Let's try it again:
 
-              <figure id="sc-rpm-query-queryformat-iterator-example2">
-                <title>
-                  Nicer Output Using an Interator With
-                  <command>--queryformat</command>
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES}\n]' etcskel</userinput>
 <computeroutput>
 etcskel: /etc/skel
@@ -2535,8 +2330,7 @@ etcskel: /etc/skel
 /etc/skel/.xsession
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               That's more like it.  If we wanted, we could put another
@@ -2544,9 +2338,7 @@ etcskel: /etc/skel
               <command>FILESIZES</command> tag, we'd be able to see the name of
               each file, as well as how big it was:
 
-              <figure id="sc-rpm-query-single-iterator-setup">
-                <title>More Fun With Iterators</title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES} (%{FILESIZES} bytes)\n]' etcskel</userinput>
 <computeroutput>
 etcskel: /etc/skel (1024 bytes)
@@ -2558,8 +2350,7 @@ etcskel: /etc/skel (1024 bytes)
 /etc/skel/.xsession (9 bytes)
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               That's pretty nice.  But it would be even nicer if the package
@@ -2567,15 +2358,12 @@ etcskel: /etc/skel (1024 bytes)
               Maybe if we put the <command>NAME</command> tag inside the
               iterator:
 
-              <figure id="sc-rpm-query-single-iterator-oops">
-                <title>An Iterator-related Problem</title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '[%{NAME}: %{FILENAMES} \</userinput>
 <prompt>?  </prompt><userinput>(%{FILESIZES} bytes)\n]' etcskel</userinput>
 <computeroutput>
 etcskel: /etc/skel(parallel array size mismatch)</computeroutput><prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
 
               The error message says it all.  The <command>FILENAMES</command>
               and <command>FILESIZES</command> arrays are the same size.  The
@@ -2596,9 +2384,7 @@ etcskel: /etc/skel(parallel array size mismatch)</computeroutput><prompt>#</prom
                 iteration.  This is done by preceding the tag name with an equal
                 sign.  Let's try it out on our current example:
 
-                <figure id="sc-rpm-query-single-entry-interators">
-                  <title>A New Way of Iterating</title>
-                  <screen width="60">
+                <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '[%{=NAME}: %{FILENAMES} (%{FILESIZES} bytes)\n]' etcskel</userinput>
 <computeroutput>
 etcskel: /etc/skel (1024 bytes)
@@ -2610,8 +2396,7 @@ etcskel: /etc/skel/.bashrc (124 bytes)
 etcskel: /etc/skel/.xsession (9 bytes)
 </computeroutput>
 <prompt>#</prompt>
-                  </screen>
-                </figure>
+                </screen>
 
                 That's about all there is to format strings.  Now, if RPM's
                 standard output doesn't give you what you want, you have no
@@ -2638,12 +2423,7 @@ etcskel: /etc/skel/.xsession (9 bytes)
               Here's a partial example of the <command>--querytags</command>
               option in action:
 
-              <figure id="sc-rpm-query-querytags-example">
-                <title>
-                  Using the <command>--querytags</command> Option to List
-                  Available Tags
-                </title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>rpm --querytags</userinput>
 <computeroutput>
 RPMTAG_NAME
@@ -2653,8 +2433,7 @@ RPMTAG_RELEASE
 RPMTAG_VERIFYSCRIPT
 </computeroutput>
 <prompt>#</prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               Be forewarned: the full list is quite lengthy.  At the time this
@@ -2664,9 +2443,7 @@ RPMTAG_VERIFYSCRIPT
               <command>RPMTAG_VERIFYSCRIPT</command>, in a format string, it
               could be specified in any of the following ways:
 
-              <figure id="sc-rpm-query-querytag-examples">
-                <title>Examples of Valid Tags</title>
-                <screen width="60">
+              <screen width="60">
 <command>
 %{RPMTAG_VERIFYSCRIPT}
 
@@ -2680,8 +2457,7 @@ RPMTAG_VERIFYSCRIPT
 
 %{VeRiFyScRiPt}
 </command>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               The only hard-and-fast rule regarding tags is that if you include
@@ -2698,8 +2474,7 @@ RPMTAG_VERIFYSCRIPT
               <computeroutput>(unknown)</computeroutput>.  There are also a few
               tags that, for one reason or another, will not produce useful
               output when using in a format string.  For a comprehensive list of
-              queryformat tags, please see Appendix <xref
-              linkend="ch-queryformat-tags">.
+              queryformat tags, please see <xref linkend="ch-queryformat-tags">.
             </para>
           </sect4>
         </sect3>
@@ -2721,9 +2496,7 @@ RPMTAG_VERIFYSCRIPT
           another <command>v</command>, we can start to see more of RPM's inner
           workings:
 
-          <figure id="sc-rpm-query-vv-example">
-            <title>Using the <command>-vv</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qvv rpm</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -2731,8 +2504,7 @@ D: querying record number 2341208
 rpm-2.3-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The lines starting with <computeroutput>D:</computeroutput> have been
@@ -2771,7 +2543,7 @@ rpm-2.3-1
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2804,7 +2576,7 @@ rpm-2.3-1
           This option would be used if there was a need to switch between
           several sets of RPM options.  Software developer and package builders
           will be the people using <command>--rcfile</command>.  For more
-          information on <filename>rpmrc</filename> files, see Appendix <xref
+          information on <filename>rpmrc</filename> files, see <xref
           linkend="ch-rpmrc-file">.
         </para>
       </sect2>
@@ -2870,16 +2642,13 @@ rpm-2.3-1
           name of the system-wide initialization file used by
           <command>bash</command>, or where it resides:
 
-          <figure id="sc-rpm-query-bash-config">
-            <title>Finding Configuration Files Associated With a Program</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qcf /bin/bash</userinput>
 <computeroutput>
 /etc/bashrc
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           Rather than spending time trying to hunt down the file, RPM finds it
           for you in seconds.
@@ -2898,9 +2667,7 @@ rpm-2.3-1
           extract information from a .rpm file.  Let's say you have an unknown
           .rpm file, and you'd like to know a bit more before installing it:
 
-          <figure id="sc-rpm-query-uninstalled-package">
-            <title>Querying An Uninstalled Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qpil foo.bar</userinput>
 <computeroutput>
 Name        : rpm                  Distribution: Red Hat Linux Vanderbilt
@@ -2927,8 +2694,7 @@ including name, version, and description.
 /usr/src/redhat/SRPMS
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           By displaying the package information, we know that we have a package
@@ -2949,9 +2715,7 @@ including name, version, and description.
           knowledge of the software is lacking.  You'd like to see when it was
           installed on your system, and what documentation is available for it:
 
-          <figure id="sc-rpm-query-bash-info">
-            <title>Getting Additional Information With RPM</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qid bash</userinput>
 <computeroutput>
 Name        :bash                   Distribution: Red Hat Linux (Picasso)
@@ -2969,8 +2733,7 @@ Description :GNU Bourne Again Shell (bash)
 /usr/man/man1/bash.1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           You never realized that there could be so much documentation for a
           shell!
@@ -2990,9 +2753,7 @@ Description :GNU Bourne Again Shell (bash)
           packages are installed on your system.  If you can find other packages
           in the "Shells" group, you'll have found the other installed shells:
 
-          <figure id="sc-rpm-query-similar-packages">
-            <title>Using RPM to Find Similar Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qa --queryformat '%10{NAME} %20{GROUP}\n' | grep -i shells</userinput>
 <computeroutput>
        ash               Shells
@@ -3002,8 +2763,7 @@ Description :GNU Bourne Again Shell (bash)
       tcsh               Shells
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           Now you can query each of these packages, and learn more about them,
           too.
@@ -3032,16 +2792,13 @@ Description :GNU Bourne Again Shell (bash)
           for certain is that the package installed a new command in the
           <filename>/bin</filename> directory.  Let's try to find the package:
 
-          <figure id="sc-rpm-query-recent-packages1">
-            <title>One Way to Find Recently-Installed Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>find /bin -type f -mtime -14 | rpm -qF</userinput>
 <computeroutput>
 rpm-2.3-1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           Looks like RPM version 2.3 was installed sometime in the last two
           weeks.
@@ -3054,9 +2811,7 @@ rpm-2.3-1
           Another way to see which packages were recently installed is to use
           the <command>--queryformat</command> option:
 
-          <figure id="sc-rpm-query-recent-packages2">
-            <title>Another Way to Find Recently-Installed Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qa --queryformat '%{installtime} %{name}-%{version}-%{release} %{installtime:date}\n' | sort -nr +1 | sed -e 's/^[^ ]* //'</userinput>
 <computeroutput>
 rpm-devel-2.3-1 Thu Dec 26 23:02:05 1996
@@ -3067,8 +2822,7 @@ pamconfig-0.50-5 Tue Oct 15 17:23:22 1996
 setup-1.5-1 Tue Oct 15 17:23:21 1996
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
             By having RPM include the installation time in numeric form, it was
             simple to sort the packages and then use <command>sed</command> to
@@ -3089,9 +2843,7 @@ setup-1.5-1 Tue Oct 15 17:23:21 1996
           package takes up.  You'd also like to see the largest packages first,
           so you can get back as much disk space as possible:
 
-          <figure id="sc-rpm-query-largest-packages">
-            <title>Finding the Largest Installed Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qa --queryformat '%{name-%{version}-%{release} %{size}\n' | sort -nr +1</userinput>
 <computeroutput>
 kernel-source-2.0.18-5  20608472
@@ -3103,8 +2855,7 @@ mkinitrd-1.0-1  1898
 redhat-release-4.0-1  22
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
 
           If you don't build custom kernels, or use TeX, it's easy to see how
           much space could be reclaimed by removing those packages.

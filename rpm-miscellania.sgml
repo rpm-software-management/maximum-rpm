@@ -28,14 +28,11 @@
           But still, there is a chance that one day, while you're busy using RPM
           to install or upgrade a package, you'll see this message:
 
-          <figure id="sc-rpm-miscellania-free-list-corrupt">
-            <title>A First Hint of Possible Problems</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 free list corrupt (42)- contact rpm-list@redhat.com
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Once this happens, you'll find there's very little that you can do,
@@ -43,16 +40,11 @@ free list corrupt (42)- contact rpm-list@redhat.com
           list, you might try the <command>--rebuilddb</command> option.  The
           format of the command is simple:
 
-          <figure id="sc-rpm-miscellania-rebuilddb-syntax">
-            <title>
-              Command Syntax For the <command>--rebuilddb</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <command>
 rpm --rebuilddb
 </command>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The command produces no output, either.  After a few minutes, it
@@ -61,9 +53,7 @@ rpm --rebuilddb
           wasn't corrupt.  First, let's look at the files that comprise the
           database:
 
-          <figure id="sc-rpm-miscellania-rebuilddb-setup">
-            <title>Listing of RPM Database Files</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /var/lib/rpm</userinput>
 <prompt># </prompt><userinput>ls</userinput>
 <computeroutput>
@@ -76,30 +66,21 @@ total 3534
 -rw-r--r--   1 root     root        16384 Oct 17 10:35 requiredby.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Then, we issue the command:
 
-          <figure id="sc-rpm-miscellania-rebuilddb-example">
-            <title>
-              Rebuilding an RPM Database With the <command>--rebuilddb</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --rebuilddb</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           After a few minutes, the command completes, and we take a look at the
           files again:
 
-          <figure id="sc-rpm-miscellania-rebuilddb-payoff">
-            <title>RPM Database Files After a Rebuild</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls</userinput>
 <computeroutput>
 total 3531
@@ -111,8 +92,7 @@ total 3531
 -rw-r--r--   1 root     root        16384 Oct 17 20:50 requiredby.rpm
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           You'll note that <filename>packages.rpm</filename> decreased in size.
@@ -157,9 +137,7 @@ total 3531
           listing of the files that make up the RPM database on a &RHL;
           system:
 
-          <figure id="sc-rpm-miscellania-rpm-database-files">
-            <title>File That Comprise a Typical RPM Database</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls /var/lib/rpm</userinput>
 <computeroutput>
 total 3559
@@ -172,19 +150,13 @@ total 3559
 -rw-r--r--   1 root     root        16384 Jan  8 22:10 requiredby.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Next, let's use the <command>--initdb</command> option, just to see
           what it does to this database:
 
-          <figure id="sc-rpm-miscellania-initdb-on-existing-db">
-            <title>
-              Using the <command>--initdb</command> Option on an Existing RPM
-              Database
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --initdb</userinput>
 <prompt># </prompt><userinput>ls /var/lib/rpm</userinput>
 <computeroutput>
@@ -198,8 +170,7 @@ total 3559
 -rw-r--r--   1 root     root        16384 Jan  8 22:10 requiredby.rpm
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Since an RPM database existed already, the <command>--initdb</command>
@@ -229,9 +200,7 @@ total 3559
           normally produces reams of output; by adding the
           <command>--quiet</command> option, this is all you'll see:
 
-          <figure id="sc-rpm-miscellania-quiet-example">
-            <title>The <command>--quiet</command> Option in Action</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --quiet bother-3.5.spec</userinput>
 <computeroutput>
 * Package: bother
@@ -239,23 +208,16 @@ total 3559
 3 blocks
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>--quiet</command> option can silence even the mighty
           <command>-vv</command> option:
 
-          <figure id="sc-rpm-miscellania-quiet-example2">
-            <title>
-              The <command>-quiet</command> Option and the
-              <command>-vv</command> Option: Who Wins?
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Uvv --quiet eject-1.2-2.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -273,9 +235,7 @@ total 3559
           <command>less</command>, since the output is more than one screen
           long:
 
-          <figure id="sc-rpm-miscellania-help-example">
-            <title>Using the <command>--help</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --help|less</userinput>
 <computeroutput>
 RPM version 2.3
@@ -300,8 +260,7 @@ usage:
 
       --ftpport &lt;port&gt;    - port number of ftp server (or proxy)
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This is just the first screen of RPM's help command.  To see the rest,
@@ -325,16 +284,13 @@ usage:
           system, the easiest way to find out is to ask RPM itself using the
           <command>--version</command> option:
 
-          <figure id="sc-rpm-miscellania-version-example">
-            <title>Using the <command>--version</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm --version</userinput>
 <computeroutput>
 RPM version 2.3
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
     </sect1>
@@ -395,9 +351,7 @@ RPM version 2.3
           convert <emphasis>that</emphasis> to a <command>cpio</command>
           archive.  Let's give it a try:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-output">
-            <title>Sample Output From <command>rpm2cpio</command></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm</userinput>
 <computeroutput>
 0707020001a86a000081a4000000000000000000000001313118bb000002c200000008000
@@ -407,8 +361,7 @@ le rotator
 .TH rpm 8 "28 November 1995" "Red Hat Software" "Red Hat Linux"
 .SH NAME
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           (We've just shown the first few lines of output.)
         </para>
@@ -419,20 +372,14 @@ le rotator
           standard output, which, if you've not redirected it somehow, is your
           screen.  Here's a more reasonable example:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-example">
-            <title>
-              Using <command>rpm2cpio</command> to Convert a Package File to a
-              <command>cpio</command> Archive
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm &gt; blah.cpio</userinput>
 <prompt># </prompt><userinput>file blah.cpio</userinput>
 <computeroutput>
 blah.cpio: ASCII cpio archive (SVR4 with CRC)
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've directed <command>rpm2cpio</command> to convert the
@@ -445,13 +392,10 @@ blah.cpio: ASCII cpio archive (SVR4 with CRC)
           <command>rpm2cpio</command>'s ability to read the package file from
           its standard input:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-example2">
-            <title>Another Way to Use <command>rpm2cpio</command></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cat logrotate-1.0-1.i386.rpm | rpm2cpio &gt; blah.cpio</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -473,9 +417,7 @@ blah.cpio: ASCII cpio archive (SVR4 with CRC)
           <command>rpm2cpio</command>'s output directly into
           <command>cpio</command>:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-example3">
-            <title>Yet Another Way to Use <command>rpm2cpio</command></title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm  | cpio -t</userinput>
 <computeroutput>
 usr/man/man8/logrotate.8
@@ -483,8 +425,7 @@ usr/sbin/logrotate
 14 blocks
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this example, we used the <command>-t</command> option to direct
@@ -510,19 +451,14 @@ usr/sbin/logrotate
           <filename>usr/man/man8/logrotate.8</filename>.  All we need to do is
           to use the filename and path as shown below:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-extracting-file">
-            <title>
-              Extracting Files From a Package Using <command>rpm2cpio</command>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm |cpio -ivd usr/man/man8/logrotate.8</userinput>
 <computeroutput>
 usr/man/man8/logrotate.8
 14 blocks
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this case, the <command>cpio</command> options
@@ -562,9 +498,7 @@ usr/man/man8/logrotate.8
           So where did the file end up?  The last option (<command>-d</command>)
           to <command>cpio</command> provides a hint.  Let's take a look:
 
-          <figure id="sc-rpm-miscellania-rpm2cpio-files">
-            <title>Finding the File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al</userinput>
 <computeroutput>
 total 5
@@ -602,8 +536,7 @@ logrotate \- log file rotator
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Since the current directory didn't have a
@@ -629,12 +562,9 @@ logrotate \- log file rotator
         One day, you may run across a package file with a name similar to the
         following:
 
-        <figure id="sc-rpm-miscellania-srpms-sample">
-          <title>A Strange New Package File?</title>
-          <screen width="60">
+        <screen width="60">
 <command>etcskel-1.0-3.<userinput>src</userinput>.rpm</command>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Notice the <filename>src</filename>.  Is that a new kind of computer?
@@ -645,16 +575,13 @@ logrotate \- log file rotator
         changed.  We've used it before to figure out what package a file
         contains:
 
-        <figure id="sc-rpm-miscellania-srpms-identifying-setup">
-          <title>Package Files and the <command>file</command> Command</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>file foo.bar</userinput>
 <computeroutput>
 foo.bar: RPM v2 bin i386 eject-1.2-2
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this example, <filename>foo.bar</filename> is an RPM version 2 file,
@@ -667,18 +594,13 @@ foo.bar: RPM v2 bin i386 eject-1.2-2
         Let's try the <command>file</command> command on this mystery file and
         see what we can find out about it:
 
-        <figure id="sc-rpm-miscellania-srpms-payoff">
-          <title>
-            Using the <command>file</command> to Identify a Package File
-          </title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>file etcskel-1.0-3.src.rpm</userinput>
 <computeroutput>
 etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Well, it's a package file all right --- for version 1.0, release 3 of
@@ -746,22 +668,17 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
           done with them is that they can be installed.  Let's try an install of
           a source package:
 
-          <figure id="sc-rpm-miscellania-srpms-installing">
-            <title>Installing a Source Package File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i cdp-0.33-3.src.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Well that doesn't tell us very much and, take our word for it, adding
           <command>-v</command> doesn't improve the situation appreciably.
           Let's haul out the big guns and try <command>-vv</command>:
 
-          <figure id="sc-rpm-miscellania-srpms-installing-vv">
-            <title>Using the <command>-vv</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ivv cdp-0.33-3.src.rpm</userinput>
 <computeroutput>
 D: installing cdp-0.33-3.src.rpm
@@ -777,8 +694,7 @@ D: file "cdp-0.33.tgz" complete
 D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/cdp-0.33.spec
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           What does this output tell us?  Well, RPM recognizes that the file is
@@ -786,9 +702,7 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
           <emphasis>they</emphasis> are) are in
           <filename>/usr/src/redhat/SOURCES</filename>.  Let's take a look:
 
-          <figure id="sc-rpm-miscellania-srpms-looking-around">
-            <title>Files Created by Installing a Source Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/src/redhat/SOURCES/</userinput>
 <computeroutput>
 -rw-rw-r--   1 root     root          364 Apr 24 22:35 cdp-0.33-cdplay.patch
@@ -796,8 +710,7 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
 -rw-r--r--   1 root     root       148916 Nov 10  1995 cdp-0.33.tgz
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           There are some files that seem to be related to
@@ -814,9 +727,7 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
           the usual kinds of things: README files, a Makefile or two, and some
           source code:
 
-          <figure id="sc-rpm-miscellania-srpms-untarring">
-            <title>Inside the <command>tar</command> File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>tar ztf cdp-0.33.tgz</userinput>
 <computeroutput>
 cdp-0.33/COPYING
@@ -832,8 +743,7 @@ cdp-0.33/cdp.c
 cdp-0.33/cdp.h
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           There's more, but you get the idea.  OK, so there are the sources.
@@ -841,15 +751,12 @@ cdp-0.33/cdp.h
           something about "<filename>/usr/src/redhat/SPECS</filename>", so let's
           see what we have in that directory:
 
-          <figure id="sc-rpm-miscellania-srpms-spec-file">
-            <title>Finding the spec File</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/src/redhat/SPECS</userinput>
 <computeroutput>
 -rw-r--r--   1 root     root          397 Apr 24 22:36 cdp-0.33.spec
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Without making a long story too short, a spec file contains

@@ -8,10 +8,9 @@
     </indexterm>
 
     <para>
-      In chapter <xref linkend="ch-rpm-build">, we packaged a fairly simple
-      application.  Since our goal was to introduce package building, we kept
-      things as simple as possible.  However, things aren't always that simple
-      in the real world.
+      In <xref linkend="ch-rpm-build">, we packaged a fairly simple application.
+      Since our goal was to introduce package building, we kept things as simple
+      as possible.  However, things aren't always that simple in the real world.
     </para>
     <para>
       In this chapter, we'll package a more complex application that will call
@@ -1874,12 +1873,12 @@ amanda-server       ##################################################
         </para>
         <para>
           Running some tests, it looks like everything is running well.  But
-          back in section <xref linkend="s2-rpm-build-testing-packages">, we
-          mentioned that it was possible to install a newly-built package on the
-          build system, and not realize that the package was missing files.
-          Well, there's another reason why installing the package on the
-          build-system for testing is a bad idea.  Let's bring our packages to a
-          different system, test them there, and see what happens.
+          back in <xref linkend="s2-rpm-build-testing-packages">, we mentioned
+          that it was possible to install a newly-built package on the build
+          system, and not realize that the package was missing files.  Well,
+          there's another reason why installing the package on the build-system
+          for testing is a bad idea.  Let's bring our packages to a different
+          system, test them there, and see what happens.
         </para>
 
         <sect3 id="s3-rpm-rw-build-installing-different-system">

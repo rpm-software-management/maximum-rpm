@@ -79,9 +79,7 @@
         with sufficient free space to build the largest package expected.  Here
         is a directory listing showing a typical build directory tree:
 
-        <figure id="sc-rpm-build-directory-tree">
-          <title>A Typical RPM Build Tree</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>ls -lF /usr/src/redhat</userinput>
 <computeroutput>
 total 5
@@ -92,8 +90,7 @@ drwxr-xr-x   2 root     root         1024 Aug  5 13:12 SPECS/
 drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Now that we have the directories ready to go, it's time to prepare for
@@ -162,9 +159,7 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
           built, and the people that built it.  Here's
           <filename>cdplayer</filename>'s preamble:
 
-          <figure id="sc-rpm-build-preamble-example">
-            <title>A Sample Spec File Preamble</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #
 # Example spec file for cdplayer app...
@@ -188,8 +183,7 @@ of the CD itself, it is able to simulate 20X
 oversampling.  This leads to sound quality that
 cannot be equaled with more mundane software...
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In general, the preamble consists of entries, one per line, that start
@@ -381,16 +375,13 @@ cannot be equaled with more mundane software...
           is expanded.  Here is what the <command>%prep</command> section looks
           like in our example spec file:
 
-          <figure id="sc-rpm-build-prep-example">
-            <title>An Example <command>%prep</command> Section</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %prep
 rm -rf $RPM_BUILD_DIR/cdplayer-1.0
 zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If the <command>%prep</command> section looks like a script, that's
@@ -401,7 +392,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
           <footnote>
             <para>
               For more information on the environment variables used in the
-              build-time scripts, please refer to section <xref
+              build-time scripts, please refer to <xref
               linkend="s2-rpm-inside-build-time-scripts">.
             </para>
           </footnote>
@@ -417,8 +408,8 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
           properly.  The <command>%prep</command> section is the appropriate
           place to patch the sources, but in this example, no patching is
           required.  Fear not, however, as we'll explore patching in all its
-          glory in chapter <xref linkend="ch-rpm-rw-build">, when we build a
-          more complex package.
+          glory in <xref linkend="ch-rpm-rw-build">, when we build a more
+          complex package.
         </para>
 
         <sect3 id="s3-rpm-build-macros">
@@ -441,22 +432,19 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
             of options that we'll cover in later chapters, for now all we need
             for a <command>%prep</command> section is:
 
-            <figure id="sc-rpm-build-prep-with-setup-macro">
-              <title>The <command>%setup</command> Macro In Action</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %prep
 %setup
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             That is simpler than our <command>%prep</command> section, so let's
             use the <command>%setup</command> macro instead.  The
             <command>%setup</command> macro has a number of options to handle
             many different situations.  For more information on this and other
-            macros, please see section <xref linkend="s1-rpm-inside-macros">.
+            macros, please see <xref linkend="s1-rpm-inside-macros">.
           </para>
           <para>
             In our example here, the <command>%prep</command> section is
@@ -483,15 +471,12 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
           very easy, or highly complicated. In either case, macros won't help
           much.  In our example, the build process is simple:
 
-          <figure id="sc-rpm-build-build-section-example">
-            <title>An Example <command>%build</command> Section</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %build
 make 
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Thanks to the <command>make</command> utility, only one command is
@@ -517,15 +502,12 @@ make
           <command>%install</command> section will also be straightforward.  The
           <filename>cdplayer</filename> application is a good example of this:
 
-          <figure id="sc-rpm-build-install-section-example">
-            <title>A Sample <command>%install</command> Section</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %install
 make install
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If the application doesn't have a means of automatically installing
@@ -548,9 +530,7 @@ make install
           Always remember --- if it isn't in the file list, it won't be put in
           the package!
 
-          <figure id="sc-rpm-build-files-list-example">
-            <title>A <command>%files</command> List</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %files
 %doc README
@@ -558,8 +538,7 @@ make install
 /usr/local/bin/cdplay
 /usr/local/man/man1/cdp.1
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The line starting with <command>%doc</command> is an example of RPM's
@@ -571,7 +550,7 @@ make install
           <filename>/usr/doc</filename>, and called
           <filename>cdplayer-1.0-1</filename>.  It's also possible to mark files
           as documentation and have them installed in other directories.  This
-          is covered in more detail in section <xref
+          is covered in more detail in <xref
           linkend="s3-rpm-inside-flist-doc-directive">.
         </para>
         <para>
@@ -678,7 +657,7 @@ make install
             </itemizedlist>
           </para>
           <para>
-            We'll see how these scripts are used in chapter <xref
+            We'll see how these scripts are used in <xref
             linkend="ch-rpm-rw-build">.
           </para>
         </sect3>
@@ -717,23 +696,17 @@ make install
         Now it's time to begin the build.  First, we change directory into the
         directory holding <filename>cdplayer</filename>'s spec file:
 
-        <figure id="sc-rpm-build-cd-into-tree">
-          <title>Changing Directory Into the Build Tree</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/SPECS</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Next, we start the build with an <command>rpm -b</command> command:
 
-        <figure id="sc-rpm-build-starting-build">
-          <title>Starting the Build</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <command>a</command> following the <command>-b</command> option
@@ -752,9 +725,7 @@ make install
       <para>
         Let's look at RPM's output during the build:
 
-        <figure id="sc-rpm-build-build-output">
-          <title>Output From a Sample Build</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -781,8 +752,7 @@ drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
 + chmod -R a+rX,g-w,o-w .
 + exit 0
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The output continues, but let's stop here for a moment, and discuss what
@@ -807,9 +777,7 @@ drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
         Let's take a look at the output from the <command>%build</command>
         section next:
 
-        <figure id="sc-rpm-build-build-section-output">
-          <title>Output From the <command>%build</command> Section</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 + umask 022
 + echo Excuting: %build
@@ -832,8 +800,7 @@ getline.o  -I/usr/include/ncurses  -L/usr/lib -lncurses
 groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
 + exit 0
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         There are no surprises here.  After setting the umask and changing
@@ -843,9 +810,7 @@ groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
         builds the software.  Next comes the <command>%install</command>
         section:
 
-        <figure id="sc-rpm-build-install-section-output">
-          <title><command>%install</command> Section Output</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 + umask 022
 + echo Excuting: %install
@@ -860,8 +825,7 @@ ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 cp cdp.1 /usr/local/man/man1
 + exit 0
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Just like the previous sections, RPM again sets the umask and changes
@@ -872,9 +836,7 @@ cp cdp.1 /usr/local/man/man1
         file is not part of the install section.  It's not a problem, as we see
         here:
 
-        <figure id="sc-rpm-build-documentation-handling">
-          <title>More Output From the Build</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 + umask 022
 + echo Excuting: special doc
@@ -887,8 +849,7 @@ Excuting: special doc
 + cp -ar README //usr/doc/cdplayer-1.0-1
 + exit 0
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         After the customary <command>umask</command> and <command>cd</command>
@@ -900,9 +861,7 @@ Excuting: special doc
         package files, and perform some housekeeping.  The binary package file
         is created first:
 
-        <figure id="sc-rpm-build-binary-package-creation">
-          <title>Creating the Binary Package</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 Binary Packaging: cdplayer-1.0-1
 Finding dependencies...
@@ -916,8 +875,7 @@ usr/local/man/man1/cdp.1
 Generating signature: 0
 Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The first line says it all: RPM is creating the binary package for
@@ -955,9 +913,7 @@ Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
         there <emphasis>were</emphasis> files that we needed to remove?  Well,
         they could be deleted here, in the <command>%clean</command> section:
 
-        <figure id="sc-rpm-build-clean-output">
-          <title>Output From the <command>%clean</command> Section</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 + umask 022
 + echo Excuting: %clean
@@ -966,8 +922,7 @@ Excuting: %clean
 + cd cdplayer-1.0
 + exit 0
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In our example, there are no other files outside of the build directory
@@ -978,9 +933,7 @@ Excuting: %clean
         The very last step performed by RPM is to create the source package
         file:
 
-        <figure id="sc-rpm-build-source-package-creation">
-          <title>Creating the Source Package</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 Source Packaging: cdplayer-1.0-1
 cdplayer-1.0.spec
@@ -990,8 +943,7 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         This file includes everything needed to recreate a binary package file,
@@ -1009,16 +961,13 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         the source package.  Let's take a look at the end products.  First, the
         binary package:
 
-        <figure id="sc-rpm-build-binary-listing">
-          <title>The Binary Package</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>ls -lF /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 -rw-r--r--   1 root     root        24698 Aug  6 22:22 RPMS/i386/cdplayer-1.0-1.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Note that we built <filename>cdplayer</filename> on an Intel-based
@@ -1028,16 +977,13 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
       <para>
         Next, the source package file:
 
-        <figure id="sc-rpm-build-source-listing">
-          <title>The Source Package</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>ls -lF /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm</userinput>
 <computeroutput>
 -rw-r--r--   1 root     root        41380 Aug  6 22:22 SRPMS/cdplayer-1.0-1.src.rpm
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Everything went perfectly --- we now have binary and source package

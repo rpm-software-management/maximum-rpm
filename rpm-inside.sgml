@@ -80,14 +80,11 @@
         start of the line.  Any text following the comment character will be
         ignored by RPM.  Here's an example comment:
 
-        <figure id="sc-rpm-inside-example-comment">
-          <title>A Typical Comment</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 # This is the spec file for playmidi 2.3...
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
         Comments can be placed in any section of the spec file.
       </para>
     </sect1>
@@ -103,14 +100,11 @@
         Looking at a spec file, the first thing you'll see are a number of
         lines, all following the same basic format:
 
-        <figure id="sc-rpm-inside-tag-format">
-          <title>Tag Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 &lt;something&gt;:&lt;something-else&gt;
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <command>&lt;something&gt;</command> is known as a "tag", because it
@@ -120,14 +114,11 @@
         Tags are grouped together at the top of the spec file, in a section
         known as the preamble.  Here's an example of a tag and its data:
 
-        <figure id="sc-rpm-inside-tag-example">
-          <title>A Sample Tag</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 Vendor: White Socks Software, Inc.
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this example, the tag is "<command>Vendor</command>".  Tags are not
@@ -143,16 +134,13 @@ Vendor: White Socks Software, Inc.
         unimportant.  Given this, and the case-insensitivity of the tag, each of
         the following lines are equivalent to the one above:
 
-        <figure id="sc-rpm-inside-tag-equivalents">
-          <title>Equivalent Tags</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 VeNdOr : White Socks Software, Inc.
 vendor:White Socks Software, Inc.
 VENDOR    :    White Socks Software, Inc.
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The bottom line is that you can make tag lines as neat or as ugly as you
@@ -169,14 +157,11 @@ VENDOR    :    White Socks Software, Inc.
           The following tags are used by RPM to produce the package's final
           name.  Since the name is always in the format:
 
-          <figure id="sc-rpm-inside-package-name-format">
-            <title>RPM's Package Name Format</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 &lt;name&gt;-&lt;version&gt;-&lt;release&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           it's only natural that the three tags are known as
@@ -206,14 +191,11 @@ VENDOR    :    White Socks Software, Inc.
             is <filename>cdplayer</filename>, the <command>name</command> tag
             should be something like:
 
-            <figure id="sc-rpm-inside-name-example">
-              <title>An Example <command>name</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Name: cdplayer
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -238,17 +220,14 @@ Name: cdplayer
             restriction.  There can be no dashes in the version.  If you forget,
             RPM will remind you:
 
-            <figure id="sc-rpm-inside-version-nodash">
-              <title>A Possible <command>version</command> Tag Problem</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 Illegal '-' char in version: 1.0-a
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Spaces in the version will also cause problems, in that anything
@@ -256,14 +235,11 @@ Illegal '-' char in version: 1.0-a
             with alphanumeric characters and periods, and you'll never have to
             worry about it.  Here's a sample <command>version</command> tag:
 
-            <figure id="sc-rpm-inside-command-tag-example">
-              <title>A Sample <command>version</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Version: 1.2
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -301,14 +277,11 @@ Version: 1.2
             a new release and to update the release manually.  Here is what a
             typical <command>release</command> tag might look like:
 
-            <figure id="sc-rpm-inside-release-example">
-              <title>Example <command>release</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Release: 5
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
       </sect2>
@@ -352,9 +325,7 @@ Release: 5
             paragraph and will be formatted by RPM.  It's even possible to mix
             and match formatted and unformatted lines.  Here are some examples:
 
-            <figure id="sc-rpm-inside-description-example">
-              <title>The <command>%description</command> Tag in Action</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %description
 It slices!  It dices!  It's a CD player app that can't be beat.  By using
@@ -362,18 +333,13 @@ the resonant frequency of the CD itself, it is able to simulate 20X
 oversampling.  This leads to sound quality that cannot be equaled with
 more mundane software...
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The example above contains no explicit formatting.  RPM will format
             the text as a single paragraph, breaking lines as needed.
 
-            <figure id="sc-rpm-inside-description-example2">
-              <title>
-                Using Formatting With the <command>%description</command> Tag
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %description
  It slices!
@@ -383,20 +349,14 @@ By using the resonant frequency of the CD itself, it is able to simulate
 20X oversampling.  This leads to sound quality that cannot be equaled with
 more mundane software...
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, the first three lines will be displayed by RPM,
             verbatim.  The remainder of the text will be formatted by RPM.  The
             text will be formatted as one paragraph.
 
-            <figure id="sc-rpm-inside-description-example3">
-              <title>
-                Additional Formatting With the <command>%description</command>
-                Tag
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %description
  It slices!
@@ -407,8 +367,7 @@ By using the resonant frequency of the CD itself, it is able to simulate
 20X oversampling.  This leads to sound quality that cannot be equaled with
 more mundane software...
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Above, we have a similar situation to the previous example, in that
@@ -437,14 +396,11 @@ more mundane software...
             the package is needed.  Here is an example of a
             <command>summary</command> line:
 
-            <figure id="sc-rpm-inside-summary-example">
-              <title>A Sample <command>summary</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Summary: A CD player app that rocks!
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -467,14 +423,11 @@ Summary: A CD player app that rocks!
             software distributed under the terms of the GNU General Public
             License, or something similar.  For example:
 
-            <figure id="sc-rpm-inside-copyright-example">
-              <title>The <command>copyright</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Copyright: GPL
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -499,14 +452,11 @@ Copyright: GPL
             package that is part of the suite would define its
             <command>distribution</command> line like this:
 
-            <figure id="sc-rpm-inside-distribution-example">
-              <title>The <command>distribution</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Distribution: Doors '95
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -536,14 +486,11 @@ Distribution: Doors '95
             and retained in RPM's database after the package is installed.  An
             example <command>icon</command> tag might look like:
 
-            <figure id="sc-rpm-inside-icon-example">
-              <title>The <command>icon</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Icon: foo.xpm
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -564,14 +511,11 @@ Icon: foo.xpm
             entity that is responsible for packaging the software.  Normally,
             this would be the name of an organization.  Here's an example:
 
-            <figure id="sc-rpm-inside-vendor-example">
-              <title>The <command>vendor</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Vendor: White Socks Software, Inc.
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -601,14 +545,11 @@ Vendor: White Socks Software, Inc.
             this information, so make sure you include URLs!  Something like
             this is all you'll need:
 
-            <figure id="sc-rpm-inside-url-example">
-              <title>The <command>url</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 URL: http://www.gnomovision.com/cdplayer.html
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -631,14 +572,11 @@ URL: http://www.gnomovision.com/cdplayer.html
             more general groupings before more detailed ones.  For example, a
             package containing a text editor might have the following group:
 
-            <figure id="sc-rpm-inside-group-example">
-              <title>The <command>group</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Group: Applications/Editors
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, the package is part of the
@@ -646,14 +584,11 @@ Group: Applications/Editors
             <filename>Applications</filename> group.  Likewise, a spreadsheet
             package might have this group:
 
-            <figure id="sc-rpm-inside-group-example2">
-              <title>A Second <command>group</command> Tag Example</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Group: Applications/Spreadsheets
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This <command>group</command> tag indicates that under the
@@ -700,14 +635,11 @@ Group: Applications/Spreadsheets
             depending on their satisfaction with the packaged software.  Here's
             an example of a <command>packager</command> tag:
 
-            <figure id="sc-rpm-inside-packager-example">
-              <title>The <command>packager</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
       </sect2>
@@ -730,8 +662,8 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           appropriate dependency information to the package.  This is done by
           using the following tags.  Note, however, that adding dependency
           information to a package requires some forethought.  For additional
-          information on RPM's dependency processing, please review chapter
-          <xref linkend="ch-rpm-depend">.
+          information on RPM's dependency processing, please review <xref
+          linkend="ch-rpm-depend">.
         </para>
 
         <sect3 id="s3-rpm-inside-provides-tag">
@@ -758,14 +690,11 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
             if any one of several mail programs were installed.  Here's what a
             <command>provides</command> tag might look like:
 
-            <figure id="sc-rpm-inside-provides-example">
-              <title>The <command>provides</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Provides: mail-reader
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -796,30 +725,22 @@ Provides: mail-reader
             a <command>requires</command> tag in action, with a specific version
             requirement:
 
-            <figure id="sc-rpm-inside-requires-example">
-              <title>The <command>requires</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Requires: playmidi = 2.3
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If the <command>Requires</command> tag needs to perform a comparison
             against a serial number defined with the <command>serial</command>
             tag (described below), then the proper format would be:
 
-            <figure id="sc-rpm-inside-requires-example2">
-              <title>
-                The <command>requires</command> Tag (With Serial Number)
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Requires: playmidi =S 4
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -851,14 +772,11 @@ Requires: playmidi =S 4
             <command>conflicts</command> tag also accepts version and release
             specifications:
 
-            <figure id="sc-rpm-inside-conflicts-example">
-              <title>The <command>conflicts</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Conflicts: playmidi = 2.3-1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If the <command>conflicts</command> tag needs to perform a
@@ -866,16 +784,11 @@ Conflicts: playmidi = 2.3-1
             <command>serial</command> tag (described below), then the proper
             format would be:
 
-            <figure id="sc-rpm-inside-conflicts-example2">
-              <title>
-                The <command>conflicts</command> Tag (With Seria Number)
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Conflicts: playmidi =S 4
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -947,14 +860,11 @@ Conflicts: playmidi =S 4
             example <command>serial</command> tag would look something like
             this:
 
-            <figure id="sc-rpm-inside-serial-example">
-              <title>The <command>serial</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Serial: 4
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that RPM considers a package with a serial number as newer than
@@ -1010,14 +920,11 @@ Serial: 4
           <para>
             To disable automatic dependency processing, add the following line:
 
-            <figure id="sc-rpm-inside-autoreqprov-example">
-              <title>The <command>autoreqprov</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 AutoReqProv: no
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             (The number zero may be used instead of <command>no</command>)
@@ -1069,7 +976,7 @@ AutoReqProv: no
           tags, it's possible to support package building under multiple
           environments, all from a single set of sources, patches, and a single
           spec file.  For a more complete discussion of multi-architecture
-          package building, please see chapter <xref linkend="ch-rpm-multi">.
+          package building, please see <xref linkend="ch-rpm-multi">.
         </para>
 
         <sect3 id="s3-rpm-inside-excludearch-tag">
@@ -1123,14 +1030,11 @@ AutoReqProv: no
             <command>excludearch</command> tag, separated by either spaces or
             commas.  Here is an example:
 
-            <figure id="sc-rpm-inside-excludearch-example">
-              <title>The <command>excludearch</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 ExcludeArch: sparc alpha
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, RPM would not attempt to build the package on
@@ -1139,17 +1043,14 @@ ExcludeArch: sparc alpha
             is attempted on an excluded architecture, the following message will
             be displayed, and the build will fail:
 
-            <figure id="sc-rpm-inside-excludearch-example2">
-              <title>The <command>excludearch</command> Tag In Action</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 Arch mismatch!
 cdplayer-1.0.spec doesn't build on this architecture
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that if your goal is to ensure that a package will only build
@@ -1187,14 +1088,11 @@ cdplayer-1.0.spec doesn't build on this architecture
             The syntax of the <command>exclusivearch</command> tag is identical
             to that of <command>excludearch</command>:
 
-            <figure id="sc-rpm-inside-exclusivearch-tag">
-              <title>The <command>exclusivearch</command></title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 ExclusiveArch: sparc alpha
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, the package will only build on a Sun SPARC or
@@ -1233,14 +1131,11 @@ ExclusiveArch: sparc alpha
             the <command>exclusiveos</command> tag.  Here's a sample
             <command>excludeos</command> tag:
 
-            <figure id="sc-rpm-inside-excludeos-example">
-              <title>The <command>excludeos</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 ExcludeOS: linux irix
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -1263,14 +1158,11 @@ ExcludeOS: linux irix
             system(s) should <emphasis>only</emphasis> be be permitted to build
             the package.  Here's <command>exclusiveos</command> in action:
 
-            <figure id="sc-rpm-inside-exclusiveos-example">
-              <title>The <command>exclusiveos</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 ExclusiveOS: linux
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that if your goal is to ensure that a package will
@@ -1312,27 +1204,21 @@ ExclusiveOS: linux
             example, if the following <command>prefix</command> line was
             included in a spec file:
 
-            <figure id="sc-rpm-inside-prefix-example">
-              <title>The <command>prefix</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Prefix: /opt
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             and the following file was specified in the spec file's
             <command>%files</command> list:
 
-            <figure id="sc-rpm-inside-prefix-example2">
-              <title>A File in the <command>%files</command> List</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 /opt/blather/foonly
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             then the file <filename>foonly</filename> would be installed in
@@ -1343,8 +1229,8 @@ Prefix: /opt
             option.
           </para>
           <para>
-            For more information about creating relocatable packages, see
-            chapter <xref linkend="ch-rpm-reloc">.
+            For more information about creating relocatable packages, see <xref
+            linkend="ch-rpm-reloc">.
           </para>
         </sect3>
 
@@ -1366,18 +1252,14 @@ Prefix: /opt
             actually used when the software is <emphasis>installed</emphasis>
             during the build process.  In order for a build root to be defined
             and actually used, a number of issues must be taken into account.
-            These issues are covered in chapter <xref
-            linkend="ch-rpm-anywhere">.  This is what a
-            <command>buildroot</command> tag would look like:
+            These issues are covered in <xref linkend="ch-rpm-anywhere">.  This
+            is what a <command>buildroot</command> tag would look like:
 
-            <figure id="sc-rpm-inside-buildroot-example">
-              <title>The <command>buildroot</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 BuildRoot: /tmp/cdplayer
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>buildroot</command> tag can be overridden at build-time
@@ -1458,14 +1340,11 @@ BuildRoot: /tmp/cdplayer
             filename must be at the end of the line as the final element in a
             path.  Here's an example:
 
-            <figure id="sc-rpm-inside-source-example">
-              <title>The <command>source</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Source: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
 
           <para>
@@ -1486,31 +1365,22 @@ Source: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
             <command>source0</command>.  Therefore, if a package contains two
             source files, they may either be specified as:
 
-            <figure id="sc-rpm-inside-source-example2">
-              <title>More <command>source</command> Tag Examples</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Source: blather-4.5.tar.gz
 Source1: bother-1.2.tar.gz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             or as:
 
-            <figure id="sc-rpm-inside-source-example3">
-              <title>
-                <command>source</command> Tags Equivalent to the Previous
-                Example
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Source0: blather-4.5.tar.gz
 Source1: bother-1.2.tar.gz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Either approach may be used.  The choice is yours.
@@ -1543,7 +1413,7 @@ Source1: bother-1.2.tar.gz
             <footnote>
               <para>
                 There is also an "international" version that may be used in
-                non-US countries.  See Appendix <xref linkend="ch-pgp-intro">.
+                non-US countries.  See <xref linkend="ch-pgp-intro">.
               </para>
             </footnote>
             While it would be nice to create a PGP package file, the resulting
@@ -1570,14 +1440,11 @@ Source1: bother-1.2.tar.gz
             spec file, the format of the <command>nosource</command> tag is as
             follows:
 
-            <figure id="sc-rpm-inside-nosource-example">
-              <title>The <command>nosource</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 nosource: &lt;src-num&gt;, &lt;src-num&gt;&hellip;&lt;src-num&gt;
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>&lt;src-num&gt;</command> represents the number
@@ -1586,17 +1453,14 @@ nosource: &lt;src-num&gt;, &lt;src-num&gt;&hellip;&lt;src-num&gt;
             spaces.  For example, consider a package containing the following
             <command>source</command> tags:
 
-            <figure id="sc-rpm-inside-nosource-setup">
-              <title>Example <command>source</command> Tags</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 source: blather-4.5.tar.gz
 Source1: bother-1.2.tar.gz
 source2: blather-lib-4.5.tar.gz
 source3: bother-lib-1.2.tar.gz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If the source files for <filename>blather</filename> and
@@ -1604,14 +1468,11 @@ source3: bother-lib-1.2.tar.gz
             package, the following <command>nosource</command> line could be
             added:
 
-            <figure id="sc-rpm-inside-nosource-payoff">
-              <title>The <command>nosource</command> Tag in Action</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 NoSource: 0, 3
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             What about that <command>0</command>?  Keep in mind that the first
@@ -1638,14 +1499,11 @@ NoSource: 0, 3
             are kept in RPM's <filename>SOURCES</filename> directory, so only
             the name of the patch file should be specified.  Here is an example:
 
-            <figure id="sc-rpm-inside-patch-example">
-              <title>The <command>patch</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Patch: cdp-0.33-fsstnd.patch
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             There are no hard and fast requirements for naming the patch files,
@@ -1677,32 +1535,24 @@ Patch: cdp-0.33-fsstnd.patch
             Therefore, if a package contains three patches, the following two
             methods of specifying them are equivalent:
 
-            <figure id="sc-rpm-inside-patch-example2">
-              <title>Several Example <command>patch</command> Tags</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Patch: blather-4.5-bugfix.patch
 Patch1: blather-4.5-config.patch
 Patch2: blather-4.5-somethingelse.patch
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This is the same as:
 
-            <figure id="sc-rpm-inside-patch-example3">
-              <title>
-                <command>patch</command> Tags Equivalent to the Previous Example
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Patch0: blather-4.5-bugfix.patch
 Patch1: blather-4.5-config.patch
 Patch2: blather-4.5-somethingelse.patch
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Either approach may be used, but the second method looks nicer.
@@ -1736,14 +1586,11 @@ Patch2: blather-4.5-somethingelse.patch
             specify which patches are not to be included in the package.  The
             <command>nopatch</command> tag is used in this manner:
 
-            <figure id="sc-rpm-inside-nopatch-example">
-              <title>The <command>nopatch</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 NoPatch: 2 3
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             In this example, the source files specified on the
@@ -1832,8 +1679,7 @@ NoPatch: 2 3
           <command>--test</command> option
           <footnote>
             <para>
-              Described in section <xref
-              linkend="s2-rpm-b-command-test-option">.
+              Described in <xref linkend="s2-rpm-b-command-test-option">.
             </para>
           </footnote>
           , we can see the common portion of each script.  In the following
@@ -1843,9 +1689,7 @@ NoPatch: 2 3
           (with the appropriate package-specific values) is present in every
           script RPM executes during a build:
 
-          <figure id="sc-rpm-inside-script-preamble">
-            <title>Start of All Build-Time Scripts</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #!/bin/sh -e
 # Script generated by rpm
@@ -1865,8 +1709,7 @@ set -x
 
 umask 022
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
           <indexterm>
             <primary>scripts</primary>
             <secondary>build-time</secondary>
@@ -1909,7 +1752,7 @@ umask 022
                 <command>%doc</command> directive can be installed in a
                 subdirectory of <command>defaultdocdir</command>.  For more
                 information on the <command>%doc</command> directive, refer to
-                section <xref linkend="s3-rpm-inside-flist-doc-directive">.
+                <xref linkend="s3-rpm-inside-flist-doc-directive">.
               </para>
             </listitem>
 
@@ -2043,7 +1886,7 @@ umask 022
             of all software being packaged.  Because of this, RPM has two macros
             that greatly simplify these routine functions.  More information on
             RPM's <command>%setup</command> and <command>%patch</command> macros
-            can be found in section <xref linkend="s1-rpm-inside-macros">.
+            can be found in <xref linkend="s1-rpm-inside-macros">.
           </para>
           <para>
             The last item on the list can include creating directories or
@@ -2130,20 +1973,17 @@ umask 022
             environment variable is particularly useful.  In many cases, a
             simple
 
-            <figure id="sc-rpm-inside-clean-example">
-              <title>A Simple <command>%clean</command> Script</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 rm -rf $RPM_BUILD_ROOT
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
             will suffice.
             <footnote>
               <para>
                 Keep in mind that this command in a <command>%clean</command>
                 script can wreak havoc if used with a build root of, say,
-                <filename>/</filename>.  Section <xref
+                <filename>/</filename>.  <xref
                 linkend="s3-rpm-b-command-buildroot-warning">
                 discusses this in more detail.
               </para>
@@ -2406,9 +2246,7 @@ rm -rf $RPM_BUILD_ROOT
           ensure that certain configuration files contain the proper information
           for the package being verified:
 
-          <figure id="sc-rpm-inside-verifyscript-example">
-            <title>A Sample Verification Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 for n in ash bsh; do
     echo -n "Looking for $n in /etc/shells... "
@@ -2420,8 +2258,7 @@ for n in ash bsh; do
     fi
 done
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this script, the config file <filename>/etc/shells</filename>, is
@@ -2499,35 +2336,27 @@ done
           <filename>cdplayer</filename> package has the following
           <command>source</command> tag:
 
-          <figure id="sc-rpm-inside-setup-setup">
-            <title>A Typical <command>source</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           and the following <command>%prep</command> script:
 
-          <figure id="sc-rpm-inside-setup-setup2">
-            <title>A Typical <command>%prep</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %prep
 %setup
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this simple case, the <command>%setup</command> macro expands into
           the following commands:
 
-          <figure id="sc-rpm-inside-setup-payoff">
-            <title><command>%setup</command> Macro Exapansion</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2540,8 +2369,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we can see, the <command>%setup</command> macro starts by changing
@@ -2604,21 +2432,16 @@ chmod -R a+rX,g-w,o-w .
             <filename>cd-player</filename>.  In this case, our
             <command>%setup</command> line would look like this:
 
-            <figure id="sc-rpm-inside-setup-n-setup">
-              <title>The <command>-n</command> Option in Action</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -n cd-player
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             and the resulting commands would look like this:
 
-            <figure id="sc-rpm-inside-setup-n-payoff">
-              <title>Affect of the <command>-n</command> Option</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cd-player
@@ -2631,8 +2454,7 @@ cd /usr/src/redhat/BUILD/cd-player
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The results are identical to using <command>%setup</command> with no
@@ -2647,7 +2469,7 @@ chmod -R a+rX,g-w,o-w .
             into the directory specified by the <command>-n</command> option.
             This makes <command>-n</command> unsuitable as a means of unpacking
             sources in directories other than the top-level build directory.  In
-            the upcoming example on page <xref
+            the upcoming example on <xref
             linkend="s3-rpm-inside-setup-multi-source">, we'll show a way around
             this restriction.
           </para>
@@ -2685,12 +2507,7 @@ chmod -R a+rX,g-w,o-w .
             This option simply creates the directory and changes directory into
             it before unpacking the sources.  Here's what it looks like:
 
-            <figure id="sc-rpm-inside-setup-c-example">
-              <title>
-                Macro Expansion Using the <command>-c</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2704,8 +2521,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The only changes from using <command>%setup</command> with no
@@ -2737,11 +2553,7 @@ chmod -R a+rX,g-w,o-w .
             <command>%setup</command> does when the <command>-D</command> option
             is employed:
 
-            <figure id="sc-rpm-inside-setup-d-example">
-              <title>
-                Macro Expansion Using the <command>-D</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
@@ -2753,8 +2565,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As advertised, the <command>rm</command> prior to the
@@ -2778,11 +2589,7 @@ chmod -R a+rX,g-w,o-w .
             specified on the <command>source0</command> line.  Here's what the
             resulting commands look like:
 
-            <figure id="sc-rpm-inside-setup-t-option">
-              <title>
-                Macro Expansion Using the <command>-T</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2791,8 +2598,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Doesn't make much sense, does it?  There's a method to this madness.
@@ -2822,16 +2628,13 @@ chmod -R a+rX,g-w,o-w .
             matching an existing <command>source</command> tag.  If a numeric
             argument is not provided, the build will fail:
 
-            <figure id="sc-rpm-inside-setup-b-failure">
-              <title>Build Failure Caused by Missing Argument</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 * Package: cdplayer
 Need arg to %setup -b
 Build failed.
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Remembering that the first <command>source</command> tag is
@@ -2839,11 +2642,7 @@ Build failed.
             <command>%setup</command> line is changed to <command>%setup -b
             0</command>:
 
-            <figure id="sc-rpm-inside-setup-b-example">
-              <title>
-                Macro Expansion Using the <command>-b</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2860,8 +2659,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             That's strange.  The sources were unpacked twice.  It doesn't make
@@ -2871,27 +2669,16 @@ chmod -R a+rX,g-w,o-w .
             a particular source file to be unpacked, the two are meant to go
             together, like this:
 
-            <figure id="sc-rpm-inside-setup-t-and-b">
-              <title>
-                Proper Usage of the <command>-T</command> and
-                <command>-b</command> Options
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -T -b 0
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Looking at the resulting commands, we find:
 
-            <figure id="sc-rpm-inside-setup-t-and-b-example">
-              <title>
-                Macro Expansion Using <command>-T</command> and
-                <command>-b</command> Together
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2904,8 +2691,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             That's more like it!  Let's go on to the next option.
@@ -2932,11 +2718,7 @@ chmod -R a+rX,g-w,o-w .
             prevent two sets of unpacking commands.  Here are the commands that
             a <command>%setup -T -a 0</command> line would produce:
 
-            <figure id="sc-rpm-inside-setup-t-a-example">
-              <title>
-                Macro Expansion of <command>%setup -T -a 0</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2949,8 +2731,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that there is no <command>mkdir</command> command to create the
@@ -2958,11 +2739,7 @@ chmod -R a+rX,g-w,o-w .
             it.  In our example, adding the <command>-c</command> option will
             make things right:
 
-            <figure id="sc-rpm-inside-setup-t-a-c-example">
-              <title>
-                Macro Expansion of <command>%setup -T -c -a 0</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2976,8 +2753,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The result is the proper sequence of commands for unpacking a
@@ -3012,36 +2788,28 @@ chmod -R a+rX,g-w,o-w .
               </para>
             </footnote>
 
-            <figure id="sc-rpm-inside-setup-rw-example">
-              <title>Sample <command>source</command> Tags</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 source: source-zero.tar.gz
 source1: source-one.tar.gz
 source2: source-two.tar.gz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             To unpack the first source is not hard; all that's required is to
             use <command>%setup</command> with no options:
 
-            <figure id="sc-rpm-inside-setup-rw-example2">
-              <title>Unpacking the First Source Archive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This produces the following set of commands:
 
-            <figure id="sc-rpm-inside-setup-rw-expansion">
-              <title>Macro Expansion For the First Source Archive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3054,31 +2822,23 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If <filename>source-zero.tar.gz</filename> didn't include a
             top-level directory, we could have made one by adding the
             <command>-c</command> option:
 
-            <figure id="sc-rpm-inside-setup-rw-c-example">
-              <title>An Alternative <command>%setup</command> Macro</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -c
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             which would result in:
 
-            <figure id="sc-rpm-inside-setup-rw-c-expansion">
-              <title>
-                Macro Expansion Using the <command>-c</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3092,32 +2852,22 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Of course, if the top-level directory did not match the package
             name, the <command>-n</command> option could have been added:
 
-            <figure id="sc-rpm-inside-setup-rw-n-example">
-              <title>
-                Yet Another Alternative <command>%setup</command> Macro
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -n blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             which results in:
 
-            <figure id="sc-rpm-inside-setup-rw-n-expansion">
-              <title>
-                Macro Expansion of <command>%setup -n blather</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf blather
@@ -3130,32 +2880,21 @@ cd /usr/src/redhat/BUILD/blather
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             or
 
-            <figure id="sc-rpm-inside-setup-rw-cn-example">
-              <title>
-                Combining the <command>-c</command>, <command>-n</command>
-                Options
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -c -n blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This results in:
 
-            <figure id="sc-rpm-inside-setup-rw-cn-expansion">
-              <title>
-                Macro Expansion of <command>%setup -c -n blather</command>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf blather
@@ -3169,8 +2908,7 @@ cd /usr/src/redhat/BUILD/blather
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Now let's add the second source file.  Things get a bit more
@@ -3183,14 +2921,11 @@ chmod -R a+rX,g-w,o-w .
             option, plus a "1" to point to the source file specified in the
             <command>source1</command> tag, we have:
 
-            <figure id="sc-rpm-inside-setup-rw2-example">
-              <title>Unpacking the Second Source Archive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -a 1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Since we've already seen that using the <command>-a</command> or
@@ -3198,17 +2933,11 @@ chmod -R a+rX,g-w,o-w .
             to disable the default unpacking by adding the <command>-T</command>
             option:
 
-            <figure id="sc-rpm-inside-setup-rw2-example2">
-              <title>
-                Disabling Default Unpacking With the <command>-T</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -T -a 1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Next, we need to make sure that the top-level directory isn't
@@ -3218,22 +2947,17 @@ chmod -R a+rX,g-w,o-w .
             and including the now complete macro in our <command>%prep</command>
             script, we now have:
 
-            <figure id="sc-rpm-inside-setup-rw2-example3">
-              <title>Our <command>%setup</command> Macros So Far</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup
 %setup -T -D -a 1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This will result in the following commands:
 
-            <figure id="sc-rpm-inside-setup-rw2-expansion">
-              <title>Macro Expansion</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3255,8 +2979,7 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             So far, so good.  Let's include the last source file, but with this
@@ -3274,9 +2997,7 @@ chmod -R a+rX,g-w,o-w .
             have to do it ourselves.  Here's our <command>%prep</command> script
             now:
 
-            <figure id="sc-rpm-inside-setup-rw2-prep-script">
-              <title>Our Final <command>%prep</command> Script</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup
 %setup -T -D -a 1
@@ -3284,17 +3005,12 @@ mkdir database
 cd database
 gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here's the resulting script:
 
-            <figure id="sc-rpm-inside-setup-rw2-final-expansion">
-              <title>
-                Complete <command>%prep</command> Script Macro Expansion
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3316,8 +3032,7 @@ mkdir database
 cd database
 gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The three commands we added to unpack the last set of sources were
@@ -3350,42 +3065,33 @@ gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
           apply patches to the unpacked sources.  In the following examples, our
           spec file has the following <command>patch</command> tag lines:
 
-          <figure id="sc-rpm-inside-patch-setup">
-            <title>A List of <command>patch</command> Tags</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 patch0: patch-zero
 patch1: patch-one
 patch2: patch-two
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           At its simplest, the <command>%patch</command> macro can be invoked
           without any options:
 
-          <figure id="sc-rpm-inside-patch-example-1">
-            <title>The Simplest <command>%patch</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %patch
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here are the resulting commands:
 
-          <figure id="sc-rpm-inside-patch-expansion">
-            <title><command>%patch</command> Macro Expansion</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 echo "Patch #0:"
 patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>%patch</command> macro nicely displays a message showing
@@ -3441,14 +3147,11 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             apply the patch specified on the <command>patch2</command> tag line,
             the following <command>%patch</command> macro could be used:
 
-            <figure id="sc-rpm-inside-patch-example2-1">
-              <title>One Way to Select the <command>patch2</command> Tag</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %patch2
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The other approach is to use the <command>-P</command> option.  This
@@ -3456,16 +3159,11 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             line desired.  Therefore, this line is identical in function to the
             previous one:
 
-            <figure id="sc-rpm-inside-patch-example3-1">
-              <title>
-                Another Way to Select the <command>patch2</command> Tag
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %patch -P 2
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that the <command>-P</command> option will
@@ -3475,17 +3173,11 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             numbers, you'll need to use the following format when applying patch
             zero:
 
-            <figure id="sc-rpm-inside-patch-zero">
-              <title>
-                Selecting the <command>patch0</command> Line Using the
-                <command>-P</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %patch -P 0
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -3570,17 +3262,11 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             applied needs to have the root directory stripped.  Its
             <command>%patch</command> macro will look like this:
 
-            <figure id="sc-rpm-inside-patch-rw-example">
-              <title>
-                <command>%patch</command> Macro for the First
-                <command>patch</command> Tag Line
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %patch -p1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The next patch is to be applied to files in the software's
@@ -3588,18 +3274,12 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             <command>cd</command> command to get us there.  We'll also need to
             strip an additional directory:
 
-            <figure id="sc-rpm-inside-patch-rw-example2">
-              <title>
-                <command>%patch</command> Macro for the Second
-                <command>patch</command> Tag Line
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd lib
 %patch -P 1 -p2
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Finally, the last patch is to be applied from the software's
@@ -3608,29 +3288,18 @@ cd lib
             patched the first time, so we'll need to change the backup file
             extension:
 
-            <figure id="sc-rpm-inside-patch-rw-example3">
-              <title>
-                <command>%patch</command> Macro for the Last
-                <command>patch</command> Tag Line
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 cd ..
 %patch -P 2 -p1 -b .last-patch
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here's what the <command>%prep</command> script (minus any
             <command>%setup</command> macros) looks like:
 
-            <figure id="sc-rpm-inside-patch-rw-prep-script">
-              <title>
-                <command>%prep</command> Script With
-                <command>%patch</command> Macros
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %patch -p1
 cd lib
@@ -3638,18 +3307,12 @@ cd lib
 cd ..
 %patch -P 2 -p1 -b .last-patch
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             And here's what the macros expand to:
 
-            <figure id="sc-rpm-inside-patch-rw-prep-expansion">
-              <title>
-                <command>%prep</command> Script (With
-                <command>%patch</command> Macros Expanded)
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 echo "Patch #0:"
 patch -p1  -s &lt; /usr/src/redhat/SOURCES/patch-zero
@@ -3660,8 +3323,7 @@ cd ..
 echo "Patch #2:"
 patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             No surprises here.  Note that the <command>%setup</command> macro
@@ -3683,24 +3345,17 @@ patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
               will automatically decompress it before applying the patch.
               Here's a compressed patch file as specified in the spec file:
 
-              <figure id="sc-rpm-inside-patch-compressed-sample">
-                <title>
-                  A <command>patch</command> Tag Line With a Compressed Patch
-                </title>
-                <screen width="60">
+              <screen width="60">
 <computeroutput>
 Patch: bother-3.5-hack.patch.gz
 </computeroutput>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               This is part of the script RPM will execute when the
               <command>%prep</command> section is executed:
 
-              <figure id="sc-rpm-inside-patch-compressed-expansion">
-                <title><command>%patch</command> Macro Expansion</title>
-                <screen width="60">
+              <screen width="60">
 <computeroutput>
 echo Executing: %prep
 &hellip;
@@ -3708,8 +3363,7 @@ echo "Patch #0:"
 gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </computeroutput>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               First, the patch file is decompressed using
@@ -3749,8 +3403,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         <footnote>
           <para>
             This is not entirely the case when a relocatable package is being
-            built.  For more information on relocatable packages, see chapter
-            <xref linkend="ch-rpm-reloc">.
+            built.  For more information on relocatable packages, see <xref
+            linkend="ch-rpm-reloc">.
           </para>
         </footnote>
       </para>
@@ -3812,17 +3466,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         two <command>%files</command> list directives, they may be applied to a
         file <filename>baz</filename> in the following manner:
 
-        <figure id="sc-rpm-inside-flist-directives-example">
-          <title>
-            Use of Multiple <command>%files</command> List Directives on One
-            LIne
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %foo %bar baz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Now it's time to take a look at the directives that inhabit the
@@ -3863,15 +3511,12 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             copy documentation into it.  Whether or not this additional step is
             taken, is dependent on how a file is specified.  Here is an example:
 
-          <figure id="sc-rpm-inside-flist-doc-example">
-            <title>The <command>%doc</command> Directive in Action</title>
             <screen width="60">
 <computeroutput>
 %doc README
 %doc /usr/local/foonly/README
 </computeroutput>
             </screen>
-          </figure>
           </para>
           <para>
             The file <filename>README</filename> exists in the software's
@@ -3885,7 +3530,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             documentation directory is <filename>/usr/doc</filename>, and can be
             changed by setting the <command>defaultdocdir</command>
             <filename>rpmrc</filename> file entry.  For more information on
-            <filename>rpmrc</filename> files, please see appendix <xref
+            <filename>rpmrc</filename> files, please see <xref
             linkend="ch-rpmrc-file">.
           </para>
           <para>
@@ -3919,14 +3564,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             the <command>%config</command>.  This means that the following
             example is the only allowable way to specify config files:
 
-            <figure id="sc-rpm-inside-flist-config-example">
-              <title>The <command>%config</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %config /etc/foonly
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Note that the full path to the file, as it is installed at build
@@ -3969,14 +3611,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           <para>
             The <command>%attr</command> directive has the following format:
 
-            <figure id="sc-rpm-inside-flist-attr-example">
-              <title>The <command>%attr</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>file</userinput>
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The mode is specified in the traditional numeric format, while the
@@ -3984,14 +3623,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             "<command>root</command>".  Here's a sample <command>%attr</command>
             directive:
 
-            <figure id="sc-rpm-inside-flist-attr-example2">
-              <title>A Sample <command>%attr</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %attr(755, root, root) foo.bar
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This would set <filename>foo.bar</filename>'s permissions to 755.
@@ -4000,22 +3636,17 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             installed with that attribute set properly), then that attribute may
             be replaced with a dash:
 
-            <figure id="sc-rpm-inside-flist-attr-example3">
-              <title>
-                An <command>%attr</command> Directive With Unspecified Attribute
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %attr(755, -, root) foo.bar
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The main reason to use the <command>%attr</command> directive is to
             permit users without root access to build packages.  The techniques
             for doing this (and a more in-depth discussion of the
-            <command>%attr</command> directive) can be found in chapter <xref
+            <command>%attr</command> directive) can be found in <xref
             linkend="ch-rpm-anywhere">.
           </para>
         </sect3>
@@ -4102,14 +3733,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             owner/group and give out a false alarm.  Instead, the following
             <command>%verify</command> directive could be used:
 
-            <figure id="sc-rpm-inside-flist-verify-example">
-              <title>An Example <command>%verify</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %verify(mode md5 size maj min symlink mtime) /dev/ttyS0
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We've left out <command>owner</command> and
@@ -4128,17 +3756,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             two attributes, you can use <command>%verify</command>'s alternate
             syntax:
 
-            <figure id="sc-rpm-inside-flist-verify-example2">
-              <title>
-                The <command>%verify</command> Directive's
-                <command>not</command> Clause
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %verify(not owner group) /dev/ttyS0
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This use of <command>%verify</command> produces identical results to
@@ -4173,14 +3795,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             For example, if the following line is part of the
             <command>%files</command> list:
 
-            <figure id="sc-rpm-inside-docdir-example">
-              <title>Using the <command>%docdir</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             any files in the <command>%files</command> list that RPM packages
@@ -4190,14 +3809,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             own documentation directory and contains a large number of files.
             Let's give it a try by adding the following line to our spec file:
 
-            <figure id="sc-rpm-inside-docdir-example2">
-              <title>A Sample <command>%docdir</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Our <command>%files</command> list contains no references to the
@@ -4205,19 +3821,13 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             <filename>/usr/blather</filename> directory.  After building the
             package, looking at the package's file list shows:
 
-            <figure id="sc-rpm-inside-docdir-setup">
-              <title>
-                Querying a Package Built With the
-                <command>%docdir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Wait a minute: There's nothing there, not even
@@ -4234,35 +3844,25 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             One way to do this is to simply add the files to the
             <command>%files</command> list:
 
-            <figure id="sc-rpm-inside-docdir-payoff">
-              <title>
-                Proper Usage of the <command>%docdir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 /usr/blather/INSTALL
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Looking at the package, we see that <filename>INSTALL</filename> was
             packaged:
 
-            <figure id="sc-rpm-inside-docdir-payoff2">
-              <title>
-                File Packaged Using the <command>%docdir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 &hellip;
 /usr/blather/INSTALL
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Directing RPM to only show the documentation files, we see that
@@ -4270,20 +3870,14 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             documentation, even though the <command>%doc</command> directive had
             not been used:
 
-            <figure id="sc-rpm-inside-docdir-payoff3">
-              <title>
-                File Marked as Documentation Using the
-                <command>%docdir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 &hellip;
 /usr/blather/INSTALL
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Of course, if you go to the trouble of adding each file to the
@@ -4292,17 +3886,12 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             most benefit from <command>%docdir</command> is to add another line
             to the <command>%files</command> list:
 
-            <figure id="sc-rpm-inside-docdir-directory-example">
-              <title>
-                Making the Most of the <command>%docdir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 /usr/blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Since the first line directs RPM to flag any file in
@@ -4311,12 +3900,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             <filename>/usr/blather</filename>, every single file in there will
             be packaged <emphasis>and</emphasis> marked as documentation:
 
-            <figure id="sc-rpm-inside-docdir-directory-example2">
-              <title>
-                A Package Query Showing <command>%docdir</command>-Included
-                Files
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 /usr/blather
@@ -4326,8 +3910,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>%docdir</command> directive can save quite a bit of
@@ -4347,14 +3930,13 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           </indexterm>
 
           <para>
-            As we mentioned in section <xref
-            linkend="s1-rpm-inside-files-list">, if a directory is specified in
-            the <command>%files</command> list, the contents of that directory,
-            and the contents of every directory under it, will automatically be
-            included in the package.  While this feature can be handy (assuming
-            you are <emphasis>sure</emphasis> that every file under the
-            directory should be packaged) there are times when this could be a
-            problem.
+            As we mentioned in <xref linkend="s1-rpm-inside-files-list">, if a
+            directory is specified in the <command>%files</command> list, the
+            contents of that directory, and the contents of every directory
+            under it, will automatically be included in the package.  While this
+            feature can be handy (assuming you are <emphasis>sure</emphasis>
+            that every file under the directory should be packaged) there are
+            times when this could be a problem.
           </para>
           <para>
             The way to get around this, is to use the <command>%dir</command>
@@ -4370,19 +3952,14 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             <filename>/usr/blather</filename> directory is included in the
             <command>%files</command> list:
 
-            <figure id="sc-rpm-inside-dir-example-setup">
-              <title>
-                A Directory Specified in the <command>%files</command> List
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files
 &hellip;
 /usr/blather
 &hellip;
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             There are no other entries in the <command>%files</command> list
@@ -4390,9 +3967,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             After building the package, we use RPM to look at the files in the
             package:
 
-            <figure id="sc-rpm-inside-dir-example-payoff">
-              <title>Files Packaged by Including a Directory</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 &hellip;
@@ -4403,8 +3978,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The files present in <filename>/usr/blather</filename> at the time
@@ -4415,24 +3989,17 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             However, after changing the <filename>/usr/blather</filename> line
             in the <command>%files</command> list to:
 
-            <figure id="sc-rpm-inside-dir-directive-example2">
-              <title>Using the <command>%dir</command> Directive</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %dir /usr/blather
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             and rebuilding the package, a listing of the package's files now
             includes only the <filename>/usr/blather</filename> directory:
 
-            <figure id="sc-rpm-inside-dir-directive-payoff">
-              <title>
-                A Directory Included Using the <command>%dir</command> Directive
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
 <computeroutput>
 &hellip;
@@ -4440,8 +4007,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
         </sect3>
 
@@ -4480,20 +4046,14 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             file.  If there are any filenames present in the spec file, they
             will be packaged as well:
 
-            <figure id="sc-rpm-inside-flist-f-option-example">
-              <title>
-                The <command>%files</command> List's <command>-f</command>
-                Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files latex -f tetex-latex-skel
 /usr/bin/latex
 /usr/bin/pslatex
 &hellip;
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here, the filenames present in the file
@@ -4521,14 +4081,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         <command>%package</command> directive.  The format of the package
         directive is:
 
-        <figure id="sc-rpm-inside-package-directive-format">
-          <title><command>%package</command> Directive Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %package: &lt;string&gt;
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <command>&lt;string&gt;</command> should be a name that describes
@@ -4560,29 +4117,21 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           <command>%package</command> line would create a subpackage named
           <filename>foonly-doc</filename>:
 
-          <figure id="sc-rpm-inside-package-n-option-setup">
-            <title>An Example <command>%package</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %package doc
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The following <command>%package</command> line would create a
           subpackage named <filename>doc</filename>:
 
-          <figure id="sc-rpm-inside-package-n-option-payoff">
-            <title>
-              Using the <command>-n</command> Option to Control Subpackage Names
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %package -n doc
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>%package</command> directive plays another role in
@@ -4599,9 +4148,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           <command>%package</command> line) on the starting line of the section
           that is to be subpackage-specific.  Here's an example:
 
-          <figure id="sc-rpm-inside-package-n-option-example2">
-            <title>The <command>-n</command> Option in Action</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 &hellip;
 %package -n bar
@@ -4609,8 +4156,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 %post -n bar
 &hellip;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this heavily edited spec file segment, a subpackage called
@@ -4621,7 +4167,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           subpackage only.
         </para>
         <para>
-          For more information on building subpackages, please see chapter <xref
+          For more information on building subpackages, please see <xref
           linkend="ch-rpm-subpack">.
         </para>
       </sect2>
@@ -4685,7 +4231,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         multi-platform package building easier and less prone to mistakes.
       </para>
       <para>
-        We discuss multi-platform package building in depth in chapter <xref
+        We discuss multi-platform package building in depth in <xref
         linkend="ch-rpm-multi">.  For now, let's take a quick look at RPM's
         conditionals.
       </para>
@@ -4703,14 +4249,11 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           or more architecture specifiers, each separated by commas or
           whitespace.  Here is an example:
 
-          <figure id="sc-rpm-inside-ifarch-example">
-            <title>The <command>%ifarch</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifarch i386 sparc
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The contents of the spec file following this line would be processed
@@ -4718,19 +4261,14 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           line were placed in a spec file, this is what would happen if a build
           was attempted:
 
-          <figure id="sc-rpm-inside-ifarch-build">
-            <title>
-              Attempting to Use the <command>%ifarch</command> Conditional
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 Unclosed %if
 Build failed.
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The problem that surfaced here is that any conditional must be
@@ -4779,14 +4317,11 @@ Build failed.
           <command>%else</command> or <command>%endif</command>.  Here's an
           example:
 
-          <figure id="sc-rpm-inside-ifos-example">
-            <title>The <command>%ifos</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifos linux
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The contents of the spec file following this line would be processed
@@ -4826,9 +4361,7 @@ Build failed.
           file statements, only one of which will be used in any given
           case. Here's an example:
 
-          <figure id="sc-rpm-inside-else-example">
-            <title>The <command>%else</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifarch alpha
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
@@ -4836,8 +4369,7 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 %endif
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           When a build is performed on a Digital Alpha/AXP, some additional
@@ -4861,16 +4393,13 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
           otherwise the build will fail.  Here's short conditional block, ending
           with a <command>%endif</command>:
 
-          <figure id="sc-rpm-inside-endif-example">
-            <title>The <command>%endif</command> Conditional</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %ifarch i386
 make INTELFLAG=-DINTEL
 %endif
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this example, we see the conditional block started with a

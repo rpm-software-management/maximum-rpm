@@ -908,8 +908,8 @@ file /etc/blunder is not owned by any package
         </para>
         <para>
           (Note that the issue surrounding RPM and symbolic links mentioned in
-          "A Tricky Detail" (page <xref linkend="s4-rpm-query-tricky-detail">)
-          also applies to <command>rpm -Vf</command>.  Watch those symlinks!)
+          "A Tricky Detail" (<xref linkend="s4-rpm-query-tricky-detail">) also
+          applies to <command>rpm -Vf</command>.  Watch those symlinks!)
         </para>
       </sect2>
 
@@ -1382,7 +1382,7 @@ D: dependencies: looking for libc.so.5
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -1415,7 +1415,7 @@ D: dependencies: looking for libc.so.5
           This option would be used if there was a need to switch between
           several sets of RPM options.  Software developer and package builders
           will be the people using <command>--rcfile</command>.  For more
-          information on <filename>rpmrc</filename> files, see Appendix <xref
+          information on <filename>rpmrc</filename> files, see <xref
           linkend="ch-rpmrc-file">.
         </para>
       </sect2>
@@ -1660,8 +1660,8 @@ D: dependencies: looking for libc.so.5
             <command>%verify</command>
             <footnote>
               <para>
-                See page <xref linkend="s3-rpm-inside-flist-verify-directive">
-                for details on <command>%verify</command>
+                See <xref linkend="s3-rpm-inside-flist-verify-directive"> for
+                details on <command>%verify</command>
               </para>
             </footnote>
             directive, a package builder can save you from trivial

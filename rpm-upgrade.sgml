@@ -291,9 +291,8 @@
               <footnote id="fn-rpm-upgrade-tablefoot">
                 <para>
                   This option behaves identically to the same option used with
-                  <command>rpm -i</command>.  Please see Chapter <xref
-                  linkend="ch-rpm-install"> for more information on this
-                  option.
+                  <command>rpm -i</command>.  Please see <xref
+                  linkend="ch-rpm-install"> for more information on this option.
                 </para>
               </footnote>
             </entry>
@@ -339,12 +338,12 @@
 
       <para>
         If it sounds to you like <command>rpm -U</command> is nothing more than
-        an <command>rpm -i</command> command (see chapter <xref
-        linkend="ch-rpm-install">) followed by the appropriate number of <command>rpm
-        -e</command> commands, (see chapter <xref linkend="ch-rpm-erase">) you'd be
-        exactly right.  In fact, we'll be referring back to those chapters as we
-        discuss <command>rpm -U</command>, so if you haven't skimmed those
-        chapters yet, you might want to do that now.
+        an <command>rpm -i</command> command (see <xref
+        linkend="ch-rpm-install">) followed by the appropriate number of
+        <command>rpm -e</command> commands, (see <xref linkend="ch-rpm-erase">)
+        you'd be exactly right.  In fact, we'll be referring back to those
+        chapters as we discuss <command>rpm -U</command>, so if you haven't
+        skimmed those chapters yet, you might want to do that now.
       </para>
       <para>
         While some people might think it's a "cheap shot" to claim that RPM
@@ -613,7 +612,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         or URLs, can also be used to specify the package file.
         <footnote>
           <para>
-            For more information on RPM's use of URLs, please see section <xref
+            For more information on RPM's use of URLs, please see <xref
             linkend="s2-rpm-install-urls">.
           </para>
         </footnote>
@@ -658,10 +657,10 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         used with <command>rpm -i</command>.  Therefore, to keep the duplication
         to a minimum, we'll discuss only those options that are unique to
         <command>rpm -U</command>, or that behave differently from the same
-        option when used with <command>rpm -i</command>.  The table on page
-        <xref linkend="tb-rpm-upgrade-syntax"> at the start of this chapter
-        shows all valid options to RPM's upgrade command, and indicates which
-        are identical to those used with <command>rpm -i</command>.
+        option when used with <command>rpm -i</command>.  The table on <xref
+        linkend="tb-rpm-upgrade-syntax"> at the start of this chapter shows all
+        valid options to RPM's upgrade command, and indicates which are
+        identical to those used with <command>rpm -i</command>.
       </para>
 
       <sect2 id="s2-rpm-upgrade-oldpackage-option">
