@@ -518,20 +518,22 @@ rpm-2.2.1-1
         </para>
         <para>
           There are three sections to each header structure.  The first section
-          is known as the "header structure header".  The header structure
-          header is used to identify the start of a header structure, its size,
-          and the number of data items it contains.
+          is known as the <firstterm>header structure header</firstterm>.  The
+          header structure header is used to identify the start of a header
+          structure, its size, and the number of data items it contains.
         </para>
         <para>
-          Following the header structure header is an area called the "index".
-          The index contains one or more index entries.  Each index entry
-          contains information about, and a pointer to, a specific data item.
+          Following the header structure header is an area called the
+          <firstterm>index</firstterm>.  The index contains one or more index
+          entries.  Each index entry contains information about, and a pointer
+          to, a specific data item.
         </para>
         <para>
-          After the index comes the "store".  It is in the store that the data
-          items are kept.  The data in the store is packed together as closely
-          as possible.  The order in which the data is stored is immaterial ---
-          a far cry from the C structure used in the lead.
+          After the index comes the <firstterm>store</firstterm>.  It is in the
+          store that the data items are kept.  The data in the store is packed
+          together as closely as possible.  The order in which the data is
+          stored is immaterial --- a far cry from the C structure used in the
+          lead.
         </para>
       </sect3>
 
@@ -563,17 +565,17 @@ rpm-2.2.1-1
           <para>
             The header structure's index is made up of zero or more index
             entries.  Each entry is sixteen bytes longs.  The first four bytes
-            contain a "tag" --- a numeric value that identifies what type of
-            data is pointed to by the entry.  The tag values change according to
-            the header structure's position in the RPM file.  A list of the
-            actual tag values, and what they represent, will be included later
-            in this appendix.
+            contain a <firstterm>tag</firstterm> --- a numeric value that
+            identifies what type of data is pointed to by the entry.  The tag
+            values change according to the header structure's position in the
+            RPM file.  A list of the actual tag values, and what they represent,
+            will be included later in this appendix.
           </para>
           <para>
-            Following the tag, is a four-byte "type", which is a numeric value
-            that describes the format of the data pointed to by the entry.  The
-            types and their values do not change from header structure to header
-            structure.  Here is the current list:
+            Following the tag, is a four-byte <firstterm>type</firstterm>, which
+            is a numeric value that describes the format of the data pointed to
+            by the entry.  The types and their values do not change from header
+            structure to header structure.  Here is the current list:
 
             <itemizedlist mark="bullet">
               <listitem>
@@ -639,17 +641,17 @@ rpm-2.2.1-1
             that is longer than an INT, but not a printable STRING.
           </para>
           <para>
-            Next is a four-byte "offset" that contains the position of the data,
-            relative to the beginning of the store.  We'll talk about the store
-            in just a moment.
+            Next is a four-byte <firstterm>offset</firstterm> that contains the
+            position of the data, relative to the beginning of the store.  We'll
+            talk about the store in just a moment.
           </para>
           <para>
-            Finally, there is a four-byte "count" that contains the number of
-            data items pointed to by the index entry.  There are a few wrinkles
-            to the meaning of the count, and they center around the STRING and
-            STRING_ARRAY data types.  STRING data always has a count of 1, while
-            STRING_ARRAY data has a count equal to the number of strings
-            contained in the store.
+            Finally, there is a four-byte <firstterm>count</firstterm> that
+            contains the number of data items pointed to by the index entry.
+            There are a few wrinkles to the meaning of the count, and they
+            center around the STRING and STRING_ARRAY data types.  STRING data
+            always has a count of 1, while STRING_ARRAY data has a count equal
+            to the number of strings contained in the store.
           </para>
         </sect4>
 
@@ -865,7 +867,7 @@ rpm-2.2.1-1
           file:
 
           <screen width="60">
-<prompt># </prompt><userinput>ls -al rpm-2.2.1-1.i386.rpm</userinput>
+<prompt># </prompt><command>ls -al rpm-2.2.1-1.i386.rpm</command>
 <computeroutput>
                 -rw-rw-r--   1 ed       ed         <replaceable>282015</replaceable> Jul 21 16:05 rpm-2.2.1-1.i386.rpm
 </computeroutput>
@@ -1277,7 +1279,7 @@ rpm-2.2.1-1
       display the lead from a package file:
 
       <screen width="60">
-<prompt># </prompt><userinput>rpmlead foo.rpm | od -x</userinput>
+<prompt># </prompt><command>rpmlead foo.rpm | od -x</command>
 <computeroutput>
 0000000 abed dbee 0003 0000 0100 7072 2d6d 2e32
 0000020 2e32 2d31 0031 0000 0000 0000 0000 0000
@@ -1295,7 +1297,7 @@ rpm-2.2.1-1
       command is equivalent to the one above:
 
       <screen width="60">
-<prompt># </prompt><userinput>cat foo.rpm | rpmlead | od -x</userinput>
+<prompt># </prompt><command>cat foo.rpm | rpmlead | od -x</command>
 <computeroutput>
 0000000 abed dbee 0003 0000 0100 7072 2d6d 2e32
 0000020 2e32 2d31 0031 0000 0000 0000 0000 0000
@@ -1314,7 +1316,7 @@ rpm-2.2.1-1
       decoding header structures a snap:
 
       <screen width="60">
-<prompt># </prompt><userinput>rpmsignature foo.rpm | dump</userinput>
+<prompt># </prompt><command>rpmsignature foo.rpm | dump</command>
 <computeroutput>
 Entry count: 3
 Data count : 172
@@ -1399,7 +1401,7 @@ Entry      : 002 (1002)RELEASE        BIN_TYPE         0x00000014 00000152
       The output of the <command>file</command> command is succinct:
 
       <screen width="60">
-<prompt># </prompt><userinput>file baz</userinput>
+<prompt># </prompt><command>file baz</command>
 <computeroutput>
 baz: RPM v3 bin i386 vlock-1.0-2
 </computeroutput>

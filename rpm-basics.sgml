@@ -40,8 +40,9 @@
           First and foremost, are the sources.  After all, without them, there
           wouldn't be much to build!  In the case of packaging someone else's
           software, the sources should be kept as the author distributed them,
-          which usually means a compressed <command>tar</command> file.  RPM can handle
-          other archive formats, but a bit more up-front effort is required.
+          which usually means a compressed <command>tar</command> file.  RPM can
+          handle other archive formats, but a bit more up-front effort is
+          required.
         </para>
         <para>
           In any case, you should not modify the sources used in the package

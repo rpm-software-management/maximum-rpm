@@ -102,17 +102,17 @@
 
         <screen width="60">
 <computeroutput>
-&lt;something&gt;:&lt;something-else&gt;
+<replaceable>&lt;something&gt;</replaceable>:<replaceable>&lt;something-else&gt;</replaceable>
 </computeroutput>
         </screen>
       </para>
       <para>
-        The <command>&lt;something&gt;</command> is known as a "tag", because it
-        is used by RPM to name or <emphasis>tag</emphasis> some data.  The tag
-        is separated from its associated data by a colon.  The data is
-        represented by the <command>&lt;something-else&gt;</command> above.
-        Tags are grouped together at the top of the spec file, in a section
-        known as the preamble.  Here's an example of a tag and its data:
+        The <replaceable>&lt;something&gt;</replaceable> is known as a "tag",
+        because it is used by RPM to name or <emphasis>tag</emphasis> some data.
+        The tag is separated from its associated data by a colon.  The data is
+        represented by the <replaceable>&lt;something-else&gt;</replaceable>
+        above.  Tags are grouped together at the top of the spec file, in a
+        section known as the preamble.  Here's an example of a tag and its data:
 
         <screen width="60">
 <computeroutput>
@@ -159,7 +159,7 @@ VENDOR    :    White Socks Software, Inc.
 
           <screen width="60">
 <computeroutput>
-&lt;name&gt;-&lt;version&gt;-&lt;release&gt;
+<replaceable>&lt;name&gt;</replaceable>-<replaceable>&lt;version&gt;</replaceable>-<replaceable>&lt;release&gt;</replaceable>
 </computeroutput>
           </screen>
         </para>
@@ -188,8 +188,8 @@ VENDOR    :    White Socks Software, Inc.
             software being packaged.  The name cannot contain any whitespace: If
             it does, RPM will only use the first part of the name (up to the
             first space).  Therefore, if the name of the software being packaged
-            is <filename>cdplayer</filename>, the <command>name</command> tag
-            should be something like:
+            is <application>cdplayer</application>, the <command>name</command>
+            tag should be something like:
 
             <screen width="60">
 <computeroutput>
@@ -221,7 +221,7 @@ Name: cdplayer
             RPM will remind you:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Illegal '-' char in version: 1.0-a
@@ -679,16 +679,17 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           </indexterm>
 
           <para>
-            The <command>provides</command> tag is used to specify a "virtual
-            package" that the packaged software makes available when it is
-            installed.  Normally, this tag would be used when different packages
-            provide equivalent services.  For example, any package that allows a
-            user to read mail might provide the <filename>mail-reader</filename>
-            virtual package.  Another package that depends on a mail reader of
-            some sort, could require the <filename>mail-reader</filename>
-            virtual package.  It would then install without dependency problems,
-            if any one of several mail programs were installed.  Here's what a
-            <command>provides</command> tag might look like:
+            The <command>provides</command> tag is used to specify a
+            <firstterm>virtual package</firstterm> that the packaged software
+            makes available when it is installed.  Normally, this tag would be
+            used when different packages provide equivalent services.  For
+            example, any package that allows a user to read mail might provide
+            the <application>mail-reader</application> virtual package.  Another
+            package that depends on a mail reader of some sort, could require
+            the <application>mail-reader</application> virtual package.  It would then
+            install without dependency problems, if any one of several mail
+            programs were installed.  Here's what a <command>provides</command>
+            tag might look like:
 
             <screen width="60">
 <computeroutput>
@@ -813,7 +814,7 @@ Conflicts: playmidi =S 4
               <listitem>
                 <para>
                   The package being built (call it package
-                  <emphasis>A</emphasis>) uses a version numbering scheme
+                  <replaceable>A</replaceable>) uses a version numbering scheme
                   sufficiently obscure so that RPM cannot determine if one
                   version is older or newer than another version.
                 </para>
@@ -821,10 +822,10 @@ Conflicts: playmidi =S 4
 
               <listitem>
                 <para>
-                  Another package (package <emphasis>B</emphasis>) requires that
-                  package <emphasis>A</emphasis> be installed.  More
+                  Another package (package <replaceable>B</replaceable>) requires that
+                  package <replaceable>A</replaceable> be installed.  More
                   specifically, it requires RPM to compare package
-                  <emphasis>A</emphasis>'s version against a specified minimum
+                  <replaceable>A</replaceable>'s version against a specified minimum
                   (or maximum) version.
                 </para>
               </listitem>
@@ -832,10 +833,10 @@ Conflicts: playmidi =S 4
           </para>
 
           <para>
-            Since RPM is unable to compare package <emphasis>A</emphasis>'s
+            Since RPM is unable to compare package <replaceable>A</replaceable>'s
             version against the version specified by package
-            <emphasis>B</emphasis>, there is no way to determine if package
-            <emphasis>B</emphasis>'s dependency requirements can be met.  What
+            <replaceable>B</replaceable>, there is no way to determine if package
+            <replaceable>B</replaceable>'s dependency requirements can be met.  What
             to do?
           </para>
           <para>
@@ -1044,7 +1045,7 @@ ExcludeArch: sparc alpha
             be displayed, and the build will fail:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
 <computeroutput>
 Arch mismatch!
 cdplayer-1.0.spec doesn't build on this architecture
@@ -1442,16 +1443,16 @@ Source1: bother-1.2.tar.gz
 
             <screen width="60">
 <computeroutput>
-nosource: &lt;src-num&gt;, &lt;src-num&gt;&hellip;&lt;src-num&gt;
+nosource: <replaceable>&lt;src-num&gt;</replaceable>, <replaceable>&lt;src-num&gt;</replaceable>&hellip;<replaceable>&lt;src-num&gt;</replaceable>
 </computeroutput>
             </screen>
           </para>
           <para>
-            The <command>&lt;src-num&gt;</command> represents the number
-            following the <command>source</command> tag.  If there is more than
-            one number in the list, they may be separated by either commas or
-            spaces.  For example, consider a package containing the following
-            <command>source</command> tags:
+            The <command><replaceable>&lt;src-num&gt;</replaceable></command>
+            represents the number following the <command>source</command> tag.
+            If there is more than one number in the list, they may be separated
+            by either commas or spaces.  For example, consider a package
+            containing the following <command>source</command> tags:
 
             <screen width="60">
 <computeroutput>
@@ -1463,8 +1464,8 @@ source3: bother-lib-1.2.tar.gz
             </screen>
           </para>
           <para>
-            If the source files for <filename>blather</filename> and
-            <filename>blather-lib</filename> were not to be included in the
+            If the source files for <application>blather</application> and
+            <application>blather-lib</application> were not to be included in the
             package, the following <command>nosource</command> line could be
             added:
 
@@ -1683,7 +1684,7 @@ NoPatch: 2 3
             </para>
           </footnote>
           , we can see the common portion of each script.  In the following
-          example, we've taken the <filename>cdplayer</filename> package, issued
+          example, we've taken the <application>cdplayer</application> package, issued
           an <command>rpm -ba --test cdplayer-1.0-1.spec</command>, and viewed
           the script files left in RPM's temporary directory.  This section
           (with the appropriate package-specific values) is present in every
@@ -2059,12 +2060,12 @@ rm -rf $RPM_BUILD_ROOT
           Here's an example:
         </para>
         <para>
-          Assume that a package, called <filename>blather-1.0</filename>, is
-          being installed.  No previous versions of <filename>blather</filename>
+          Assume that a package, called <application>blather-1.0</application>, is
+          being installed.  No previous versions of <application>blather</application>
           have been installed.  Since the software is being installed, only the
           <command>%pre</command> and <command>%post</command> scripts are
           executed.  The argument passed to these scripts will be 1, since the
-          the number of <filename>blather</filename> packages installed is 1.
+          the number of <application>blather</application> packages installed is 1.
           <footnote>
             <para>
               Or it will be 1, once the package is completely installed.
@@ -2076,25 +2077,25 @@ rm -rf $RPM_BUILD_ROOT
         </para>
         <para>
           Continuing our example, a new version of the
-          <filename>blather</filename> package, version 1.3, is now available.
+          <application>blather</application> package, version 1.3, is now available.
           Clearly it's time to upgrade.  What will the scripts' values be during
-          the upgrade?  As <filename>blather-1.3</filename> is installing, its
+          the upgrade?  As <application>blather-1.3</application> is installing, its
           <command>%pre</command> and <command>%post</command> scripts will have
           an argument equal to 2 (1 for version 1.0 already installed, plus 1
           for version 1.3 being installed).  As the final part of the upgrade,
-          it's then time to erase <filename>blather</filename> version 1.0.  As
+          it's then time to erase <application>blather</application> version 1.0.  As
           the package is being removed, its <command>%preun</command> and
           <command>%postun</command> scripts are executed.  Since there will be
-          only one <filename>blather</filename> package (version 1.3) installed
+          only one <application>blather</application> package (version 1.3) installed
           after version 1.0 is erased, the argument passed to version 1.0's
           scripts is 1.
         </para>
         <para>
           To finally bring an end to this example, we've decided to erase
-          <filename>blather</filename> 1.3.  We just don't need it anymore.  As
+          <application>blather</application> 1.3.  We just don't need it anymore.  As
           the package is being erased, its <command>%preun</command> and
           <command>%postun</command> scripts will be executed.  Since there will
-          be no <filename>blather</filename> packages installed once the erase
+          be no <application>blather</application> packages installed once the erase
           completes, the argument passed to the scripts is 0.
         </para>
         <para>
@@ -2333,7 +2334,7 @@ done
           simplest form, the macro is used with no options and gets the name of
           the source archive from the <command>source</command> tag specified
           earlier in the spec file.  Let's look at an example.  The
-          <filename>cdplayer</filename> package has the following
+          <application>cdplayer</application> package has the following
           <command>source</command> tag:
 
           <screen width="60">
@@ -2374,7 +2375,7 @@ chmod -R a+rX,g-w,o-w .
         <para>
           As we can see, the <command>%setup</command> macro starts by changing
           directory into RPM's build area and removing any
-          <filename>cdplayer</filename> build trees from previous builds.  It
+          <application>cdplayer</application> build trees from previous builds.  It
           then uses <command>gzip</command> to uncompress the original source
           (whose name was taken from the <command>source</command> tag), and
           pipes the result to <command>tar</command> for unpacking.  The return
@@ -2383,7 +2384,7 @@ chmod -R a+rX,g-w,o-w .
         <para>
           At this point, the original sources have been unpacked.  The
           <command>%setup</command> macro continues by changing directory into
-          <filename>cdplayer</filename>'s top-level directory.  The two
+          <application>cdplayer</application>'s top-level directory.  The two
           <command>cd</command> commands are an artifact of
           <command>%setup</command>'s macro expansion.  Finally,
           <command>%setup</command> makes sure every file in the build tree is
@@ -2427,9 +2428,9 @@ chmod -R a+rX,g-w,o-w .
             example:
           </para>
           <para>
-            Assume, for a moment, that the <filename>cdplayer</filename>
+            Assume, for a moment, that the <application>cdplayer</application>
             sources, when unpacked, create a top-level directory named
-            <filename>cd-player</filename>.  In this case, our
+            <application>cd-player</application>.  In this case, our
             <command>%setup</command> line would look like this:
 
             <screen width="60">
@@ -2459,10 +2460,10 @@ chmod -R a+rX,g-w,o-w .
           <para>
             The results are identical to using <command>%setup</command> with no
             options, except for the fact that <command>%setup</command> now does
-            a recursive delete on the directory <filename>cd-player</filename>
-            (instead of <filename>cdplayer-1.0</filename>), and changes
-            directory into <filename>cd-player</filename> (instead of
-            <filename>cdplayer-1.0</filename>).
+            a recursive delete on the directory <application>cd-player</application>
+            (instead of <application>cdplayer-1.0</application>), and changes
+            directory into <application>cd-player</application> (instead of
+            <application>cdplayer-1.0</application>).
           </para>
           <para>
             Note that all subsequent build-time scripts will change directory
@@ -2629,7 +2630,7 @@ chmod -R a+rX,g-w,o-w .
             argument is not provided, the build will fail:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
 * Package: cdplayer
 Need arg to %setup -b
 Build failed.
@@ -2984,7 +2985,7 @@ chmod -R a+rX,g-w,o-w .
           <para>
             So far, so good.  Let's include the last source file, but with this
             one, we'll say that it needs to be unpacked in a subdirectory of
-            <filename>cdplayer-1.0</filename> called
+            <application>cdplayer-1.0</application> called
             <filename>database</filename>.  Can we use <command>%setup</command>
             in this case?
           </para>
@@ -3523,7 +3524,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             top-level directory during the build, and is included in the package
             file.  When the package is installed, RPM creates a directory in the
             documentation directory named the same as the package (ie,
-            <filename>&lt;software&gt;-&lt;version&gt;-&lt;release&gt;</filename>),
+            <filename><replaceable>&lt;software&gt;</replaceable>-<replaceable>&lt;version&gt;</replaceable>-<replaceable>&lt;release&gt;</replaceable></filename>),
             and copies the <filename>README</filename> file there.  The newly
             created directory and the <filename>README</filename> file are
             marked in the RPM database as being documentation.  The default
@@ -3822,7 +3823,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             package, looking at the package's file list shows:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 &hellip;
 </computeroutput>
@@ -3856,7 +3857,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             packaged:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 &hellip;
 /usr/blather/INSTALL
@@ -3871,7 +3872,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             not been used:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 &hellip;
 /usr/blather/INSTALL
@@ -3901,7 +3902,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             be packaged <emphasis>and</emphasis> marked as documentation:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 /usr/blather
 /usr/blather/COPYING
@@ -3946,7 +3947,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             Here's an example of <command>%dir</command> in action.
           </para>
           <para>
-            The <filename>blather-1.0</filename> package creates the directory
+            The <application>blather-1.0</application> package creates the directory
             <filename>/usr/blather</filename> as part of its build.  It also
             puts several files in that directory.  In the spec file, the
             <filename>/usr/blather</filename> directory is included in the
@@ -3968,7 +3969,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             package:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 &hellip;
 /usr/blather
@@ -4000,7 +4001,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             includes only the <filename>/usr/blather</filename> directory:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</command>
 <computeroutput>
 &hellip;
 /usr/blather
@@ -4093,7 +4094,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         produce the subpackage's name.  For example, if a spec file contains a
         <command>name</command> tag value of "<command>foonly</command>", and a
         "<command>%package doc</command>" line, then the subpackage name will be
-        <filename>foonly-doc</filename>.
+        <application>foonly-doc</application>.
       </para>
 
       <sect2 id="s2-rpm-inside-package-n-option">
@@ -4115,7 +4116,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           name specified on the <command>%package</command> line as the entire
           package name.  In the example above, the following
           <command>%package</command> line would create a subpackage named
-          <filename>foonly-doc</filename>:
+          <application>foonly-doc</application>:
 
           <screen width="60">
 <computeroutput>
@@ -4125,7 +4126,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         </para>
         <para>
           The following <command>%package</command> line would create a
-          subpackage named <filename>doc</filename>:
+          subpackage named <application>doc</application>:
 
           <screen width="60">
 <computeroutput>
@@ -4160,10 +4161,10 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         </para>
         <para>
           In this heavily edited spec file segment, a subpackage called
-          <filename>bar</filename> has been defined.  Later in the file is a
+          <application>bar</application> has been defined.  Later in the file is a
           post-install script.  Because it has subpackage
-          <filename>bar</filename>'s name on the <command>%post</command> line,
-          the post-install script will be part of the <filename>bar</filename>
+          <application>bar</application>'s name on the <command>%post</command> line,
+          the post-install script will be part of the <application>bar</application>
           subpackage only.
         </para>
         <para>
@@ -4262,7 +4263,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           was attempted:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
 <computeroutput>
 Unclosed %if
 Build failed.

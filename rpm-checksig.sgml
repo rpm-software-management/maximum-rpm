@@ -19,9 +19,9 @@
           <row>
             <entry spanname="spanall" align="center">
               <command>rpm -K</command> (or
-              <command>--checksig</command>) <emphasis>options</emphasis>
+              <command>--checksig</command>) <replaceable>options</replaceable>
               <filename>file1.rpm</filename> &hellip;
-              <filename>fileN.rpm</filename>
+              <filename>file<replaceable>N</replaceable>.rpm</filename>
             </entry>
           </row>
           <row>
@@ -32,7 +32,7 @@
           <row>
             <entry>
               <filename>file1.rpm</filename> &hellip;
-              <filename>fileN.rpm</filename>
+              <filename>file<replaceable>N</replaceable>.rpm</filename>
               </entry>
             <entry spanname="span23" align="center">
               One or more RPM package files (URLs OK)
@@ -89,11 +89,11 @@
           </row>
           <row>
             <entry>
-              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+              <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate rpmrc file to
-              <command><userinput>&lt;rcfile&gt;</userinput></command>
+              <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-checksig-rcfile-option">
@@ -174,7 +174,7 @@
           <listitem>
             <para>
               PGP must be in your path.  If PGP's usage message doesn't come up
-              when you enter <userinput>pgp</userinput> at your shell prompt,
+              when you enter <command>pgp</command> at your shell prompt,
               you'll need to add PGP's directory to your path.
             </para>
           </listitem>
@@ -188,8 +188,8 @@
               <orderedlist>
                 <listitem>
                   <para>
-                    Set the <command>PGPPATH</command> environment variable to
-                    point to the directory containing the public keyring file.
+                    Set the <envar>PGPPATH</envar> environment variable to point
+                    to the directory containing the public keyring file.
                   </para>
                 </listitem>
 
@@ -232,7 +232,7 @@
         you'll need to do:
 
         <screen width="60">
-<prompt># </prompt><userinput>pgp -ka RPM-PGP-KEY ./pubring.pgp</userinput>
+<prompt># </prompt><command>pgp -ka RPM-PGP-KEY ./pubring.pgp</command>
 <computeroutput>
 Pretty Good Privacy(tm) 2.6.3a - Public-key encryption for the masses.
 (c) 1990-96 Philip Zimmermann, Phil's Pretty Good Software. 1996-03-04
@@ -265,7 +265,7 @@ One or more of the new keys are not fully certified.
         Next, we'll verify a package file:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size pgp md5 OK
 </computeroutput>
@@ -346,7 +346,7 @@ rpm-2.3-1.i386.rpm: size pgp md5 OK
           more interesting output:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -Kv rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -Kv rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386.rpm:
 Header+Archive size OK: 278686 bytes
@@ -365,8 +365,8 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           With a bit of digging, we can see that each of the three tests was
           performed, and each passed.  The reason for that dire-sounding warning
           is that PGP is meant to operate without a central authority managing
-          key distribution.  PGP certifies keys based on <emphasis>webs of
-          trust</emphasis>.  For example, if an acquaintance of yours creates a
+          key distribution.  PGP certifies keys based on <firstterm>webs of
+          trust</firstterm>.  For example, if an acquaintance of yours creates a
           public key, you can certify it by attaching your digital signature to
           it.  Then anyone that knows and trusts you can also trust your
           acquaintance's public key.
@@ -404,7 +404,7 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           be signed.  If this is the case, here's what you'll see from RPM:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K bother-3.5-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K bother-3.5-1.i386.rpm</command>
 <computeroutput>
 bother-3.5-1.i386.rpm: size md5 OK
 </computeroutput>
@@ -424,7 +424,7 @@ bother-3.5-1.i386.rpm: size md5 OK
           right away:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K apmd-2.4-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K apmd-2.4-1.i386.rpm</command>
 <computeroutput>
 apmd-2.4-1.i386.rpm: No signature available
 </computeroutput>
@@ -450,7 +450,7 @@ apmd-2.4-1.i386.rpm: No signature available
           you'll see the following response:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
 </computeroutput>
@@ -494,7 +494,7 @@ rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
           package file was queried.  Here's a listing from the original package:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -qip rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
 Version     : 2.3                         Vendor: Red Hat Software
@@ -516,7 +516,7 @@ including name, version, and description.
           And here's the same listing from the bogus package file:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386-bogus.rpm</userinput>
+<prompt># </prompt><command>rpm -qip rpm-2.3-1.i386-bogus.rpm</command>
 <computeroutput>
 Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
 Version     : 2.3                         Vendor: Red Hat Software
@@ -543,7 +543,7 @@ including name, version, and description.
           160), to "q" (octal 161):
 
           <screen width="60">
-<prompt># </prompt><userinput>cmp -cl rpm-2.3-1.i386.rpm rpm-2.3-1.i386-bogus.rpm</userinput>
+<prompt># </prompt><command>cmp -cl rpm-2.3-1.i386.rpm rpm-2.3-1.i386-bogus.rpm</command>
 <computeroutput>
   1201 160 p    161 q
 </computeroutput>
@@ -557,7 +557,7 @@ including name, version, and description.
           fares:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386-bogus.rpm</userinput>
+<prompt># </prompt><command>rpm -K rpm-2.3-1.i386-bogus.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
 </computeroutput>
@@ -613,7 +613,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
           always looks like something's wrong:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
 </computeroutput>
@@ -626,7 +626,7 @@ rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
           example above, we find that things look a whole lot better:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -K --nopgp rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -K --nopgp rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 rpm-2.3-1.i386.rpm: size md5 OK
 </computeroutput>
@@ -648,7 +648,7 @@ rpm-2.3-1.i386.rpm: size md5 OK
           you insights into how RPM verifies packages.  Here's an example:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -Kvv rpm-2.3-1.i386.rpm</userinput>
+<prompt># </prompt><command>rpm -Kvv rpm-2.3-1.i386.rpm</command>
 <computeroutput>
 D: New Header signature
 D: magic: 8e ad e8 01
@@ -689,8 +689,8 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
 
       <sect2 id="s2-rpm-checksig-rcfile-option">
         <title>
-          <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>: Use
-          <command><userinput>&lt;rcfile&gt;</userinput></command> As An
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>: Use
+          <command><replaceable>&lt;rcfile&gt;</replaceable></command> As An
           Alternate <filename>rpmrc</filename> File
         </title> 
         <!-- label: checksig- -rcfile -->

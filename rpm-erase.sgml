@@ -19,8 +19,8 @@
           <row>
               <entry spanname="spanall" align="center">
                 <command>rpm -e</command> (or <command>--erase</command>)
-                <emphasis>options</emphasis> <filename>pkg1</filename> &hellip;
-                <filename>pkgN</filename>
+                <replaceable>options</replaceable> <filename>pkg1</filename> &hellip;
+              <filename>pkg<replaceable>N</replaceable></filename>
               </entry>
           </row>
           <row>
@@ -30,7 +30,8 @@
           </row>
           <row>
             <entry>
-              <filename>pkg1</filename> &hellip; <filename>pkgN</filename>
+              <filename>pkg1</filename> &hellip;
+              <filename>pkg<replaceable>N</replaceable></filename>
             </entry>
             <entry spanname="span23" align="center">
               One or more installed packages
@@ -98,11 +99,11 @@
           </row>
           <row>
             <entry>
-              <command>--root <userinput>&lt;path&gt;</userinput></command>
+              <command>--root <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate root to
-              <command><userinput>&lt;path&gt;</userinput></command>
+              <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-erase-root-option">
@@ -110,11 +111,11 @@
           </row>
           <row>
             <entry>
-              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+              <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate rpmrc file to
-              <command><userinput>&lt;rcfile&gt;</userinput></command>
+              <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-erase-rcfile-option">
@@ -122,10 +123,10 @@
           </row>
           <row>
             <entry>
-              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+              <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;path&gt;</userinput></command> to find
+              Use <command><replaceable>&lt;path&gt;</replaceable></command> to find
               the RPM database
             </entry>
             <entry>
@@ -210,17 +211,17 @@
         The most basic erase command is:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -e eject</userinput>
+<prompt># </prompt><command>rpm -e eject</command>
 <prompt>#</prompt>
         </screen>
       </para>
       <para>
         In this case, the <filename>eject</filename> package was erased.  There
         isn't much in the way of feedback, is there?  Could we get more if we
-        add -v?
+        add <command>-v</command>?
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ev eject</userinput>
+<prompt># </prompt><command>rpm -ev eject</command>
 <prompt>#</prompt>
         </screen>
       </para>
@@ -248,7 +249,7 @@
           RPM's inner workings.  Let's try it with <command>rpm -e</command>:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -evv eject</userinput>
+<prompt># </prompt><command>rpm -evv eject</command>
 <computeroutput>
 D: uninstalling record number 286040
 D: running preuninstall script (if any)
@@ -333,7 +334,7 @@ D: removing file index for /usr/man/man1/eject.1
           -e</command> would do:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -e --test bother</userinput>
+<prompt># </prompt><command>rpm -e --test bother</command>
 <computeroutput>
 removing these packages would break dependencies:
         bother &gt;= 3.1 is needed by blather-7.9-1
@@ -353,7 +354,7 @@ removing these packages would break dependencies:
           very much:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -e --test eject</userinput>
+<prompt># </prompt><command>rpm -e --test eject</command>
 <prompt>#</prompt>
           </screen>
         </para>
@@ -364,7 +365,7 @@ removing these packages would break dependencies:
           works wonders.  Let's see what <emphasis>it</emphasis> has to say:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -evv --test eject</userinput>
+<prompt># </prompt><command>rpm -evv --test eject</command>
 <computeroutput>
 D: uninstalling record number 286040
 D: running preuninstall script (if any)
@@ -433,7 +434,7 @@ D: would remove database entry
           like this:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -e bother</userinput>
+<prompt># </prompt><command>rpm -e bother</command>
 <computeroutput>
 removing these packages would break dependencies:
         bother &gt;= 3.1 is needed by blather-7.9-1
@@ -466,7 +467,7 @@ removing these packages would break dependencies:
           happens:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -e --nodeps bother</userinput>
+<prompt># </prompt><command>rpm -e --nodeps bother</command>
 <prompt>#</prompt>
           </screen>
         </para>
@@ -512,8 +513,8 @@ removing these packages would break dependencies:
 
       <sect2 id="s2-rpm-erase-rcfile-option">
         <title>
-          <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command> ---
-          Read <command><userinput>&lt;rcfile&gt;</userinput></command> For RPM
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command> ---
+          Read <command><replaceable>&lt;rcfile&gt;</replaceable></command> For RPM
           Defaults
         </title>
         <!-- label: erase- -rcfile -->
@@ -539,8 +540,8 @@ removing these packages would break dependencies:
 
       <sect2 id="s2-rpm-erase-root-option">
         <title>
-          <command>--root <userinput>&lt;path&gt;</userinput></command> --- Use
-          <command><userinput>&lt;path&gt;</userinput></command> As the Root
+          <command>--root <replaceable>&lt;path&gt;</replaceable></command> --- Use
+          <command><replaceable>&lt;path&gt;</replaceable></command> As the Root
         </title>
         <!-- label: erase- -root -->
         <indexterm>
@@ -548,18 +549,18 @@ removing these packages would break dependencies:
         </indexterm>
 
         <para>
-          Adding <command>--root <userinput>&lt;path&gt;</userinput></command>
+          Adding <command>--root <replaceable>&lt;path&gt;</replaceable></command>
           to an install command forces RPM to assume that the directory
-          specified by <command><userinput>&lt;path&gt;</userinput></command> is
+          specified by <command><replaceable>&lt;path&gt;</replaceable></command> is
           actually the "root" directory.  The <command>--root</command> option
           affects every aspect of the install process, so pre- and post-install
           scripts are run with
-          <command><userinput>&lt;path&gt;</userinput></command> as their root
+          <command><replaceable>&lt;path&gt;</replaceable></command> as their root
           directory (using <function>chroot(2)</function>, if you must know).
           In addition, RPM expects its database to reside in the directory
           specified by the <command>dbpath</command> <filename>rpmrc</filename>
           file entry, relative to
-          <command><userinput>&lt;path&gt;</userinput></command>.
+          <command><replaceable>&lt;path&gt;</replaceable></command>.
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
@@ -576,8 +577,8 @@ removing these packages would break dependencies:
 
       <sect2 id="s2-rpm-erase-dbpath-option">
         <title>
-          <command>--dbpath <userinput>&lt;path&gt;</userinput></command>: Use
-          <command><userinput>&lt;path&gt;</userinput></command> To Find RPM
+          <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>: Use
+          <command><replaceable>&lt;path&gt;</replaceable></command> To Find RPM
           Database
         </title>
         <!-- label: erase- -dbpath -->
@@ -624,7 +625,7 @@ removing these packages would break dependencies:
         we remove <filename>etcskel</filename>:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -e etcskel</userinput>
+<prompt># </prompt><command>rpm -e etcskel</command>
 <prompt>#</prompt>
         </screen>
       </para>
@@ -633,7 +634,7 @@ removing these packages would break dependencies:
         there:
 
         <screen width="60">
-<prompt># </prompt><userinput>ls -al</userinput>
+<prompt># </prompt><command>ls -al</command>
 <computeroutput>
 total 5
 drwxr-xr-x   3 root     root         1024 Jun 17 22:01 .

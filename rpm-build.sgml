@@ -95,14 +95,15 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
       <para>
         Now that we have the directories ready to go, it's time to prepare for
         the build.  For the remainder of this chapter, we'll be building a
-        fictional piece of software known as <filename>cdplayer</filename>.
+        fictional piece of software known as
+        <application>cdplayer</application>.
         <footnote>
           <para>
             In reality, this software is a mercilessly hacked version of
-            <filename>cdp</filename>, which was written by Sariel Har-Peled.
-            The software was hacked to provide a simple example package, and in
-            no way represents the fine work done by Sariel on
-            <filename>cdp</filename>.
+            <application>cdp</application>, which was written by Sariel
+            Har-Peled.  The software was hacked to provide a simple example
+            package, and in no way represents the fine work done by Sariel on
+            <application>cdp</application>.
           </para>
         </footnote>
       </para>
@@ -118,16 +119,16 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
 
       <para>
         The first thing we need to do in order to build a package for
-        <filename>cdplayer</filename>, is to obtain the sources.  Being avid
-        <filename>cdplayer</filename> fans from way back, we know that the
-        latest source can be found at GnomoVision's FTP site, so we go get a
-        copy.
+        <application>cdplayer</application>, is to obtain the sources.  Being
+        avid <application>cdplayer</application> fans from way back, we know
+        that the latest source can be found at GnomoVision's FTP site, so we go
+        get a copy.
       </para>
       <para>
         We now have a gzipped <command>tar</command> file of
-        <filename>cdplayer</filename> version 1.0 on our system.  After putting
-        a copy in the <filename>SOURCES</filename> directory, we're ready to
-        tell RPM what to do with it.
+        <application>cdplayer</application> version 1.0 on our system.  After
+        putting a copy in the <filename>SOURCES</filename> directory, we're
+        ready to tell RPM what to do with it.
       </para>
     </sect1>
 
@@ -143,7 +144,7 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
         The way we direct RPM in the build process is to create a spec file.  As
         we saw in the previous chapter, the spec file contains eight different
         sections, most of which are required.  Let's go through each section and
-        create <filename>cdplayer</filename>'s spec file as we go.
+        create <application>cdplayer</application>'s spec file as we go.
       </para>
 
       <sect2 id="s2-rpm-build-spec-file-preamble">
@@ -157,7 +158,7 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
         <para>
           The preamble contains a wealth of information about the package being
           built, and the people that built it.  Here's
-          <filename>cdplayer</filename>'s preamble:
+          <application>cdplayer</application>'s preamble:
 
           <screen width="60">
 <computeroutput>
@@ -187,7 +188,7 @@ cannot be equaled with more mundane software...
         </para>
         <para>
           In general, the preamble consists of entries, one per line, that start
-          with a <emphasis>tag</emphasis> followed by a colon, and then some
+          with a <firstterm>tag</firstterm> followed by a colon, and then some
           information.  For example, the line starting with
           "<command>Summary:</command>" gives a short description of the
           packaged software that can be displayed by RPM.  The order of the
@@ -232,7 +233,7 @@ cannot be equaled with more mundane software...
             The <command>copyright</command> line is used to hold the packaged
             software's copyright information.  This makes it easy to determine
             which packages can be freely redistributed, and which cannot.  In
-            our case, <filename>cdplayer</filename> is made available under the
+            our case, <application>cdplayer</application> is made available under the
             terms of the GNU General Public License, so we've put
             <userinput>GPL</userinput> on the line.
           </para>
@@ -245,7 +246,7 @@ cannot be equaled with more mundane software...
             defines how the packaged software should be grouped with other
             packages.  The string consists of a series of words separated by
             slashes.  From left to right, the words describe the packaged
-            software more explicitly.  We grouped <filename>cdplayer</filename>
+            software more explicitly.  We grouped <application>cdplayer</application>
             under <filename>Applications</filename>, because it is an
             application, and then under <filename>Sound</filename>, since it is
             an application that is sound-related.
@@ -273,7 +274,7 @@ cannot be equaled with more mundane software...
             </itemizedlist>
           </para>
           <para>
-            In our example, the <filename>cdplayer</filename> sources are
+            In our example, the <application>cdplayer</application> sources are
             contained in the file <filename>cdplayer-1.0.tgz</filename>, which
             is available from <filename>ftp.gnomovision.com</filename>, in the
             directory <filename>/pub/cdplayer</filename>.  RPM actually ignores
@@ -480,7 +481,7 @@ make
         </para>
         <para>
           Thanks to the <command>make</command> utility, only one command is
-          necessary to build the <filename>cdplayer</filename> application.  In
+          necessary to build the <application>cdplayer</application> application.  In
           the case of an application with more esoteric build requirements, the
           <command>%build</command> section could get a bit more interesting.
         </para>
@@ -500,7 +501,7 @@ make
           <command>%build</command>.  If the application is built with
           <command>make</command> and has an "install" target, the
           <command>%install</command> section will also be straightforward.  The
-          <filename>cdplayer</filename> application is a good example of this:
+          <application>cdplayer</application> application is a good example of this:
 
           <screen width="60">
 <computeroutput>
@@ -694,7 +695,7 @@ make install
 
       <para>
         Now it's time to begin the build.  First, we change directory into the
-        directory holding <filename>cdplayer</filename>'s spec file:
+        directory holding <application>cdplayer</application>'s spec file:
 
         <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/SPECS</userinput>
@@ -769,7 +770,7 @@ drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
       </para>
       <para>
         The <command>%setup</command> macro continues by changing directory into
-        <filename>cdplayer</filename>'s top-level source directory and setting
+        <application>cdplayer</application>'s top-level source directory and setting
         the file ownership and permissions properly.  As you can see, it does
         quite a bit of work for you.
       </para>
@@ -804,7 +805,7 @@ groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
       </para>
       <para>
         There are no surprises here.  After setting the umask and changing
-        directory into <filename>cdplayer</filename>'s top-level directory, RPM
+        directory into <application>cdplayer</application>'s top-level directory, RPM
         issues the <command>make</command> command we put into the spec file.
         The rest of the output comes from <command>make</command> as it actually
         builds the software.  Next comes the <command>%install</command>
@@ -830,7 +831,7 @@ cp cdp.1 /usr/local/man/man1
       <para>
         Just like the previous sections, RPM again sets the umask and changes
         directory into the proper directory.  It then executes
-        <filename>cdplayer</filename>'s install target, installing the newly
+        <application>cdplayer</application>'s install target, installing the newly
         built software on the build system.  Those of you that carefully studied
         the spec file might have noticed that the <filename>README</filename>
         file is not part of the install section.  It's not a problem, as we see
@@ -854,9 +855,9 @@ Excuting: special doc
       <para>
         After the customary <command>umask</command> and <command>cd</command>
         commands, RPM constructs the path that will be used for
-        <filename>cdplayer</filename>'s documentation directory.  It then cleans
+        <application>cdplayer</application>'s documentation directory.  It then cleans
         out any preexisting directory and copies the <filename>README</filename>
-        file into it.  The <filename>cdplayer</filename> app is now installed on
+        file into it.  The <application>cdplayer</application> app is now installed on
         the build system.  The only thing left to do is to create the actual
         package files, and perform some housekeeping.  The binary package file
         is created first:
@@ -879,7 +880,7 @@ Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
       </para>
       <para>
         The first line says it all: RPM is creating the binary package for
-        <filename>cdplayer</filename> version 1.0, release 1.  Next, RPM
+        <application>cdplayer</application> version 1.0, release 1.  Next, RPM
         determines what packages are required by
         <filename>cdplayer-1.0-1</filename>.  Part of this process entails
         running <command>ldd</command> on each executable program in the
@@ -926,7 +927,7 @@ Excuting: %clean
       </para>
       <para>
         In our example, there are no other files outside of the build directory
-        that are created during <filename>cdplayer</filename>'s build, so we
+        that are created during <application>cdplayer</application>'s build, so we
         don't need to expend any additional effort to clean things up.
       </para>
       <para>
@@ -970,7 +971,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </screen>
       </para>
       <para>
-        Note that we built <filename>cdplayer</filename> on an Intel-based
+        Note that we built <application>cdplayer</application> on an Intel-based
         system, so RPM placed the binary package files in the
         <filename>i386</filename> subdirectory.
       </para>

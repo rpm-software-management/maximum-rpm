@@ -106,9 +106,9 @@
       <para>
         When a package is built by RPM, if any file in the package's
         <command>%files</command> list is a shared library, the library's
-        "soname" is automatically added to the list of capabilities the package
-        provides.  The soname is the name used to determine compatibility
-        between different versions of a library.
+        <firstterm>soname</firstterm> is automatically added to the list of
+        capabilities the package provides.  The soname is the name used to
+        determine compatibility between different versions of a library.
       </para>
       <para>
         Note that this is <emphasis>not</emphasis> a filename.  In fact, no
@@ -278,7 +278,7 @@ done | sort -u
           Here's what we'll see:
 
           <screen width="60">
-<prompt># </prompt><userinput>find-requires</userinput>
+<prompt># </prompt><command>find-requires</command>
 <userinput>/bin/ls</userinput>
 <userinput>&lt;ctrl-d&gt;</userinput>
 <computeroutput>
@@ -299,7 +299,7 @@ libc.so.5
           <filename>fileutils</filename>' requirements:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -q --requires fileutils</userinput>
+<prompt># </prompt><command>rpm -q --requires fileutils</command>
 <computeroutput>
 libc.so.5
 </computeroutput>
@@ -318,9 +318,9 @@ libc.so.5
           print out the library's soname:
 
           <screen width="60">
-<prompt># </prompt><userinput>find-provides</userinput>
+<prompt># </prompt><command>find-provides</command>
 <userinput>/lib/libc.so.5.3.12</userinput>
-<userinput>&lt;ctrl-d&gt;</userinput>
+<userinput><keycombo><keycap>Ctrl</keycap><keycap>D</keycap></keycombo></userinput>
 <computeroutput>
 libc.so.5
 </computeroutput>
@@ -334,7 +334,7 @@ libc.so.5
           <filename>libc.so.5</filename> soname:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -q --provides libc</userinput>
+<prompt># </prompt><command>rpm -q --provides libc</command>
 <computeroutput>
 libm.so.5
 libc.so.5
