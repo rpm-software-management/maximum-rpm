@@ -24,11 +24,13 @@
               <filename>fileN.rpm</filename>
             </entry>
           </row>
+
           <row>
             <entry spanname="spanall" align="center">
               Parameters
             </entry>
           </row>
+
           <row>
             <entry>
               <filename>file1.rpm</filename> &hellip;
@@ -38,6 +40,7 @@
               One or more RPM package files (URLs OK)
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               Upgrade---specific Options
@@ -46,6 +49,7 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-h</command> (or <command>--hash</command>)
@@ -58,6 +62,7 @@
               <xref linkend="s2-rpm-install-install-h">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--oldpackage</command>
@@ -69,6 +74,7 @@
               <xref linkend="s2-rpm-upgrade-oldpackage-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--test</command>
@@ -80,6 +86,7 @@
               <xref linkend="s2-rpm-install-test-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--excludedocs</command>
@@ -91,6 +98,7 @@
               <xref linkend="s2-rpm-install-excludedocs-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--includedocs</command>
@@ -102,6 +110,7 @@
               <xref linkend="s2-rpm-install-includedocs">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--replacepkgs</command>
@@ -113,6 +122,7 @@
               <xref linkend="s2-rpm-install-replacepkgs">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--replacefiles</command>
@@ -124,6 +134,7 @@
               <xref linkend="s2-rpm-install-replacefiles-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--force</command>
@@ -135,6 +146,7 @@
               <xref linkend="s2-rpm-upgrade-force-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--percent</command>
@@ -146,6 +158,7 @@
               <xref linkend="s2-rpm-install-percent">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--noscripts</command>
@@ -157,19 +170,22 @@
               <xref linkend="s2-rpm-upgrade-noscripts-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--prefix <userinput>&lt;path&gt;</userinput></command>
+              <command>--prefix
+              <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               Relocate package to
-              <command><userinput>&lt;path&gt;</userinput></command> if
+              <command><replaceable>&lt;path&gt;</replaceable></command> if
               possible<footnoteref linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-prefix">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--ignorearch</command>
@@ -181,6 +197,7 @@
               <xref linkend="s2-rpm-install-ignorearch">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--ignoreos</command>
@@ -192,6 +209,7 @@
               <xref linkend="s2-rpm-install-ignoreos">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--nodeps</command>
@@ -203,30 +221,35 @@
               <xref linkend="s2-rpm-install-nodeps">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--ftpproxy <userinput>&lt;host&gt;</userinput></command>
+              <command>--ftpproxy
+              <replaceable>&lt;host&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;host&gt;</userinput></command> as the
-              FTP proxy<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Use <command><replaceable>&lt;host&gt;</replaceable></command> as
+              the FTP proxy<footnoteref linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-ftpproxy">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--ftpport <userinput>&lt;port&gt;</userinput></command>
+              <command>--ftpport
+              <replaceable>&lt;port&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;port&gt;</userinput></command> as the
-              FTP port<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Use <command><replaceable>&lt;port&gt;</replaceable></command> as
+              the FTP port<footnoteref linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-ftpport">
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               General Options
@@ -235,17 +258,20 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-v</command>
             </entry>
             <entry>
-              Display additional information<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Display additional information<footnoteref
+              linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-more-feedback">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-vv</command>
@@ -257,37 +283,44 @@
               <xref linkend="s2-rpm-install-vv-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--root <userinput>&lt;path&gt;</userinput></command>
+              <command>--root <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate root to
-              <command><userinput>&lt;path&gt;</userinput></command><footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              <command><replaceable>&lt;path&gt;</replaceable></command><footnoteref
+              linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-root">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+              <command>--rcfile
+              <replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate rpmrc file to
-              <command><userinput>&lt;rcfile&gt;</userinput></command><footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              <command><replaceable>&lt;rcfile&gt;</replaceable></command><footnoteref
+              linkend="fn-rpm-upgrade-tablefoot">
             </entry>
             <entry>
               <xref linkend="s2-rpm-install-rcfile">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+              <command>--dbpath
+              <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;path&gt;</userinput></command> to find
-              the RPM database<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Use <command><replaceable>&lt;path&gt;</replaceable></command> to
+              find the RPM database
               <footnote id="fn-rpm-upgrade-tablefoot">
                 <para>
                   This option behaves identically to the same option used with
@@ -307,6 +340,7 @@
 
     <sect1 id="s1-rpm-upgrade-what-it-does">
       <title><command>rpm -U</command> --- What Does it Do?</title>
+
       <indexterm>
         <primary><command>rpm -U</command></primary>
         <secondary>what it does</secondary>
@@ -345,6 +379,7 @@
         chapters as we discuss <command>rpm -U</command>, so if you haven't
         skimmed those chapters yet, you might want to do that now.
       </para>
+
       <para>
         While some people might think it's a "cheap shot" to claim that RPM
         performs an upgrade when in fact it's just doing the equivalent of a
@@ -354,6 +389,7 @@
         misuse by preserving important files even if an upgrade isn't being
         done.
       </para>
+
       <para>
         If RPM had been written with a very "smart" upgrade command, and the
         install and erase commands couldn't handle upgrade situations at all,
@@ -370,10 +406,12 @@
       <sect2 id="s2-rpm-upgrade-config-file-magic">
         <title>Config file magic</title>
         <!-- label: upgrade-magic -->
+
         <indexterm>
           <primary><command>rpm -U</command></primary>
           <secondary>config file handling</secondary>
         </indexterm>
+
         <indexterm>
           <primary>config files</primary>
         </indexterm>
@@ -386,6 +424,7 @@
           <emphasis>six</emphasis> different scenarios that RPM takes into
           account when handling config files.
         </para>
+
         <para>
           In order to make the appropriate decisions, RPM needs information.
           The information used to decide how to handle config files is a set of
@@ -404,6 +443,7 @@
           Therefore, MD5 checksums are a powerful tool for quickly determining
           whether two different files have the same contents or not.
         </para>
+
         <para>
           In the previous paragraph, we stated that RPM uses three different MD5
           checksums to determine what should be done with a config file.  The
@@ -432,15 +472,23 @@
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           Let's take a look at the various combinations of checksums, see what
           RPM will do because of them, and discuss why.  In the following
-          examples, we'll use the letters X, Y, and Z in place of lengthy MD5
+          examples, we'll use the letters <replaceable>X</replaceable>,
+          <replaceable>Y</replaceable>, and <replaceable>Z</replaceable> in
+          place of lengthy MD5
           checksums.
         </para>
 
         <sect3 id="s3-rpm-upgrade-xxx">
-          <title>Original file = X, Current file = X, New file = X</title>
+          <title>
+            Original file = <replaceable>X</replaceable>, Current file =
+            <replaceable>X</replaceable>, New file =
+            <replaceable>X</replaceable>
+          </title>
+
           <para>
             In this case, the file originally installed was never modified.
             <footnote>
@@ -452,6 +500,7 @@
             The file in the new version of the package is identical to the file
             on disk.
           </para>
+
           <para>
             In this case, RPM installs the new file, overwriting the original.
             You may be wondering why go to the trouble of installing the new
@@ -463,13 +512,19 @@
         </sect3>
 
         <sect3 id="s3-rpm-upgrade-xxy">
-          <title>Original file = X, Current file = X, New file = Y</title>
+          <title>
+            Original file = <replaceable>X</replaceable>, Current file =
+            <replaceable>X</replaceable>, New file =
+            <replaceable>Y</replaceable>
+          </title>
+
           <para>
             The original file has not been modified, but the file in the new
             package <emphasis>is</emphasis> different.  Perhaps the difference
             represents a bug-fix, or a new feature.  It makes no difference to
             RPM.
           </para>
+
           <para>
             In this case, RPM installs the new file, overwriting the original.
             This makes sense.  If it didn't, RPM would never permit newer,
@@ -480,12 +535,18 @@
         </sect3>
 
         <sect3 id="s3-rpm-upgrade-xyx">
-          <title>Original file = X, Current file = Y, New file = X</title>
+          <title>
+            Original file = <replaceable>X</replaceable>, Current file =
+            <replaceable>Y</replaceable>, New file =
+            <replaceable>X</replaceable>
+          </title>
+
           <para>
             Here we have a file that <emphasis>was</emphasis> changed at some
             point.  However, the new file is identical to the existing file
             <emphasis>prior</emphasis> to the local modifications.
           </para>
+
           <para>
             In this case, RPM takes the viewpoint that since the original file
             and the new file are identical, the modifications made to the
@@ -495,13 +556,19 @@
         </sect3>
 
         <sect3 id="s3-rpm-upgrade-xyy">
-          <title>Original file = X, Current file = Y, New file = Y</title>
+          <title>
+            Original file = <replaceable>X</replaceable>, Current file =
+            <replaceable>Y</replaceable>, New file =
+            <replaceable>Y</replaceable>
+          </title>
+
           <para>
             At some point the original file was modified, and those
             modifications happen to make the file identical to the new file.
             Perhaps the modification was made to fix a security problem, and the
             new version of the file has the same fix applied to it.
           </para>
+
           <para>
             In this case, RPM installs the new version, overwriting the modified
             original.  The same philosophy used in the first scenario applies
@@ -511,12 +578,18 @@
         </sect3>
 
         <sect3 id="s3-rpm-upgrade-xyz">
-          <title>Original file = X, Current file = Y, New file = Z</title>
+          <title>
+            Original file = <replaceable>X</replaceable>, Current file =
+            <replaceable>Y</replaceable>, New file =
+            <replaceable>Z</replaceable>
+          </title>
+
           <para>
             Here the original file was modified at some point.  The new file is
             different from both the original <emphasis>and</emphasis> the
             modified versions of the original file.
           </para>
+
           <para>
             RPM is not able to analyze the contents of the files, and determine
             what is going on.  In this instance, it takes the best possible
@@ -526,13 +599,14 @@
             file is an unknown: it might work with the new package, it might
             not.  So RPM installs the new file.
           </para>
+
           <para>
             BUT&hellip; The existing file was definitely modified.  Someone made
             an effort to change the file, for some reason.  Perhaps the
             information contained in the file is still of use.  Therefore, RPM
             saves the modified file, naming it
-            <command><userinput>&lt;file&gt;</userinput>.rpmsave</command>, and
-            prints a warning, so the user knows what happened:
+            <filename><replaceable>&lt;file&gt;</replaceable>.rpmsave</filename>,
+            and prints a warning, so the user knows what happened:
 
             <screen width="60">
 <computeroutput>
@@ -546,15 +620,18 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 
         <sect3 id="s3-rpm-upgrade-none-huh-huh">
           <title>
-            Original file = <emphasis>none</emphasis>, Current file = ??, New
-            file = ??
+            Original file = <emphasis>none</emphasis>, Current file =
+            <replaceable>??</replaceable>, New file =
+            <replaceable>??</replaceable>
           </title>
+
           <para>
             While RPM doesn't use checksums in this particular case, we'll
             describe it in those terms, for the sake of consistency.  In this
             instance, RPM had not installed the file originally, so there is no
             original checksum.
           </para>
+
           <para>
             Because the file had not originally been installed as part of a
             package, there is no way for RPM to determine if the file currently
@@ -562,14 +639,16 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
             current file and the new file are irrelevant; they cannot be used to
             clear up the mystery.
           </para>
+
           <para>
             When this happens, RPM renames the file to
-            <command><userinput>&lt;file&gt;</userinput>.rpmorig</command>,
+            <filename><replaceable>&lt;file&gt;</replaceable>.rpmorig</filename>,
             prints a warning, and installs the new file.  This way, any
             modifications contained in the original file are saved.  The system
             administrator can review the differences between the original and
             the newly installed files and determine what action should be taken.
           </para>
+
           <para>
             As you can see, in the majority of cases RPM will automatically take
             the proper course of action when performing an upgrade.  It is only
@@ -584,6 +663,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 
     <sect1 id="s1-rpm-upgrade-upgrading-a-package">
       <title>Upgrading a Package</title>
+
       <indexterm>
         <primary><command>rpm -U</command></primary>
         <secondary>basic command</secondary>
@@ -591,14 +671,15 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 
       <para>
         The most basic version of the <command>rpm -U</command> command is
-        simply "<command>rpm -U</command>", followed by the name of a .rpm
-        package file:
+        simply "<command>rpm -U</command>", followed by the name of a
+        <filename>.rpm</filename> package file:
 
         <screen width="60">
 <prompt># </prompt><userinput>rpm -U eject-1.2-2.i386.rpm</userinput>
 <prompt>#</prompt>
         </screen>
       </para>
+
       <para>
         Here, RPM performed all the steps necessary to upgrade the
         <filename>eject-1.2-2</filename> package, faster than could have been
@@ -614,6 +695,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 
       <sect2 id="s2-rpm-upgrade-secret">
         <title><command>rpm -U</command>'s Dirty Little Secret</title>
+
         <indexterm>
           <primary><command>rpm -U</command></primary>
           <secondary>as replacement for <command>rpm -i</command></secondary>
@@ -625,6 +707,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
           Yes, it's true --- <command>rpm -U</command> works just fine as a
           replacement for the normal install command <command>rpm -i</command>.
         </para>
+
         <para>
           This is another, more concrete example of the strength of RPM's method
           of performing upgrades.  Since RPM's install command is smart enough
@@ -639,6 +722,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 
     <sect1 id="s1-rpm-upgrade-nearly-identical">
       <title>They're Nearly Identical&hellip;</title>
+
       <indexterm>
         <primary><command>rpm -U</command></primary>
         <secondary>options</secondary>
@@ -662,6 +746,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
           <command>--oldpackage</command>: Upgrade To An Older Version
         </title>
         <!-- label: upgrade- -oldpackage -->
+
         <indexterm>
           <primary><command>--oldpackage</command> option</primary>
         </indexterm>
@@ -705,6 +790,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           Looks like a bug in the new version.  <emphasis>Now</emphasis> what do
           you do?  Hmmm.  Maybe you can just "upgrade" to the older version.
@@ -721,6 +807,7 @@ error: cdp-0.33-2.i386.rpm cannot be installed
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           That didn't work very well.  At least it told us just what the problem
           was --- we were trying to upgrade to an older version of a package
@@ -736,6 +823,7 @@ Installing cdp-0.33-2.i386.rpm
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           By using the <command>--oldpackage</command> option, release 3 of
           <filename>cdp-0.33</filename> is history, and has been replaced by
@@ -746,15 +834,19 @@ Installing cdp-0.33-2.i386.rpm
       <sect2 id="s2-rpm-upgrade-force-option">
         <title><command>--force</command>: The Big Hammer</title>
         <!-- label: upgrade- -force -->
+
         <indexterm>
           <primary><command>--force</command> option</primary>
         </indexterm>
+
         <indexterm>
           <primary><command>--replacepkgs</command> option</primary>
         </indexterm>
+
         <indexterm>
           <primary><command>--replacefiles</command> option</primary>
         </indexterm>
+
         <indexterm>
           <primary><command>--replacepkgs</command> option</primary>
         </indexterm>
@@ -775,6 +867,7 @@ Installing cdp-0.33-2.i386.rpm
           <command>--force</command>'ed upgrade from proceeding is a dependency
           conflict.
         </para>
+
         <para>
           And like a big hammer, it pays to fully understand why you need to use
           <command>--force</command> before actually using it.
@@ -787,6 +880,7 @@ Installing cdp-0.33-2.i386.rpm
           Scripts
         </title>
         <!-- label: rpm-U- -noscripts --><!-- label: upgrade- -noscripts -->
+
         <indexterm>
           <primary><command>--noscripts</command> option</primary>
         </indexterm>
@@ -808,6 +902,7 @@ This is the bother 2.7 postinstall script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           In this case, a package has been installed.  As expected, its scripts
           are executed.  Next, let's upgrade this package:
@@ -823,6 +918,7 @@ This is the bother 2.7 postuninstall script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           This is a textbook example of the sequence of events during an
           upgrade.  The new version of the package is installed (as shown by the
@@ -830,6 +926,7 @@ This is the bother 2.7 postuninstall script
           version of the package is removed (showing the pre- and
           post-<emphasis>un</emphasis>install scripts being executed).
         </para>
+
         <para>
           There are really no surprises there --- it worked just the way it was
           meant to.  This time, let's use the <command>--noscripts</command>
@@ -844,6 +941,7 @@ This is the bother 2.7 postinstall script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Again, the first package is installed, and its scripts are executed.
           Now let's try the upgrade using the <command>--noscripts</command>
@@ -858,6 +956,7 @@ This is the bother 2.7 postuninstall script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The difference here is that the <command>--noscripts</command> option
           prevented the new package's scripts from executing.  The scripts from

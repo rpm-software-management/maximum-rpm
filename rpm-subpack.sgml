@@ -13,6 +13,7 @@
 
     <sect1 id="s1-rpm-subpack-what-are-they">
       <title>What Are Subpackages?</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>definition of</secondary>
@@ -28,6 +29,7 @@
 
     <sect1 id="s1-rpm-subpack-why">
       <title>Why Are They Needed?</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>why needed</secondary>
@@ -39,17 +41,20 @@
         RPM handles the building and packaging of a program into a single
         package file just fine.
       </para>
+
       <para>
         But software doesn't always conform to this simplistic structure.  It's
         not unusual for software to support two or more different modes of
         operation.  A client/server program, for example, comes in two flavors:
         a client, and a server.
       </para>
+
       <para>
         And it can get more complicated than that.  Sometimes software relies on
         another program so completely that the two cannot be built separately.
         The result is often several packages.
       </para>
+
       <para>
         While it is certainly possible that some convoluted procedure could be
         devised to force these kinds of software into a single-package
@@ -57,6 +62,7 @@
         subpackages.  Why?  From the package builder's viewpoint, the main
         reason to use subpackages is to eliminate any duplication of effort.
       </para>
+
       <para>
         By using subpackages, there's no need to maintain separate spec files
         and endure the resulting headaches when new versions of the software
@@ -64,6 +70,7 @@
         versions can be quickly integrated, and every related subpackage rebuilt
         with a single command.
       </para>
+
       <para>
         But that's enough of the preliminaries.  Let's see how subpackages are
         created.
@@ -72,6 +79,7 @@
 
     <sect1 id="s1-rpm-subpack-example-intro">
       <title>Our Example Spec File: Subpackages Galore!</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>example requirements</secondary>
@@ -135,7 +143,7 @@
               <command>description</command> tags.
             </para>
           </listitem>
-          </itemizedlist>
+        </itemizedlist>
       </para>
 
       <para>
@@ -157,6 +165,7 @@ build it...
 </computeroutput>
         </screen>
       </para>
+
       <para>
         As we can see, there's nothing different here: this is an ordinary spec
         file so far.  Let's delve into things a bit more and see what we'll need
@@ -166,6 +175,7 @@ build it...
 
     <sect1 id="s1-rpm-subpack-spec-file-changes">
       <title>Spec File Changes For Subpackages</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>spec file changes</secondary>
@@ -177,6 +187,7 @@ build it...
         set of tags, conditionals, and directives in order to create
         subpackages.  In fact, you'll only need to learn one.
       </para>
+
       <para>
         The primary change to a spec file is structural and starts with the
         definition of a preamble for each subpackage.
@@ -193,6 +204,7 @@ build it...
           situation, the preamble must be at the start of the spec file.  The
           spec file we're creating will have one there, too.
         </para>
+
         <para>
           When creating a spec file that will build subpackages, each subpackage
           also needs a preamble of its own.  These "sub-preambles" need only
@@ -206,6 +218,7 @@ build it...
           </indexterm>
           That subpackage would then be relocatable.
         </para>
+
         <para>
           In a single-package spec file, there is nothing that explicitly
           identifies the preamble, other than its position at the top of the
@@ -216,6 +229,7 @@ build it...
 
         <sect3 id="s3-rpm-subpack-package-directive">
           <title>The <command>%package</command> Directive</title>
+
           <indexterm>
             <primary>subpackages</primary>
             <secondary><command>%package</command> directive</secondary>
@@ -238,6 +252,7 @@ name: foo
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Later in the spec file, there is a <command>%package</command>
             directive:
@@ -248,10 +263,12 @@ name: foo
 </computeroutput>
             </screen>
           </para>
+
           <para>
             This would result in the name of the subpackage being
             <filename>foo-bar</filename>.
           </para>
+
           <para>
             In this way, it's easy to see the relationship of the subpackage to
             the main package (or other subpackages, for that matter).  Of
@@ -266,6 +283,7 @@ name: foo
             Adding <command>-n</command> To the <command>%package</command>
             directive
           </title>
+
           <indexterm>
             <primary>subpackages</primary>
             <secondary><command>%package</command> directive</secondary>
@@ -279,9 +297,12 @@ name: foo
 
           <para>
             The <command>-n</command> option is used to change the final name of
-            a subpackage from <filename>mainpackage-subpackage</filename> to
-            <filename>subpackage</filename>.  Let's modify the
-            <command>%package</command> directive in our example above to be:
+            a subpackage from
+            <filename><replaceable>&lt;mainpackage&gt;</replaceable>-<replaceable>&lt;subpackage&gt;</replaceable></filename>
+            to
+            <filename><replaceable>&lt;subpackage&gt;</replaceable></filename>.
+            Let's modify the <command>%package</command> directive in our
+            example above to be:
 
             <screen width="60">
 <computeroutput>
@@ -289,6 +310,7 @@ name: foo
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The result is that the subpackage name would then be
             <filename>bar</filename> instead of <filename>foo-bar</filename>.
@@ -340,6 +362,7 @@ name: foo
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Since the <filename>baz</filename> library's package name is
             <emphasis>not</emphasis> to start with <filename>foo</filename>, we
@@ -352,11 +375,13 @@ name: foo
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Our requirements further state that <filename>foo-server</filename>
             and <filename>foo-client</filename> are to have the same version as
             the main package.
           </para>
+
           <para>
             One of the time-saving aspects of using subpackages is that there is
             no need to duplicate information for each subpackage if it is
@@ -366,15 +391,18 @@ name: foo
             <command>version</command> tag in their preambles will simply
             inherit the main package's version definition.
           </para>
+
           <para>
             Since the <filename>bazlib</filename> subpackage's preamble contains
             a <command>version</command> tag, it must have its own unique
             version.
           </para>
+
           <para>
             In addition, each subpackage must have its own
             <command>summary</command> tag.
           </para>
+
           <para>
             So based on these requirements, our spec file now looks like this:
 
@@ -403,6 +431,7 @@ Summary: The baz library
 </computeroutput>
             </screen>
           </para>
+
           <para>
             We can see the subpackage structure starting to appear now.
           </para>
@@ -410,6 +439,7 @@ Summary: The baz library
 
         <sect3 id="s3-rpm-subpack-required-tags">
           <title>Required Tags In Subpackages</title>
+
           <indexterm>
             <primary>subpackages</primary>
             <secondary>tags required by</secondary>
@@ -441,6 +471,7 @@ Tell rpm-list@redhat.com if this is incorrect.
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             Our spec file is incomplete.  The bottom line is that each
             subpackage <emphasis>must</emphasis> have these three tags:
@@ -472,6 +503,7 @@ Tell rpm-list@redhat.com if this is incorrect.
             we already included a <command>summary</command> for each subpackage
             in our example spec file.
           </para>
+
           <para>
             Let's take a look at the <command>%description</command> tag first.
           </para>
@@ -497,6 +529,7 @@ Tell rpm-list@redhat.com if this is incorrect.
 </computeroutput>
             </screen>
           </para>
+
           <para>
             our <command>%description</command> tags would start with:
 
@@ -508,6 +541,7 @@ Tell rpm-list@redhat.com if this is incorrect.
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Notice that we've included the <command>-n</command> option in the
             <command>%description</command> tag for <filename>bazlib</filename>.
@@ -557,23 +591,27 @@ This is the long description for the bazlib...
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Let's take a look at what we've done.  We've created a main preamble
             as we normally would.  We then created three additional preambles,
             each starting with a <command>%package</command> directive.
             Finally, we added a few tags to the subpackage preambles.
           </para>
+
           <para>
             But what about <command>version</command> tags?  Aren't the
             <filename>server</filename> and <filename>client</filename>
             subpackages missing them?
           </para>
+
           <para>
             Not really.  Remember that if a subpackage is missing a given tag,
             it will inherit the value of that tag from the main preamble.  We're
             well on our way to having a complete spec file, but we aren't quite
             there yet.
           </para>
+
           <para>
             Let's continue by looking at the next part of the spec file that
             changes when building subpackages.
@@ -583,6 +621,7 @@ This is the long description for the bazlib...
 
       <sect2 id="s2-rpm-subpack-files-list">
         <title>The <command>%files</command> List</title>
+
         <indexterm>
           <primary>subpackages</primary>
           <secondary><command>%files</command> list changes</secondary>
@@ -595,6 +634,7 @@ This is the long description for the bazlib...
           <emphasis>is</emphasis> different, is that there must be a
           <command>%files</command> list for each subpackage.
         </para>
+
         <para>
           Since each <command>%files</command> list must be associated with a
           particular <command>%package</command> directive, we simply label each
@@ -610,6 +650,7 @@ This is the long description for the bazlib...
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Therefore, our <command>%files</command> lists should start with:
 
@@ -621,6 +662,7 @@ This is the long description for the bazlib...
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In addition, we need the main package's <command>%files</command>
           list, which remains unnamed:
@@ -631,6 +673,7 @@ This is the long description for the bazlib...
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The contents of each <command>%files</command> list is dictated
           entirely by the software's requirements.  If, for example, a certain
@@ -650,12 +693,14 @@ This is the long description for the bazlib...
             reason why you'd want to go to the trouble of setting up
             subpackages, only to keep one from being created?
           </para>
+
           <para>
             Actually, there is.  Take, for example, the case where
             client/server-based software is to be packaged.  Certainly, it makes
             sense to create two subpackages: one for the client and one for the
             server.  But what about the main package?  Is there any need for it?
           </para>
+
           <para>
             Quite often there's no need for a main package.  In those cases,
             removing the main <command>%files</command> list entirely will
@@ -676,6 +721,7 @@ This is the long description for the bazlib...
             <command>%files</command> list with no files, it will happily create
             an empty package file.
           </para>
+
           <para>
             This feature (which also works with subpackage
             <command>%files</command> lists) comes in handy when used in concert
@@ -734,6 +780,7 @@ Group: bogus/junque
 </computeroutput>
             </screen>
           </para>
+
           <para>
             As you can see we've added <command>%files</command> lists for:
 
@@ -777,6 +824,7 @@ Group: bogus/junque
             package's preamble <emphasis>will</emphasis> appear somewhere ---
             specifically, in the source package file.
           </para>
+
           <para>
             Let's look at the last subpackage-specific part of the spec file:
             the install- and erase-time scripts.
@@ -786,6 +834,7 @@ Group: bogus/junque
 
       <sect2 id="s2-rpm-subpack-install-erase-scripts">
         <title>Install- and Erase-time Scripts</title>
+
         <indexterm>
           <primary>subpackages</primary>
           <secondary>script changes</secondary>
@@ -904,10 +953,12 @@ echo "This is the bazlib subpackage preinstall script"
 </computeroutput>
             </screen>
           </para>
+
           <para>
             As pre-install scripts go, these don't do very much.  But they will
             allow us to see how subpackage-specific scripts can be defined.
           </para>
+
           <para>
             Those of you that have built packages before probably realize that
             our spec file is missing something.  Let's add that part now.
@@ -918,6 +969,7 @@ echo "This is the bazlib subpackage preinstall script"
 
     <sect1 id="s1-rpm-subpack-build-time-scripts">
       <title>Build-Time Scripts: Unchanged For Subpackages</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>build-time scripts, unchanged</secondary>
@@ -930,6 +982,7 @@ echo "This is the bazlib subpackage preinstall script"
         <command>%build</command>, and <command>%install</command> scripts in
         any spec file.
       </para>
+
       <para>
         Of course, even if RPM doesn't require any changes to these scripts, you
         still might need to make some subpackage-related changes to them.
@@ -1015,6 +1068,7 @@ echo "This is the bazlib subpackage preinstall script"
 </computeroutput>
           </screen>
         </para>
+
         <para>
           As you can see, the build-time scripts are about as simple as they can
           be.
@@ -1030,6 +1084,7 @@ echo "This is the bazlib subpackage preinstall script"
 
     <sect1 id="s1-rpm-subpack-building-subpackages">
       <title>Building Subpackages</title>
+
       <indexterm>
         <primary>subpackages</primary>
         <secondary>building</secondary>
@@ -1096,6 +1151,7 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
 <prompt>#</prompt>
         </screen>
       </para>
+
       <para>
         Starting at the top, we start the build with the usual command.
         Immediately following the command, RPM indicates that four packages are
@@ -1103,6 +1159,7 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
         <command>%build</command>, and <command>%install</command> scripts then
         execute as usual.
       </para>
+
       <para>
         Next, RPM executes its "special doc" internal script, even though we
         haven't declared any files to be documentation.  It's worth noting,
@@ -1111,14 +1168,17 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
         documentation, RPM would have created the appropriate documentation
         directories for each of the packages.
       </para>
+
       <para>
         At this point, RPM creates the binary packages.  As we can see, each
         package contains the file defined in its <command>%files</command> list.
       </para>
+
       <para>
         Finally, the source package file is created.  It contains the spec file
         and the original sources, just like any other source package.
       </para>
+
       <para>
         One spec file.  One set of sources.  One build command.  Four packages.
         <footnote>
@@ -1131,6 +1191,7 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
 
       <sect2 id="s2-rpm-subpack-subpackage-testing">
         <title>Giving Subpackages the Once-Over</title>
+
         <indexterm>
           <primary>subpackages</primary>
           <secondary>testing</secondary>
@@ -1143,6 +1204,7 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
           we'll just snoop around the subpackages and point out how they differ
           from packages built one to a spec file.
         </para>
+
         <para>
           First, let's just look at each package's information:
 
@@ -1202,10 +1264,12 @@ This is the long description for the bazlib...
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Here we've used RPM's query capability to display a list of summary
           information for each package.  A few points are worth noting.
         </para>
+
         <para>
           First, each package lists <filename>foo-2.7-1.src.rpm</filename> as
           its source package file.  This is the only way to tell if two package
@@ -1213,12 +1277,14 @@ This is the long description for the bazlib...
           package's name as an indicator is futile, as the
           <filename>bazlib</filename> package shows us.
         </para>
+
         <para>
           The next thing to notice is that the summaries and descriptions for
           each package are specific to that package.  Since these tags were
           placed and named according to each package, that should be no
           surprise.
         </para>
+
         <para>
           Finally, we can see that each package's version has been either
           "inherited" from the main package's preamble, or, as in the case of
@@ -1226,6 +1292,7 @@ This is the long description for the bazlib...
           has been overridden by a <command>version</command> tag added to
           <filename>bazlib</filename>'s preamble.
         </para>
+
         <para>
           If we look at the source package's information, we see that its
           information has been taken entirely from the main package's set of
@@ -1248,6 +1315,7 @@ build it...
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           It's easy to see that if there was no <command>%files</command> list
           for the main package, and therefore, no main package, the tags in the
@@ -1270,6 +1338,7 @@ build it...
           <title>
             Verifying Subpackage-specific Install and Erase Scripts
           </title>
+
           <indexterm>
             <primary>subpackages</primary>
             <secondary>scripts, testing</secondary>
@@ -1307,6 +1376,7 @@ bazlib                 This is the bazlib subpackage preinstall script
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             As expected, the unique <command>%pre</command> script for each
             package has been included.  Of course, if we hadn't wanted to
@@ -1331,6 +1401,7 @@ verify script:
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             This approach might be a bit safer, particularly if installing the
             newly built package would disrupt operations on your build system.

@@ -8,6 +8,7 @@
 
   <sect1 id="s1-rpm-specref-comments">
     <title>Comments</title>
+
     <indexterm>
       <primary>spec file</primary>
       <secondary>comments in</secondary>
