@@ -1938,7 +1938,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
             /</command>!  A recursive delete, starting at your system's root
             directory, might not be a total disaster if you catch it quickly,
             but in either case, you'll be testing your ability to restore from
-            backup\dots\ Er, you <emphasis>do</emphasis> have backups, don't
+            backup&hellip; Er, you <emphasis>do</emphasis> have backups, don't
             you?
           </para>
           <para>

@@ -332,7 +332,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         do this and install the file in one command.
       </para>
       <para>
-        Looking at the section labeled <computeroutput>Executing:\ special
+        Looking at the section labeled <computeroutput>Executing: special
         doc</computeroutput>, we find that RPM is doing something similar for
         us.  It starts by making sure there is no pre-existing documentation
         directory.  Next, RPM creates the documentation directory and copies
@@ -540,13 +540,13 @@ rm -rf $RPM_BUILD_ROOT
             <screen width="60">
 <prompt>% </prompt><userinput>pwd</userinput>
 /home/ed
-% <userinput>mkdir mybuild</userinput>\
-<prompt>?  </prompt><userinput>mybuild/BUILD</userinput>\
-<prompt>?  </prompt><userinput>mybuild/RPMS</userinput>\
-<prompt>?  </prompt><userinput>mybuild/RPMS/i386</userinput>\
-<prompt>?  </prompt><userinput>mybuild/SOURCES</userinput>\
-<prompt>?  </prompt><userinput>mybuild/SPECS</userinput>\
-<prompt>?  </prompt><userinput>mybuild/SRPMS</userinput>
+% <userinput>mkdir mybuild\</userinput>
+<prompt>?  </prompt><userinput>mybuild/BUILD\</userinput>
+<prompt>?  </prompt><userinput>mybuild/RPMS\</userinput>
+<prompt>?  </prompt><userinput>mybuild/RPMS/i386\</userinput>
+<prompt>?  </prompt><userinput>mybuild/SOURCES\</userinput>
+<prompt>?  </prompt><userinput>mybuild/SPECS\</userinput>
+<prompt>?  </prompt><userinput>mybuild/SRPMS\</userinput>
 <prompt>%</prompt>
             </screen>
           </figure>

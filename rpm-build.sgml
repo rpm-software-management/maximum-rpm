@@ -466,7 +466,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
       </sect2>
 
       <sect2 id="s2-rpm-build-build-section">
-        <title>The <command>\%build</command> Section</title>
+        <title>The <command>%build</command> Section</title>
         <indexterm>
           <primary>package building</primary>
           <secondary>simple example</secondary>
@@ -502,7 +502,7 @@ make
       </sect2>
 
       <sect2 id="s2-rpm-build-install-section">
-        <title>The <command>\%install</command> Section</title>
+        <title>The <command>%install</command> Section</title>
         <indexterm>
           <primary>package building</primary>
           <secondary>simple example</secondary>
@@ -535,7 +535,7 @@ make install
       </sect2>
 
       <sect2 id="s2-rpm-build-files-section">
-        <title>The <command>\%files</command> Section</title>
+        <title>The <command>%files</command> Section</title>
         <indexterm>
           <primary>package building</primary>
           <secondary>simple example</secondary>

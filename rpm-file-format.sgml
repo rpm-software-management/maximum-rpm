@@ -904,7 +904,7 @@ rpm-2.2.1-1
             <screen width="60">
 <prompt># </prompt><userinput>ls -al rpm-2.2.1-1.i386.rpm</userinput>
 <computeroutput>
--rw-rw-r--   1 ed       ed         \ovalbox{282015} Jul 21 16:05 rpm-2.2.1-1.i386.rpm
+                -rw-rw-r--   1 ed       ed         <replaceable>282015</replaceable> Jul 21 16:05 rpm-2.2.1-1.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
             </screen>
