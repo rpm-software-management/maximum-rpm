@@ -3334,274 +3334,299 @@ gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
         </sect3>
       </sect2>
 
-<sect2 id="s2-rpm-inside-">
-<title>The <command>%patch</command> Macro</title>
-<!-- label: inside-patch-macro -->
-<indexterm>
-<primary><command>%patch</command> macro</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-patch-macro">
+        <title>The <command>%patch</command> Macro</title>
+        <!-- label: inside-patch-macro -->
+        <indexterm>
+          <primary><command>%patch</command> macro</primary>
+        </indexterm>
 
-The <command>%patch</command> macro, as its name implies, is used to apply patches
-to the unpacked sources.  In the following examples, our spec file has the
-following <command>patch</command> tag lines:
+        <para>
+          The <command>%patch</command> macro, as its name implies, is used to
+          apply patches to the unpacked sources.  In the following examples, our
+          spec file has the following <command>patch</command> tag lines:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-patch-setup">
+            <title>A List of <command>patch</command> Tags</title>
+            <screen width="60">
 <computeroutput>
 patch0: patch-zero
 patch1: patch-one
 patch2: patch-two
 </computeroutput>
-</screen>
-</figure>
-At its simplest, the <command>%patch</command> macro can be invoked without any
-options:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          At its simplest, the <command>%patch</command> macro can be invoked
+          without any options:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-patch-example-1">
+            <title>The Simplest <command>%patch</command> Macro</title>
+            <screen width="60">
 <computeroutput>
 %patch
 </computeroutput>
-</screen>
-</figure>
-Here are the resulting commands:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Here are the resulting commands:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-patch-expansion">
+            <title><command>%patch</command> Macro Expansion</title>
+            <screen width="60">
 <computeroutput>
 echo "Patch #0:"
 patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 </computeroutput>
-</screen>
-</figure>
-The <command>%patch</command> macro nicely displays a message showing that a patch
-is being applied, then invokes the <command>patch</command> command to actually do
-the dirty work.  There are two options to the <command>patch</command> command:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>%patch</command> macro nicely displays a message showing
+          that a patch is being applied, then invokes the
+          <command>patch</command> command to actually do the dirty work.  There
+          are two options to the <command>patch</command> command:
 
-<orderedlist>
-<listitem>
-<para>
-The <command>-p</command> option, which directs <command>patch</command> to remove the
-specified number of slashes (and any intervening directories) from the
-front of any filenames specified in the patch file.  In this case, nothing
-will be removed.
+          <orderedlist>
+            <listitem>
+              <para>
+                The <command>-p</command> option, which directs
+                <command>patch</command> to remove the specified number of
+                slashes (and any intervening directories) from the front of any
+                filenames specified in the patch file.  In this case, nothing
+                will be removed.
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                The <command>-s</command> option, which directs
+                <command>patch</command> to apply the patch without displaying
+                any informational messages.  Only errors from
+                <command>patch</command> will be displayed.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
 
-<listitem>
-<para>
-The <command>-s</command> option, which directs <command>patch</command> to apply the
-patch without displaying any informational messages.  Only errors from
-<command>patch</command> will be displayed.
+        <para>
+          How did the <command>%patch</command> macro know which patch to apply?
+          Keep in mind that, like the <command>source</command> tag lines, every
+          <command>patch</command> tag is numbered, starting at zero.  The
+          <command>%patch</command> macro, by default, applies the patch file
+          named on the <command>patch</command> (or <command>patch0</command>)
+          tag line.
+        </para>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-inside-which-patch-tag">
+          <title>Specifying Which <command>patch</command> Tag to Use</title>
+          <!-- label: inside-patch-P -->
+          <indexterm>
+            <primary><command>%patch</command> macro!<command>-P</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</orderedlist>
-How did the <command>%patch</command> macro know which patch to apply?  Keep in mind
-that, like the <command>source</command> tag lines, every <command>patch</command> tag is
-numbered, starting at zero.  The <command>%patch</command> macro, by default,
-applies the patch file named on the <command>patch</command> (or <command>patch0</command>) tag
-line.
+          <para>
+            The <command>%patch</command> macro actually has two different ways
+            to specify the <command>patch</command> tag line it is to use.  The
+            first method is to simply append the number of the desired
+            <command>patch</command> tag to the end of the
+            <command>%patch</command> macro itself.  For example, in order to
+            apply the patch specified on the <command>patch2</command> tag line,
+            the following <command>%patch</command> macro could be used:
 
-<sect3 id="s3-rpm-inside-">
-<title>Specifying Which <command>patch</command> Tag to Use</title>
-<!-- label: inside-patch-P -->
-<indexterm>
-<primary><command>%patch</command> macro!<command>-P</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%patch</command> macro actually has two different ways to specify the
-<command>patch</command> tag line it is to use.  The first method is to simply append
-the number of the desired <command>patch</command> tag to the end of the
-<command>%patch</command> macro itself.  For example, in order to apply the patch
-specified on the <command>patch2</command> tag line, the following <command>%patch</command>
-macro could be used:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-example2-1">
+              <title>One Way to Select the <command>patch2</command> Tag</title>
+              <screen width="60">
 <computeroutput>
 %patch2
 </computeroutput>
-</screen>
-</figure>
-The other approach is to use the <command>-P</command> option.  This option is
-followed by the number of the <command>patch</command> tag line desired.  Therefore,
-this line is identical in function to the previous one:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The other approach is to use the <command>-P</command> option.  This
+            option is followed by the number of the <command>patch</command> tag
+            line desired.  Therefore, this line is identical in function to the
+            previous one:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-example3-1">
+              <title>
+                Another Way to Select the <command>patch2</command> Tag
+              </title>
+              <screen width="60">
 <computeroutput>
 %patch -P 2
 </computeroutput>
-</screen>
-</figure>
-Note that the <command>-P</command> option will <emphasis>not</emphasis> apply the file specified
-on the <command>patch0</command> line, by default.  Therefore, if you choose to use
-the <command>-P</command> option to specify patch numbers, you'll need to use the
-following format when applying patch zero:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Note that the <command>-P</command> option will
+            <emphasis>not</emphasis> apply the file specified on the
+            <command>patch0</command> line, by default.  Therefore, if you
+            choose to use the <command>-P</command> option to specify patch
+            numbers, you'll need to use the following format when applying patch
+            zero:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-zero">
+              <title>
+                Selecting the <command>patch0</command> Line Using the
+                <command>-P</command> Option
+              </title>
+              <screen width="60">
 <computeroutput>
 %patch -P 0
 </computeroutput>
-</screen>
-</figure>
-<indexterm>
-<primary><command>%patch</command> macro!<command>-P</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+              </screen>
+            </figure>
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-inside-patch-p-option">
+          <title>
+            <command>-p &lt;<userinput>#</userinput>&gt;</command> -- Strip
+            <command>&lt;<userinput>#</userinput>&gt;</command> leading slashes
+            and directories from patch filenames
+          </title>
+          <!-- label: inside-patch-p -->
+          <indexterm>
+            <primary><command>%patch</command> macro!<command>-p</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-p &lt;<emphasis>#</command>&gt;</emphasis> -- Strip <command>&lt;<emphasis>#</command>&gt;</emphasis> leading slashes and directories from patch filenames</title>
-<!-- label: inside-patch-p -->
-<indexterm>
-<primary><command>%patch</command> macro!<command>-p</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <command>-p</command> (Note the <emphasis>lowercase</emphasis>
+            "p"!) option is sent directly to the <command>patch</command>
+            command.  It is followed by a number, which specifies the number of
+            leading slashes (and the directories in between) to strip from any
+            filenames present in the patch file.  For more information on this
+            option, please consult the <command>patch</command> man page.
+          </para>
+        </sect3>
 
-The <command>-p</command> (Note the <emphasis>lowercase</emphasis> "p"!) option is sent directly
-to the <command>patch</command> command.  It is followed by a number, which specifies
-the number of leading slashes (and the directories in between) to strip
-from any filenames present in the patch file.  For more information on this
-option, please consult the <command>patch</command> man page.
+        <sect3 id="s3-rpm-inside-b-option">
+          <title>
+            <command>-b <userinput>&lt;name&gt;</userinput></command> -- Set the
+            backup file extension to
+            <command><userinput>&lt;name&gt;</userinput></command>
+          </title>
+          <!-- label: inside-patch-b -->
+          <indexterm>
+            <primary><command>%patch</command> macro!<command>-b</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-<indexterm>
-<primary><command>%patch</command> macro!<command>-p</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            When the <command>patch</command> command is used to apply a patch,
+            unmodified copies of the files patched are renamed to end with the
+            extension <filename>.orig</filename>.  The <command>-b</command>
+            option is used to change the extension used by
+            <command>patch</command>.  This is normally done when multiple
+            patches are to be applied to a given file.  By doing this, copies of
+            the file as it existed prior to each patch, are readily available.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-inside-e-option">
+          <title><command>-E</command> --- Remove Empty Output Files</title>
+          <!-- label: inside-patch-E -->
+          <indexterm>
+            <primary><command>%patch</command> macro!<command>-E</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-b <emphasis>&lt;name&gt;</command></emphasis> -- Set the backup file extension to <command><emphasis>&lt;name&gt;</command></emphasis></title>
-<!-- label: inside-patch-b -->
-<indexterm>
-<primary><command>%patch</command> macro!<command>-b</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <command>-E</command> option is passed directly to the
+            <command>patch</command> program.  When <command>patch</command> is
+            run with the <command>-E</command> option, any output files that are
+            empty after the patches have been applied, are removed.
+          </para>
+          <para>
+            Now let's take <command>%patch</command> on a test-drive, and put it
+            through its paces.
+          </para>
+        </sect3>
 
-When the <command>patch</command> command is used to apply a patch, unmodified copies
-of the files patched are renamed to end with the extension <filename>.orig</filename>.
-The <command>-b</command> option is used to change the extension used by
-<command>patch</command>.  This is normally done when multiple patches are to be
-applied to a given file.  By doing this, copies of the file as it existed
-prior to each patch, are readily available.
+        <sect3 id="s3-rpm-inside-patch-rw">
+          <title>
+            An example of the <command>%patch</command> Macro in Action
+          </title>
+          <indexterm>
+            <primary><command>%patch</command> macro!example of</primary>
+            <secondary></secondary>
+          </indexterm>
 
-<indexterm>
-<primary><command>%patch</command> macro!<command>-b</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            Using the example <command>patch</command> tag lines we've used
+            throughout this section, let's put together an example and look at
+            the resulting commands.  In our example, the first patch to be
+            applied needs to have the root directory stripped.  Its
+            <command>%patch</command> macro will look like this:
 
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title><command>-E</command> --- Remove Empty Output Files</title>
-<!-- label: inside-patch-E -->
-<indexterm>
-<primary><command>%patch</command> macro!<command>-E</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>-E</command> option is passed directly to the <command>patch</command> program.
-When <command>patch</command> is run with the <command>-E</command> option, any output files
-that are empty after the patches have been applied, are removed.
-
-<indexterm>
-<primary><command>%patch</command> macro!<command>-E</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Now let's take <command>%patch</command> on a test-drive, and put it through its
-paces.
-
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title>An example of the <command>%patch</command> Macro in Action</title>
-<indexterm>
-<primary><command>%patch</command> macro!example of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Using the example <command>patch</command> tag lines we've used throughout this
-section, let's put together an example and look at the resulting commands.
-In our example, the first patch to be applied needs to have the root
-directory stripped.  Its <command>%patch</command> macro will look like this:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-rw-example">
+              <title>
+                <command>%patch</command> Macro for the First
+                <command>patch</command> Tag Line
+              </title>
+              <screen width="60">
 <computeroutput>
 %patch -p1
 </computeroutput>
-</screen>
-</figure>
-The next patch is to be applied to files in the software's <filename>lib</filename>
-subdirectory, so we'll need to add a <command>cd</command> command to get us there.
-We'll also need to strip an additional directory:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The next patch is to be applied to files in the software's
+            <filename>lib</filename> subdirectory, so we'll need to add a
+            <command>cd</command> command to get us there.  We'll also need to
+            strip an additional directory:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-rw-example2">
+              <title>
+                <command>%patch</command> Macro for the Second
+                <command>patch</command> Tag Line
+              </title>
+              <screen width="60">
 <computeroutput>
 cd lib
 %patch -P 1 -p2
 </computeroutput>
-</screen>
-</figure>
-Finally, the last patch is to be applied from the software's top-level
-directory, so we need to <command>cd</command> back up a level.  In addition, this
-patch modifies some files that were also patched the first time, so we'll
-need to change the backup file extension:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Finally, the last patch is to be applied from the software's
+            top-level directory, so we need to <command>cd</command> back up a
+            level.  In addition, this patch modifies some files that were also
+            patched the first time, so we'll need to change the backup file
+            extension:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-rw-example3">
+              <title>
+                <command>%patch</command> Macro for the Last
+                <command>patch</command> Tag Line
+              </title>
+              <screen width="60">
 <computeroutput>
 cd ..
 %patch -P 2 -p1 -b .last-patch
 </computeroutput>
-</screen>
-</figure>
-Here's what the <command>%prep</command> script (minus any <command>%setup</command> macros)
-looks like:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Here's what the <command>%prep</command> script (minus any
+            <command>%setup</command> macros) looks like:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-rw-prep-script">
+              <title>
+                <command>%prep</command> Script With
+                <command>%patch</command> Macros
+              </title>
+              <screen width="60">
 <computeroutput>
 %patch -p1
 cd lib
@@ -3609,13 +3634,18 @@ cd lib
 cd ..
 %patch -P 2 -p1 -b .last-patch
 </computeroutput>
-</screen>
-</figure>
-And here's what the macros expand to:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            And here's what the macros expand to:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-patch-rw-prep-expansion">
+              <title>
+                <command>%prep</command> Script (With
+                <command>%patch</command> Macros Expanded)
+              </title>
+              <screen width="60">
 <computeroutput>
 echo "Patch #0:"
 patch -p1  -s &lt; /usr/src/redhat/SOURCES/patch-zero
@@ -3626,41 +3656,47 @@ cd ..
 echo "Patch #2:"
 patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
 </computeroutput>
-</screen>
-</figure>
-No surprises here.  Note that the <command>%setup</command> macro leaves the current
-working directory set to the software's top-level directory, so our
-<command>cd</command> commands with their relative paths will do the right thing.  Of
-course, we have environment variables available that could be used here,
-too.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            No surprises here.  Note that the <command>%setup</command> macro
+            leaves the current working directory set to the software's top-level
+            directory, so our <command>cd</command> commands with their relative
+            paths will do the right thing.  Of course, we have environment
+            variables available that could be used here, too.
+          </para>
 
-<sect4 id="s4-rpm-inside-">
-<title>Compressed Patch Files</title>
-<indexterm>
-<primary><command>%patch</command> macro!compressed patches</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <sect4 id="s4-rpm-inside-patch-compressed">
+            <title>Compressed Patch Files</title>
+            <indexterm>
+              <primary><command>%patch</command> macro!compressed patches</primary>
+              <secondary></secondary>
+            </indexterm>
 
-If a patch file is compressed with <command>gzip</command>, RPM will automatically
-decompress it before applying the patch.  Here's a compressed patch file as
-specified in the spec file:
+            <para>
+              If a patch file is compressed with <command>gzip</command>, RPM
+              will automatically decompress it before applying the patch.
+              Here's a compressed patch file as specified in the spec file:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+              <figure id="sc-rpm-inside-patch-compressed-sample">
+                <title>
+                  A <command>patch</command> Tag Line With a Compressed Patch
+                </title>
+                <screen width="60">
 <computeroutput>
 Patch: bother-3.5-hack.patch.gz
 </computeroutput>
-</screen>
-</figure>
-This is part of the script RPM will execute when the <command>%prep</command>
-section is executed:
+                </screen>
+              </figure>
+            </para>
+            <para>
+              This is part of the script RPM will execute when the
+              <command>%prep</command> section is executed:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+              <figure id="sc-rpm-inside-patch-compressed-expansion">
+                <title><command>%patch</command> Macro Expansion</title>
+                <screen width="60">
 <computeroutput>
 echo Executing: %prep
 &hellip;
@@ -3668,51 +3704,24 @@ echo "Patch #0:"
 gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </computeroutput>
-</screen>
-</figure>
-First, the patch file is decompressed using <command>gzip</command>.  The output from
-<command>gzip</command> is then piped into <command>patch</command>.
+                </screen>
+              </figure>
+            </para>
+            <para>
+              First, the patch file is decompressed using
+              <command>gzip</command>.  The output from <command>gzip</command>
+              is then piped into <command>patch</command>.
+            </para>
+            <para>
+              That's about it for RPM's macros.  Next, let's take a look at the
+              <command>%files</command> list.
+            </para>
+          </sect4>
+        </sect3>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary><command>%patch</command> macro!compressed patches|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-That's about it for RPM's macros.  Next, let's take a look at the
-<command>%files</command> list.
-
-<indexterm>
-<primary><command>%patch</command> macro!example of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary><command>%patch</command> macro|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>spec file!macros in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect4>
-
-</sect3>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-inside-">
+    <sect1 id="s1-rpm-inside-">
 <title>The <command>%files</command> List</title>
 <!-- label: rpm-files-list --><!-- label: inside-files -->
 <indexterm>
