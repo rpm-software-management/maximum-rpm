@@ -1069,7 +1069,7 @@ AutoReqProv: no
           tags, it's possible to support package building under multiple
           environments, all from a single set of sources, patches, and a single
           spec file.  For a more complete discussion of multi-architecture
-          package building, please see chapter <xref linkend="rpm-multi">.
+          package building, please see chapter <xref linkend="ch-rpm-multi">.
         </para>
 
         <sect3 id="s3-rpm-inside-excludearch-tag">
@@ -4689,7 +4689,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
       </para>
       <para>
         We discuss multi-platform package building in depth in chapter <xref
-        linkend="rpm-multi">.  For now, let's take a quick look at RPM's
+        linkend="ch-rpm-multi">.  For now, let's take a quick look at RPM's
         conditionals.
       </para>
 

@@ -2115,7 +2115,7 @@ total 5
             <para>
               If you <emphasis>are</emphasis> porting RPM, you'll find more on
               <command>arch_compat</command> in section <xref
-              linkend="multi-xxx-compat">.
+              linkend="s3-rpm-multi-xxx-compat">.
             </para>
           </footnote>
           While RPM attempts to make the right decisions regarding package
@@ -2157,7 +2157,7 @@ total 5
             <para>
               If you <emphasis>are</emphasis> porting RPM, you'll find more on
               <command>os_compat</command> in section <xref
-              linkend="multi-xxx-compat">.
+              linkend="s3-rpm-multi-xxx-compat">.
             </para>
           </footnote>
           While RPM attempts to make the right decisions regarding package

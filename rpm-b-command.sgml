@@ -1373,7 +1373,7 @@ i486
         </para>
         <para>
           For more information on build packages for multiple architectures,
-          please see Chapter <xref linkend="rpm-multi">.
+          please see Chapter <xref linkend="ch-rpm-multi">.
         </para>
       </sect2>
 
@@ -1432,7 +1432,7 @@ osf1
         <para>
           The package was indeed built for the specified operating system.  For
           more information on building packages for multiple operating systems,
-          please see Chapter <xref linkend="rpm-multi">.
+          please see Chapter <xref linkend="ch-rpm-multi">.
         </para>
       </sect2>
 
