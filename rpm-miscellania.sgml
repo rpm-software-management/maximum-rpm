@@ -11,6 +11,7 @@
 
     <sect1 id="s1-rpm-miscellania-other-options">
       <title>Other RPM Options</title>
+
       <para>
         The following options are not normally used on a day to day basis.
         However, some of them can be quite important when the need arises.  One
@@ -34,6 +35,7 @@ free list corrupt (42)- contact rpm-list@redhat.com
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Once this happens, you'll find there's very little that you can do,
           RPM-wise.  However, before you fire off an e-mail to the RPM mailing
@@ -46,6 +48,7 @@ rpm --rebuilddb
 </command>
           </screen>
         </para>
+
         <para>
           The command produces no output, either.  After a few minutes, it
           completes with nary a peep.  Here's an example of
@@ -68,6 +71,7 @@ total 3534
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Then, we issue the command:
 
@@ -76,6 +80,7 @@ total 3534
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           After a few minutes, the command completes, and we take a look at the
           files again:
@@ -94,6 +99,7 @@ total 3531
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           You'll note that <filename>packages.rpm</filename> decreased in size.
           This is due to a side-effect of the <command>--rebuilddb</command>
@@ -103,6 +109,7 @@ total 3531
           the reduction in size was small.  For a system that has been through a
           complete upgrade, the difference would be more dramatic.
         </para>
+
         <para>
           Does this mean that you should rebuild the database every once in a
           while?  Not really.  Since RPM eventually will make use of the holes,
@@ -128,6 +135,7 @@ total 3531
           database.  That's why you'll probably not need it if you're already
           using RPM --- you already have an RPM database.
         </para>
+
         <para>
           It might seem that the <command>--initdb</command> option would be
           dangerous.  After all, won't it trash your current database if you
@@ -152,6 +160,7 @@ total 3559
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Next, let's use the <command>--initdb</command> option, just to see
           what it does to this database:
@@ -172,11 +181,13 @@ total 3559
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Since an RPM database existed already, the <command>--initdb</command>
           option did no harm to it --- there was no change to the database
           files.
         </para>
+
         <para>
           The only other option that can be used with
           <command>--initdb</command> is <command>--dbpath</command>.  This
@@ -210,6 +221,7 @@ total 3559
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The <command>--quiet</command> option can silence even the mighty
           <command>-vv</command> option:
@@ -262,6 +274,7 @@ usage:
 </computeroutput>
           </screen>
         </para>
+
         <para>
           This is just the first screen of RPM's help command.  To see the rest,
           give the command a try.  Practically everything there is to know about
@@ -326,6 +339,7 @@ RPM version 2.3
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         An easier way would be to use <command>rpm2cpio</command>.
       </para>
@@ -344,6 +358,7 @@ RPM version 2.3
           specified.  <command>rpm2cpio</command> takes only only one argument,
           and even <emphasis>that's</emphasis> optional!
         </para>
+
         <para>
           The optional argument is the name of the package file to be converted.
           If there is no filename specified on the command line,
@@ -365,6 +380,7 @@ le rotator
 
           (We've just shown the first few lines of output.)
         </para>
+
         <para>
           What on earth is all that stuff?  Remember,
           <command>rpm2cpio</command> is written as a filter.  It writes the
@@ -381,6 +397,7 @@ blah.cpio: ASCII cpio archive (SVR4 with CRC)
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Here we've directed <command>rpm2cpio</command> to convert the
           <filename>logrotate</filename> package file.  We've also redirected
@@ -427,6 +444,7 @@ usr/sbin/logrotate
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           In this example, we used the <command>-t</command> option to direct
           <command>cpio</command> to produce a "table of contents" of the
@@ -460,6 +478,7 @@ usr/man/man8/logrotate.8
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           In this case, the <command>cpio</command> options
           <command>-i</command>, <command>-v</command>, and
@@ -494,6 +513,7 @@ usr/man/man8/logrotate.8
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           So where did the file end up?  The last option (<command>-d</command>)
           to <command>cpio</command> provides a hint.  Let's take a look:
@@ -538,6 +558,7 @@ logrotate \- log file rotator
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Since the current directory didn't have a
           <filename>usr/man/man8/</filename> path in it, the
@@ -566,6 +587,7 @@ logrotate \- log file rotator
 <command>etcskel-1.0-3.<userinput>src</userinput>.rpm</command>
         </screen>
       </para>
+
       <para>
         Notice the <filename>src</filename>.  Is that a new kind of computer?
         If you use RPM on an Intel-based computer, you'd normally expect to find
@@ -583,6 +605,7 @@ foo.bar: RPM v2 bin i386 eject-1.2-2
 <prompt>#</prompt>
         </screen>
       </para>
+
       <para>
         In this example, <filename>foo.bar</filename> is an RPM version 2 file,
         containing an executable package -- hence, the
@@ -590,6 +613,7 @@ foo.bar: RPM v2 bin i386 eject-1.2-2
         "<filename>i386</filename>".  The package is eject version 1.2, release
         2.
       </para>
+
       <para>
         Let's try the <command>file</command> command on this mystery file and
         see what we can find out about it:
@@ -602,14 +626,17 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
 <prompt>#</prompt>
         </screen>
       </para>
+
       <para>
         Well, it's a package file all right --- for version 1.0, release 3 of
-        the etcskel package.  It's in RPM version 2 format, and built for
-        Intel-based systems.  But what does the "<filename>src</filename>" mean?
+        the <filename>etcskel</filename> package.  It's in RPM version 2 format,
+        and built for Intel-based systems.  But what does the
+        "<filename>src</filename>" mean?
       </para>
 
       <sect2 id="s2-rpm-miscellania-srpms-source-code">
         <title>A gentle introduction to source code</title>
+
         <para>
           This package file contains not the executable, or "binary", files that
           a normal package contains, but rather the "source" files required to
@@ -618,6 +645,7 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
           The source code is then compiled into a binary that can be executed by
           the computer.
         </para>
+
         <para>
           As part of the process of building package files (a process we cover
           in great detail in the second half of this book), two types of package
@@ -637,6 +665,7 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           The source package contains everything needed to recreate not only the
           programs and associated files that are contained in the binary package
@@ -648,6 +677,7 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
         <title>
           Do you <emphasis>really</emphasis> need more information than this?
         </title>
+
         <para>
           The following discussion is going to get rather technical.  Unless
           you're the type of person who likes to take other people's code and
@@ -696,6 +726,7 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           What does this output tell us?  Well, RPM recognizes that the file is
           a source package.  It mentions that sources (we know what
@@ -712,6 +743,7 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           There are some files that seem to be related to
           <filename>cdp</filename> there.  The two files ending with
@@ -720,12 +752,13 @@ D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/c
           are bundled along with the original, unmodified sources in the source
           package.
         </para>
+
         <para>
           The last file is a gzipped tar file.  If you've gotten software off
           the Internet, you're probably familiar with <command>tar</command>
           files, gzipped or not.  If we look inside the file, we should see all
-          the usual kinds of things: README files, a Makefile or two, and some
-          source code:
+          the usual kinds of things: <filename>README</filename> files, a
+          <filename>Makefile</filename> or two, and some source code:
 
           <screen width="60">
 <prompt># </prompt><userinput>tar ztf cdp-0.33.tgz</userinput>
@@ -745,6 +778,7 @@ cdp-0.33/cdp.h
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           There's more, but you get the idea.  OK, so there are the sources.
           But what is that "spec" file mentioned in the output?  It mentions
@@ -758,6 +792,7 @@ cdp-0.33/cdp.h
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Without making a long story too short, a spec file contains
           information used by RPM to create the binary and source packages.
@@ -801,6 +836,7 @@ cdp-0.33/cdp.h
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           The neatest part of this is that RPM does this all automatically,
           under the control of the spec file.  That's about all we're going to
@@ -811,6 +847,7 @@ cdp-0.33/cdp.h
 
       <sect2 id="s2-rpm-miscellania-stick-with-us">
         <title>Stick with us!</title>
+
         <para>
           As we've noted several times, we'll be covering the entire subject of
           building packages with RPM, in the second half of the book.  Be

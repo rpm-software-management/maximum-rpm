@@ -18,6 +18,7 @@
       sources.  RPM lets you continue that practice through the package building
       phase.
     </para>
+
     <para>
       Before we get into RPM's capabilities, let's do a quick review of what is
       involved in developing software for different types of computer systems.
@@ -57,6 +58,7 @@
         example, every "PC" today, no matter who built it, is based on the Intel
         x86 architecture.
       </para>
+
       <para>
         The second difference is more under our control.  The operating system
         is software that controls how the system operates.  Different operating
@@ -64,6 +66,7 @@
         ways of implementing functions used by programs, and different hardware
         requirements.
       </para>
+
       <para>
         As far as package building is concerned, two systems with the same
         architecture running two different operating systems, are as different
@@ -96,9 +99,10 @@
         <para>
           In order to keep the duplication in this chapter to a minimum, we'll
           refer to a computer of a given architecture running a given operating
-          system as a "platform".  If another system differs in either aspect,
-          it is considered a different platform.
+          system as a <firstterm>platform</firstterm>.  If another system
+          differs in either aspect, it is considered a different platform.
         </para>
+
         <para>
           OK, now that we've gotten through the preliminaries, let's look at
           RPM's multi-platform capabilities.
@@ -120,6 +124,7 @@
         hardest part of multi-platform package building is figuring out how the
         software needs to be changed to support different platforms.
       </para>
+
       <para>
         Let's take a look at each multi-platform tool RPM provides.
       </para>
@@ -145,6 +150,7 @@
           you, though it's possible to override this when the package is
           installed.
         </para>
+
         <para>
           But there is more to multi-platform package building than simply being
           able to determine the platform during package building and
@@ -177,6 +183,7 @@
           the spec file that are specific to another platform and replace them
           with one or more lines that are compatible with the build platform.
         </para>
+
         <para>
           Now that we have a basic idea of RPM's multi-platform support
           features, let's take a more in-depth look at each one.
@@ -197,6 +204,7 @@
         from the build system's <command>uname</command> output against a number
         of <filename>rpmrc</filename> file entries.
       </para>
+
       <para>
         Normally, it's not necessary to worry too much about the following
         <filename>rpmrc</filename> file entries, as RPM comes with a set of
@@ -219,17 +227,18 @@
           <filename>~/.rpmrc</filename>.  This is discussed more completely in
           <xref linkend="ch-rpmrc-file">.
         </para>
+
         <para>
           Because each entry type is available in both architecture and
           operating system flavors, we'll just use
-          <command><userinput>xxx</userinput></command> in place of
+          <command><replaceable>xxx</replaceable></command> in place of
           <command>arch</command> and <command>os</command> in the following
           descriptions.
         </para>
 
         <sect3 id="s3-rpm-multi-xxx-canon">
           <title>
-            <command><userinput>xxx</userinput>_canon</command> --- Define
+            <command><replaceable>xxx</replaceable>_canon</command> --- Define
             Canonical Platform Name and Number
           </title>
           <indexterm>
@@ -257,23 +266,24 @@
           </indexterm>
 
           <para>
-            The <command><userinput>xxx</userinput>_canon</command> entry is
+            The <command><replaceable>xxx</replaceable>_canon</command> entry is
             used to convert information obtained from the system running RPM
             into a canonical name and number that RPM will use internally.
             Here's the format:
 
             <screen width="60">
 <computeroutput>
-<userinput>xxx</userinput>_canon:&lt;label&gt;: &lt;string&gt; &lt;value&gt;
+<replaceable>xxx</replaceable>_canon: <replaceable>&lt;label&gt;</replaceable>: <replaceable>&lt;string&gt;</replaceable> <replaceable>&lt;value&gt;</replaceable>
 </computeroutput>
             </screen>
           </para>
+
           <para>
-            The <filename>&lt;label&gt;</filename> is compared against
+            The <replaceable>&lt;label&gt;</replaceable> is compared against
             information from <command>uname(2)</command>.  If a match is found,
-            then <filename>&lt;string&gt;</filename> is used by RPM as the
-            canonical name, and <filename>&lt;value&gt;</filename> is used as a
-            unique numeric value.  Here are two examples:
+            then <replaceable>&lt;string&gt;</replaceable> is used by RPM as the
+            canonical name, and <replaceable>&lt;value&gt;</replaceable> is used
+            as a unique numeric value.  Here are two examples:
 
             <screen width="60">
 <computeroutput>
@@ -282,6 +292,7 @@ os_canon:  Linux:  Linux  1
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The <command>arch_canon</command> tag above is used to define the
             canonical architecture information for Sun Microsystems' SPARC
@@ -291,6 +302,7 @@ os_canon:  Linux:  Linux  1
             architecture name is set to <command>sparc</command> and the
             architecture number is set to <command>3</command>.
           </para>
+
           <para>
             The <command>os_canon</command> tag above is used to define the
             canonical operating system information for the Linux operating
@@ -299,6 +311,7 @@ os_canon:  Linux:  Linux  1
             canonical operating system name is set to <command>Linux</command>,
             and the operating system number is set to <command>1</command>.
           </para>
+
           <para>
             The description above is not 100% complete --- There is an
             additional step performed during the time RPM gets the system
@@ -310,7 +323,7 @@ os_canon:  Linux:  Linux  1
 
         <sect3 id="s3-rpm-multi-buildxxxtranslate">
           <title>
-            <command>build<userinput>xxx</userinput>translate</command> ---
+            <command>build<replaceable>xxx</replaceable>translate</command> ---
             Define Build Platform
           </title>
           <indexterm>
@@ -338,27 +351,29 @@ os_canon:  Linux:  Linux  1
           </indexterm>
 
           <para>
-            The <command>build<userinput>xxx</userinput>translate</command>
+            The <command>build<replaceable>xxx</replaceable>translate</command>
             entry is used to define the build platform information.
             Specifically, these entries are used to create a table that maps
             information from <command>uname</command> to the appropriate
             architecture/operating system name.
           </para>
+
           <para>
-            The <command>build<userinput>xxx</userinput>translate</command>
+            The <command>build<replaceable>xxx</replaceable>translate</command>
             entry looks like this:
 
             <screen width="60">
-<command>build<userinput>xxx</userinput>translate:&lt;label&gt;: &lt;string&gt;</command>
+<command>build<replaceable>xxx</replaceable>translate: <replaceable>&lt;label&gt;</replaceable>: <replaceable>&lt;string&gt;</replaceable></command>
             </screen>
           </para>
+
           <para>
-            The <command>&lt;label&gt;</command> is compared against information
-            from <command>uname(2)</command>.  If a match is found, then
-            <command>&lt;string&gt;</command> is used by RPM as the build
-            platform information, after it has been canonicalized by
-            <command><userinput>xxx</userinput>_canon</command>.  Here are two
-            examples:
+            The <replaceable>&lt;label&gt;</replaceable> is compared against
+            information from <command>uname(2)</command>.  If a match is found,
+            then <replaceable>&lt;string&gt;</replaceable> is used by RPM as the
+            build platform information, after it has been canonicalized by
+            <command><replaceable>xxx</replaceable>_canon</command>.  Here are
+            two examples:
 
             <screen width="60">
 <computeroutput>
@@ -367,6 +382,7 @@ buildostranslate: Linux: Linux
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The <command>buildarchtranslate</command> tag shown above is used to
             define the build architecture for an Intel Pentium (or
@@ -374,6 +390,7 @@ buildostranslate: Linux: Linux
             Pentium-based system will, by default, build packages for the Intel
             80386 (or <command>i386</command>) architecture.
           </para>
+
           <para>
             The <command>buildostranslate</command> tag shown above is used to
             define the build operating system for systems running the Linux
@@ -384,7 +401,7 @@ buildostranslate: Linux: Linux
 
         <sect3 id="s3-rpm-multi-xxx-compat">
           <title>
-            <command><userinput>xxx</userinput>_compat</command> --- Define
+            <command><replaceable>xxx</replaceable>_compat</command> --- Define
             Compatible Architectures
           </title>
           <!-- label: multi-xxx_compat -->
@@ -413,22 +430,26 @@ buildostranslate: Linux: Linux
           </indexterm>
 
           <para>
-            The <command><userinput>xxx</userinput>_compat</command> entry is
+            The <command><replaceable>xxx</replaceable>_compat</command> entry is
             used to define which architectures and operating systems are
             compatible with one another.  It is used at install-time only.  The
             format of the entry is:
 
             <screen width="60">
-<command><userinput>xxx</userinput>_compat:&lt;label&gt;: &lt;list&gt;</command>
+<command><replaceable>xxx</replaceable>_compat: <replaceable>&lt;label&gt;</replaceable>: <replaceable>&lt;list&gt;</replaceable></command>
             </screen>
           </para>
+
           <para>
-            The <command>&lt;label&gt;</command> is a name string as defined by
-            an <command><userinput>xxx</userinput>_canon</command> entry.  The
-            <command>&lt;list&gt;</command> following it consists of one or more
-            names, also defined by <command>arch_canon</command>.  If there is
-            more than one name in the list, they should be separated by a space.
+            The <replaceable>&lt;label&gt;</replaceable> is a name string as
+            defined by an
+            <command><replaceable>xxx</replaceable>_canon</command> entry.  The
+            <replaceable>&lt;list&gt;</replaceable> following it consists of one
+            or more names, also defined by <command>arch_canon</command>.  If
+            there is more than one name in the list, they should be separated by
+            a space.
           </para>
+
           <para>
             The names in the list are considered compatible to the name
             specified in the label.
@@ -441,6 +462,7 @@ os_compat: Linux: AIX
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The <command>arch_compat</command> lines shown above illustrate how
             a family of upwardly compatible architectures may be represented.
@@ -450,6 +472,7 @@ os_compat: Linux: AIX
             the build system was an <command>i486</command>, the only compatible
             architecture would be an <command>i386</command>.
           </para>
+
           <para>
             While the <command>os_compat</command> line shown above is entirely
             fictional, its purpose would be to declare <command>AIX</command>
@@ -474,6 +497,7 @@ os_compat: Linux: AIX
           nice to have an easy way of overriding the build-time architecture and
           operating system.
         </para>
+
         <para>
           The <command>--buildarch</command> and <command>--buildos</command>
           options can be used to set the build-time architecture and operating
@@ -485,6 +509,7 @@ os_compat: Linux: AIX
           entirely fictional operating system, RPM will issue a warning message,
           and then happily build a package for it.
         </para>
+
         <para>
           Why?  Wouldn't it make more sense for RPM to perform some sort of
           sanity check?  In a word, no.  One of RPM's main design goals was to
@@ -492,6 +517,7 @@ os_compat: Linux: AIX
           override their build platform information, they should know what
           they're doing, and what the full implications of their actions are.
         </para>
+
         <para>
           Bottom line: Unless you <emphasis>know</emphasis> why you need to use
           <command>--buildarch</command> or <command>--buildos</command>, you
@@ -513,6 +539,7 @@ os_compat: Linux: AIX
           upgrade, even if the package's platform doesn't match the install
           platform.
         </para>
+
         <para>
           Dangerous?  Yes.  But it can be indispensable in certain
           circumstances.  Like the ability to override platform information at
@@ -542,11 +569,12 @@ os_compat: Linux: AIX
         options that can be used during the build process, specifically during
         compilation.
       </para>
+
       <para>
         The <command>optflags</command> entry looks like this:
 
         <screen width="60">
-<command>optflags:&lt;architecture&gt; &lt;value&gt;</command>
+<command>optflags: <replaceable>&lt;architecture&gt;</replaceable> <replaceable>&lt;value&gt;</replaceable></command>
         </screen>
       </para>
       <para>
@@ -560,6 +588,7 @@ optflags: sparc -O2
 </computeroutput>
         </screen>
       </para>
+
       <para>
         If RPM was running on an Intel 80386-compatible architecture, the
         <command>optflags</command> value would be set to <command>-O2 -m486
@@ -567,6 +596,7 @@ optflags: sparc -O2
         SPARC-based system, <command>optflags</command> would be set to
         <command>-O2</command>.
       </para>
+
       <para>
         This entry sets the <envar>RPM_OPT_FLAGS</envar> environment variable,
         which can be used in the <command>%prep</command>,
@@ -588,18 +618,21 @@ optflags: sparc -O2
         be built on a given platform.  This is done through the use of four tags
         that can be added to a spec file.
       </para>
+
       <para>
         There can be many reasons to do this.  For example, the software may not
         build correctly on a given platform.  Or the software may be
         platform-specific, such that packaging the software on any other
         platform, while technologically possible, would really make no sense.
       </para>
+
       <para>
         The real world is not always so clear-cut, so there might even be cases
         where a package should be built on, say, three different platforms, but
         no others.  By carefully using the following tags, any conceivable
         situation can be covered.
       </para>
+
       <para>
         Like the <filename>rpmrc</filename> file entries we've already
         discussed, there are identical tags for architecture and operating
@@ -608,7 +641,7 @@ optflags: sparc -O2
 
       <sect2 id="s2-rpm-multi-excludexxx-tag">
         <title>
-          The <command>exclude<userinput>xxx</userinput></command> Tag
+          The <command>exclude<replaceable>xxx</replaceable></command> Tag
         </title>
         <indexterm>
           <primary><command>excludearch</command> tag</primary>
@@ -631,11 +664,11 @@ optflags: sparc -O2
         </indexterm>
 
         <para>
-          The <command>exclude<userinput>xxx</userinput></command> tags are used
+          The <command>exclude<replaceable>xxx</replaceable></command> tags are used
           to direct RPM to insure that the package does <emphasis>not</emphasis>
           attempt to build on the excluded platforms.  One or more platforms may
           be specified after the
-          <command>exclude<userinput>xxx</userinput></command> tags, separated
+          <command>exclude<replaceable>xxx</replaceable></command> tags, separated
           by either spaces or commas.  Here are two examples:
 
           <screen width="60">
@@ -645,12 +678,14 @@ ExcludeOS: Irix
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The first line prevents systems based on the Sun SPARC and Digital
           Alpha/AXP architectures from attempting to build the package.  The
           second line insures that the package will not be built for the Silicon
           Graphics operating system, Irix.
         </para>
+
         <para>
           If a build is attempted on an excluded architecture or operating
           system, the following message will be displayed, and the build will
@@ -665,19 +700,20 @@ cdplayer-1.0.spec doesn't build on this architecture
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
-          The <command>exclude<userinput>xxx</userinput></command> tags are
+          The <command>exclude<replaceable>xxx</replaceable></command> tags are
           meant to explicitly prevent a finite set of architectures or operating
           systems from building a package.  If your goal is to insure that a
           package will only build on <emphasis>one</emphasis> architecture, then
           you should use the
-          <command>exclusive<userinput>xxx</userinput></command> tags.
+          <command>exclusive<replaceable>xxx</replaceable></command> tags.
         </para>
       </sect2>
 
       <sect2 id="s2-rpm-multi-exclusivexxx-tag">
         <title>
-          The <command>exclusive<userinput>xxx</userinput></command> Tag
+          The <command>exclusive<replaceable>xxx</replaceable></command> Tag
         </title>
         <indexterm>
           <primary><command>exclusivearch</command> tag</primary>
@@ -700,16 +736,17 @@ cdplayer-1.0.spec doesn't build on this architecture
         </indexterm>
 
         <para>
-          The <command>exclusive<userinput>xxx</userinput></command> tags are
+          The <command>exclusive<replaceable>xxx</replaceable></command> tags are
           used to direct RPM to only build the package on the specified
           platforms.  These tags insure that, in the future, no brand-new
           platform will mistakenly attempt to build the package.  RPM will build
           the package on the specified platforms only.
         </para>
+
         <para>
           The syntax of the
-          <command>exclusive<userinput>xxx</userinput></command> tags is
-          identical to <command>exclude<userinput>xxx</userinput></command>:
+          <command>exclusive<replaceable>xxx</replaceable></command> tags is
+          identical to <command>exclude<replaceable>xxx</replaceable></command>:
 
           <screen width="60">
 <computeroutput>
@@ -718,17 +755,19 @@ ExclusiveOS: Irix
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In the first line, the package will only build on a Sun SPARC or
           Digital Alpha/AXP system.  In the second, the package will only be
           built on the Irix operating system.
         </para>
+
         <para>
-          The <command>exclusive<userinput>xxx</userinput></command> tags are
+          The <command>exclusive<replaceable>xxx</replaceable></command> tags are
           meant to explicitly allow a finite set of architectures or operating
           systems to build a package.  If your goal is to insure that a package
           will <emphasis>not</emphasis> build on a specific platform, then you
-          should use the <command>exclude<userinput>xxx</userinput></command>
+          should use the <command>exclude<replaceable>xxx</replaceable></command>
           tag.
         </para>
       </sect2>
@@ -743,13 +782,14 @@ ExclusiveOS: Irix
 
       <para>
         Of course, the control exerted by the
-        <command>exclude<userinput>xxx</userinput></command> and
-        <command>exclusive<userinput>xxx</userinput></command> tags over package
+        <command>exclude<replaceable>xxx</replaceable></command> and
+        <command>exclusive<replaceable>xxx</replaceable></command> tags over package
         building is often too coarse.  There may be packages, for example, that
         would build just fine on another platform, if only you could substitute
         a platform-specific patch file or change some paths in the
         <command>%files</command> list.
       </para>
+
       <para>
         The key to exerting this kind of platform-specific control in the spec
         file is to use RPM's conditionals.  The conditionals provide a
@@ -782,12 +822,14 @@ ExclusiveOS: Irix
             block that will be used or ignored, depending on the platform the
             conditional is checking for, as well as the build platform itself.
           </para>
+
           <para>
             Every conditional starts with a line beginning with the characters
             <command>%if</command> and is followed by one of four
             platform-related conditions.  Every conditional ends with a line
             containing the characters <command>%endif</command>.
           </para>
+
           <para>
             Ignoring the platform-related conditions for a moment, here's an
             example of a conditional block:
@@ -800,9 +842,11 @@ Summary: This is a package for the Linux operating system
 </computeroutput>
             </screen>
           </para>
+
           <para>
             It's a one-line block, but a block nonetheless.
           </para>
+
           <para>
             There's also another style of conditional block.  As before, it
             starts with a <command>%if</command>, and ends with a
@@ -818,6 +862,7 @@ Summary: This is a package for some other operating system
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Here we've replaced one <command>summary</command> tag with another.
           </para>
@@ -855,6 +900,7 @@ echo "This is not an i386"
 </computeroutput>
             </screen>
           </para>
+
           <para>
             In this example, the first conditional block formed by the
               <command>%ifarch i386</command> line contains a complete
@@ -876,6 +922,7 @@ echo "This is not an i386"
             like.  But it's much better to use conditionals to insert only the
             appropriate platform-specific contents.
           </para>
+
           <para>
             Now that we have the basics out of the way, let's take a look at
             each of the conditionals and see how they work.
@@ -884,7 +931,7 @@ echo "This is not an i386"
       </sect2>
 
       <sect2 id="s2-rpm-multi-ifxxx-conditional">
-        <title><command>%if<userinput>xxx</userinput></command></title>
+        <title><command>%if<replaceable>xxx</replaceable></command></title>
         <indexterm>
           <primary><command>%ifarch</command> conditional</primary>
         </indexterm>
@@ -906,7 +953,7 @@ echo "This is not an i386"
         </indexterm>
 
         <para>
-          The <command>%if<userinput>xxx</userinput></command> conditionals are
+          The <command>%if<replaceable>xxx</replaceable></command> conditionals are
           used to control the inclusion of a block, as long as the
           platform-dependent information is true.  Here are two examples:
 
@@ -916,6 +963,7 @@ echo "This is not an i386"
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In this case, the block following the conditional would be included
           only if the build architecture was <command>i386</command> or
@@ -927,6 +975,7 @@ echo "This is not an i386"
 </computeroutput>
           </screen>
         </para>
+
         <para>
           This example would include the block following the conditional only if
           the operating system was <command>Linux</command>.
@@ -934,7 +983,7 @@ echo "This is not an i386"
       </sect2>
 
       <sect2 id="s2-rpm-multi-ifnxxx-conditional">
-        <title><command>%ifn<userinput>xxx</userinput></command></title>
+        <title><command>%ifn<replaceable>xxx</replaceable></command></title>
         <indexterm>
           <primary><command>%ifnarch</command> conditional</primary>
         </indexterm>
@@ -956,7 +1005,7 @@ echo "This is not an i386"
         </indexterm>
 
         <para>
-          The <command>%ifn<userinput>xxx</userinput></command> conditionals are
+          The <command>%ifn<replaceable>xxx</replaceable></command> conditionals are
           used to control the inclusion of a block, as long as the
           platform-dependent information is <emphasis>not</emphasis> true.  Here
           are two examples:
@@ -967,6 +1016,7 @@ echo "This is not an i386"
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In this case, the block following the conditional would be included
           only if the build architecture was <emphasis>not</emphasis>
@@ -978,6 +1028,7 @@ echo "This is not an i386"
 </computeroutput>
           </screen>
         </para>
+
         <para>
           This example would include the block following the conditional only if
           the operating system was <emphasis>not</emphasis>
@@ -1001,8 +1052,8 @@ echo "This is not an i386"
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              The <command>exclude<userinput>xxx</userinput></command> and
-              <command>exclusive<userinput>xxx</userinput></command> tags are
+              The <command>exclude<replaceable>xxx</replaceable></command> and
+              <command>exclusive<replaceable>xxx</replaceable></command> tags are
               best used when it's known there's no reason for the package to be
               built on specific architectures.
             </para>
@@ -1010,9 +1061,10 @@ echo "This is not an i386"
 
           <listitem>
             <para>
-              The <command>%if<userinput>xxx</userinput></command> and
-              <command>%ifn<userinput>xxx</userinput></command> conditionals are
+              The <command>%if<replaceable>xxx</replaceable></command> and
+              <command>%ifn<replaceable>xxx</replaceable></command> conditionals are
               most likely to be used in the following areas:
+
               <itemizedlist mark="bullet">
                 <listitem>
                   <para>
