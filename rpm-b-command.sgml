@@ -1513,7 +1513,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </para>
         <para>
           For more information on signing packages, please see Chapter <xref
-          linkend="rpm-pgp">.  Appendix <xref linkend="pgp-intro"> contains
+          linkend="ch-rpm-pgp">.  Appendix <xref linkend="pgp-intro"> contains
           information on obtaining and installing PGP.
         </para>
       </sect2>
