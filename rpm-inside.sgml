@@ -43,7 +43,7 @@ Macros --- A method of executing multiple commands easily.
 
 <listitem>
 <para>
-The <tt?>%files</tt?> list --- A list of files to be included in the
+The <command>%files</command> list --- A list of files to be included in the
 package.
 
 </para>
@@ -51,7 +51,7 @@ package.
 
 <listitem>
 <para>
-Directives --- Used in the <tt?>%files</tt?> list to direct RPM to
+Directives --- Used in the <command>%files</command> list to direct RPM to
 handle certain files in a specific way.
 
 </para>
@@ -82,7 +82,7 @@ Comments are a way to make RPM ignore a line in the spec file.  The
 contents of a comment line are entirely up to the person writing the spec
 file.
 
-To create a comment, enter an octothorp (<tt?>#</tt?>) at the start of the
+To create a comment, enter an octothorp (<command>#</command>) at the start of the
 line.  Any text following the comment character will be ignored by RPM.
 Here's an example comment:
 
@@ -121,9 +121,9 @@ all following the same basic format:
 &lt;something&gt;:&lt;something-else&gt;
 </screen>
 </figure>
-The <tt?>&lt;something&gt;</tt?> is known as a "tag", because it is used by RPM
+The <command>&lt;something&gt;</command> is known as a "tag", because it is used by RPM
 to name or <emphasis>tag</emphasis> some data.  The tag is separated from its associated
-data by a colon.  The data is represented by the <tt?>&lt;something-else&gt;</tt?>
+data by a colon.  The data is represented by the <command>&lt;something-else&gt;</command>
 above.  Tags are grouped together at the top of the spec file, in a section
 known as the preamble.  Here's an example of a tag and its data:
 
@@ -133,9 +133,9 @@ known as the preamble.  Here's an example of a tag and its data:
 Vendor: White Socks Software, Inc.
 </screen>
 </figure>
-In this example, the tag is "<tt?>Vendor</tt?>".  Tags are not
+In this example, the tag is "<command>Vendor</command>".  Tags are not
 case-sensitive --- they may be all uppercase, all lowercase, or anything
-in-between.  The <tt?>Vendor</tt?> tag is used to define the name of the
+in-between.  The <command>Vendor</command> tag is used to define the name of the
 organization producing the package.  The data in this example is
 "<tt?>White Socks Software, Inc.</tt?>".  Therefore, RPM will store
 <tt?>White Socks Software, Inc.</tt?> as the vendor of the package.
@@ -170,32 +170,32 @@ Since the name is always in the format:
 &lt;name&gt;-&lt;version&gt;-&lt;release&gt;
 </screen>
 </figure>
-it's only natural that the three tags are known as <tt?>name</tt?>,
-<tt?>version</tt?>, and <tt?>release</tt?>.
+it's only natural that the three tags are known as <command>name</command>,
+<command>version</command>, and <command>release</command>.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>name</tt?> Tag</title>
+<title>The <command>name</command> Tag</title>
 <!-- label: inside-name -->
 <indexterm>
-<primary>tags!<tt?>name</tt?></primary>
+<primary>tags!<command>name</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>name@<tt?>name</tt?> tag</primary>
+<primary>name@<command>name</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>name</tt?> tag is used to define the name of the software being
+The <command>name</command> tag is used to define the name of the software being
 packaged.  In most (if not all) cases, the name used for a package should
 be identical in spelling and case to the software being packaged.  The name
 cannot contain any whitespace: If it does, RPM will only use the first part
 of the name (up to the first space).  Therefore, if the name of the
-software being packaged is <tt?>cdplayer</tt?>, the <tt?>name</tt?> tag should
+software being packaged is <tt?>cdplayer</tt?>, the <command>name</command> tag should
 be something like:
 
 <figure id="sc-rpm-inside-">
@@ -207,23 +207,23 @@ Name: cdplayer
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>version</tt?> Tag</title>
+<title>The <command>version</command> Tag</title>
 <!-- label: inside-version -->
 <indexterm>
-<primary>tags!<tt?>version</tt?></primary>
+<primary>tags!<command>version</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>version@<tt?>version</tt?> tag</primary>
+<primary>version@<command>version</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>version</tt?> tag defines the version of the software being
+The <command>version</command> tag defines the version of the software being
 packaged.  The version specified should be as close as possible to the
 format of the original software's version.  In most cases, there should be
 no problem specifying the version just as the software's original developer
@@ -242,7 +242,7 @@ Illegal '-' char in version: 1.0-a
 Spaces in the version will also cause problems, in that anything after the
 first space will be ignored by RPM.  Bottom line: Stick with alphanumeric
 characters and periods, and you'll never have to worry about it.  Here's a
-sample <tt?>version</tt?> tag:
+sample <command>version</command> tag:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -253,23 +253,23 @@ Version: 1.2
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>release</tt?> Tag</title>
+<title>The <command>release</command> Tag</title>
 <!-- label: inside-release -->
 <indexterm>
-<primary>tags!<tt?>release</tt?></primary>
+<primary>tags!<command>release</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>release@<tt?>release</tt?> tag</primary>
+<primary>release@<command>release</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>release</tt?> tag can be thought of as the <emphasis>package's</emphasis>
+The <command>release</command> tag can be thought of as the <emphasis>package's</emphasis>
 version.  The release is traditionally an integer ---  for example, when a
 specific piece of software at a particular version is first packaged, the
 release should be "<tt?>1</tt?>".  If it is necessary to repackage that
@@ -284,7 +284,7 @@ what your release means.
 
 It is up to the package builder to determine which build represents a new
 release and to update the release manually.  Here is what a typical
-<tt?>release</tt?> tag might look like:
+<command>release</command> tag might look like:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -300,32 +300,32 @@ Release: 5
 <title>Descriptive Tags</title>
 These tags provide information primarily for people who want to know a bit
 more about the package, and who produced it.  They are part of the package
-file, and most of them can be seen by issuing an <tt?>rpm -qi</tt?> command.
+file, and most of them can be seen by issuing an <command>rpm -qi</command> command.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%description</tt?> Tag</title>
+<title>The <command>%description</Command> Tag</title>
 <!-- label: inside-description -->
 <indexterm>
-<primary>tags!<tt?>%description</tt?></primary>
+<primary>tags!<command>%description</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>description@<tt?>%description</tt?> tag</primary>
+<primary>description@<command>%description</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%description</tt?> tag is used to provide an in-depth description
+The <command>%description</command> tag is used to provide an in-depth description
 of the packaged software.  The description should be several sentences
 describing, to an uninformed user, what the software does.
 
-The <tt?>%description</tt?> tag is a bit different than the other tags in
+The <command>%description</command> tag is a bit different than the other tags in
 the preamble.  For one, it starts with a percent sign.  The other
-difference is that the data specified by the <tt?>%description</tt?> tag can
+difference is that the data specified by the <command>%description</command> tag can
 span more than one line.  In addition, a primitive formatting capability
 exists.  If a line starts with a space, that line will be displayed
 verbatim by RPM.  Lines that do not start with a space are assumed to be
@@ -381,26 +381,26 @@ the text into two paragraphs.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>summary</tt?> Tag</title>
+<title>The <command>summary</command> Tag</title>
 <!-- label: inside-summary -->
 <indexterm>
-<primary>tags!<tt?>summary</tt?></primary>
+<primary>tags!<command>summary</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>summary@<tt?>summary</tt?> tag</primary>
+<primary>summary@<command>summary</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>summary</tt?> tag is used to define a one-line description of the
-packaged software.  Unlike <tt?>%description</tt?>, <tt?>summary</tt?> is
+The <command>summary</command> tag is used to define a one-line description of the
+packaged software.  Unlike <command>%description</command>, <command>summary</command> is
 restricted to one line.  RPM uses it when a succinct description of the
-package is needed.  Here is an example of a <tt?>summary</tt?> line:
+package is needed.  Here is an example of a <command>summary</command> line:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -411,23 +411,23 @@ Summary: A CD player app that rocks!
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>copyright</tt?> Tag</title>
+<title>The <command>copyright</command> Tag</title>
 <!-- label: inside-copyright -->
 <indexterm>
-<primary>tags!<tt?>copyright</tt?></primary>
+<primary>tags!<command>copyright</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>copyright@<tt?>copyright</tt?> tag</primary>
+<primary>copyright@<command>copyright</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>copyright</tt?> tag is used to define the copyright terms applicable
+The <command>copyright</command> tag is used to define the copyright terms applicable
 to the software being packaged.  In many cases, this might be nothing more
 than "<tt?>GPL</tt?>", for software distributed under the terms of the GNU
 General Public License, or something similar.  For example:
@@ -441,28 +441,28 @@ Copyright: GPL
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>distribution</tt?> Tag</title>
+<title>The <command>distribution</command> Tag</title>
 <!-- label: inside-distribution -->
 <indexterm>
-<primary>tags!<tt?>distribution</tt?></primary>
+<primary>tags!<command>distribution</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>distribution@<tt?>distribution</tt?> tag</primary>
+<primary>distribution@<command>distribution</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>distribution</tt?> tag is used to define a group of packages, of
+The <command>distribution</command> tag is used to define a group of packages, of
 which this package is a part.    Since Red Hat <!-- *** RED HAT *** -->Software is in the business
 of producing a group of packages known as a Linux <emphasis>distribution</emphasis>, the
 name stuck.  For example, if a suite of applications known as "Doors
 '95" were produced, each package that is part of the suite would define
-its <tt?>distribution</tt?> line like this:
+its <command>distribution</command> line like this:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -473,23 +473,23 @@ Distribution: Doors '95
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>icon</tt?> Tag</title>
+<title>The <command>icon</command> Tag</title>
 <!-- label: inside-icon -->
 <indexterm>
-<primary>tags!<tt?>icon</tt?></primary>
+<primary>tags!<command>icon</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>icon@<tt?>icon</tt?> tag</primary>
+<primary>icon@<command>icon</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>icon</tt?> tag is used to name a file containing an icon
+The <command>icon</command> tag is used to name a file containing an icon
 representing the packaged software.  The file may be in either GIF or XPM
 format, although XPM is preferred.  In either case, the background of the
 icon should be transparent.  The file should be placed in RPM's
@@ -499,7 +499,7 @@ needed.
 The icon is normally used by graphically-oriented front ends to RPM.  RPM
 itself doesn't use the icon, but it's stored in the package file and
 retained in RPM's database after the package is installed.  An example
-<tt?>icon</tt?> tag might look like:
+<command>icon</command> tag might look like:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -510,23 +510,23 @@ Icon: foo.xpm
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>vendor</tt?> Tag</title>
+<title>The <command>vendor</command> Tag</title>
 <!-- label: inside-vendor -->
 <indexterm>
-<primary>tags!<tt?>vendor</tt?></primary>
+<primary>tags!<command>vendor</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>vendor@<tt?>vendor</tt?> tag</primary>
+<primary>vendor@<command>vendor</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>vendor</tt?> tag is used to define the name of the entity that is
+The <command>vendor</command> tag is used to define the name of the entity that is
 responsible for packaging the software.  Normally, this would be the name
 of an organization.  Here's an example:
 
@@ -539,17 +539,17 @@ Vendor: White Socks Software, Inc.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>url</tt?> Tag</title>
+<title>The <command>url</command> Tag</title>
 <!-- label: inside-url -->
 <indexterm>
-<primary>tags!<tt?>url</tt?></primary>
+<primary>tags!<command>url</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>url@<tt?>url</tt?> tag</primary>
+<primary>url@<command>url</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -562,7 +562,7 @@ Vendor: White Socks Software, Inc.
 <see></see>
 </indexterm>
 
-The <tt?>url</tt?> tag is used to define a Uniform Resource Locator that can
+The <command>url</command> tag is used to define a Uniform Resource Locator that can
 be used to obtain additional information about the packaged software.  At
 present, RPM doesn't actively make use of this tag.  The data is stored in
 the package however, and will be written into RPM's database when the
@@ -579,23 +579,23 @@ URL: http://www.gnomovision.com/cdplayer.html
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>group</tt?> Tag</title>
+<title>The <command>group</command> Tag</title>
 <!-- label: inside-group -->
 <indexterm>
-<primary>tags!<tt?>group</tt?></primary>
+<primary>tags!<command>group</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>group@<tt?>group</tt?> tag</primary>
+<primary>group@<command>group</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>group</tt?> tag is used to group packages together by the types of
+The <command>group</command> tag is used to group packages together by the types of
 functionality they provide.  The group specification looks like a path and
 is similar in function, in that it specifies more general groupings before
 more detailed ones.  For example, a package containing a text editor might
@@ -617,7 +617,7 @@ spreadsheet package might have this group:
 Group: Applications/Spreadsheets
 </screen>
 </figure>
-This <tt?>group</tt?> tag indicates that under the <tt?>Applications</tt?>
+This <command>group</command> tag indicates that under the <tt?>Applications</tt?>
 group, we would find <tt?>Editors</tt?> and <tt?>Spreadsheets</tt?>, and
 probably some other subgroups as well.
 
@@ -636,29 +636,29 @@ directory.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>packager</tt?> Tag</title>
+<title>The <command>packager</command> Tag</title>
 <!-- label: inside-packager -->
 <indexterm>
-<primary>tags!<tt?>packager</tt?></primary>
+<primary>tags!<command>packager</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>packager@<tt?>packager</tt?> tag</primary>
+<primary>packager@<command>packager</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>packager</tt?> tag is used to hold the name and contact information
+The <command>packager</command> tag is used to hold the name and contact information
 for the person or persons who built the package.  Normally, this would be
 the person that actually built the package, or in a larger organization, a
 public relations contact.  In either case, contact information such as an
 e-mail address or phone number should be included, so customers can send
 either money or hate mail, depending on their satisfaction with the
-packaged software.  Here's an example of a <tt?>packager</tt?> tag:
+packaged software.  Here's an example of a <command>packager</command> tag:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -688,30 +688,30 @@ requires some forethought.  For additional information on RPM's dependency
 processing, please review chapter <xref linkend="rpm-depend">.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>provides</tt?> Tag</title>
+<title>The <command>provides</command> Tag</title>
 <!-- label: inside-provides -->
 <indexterm>
-<primary>tags!<tt?>provides</tt?></primary>
+<primary>tags!<command>provides</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>provides@<tt?>provides</tt?> tag</primary>
+<primary>provides@<command>provides</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>provides</tt?> tag is used to specify a "virtual package" that the
+The <command>provides</command> tag is used to specify a "virtual package" that the
 packaged software makes available when it is installed.  Normally, this tag
 would be used when different packages provide equivalent services.  For
 example, any package that allows a user to read mail might provide the
 <tt?>mail-reader</tt?> virtual package.  Another package that depends on a
 mail reader of some sort, could require the <tt?>mail-reader</tt?> virtual
 package.  It would then install without dependency problems, if any one of
-several mail programs were installed.  Here's what a <tt?>provides</tt?> tag
+several mail programs were installed.  Here's what a <command>provides</command> tag
 might look like:
 
 <figure id="sc-rpm-inside-">
@@ -723,31 +723,31 @@ Provides: mail-reader
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>requires</tt?> Tag</title>
+<title>The <command>requires</command> Tag</title>
 <!-- label: inside-requires -->
 <indexterm>
-<primary>tags!<tt?>requires</tt?></primary>
+<primary>tags!<command>requires</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>requires@<tt?>requires</tt?> tag</primary>
+<primary>requires@<command>requires</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>requires</tt?> tag is used to alert RPM to the fact that the package
+The <command>requires</command> tag is used to alert RPM to the fact that the package
 needs to have certain capabilities available in order to operate properly.
 These capabilities refer to the name of another package, or to a virtual
-package provided by one or more packages that use the <tt?>provides</tt?>
-tag.  When the <tt?>requires</tt?> tag references a package name, version
+package provided by one or more packages that use the <command>provides</command>
+tag.  When the <command>requires</command> tag references a package name, version
 comparisons may also be included by following the package name with
 <tt?>&lt;</tt?>, <tt?>&gt;</tt?>, <tt?>=</tt?>, <tt?>&gt;=</tt?>, or <tt?>&lt;=</tt?>, and a
 version specification.  To get even more specific, a package's release may
-be included as well.  Here's a <tt?>requires</tt?> tag in action, with a
+be included as well.  Here's a <command>requires</command> tag in action, with a
 specific version requirement:
 
 <figure id="sc-rpm-inside-">
@@ -756,8 +756,8 @@ specific version requirement:
 Requires: playmidi = 2.3
 </screen>
 </figure>
-If the <tt?>Requires</tt?> tag needs to perform a comparison against a serial
-number defined with the <tt?>serial</tt?> tag (described below), then the
+If the <command>Requires</command> tag needs to perform a comparison against a serial
+number defined with the <command>serial</command> tag (described below), then the
 proper format would be:
 
 <figure id="sc-rpm-inside-">
@@ -769,31 +769,31 @@ Requires: playmidi =S 4
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>conflicts</tt?> Tag</title>
+<title>The <command>conflicts</command> Tag</title>
 <!-- label: inside-conflicts -->
 <indexterm>
-<primary>tags!<tt?>conflicts</tt?></primary>
+<primary>tags!<command>conflicts</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>conflicts@<tt?>conflicts</tt?> tag</primary>
+<primary>conflicts@<command>conflicts</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>conflicts</tt?> tag is the logical complement to the
-<tt?>requires</tt?> tag.  The <tt?>requires</tt?> tag is used to specify what
+The <command>conflicts</command> tag is the logical complement to the
+<command>requires</command> tag.  The <command>requires</command> tag is used to specify what
 packages <emphasis>must</emphasis> be present in order for the current package to operate
-properly.  The <tt?>conflicts</tt?> tag is used to specify what packages
+properly.  The <command>conflicts</command> tag is used to specify what packages
 <emphasis>cannot</emphasis> be installed if the current package is to operate properly.
 
-The <tt?>conflicts</tt?> tag has the same format as the <tt?>requires</tt?>
+The <command>conflicts</command> tag has the same format as the <command>requires</command>
 tag --- namely, the tag is followed by a real or virtual package name.
-Like <tt?>requires</tt?>, the <tt?>conflicts</tt?> tag also accepts version and
+Like <command>requires</command>, the <command>conflicts</command> tag also accepts version and
 release specifications:
 
 <figure id="sc-rpm-inside-">
@@ -802,8 +802,8 @@ release specifications:
 Conflicts: playmidi = 2.3-1
 </screen>
 </figure>
-If the <tt?>conflicts</tt?> tag needs to perform a comparision against a
-serial number defined with the <tt?>serial</tt?> tag (described below), then
+If the <command>conflicts</command> tag needs to perform a comparision against a
+serial number defined with the <command>serial</command> tag (described below), then
 the proper format would be:
 
 <figure id="sc-rpm-inside-">
@@ -815,23 +815,23 @@ Conflicts: playmidi =S 4
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>serial</tt?> Tag</title>
+<title>The <command>serial</command> Tag</title>
 <!-- label: inside-serial -->
 <indexterm>
-<primary>tags!<tt?>serial</tt?></primary>
+<primary>tags!<command>serial</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>serial@<tt?>serial</tt?> tag</primary>
+<primary>serial@<command>serial</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>serial</tt?> tag is another part of RPM's dependency and upgrade
+The <command>serial</command> tag is another part of RPM's dependency and upgrade
 processing.  The need for it is somewhat obscure, but goes something like
 this:
 
@@ -859,7 +859,7 @@ Since RPM is unable to compare package <emphasis>A</emphasis>'s version against 
 version specified by package <emphasis>B</emphasis>, there is no way to determine if
 package <emphasis>B</emphasis>'s dependency requirements can be met.  What to do?
 
-The <tt?>serial</tt?> tag provides a way to get around this tricky
+The <command>serial</command> tag provides a way to get around this tricky
 problem.  By specifying a simple integer serial number for each version,
 you are, in essence, directing how RPM interprets the relative age of the
 package.  The key point to keep in mind is that in order for this to work,
@@ -874,7 +874,7 @@ in the position of needing to use this tag, take a deep breath and
 seriously consider changing the way you assign version numbers.  If you're
 packaging someone else's software, perhaps you can convince them to make
 the change. Chances are, if RPM can't figure out the version number, most
-people can't, either!  An example <tt?>serial</tt?> tag would look something
+people can't, either!  An example <command>serial</command> tag would look something
 like this:
 
 <figure id="sc-rpm-inside-">
@@ -889,23 +889,23 @@ package without a serial number.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>autoreqprov</tt?> Tag</title>
+<title>The <command>autoreqprov</command> Tag</title>
 <!-- label: inside-autoreqprov -->
 <indexterm>
-<primary>tags!<tt?>autoreqprov</tt?></primary>
+<primary>tags!<command>autoreqprov</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>autoreqprov@<tt?>autoreqprov</tt?> tag</primary>
+<primary>autoreqprov@<command>autoreqprov</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>autoreqprov</tt?> tag is used to control the automatic dependency
+The <command>autoreqprov</command> tag is used to control the automatic dependency
 processing performed when the package is being built.  Normally, as each
 package is built, the following steps are performed:
 
@@ -931,7 +931,7 @@ added to the package's list of "provides" information.
 By doing this, RPM reduces the need for package builders to manually add
 dependency information to their packages.  However, there are times when
 RPM's automatic dependency processing may not be desirable.  In those cases
-the <tt?>autoreqprov</tt?> tag can be used to disable automatic dependency
+the <command>autoreqprov</command> tag can be used to disable automatic dependency
 processing.
 
 To disable automatic dependency processing, add the following line:
@@ -944,7 +944,7 @@ AutoReqProv: no
 </figure>
 (The number zero may be used instead of <tt?>no</tt?>)  Although RPM defaults
 to performing automatic dependency processing, the effect of the
-<tt?>autoreqprov</tt?> tag can be reversed by changing <tt?>no</tt?> to
+<command>autoreqprov</command> tag can be reversed by changing <tt?>no</tt?> to
 <tt?>yes</tt?>.  (The number one may be used instead of <tt?>yes</tt?>)
 
 </sect3>
@@ -990,23 +990,23 @@ complete discussion of multi-architecture package building, please see
 chapter <xref linkend="rpm-multi">.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>excludearch</tt?> Tag</title>
+<title>The <command>excludearch</command> Tag</title>
 <!-- label: inside-excludearch -->
 <indexterm>
-<primary>tags!<tt?>excludearch</tt?></primary>
+<primary>tags!<command>excludearch</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>excludearch@<tt?>excludearch</tt?> tag</primary>
+<primary>excludearch@<command>excludearch</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>excludearch</tt?> tag directs RPM to ensure that the package does
+The <command>excludearch</command> tag directs RPM to ensure that the package does
 <emphasis>not</emphasis> attempt to build on the excluded architecture(s).  The reasons
 for preventing a package from building on a certain architecture might
 include:
@@ -1036,7 +1036,7 @@ features of a given architecture, should be excluded from building on a
 different architecture.  Assembly language programs would fall into this
 category.
 
-One or more architectures may be specified after the <tt?>excludearch</tt?>
+One or more architectures may be specified after the <command>excludearch</command>
 tag, separated by either spaces or commas.  Here is an example:
 
 <figure id="sc-rpm-inside-">
@@ -1061,40 +1061,40 @@ cdplayer-1.0.spec doesn't build on this architecture
 </screen>
 </figure>
 Note that if your goal is to ensure that a package will only build on
-<emphasis>one</emphasis> architecture, then you should use the <tt?>exclusivearch</tt?>
+<emphasis>one</emphasis> architecture, then you should use the <command>exclusivearch</command>
 tag.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>exclusivearch</tt?> Tag</title>
+<title>The <command>exclusivearch</command> Tag</title>
 <!-- label: inside-exclusivearch -->
 <indexterm>
-<primary>tags!<tt?>exclusivearch</tt?></primary>
+<primary>tags!<command>exclusivearch</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>exclusivearch@<tt?>exclusivearch</tt?> tag</primary>
+<primary>exclusivearch@<command>exclusivearch</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>exclusivearch</tt?> tag is used to direct RPM to ensure the package
+The <command>exclusivearch</command> tag is used to direct RPM to ensure the package
 is <emphasis>only</emphasis> built on the specified architecture(s).  The reasons for
 this are similar to the those mentioned in the section on the
-<tt?>excludearch</tt?> tag above.  However, the <tt?>exclusivearch</tt?> tag is
+<command>excludearch</command> tag above.  However, the <command>exclusivearch</command> tag is
 useful when the package builder needs to ensure that <emphasis>only</emphasis> the
 specified architectures will build the package.  This tag ensures that no
 future architectures will mistakenly attempt to build the package.  This
-would not be the case if the <tt?>excludearch</tt?> tag were used to specify
+would not be the case if the <command>excludearch</command> tag were used to specify
 every architecture known at the time the package is built.
 
-The syntax of the <tt?>exclusivearch</tt?> tag is identical to that of
-<tt?>excludearch</tt?>:
+The syntax of the <command>exclusivearch</command> tag is identical to that of
+<command>excludearch</command>:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1106,36 +1106,36 @@ In this example, the package will only build on a Sun SPARC or Digital
 Alpha/AXP system.
 
 Note that if your goal is to ensure that a package will <emphasis>not</emphasis> build on
-specific architectures, then you should use the <tt?>excludearch</tt?> tag.
+specific architectures, then you should use the <command>excludearch</command> tag.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>excludeos</tt?> Tag</title>
+<title>The <command>excludeos</command> Tag</title>
 <!-- label: inside-excludeos -->
 <indexterm>
-<primary>tags!<tt?>excludeos</tt?></primary>
+<primary>tags!<command>excludeos</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>excludeos@<tt?>excludeos</tt?> tag</primary>
+<primary>excludeos@<command>excludeos</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>excludeos</tt?> tag is used to direct RPM to ensure that the package
+The <command>excludeos</command> tag is used to direct RPM to ensure that the package
 does <emphasis>not</emphasis> attempt to build on the excluded operating system(s).  This
 is usually necessary when a package is to be built on more than one
 operating system, but it is necessary to keep a particular operating system
 from attempting a build.
 
 Note that if your goal is to ensure that a package will only build on
-<emphasis>one</emphasis> operating system, then you should use the <tt?>exclusiveos</tt?>
-tag.  Here's a sample <tt?>excludeos</tt?> tag:
+<emphasis>one</emphasis> operating system, then you should use the <command>exclusiveos</command>
+tag.  Here's a sample <command>excludeos</command> tag:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1146,26 +1146,26 @@ ExcludeOS: linux irix
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>exclusiveos</tt?> Tag</title>
+<title>The <command>exclusiveos</command> Tag</title>
 <!-- label: inside-exclusiveos -->
 <indexterm>
-<primary>tags!<tt?>exclusiveos</tt?></primary>
+<primary>tags!<command>exclusiveos</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>exclusiveos@<tt?>exclusiveos</tt?> tag</primary>
+<primary>exclusiveos@<command>exclusiveos</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>exclusiveos</tt?> tag has the same syntax as <tt?>excludeos</tt?>, but
-it has the opposite logic.  The <tt?>exclusiveos</tt?> tag is used to denote
+The <command>exclusiveos</command> tag has the same syntax as <command>excludeos</command>, but
+it has the opposite logic.  The <command>exclusiveos</command> tag is used to denote
 which operating system(s) should <emphasis>only</emphasis> be be permitted to build the
-package.  Here's <tt?>exclusiveos</tt?> in action:
+package.  Here's <command>exclusiveos</command> in action:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1174,7 +1174,7 @@ ExclusiveOS: linux
 </screen>
 </figure>
 Note that if your goal is to ensure that a package will <emphasis>not</emphasis> build on
-a specific operating system, then you should use the <tt?>excludeos</tt?>
+a specific operating system, then you should use the <command>excludeos</command>
 tag.
 
 </sect3>
@@ -1189,28 +1189,28 @@ to say collectively about these tags, so let's dive right in and look them
 over.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>prefix</tt?> Tag</title>
+<title>The <command>prefix</command> Tag</title>
 <!-- label: inside-prefix -->
 <indexterm>
-<primary>tags!<tt?>prefix</tt?></primary>
+<primary>tags!<command>prefix</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>prefix@<tt?>prefix</tt?> tag</primary>
+<primary>prefix@<command>prefix</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>prefix</tt?> tag is used when a relocatable package is to be built.
+The <command>prefix</command> tag is used when a relocatable package is to be built.
 A relocatable package can be installed normally or can be installed in a
-user-specified directory, by using RPM's <tt?>--prefix</tt?> install-time
-option.  The data specified after the <tt?>prefix</tt?> tag should be the
+user-specified directory, by using RPM's <command>--prefix</command> install-time
+option.  The data specified after the <command>prefix</command> tag should be the
 part of the package's path that may be changed during installation.  For
-example, if the following <tt?>prefix</tt?> line was included in a spec
+example, if the following <command>prefix</command> line was included in a spec
 file: 
 
 <figure id="sc-rpm-inside-">
@@ -1219,7 +1219,7 @@ file:
 Prefix: /opt
 </screen>
 </figure>
-and the following file was specified in the spec file's <tt?>%files</tt?>
+and the following file was specified in the spec file's <command>%files</command>
 list:
 
 <figure id="sc-rpm-inside-">
@@ -1231,7 +1231,7 @@ list:
 then the file <tt?>foonly</tt?> would be installed in
 <tt?>/opt/blather</tt?> if the package was installed normally.  It would be
 installed in <tt?>/usr/local/blather</tt?> if the package was installed with
-the <tt?>--prefix /usr/local</tt?> option.
+the <command>--prefix /usr/local</command> option.
 
 For more information about creating relocatable packages, see chapter
 <xref linkend="rpm-reloc">.
@@ -1239,28 +1239,28 @@ For more information about creating relocatable packages, see chapter
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>buildroot</tt?> Tag</title>
+<title>The <command>buildroot</command> Tag</title>
 <!-- label: inside-buildroot -->
 <indexterm>
-<primary>tags!<tt?>buildroot</tt?></primary>
+<primary>tags!<command>buildroot</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>buildroot@<tt?>buildroot</tt?> tag</primary>
+<primary>buildroot@<command>buildroot</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>buildroot</tt?> tag is used to define an alternate build root.  The
+The <command>buildroot</command> tag is used to define an alternate build root.  The
 name is a bit misleading, as the build root is actually used when the
 software is <emphasis>installed</emphasis> during the build process.  In order for a
 build root to be defined and actually used, a number of issues must be
 taken into account.  These issues are covered in chapter
-<xref linkend="rpm-anywhere">.  This is what a <tt?>buildroot</tt?> tag would look like:
+<xref linkend="rpm-anywhere">.  This is what a <command>buildroot</command> tag would look like:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1268,8 +1268,8 @@ taken into account.  These issues are covered in chapter
 BuildRoot: /tmp/cdplayer
 </screen>
 </figure>
-The <tt?>buildroot</tt?> tag can be overridden at build-time by using the
-<tt?>--buildroot</tt?> command-line option.
+The <command>buildroot</command> tag can be overridden at build-time by using the
+<command>--buildroot</command> command-line option.
 
 </sect3>
 
@@ -1292,23 +1292,23 @@ The tags that follow are crucial to RPM, so it pays to have a firm grasp of
 how they are used.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>source</tt?> Tag</title>
+<title>The <command>source</command> Tag</title>
 <!-- label: inside-source -->
 <indexterm>
-<primary>tags!<tt?>source</tt?></primary>
+<primary>tags!<command>source</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>source@<tt?>source</tt?> tag</primary>
+<primary>source@<command>source</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>source</tt?> tag is central to nearly every spec file.  Although it
+The <command>source</command> tag is central to nearly every spec file.  Although it
 has only one piece of data associated with it, it actually performs two
 functions:
 
@@ -1341,9 +1341,9 @@ Resource Locator (URL).
 </indexterm>
 
   The URL should point directly to the source file
-itself.  This is due to the <tt?>source</tt?> tag's second function.
+itself.  This is due to the <command>source</command> tag's second function.
 
-As mentioned above, the <tt?>source</tt?> tag also needs to direct RPM to the
+As mentioned above, the <command>source</command> tag also needs to direct RPM to the
 source file on the build system.  How does it do this?  There's only one
 requirement, and it is ironclad:  The source filename must be at the end of
 the line as the final element in a path.  Here's an example:
@@ -1354,17 +1354,17 @@ the line as the final element in a path.  Here's an example:
 Source: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
 </screen>
 </figure>
-Given this <tt?>source</tt?> line, RPM will search its <tt?>SOURCES</tt?>
+Given this <command>source</command> line, RPM will search its <tt?>SOURCES</tt?>
 directory for <tt?>cdplayer-1.0.tgz</tt?>.  Everything prior to the filename
 is ignored by RPM.  It's there strictly for any interested humans.
 
-A spec file may contain more than one <tt?>source</tt?> tag.  This is
+A spec file may contain more than one <command>source</command> tag.  This is
 necessary for those cases where the software being packaged is contained in
-more than one source file.  However, the <tt?>source</tt?> tags must be
+more than one source file.  However, the <command>source</command> tags must be
 uniquely identified.  This is done by appending a number to the end of the
 tag itself.  In fact, RPM does this internally for the first
-<tt?>source</tt?> tag in a spec file, in essence turning it into
-<tt?>source0</tt?>.  Therefore, if a package contains two source files, they
+<command>source</command> tag in a spec file, in essence turning it into
+<command>source0</command>.  Therefore, if a package contains two source files, they
 may either be specified as:
 
 <figure id="sc-rpm-inside-">
@@ -1388,23 +1388,23 @@ Either approach may be used.  The choice is yours.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>nosource</tt?> Tag</title>
+<title>The <command>nosource</command> Tag</title>
 <!-- label: rpm-nosource --><!-- label: inside-nosource -->
 <indexterm>
-<primary>tags!<tt?>nosource</tt?></primary>
+<primary>tags!<command>nosource</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>nosource@<tt?>nosource</tt?> tag</primary>
+<primary>nosource@<command>nosource</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>nosource</tt?> tag is used to direct RPM to omit one or more source
+The <command>nosource</command> tag is used to direct RPM to omit one or more source
 files from the source package.  Why would someone want to go to the trouble
 of specifying a source file, only to exclude it?  The reasons for this can
 be varied, but let's look at one example: The software known as Pretty Good
@@ -1431,12 +1431,12 @@ software was not a part of the source package, this sanitized source
 package could be downloaded legally in any country.  The person that
 downloaded a copy could then go about legally obtaining the PGP sources
 themselves, place them in RPM's <tt?>SOURCES</tt?> directory, and create a
-binary package.  They wouldn't even need to change the <tt?>nosource</tt?>
-tag.  One <tt?>rpm -ba</tt?> command later, and the user would have a
+binary package.  They wouldn't even need to change the <command>nosource</command>
+tag.  One <command>rpm -ba</command> command later, and the user would have a
 perfectly usable PGP binary package file.
 
-Since there may be more than one <tt?>source</tt?> tag in a spec file, the
-format of the <tt?>nosource</tt?> tag is as follows:
+Since there may be more than one <command>source</command> tag in a spec file, the
+format of the <command>nosource</command> tag is as follows:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1444,10 +1444,10 @@ format of the <tt?>nosource</tt?> tag is as follows:
 nosource: &lt;src-num&gt;, &lt;src-num&gt;&hellip;&lt;src-num&gt;
 </screen>
 </figure>
-The <tt?>&lt;src-num&gt;</tt?> represents the number following the <tt?>source</tt?>
+The <command>&lt;src-num&gt;</command> represents the number following the <command>source</command>
 tag.  If there is more than one number in the list, they may be separated
 by either commas or spaces.  For example, consider a package containing the
-following <tt?>source</tt?> tags:
+following <command>source</command> tags:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -1459,7 +1459,7 @@ source3: bother-lib-1.2.tar.gz
 </screen>
 </figure>
 If the source files for <tt?>blather</tt?> and <tt?>blather-lib</tt?> were not
-to be included in the package, the following <tt?>nosource</tt?> line could
+to be included in the package, the following <command>nosource</command> line could
 be added:
 
 <figure id="sc-rpm-inside-">
@@ -1469,28 +1469,28 @@ NoSource: 0, 3
 </screen>
 </figure>
 What about that <tt?>0</tt?>?  Keep in mind that the first unnumbered
-<tt?>source</tt?> tag in a spec file is automatically numbered 0 by RPM.
+<command>source</command> tag in a spec file is automatically numbered 0 by RPM.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>patch</tt?> Tag</title>
+<title>The <command>patch</command> Tag</title>
 <!-- label: inside-patch -->
 <indexterm>
-<primary>tags!<tt?>patch</tt?></primary>
+<primary>tags!<command>patch</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>patch@<tt?>patch</tt?> tag</primary>
+<primary>patch@<command>patch</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>patch</tt?> tag is used to identify which patches are associated
+The <command>patch</command> tag is used to identify which patches are associated
 with the software being packaged.  The patch files are kept in RPM's
 <tt?>SOURCES</tt?> directory, so only the name of the patch file should be
 specified.  Here is an example:
@@ -1509,7 +1509,7 @@ above, the patch file contains changes necessary to bring the software into
 compliance with the Linux File System Standard, hence the <tt?>fsstnd</tt?>
 magic incantation.
 
-RPM processes <tt?>patch</tt?> tags the same way it does <tt?>source</tt?>
+RPM processes <command>patch</command> tags the same way it does <command>source</command>
 tags.  Therefore, it's acceptable to use a Uniform Resource Locator (URL)
 
 <indexterm>
@@ -1519,14 +1519,14 @@ tags.  Therefore, it's acceptable to use a Uniform Resource Locator (URL)
 <see></see>
 </indexterm>
 
-on a <tt?>patch</tt?> line, too.
+on a <command>patch</command> line, too.
 
-A spec file may contain more than one <tt?>patch</tt?> tag.  This is
+A spec file may contain more than one <command>patch</command> tag.  This is
 necessary for those cases where the software being packaged requires more
-than one patch.  However, the <tt?>patch</tt?> tags must be uniquely
+than one patch.  However, the <command>patch</command> tags must be uniquely
 identified.  This is done by appending a number to the end of the tag
-itself.  In fact, RPM does this internally for the first <tt?>patch</tt?> tag
-in a spec file, in essence turning it into <tt?>patch0</tt?>.  Therefore, if
+itself.  In fact, RPM does this internally for the first <command>patch</command> tag
+in a spec file, in essence turning it into <command>patch0</command>.  Therefore, if
 a package contains three patches, the following two methods of specifying
 them are equivalent:
 
@@ -1553,31 +1553,31 @@ Either approach may be used, but the second method looks nicer.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>nopatch</tt?> Tag</title>
+<title>The <command>nopatch</command> Tag</title>
 <!-- label: inside-nopatch -->
 <indexterm>
-<primary>tags!<tt?>nopatch</tt?></primary>
+<primary>tags!<command>nopatch</command></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>nopatch@<tt?>nopatch</tt?> tag</primary>
+<primary>nopatch@<command>nopatch</command> tag</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>nopatch</tt?> tag is similar to the <tt?>nosource</tt?> tag discussed
-earlier.  Just like the <tt?>nosource</tt?> tag, the <tt?>nopatch</tt?> tag is
+The <command>nopatch</command> tag is similar to the <command>nosource</command> tag discussed
+earlier.  Just like the <command>nosource</command> tag, the <command>nopatch</command> tag is
 used to direct RPM to omit something from the source package.  In the case
-of <tt?>nosource</tt?>, that "something" was one or more sources.  For the
-<tt?>nopatch</tt?> tag, the "something" is one or more patches.
+of <command>nosource</command>, that "something" was one or more sources.  For the
+<command>nopatch</command> tag, the "something" is one or more patches.
 
-Since each <tt?>patch</tt?> tag in a spec file must be numbered, the
-<tt?>nopatch</tt?> tag uses those numbers to specify which patches are not to
-be included in the package.  The <tt?>nopatch</tt?> tag is used in this
+Since each <command>patch</command> tag in a spec file must be numbered, the
+<command>nopatch</command> tag uses those numbers to specify which patches are not to
+be included in the package.  The <command>nopatch</command> tag is used in this
 manner:
 
 <figure id="sc-rpm-inside-">
@@ -1586,8 +1586,8 @@ manner:
 NoPatch: 2 3
 </screen>
 </figure>
-In this example, the source files specified on the <tt?>source2</tt?> and
-<tt?>source3</tt?> lines are not to be included in the build.
+In this example, the source files specified on the <command>source2</command> and
+<command>source3</command> lines are not to be included in the build.
 
 This concludes our study of RPM's tags.  In the next section, we'll look at
 the various scripts that RPM uses to build, as well as to install, and
@@ -1621,7 +1621,7 @@ contain scripts that perform a variety of tasks whenever the package is
 installed or erased.
 
 The start of each script is denoted by a keyword.  For example, the
-<tt?>%build</tt?> keyword marks the start of the script RPM will execute
+<command>%build</command> keyword marks the start of the script RPM will execute
 when building the software to be packaged.  It should be noted that, in the
 strictest sense of the word, these parts of the spec file are not scripts.
 For example, they do not start with the traditional invocation of a shell.
@@ -1675,7 +1675,7 @@ Cleaning up.
 
 </itemizedlist>
 Although each of the scripts perform a specific function in the build
-process, they share a common environment.  Using RPM's <tt?>--test</tt?>
+process, they share a common environment.  Using RPM's <command>--test</command>
 option
 <footnote>
 <para>
@@ -1684,8 +1684,8 @@ Described in section <xref linkend="build--test">.
 </footnote>
 , we can see the
 common portion of each script.  In the following example, we've taken the
-<tt?>cdplayer</tt?> package, issued an <tt?>rpm -ba --test
-cdplayer-1.0-1.spec</tt?>, and viewed the script files left in RPM's temporary
+<tt?>cdplayer</tt?> package, issued an <command>rpm -ba --test
+cdplayer-1.0-1.spec</command>, and viewed the script files left in RPM's temporary
 directory.  This section (with the appropriate package-specific values) is
 present in every script RPM executes during a build:
 
@@ -1727,9 +1727,9 @@ description of each one:
 <listitem>
 <para>
 <tt?>RPM_SOURCE_DIR</tt?> --- This environment variable gets its
-value from the rpmrc file entry <tt?>sourcedir</tt?>, which in turn can get
-part of its value from the <tt?>topdir</tt?> entry.  It is the path RPM will
-prepend to the file, specified in the <tt?>source</tt?> tag line.
+value from the rpmrc file entry <command>sourcedir</command>, which in turn can get
+part of its value from the <command>topdir</command> entry.  It is the path RPM will
+prepend to the file, specified in the <command>source</command> tag line.
 
 </para>
 </listitem>
@@ -1737,8 +1737,8 @@ prepend to the file, specified in the <tt?>source</tt?> tag line.
 <listitem>
 <para>
 <tt?>RPM_BUILD_DIR</tt?> --- This variable is based on the
-<tt?>builddir</tt?> rpmrc file entry, which in turn can get part of its value
-from the <tt?>topdir</tt?> entry.  This environment variable translates to
+<command>builddir</command> rpmrc file entry, which in turn can get part of its value
+from the <command>topdir</command> entry.  This environment variable translates to
 the path of RPM's build directory, where most software will be unpacked and
 built.
 
@@ -1748,9 +1748,9 @@ built.
 <listitem>
 <para>
 <tt?>RPM_DOC_DIR</tt?> --- The value of this environment variable is
-based on the <tt?>defaultdocdir</tt?> <tt?>rpmrc</tt?> file entry.  Files
-marked with the <tt?>%doc</tt?> directive can be installed in a subdirectory
-of <tt?>defaultdocdir</tt?>.  For more information on the <tt?>%doc</tt?>
+based on the <command>defaultdocdir</command> <tt?>rpmrc</tt?> file entry.  Files
+marked with the <command>%doc</command> directive can be installed in a subdirectory
+of <command>defaultdocdir</command>.  For more information on the <command>%doc</command>
 directive, refer to section <xref linkend="rpm-macros-doc">.
 
 </para>
@@ -1759,10 +1759,10 @@ directive, refer to section <xref linkend="rpm-macros-doc">.
 <listitem>
 <para>
 <tt?>RPM_OPT_FLAGS</tt?> --- This environment variable gets its value
-from the <tt?>optflags</tt?> <tt?>rpmrc</tt?> file entry.  It contains options
+from the <command>optflags</command> <tt?>rpmrc</tt?> file entry.  It contains options
 that can be passed on to the build procedures of the software being
 packaged.  Normally this means either a configuration script or the
-<tt?>make</tt?> command itself.
+<command>make</command> command itself.
 
 </para>
 </listitem>
@@ -1797,7 +1797,7 @@ option, spec file tag line, or rpmrc file entry), this variable will be null.
 <listitem>
 <para>
 <tt?>RPM_PACKAGE_NAME</tt?> --- This environment variable gets its value
-from the <tt?>name</tt?> tag line in the package's spec file.  It contains
+from the <command>name</command> tag line in the package's spec file.  It contains
 the name of the software being packaged.
 
 </para>
@@ -1805,7 +1805,7 @@ the name of the software being packaged.
 
 <listitem>
 <para>
-<tt?>RPM_PACKAGE_VERSION</tt?> --- The <tt?>version</tt?> tag line is the
+<tt?>RPM_PACKAGE_VERSION</tt?> --- The <command>version</command> tag line is the
 source of this variable's translation.  Predictably, this environment
 variable contains the software's version number.
 
@@ -1816,7 +1816,7 @@ variable contains the software's version number.
 <para>
 <tt?>RPM_PACKAGE_RELEASE</tt?> --- This environment variable contains
 the package's release number.  Its value is obtained from the
-<tt?>release</tt?> tag line in the spec file.
+<command>release</command> tag line in the spec file.
 
 </para>
 </listitem>
@@ -1839,23 +1839,23 @@ permissions are set.  Past this point, the scripts differ.  Let's look at
 the scripts in the order they are executed.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%prep</tt?> Script</title>
+<title>The <command>%prep</command> Script</title>
 <!-- label: inside-prep -->
 <indexterm>
-<primary>prep@<tt?>%prep</tt?> script</primary>
+<primary>prep@<command>%prep</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%prep</tt?> script is the first script RPM executes during a
-build.  Prior to the <tt?>%prep</tt?> script, RPM has performed preliminary
-consistency checks, such as whether the spec file's <tt?>source</tt?> tag
+The <command>%prep</command> script is the first script RPM executes during a
+build.  Prior to the <command>%prep</command> script, RPM has performed preliminary
+consistency checks, such as whether the spec file's <command>source</command> tag
 points to files that actually exist.  Just prior to passing control over to
-the <tt?>%prep</tt?> script's contents, RPM changes directory into RPM's
+the <command>%prep</command> script's contents, RPM changes directory into RPM's
 build area, which, by default, is <tt?>/usr/src/redhat/BUILD</tt?>.
 
-At that point, it is the responsibility of the <tt?>%prep</tt?> script to:
+At that point, it is the responsibility of the <command>%prep</command> script to:
 
 <itemizedlist mark="bullet">
 <listitem>
@@ -1891,16 +1891,16 @@ ready-to-build state.
 The first three items on this list are common to the vast majority of all
 software being packaged.  Because of this, RPM has two macros that greatly
 simplify these routine functions.  More information on RPM's
-<tt?>%setup</tt?> and <tt?>%patch</tt?> macros can be found in section
+<command>%setup</command> and <command>%patch</command> macros can be found in section
 <xref linkend="rpm-macros">.
 
 The last item on the list can include creating directories or anything else
 required to get the sources in a ready-to-build state.  As a result, a
-<tt?>%prep</tt?> script can range from one line invoking a single
-<tt?>%setup</tt?> macro, to many lines of tricky shell programming.
+<command>%prep</command> script can range from one line invoking a single
+<command>%setup</command> macro, to many lines of tricky shell programming.
 
 <indexterm>
-<primary>prep@<tt?>%prep</tt?> script|)</primary>
+<primary>prep@<command>%prep</command> script|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -1909,35 +1909,35 @@ required to get the sources in a ready-to-build state.  As a result, a
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%build</tt?> Script</title>
+<title>The <command>\%build</command> Script</title>
 <!-- label: inside-build -->
 <indexterm>
-<primary>build@<tt?>%build</tt?> script</primary>
+<primary>build@<command>%build</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%build</tt?> script picks up where the <tt?>%prep</tt?> script
-left off.  Once the <tt?>%prep</tt?> script has gotten everything ready
-for the build, the <tt?>%build</tt?> script is usually somewhat
-anti-climactic --- normally invoking <tt?>make</tt?>, maybe a configuration
+The <command>%build</command> script picks up where the <command>%prep</command> script
+left off.  Once the <command>%prep</command> script has gotten everything ready
+for the build, the <command>%build</command> script is usually somewhat
+anti-climactic --- normally invoking <command>make</command>, maybe a configuration
 script, and little else.
 
-Like <tt?>%prep</tt?> before it, the <tt?>%build</tt?> script has the same
+Like <command>%prep</command> before it, the <command>%build</command> script has the same
 assortment of environment variables to draw on.  Also, like
-<tt?>%prep</tt?>, <tt?>%build</tt?> changes directory into the software's
+<command>%prep</command>, <command>%build</command> changes directory into the software's
 top-level build directory (located in <tt?>RPM_BUILD_DIR</tt?>, or usually
-called <tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis>).
+called <command><emphasis>&lt;name&gt;-&lt;version&gt;</command></emphasis>).
 
-Unlike <tt?>%prep</tt?>, there are no macros available for use in the
-<tt?>%build</tt?> script.  The reason is simple: Either the commands
-required to build the software are simple (such as a single <tt?>make</tt?>
+Unlike <command>%prep</command>, there are no macros available for use in the
+<command>%build</command> script.  The reason is simple: Either the commands
+required to build the software are simple (such as a single <command>make</command>
 command), or they are so unique that a macro wouldn't make it easier to
 write the script.
 
 <indexterm>
-<primary>build@<tt?>%build</tt?> script|)</primary>
+<primary>build@<command>%build</command> script|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -1946,27 +1946,27 @@ write the script.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%install</tt?> Script</title>
+<title>The <command>\%install</command> Script</title>
 <!-- label: inside-install -->
 <indexterm>
-<primary>install@<tt?>%install</tt?> script</primary>
+<primary>install@<command>%install</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The environment in which the <tt?>%install</tt?> script executes is
+The environment in which the <command>%install</command> script executes is
 identical to the other scripts.  Like the other scripts, the
-<tt?>%install</tt?> script's working directory is set to the software's
+<command>%install</command> script's working directory is set to the software's
 top-level directory.
 
 As the name implies, it is this script's responsibility to do whatever is
 necessary to actually install the newly built software.  In most cases,
-this means a single <tt?>make install</tt?> command, or a few commands to
+this means a single <command>make install</command> command, or a few commands to
 copy files and create directories.
 
 <indexterm>
-<primary>install@<tt?>%install</tt?> script|)</primary>
+<primary>install@<command>%install</command> script|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -1975,23 +1975,23 @@ copy files and create directories.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%clean</tt?> Script</title>
+<title>The <command>\%clean</command> Script</title>
 <!-- label: inside-clean -->
 <indexterm>
-<primary>clean@<tt?>%clean</tt?> script</primary>
+<primary>clean@<command>%clean</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%clean</tt?> script, as the name implies, is used to clean up the
+The <command>%clean</command> script, as the name implies, is used to clean up the
 software's build directory tree.  RPM normally does this for you, but in
 certain cases (most notably in those packages that use a build root) you'll
-need to include a <tt?>%clean</tt?> script.
+need to include a <command>%clean</command> script.
 
-As usual, the <tt?>%clean</tt?> script has the same set of environment
+As usual, the <command>%clean</command> script has the same set of environment
 variables as the other scripts we've covered here.  Since a
-<tt?>%clean</tt?> script is normally used when the package is built in a
+<command>%clean</command> script is normally used when the package is built in a
 build root, the <tt?>RPM_BUILD_ROOT</tt?> environment variable is
 particularly useful.  In many cases, a simple 
 
@@ -2004,14 +2004,14 @@ rm -rf $RPM_BUILD_ROOT
 will suffice.
 <footnote>
 <para>
-Keep in mind that this command in a <tt?>%clean</tt?>
+Keep in mind that this command in a <command>%clean</command>
 script can wreak havoc if used with a build root of, say, <tt?>/</tt?>.
 Section <xref linkend="buildroot-bite"> discusses this in more detail.
 </para>
 </footnote>
 
 <indexterm>
-<primary>clean@<tt?>%clean</tt?> script|)</primary>
+<primary>clean@<command>%clean</command> script|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2107,7 +2107,7 @@ isn't.  Here's an example:
 
 Assume that a package, called <tt?>blather-1.0</tt?>, is being installed.  No
 previous versions of <tt?>blather</tt?> have been installed.  Since the
-software is being installed, only the <tt?>%pre</tt?> and <tt?>%post</tt?>
+software is being installed, only the <command>%pre</command> and <command>%post</command>
 scripts are executed.  The argument passed to these scripts will be
 1, since the the number of <tt?>blather</tt?> packages installed is
 1.
@@ -2122,18 +2122,18 @@ Remember, the number is based on the number of packages installed
 Continuing our example, a new version of the <tt?>blather</tt?> package,
 version 1.3, is now available.  Clearly it's time to upgrade.  What will
 the scripts' values be during the upgrade?  As <tt?>blather-1.3</tt?> is
-installing, its <tt?>%pre</tt?> and <tt?>%post</tt?> scripts will have an
+installing, its <command>%pre</command> and <command>%post</command> scripts will have an
 argument equal to 2 (1 for version 1.0 already installed, plus 1 for
 version 1.3 being installed).  As the final part of the upgrade, it's then
 time to erase <tt?>blather</tt?> version 1.0.  As the package is being
-removed, its <tt?>%preun</tt?> and <tt?>%postun</tt?> scripts are executed.
+removed, its <command>%preun</command> and <command>%postun</command> scripts are executed.
 Since there will be only one <tt?>blather</tt?> package (version 1.3)
 installed after version 1.0 is erased, the argument passed to version 1.0's
 scripts is 1.
 
 To finally bring an end to this example, we've decided to erase
 <tt?>blather</tt?> 1.3.  We just don't need it anymore.  As the package is
-being erased, its <tt?>%preun</tt?> and <tt?>%postun</tt?> scripts will be
+being erased, its <command>%preun</command> and <command>%postun</command> scripts will be
 executed.  Since there will be no <tt?>blather</tt?> packages installed once
 the erase completes, the argument passed to the scripts is 0.
 
@@ -2143,16 +2143,16 @@ has two very interesting properties:
 <orderedlist>
 <listitem>
 <para>
-When the first version of a package is installed, its <tt?>%pre</tt?>
-and <tt?>%post</tt?> scripts will be passed an argument equal to 1.
+When the first version of a package is installed, its <command>%pre</command>
+and <command>%post</command> scripts will be passed an argument equal to 1.
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-When the last version of a package is erased, its <tt?>%preun</tt?>
-and <tt?>%postun</tt?> scripts will be passed an argument equal to 0.
+When the last version of a package is erased, its <command>%preun</command>
+and <command>%postun</command> scripts will be passed an argument equal to 0.
 
 </para>
 </listitem>
@@ -2160,7 +2160,7 @@ and <tt?>%postun</tt?> scripts will be passed an argument equal to 0.
 </orderedlist>
 Based on these properties, it's trivial to write an install-time script
 that can take certain actions in specific circumstances.  Usually, the
-argument is used in the <tt?>%preun</tt?> or <tt?>%postun</tt?> scripts to
+argument is used in the <command>%preun</command> or <command>%postun</command> scripts to
 perform a special task when the last instance of a package is being
 erased.
 
@@ -2173,7 +2173,7 @@ erased.
 
 What is normally done during these scripts?  The exact tasks may vary, but
 in general, the tasks are any that need to be performed at these points in
-the package's existence.  One very common task is to run <tt?>ldconfig</tt?>
+the package's existence.  One very common task is to run <command>ldconfig</command>
 when shared libraries are installed or removed.  But that's not the only
 use for these scripts.  It's even possible to use the scripts to perform
 tests to ensure the package install/erasure should proceed.
@@ -2185,74 +2185,74 @@ carefully.  Unless you're sure a given program is going to be available on
 not use it in these scripts.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%pre</tt?> Script</title>
+<title>The <command>%pre</command> Script</title>
 <!-- label: inside-pre -->
 <indexterm>
-<primary>pre@<tt?>%pre</tt?> script</primary>
+<primary>pre@<command>%pre</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%pre</tt?> script executes just before the package is to be
+The <command>%pre</command> script executes just before the package is to be
 installed.  It is the rare package that requires anything to be done prior
 to installation; none of the 350 packages that comprise Red Hat <!-- *** RED HAT *** -->Linux 4.0
 make use of it.
 
-\subsubsection{The <tt?>%post</tt?>
+\subsubsection{The <command>%post</command>
 Script}<!-- label: rpm-inside-post --><!-- label: inside-post -->
 
 <indexterm>
-<primary>post@<tt?>%post</tt?> script</primary>
+<primary>post@<command>%post</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%post</tt?> script executes after the package has been installed.
-One of the most popular reasons a <tt?>%post</tt?> script is needed is to
-run <tt?>ldconfig</tt?> to update the list of available shared libraries
+The <command>%post</command> script executes after the package has been installed.
+One of the most popular reasons a <command>%post</command> script is needed is to
+run <command>ldconfig</command> to update the list of available shared libraries
 after a new one has been installed.  Of course, other functions can be
-performed in a <tt?>%post</tt?> script.  For example, packages that install
-shells use the <tt?>%post</tt?> script to add the shell name to
+performed in a <command>%post</command> script.  For example, packages that install
+shells use the <command>%post</command> script to add the shell name to
 <tt?>/etc/shells</tt?>.
 
-If a package uses a <tt?>%post</tt?> script to perform some function, quite
-often it will include a <tt?>%postun</tt?> script that performs the inverse
-of the <tt?>%post</tt?> script, after the package has been removed.
+If a package uses a <command>%post</command> script to perform some function, quite
+often it will include a <command>%postun</command> script that performs the inverse
+of the <command>%post</command> script, after the package has been removed.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%preun</tt?> Script</title>
+<title>The <command>%preun</command> Script</title>
 <!-- label: inside-preun -->
 <indexterm>
-<primary>preun@<tt?>%preun</tt?> script</primary>
+<primary>preun@<command>%preun</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 If there's a time when your package needs to have one last look around
-before the user erases it, the place to do it is in the <tt?>%preun</tt?>
+before the user erases it, the place to do it is in the <command>%preun</command>
 script.  Anything that a package needs to do immediately prior to RPM
 taking any action to erase the package, can be done here.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%postun</tt?> Script</title>
+<title>The <command>%postun</command> Script</title>
 <!-- label: inside-postun -->
 <indexterm>
-<primary>postun@<tt?>%postun</tt?> script</primary>
+<primary>postun@<command>%postun</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%postun</tt?> script executes after the package has been removed.
+The <command>%postun</command> script executes after the package has been removed.
 It is the last chance for a package to clean up after itself.  Quite often,
-<tt?>%postun</tt?> scripts are used to run <tt?>ldconfig</tt?> to remove newly
+<command>%postun</command> scripts are used to run <command>ldconfig</command> to remove newly
 erased shared libraries from <tt?>ld.so.cache</tt?>.
 
 <indexterm>
@@ -2267,7 +2267,7 @@ erased shared libraries from <tt?>ld.so.cache</tt?>.
 </sect2>
 
 <sect2 id="s2-rpm-inside-">
-<title>Verification-Time Script --- The <tt?>\%verifyscript</tt?> Script</title>
+<title>Verification-Time Script --- The <command>%verifyscript</command> Script</title>
 <!-- label: inside-verifyscript -->
 <indexterm>
 <primary>scripts!verification-time</primary>
@@ -2277,18 +2277,18 @@ erased shared libraries from <tt?>ld.so.cache</tt?>.
 </indexterm>
 
 <indexterm>
-<primary>verifyscript@<tt?>%verifyscript</tt?> script</primary>
+<primary>verifyscript@<command>%verifyscript</command> script</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%verifyscript</tt?> executes whenever the installed package is
+The <command>%verifyscript</command> executes whenever the installed package is
 verified by RPM's verification command.  The contents of this script is
 entirely up to the package builder, but in general the script should do
 whatever is necessary to verify the package's proper installation.  Since
 RPM automatically verifies the existence of a package's files, along with
-other file attributes, the <tt?>%verifyscript</tt?> should concentrate on
+other file attributes, the <command>%verifyscript</command> should concentrate on
 different aspects of the package's installation.  For example, the script
 may ensure that certain configuration files contain the proper information
 for the package being verified:
@@ -2355,7 +2355,7 @@ simplify these tasks:
 <orderedlist>
 <listitem>
 <para>
-The <tt?>%setup</tt?> macro, which is used to unpack the original
+The <command>%setup</command> macro, which is used to unpack the original
 sources.
 
 </para>
@@ -2363,35 +2363,35 @@ sources.
 
 <listitem>
 <para>
-The <tt?>%patch</tt?> macro, which is used to apply patches to the
+The <command>%patch</command> macro, which is used to apply patches to the
 original sources.
 
 </para>
 </listitem>
 
 </orderedlist>
-These macros are used exclusively in the <tt?>%prep</tt?> script; it
+These macros are used exclusively in the <command>%prep</command> script; it
 wouldn't make sense to use them anywhere else.  The use of these macros is
-not mandatory --- It is certainly possible to write a <tt?>%prep</tt?>
+not mandatory --- It is certainly possible to write a <command>%prep</command>
 script without them.  But in the vast majority of cases they make life
 easier for the package builder.
 
 <sect2 id="s2-rpm-inside-">
-<title><tt?>The \%setup</tt?> Macro</title>
+<title>The <command>%setup</command> Macro</title>
 <!-- label: inside-setup -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro</primary>
+<primary>setup@<command>%setup</command> macro</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-As we mentioned above, the <tt?>%setup</tt?> macro is used to unpack the
+As we mentioned above, the <command>%setup</command> macro is used to unpack the
 original sources, in preparation for the build.  In its simplest form, the
 macro is used with no options and gets the name of the source archive from
-the <tt?>source</tt?> tag specified earlier in the spec file.  Let's look at
+the <command>source</command> tag specified earlier in the spec file.  Let's look at
 an example.  The <tt?>cdplayer</tt?> package has the following
-<tt?>source</tt?> tag:
+<command>source</command> tag:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2399,7 +2399,7 @@ an example.  The <tt?>cdplayer</tt?> package has the following
 Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
 </screen>
 </figure>
-and the following <tt?>%prep</tt?> script:
+and the following <command>%prep</command> script:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2408,7 +2408,7 @@ and the following <tt?>%prep</tt?> script:
 %setup
 </screen>
 </figure>
-In this simple case, the <tt?>%setup</tt?> macro expands into the following
+In this simple case, the <command>%setup</command> macro expands into the following
 commands:
 
 <figure id="sc-rpm-inside-">
@@ -2426,51 +2426,51 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-As we can see, the <tt?>%setup</tt?> macro starts by changing directory into
+As we can see, the <command>%setup</command> macro starts by changing directory into
 RPM's build area and removing any <tt?>cdplayer</tt?> build trees from
-previous builds.  It then uses <tt?>gzip</tt?> to uncompress the original
-source (whose name was taken from the <tt?>source</tt?> tag), and pipes the
-result to <tt?>tar</tt?> for unpacking.  The return status of the unpacking
+previous builds.  It then uses <command>gzip</command> to uncompress the original
+source (whose name was taken from the <command>source</command> tag), and pipes the
+result to <command>tar</command> for unpacking.  The return status of the unpacking
 is tested.  If sucessful, the macro continues.
 
 At this point, the original sources have been unpacked.  The
-<tt?>%setup</tt?> macro continues by changing directory into
-<tt?>cdplayer</tt?>'s top-level directory.  The two <tt?>cd</tt?> commands are
-an artifact of <tt?>%setup</tt?>'s macro expansion.  Finally,
-<tt?>%setup</tt?> makes sure every file in the build tree is owned by root
+<command>%setup</command> macro continues by changing directory into
+<tt?>cdplayer</tt?>'s top-level directory.  The two <command>cd</command> commands are
+an artifact of <command>%setup</command>'s macro expansion.  Finally,
+<command>%setup</command> makes sure every file in the build tree is owned by root
 and has appropriate permissions set.
 
-But that's just the simplest way that <tt?>%setup</tt?> can be used.  There
+But that's just the simplest way that <command>%setup</command> can be used.  There
 are a number of other options that can be added to accomodate different
 situations.  Let's look at them.
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-n <emphasis>&lt;name&gt;</tt?></emphasis> -- Set Name of Build Directory</title>
+<title><command>-n <emphasis>&lt;name&gt;</command></emphasis> -- Set Name of Build Directory</title>
 <!-- label: inside-setup-n -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-n</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-n</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-In our example above, the <tt?>%setup</tt?> macro simply uncompressed and
-unpacked the sources.  In this case, the <tt?>tar</tt?> file containing the
+In our example above, the <command>%setup</command> macro simply uncompressed and
+unpacked the sources.  In this case, the <command>tar</command> file containing the
 original sources was created such that the top-level directory was included
 in the tar file.  The name of the top-level directory was also identical to
-that of the <tt?>tar</tt?> file, which was in
-<tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis> format.
+that of the <command>tar</command> file, which was in
+<command><emphasis>&lt;name&gt;-&lt;version&gt;</command></emphasis> format.
 
 However, this is not always the case.  Quite often, the original sources
 unpack into a directory whose name is different than the original
-<tt?>tar</tt?> file.  Since RPM assumes the directory will be called
-<tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis>, when the directory is called something
-else, it's necessary to use <tt?>%setup</tt?>'s <tt?>-n</tt?> option.  Here's
+<command>tar</command> file.  Since RPM assumes the directory will be called
+<command><emphasis>&lt;name&gt;-&lt;version&gt;</command></emphasis>, when the directory is called something
+else, it's necessary to use <command>%setup</command>'s <command>-n</command> option.  Here's
 an example:
 
 Assume, for a moment, that the <tt?>cdplayer</tt?> sources, when unpacked,
 create a top-level directory named <tt?>cd-player</tt?>.  In this case, our
-<tt?>%setup</tt?> line would look like this:
+<command>%setup</command> line would look like this:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2495,25 +2495,25 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-The results are identical to using <tt?>%setup</tt?> with no options, except
-for the fact that <tt?>%setup</tt?> now does a recursive delete on the
+The results are identical to using <command>%setup</command> with no options, except
+for the fact that <command>%setup</command> now does a recursive delete on the
 directory <tt?>cd-player</tt?> (instead of <tt?>cdplayer-1.0</tt?>), and
 changes directory into <tt?>cd-player</tt?> (instead of
 <tt?>cdplayer-1.0</tt?>).
 
 Note that all subsequent build-time scripts will change directory into the
-directory specified by the <tt?>-n</tt?> option.  This makes <tt?>-n</tt?>
+directory specified by the <command>-n</command> option.  This makes <command>-n</command>
 unsuitable as a means of unpacking sources in directories other than the
 top-level build directory.  In the upcoming example on page
 <xref linkend="multi-source-spec">, we'll show a way around this restriction.
 
-A quick word of warning: If the name specified with the <tt?>-n</tt?> option
+A quick word of warning: If the name specified with the <command>-n</command> option
 doesn't match the name of the directory created when the sources are
 unpacked, the build will stop pretty quickly, so it pays to be careful when
 using this option.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-n</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-n</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2522,22 +2522,22 @@ using this option.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-c</tt?> -- Create Directory (and change to it) Before Unpacking</title>
+<title><command>-c</command> -- Create Directory (and change to it) Before Unpacking</title>
 <!-- label: inside-setup-c -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-c</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-c</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-How many times have you grabbed a <tt?>tar</tt?> file and unpacked it, only
+How many times have you grabbed a <command>tar</command> file and unpacked it, only
 to find that it splattered files all over your current directory?
 Sometimes source archives are created without a top-level directory.
 
-As you can see from the examples so far, <tt?>%setup</tt?> expects the
+As you can see from the examples so far, <command>%setup</command> expects the
 archive to create its own top-level directory.  If this isn't the case,
-you'll need to use the <tt?>-c</tt?> option.
+you'll need to use the <command>-c</command> option.
 
 This option simply creates the directory and changes directory into it
 before unpacking the sources.  Here's what it looks like:
@@ -2558,14 +2558,14 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-The only changes from using <tt?>%setup</tt?> with no options, are the
-<tt?>mkdir</tt?> and <tt?>cd</tt?> commands, prior to the commands that unpack
-the sources.  Note that you can use the <tt?>-n</tt?> option along with
-<tt?>-c</tt?>, so something like <tt?>%setup -c -n blather</tt?> works as
+The only changes from using <command>%setup</command> with no options, are the
+<command>mkdir</command> and <command>cd</command> commands, prior to the commands that unpack
+the sources.  Note that you can use the <command>-n</command> option along with
+<command>-c</command>, so something like <command>%setup -c -n blather</command> works as
 expected.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-c</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-c</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2574,20 +2574,20 @@ expected.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-D</tt?> -- Do Not Delete Directory Before Unpacking Sources</title>
+<title><command>-D</command> -- Do Not Delete Directory Before Unpacking Sources</title>
 <!-- label: inside-setup-D -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-D</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-D</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-D</tt?> option keeps the <tt?>%setup</tt?> macro from deleting the
+The <command>-D</command> option keeps the <command>%setup</command> macro from deleting the
 software's top-level directory.  This option is handy when the sources
 being unpacked are to be added to an already-existing directory tree.  This
-would be the case when more than one <tt?>%setup</tt?> macro is used.
-Here's what <tt?>%setup</tt?> does when the <tt?>-D</tt?> option is employed:
+would be the case when more than one <command>%setup</command> macro is used.
+Here's what <command>%setup</command> does when the <command>-D</command> option is employed:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2603,10 +2603,10 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-As advertised, the <tt?>rm</tt?> prior to the <tt?>tar</tt?> command is gone.
+As advertised, the <command>rm</command> prior to the <command>tar</command> command is gone.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-D</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-D</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2615,17 +2615,17 @@ As advertised, the <tt?>rm</tt?> prior to the <tt?>tar</tt?> command is gone.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-T</tt?> -- Do Not Perform Default Archive Unpacking</title>
+<title><command>-T</command> -- Do Not Perform Default Archive Unpacking</title>
 <!-- label: inside-setup-T -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-T</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-T</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-T</tt?> option disables <tt?>%setup</tt?>'s normal unpacking of the
-archive file specified on the <tt?>source0</tt?> line.  Here's what the
+The <command>-T</command> option disables <command>%setup</command>'s normal unpacking of the
+archive file specified on the <command>source0</command> line.  Here's what the
 resulting commands look like:
 
 <figure id="sc-rpm-inside-">
@@ -2640,10 +2640,10 @@ chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
 Doesn't make much sense, does it?  There's a method to this madness.  We'll
-see the <tt?>-T</tt?> in action in the next section.
+see the <command>-T</command> in action in the next section.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-T</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-T</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2652,21 +2652,21 @@ see the <tt?>-T</tt?> in action in the next section.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-b <emphasis>&lt;n&gt;</tt?></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources Before Changing Directory</title>
+<title><command>-b <emphasis>&lt;n&gt;</command></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources Before Changing Directory</title>
 <!-- label: inside-setup-b -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-b</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-b</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-b</tt?> option is used in conjunction with the <tt?>source</tt?>
+The <command>-b</command> option is used in conjunction with the <command>source</command>
 tag.  Specifically, it is used to identify which of the numbered
-<tt?>source</tt?> tags in the spec file are to be unpacked.
+<command>source</command> tags in the spec file are to be unpacked.
 
-The <tt?>-b</tt?> option requires a numeric argument matching an existing
-<tt?>source</tt?> tag.  If a numeric argument is not provided, the build will
+The <command>-b</command> option requires a numeric argument matching an existing
+<command>source</command> tag.  If a numeric argument is not provided, the build will
 fail:
 
 <figure id="sc-rpm-inside-">
@@ -2679,9 +2679,9 @@ Build failed.
 #
 </screen>
 </figure>
-Remembering that the first <tt?>source</tt?> tag is implicitly numbered 0,
-let's see what happens when the <tt?>%setup</tt?> line is changed to
-<tt?>%setup -b 0</tt?>:
+Remembering that the first <command>source</command> tag is implicitly numbered 0,
+let's see what happens when the <command>%setup</command> line is changed to
+<command>%setup -b 0</command>:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2703,8 +2703,8 @@ chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
 That's strange.  The sources were unpacked twice.  It doesn't make sense,
-until you realize that this is why there is a <tt?>-T</tt?> option.  Since
-<tt?>-T</tt?> disables the default source file unpacking, and <tt?>-b</tt?>
+until you realize that this is why there is a <command>-T</command> option.  Since
+<command>-T</command> disables the default source file unpacking, and <command>-b</command>
 selects a particular source file to be unpacked, the two are meant to go
 together, like this:
 
@@ -2734,7 +2734,7 @@ chmod -R a+rX,g-w,o-w .
 That's more like it!  Let's go on to the next option.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-b</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-b</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2743,20 +2743,20 @@ That's more like it!  Let's go on to the next option.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-a <emphasis>&lt;n&gt;</tt?></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources After Changing Directory</title>
+<title><command>-a <emphasis>&lt;n&gt;</command></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources After Changing Directory</title>
 <!-- label: inside-setup-a -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-a</tt?> option</primary>
+<primary>setup@<command>%setup</command> macro!<command>-a</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-a</tt?> option works similarly to the <tt?>-b</tt?> option, except
+The <command>-a</command> option works similarly to the <command>-b</command> option, except
 that the sources are unpacked <emphasis>after</emphasis> changing directory into the
-top-level build directory.  Like the <tt?>-b</tt?> option, <tt?>-a</tt?>
-requires <tt?>-T</tt?> in order to prevent two sets of unpacking commands.
-Here are the commands that a <tt?>%setup -T -a 0</tt?> line would produce:
+top-level build directory.  Like the <command>-b</command> option, <command>-a</command>
+requires <command>-T</command> in order to prevent two sets of unpacking commands.
+Here are the commands that a <command>%setup -T -a 0</command> line would produce:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2773,9 +2773,9 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-Note that there is no <tt?>mkdir</tt?> command to create the top-level
-directory prior to issuing a <tt?>cd</tt?> into it.  In our example, adding
-the <tt?>-c</tt?> option will make things right:
+Note that there is no <command>mkdir</command> command to create the top-level
+directory prior to issuing a <command>cd</command> into it.  In our example, adding
+the <command>-c</command> option will make things right:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2793,11 +2793,11 @@ chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
-The result is the proper sequence of commands for unpacking a <tt?>tar</tt?>
+The result is the proper sequence of commands for unpacking a <command>tar</command>
 file with no top-level directory.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!<tt?>-a</tt?> option|)</primary>
+<primary>setup@<command>%setup</command> macro!<command>-a</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2806,10 +2806,10 @@ file with no top-level directory.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>Using <tt?>\%setup</tt?> in a Multi-source Spec File</title>
+<title>Using <command>\%setup</command> in a Multi-source Spec File</title>
 <!-- label: multi-source-spec -->
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!use in multi-source spec files</primary>
+<primary>setup@<command>%setup</command> macro!use in multi-source spec files</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -2821,10 +2821,10 @@ make it easier to combine several separate source archives into a single,
 build-able entity.  Let's see how they work in that type of environment.
 
 For the purposes of this example, our spec file will have the following
-three <tt?>source</tt?> tags:
+three <command>source</command> tags:
 <footnote>
 <para>
-Yes, the <tt?>source</tt?> tags should
+Yes, the <command>source</command> tags should
 include a URL pointing to the sources.
 </para>
 </footnote>
@@ -2838,7 +2838,7 @@ source2: source-two.tar.gz
 </screen>
 </figure>
 To unpack the first source is not hard; all that's required is to use
-<tt?>%setup</tt?> with no options:
+<command>%setup</command> with no options:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2864,7 +2864,7 @@ chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
 If <tt?>source-zero.tar.gz</tt?> didn't include a top-level directory, we
-could have made one by adding the <tt?>-c</tt?> option:
+could have made one by adding the <command>-c</command> option:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2891,7 +2891,7 @@ chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
 Of course, if the top-level directory did not match the package name, the
-<tt?>-n</tt?> option could have been added:
+<command>-n</command> option could have been added:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2943,12 +2943,12 @@ chmod -R a+rX,g-w,o-w .
 </screen>
 </figure>
 Now let's add the second source file.  Things get a bit more interesting
-here.  First, we need to identify which <tt?>source</tt?> tag (and therefore,
+here.  First, we need to identify which <command>source</command> tag (and therefore,
 which source file) we're talking about.  So we need to use either the
-<tt?>-a</tt?> or <tt?>-b</tt?> option, depending on the characteristics of the
-source archive.  For this example, let's say that <tt?>-a</tt?> is the option
+<command>-a</command> or <command>-b</command> option, depending on the characteristics of the
+source archive.  For this example, let's say that <command>-a</command> is the option
 we want.  Adding that option, plus a "1" to point to the source file
-specified in the <tt?>source1</tt?> tag, we have:
+specified in the <command>source1</command> tag, we have:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2956,9 +2956,9 @@ specified in the <tt?>source1</tt?> tag, we have:
 %setup -a 1
 </screen>
 </figure>
-Since we've already seen that using the <tt?>-a</tt?> or <tt?>-b</tt?> option
+Since we've already seen that using the <command>-a</command> or <command>-b</command> option
 results in duplicate unpacking, we need to disable the default unpacking by
-adding the <tt?>-T</tt?> option:
+adding the <command>-T</command> option:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -2968,9 +2968,9 @@ adding the <tt?>-T</tt?> option:
 </figure>
 Next, we need to make sure that the top-level directory isn't deleted.
 Otherwise, the first source file we just unpacked would be gone.  That
-means we need to include the <tt?>-D</tt?> option to prevent that from
+means we need to include the <command>-D</command> option to prevent that from
 happening.  Adding this final option, and including the now complete macro
-in our <tt?>%prep</tt?> script, we now have:
+in our <command>%prep</command> script, we now have:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3008,13 +3008,13 @@ chmod -R a+rX,g-w,o-w .
 So far, so good.  Let's include the last source file, but with this one,
 we'll say that it needs to be unpacked in a subdirectory of
 <tt?>cdplayer-1.0</tt?> called <tt?>database</tt?>.  Can we use
-<tt?>%setup</tt?> in this case?
+<command>%setup</command> in this case?
 
 We could, if <tt?>source-two.tgz</tt?> created the <tt?>database</tt?>
 subdirectory.  If not, then it'll be necessary to do it by hand.  For the
 purposes of our example, let's say that <tt?>source-two.tgz</tt?> wasn't
 created to include the <tt?>database</tt?> subdirectory, so we'll have to do
-it ourselves.  Here's our <tt?>%prep</tt?> script now:
+it ourselves.  Here's our <command>%prep</command> script now:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3053,26 +3053,26 @@ gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
 </screen>
 </figure>
 The three commands we added to unpack the last set of sources were added to
-the end of the <tt?>%prep</tt?> script.
+the end of the <command>%prep</command> script.
 
-The bottom line to using the <tt?>%setup</tt?> macro is that you can
+The bottom line to using the <command>%setup</command> macro is that you can
 probably get it to do what you want, but don't be afraid to tinker.  And
-even if <tt?>%setup</tt?> can't be used, it's easy enough to add the
+even if <command>%setup</command> can't be used, it's easy enough to add the
 necessary commands to do the work manually.  Above all, make sure you use
-the <tt?>--test</tt?> option when testing your <tt?>%setup</tt?> macros, so
+the <command>--test</command> option when testing your <command>%setup</command> macros, so
 you can see what commands they're translating to.
 
-Next, let's look at RPM's second macro, <tt?>%patch</tt?>.
+Next, let's look at RPM's second macro, <command>%patch</command>.
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro!use in multi-source spec files|)</primary>
+<primary>setup@<command>%setup</command> macro!use in multi-source spec files|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>setup@<tt?>%setup</tt?> macro|)</primary>
+<primary>setup@<command>%setup</command> macro|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3083,18 +3083,18 @@ Next, let's look at RPM's second macro, <tt?>%patch</tt?>.
 </sect2>
 
 <sect2 id="s2-rpm-inside-">
-<title>The <tt?>\%patch</tt?> Macro</title>
+<title>The <command>\%patch</command> Macro</title>
 <!-- label: inside-patch-macro -->
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro</primary>
+<primary>patch@<command>%patch</command> macro</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%patch</tt?> macro, as its name implies, is used to apply patches
+The <command>%patch</command> macro, as its name implies, is used to apply patches
 to the unpacked sources.  In the following examples, our spec file has the
-following <tt?>patch</tt?> tag lines:
+following <command>patch</command> tag lines:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3104,7 +3104,7 @@ patch1: patch-one
 patch2: patch-two
 </screen>
 </figure>
-At its simplest, the <tt?>%patch</tt?> macro can be invoked without any
+At its simplest, the <command>%patch</command> macro can be invoked without any
 options:
 
 <figure id="sc-rpm-inside-">
@@ -3122,14 +3122,14 @@ echo "Patch #0:"
 patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 </screen>
 </figure>
-The <tt?>%patch</tt?> macro nicely displays a message showing that a patch
-is being applied, then invokes the <tt?>patch</tt?> command to actually do
-the dirty work.  There are two options to the <tt?>patch</tt?> command:
+The <command>%patch</command> macro nicely displays a message showing that a patch
+is being applied, then invokes the <command>patch</command> command to actually do
+the dirty work.  There are two options to the <command>patch</command> command:
 
 <orderedlist>
 <listitem>
 <para>
-The <tt?>-p</tt?> option, which directs <tt?>patch</tt?> to remove the
+The <command>-p</command> option, which directs <command>patch</command> to remove the
 specified number of slashes (and any intervening directories) from the
 front of any filenames specified in the patch file.  In this case, nothing
 will be removed.
@@ -3139,35 +3139,35 @@ will be removed.
 
 <listitem>
 <para>
-The <tt?>-s</tt?> option, which directs <tt?>patch</tt?> to apply the
+The <command>-s</command> option, which directs <command>patch</command> to apply the
 patch without displaying any informational messages.  Only errors from
-<tt?>patch</tt?> will be displayed.
+<command>patch</command> will be displayed.
 
 </para>
 </listitem>
 
 </orderedlist>
-How did the <tt?>%patch</tt?> macro know which patch to apply?  Keep in mind
-that, like the <tt?>source</tt?> tag lines, every <tt?>patch</tt?> tag is
-numbered, starting at zero.  The <tt?>%patch</tt?> macro, by default,
-applies the patch file named on the <tt?>patch</tt?> (or <tt?>patch0</tt?>) tag
+How did the <command>%patch</command> macro know which patch to apply?  Keep in mind
+that, like the <command>source</command> tag lines, every <command>patch</command> tag is
+numbered, starting at zero.  The <command>%patch</command> macro, by default,
+applies the patch file named on the <command>patch</command> (or <command>patch0</command>) tag
 line.
 
 <sect3 id="s3-rpm-inside-">
-<title>Specifying Which <tt?>patch</tt?> Tag to Use</title>
+<title>Specifying Which <command>patch</command> Tag to Use</title>
 <!-- label: inside-patch-P -->
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-P</tt?> option</primary>
+<primary>patch@<command>%patch</command> macro!<command>-P</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%patch</tt?> macro actually has two different ways to specify the
-<tt?>patch</tt?> tag line it is to use.  The first method is to simply append
-the number of the desired <tt?>patch</tt?> tag to the end of the
-<tt?>%patch</tt?> macro itself.  For example, in order to apply the patch
-specified on the <tt?>patch2</tt?> tag line, the following <tt?>%patch</tt?>
+The <command>%patch</command> macro actually has two different ways to specify the
+<command>patch</command> tag line it is to use.  The first method is to simply append
+the number of the desired <command>patch</command> tag to the end of the
+<command>%patch</command> macro itself.  For example, in order to apply the patch
+specified on the <command>patch2</command> tag line, the following <command>%patch</command>
 macro could be used:
 
 <figure id="sc-rpm-inside-">
@@ -3176,8 +3176,8 @@ macro could be used:
 %patch2
 </screen>
 </figure>
-The other approach is to use the <tt?>-P</tt?> option.  This option is
-followed by the number of the <tt?>patch</tt?> tag line desired.  Therefore,
+The other approach is to use the <command>-P</command> option.  This option is
+followed by the number of the <command>patch</command> tag line desired.  Therefore,
 this line is identical in function to the previous one:
 
 <figure id="sc-rpm-inside-">
@@ -3186,9 +3186,9 @@ this line is identical in function to the previous one:
 %patch -P 2
 </screen>
 </figure>
-Note that the <tt?>-P</tt?> option will <emphasis>not</emphasis> apply the file specified
-on the <tt?>patch0</tt?> line, by default.  Therefore, if you choose to use
-the <tt?>-P</tt?> option to specify patch numbers, you'll need to use the
+Note that the <command>-P</command> option will <emphasis>not</emphasis> apply the file specified
+on the <command>patch0</command> line, by default.  Therefore, if you choose to use
+the <command>-P</command> option to specify patch numbers, you'll need to use the
 following format when applying patch zero:
 
 <figure id="sc-rpm-inside-">
@@ -3198,7 +3198,7 @@ following format when applying patch zero:
 </screen>
 </figure>
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-P</tt?> option|)</primary>
+<primary>patch@<command>%patch</command> macro!<command>-P</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3207,23 +3207,23 @@ following format when applying patch zero:
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-p &lt;<emphasis>#</tt?>&gt;</emphasis> -- Strip <tt?>&lt;<emphasis>#</tt?>&gt;</emphasis> leading slashes and directories from patch filenames</title>
+<title><command>-p &lt;<emphasis>#</command>&gt;</emphasis> -- Strip <command>&lt;<emphasis>#</command>&gt;</emphasis> leading slashes and directories from patch filenames</title>
 <!-- label: inside-patch-p -->
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-p</tt?> option</primary>
+<primary>patch@<command>%patch</command> macro!<command>-p</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-p</tt?> (Note the <emphasis>lowercase</emphasis> "p"!) option is sent directly
-to the <tt?>patch</tt?> command.  It is followed by a number, which specifies
+The <command>-p</command> (Note the <emphasis>lowercase</emphasis> "p"!) option is sent directly
+to the <command>patch</command> command.  It is followed by a number, which specifies
 the number of leading slashes (and the directories in between) to strip
 from any filenames present in the patch file.  For more information on this
-option, please consult the <tt?>patch</tt?> man page.
+option, please consult the <command>patch</command> man page.
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-p</tt?> option|)</primary>
+<primary>patch@<command>%patch</command> macro!<command>-p</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3232,24 +3232,24 @@ option, please consult the <tt?>patch</tt?> man page.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-b <emphasis>&lt;name&gt;</tt?></emphasis> -- Set the backup file extension to <tt?><emphasis>&lt;name&gt;</tt?></emphasis></title>
+<title><command>-b <emphasis>&lt;name&gt;</command></emphasis> -- Set the backup file extension to <command><emphasis>&lt;name&gt;</command></emphasis></title>
 <!-- label: inside-patch-b -->
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-b</tt?> option</primary>
+<primary>patch@<command>%patch</command> macro!<command>-b</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-When the <tt?>patch</tt?> command is used to apply a patch, unmodified copies
+When the <command>patch</command> command is used to apply a patch, unmodified copies
 of the files patched are renamed to end with the extension <tt?>.orig</tt?>.
-The <tt?>-b</tt?> option is used to change the extension used by
-<tt?>patch</tt?>.  This is normally done when multiple patches are to be
+The <command>-b</command> option is used to change the extension used by
+<command>patch</command>.  This is normally done when multiple patches are to be
 applied to a given file.  By doing this, copies of the file as it existed
 prior to each patch, are readily available.
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-b</tt?> option|)</primary>
+<primary>patch@<command>%patch</command> macro!<command>-b</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3258,44 +3258,44 @@ prior to each patch, are readily available.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-E</tt?> --- Remove Empty Output Files</title>
+<title><command>-E</command> --- Remove Empty Output Files</title>
 <!-- label: inside-patch-E -->
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-E</tt?> option</primary>
+<primary>patch@<command>%patch</command> macro!<command>-E</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-E</tt?> option is passed directly to the <tt?>patch</tt?> program.
-When <tt?>patch</tt?> is run with the <tt?>-E</tt?> option, any output files
+The <command>-E</command> option is passed directly to the <command>patch</command> program.
+When <command>patch</command> is run with the <command>-E</command> option, any output files
 that are empty after the patches have been applied, are removed.
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!<tt?>-E</tt?> option|)</primary>
+<primary>patch@<command>%patch</command> macro!<command>-E</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-Now let's take <tt?>%patch</tt?> on a test-drive, and put it through its
+Now let's take <command>%patch</command> on a test-drive, and put it through its
 paces.
 
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>An example of the <tt?>\%patch</tt?> Macro in Action</title>
+<title>An example of the <command>\%patch</command> Macro in Action</title>
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!example of</primary>
+<primary>patch@<command>%patch</command> macro!example of</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-Using the example <tt?>patch</tt?> tag lines we've used throughout this
+Using the example <command>patch</command> tag lines we've used throughout this
 section, let's put together an example and look at the resulting commands.
 In our example, the first patch to be applied needs to have the root
-directory stripped.  Its <tt?>%patch</tt?> macro will look like this:
+directory stripped.  Its <command>%patch</command> macro will look like this:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3304,7 +3304,7 @@ directory stripped.  Its <tt?>%patch</tt?> macro will look like this:
 </screen>
 </figure>
 The next patch is to be applied to files in the software's <tt?>lib</tt?>
-subdirectory, so we'll need to add a <tt?>cd</tt?> command to get us there.
+subdirectory, so we'll need to add a <command>cd</command> command to get us there.
 We'll also need to strip an additional directory:
 
 <figure id="sc-rpm-inside-">
@@ -3315,7 +3315,7 @@ cd lib
 </screen>
 </figure>
 Finally, the last patch is to be applied from the software's top-level
-directory, so we need to <tt?>cd</tt?> back up a level.  In addition, this
+directory, so we need to <command>cd</command> back up a level.  In addition, this
 patch modifies some files that were also patched the first time, so we'll
 need to change the backup file extension:
 
@@ -3326,7 +3326,7 @@ cd ..
 %patch -P 2 -p1 -b .last-patch
 </screen>
 </figure>
-Here's what the <tt?>%prep</tt?> script (minus any <tt?>%setup</tt?> macros)
+Here's what the <command>%prep</command> script (minus any <command>%setup</command> macros)
 looks like:
 
 <figure id="sc-rpm-inside-">
@@ -3354,22 +3354,22 @@ echo "Patch #2:"
 patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
 </screen>
 </figure>
-No surprises here.  Note that the <tt?>%setup</tt?> macro leaves the current
+No surprises here.  Note that the <command>%setup</command> macro leaves the current
 working directory set to the software's top-level directory, so our
-<tt?>cd</tt?> commands with their relative paths will do the right thing.  Of
+<command>cd</command> commands with their relative paths will do the right thing.  Of
 course, we have environment variables available that could be used here,
 too.
 
 <sect4 id="s4-rpm-inside-">
 <title>Compressed Patch Files</title>
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!compressed patches</primary>
+<primary>patch@<command>%patch</command> macro!compressed patches</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-If a patch file is compressed with <tt?>gzip</tt?>, RPM will automatically
+If a patch file is compressed with <command>gzip</command>, RPM will automatically
 decompress it before applying the patch.  Here's a compressed patch file as
 specified in the spec file:
 
@@ -3379,7 +3379,7 @@ specified in the spec file:
 Patch: bother-3.5-hack.patch.gz
 </screen>
 </figure>
-This is part of the script RPM will execute when the <tt?>%prep</tt?>
+This is part of the script RPM will execute when the <command>%prep</command>
 section is executed:
 
 <figure id="sc-rpm-inside-">
@@ -3392,28 +3392,28 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 &hellip;
 </screen>
 </figure>
-First, the patch file is decompressed using <tt?>gzip</tt?>.  The output from
-<tt?>gzip</tt?> is then piped into <tt?>patch</tt?>.
+First, the patch file is decompressed using <command>gzip</command>.  The output from
+<command>gzip</command> is then piped into <command>patch</command>.
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!compressed patches|)</primary>
+<primary>patch@<command>%patch</command> macro!compressed patches|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 That's about it for RPM's macros.  Next, let's take a look at the
-<tt?>%files</tt?> list.
+<command>%files</command> list.
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro!example of|)</primary>
+<primary>patch@<command>%patch</command> macro!example of|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>patch@<tt?>%patch</tt?> macro|)</primary>
+<primary>patch@<command>%patch</command> macro|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3435,16 +3435,16 @@ That's about it for RPM's macros.  Next, let's take a look at the
 </sect1>
 
 <sect1 id="s1-rpm-inside-">
-<title>The <tt?>\%files</tt?> List</title>
+<title>The <command>\%files</command> List</title>
 <!-- label: rpm-files-list --><!-- label: inside-files -->
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list in</primary>
+<primary>spec file!<command>%files</command> list in</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%files</tt?> list indicates to RPM which files on the build system
+The <command>%files</command> list indicates to RPM which files on the build system
 are to be packaged.  The list consists of one file per line.  The file may
 have one or more directives preceeding it.  These directives give RPM
 additional information about the file and are discussed more fully below.
@@ -3463,13 +3463,13 @@ chapter <xref linkend="rpm-reloc">.
 
 For packages that create directories containing hundreds of files, it can
 be quite cumbersome creating a list that contains every file.  To make this
-situation a bit easier, if the <tt?>%files</tt?> list contains a path to a
+situation a bit easier, if the <command>%files</command> list contains a path to a
 directory, RPM will automatically package every file in that directory, as
 well as every file in each subdirectory.  Shell-style globbing can also be
-used in the <tt?>%files</tt?> list.
+used in the <command>%files</command> list.
 
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list in|)</primary>
+<primary>spec file!<command>%files</command> list in|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3478,15 +3478,15 @@ used in the <tt?>%files</tt?> list.
 </sect1>
 
 <sect1 id="s1-rpm-inside-">
-<title>Directives For the <tt?>\%files</tt?> list</title>
+<title>Directives For the <command>\%files</command> list</title>
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list directives</primary>
+<primary>spec file!<command>%files</command> list directives</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%files</tt?> list may contain a number of different directives.
+The <command>%files</command> list may contain a number of different directives.
 They are used to:
 
 <itemizedlist mark="bullet">
@@ -3514,15 +3514,15 @@ verification.
 
 <listitem>
 <para>
-Eliminate some of the tedium in creating the <tt?>%files</tt?> list.
+Eliminate some of the tedium in creating the <command>%files</command> list.
 
 </para>
 </listitem>
 
 </itemizedlist>
-In the <tt?>%files</tt?> list, one or more directives may be placed on a line,
+In the <command>%files</command> list, one or more directives may be placed on a line,
 separated by spaces, before one or more filenames.  Therefore, if
-<tt?>%foo</tt?> and <tt?>%bar</tt?> are two <tt?>%files</tt?> list directives,
+<command>%foo</command> and <command>%bar</command> are two <command>%files</command> list directives,
 they may be applied to a file <tt?>baz</tt?> in the following manner:
 
 <figure id="sc-rpm-inside-">
@@ -3532,31 +3532,31 @@ they may be applied to a file <tt?>baz</tt?> in the following manner:
 </screen>
 </figure>
 Now it's time to take a look at the directives that inhabit the
-<tt?>%files</tt?> list.
+<command>%files</command> list.
 
 <sect2 id="s2-rpm-inside-">
 <title>File-related Directives</title>
 RPM processes files differently according to their type.  However, RPM does
 not have a method of automatically determining file types.  Therefore, it
 is up to the package builder to appropriately mark files in the
-<tt?>%files</tt?> list.  This is done using one of the directives below.
+<command>%files</command> list.  This is done using one of the directives below.
 
 Keep in mind that not every file will need to be marked.  As you read the
 following sections, you'll see that directives are only used in special
 circumstances.  In most packages, the majority of files in the
-<tt?>%files</tt?> list will not need to be marked.
+<command>%files</command> list will not need to be marked.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%doc</tt?> Directive</title>
+<title>The <command>\%doc</command> Directive</title>
 <!-- label: rpm-macros-doc --><!-- label: inside-doc -->
 <indexterm>
-<primary>doc@<tt?>%doc</tt?> directive</primary>
+<primary>doc@<command>%doc</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%doc</tt?> directive flags the filename(s) that follow, as being
+The <command>%doc</command> directive flags the filename(s) that follow, as being
 documentation.  RPM keeps track of documentation files in its database, so
 that a user can easily find information about an installed package.  In
 addition, RPM can create a package-specific documentation directory during
@@ -3578,7 +3578,7 @@ same as the package (ie, <tt?>&lt;software&gt;-&lt;version&gt;-&lt;release&gt;</
 copies the <tt?>README</tt?> file there.  The newly created directory and the
 <tt?>README</tt?> file are marked in the RPM database as being documentation.
 The default documentation directory is <tt?>/usr/doc</tt?>, and can be
-changed by setting the <tt?>defaultdocdir</tt?> <tt?>rpmrc</tt?> file
+changed by setting the <command>defaultdocdir</command> <tt?>rpmrc</tt?> file
 entry.  For more information on <tt?>rpmrc</tt?> files, please see chapter
 <xref linkend="rpmrc-file">.
 
@@ -3589,7 +3589,7 @@ package is installed, the <tt?>README</tt?> file is copied into
 documentation.
 
 <indexterm>
-<primary>doc@<tt?>%doc</tt?> directive|)</primary>
+<primary>doc@<command>%doc</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3598,23 +3598,23 @@ documentation.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%config</tt?> Directive</title>
+<title>The <command>\%config</command> Directive</title>
 <!-- label: inside-config -->
 <indexterm>
-<primary>config@<tt?>%config</tt?> directive</primary>
+<primary>config@<command>%config</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%config</tt?> directive is used to flag the specified file as being
+The <command>%config</command> directive is used to flag the specified file as being
 a configuration file.  RPM performs additional processing for config files
 when packages are erased, and during installations and upgrades.  This is
 due to the nature of config files: They are often changed by the system
 administrator, and those changes should not be lost.
 
-There is a restriction to the <tt?>%config</tt?> directive, and that restriction
-is that no more than one filename may follow the <tt?>%config</tt?>.  This
+There is a restriction to the <command>%config</command> directive, and that restriction
+is that no more than one filename may follow the <command>%config</command>.  This
 means that the following example is the only allowable way to specify
 config files:
 
@@ -3628,7 +3628,7 @@ Note that the full path to the file, as it is installed at build time, is
 required.
 
 <indexterm>
-<primary>config@<tt?>%config</tt?> directive|)</primary>
+<primary>config@<command>%config</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3637,16 +3637,16 @@ required.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%attr</tt?> Directive</title>
+<title>The <command>\%attr</command> Directive</title>
 <!-- label: inside-attr -->
 <indexterm>
-<primary>attr@<tt?>%attr</tt?> directive</primary>
+<primary>attr@<command>%attr</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%attr</tt?> directive permits finer control over three key file
+The <command>%attr</command> directive permits finer control over three key file
 attributes:
 
 <orderedlist>
@@ -3672,7 +3672,7 @@ The file's group ID.
 </listitem>
 
 </orderedlist>
-The <tt?>%attr</tt?> directive has the following format:
+The <command>%attr</command> directive has the following format:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3682,7 +3682,7 @@ The <tt?>%attr</tt?> directive has the following format:
 </figure>
 The mode is specified in the traditional numeric format, while the user and
 group are specifed as a string, such as "<tt?>root</tt?>".  Here's a sample
-<tt?>%attr</tt?> directive:
+<command>%attr</command> directive:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3701,13 +3701,13 @@ properly), then that attribute may be replaced with a dash:
 %attr(755, -, root) foo.bar
 </screen>
 </figure>
-The main reason to use the <tt?>%attr</tt?> directive is to permit users without
+The main reason to use the <command>%attr</command> directive is to permit users without
 root access to build packages.  The techniques for doing this (and a more
-in-depth discussion of the <tt?>%attr</tt?> directive) can be found in
+in-depth discussion of the <command>%attr</command> directive) can be found in
 chapter <xref linkend="rpm-anywhere">.
 
 <indexterm>
-<primary>attr@<tt?>%attr</tt?> directive|)</primary>
+<primary>attr@<command>%attr</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3716,10 +3716,10 @@ chapter <xref linkend="rpm-anywhere">.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%verify</tt?> Directive</title>
+<title>The <command>\%verify</command> Directive</title>
 <!-- label: spec-verify --><!-- label: inside-verify -->
 <indexterm>
-<primary>verify@<tt?>%verify</tt?> directive</primary>
+<primary>verify@<command>%verify</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3728,79 +3728,79 @@ chapter <xref linkend="rpm-anywhere">.
 RPM's ability to verify the integrity of the software it has installed is
 impressive.  But sometimes it's a bit <emphasis>too</emphasis> impressive.  After all,
 RPM can verify as many as nine different aspects of every file.  The
-<tt?>%verify</tt?> directive can control which of these file attributes are
+<command>%verify</command> directive can control which of these file attributes are
 to be checked when an RPM verification is done.  Here are the attributes,
-along with the names used by the <tt?>%verify</tt?> directive:
+along with the names used by the <command>%verify</command> directive:
 
 <orderedlist>
 <listitem>
 <para>
-Owner (<tt?>owner</tt?>)
+Owner (<command>owner</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Group (<tt?>group</tt?>)
+Group (<command>group</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Mode (<tt?>mode</tt?>)
+Mode (<command>mode</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-MD5 Checksum (<tt?>md5</tt?>)
+MD5 Checksum (<command>md5</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Size (<tt?>size</tt?>)
+Size (<command>size</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Major Number (<tt?>maj</tt?>)
+Major Number (<command>maj</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Minor Number (<tt?>min</tt?>)
+Minor Number (<command>min</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Symbolic Link String (<tt?>symlink</tt?>)
+Symbolic Link String (<command>symlink</command>)
 
 </para>
 </listitem>
 
 <listitem>
 <para>
-Modification Time (<tt?>mtime</tt?>)
+Modification Time (<command>mtime</command>)
 
 </para>
 </listitem>
 
 </orderedlist>
-How is <tt?>%verify</tt?> used?  Say, for instance, that a package installs
+How is <command>%verify</command> used?  Say, for instance, that a package installs
 device files.  Since the owner of a device will change, it doesn't make
 sense to have RPM verify the device file's owner/group and give out a false
-alarm.  Instead, the following <tt?>%verify</tt?> directive could be used:
+alarm.  Instead, the following <command>%verify</command> directive could be used:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3808,7 +3808,7 @@ alarm.  Instead, the following <tt?>%verify</tt?> directive could be used:
 %verify(mode md5 size maj min symlink mtime) /dev/ttyS0
 </screen>
 </figure>
-We've left out <tt?>owner</tt?> and <tt?>group</tt?>, since we'd rather RPM
+We've left out <command>owner</command> and <command>group</command>, since we'd rather RPM
 not verify those.
 <footnote>
 <para>
@@ -3819,7 +3819,7 @@ situation.
 </para>
 </footnote>
   However, if all you want to do is prevent RPM from verifying
-one or two attributes, you can use <tt?>%verify</tt?>'s alternate syntax:
+one or two attributes, you can use <command>%verify</command>'s alternate syntax:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3827,11 +3827,11 @@ one or two attributes, you can use <tt?>%verify</tt?>'s alternate syntax:
 %verify(not owner group) /dev/ttyS0
 </screen>
 </figure>
-This use of <tt?>%verify</tt?> produces identical results to the previous
+This use of <command>%verify</command> produces identical results to the previous
 example.
 
 <indexterm>
-<primary>verify@<tt?>%verify</tt?> directive|)</primary>
+<primary>verify@<command>%verify</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3847,22 +3847,22 @@ While the two directives in this section perform different functions, each
 is related to directories in some way.  Let's see what they do:
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%docdir</tt?> Directive</title>
+<title>The <command>\%docdir</command> Directive</title>
 <!-- label: inside-docdir -->
 <indexterm>
-<primary>docdir@<tt?>%docdir</tt?> directive</primary>
+<primary>docdir@<command>%docdir</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%docdir</tt?> directive is used to add a directory to the list of
+The <command>%docdir</command> directive is used to add a directory to the list of
 directories that will contain documentation.  RPM includes the directories
 <tt?>/usr/doc</tt?>, <tt?>/usr/info</tt?>, and <tt?>/usr/man</tt?> in the
-<tt?>%docdir</tt?> list by default.
+<command>%docdir</command> list by default.
 
 For example, if the following
-line is part of the <tt?>%files</tt?> list:
+line is part of the <command>%files</command> list:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3870,7 +3870,7 @@ line is part of the <tt?>%files</tt?> list:
 %docdir /usr/blather
 </screen>
 </figure>
-any files in the <tt?>%files</tt?> list that RPM packages from
+any files in the <command>%files</command> list that RPM packages from
 <tt?>/usr/blather</tt?> will be included in the package as usual, but will
 also be automatically flagged as documentation.  This directive is handy
 when a package creates its own documentation directory and contains a large
@@ -3883,7 +3883,7 @@ spec file:
 %docdir /usr/blather
 </screen>
 </figure>
-Our <tt?>%files</tt?> list contains no references to the several files the
+Our <command>%files</command> list contains no references to the several files the
 package installs in the <tt?>/usr/blather</tt?> directory.  After building
 the package, looking at the package's file list shows:
 
@@ -3898,12 +3898,12 @@ the package, looking at the package's file list shows:
 Wait a minute:  There's nothing there, not even <tt?>/usr/blather</tt?>!
 What happened?
 
-The problem is that <tt?>%docdir</tt?> only directs RPM to mark the
+The problem is that <command>%docdir</command> only directs RPM to mark the
 specified directory as holding documentation.  It <emphasis>doesn't</emphasis> direct RPM
 to package any files in the directory.  To do that, we need to clue RPM in
 to the fact that there are files in the directory that must be packaged.
 
-One way to do this is to simply add the files to the <tt?>%files</tt?>
+One way to do this is to simply add the files to the <command>%files</command>
 list:
 
 <figure id="sc-rpm-inside-">
@@ -3926,7 +3926,7 @@ Looking at the package, we see that <tt?>INSTALL</tt?> was packaged:
 </figure>
 Directing RPM to only show the documentation files, we see that
 <tt?>INSTALL</tt?> has indeed been marked as documentation, even though the
-<tt?>%doc</tt?> directive had not been used:
+<command>%doc</command> directive had not been used:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3938,9 +3938,9 @@ Directing RPM to only show the documentation files, we see that
 </screen>
 </figure>
 Of course, if you go to the trouble of adding each file to the
-<tt?>%files</tt?> list, it wouldn't be that much more work to add
-<tt?>%doc</tt?> to each one.  So the way to get the most benefit from
-<tt?>%docdir</tt?> is to add another line to the <tt?>%files</tt?> list:
+<command>%files</command> list, it wouldn't be that much more work to add
+<command>%doc</command> to each one.  So the way to get the most benefit from
+<command>%docdir</command> is to add another line to the <command>%files</command> list:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -3966,15 +3966,15 @@ there will be packaged <emphasis>and</emphasis> marked as documentation:
 #
 </screen>
 </figure>
-The <tt?>%docdir</tt?> directive can save quite a bit of effort in
-creating the <tt?>%files</tt?> list.  The only caveat is that you must be
+The <command>%docdir</command> directive can save quite a bit of effort in
+creating the <command>%files</command> list.  The only caveat is that you must be
 sure the directory will only contain files you want marked as
 documentation.  Keep in mind, also, that all subdirectories of the
-<tt?>%docdir</tt?>'ed directory will be marked as documentation directories,
+<command>%docdir</command>'ed directory will be marked as documentation directories,
 too.
 
 <indexterm>
-<primary>docdir@<tt?>%docdir</tt?> directive|)</primary>
+<primary>docdir@<command>%docdir</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -3983,32 +3983,32 @@ too.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%dir</tt?> Directive</title>
+<title>The <command>\%dir</command> Directive</title>
 <!-- label: inside-dir -->
 <indexterm>
-<primary>dir@<tt?>%dir</tt?> directive</primary>
+<primary>dir@<command>%dir</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 As we mentioned in section <xref linkend="rpm-files-list">, if a directory is
-specified in the <tt?>%files</tt?> list, the contents of that directory, and
+specified in the <command>%files</command> list, the contents of that directory, and
 the contents of every directory under it, will automatically be included in
 the package.  While this feature can be handy (assuming you are <emphasis>sure</emphasis>
 that every file under the directory should be packaged) there are times
 when this could be a problem.
 
-The way to get around this, is to use the <tt?>%dir</tt?> directive.  By
+The way to get around this, is to use the <command>%dir</command> directive.  By
 adding this directive to the line containing the directory, RPM will
 package only the directory itself, regardless of what files are in the
 directory at the time the package is created.  Here's an example of
-<tt?>%dir</tt?> in action.
+<command>%dir</command> in action.
 
 The <tt?>blather-1.0</tt?> package creates the directory
 <tt?>/usr/blather</tt?> as part of its build.  It also puts several files in
 that directory.  In the spec file, the <tt?>/usr/blather</tt?> directory is
-included in the <tt?>%files</tt?> list:
+included in the <command>%files</command> list:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -4019,7 +4019,7 @@ included in the <tt?>%files</tt?> list:
 &hellip;
 </screen>
 </figure>
-There are no other entries in the <tt?>%files</tt?> list that have
+There are no other entries in the <command>%files</command> list that have
 <tt?>/usr/blather</tt?> as part of their path.  After building the package,
 we use RPM to look at the files in the package:
 
@@ -4038,10 +4038,10 @@ we use RPM to look at the files in the package:
 </figure>
 The files present in <tt?>/usr/blather</tt?> at the time the package was
 built were included in the package automatically, without entering their
-names in the <tt?>%files</tt?> list.
+names in the <command>%files</command> list.
 
 However, after changing the <tt?>/usr/blather</tt?> line in the
-<tt?>%files</tt?> list to:
+<command>%files</command> list to:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -4063,7 +4063,7 @@ only the <tt?>/usr/blather</tt?> directory:
 </screen>
 </figure>
 <indexterm>
-<primary>dir@<tt?>%dir</tt?> directive|)</primary>
+<primary>dir@<command>%dir</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4072,17 +4072,17 @@ only the <tt?>/usr/blather</tt?> directory:
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title><tt?>-f <emphasis>&lt;file&gt;</tt?></emphasis> --- Read the <tt?>\%files</tt?> List From <tt?><emphasis>&lt;file&gt;</tt?></emphasis></title>
+<title><command>-f <emphasis>&lt;file&gt;</command></emphasis> --- Read the <command>\%files</command> List From <command><emphasis>&lt;file&gt;</command></emphasis></title>
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list in!<tt?>-f</tt?> option</primary>
+<primary>spec file!<command>%files</command> list in!<command>-f</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>-f</tt?> option is used to direct RPM to read the <tt?>%files</tt?>
-list from the named file.  Like the <tt?>%files</tt?> list in a spec file,
-the file named using the <tt?>-f</tt?> option should contain one filename per
+The <command>-f</command> option is used to direct RPM to read the <command>%files</command>
+list from the named file.  Like the <command>%files</command> list in a spec file,
+the file named using the <command>-f</command> option should contain one filename per
 line and also include any of the directives named in this section.
 
 Why is it necessary to read filenames from a file rather than have the
@@ -4091,7 +4091,7 @@ filenames in the spec file?  Here's a possible reason:
 The filenames' paths may contain a directory name that can only be
 determined at build-time, such as an architecture specification.  The list
 of files, minus the variable part of the path, can be created, and
-<tt?>sed</tt?> can be used at build-time to update the path appropriately.
+<command>sed</command> can be used at build-time to update the path appropriately.
 
 It's not necessary that every filename to be packaged reside in the file.
 If there are any filenames present in the spec file, they will be packaged
@@ -4107,17 +4107,17 @@ as well:
 </screen>
 </figure>
 Here, the filenames present in the file <tt?>tetex-latex-skel</tt?> would be
-packaged, followed by every filename following the <tt?>%files</tt?> line.
+packaged, followed by every filename following the <command>%files</command> line.
 
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list in!<tt?>-f</tt?> option|)</primary>
+<primary>spec file!<command>%files</command> list in!<command>-f</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>spec file!<tt?>%files</tt?> list directives|)</primary>
+<primary>spec file!<command>%files</command> list directives|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4130,21 +4130,21 @@ packaged, followed by every filename following the <tt?>%files</tt?> line.
 </sect1>
 
 <sect1 id="s1-rpm-inside-">
-<title>The Lone Directive: <tt?>\%package</tt?></title>
+<title>The Lone Directive: <command>\%package</command></title>
 <!-- label: inside-package -->
 <indexterm>
-<primary>package@<tt?>%package</tt?> directive</primary>
+<primary>package@<command>%package</command> directive</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-While every directive we've seen so far is used in the <tt?>%files</tt?>
-list, the <tt?>%package</tt?> directive is different.  It is used to permit
+While every directive we've seen so far is used in the <command>%files</command>
+list, the <command>%package</command> directive is different.  It is used to permit
 the creation of more than one package per spec file and can appear at any
 point in the spec file.  These additional packages are known as
 subpackages.  Subpackages are named according to the contents of the line
-containing the <tt?>%package</tt?> directive.  The format of the package
+containing the <command>%package</command> directive.  The format of the package
 directive is:
 
 <figure id="sc-rpm-inside-">
@@ -4153,27 +4153,27 @@ directive is:
 %package: &lt;string&gt;
 </screen>
 </figure>
-The <tt?>&lt;string&gt;</tt?> should be a name that describes the subpackage.  This
+The <command>&lt;string&gt;</command> should be a name that describes the subpackage.  This
 string is appended to the base package name to produce the subpackage's
-name.  For example, if a spec file contains a <tt?>name</tt?> tag value of
-"<tt?>foonly</tt?>", and a "<tt?>%package doc</tt?>" line, then the
+name.  For example, if a spec file contains a <command>name</command> tag value of
+"<tt?>foonly</tt?>", and a "<command>%package doc</command>" line, then the
 subpackage name will be <tt?>foonly-doc</tt?>.
 
 <sect2 id="s2-rpm-inside-">
-<title><tt?>-n <emphasis>&lt;string&gt;</tt?></emphasis> --- Use <tt?><emphasis>&lt;string&gt;</tt?></emphasis> As the Entire Subpackage Name</title>
+<title><command>-n <emphasis>&lt;string&gt;</command></emphasis> --- Use <command><emphasis>&lt;string&gt;</command></emphasis> As the Entire Subpackage Name</title>
 <!-- label: inside-package-n -->
 <indexterm>
-<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option</primary>
+<primary>package@<command>%package</command> directive!<command>-n</command> option</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 As we mentioned above, the name of a subpackage normally includes the main
-package name.  When the <tt?>-n</tt?> option is added to the
-<tt?>%package</tt?> directive, it directs RPM to use the name specified on
-the <tt?>%package</tt?> line as the entire package name.  In the example
-above, the following <tt?>%package</tt?> line would create a subpackage
+package name.  When the <command>-n</command> option is added to the
+<command>%package</command> directive, it directs RPM to use the name specified on
+the <command>%package</command> line as the entire package name.  In the example
+above, the following <command>%package</command> line would create a subpackage
 named <tt?>foonly-doc</tt?>:
 
 <figure id="sc-rpm-inside-">
@@ -4182,7 +4182,7 @@ named <tt?>foonly-doc</tt?>:
 %package doc
 </screen>
 </figure>
-The following <tt?>%package</tt?> line would create a subpackage named
+The following <command>%package</command> line would create a subpackage named
 <tt?>doc</tt?>:
 
 <figure id="sc-rpm-inside-">
@@ -4191,15 +4191,15 @@ The following <tt?>%package</tt?> line would create a subpackage named
 %package -n doc
 </screen>
 </figure>
-The <tt?>%package</tt?> directive plays another role in subpackage
+The <command>%package</command> directive plays another role in subpackage
 building.  That role is to act as a place to collect tags that are specific
-to a given subpackage.  Any tag placed after a <tt?>%package</tt?>
+to a given subpackage.  Any tag placed after a <command>%package</command>
 directive will only apply to that subpackage.
 
-Finally, the name string specified by the <tt?>%package</tt?> directive is
+Finally, the name string specified by the <command>%package</command> directive is
 also used to denote which parts of the spec file are a part of that
 subpackage. This is done by including the string (along with the
-<tt?>-n</tt?> option, if present on the <tt?>%package</tt?> line) on the
+<command>-n</command> option, if present on the <command>%package</command> line) on the
 starting line of the section that is to be subpackage-specific.  Here's an
 example:
 
@@ -4215,21 +4215,21 @@ example:
 </figure>
 In this heavily edited spec file segment, a subpackage called <tt?>bar</tt?>
 has been defined.  Later in the file is a post-install script.  Because it
-has subpackage <tt?>bar</tt?>'s name on the <tt?>%post</tt?> line, the
+has subpackage <tt?>bar</tt?>'s name on the <command>%post</command> line, the
 post-install script will be part of the <tt?>bar</tt?> subpackage only.
 
 For more information on building subpackages, please see chapter
 <xref linkend="rpm-subpack">.
 
 <indexterm>
-<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option|)</primary>
+<primary>package@<command>%package</command> directive!<command>-n</command> option|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
 <indexterm>
-<primary>package@<tt?>%package</tt?> directive|)</primary>
+<primary>package@<command>%package</command> directive|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4248,13 +4248,13 @@ For more information on building subpackages, please see chapter
 <see></see>
 </indexterm>
 
-While the "exclude" and "exclusive" tags (<tt?>excludearch</tt?>,
-<tt?>exclusivearch</tt?>, <tt?>excludeos</tt?>, and <tt?>exclusiveos</tt?>)
+While the "exclude" and "exclusive" tags (<command>excludearch</command>,
+<command>exclusivearch</command>, <command>excludeos</command>, and <command>exclusiveos</command>)
 provide some control over whether a package will be built on a given
 architecture and/or operating system, that control is still rather coarse.
 
 For example, what should be done if a package will build under multiple
-architectures, but requires slightly different <tt?>%build</tt?> scripts?
+architectures, but requires slightly different <command>%build</command> scripts?
 Or what if a package requires a certain set of files under one operating
 system, and an entirely different set under another operating system?  The
 architecture and operating system-specific tags we've discussed earlier in
@@ -4295,16 +4295,16 @@ We discuss multi-platform package building in depth in chapter
 conditionals.
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%ifarch</tt?> Conditional</title>
+<title>The <command>\%ifarch</command> Conditional</title>
 <!-- label: inside-ifarch -->
 <indexterm>
-<primary>ifarch@<tt?>%ifarch</tt?> conditional</primary>
+<primary>ifarch@<command>%ifarch</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%ifarch</tt?> conditional is used to begin a section of the spec
+The <command>%ifarch</command> conditional is used to begin a section of the spec
 file that is architecture-specific.  It is followed by one or more
 architecture specifiers, each separated by commas or whitespace.  Here is
 an example:
@@ -4329,11 +4329,11 @@ Build failed.
 </screen>
 </figure>
 The problem that surfaced here is that any conditional must be "closed"
-by using either <tt?>%else</tt?> or <tt?>%endif</tt?>.  We'll be covering
+by using either <command>%else</command> or <command>%endif</command>.  We'll be covering
 them a bit later in the chapter.
 
 <indexterm>
-<primary>ifarch@<tt?>%ifarch</tt?> conditional|)</primary>
+<primary>ifarch@<command>%ifarch</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4342,28 +4342,28 @@ them a bit later in the chapter.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%ifnarch</tt?> Conditional</title>
+<title>The <command>\%ifnarch</command> Conditional</title>
 <!-- label: inside-ifnarch -->
 <indexterm>
-<primary>ifnarch@<tt?>%ifnarch</tt?> conditional</primary>
+<primary>ifnarch@<command>%ifnarch</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%ifnarch</tt?> conditional is used in a similar fashion to
-<tt?>%ifarch</tt?>, except that the logic is reversed.  If a spec file
-contains a conditional block starting with <tt?>%ifarch alpha</tt?>, that
+The <command>%ifnarch</command> conditional is used in a similar fashion to
+<command>%ifarch</command>, except that the logic is reversed.  If a spec file
+contains a conditional block starting with <command>%ifarch alpha</command>, that
 block would be processed only if the build was being done on a Digital
 Alpha/AXP-based system.  However, if the conditional block started with
-<tt?>%ifnarch alpha</tt?>, then that block would be processed only if the
+<command>%ifnarch alpha</command>, then that block would be processed only if the
 build were <emphasis>not</emphasis> being done on an Alpha.
 
-Like <tt?>%ifarch</tt?>, <tt?>%ifnarch</tt?> can be followed by one or more
-architectures and must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+Like <command>%ifarch</command>, <command>%ifnarch</command> can be followed by one or more
+architectures and must be closed by a <command>%else</command> or <command>%endif</command>.
 
 <indexterm>
-<primary>ifnarch@<tt?>%ifnarch</tt?> conditional|)</primary>
+<primary>ifnarch@<command>%ifnarch</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4372,19 +4372,19 @@ architectures and must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%ifos</tt?> Conditional</title>
+<title>The <command>\%ifos</command> Conditional</title>
 <!-- label: inside-ifos -->
 <indexterm>
-<primary>ifos@<tt?>%ifos</tt?> conditional</primary>
+<primary>ifos@<command>%ifos</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%ifos</tt?> conditional is used to control RPM's spec file
+The <command>%ifos</command> conditional is used to control RPM's spec file
 processing based on the build system's operating system.  It is followed by
 one or more operating system names.  A conditional block started with
-<tt?>%ifos</tt?> must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+<command>%ifos</command> must be closed by a <command>%else</command> or <command>%endif</command>.
 Here's an example:
 
 <figure id="sc-rpm-inside-">
@@ -4397,7 +4397,7 @@ The contents of the spec file following this line would be processed only
 if the build was done on a linux system.
 
 <indexterm>
-<primary>ifos@<tt?>%ifos</tt?> conditional|)</primary>
+<primary>ifos@<command>%ifos</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4406,24 +4406,24 @@ if the build was done on a linux system.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%ifnos</tt?> Conditional</title>
+<title>The <command>\%ifnos</command> Conditional</title>
 <!-- label: inside-ifnos -->
 <indexterm>
-<primary>ifnos@<tt?>%ifnos</tt?> conditional</primary>
+<primary>ifnos@<command>%ifnos</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%ifnos</tt?> conditional is the logical complement to
-<tt?>%ifos</tt?>: that is, if a conditional starting with the line
-<tt?>%ifnos irix</tt?> is present in a spec file, then the file contents
-after the <tt?>%ifnos</tt?> will not be processed if the build system is
+The <command>%ifnos</command> conditional is the logical complement to
+<command>%ifos</command>: that is, if a conditional starting with the line
+<command>%ifnos irix</command> is present in a spec file, then the file contents
+after the <command>%ifnos</command> will not be processed if the build system is
 running Irix.  As always, a conditional block starting with
-<tt?>%ifnos</tt?> must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+<command>%ifnos</command> must be closed by a <command>%else</command> or <command>%endif</command>.
 
 <indexterm>
-<primary>ifnos@<tt?>%ifnos</tt?> conditional|)</primary>
+<primary>ifnos@<command>%ifnos</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4432,17 +4432,17 @@ running Irix.  As always, a conditional block starting with
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%else</tt?> Conditional</title>
+<title>The <command>\%else</command> Conditional</title>
 <!-- label: inside-else -->
 <indexterm>
-<primary>else@<tt?>%else</tt?> conditional</primary>
+<primary>else@<command>%else</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>%else</tt?> conditional is placed between a <tt?>%if</tt?>
-conditional of some persuasion, and a <tt?>%endif</tt?>.  It is used to
+The <command>%else</command> conditional is placed between a <command>%if</command>
+conditional of some persuasion, and a <command>%endif</command>.  It is used to
 create two blocks of spec file statements, only one of which will be used
 in any given case. Here's an example:
 
@@ -4457,11 +4457,11 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 </screen>
 </figure>
 When a build is performed on a Digital Alpha/AXP, some additional flags are
-added to the <tt?>make</tt?> command.  On all other systems, these flags are
+added to the <command>make</command> command.  On all other systems, these flags are
 not added.
 
 <indexterm>
-<primary>else@<tt?>%else</tt?> conditional|)</primary>
+<primary>else@<command>%else</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -4470,20 +4470,20 @@ not added.
 </sect3>
 
 <sect3 id="s3-rpm-inside-">
-<title>The <tt?>\%endif</tt?> Conditional</title>
+<title>The <command>\%endif</command> Conditional</title>
 <!-- label: inside-endif -->
 <indexterm>
-<primary>endif@<tt?>%endif</tt?> conditional</primary>
+<primary>endif@<command>%endif</command> conditional</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-A <tt?>%endif</tt?> is used to end a conditional block of spec file
-statements.  It can follow one of the <tt?>%if</tt?> conditionals,
-or the <tt?>%else</tt?>.  The <tt?>%endif</tt?> is always needed after a
+A <command>%endif</command> is used to end a conditional block of spec file
+statements.  It can follow one of the <command>%if</command> conditionals,
+or the <command>%else</command>.  The <command>%endif</command> is always needed after a
 conditional, otherwise the build will fail.  Here's short conditional
-block, ending with a <tt?>%endif</tt?>:
+block, ending with a <command>%endif</command>:
 
 <figure id="sc-rpm-inside-">
 <title>*** Enter New Title Here ***</title>
@@ -4494,10 +4494,10 @@ make INTELFLAG=-DINTEL
 </screen>
 </figure>
 In this example, we see the conditional block started with a
-<tt?>%ifarch</tt?> and ended with a <tt?>%endif</tt?>.
+<command>%ifarch</command> and ended with a <command>%endif</command>.
 
 <indexterm>
-<primary>endif@<tt?>%endif</tt?> conditional|)</primary>
+<primary>endif@<command>%endif</command> conditional|)</primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
