@@ -5,6 +5,7 @@ html
 redhat-html.dsl
 generated-index.sgml
 temp-index.sgml
+ChangeLog
 Makefile
 Makefile.in
 config.cache

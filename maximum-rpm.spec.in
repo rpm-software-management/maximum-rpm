@@ -1,7 +1,8 @@
+%{expand: %%define _rel %(date '+%%Y%%m%%d')}
 Summary: The "Maximum RPM" book
 Name: maximum-rpm
 Version: 1.0
-Release: 0.2
+Release: 0.%{_rel}
 License: OPL
 Group: Documentation
 Source: %{name}-%{version}.tar.gz
@@ -35,5 +36,8 @@ rm -rf ${RPM_BUILD_ROOT}
 %{_defaultdocdir}/%{name}-%{version}
 
 %changelog
+* Thu Apr 19 2001 Jeff Johnson <jbj@redhat.com>
+- Prepare for Raw Hide distribution.
+
 * Thu Apr  5 2001 Jeff Johnson <jbj@redhat.com>
 - Create.

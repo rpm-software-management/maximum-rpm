@@ -1,4 +1,18 @@
 <!DOCTYPE BOOK PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+<!-- *************** Shorthand entities... *************** -->
+<!-- The generic term "Red Hat"... -->
+<!ENTITY RH "Red Hat">
+<!-- The name of the company... -->
+<!ENTITY RHI "&RH;">
+<!-- Formal version... -->
+<!ENTITY FORMAL-RHI "&RH;, Inc.">
+<!-- Shorthand version... -->
+<!ENTITY RHIS "RH">
+<!-- The basic operating system... -->
+<!ENTITY RHL "&RH; Linux">
+<!-- An rpm command... -->
+<!ENTITY rpm "<command>rpm</command>">
+<!-- *************** Chapter entities... *************** -->
 <!ENTITY RPM-MANPAGE SYSTEM "rpm-manpage.sgml">
 ]>
 

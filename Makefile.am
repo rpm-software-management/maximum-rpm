@@ -10,6 +10,7 @@ redhat_dsl =	../redhat-html.dsl
 jade =		@__JADE@ -d $(redhat_dsl)
 
 EXTRA_DIST = \
+	ChangeLog \
 	fix-index \
 	redhat-html.dsl \
 	rpm8.sgml \
@@ -49,7 +50,7 @@ EXTRA_DIST = \
 htmldir = 	/usr/share/doc/@PACKAGE@-@VERSION@
 html_DATA =	setup genhtml
 
-noinst_DATA =	setup genhtml
+noinst_DATA =	setup genhtml ChangeLog
 
 $(hdir):
 	rm -rf $(hdir)
@@ -93,5 +94,11 @@ install-data-local:
 	  fi; fi; \
 	done
 
+ChangeLog: stamp-h.in
+	rcs2log > $@
+
 rpm.8: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
 	docbook2man -d redhat-html.dsl rpm8.sgml
+
+rpm.texi: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
+	docbook2texi -d redhat-html.dsl rpm8.sgml > rpm.texi

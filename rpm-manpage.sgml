@@ -1,6 +1,6 @@
-<appendix id="ch-rpm-manpage">
+<reference id="ch-rpm-manpage">
 
-  <title>rpm.8 Man Page</title>
+  <title>&RHL;</title>
 
 <!-- rpm - Red Hat Package Manager -->
 <!-- I am looking for help to finish SGML.  -->
@@ -9,72 +9,42 @@
 	ftp.cs.berkeley.edu:/ucb/people/phelps/tcltk/rman.tar.Z
 -->
 
-<RefEntry ID=rpm.8>
+<RefEntry id="rpm.8">
   <RefMeta>
     <RefEntrytitle>rpm</RefEntrytitle>
     <ManVolNum>8</ManVolNum>
+    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
   </RefMeta>
 
 <RefNameDiv>
-  <RefName><command>rpm</command></RefName>
+  <RefName>&rpm;</RefName>
   <RefPurpose>RPM Package Manager</RefPurpose>
 </RefNameDiv>
 
 <RefSynopsisDiv>
   <variablelist>
   <varlistentry>
-  <term>Database maintenance:</term>
-  <listitem><para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	<command>rpm</command>
-	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Building:</term>
-  <listitem><para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	<command>rpm</command>
-	<arg choice="plain"><option>-b<replaceable>OPT</replaceable></option></arg>
-	<arg>buildoptions</arg>
-	<arg rep="repeat" choice="plain"><replaceable>SPECFILE</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	<command>rpm</command>
-	<arg choice="plain"><option>-t<replaceable>OPT</replaceable></option></arg>
-	<arg>buildoptions</arg>
-	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	<command>rpm</command>
-	<arg choice="req"><option>--rebuild | --recompile</option></arg>
-	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	<command>rpm</command>
-	<arg choice="plain"><option>--tarbuild</option></arg>
-	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
   <term>Querying:</term>
   <listitem><para>
     <simplelist>
       <member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-q | --query</option></arg>
+<!-- ================================ -->
+	<sbr>
+    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
+    <arg><option>-a, --all</option></arg>
+    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
+    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
+	<sbr>
+    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
+    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
+    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
+    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
+	<sbr>
+<!-- ================================ -->
 	<arg>pkgselect-options</arg>
 	<arg>query-options</arg>
 	</cmdsynopsis>
@@ -87,28 +57,28 @@
     <simplelist>
       <member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-i | --install</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-U | --upgrade</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-F | --freshen</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-e | --erase</option></arg>
 	<arg><option>--allmatches</option></arg>
 	<arg><option>--nodeps</option></arg>
@@ -119,12 +89,26 @@
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-V | --verify</option></arg>
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--nofiles</option></arg>
 	<arg><option>--nomd5</option></arg>
 	<arg><option>--noscripts</option></arg>
+<!-- ================================ -->
+	<sbr>
+    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
+    <arg><option>-a, --all</option></arg>
+    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
+    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
+	<sbr>
+    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
+    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
+    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
+    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
+	<sbr>
+<!-- ================================ -->
 	<arg>pkgselect-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
 	</cmdsynopsis>
@@ -137,16 +121,61 @@
     <simplelist>
       <member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-K | --checksig</option></arg>
 	<arg>signature-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--addsign | --resign</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Database maintenance:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Building:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="plain"><option>-b<replaceable>OPT</replaceable></option></arg>
+	<arg>buildoptions</arg>
+	<arg rep="repeat" choice="plain"><replaceable>SPECFILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="plain"><option>-t<replaceable>OPT</replaceable></option></arg>
+	<arg>buildoptions</arg>
+	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>--rebuild | --recompile</option></arg>
+	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="plain"><option>--tarbuild</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
 	</cmdsynopsis>
       </member>
     </simplelist>
@@ -157,12 +186,12 @@
     <simplelist>
       <member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--querytags | --showrc</option></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--setperms | --setugids</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE</replaceable></arg>
 	</cmdsynopsis>
@@ -175,7 +204,7 @@
 
 <refsect1><title>Description</title>
   <para>
-	<command>rpm</command> is a powerful <emphasis>Package Manager</emphasis>,
+	&rpm; is a powerful <emphasis>Package Manager</emphasis>,
 	which can be used to build, install, query, verify, update, and
 	erase individual software packages.  A <emphasis>Package</emphasis> consists
 	of an archive of files, and package information, including name,
@@ -221,7 +250,7 @@
     </varlistentry><varlistentry>
     <term><option>--pipe</option> <replaceable>CMD</replaceable></term>
       <listitem><para>
-	Pipes the output of <command>rpm</command> to the command <replaceable>CMD</replaceable>.
+	Pipes the output of &rpm; to the command <replaceable>CMD</replaceable>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--quiet</option></term>
@@ -234,7 +263,7 @@
       <listitem><para>
 	Each of the files in the colon separated
 	<replaceable>FILELIST</replaceable>
-	is read sequentially by <command>rpm</command> for configuration
+	is read sequentially by &rpm; for configuration
 	information.
 	Only the first file in the list must exist, and tildes will be
 	expanded to the value of <envar>$HOME</envar>.
@@ -255,7 +284,7 @@
     </varlistentry><varlistentry>
     <term><option>--version</option></term>
       <listitem><para>
-	Print a single line containing the version number of <command>rpm</command>
+	Print a single line containing the version number of &rpm;
 	being used. </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-vv</option></term>
@@ -273,7 +302,7 @@
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-i | --install</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
@@ -289,7 +318,7 @@
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-U | --upgrade</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
@@ -305,7 +334,7 @@
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-F | --freshen</option></arg>
 	<arg>install-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
@@ -320,7 +349,7 @@
 		<command>http</command> URL,
 	in which case the package will be downloaded before being
 	installed. See <command>FTP/HTTP OPTIONS</command>
-	for information on <command>rpm</command>'s internal
+	for information on &rpm;'s internal
 		<command>ftp</command> and
 		<command>http</command>
 	client support. 
@@ -430,7 +459,7 @@ systems of the binary package and host don't match.
     <term><option>--percent</option></term>
     <listitem><para>
 	Print percentages as files are unpacked from the package archive.
-	This is intended to make <command>rpm</command> easy to run from
+	This is intended to make &rpm; easy to run from
 	other tools.
     </para></listitem>
     </varlistentry><varlistentry>
@@ -480,8 +509,22 @@ systems of the binary package and host don't match.
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-q | --query</option></arg
+<!-- ================================ -->
+	<sbr>
+    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
+    <arg><option>-a, --all</option></arg>
+    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
+    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
+	<sbr>
+    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
+    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
+    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
+    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
+	<sbr>
+<!-- ================================ -->
 	<arg>pkgselect-options</arg>
 	<arg>query-options</arg>
       </cmdsynopsis>
@@ -495,17 +538,20 @@ systems of the binary package and host don't match.
 	<arg choice="plain"><replaceable>QUERYFMT</replaceable></arg>
 	</cmdsynopsis>
 	option, followed by the <replaceable>QUERYFMT</replaceable>
-	format string.  Query formats are
-	modifed versions of the standard <command>printf(3)</command>
-	formatting.  The format is made up of static strings (which
-	may include standard C character escapes for newlines, tabs,
-	and other special characters) and <command>printf(3)</command>
-	type formatters. As <command>rpm</command> already knows the type to print, the
+	format string.  Query formats are modifed versions of the
+	standard <command>printf(3)</command> formatting. The format
+	is made up of static strings (which may include standard C
+	character escapes for newlines, tabs, and other special
+	characters) and <command>printf(3)</command> type formatters.
+	As &rpm; already knows the type to print, the
 	type specifier must be omitted however, and replaced by the name
 	of the header tag to be printed, enclosed by <command>{}</command>
 	characters. Tag names are case insesitive, and the
 	<command>RPMTAG_</command> portion of the tag name may be omitted
-	as well.  Alternate output formats may be requested by following
+	as well.
+    </para>
+    <para>
+	Alternate output formats may be requested by following
 	the tag with <option>:<replaceable>typetag</replaceable></option>.
 	Currently, the following types are supported:
 		<command>octal</command>,
@@ -518,7 +564,7 @@ systems of the binary package and host don't match.
 	you could use <command>%{NAME}</command> as the format string.
 	To print the packages name and distribution information in
 	two columns, you could use <command>%-30{NAME}%{DISTRIBUTION}</command>.
-	<command>rpm</command> will print a list of all of the tags it knows about when it
+	&rpm; will print a list of all of the tags it knows about when it
 	is invoked with the <option>--querytags</option> argument.
     </para>
     <para>
@@ -527,9 +573,9 @@ systems of the binary package and host don't match.
 
     <variablelist>
     <varlistentry>
-    <term><option><replaceable>PACKAGE</replaceable></option></term>
+    <term><option><replaceable>PACKAGE_NAME</replaceable></option></term>
     <listitem><para>
-	Query installed package named <replaceable>PACKAGE</replaceable>.
+	Query installed package named <replaceable>PACKAGE_NAME</replaceable>.
     </para></ListItem>
     </varlistentry><varlistentry>
     <term><option>-a, --all</option></term>
@@ -554,7 +600,7 @@ systems of the binary package and host don't match.
 	as an <command>ftp</command> or <command>http</command> style URL, in
 	which case the package header will be downloaded and queried.
 	See <command>FTP/HTTP OPTIONS</command> for information on
-		<command>rpm</command>'s internal
+		&rpm;'s internal
 		<command>ftp</command> and
 		<command>http</command>
 	client support. The <replaceable>URLFILE</replaceable> argument(s),
@@ -582,10 +628,10 @@ systems of the binary package and host don't match.
 	parser.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--triggeredby</option> <replaceable>PACKAGE</replaceable></term>
+    <term><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></term>
     <listitem><para>
 	Query packages that are triggered by package(s)
-	<replaceable>PACKAGE</replaceable>.
+	<replaceable>PACKAGE_NAME</replaceable>.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></term>
@@ -694,12 +740,26 @@ systems of the binary package and host don't match.
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--verify | -V</option></arg>
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--nofiles</option></arg>
 	<arg><option>--nomd5</option></arg>
 	<arg><option>--noscripts</option></arg>
+<!-- ================================ -->
+	<sbr>
+    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
+    <arg><option>-a, --all</option></arg>
+    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
+    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
+	<sbr>
+    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
+    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--triggeredby</option> <replaceable>PACKAGE</replaceable></arg>
+    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
+    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
+	<sbr>
+<!-- ================================ -->
 	<arg>pkgselect-options</arg>
       </cmdsynopsis>
     </para>
@@ -797,7 +857,7 @@ systems of the binary package and host don't match.
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command> <arg choice="plain"><option>--checksig</option> <replaceable>FILE</replaceable></arg>
+	&rpm; <arg choice="plain"><option>--checksig</option> <replaceable>FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
 
@@ -817,7 +877,7 @@ systems of the binary package and host don't match.
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-e | --erase</option></arg>
 	<arg><option>--allmatches</option></arg>
 	<arg><option>--nodeps</option></arg>
@@ -873,7 +933,7 @@ systems of the binary package and host don't match.
     </para>
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>-b<replaceable>OPT</replaceable> | -t<replaceable>OPT</replaceable></option></arg>
 	<arg>build-options</arg>
 	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
@@ -882,7 +942,7 @@ systems of the binary package and host don't match.
 
     <para>
 	The argument used is <option>-b</option> if a spec file is being
-	used to build the package and <option>-t</option> if <command>rpm</command>
+	used to build the package and <option>-t</option> if &rpm;
 	should look inside of a (possibly compressed) tar file for
 	the spec file to use. After the first argument, the next
 	character (<replaceable>OPT</replaceable>) specifies the stages
@@ -954,13 +1014,13 @@ systems of the binary package and host don't match.
     <term><option>--rmsource</option></term>
     <listitem><para>
 	Remove the sources after the build (may also be
-	used standalone, e.g. "<command>rpm</command> <option>--rmsource foo.spec</option>").
+	used standalone, e.g. "&rpm; <option>--rmsource foo.spec</option>").
     </para></listitem>
   </varlistentry><varlistentry>
     <term><option>--rmspec</option></term>
     <listitem><para>
 	Remove the spec file after the build (may also be
-	used standalone, eg. "<command>rpm</command> <option>--rmspec foo.spec</option>").
+	used standalone, eg. "&rpm; <option>--rmspec foo.spec</option>").
     </para></listitem>
   </varlistentry><varlistentry>
     <term><option>--short-circuit</option></term>
@@ -1001,13 +1061,13 @@ systems of the binary package and host don't match.
     </para>
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--rebuild | --recompile</option></arg>
 	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
       </cmdsynopsis>
     </para>
     <para>
-	When invoked this way, <command>rpm</command> installs the named source
+	When invoked this way, &rpm; installs the named source
 	package, and does a prep, compile and install.  In addition,
 	<option>--rebuild</option> builds a new binary package. When the build
 	has completed, the build directory is removed (as in
@@ -1019,7 +1079,7 @@ systems of the binary package and host don't match.
     <refsect1><title>Signing a Package</title>
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--addsign | --resign</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
@@ -1037,10 +1097,10 @@ systems of the binary package and host don't match.
 
 <refsect1><title>PGP Signatures</title>
     <para>
-	In order to use the signature feature, <command>rpm</command>
+	In order to use the signature feature, &rpm;
 	must be configured to run PGP and be able to find a public key
 	ring with Red Hat (or other vendor) public keys. By default,
-	<command>rpm</command> uses the same conventions as PGP
+	&rpm; uses the same conventions as PGP
 	to find key rings, namely the <envar>$PGPPATH</envar> environment
 	variable.  If your key rings are not located where PGP expects
 	them to be, you will need to configure the macro
@@ -1095,7 +1155,7 @@ systems of the binary package and host don't match.
 
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
 	<arg><option>-v</option></arg>
 	<arg><option>--dbpath</option> <replaceable>DIRECTORY</replaceable></arg>
@@ -1117,13 +1177,13 @@ systems of the binary package and host don't match.
   
     <para>
       <cmdsynopsis>
-	<command>rpm</command>
+	&rpm;
 	<arg choice="plain"><option>--showrc</option></arg>
       </cmdsynopsis>
     </para>
 
     <para>
-	shows the values <command>rpm</command> will use for all of the
+	shows the values &rpm; will use for all of the
 	options that may be set in
 		<filename>rpmrc</filename> and
 		<filename>macros</filename>
@@ -1133,7 +1193,7 @@ systems of the binary package and host don't match.
 
     <refsect1><title>Ftp/Http Options</title>
     <para>
-	<command>rpm</command> can act as an FTP and/or HTTP client so
+	&rpm; can act as an FTP and/or HTTP client so
 	that packages can be queried or installed from the internet.
 	Package files for install, upgrade, and query operations may be
 	specified as an
@@ -1150,11 +1210,11 @@ systems of the binary package and host don't match.
 	If the <command>:PASSWORD</command> portion is omitted, the password will be
 	prompted for (once per user/hostname pair). If both the user and
 	password are omitted, anonymous <command>ftp</command> is used.
-	In all case,s passive (PASV) <command>ftp</command> transfers are
+	In all cases, passive (PASV) <command>ftp</command> transfers are
 	performed.
     </para>
     <para>
-	<command>rpm</command> allows the following options to be used with
+	&rpm; allows the following options to be used with
 	ftp URLs:
     <variablelist>
     <varlistentry>
@@ -1178,7 +1238,7 @@ systems of the binary package and host don't match.
     </para>
 
     <para>
-	<command>rpm</command> allows the following options to be used with
+	&rpm; allows the following options to be used with
 	<command>http</command> URLs:
     <variablelist>
     <varlistentry>
@@ -1238,15 +1298,11 @@ systems of the binary package and host don't match.
 
 <refsect1><title>Authors</title>
       <simplelist>
-	<member>
-	<author><firstname>Marc</firstname> <surname>Ewing</surname> <authorblurb><simpara><email>marc@redhat.com</email></simpara></authorblurb></author>
-	</member><member>
-	<author><firstname>Jeff</firstname> <surname>Johnson</surname> <authorblurb><simpara><email>jbj@redhat.com</email></simpara></authorblurb></author>
-	</member><member>
-	<author><firstname>Erik</firstname> <surname>Troan</surname> <authorblurb><simpara><email>ewt@redhat.com</email></simpara></authorblurb></author>
-	</member>
+	<member>Marc Ewing &lt;marc@redhat.com&gt;</member>
+	<member>Jeff Johnson &lt;jbj@redhat.com&gt;</member>
+	<member>Erik Troan &lt;ewt@redhat.com&gt;</member>
       </simplelist>
 </refsect1>
 
   </RefEntry>
-</appendix>
+</reference>
