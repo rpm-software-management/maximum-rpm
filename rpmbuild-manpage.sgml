@@ -301,7 +301,7 @@
 	When building the package, interpret <replaceable>PLATFORM</replaceable>
 	as <option>arch-vendor-os</option> and set the macros
 		<command>%_target</command>,
-		<command>%_target_arch</command>, and
+		<command>%_target_cpu</command>, and
 		<command>%_target_os</command>
 	accordingly.
     </para></listitem>
