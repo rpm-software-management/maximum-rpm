@@ -1379,31 +1379,35 @@ int rpmdbFindByConflicts(rpmdb db,
         </sect3>
       </sect2>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title>Package Manipulation</title>
-<indexterm>
-<primary>rpmlib!functions!package manipulation</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
+      <sect2 id="s2-rpm-rpmlib-package-manipulation">
+        <title>Package Manipulation</title>
+        <indexterm>
+          <primary>rpmlib!functions!package manipulation</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          These functions perform the operations most RPM users are familiar
+          with.  Functions that install and erase packages are here, along with
+          a few related lower-level support functions.
+        </para>
+
+        <sect3 id="s3-rpm-rpmlib-rpminstallsourcepackage">
+          <title>
+            Install Source Package File ---
+            <function>rpmInstallSourcePackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmInstallSourcePackage()</function></primary>
+            <secondary></secondary>
 </indexterm>
 
-These functions perform the operations most RPM users are familiar with.
-Functions that install and erase packages are here, along with a few
-related lower-level support functions.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Install Source Package File --- <function>rpmInstallSourcePackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmInstallSourcePackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpminstallsourcepackage">
+            <title>
+              <function>rpmInstallSourcePackage()</function> Synopsis
+            </title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1413,63 +1417,73 @@ int rpmInstallSourcePackage(char * root,
                             rpmNotifyFunction notify,
                             char * labelFormat);
 </computeroutput>
-</screen>
-</figure>
-This function installs the source package file specified by <parameter>fd</parameter>.
-If <parameter>root</parameter> is not <symbol>NULL</symbol>, it is prepended to the variables
-<symbol>RPMVAR_SOURCEDIR</symbol> and <symbol>RPMVAR_SPECDIR</symbol> prior to the actual
-installation.  If <parameter>specFile</parameter> is not <symbol>NULL</symbol>, the complete path
-and filename of the just-installed spec file is returned.
+            </screen>
+          </figure>
 
-The <parameter>notify</parameter> parameter is used to specify a progress-tracking
-function that will be called during the installation.  Please refer to
-page <xref linkend="notify-function"> for more information on this parameter.
+          <para>
+            This function installs the source package file specified by
+            <parameter>fd</parameter>.  If <parameter>root</parameter> is not
+            <symbol>NULL</symbol>, it is prepended to the variables
+            <symbol>RPMVAR_SOURCEDIR</symbol> and
+            <symbol>RPMVAR_SPECDIR</symbol> prior to the actual installation.
+            If <parameter>specFile</parameter> is not <symbol>NULL</symbol>, the
+            complete path and filename of the just-installed spec file is
+            returned.
+          </para>
+          <para>
+            The <parameter>notify</parameter> parameter is used to specify a
+            progress-tracking function that will be called during the
+            installation.  Please refer to page <xref linkend="notify-function">
+            for more information on this parameter.
+          </para>
+          <para>
+            The <parameter>labelFormat</parameter> parameter can be used to
+            specify how the package label should be formatted.  It is used when
+            printing the package label once the package install is ready to
+            proceed.  If <parameter>labelformat</parameter> is
+            <symbol>NULL</symbol>, the package label is not printed.
+          </para>
+          <para>
+            This function returns the following status values:
 
-The <parameter>labelFormat</parameter> parameter can be used to specify how the package
-label should be formatted.  It is used when printing the package label once
-the package install is ready to proceed.  If <parameter>labelformat</parameter> is
-<symbol>NULL</symbol>, the package label is not printed.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The source package was
+                  installed successfully.
+                </para>
+              </listitem>
 
-This function returns the following status values:
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The source package file
+                  contained incorrect magic numbers.
+                </para>
+              </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- The source package was installed successfully.
+              <listitem>
+                <para>
+                  <returnvalue>2</returnvalue> --- Another type of error
+                  occurred.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpminstallpackage">
+          <title>
+            Install Binary Package File ---
+            <function>rpmInstallPackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmInstallPackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The source package file contained incorrect magic
-numbers.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
---- Another type of error occurred.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Install Binary Package File --- <function>rpmInstallPackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmInstallPackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpminstallpackage">
+            <title><function>rpmInstallPackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1482,199 +1496,212 @@ int rpmInstallPackage(char * rootdir,
                       char * labelFormat,
                       char * netsharedPath);
 </computeroutput>
-</screen>
-</figure>
-This function installs the binary package specified by <parameter>fd</parameter>.  If a
-path is specified in <parameter>rootdir</parameter>, the package will be installed with
-that path acting as the root directory.  If a path is specified in
-<parameter>prefix</parameter>, it will be used as the prefix for relocatable packages.
-The RPM database specified by <parameter>db</parameter> is updated to reflect the newly
-installed package.
+            </screen>
+          </figure>
 
-The <parameter>flags</parameter> parameter is used to control the installation behavior.
-The flags are defined in <filename>rpmlib.h</filename> and take the form
-<symbol>RPMINSTALL_<replaceable>xxx</replaceable></symbol>, where <symbol><replaceable>xxx</replaceable></symbol> is the name of
-the flag.
+          <para>
+            This function installs the binary package specified by
+            <parameter>fd</parameter>.  If a path is specified in
+            <parameter>rootdir</parameter>, the package will be installed with
+            that path acting as the root directory.  If a path is specified in
+            <parameter>prefix</parameter>, it will be used as the prefix for
+            relocatable packages.  The RPM database specified by
+            <parameter>db</parameter> is updated to reflect the newly installed
+            package.
+          </para>
+          <para>
+            The <parameter>flags</parameter> parameter is used to control the
+            installation behavior.  The flags are defined in
+            <filename>rpmlib.h</filename> and take the form
+            <symbol>RPMINSTALL_<replaceable>xxx</replaceable></symbol>, where
+            <symbol><replaceable>xxx</replaceable></symbol> is the name of the
+            flag.
+          </para>
+          <para>
+            The following flags are currently defined:
 
-The following flags are currently defined:
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_REPLACEPKG</symbol> --- Install the package
+                  even if it is already installed.
+                </para>
+              </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<symbol>RPMINSTALL_REPLACEPKG</symbol> --- Install the package even if it is
-already installed.
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_REPLACEFILES</symbol> --- Install the
+                  package even if it will replace files owned by another
+                  package.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_TEST</symbol> --- Perform all install-time
+                  checks, but do not actually install the package.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_REPLACEFILES</symbol> --- Install the package even if it
-will replace files owned by another package.
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_UPGRADE</symbol> --- Install the package,
+                  and remove all older versions of the package.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_UPGRADETOOLD</symbol> --- Install the
+                  package, even if the package is an older version of an
+                  already-installed package.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_TEST</symbol> --- Perform all install-time checks, but do
-not actually install the package.
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_NODOCS</symbol> --- Do not install the
+                  package's documentation files.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_NOSCRIPTS</symbol> --- Do not execute the
+                  package's install- and erase-time (in the case of an upgrade)
+                  scripts.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_UPGRADE</symbol> --- Install the package, and remove all
-older versions of the package.
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_NOARCH</symbol> --- Do not perform
+                  architecture compatibility tests.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <symbol>RPMINSTALL_NOOS</symbol> --- Do not perform operating
+                  system compatibility tests.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            The <parameter>notify</parameter> parameter is used to specify a
+            progress tracking function that will be called during the
+            installation.  Please refer to page <xref linkend="notify-function">
+            for more information on this parameter.
+          </para>
+          <para>
+            The <parameter>labelFormat</parameter> parameter can be used to
+            specify how the package label should be formatted.  This information
+            is used when printing the package label once the package install is
+            ready to proceed.  It is used when printing the package label once
+            the package install is ready to proceed.  If
+            <parameter>labelformat</parameter> is <symbol>NULL</symbol>, the
+            package label is not printed.
+          </para>
+          <para>
+            The <parameter>netsharedPath</parameter> parameter is used to
+            specify that part of the local filesystem that is shared with other
+            systems.  If there is more than one path that is shared, the paths
+            should be separated with a colon.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_UPGRADETOOLD</symbol> --- Install the package, even if
-the package is an older version of an already-installed package.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The binary package was
+                  installed successfully.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The binary package file
+                  contained incorrect magic numbers.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_NODOCS</symbol> --- Do not install the package's
-documentation files.
+              <listitem>
+                <para>
+                  <returnvalue>2</returnvalue> --- Another type of error
+                  occurred.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmnotifyfunction">
+          <title>
+            Track Package Installation Progress ---
+            <function>rpmNotifyFunction()</function>
+          </title>
+          <!-- label: notify-function -->
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmNotifyFunction()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
-<symbol>RPMINSTALL_NOSCRIPTS</symbol> --- Do not execute the package's
-install- and erase-time (in the case of an upgrade) scripts.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<symbol>RPMINSTALL_NOARCH</symbol> --- Do not perform architecture
-compatibility tests.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<symbol>RPMINSTALL_NOOS</symbol> --- Do not perform operating system
-compatibility tests.
-
-</para>
-</listitem>
-
-</itemizedlist>
-The <parameter>notify</parameter> parameter is used to specify a progress tracking
-function that will be called during the installation.  Please refer to
-page <xref linkend="notify-function"> for more information on this parameter.
-
-The <parameter>labelFormat</parameter> parameter can be used to specify how the package
-label should be formatted.  This information is used when printing the
-package label once the package install is ready to proceed.  It is used
-when printing the package label once the package install is ready to
-proceed.  If <parameter>labelformat</parameter> is <symbol>NULL</symbol>, the package label is
-not printed.
-
-The <parameter>netsharedPath</parameter> parameter is used to specify that part of the
-local filesystem that is shared with other systems.  If there is more than
-one path that is shared, the paths should be separated with a colon.
-
-This function returns the following status values:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- The binary package was installed successfully.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
---- The binary package file contained incorrect magic
-numbers.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
---- Another type of error occurred.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Track Package Installation Progress --- <function>rpmNotifyFunction()</function></title>
-<!-- label: notify-function -->
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmNotifyFunction()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmnotifyfunction">
+            <title><function>rpmNotifyFunction()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 typedef void (*rpmNotifyFunction)(const unsigned long amount,
                                   const unsigned long total);
 </computeroutput>
-</screen>
-</figure>
-A function can be passed to <function>rpmIstallSourcePackage</function> or
-<function>rpmInstallPackage</function> via the <parameter>notify</parameter> parameter.  The function
-will be called at regular intervals during the installation, and will have
-two parameters passed to it:
+            </screen>
+          </figure>
 
-<orderedlist>
-<listitem>
-<para>
-<parameter>amount</parameter> --- The number of bytes of the install that have been
-completed so far.
+          <para>
+            A function can be passed to
+            <function>rpmIstallSourcePackage</function> or
+            <function>rpmInstallPackage</function> via the
+            <parameter>notify</parameter> parameter.  The function will be
+            called at regular intervals during the installation, and will have
+            two parameters passed to it:
 
-</para>
-</listitem>
+            <orderedlist>
+              <listitem>
+                <para>
+                  <parameter>amount</parameter> --- The number of bytes of the
+                  install that have been completed so far.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<parameter>total</parameter> --- The total number of bytes that will be installed.
+              <listitem>
+                <para>
+                  <parameter>total</parameter> --- The total number of bytes
+                  that will be installed.
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
+          <para>
+            This function permits the creation of a dynamically updating
+            progress meter during package installation.
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmremovepackage">
+          <title>
+            Remove Installed Package --- <function>rpmRemovePackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmRemovePackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</orderedlist>
-This function permits the creation of a dynamically updating progress meter
-during package installation.
-
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Remove Installed Package --- <function>rpmRemovePackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmRemovePackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmremovepackage">
+            <title><function>rpmRemovePackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1683,122 +1710,119 @@ int rpmRemovePackage(char * root,
                      unsigned int offset,
                      int flags);
 </computeroutput>
-</screen>
-</figure>
-This function removes the package at record number <parameter>offset</parameter> in the
-RPM database specified by <parameter>db</parameter>.  If <parameter>root</parameter> is specified, it
-is used as the path to a directory that will serve as the root directory
-while the package is being removed.
+            </screen>
+          </figure>
 
-The <parameter>flags</parameter> parameter is used to control the package removal
-behavior.  The flags that may be passed are defined in <filename>rpmlib.h</filename>,
-and are of the form <symbol>RPMUNINSTALL_<replaceable>xxx</replaceable></symbol>, where
-<symbol><replaceable>xxx</replaceable></symbol> is the name of the flag.
+          <para>
+            This function removes the package at record number
+            <parameter>offset</parameter> in the RPM database specified by
+            <parameter>db</parameter>.  If <parameter>root</parameter> is
+            specified, it is used as the path to a directory that will serve as
+            the root directory while the package is being removed.
+          </para>
+          <para>
+            The <parameter>flags</parameter> parameter is used to control the
+            package removal behavior.  The flags that may be passed are defined
+            in <filename>rpmlib.h</filename>, and are of the form
+            <symbol>RPMUNINSTALL_<replaceable>xxx</replaceable></symbol>, where
+            <symbol><replaceable>xxx</replaceable></symbol> is the name of the
+            flag.
+          </para>
+          <para>
+            The following flags are currently defined:
 
-The following flags are currently defined:
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <symbol>RPMUNINSTALL_TEST</symbol> --- Perform all erase-time
+                  checks, but do not actually remove the package.
+                </para>
+              </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<symbol>RPMUNINSTALL_TEST</symbol> --- Perform all erase-time checks, but do
-not actually remove the package.
+              <listitem>
+                <para>
+                  <symbol>RPMUNINSTALL_NOSCRIPTS</symbol> --- Do not execute the
+                  package's erase-time scripts.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            This function returns the following status values:
 
-</para>
-</listitem>
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The package was removed
+                  successfully.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-<symbol>RPMUNINSTALL_NOSCRIPTS</symbol> --- Do not execute the package's
-erase-time scripts.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The package removal failed.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
+      </sect2>
 
-</para>
-</listitem>
+      <sect2 id="s2-rpm-rpmlib-package-file-verification">
+        <title>Package And File Verification</title>
+        <indexterm>
+          <primary>rpmlib!functions!package/file verification</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</itemizedlist>
-This function returns the following status values:
+        <para>
+          The functions in this section perform the verification operations
+          necessary to ensure that the files comprising a package have not been
+          modified since they were installed.
+        </para>
+        <para>
+          Verification takes place on three distinct levels:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- The package was removed successfully.
+          <orderedlist>
+            <listitem>
+              <para>
+                On the file-by-file level.
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                On a package-wide level, through the use of the
+                <command>%verifyscript</command> verification script.
+              </para>
+            </listitem>
 
-<listitem>
-<para>
---- The package removal failed.
+            <listitem>
+              <para>
+                On an inter-package level, through RPM's normal dependency
+                processing.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          Because of this, there are two functions to perform each specific
+          verification operation.
+        </para>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmverifyfile">
+          <title>
+            Verify File --- <function>rpmVerifyFile()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmVerifyFile()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</itemizedlist>
-<indexterm>
-<primary>rpmlib!functions!package manipulation|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-rpmlib-">
-<title>Package And File Verification</title>
-<indexterm>
-<primary>rpmlib!functions!package/file verification</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The functions in this section perform the verification operations necessary
-to ensure that the files comprising a package have not been modified since
-they were installed.
-
-Verification takes place on three distinct levels:
-
-<orderedlist>
-<listitem>
-<para>
-On the file-by-file level.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-On a package-wide level, through the use of the
-<command>%verifyscript</command> verification script.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-On an inter-package level, through RPM's normal dependency
-processing.
-
-</para>
-</listitem>
-
-</orderedlist>
-Because of this, there are two functions to perform each specific
-verification operation.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Verify File --- <function>rpmVerifyFile()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmVerifyFile()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmverifyfile">
+            <title><function>rpmVerifyFile()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1808,35 +1832,43 @@ int rpmVerifyFile(char * root,
                   int filenum,
                   int * result);
 </computeroutput>
-</screen>
-</figure>
-This function verifies the <parameter>filenum</parameter>'th file from the package whose
-header is <parameter>h</parameter>.  If <parameter>root</parameter> is specified, it is used as the
-path to a directory that will serve as the root directory while the file is
-being verified.  The results of the file verification are returned in
-<parameter>result</parameter>, and consist of a number of flags.  Each flag that is set
-indicates a verification failure.
+            </screen>
+          </figure>
 
-The flags are defined in <filename>rpmlib.h</filename>, and are of the form
-<symbol>RPMVERIFY_<replaceable>xxx</replaceable></symbol>, where <symbol><replaceable>xxx</replaceable></symbol> is the name of
-the data that failed verification.
+          <para>
+            This function verifies the <parameter>filenum</parameter>'th file
+            from the package whose header is <parameter>h</parameter>.  If
+            <parameter>root</parameter> is specified, it is used as the path to
+            a directory that will serve as the root directory while the file is
+            being verified.  The results of the file verification are returned
+            in <parameter>result</parameter>, and consist of a number of flags.
+            Each flag that is set indicates a verification failure.
+          </para>
+          <para>
+            The flags are defined in <filename>rpmlib.h</filename>, and are of
+            the form <symbol>RPMVERIFY_<replaceable>xxx</replaceable></symbol>,
+            where <symbol><replaceable>xxx</replaceable></symbol> is the name of
+            the data that failed verification.
+          </para>
+          <para>
+            This function returns <returnvalue>0</returnvalue> on success, and
+            <returnvalue>1</returnvalue> on failure.
+          </para>
+        </sect3>
 
-This function returns <returnvalue>0</returnvalue> on success, and <returnvalue>1</returnvalue> on failure.
+        <sect3 id="s3-rpm-rpmlib-rpmverifyscript">
+          <title>
+            Execute Package's <command>\%verifyscript</command> Verification
+            Script --- <function>rpmVerifyScript()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmVerifyScript()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Execute Package's <command>\%verifyscript</command> Verification Script --- <function>rpmVerifyScript()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmVerifyScript()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmverifyscript">
+            <title><function>rpmVerifyScript()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1845,102 +1877,115 @@ int rpmVerifyScript(char * root,
                     Header h,
                     int err);
 </computeroutput>
-</screen>
-</figure>
-This function executes the <command>%verifyscript</command> verification script for
-the package whose header is <parameter>h</parameter>.  <parameter>err</parameter> must contain a valid
-file descriptor.  If <function>rpmIsVerbose()</function> returns true, the
-<command>%verifyscript</command> verification script will direct all status messages
-to <parameter>err</parameter>.
+            </screen>
+          </figure>
 
-This function returns <returnvalue>0</returnvalue> on success, <returnvalue>1</returnvalue> on failure.
+          <para>
+            This function executes the <command>%verifyscript</command>
+            verification script for the package whose header is
+            <parameter>h</parameter>.  <parameter>err</parameter> must contain a
+            valid file descriptor.  If <function>rpmIsVerbose()</function>
+            returns true, the <command>%verifyscript</command> verification
+            script will direct all status messages to
+            <parameter>err</parameter>.
+          </para>
+          <para>
+            This function returns <returnvalue>0</returnvalue> on success,
+            <returnvalue>1</returnvalue> on failure.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>rpmlib!functions!package/file verification|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rpmlib-dependency-related-ops">
+        <title>Dependency-Related Operations</title>
+        <indexterm>
+          <primary>rpmlib!functions!dependency processing</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The functions in this section are used to perform the various
+          dependency-related operations supported by rpmlib.
+        </para>
+        <para>
+          Dependency processing is entirely separate from normal package-based
+          operations.  The package installation and removal functions do not
+          perform any dependency processing themselves.  Therefore, dependency
+          processing is somewhat different from other aspects of rpmlib's
+          operation.
+        </para>
+        <para>
+          Dependency processing centers around the
+          <structname>rpmDependencies</structname> data structure.  The
+          operations that are to be performed against the RPM database (adding,
+          removing, and upgrading packages) are performed against this data
+          structure, using functions that are described below.  These functions
+          simply populate the data structure according to the operation being
+          performed.  They do <emphasis>not</emphasis> perform the actual
+          operation on the package.  This is an important point to keep in mind.
+        </para>
+        <para>
+          Once the data structure has been completely populated, a dependency
+          check function is called to determine if there are any
+          dependency-related problems.  The result is a structure of dependency
+          conflicts.  This structure,
+          <structname>rpmDependencyConflict</structname>, is defined in
+          <filename>rpmlib.h</filename>.
+        </para>
+        <para>
+          Note that it is necessary to free both the conflicts structure
+          <emphasis>and</emphasis> the <structname>rpmDependencies</structname>
+          structure when they are no longer needed.  However,
+          <function>free()</function> should <emphasis>not</emphasis> be used
+          --- special functions for this are provided, and will be discussed in
+          this section.
+        </para>
 
-</sect2>
+        <sect3 id="s3-rpm-rpmlib-rpmdepdependencies">
+          <title>
+            Create a New Dependency Data Structure ---
+            <function>rpmdepDependencies()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepDependencies()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title>Dependency-Related Operations</title>
-<indexterm>
-<primary>rpmlib!functions!dependency processing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The functions in this section are used to perform the various
-dependency-related operations supported by rpmlib.
-
-Dependency processing is entirely separate from normal package-based
-operations.  The package installation and removal functions do not perform
-any dependency processing themselves.  Therefore, dependency processing is
-somewhat different from other aspects of rpmlib's operation.
-
-Dependency processing centers around the <structname>rpmDependencies</structname> data
-structure.  The operations that are to be performed against the RPM
-database (adding, removing, and upgrading packages) are performed against
-this data structure, using functions that are described below.  These
-functions simply populate the data structure according to the operation
-being performed.  They do <emphasis>not</emphasis> perform the actual operation on the
-package.  This is an important point to keep in mind.
-
-Once the data structure has been completely populated, a dependency check
-function is called to determine if there are any dependency-related
-problems.  The result is a structure of dependency conflicts.  This
-structure, <structname>rpmDependencyConflict</structname>, is defined in
-<filename>rpmlib.h</filename>.
-
-Note that it is necessary to free both the conflicts structure <emphasis>and</emphasis>
-the <structname>rpmDependencies</structname> structure when they are no longer needed.
-However, <function>free()</function> should <emphasis>not</emphasis> be used --- special functions
-for this are provided, and will be discussed in this section.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Create a New Dependency Data Structure --- <function>rpmdepDependencies()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepDependencies()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepdependencies">
+            <title><function>rpmdepDependencies()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 rpmDependencies rpmdepDependencies(rpmdb db);
 </computeroutput>
-</screen>
-</figure>
-This function returns an initialized <structname>rpmDependencies</structname> structure.
-The dependency checking to be done will be based on the RPM database
-specified in the <parameter>db</parameter> parameter.  If this parameter is
-<symbol>NULL</symbol>, the dependency checking will be done as if an empty RPM
-database was being used.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function returns an initialized
+            <structname>rpmDependencies</structname> structure.  The dependency
+            checking to be done will be based on the RPM database specified in
+            the <parameter>db</parameter> parameter.  If this parameter is
+            <symbol>NULL</symbol>, the dependency checking will be done as if an
+            empty RPM database was being used.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Add a Package Install To the Dependency Data Structure ---  <function>rpmdepAddPackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepAddPackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdepaddpackage">
+          <title>
+            Add a Package Install To the Dependency Data Structure ---
+            <function>rpmdepAddPackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepAddPackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepaddpackage">
+            <title><function>rpmdepAddPackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1948,26 +1993,30 @@ database was being used.
 void rpmdepAddPackage(rpmDependencies rpmdep,
                       Header h);
 </computeroutput>
-</screen>
-</figure>
-This function adds the installation of the package whose header is
-<parameter>h</parameter>, to the <structname>rpmDependencies</structname> data structure,
-<parameter>rpmdep</parameter>.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function adds the installation of the package whose header is
+            <parameter>h</parameter>, to the
+            <structname>rpmDependencies</structname> data structure,
+            <parameter>rpmdep</parameter>.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Add a Package Upgrade To the Dependency Data Structure --- <function>rpmdepUpgradePackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepUpgradePackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdepupgradepackage">
+          <title>
+            Add a Package Upgrade To the Dependency Data Structure ---
+            <function>rpmdepUpgradePackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepUpgradePackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepupgradepackage">
+            <title><function>rpmdepUpgradePackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1975,53 +2024,64 @@ This function adds the installation of the package whose header is
 void rpmdepUpgradePackage(rpmDependencies rpmdep,
                           Header h);
 </computeroutput>
-</screen>
-</figure>
-This function adds the upgrading of the package whose header is
-<parameter>h</parameter>, to the <structname>rpmDependencies</structname> data structure,
-<parameter>rpmdep</parameter>.  It is similar to <function>rpmdepAddPackage()</function>, but older
-versions of the package are removed.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function adds the upgrading of the package whose header is
+            <parameter>h</parameter>, to the
+            <structname>rpmDependencies</structname> data structure,
+            <parameter>rpmdep</parameter>.  It is similar to
+            <function>rpmdepAddPackage()</function>, but older versions of the
+            package are removed.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Add a Package Removal To the Dependency Data Structure --- <function>rpmdepRemovePackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepRemovePackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdepremovepackage">
+          <title>
+            Add a Package Removal To the Dependency Data Structure ---
+            <function>rpmdepRemovePackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepRemovePackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepremovepackage">
+            <title><function>rpmdepRemovePackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepRemovePackage(rpmDependencies rpmdep,
                          int dboffset);
 </computeroutput>
-</screen>
-</figure>
-This function adds the removal of the package whose RPM database offset is
-<parameter>dboffset</parameter>, to the <structname>rpmDependencies</structname> data structure,
-<parameter>rpmdep</parameter>.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function adds the removal of the package whose RPM database
+            offset is <parameter>dboffset</parameter>, to the
+            <structname>rpmDependencies</structname> data structure,
+            <parameter>rpmdep</parameter>.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Add an Available Package To the Dependency Data Structure ---  <function>rpmdepAvailablePackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepAvailablePackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdepavailablepackage">
+          <title>
+            Add an Available Package To the Dependency Data Structure ---
+            <function>rpmdepAvailablePackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepAvailablePackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepavailablepackage">
+            <title>
+              <function>rpmdepAvailablePackage()</function> Synopsis
+            </title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2030,31 +2090,36 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
                             Header h,
                             void * key);
 </computeroutput>
-</screen>
-</figure>
-This function adds the package whose header is <parameter>h</parameter>, to the
-<structname>rpmDependencies</structname> structure, <parameter>rpmdep</parameter>.
+            </screen>
+          </figure>
 
-The <parameter>key</parameter> parameter can be anything that uniquely identifies the
-package being added.  It will be returned as part of the
-<structname>rpmDependencyConflict</structname> structure returned by
-<function>rpmdepCheck()</function>, specifically in that structure's
-<structfield>suggestedPackage</structfield> element.
+          <para>
+            This function adds the package whose header is
+            <parameter>h</parameter>, to the
+            <structname>rpmDependencies</structname> structure,
+            <parameter>rpmdep</parameter>.
+          </para>
+          <para>
+            The <parameter>key</parameter> parameter can be anything that
+            uniquely identifies the package being added.  It will be returned as
+            part of the <structname>rpmDependencyConflict</structname> structure
+            returned by <function>rpmdepCheck()</function>, specifically in that
+            structure's <structfield>suggestedPackage</structfield> element.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdepcheck">
+          <title>
+            Perform a Dependency Check --- <function>rpmdepCheck()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepCheck()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Perform a Dependency Check --- <function>rpmdepCheck()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepCheck()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepcheck">
+            <title><function>rpmdepCheck()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -2062,73 +2127,78 @@ int rpmdepCheck(rpmDependencies rpmdep,
                 struct rpmDependencyConflict ** conflicts,
                 int * numConflicts);
 </computeroutput>
-</screen>
-</figure>
-This function performs a dependency check on the <structname>rpmDependencies</structname>
-structure <parameter>rpmdep</parameter>.  It returns an array of size
-<parameter>numConflicts</parameter>, pointed to by <parameter>conflicts</parameter>.
+            </screen>
+          </figure>
 
-This function returns <returnvalue>0</returnvalue> on success, and <returnvalue>1</returnvalue> on error.
+          <para>
+            This function performs a dependency check on the
+            <structname>rpmDependencies</structname> structure
+            <parameter>rpmdep</parameter>.  It returns an array of size
+            <parameter>numConflicts</parameter>, pointed to by
+            <parameter>conflicts</parameter>.
+          </para>
+          <para>
+            This function returns <returnvalue>0</returnvalue> on success, and
+            <returnvalue>1</returnvalue> on error.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdepfreeconflicts">
+          <title>
+            Free Results of <function>rpmdepCheck()</function> ---
+            <function>rpmdepFreeConflicts()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepFreeConflicts()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Free Results of <function>rpmdepCheck()</function> --- <function>rpmdepFreeConflicts()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepFreeConflicts()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepfreeconflicts">
+            <title><function>rpmdepFreeConflicts()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
                          int numConflicts);
 </computeroutput>
-</screen>
-</figure>
-This function frees the dependency conflict information of size
-<parameter>numConflicts</parameter> pointed to by <parameter>conflicts</parameter>.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function frees the dependency conflict information of size
+            <parameter>numConflicts</parameter> pointed to by
+            <parameter>conflicts</parameter>.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Free a Dependency Data Structure --- <function>rpmdepDone()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdepDone()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdepdone">
+          <title>
+            Free a Dependency Data Structure ---
+            <function>rpmdepDone()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdepDone()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdepdone">
+            <title><function>rpmdepDone()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepDone(rpmDependencies rpmdep);
 </computeroutput>
-</screen>
-</figure>
-This function frees the <structname>rpmDependencies</structname> structure pointed to by
-<parameter>rpmdep</parameter>.
+            </screen>
+          </figure>
 
-<indexterm>
-<primary>rpmlib!functions!dependency processing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
+          <para>
+            This function frees the <structname>rpmDependencies</structname>
+            structure pointed to by <parameter>rpmdep</parameter>.
+          </para>
+        </sect3>
+      </sect2>
 
 <sect2 id="s2-rpm-rpmlib-">
 <title>Diagnostic Output Control</title>
