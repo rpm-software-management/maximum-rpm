@@ -11,104 +11,217 @@
 
 <RefEntry ID=rpm.8>
   <RefMeta>
-    <RefEntryTitle>rpm</RefEntryTitle>
+    <RefEntrytitle>rpm</RefEntrytitle>
     <ManVolNum>8</ManVolNum>
   </RefMeta>
 
 <RefNameDiv>
-  <RefName>rpm</RefName>
+  <RefName><command>rpm</command></RefName>
   <RefPurpose>RPM Package Manager</RefPurpose>
 </RefNameDiv>
 
-<RefSynopsisDiv><Title>Synopsis</Title>
-  <cmdsynopsis>
-    &rpm; <arg><replaceable>[options]</replaceable></arg>
-  </cmdsynopsis>
+<RefSynopsisDiv>
+  <variablelist>
+  <varlistentry>
+  <term>Database maintenance:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Building:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="plain"><option>-b<replaceable>OPT</replaceable></option></arg>
+	<arg>buildoptions</arg>
+	<arg rep="repeat" choice="plain"><replaceable>SPECFILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="plain"><option>-t<replaceable>OPT</replaceable></option></arg>
+	<arg>buildoptions</arg>
+	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--rebuild | --recompile</option></arg>
+	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="plain"><option>--tarbuild</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Querying:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-q | --query</option></arg>
+	<arg>pkgselect-options</arg>
+	<arg>query-options</arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Maintaining installed packages:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-i | --install</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-U | --upgrade</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-F | --freshen</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-e | --erase</option></arg>
+	<arg><option>--allmatches</option></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--noscripts</option></arg>
+	<arg><option>--notriggers</option></arg>
+	<arg><option>--test</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-V | --verify</option></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--nofiles</option></arg>
+	<arg><option>--nomd5</option></arg>
+	<arg><option>--noscripts</option></arg>
+	<arg>pkgselect-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Signatures:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-K | --checksig</option></arg>
+	<arg>signature-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--addsign | --resign</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry><varlistentry>
+  <term>Miscellaneous:</term>
+  <listitem><para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--querytags | --showrc</option></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--setperms | --setugids</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para></listitem>
+  </varlistentry>
+  </variablelist>
 </RefSynopsisDiv>
 
-<RefSect1><Title>Description</Title>
+<refsect1><title>Description</title>
   <para>
-	&rpm; is a powerful <Glossterm>package manager</Glossterm>,
+	<command>rpm</command> is a powerful <emphasis>Package Manager</emphasis>,
 	which can be used to build, install, query, verify, update, and
-	erase individual software packages.  A <Glossterm>package</Glossterm> consists
+	erase individual software packages.  A <emphasis>Package</emphasis> consists
 	of an archive of files, and package information, including name,
 	version, and description.
   </para>
 
   <para>
     One of the following basic modes must be selected:
-    <simplelist>
-	<member><Glossterm>Initialize Database</Glossterm>,</member>
-	<member><Glossterm>Rebuild Database</Glossterm>,</member>
-	<member><Glossterm>Build Package</Glossterm>,</member>
-	<member><Glossterm>Recompile Package</Glossterm>,</member>
-	<member><Glossterm>Build Package from Tarball</Glossterm>,</member>
-	<member><Glossterm>Query</Glossterm>,</member>
-	<member><Glossterm>Show Querytags</Glossterm>,</member>
-	<member><Glossterm>Install/Upgrade/Freshen</Glossterm>,</member>
-	<member><Glossterm>Uninstall</Glossterm>,</member>
-	<member><Glossterm>Verify</Glossterm>,</member>
-	<member><Glossterm>Signature Check</Glossterm>,</member>
-	<member><Glossterm>Resign</Glossterm>,</member>
-	<member><Glossterm>Add Signature</Glossterm>,</member>
-	<member><Glossterm>Set Owners/Groups</Glossterm>, and</member>
-	<member><Glossterm>Show Configuration</Glossterm>.</member>
-    </simplelist>
+	<emphasis>Initialize Database</emphasis>,
+	<emphasis>Rebuild Database</emphasis>,
+	<emphasis>Build Package</emphasis>,
+	<emphasis>Recompile Package</emphasis>,
+	<emphasis>Build Package from Tarball</emphasis>,
+	<emphasis>Query</emphasis>,
+	<emphasis>Show Querytags</emphasis>,
+	<emphasis>Install/Upgrade/Freshen</emphasis>,
+	<emphasis>Uninstall</emphasis>,
+	<emphasis>Verify</emphasis>,
+	<emphasis>Signature Check</emphasis>,
+	<emphasis>Resign</emphasis>,
+	<emphasis>Add Signature</emphasis>,
+	<emphasis>Set Owners/Groups</emphasis>, and
+	<emphasis>Show Configuration</emphasis>.
   </para>
+</refsect1>
 
-  <para>Database maintenance:
-    <simplelist>
-	<member>&rpm; <option>--initdb</option></member>
-	<member>&rpm; <option>--rebuilddb</option></member>
-    </simplelist>
-  </para>
-  <para>Building:
-    <simplelist>
-	<member>&rpm; <option>[-b|t]</option> [buildoptions] [specfile]+</member>
-	<member>&rpm; <option>--rebuild</option> [sourcerpm]+</member>
-	<member>&rpm; <option>--tarbuild</option> [tarredsource]+</member>
-    </simplelist>
-  </para>
-  <para>Querying:
-    <simplelist>
-	<member>&rpm; <option>[--query|-q]</option> [queryoptions]</member>
-	<member>&rpm; <option>--querytags</option></member>
-    </simplelist>
-  </para>
-  <para>Maintaining installed packages:
-    <simplelist>
-	<member>&rpm; <option>[--install|-i]</option> [installoptions] [package_file]+</member>
-	<member>&rpm; <option>[--upgrade|-U]</option> [installoptions] [package_file]+</member>
-	<member>&rpm; <option>[--freshen|-F]</option> [installoptions] [package_file]+</member>
-	<member>&rpm; <option>[--uninstall|-e]</option> [uninstalloptions] [package]+</member>
-	<member>&rpm; <option>[--verify|-V]</option> [verifyoptions] [package]+</member>
-    </simplelist>
-  </para>
-  <para>Signatures:
-    <simplelist>
-	<member>&rpm; <option>[--checksig|-K]</option> [signatureoptions] [package_file]+</member>
-	<member>&rpm; <option>--resign</option> [package_file]+</member>
-	<member>&rpm; <option>--addsign</option> [package_file]+</member>
-    </simplelist>
-  </para>
-  <para>Miscellaneous:
-    <simplelist>
-	<member>&rpm; <option>--showrc</option></member>
-	<member>&rpm; <option>--setperms</option> [package]+</member>
-	<member>&rpm; <option>--setgids</option> [package]+</member>
-    </simplelist>
-  </para>
-</RefSect1>
-
-<RefSect1><Title>General Options</Title>
+<refsect1><title>General Options</title>
   <para>
   These options can be used in all the different modes.
   </para>
   <variablelist>
     <varlistentry>
-    <term><option>-vv</option></term>
+    <term><option>--dbpath</option> <replaceable>DIRECTORY</replaceable></term>
       <listitem><para>
-	Print lots of ugly debugging information.
+	Use the database in <replaceable>DIRECTORY</replaceable> rathen
+	than the default path <filename>/var/lib/rpm</filename>
+      </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>-?, --help</option></term>
+      <listitem><para>
+	Print a longer usage message then normal.
+      </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--pipe</option> <replaceable>CMD</replaceable></term>
+      <listitem><para>
+	Pipes the output of <command>rpm</command> to the command <replaceable>CMD</replaceable>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--quiet</option></term>
@@ -117,80 +230,54 @@
 	be displayed.
       </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--help</option></term>
+    <term><option>--rcfile</option> <replaceable>FILELIST</replaceable></term>
       <listitem><para>
-	Print a longer usage message then normal.
+	Each of the files in the colon separated
+	<replaceable>FILELIST</replaceable>
+	is read sequentially by <command>rpm</command> for configuration
+	information.
+	Only the first file in the list must exist, and tildes will be
+	expanded to the value of <envar>$HOME</envar>.
+	The default <replaceable>FILELIST</replaceable> is
+		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
+      </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--root</option> <replaceable>DIRECTORY</replaceable></term>
+      <listitem><para>
+	Use the system rooted at <replaceable>DIRECTORY</replaceable> for all operations.
+	Note that this means the database will be read or modified under
+	<replaceable>DIRECTORY</replaceable> and any
+		<command>%pre</command> or
+		<command>%post</command>
+	scriptlet(s) are run after a chroot(2) to
+		<replaceable>DIRECTORY</replaceable>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--version</option></term>
       <listitem><para>
-	Print a single line containing the version number of &rpm;
+	Print a single line containing the version number of <command>rpm</command>
 	being used. </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--rcfile</option> <replaceable>&lt;filelist&gt;</replaceable></term>
+    <term><option>-vv</option></term>
       <listitem><para>
-	Each of the files in the colon separated <replaceable>&lt;filelist&gt;</replaceable>
-	is read sequentially by &rpm; for configuration information. The
-	default <replaceable>&lt;filelist&gt;</replaceable> is
-		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
-	Only the first file in the list must exist, and tildes will be
-	expanded to the value of <envar>$HOME</envar>.
-      </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--root <replaceable>&lt;dir&gt;</replaceable></option></term>
-      <listitem><para>
-	Use the system rooted at <replaceable>&lt;dir&gt;</replaceable> for all operations.
-	Note that this means the database will be read or modified under
-	<replaceable>&lt;dir&gt;</replaceable> and any <command>%pre</command> or <command>%post</command> scripts are
-	run after a chroot() to <replaceable>&lt;dir&gt;</replaceable>.
-      </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--dbpath <replaceable>&lt;path&gt;</replaceable></option></term>
-      <listitem><para>
-	Use RPM database in <replaceable>&lt;path&gt;</replaceable>.
-      </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--justdb</option></term>
-      <listitem><para>
-	Update only the database, not the filesystem.
-      </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--ftpproxy <replaceable>&lt;host&gt;</replaceable></option>,</term>
-    <listitem><para>
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--httpproxy <replaceable>&lt;host&gt;</replaceable></option></term>
-      <listitem><para>
-	Use <replaceable>&lt;host&gt;</replaceable> as an FTP or HTTP proxy host. See
-	<Command>FTP/HTTP OPTIONS</Command>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--ftpport <replaceable>&lt;port&gt;</replaceable></option>,</term>
-
-    <listitem><para>
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--httpport <replaceable>&lt;port&gt;</replaceable></option></term>
-      <listitem><para>
-	Use <replaceable>&lt;port&gt;</replaceable> as the FTP or HTTP port on the proxy
-	host. See <Command>FTP/HTTP OPTIONS</Command>.
-      </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--pipe <replaceable>&lt;cmd&gt;</replaceable></option></term>
-      <listitem><para>
-	Pipes the output of &rpm; to the command <replaceable>&lt;cmd&gt;</replaceable>.
+	Print lots of ugly debugging information.
       </para></listitem>
     </varlistentry>
   </variablelist>
-</RefSect1>
+</refsect1>
 
-    <RefSect1> <Title>Install and Upgrade Options</Title>
+    <refsect1><title>Install and Upgrade Options</title>
     <para>
 	The general form of an rpm install command is 
     </para>
 
     <para>
-	&rpm; -i [install-options] <replaceable>&lt;package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-i | --install</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
@@ -201,33 +288,72 @@
     </para>
 
     <para>
-	&rpm; -U [install-options] <replaceable>&lt;package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-U | --upgrade</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
  
     <para>
 	This upgrades or installs the package currently installed
-	to the version in the new RPM.  This is the same as install,
-	except all other version of the package are removed from the
-	system.
+	to a newer version.  This is the same as install, except
+	all other version(s) of the package are removed after the
+	new package is installed.
     </para>
 
     <para>
-	&rpm; [-F|--freshen] [install-options] <replaceable>&lt;package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-F | --freshen</option></arg>
+	<arg>install-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
 	This will upgrade packages, but only if an earlier version
-	currently exists. The <replaceable>&lt;package_file&gt;</replaceable>
-	may be specified as an ftp or <Command>http</Command> URL,
+	currently exists. The <replaceable>PACKAGE_FILE</replaceable>
+	may be specified as an
+		<command>ftp</command> or
+		<command>http</command> URL,
 	in which case the package will be downloaded before being
-	installed. See <Command>FTP/HTTP OPTIONS</Command>
-	for information on RPM's built-in <Command>ftp</Command>
-	and <Command>http</Command> support. 
+	installed. See <command>FTP/HTTP OPTIONS</command>
+	for information on <command>rpm</command>'s internal
+		<command>ftp</command> and
+		<command>http</command>
+	client support. 
     </para>
 
     <para>
     <variablelist>
     <varlistentry>
+    <term><option>--allfiles</option></term>
+    <listitem><para>
+	Installs or upgrades all the missingok files in the package,
+	regardless if they exist.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--badreloc</option></term>
+    <listitem><para>
+	Used with <option>--relocate</option>, permit relocations on
+	all file paths, not just those <replaceable>OLDPATH</replaceable>'s
+	included in the binary package relocation hint(s).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--excludepath</option> <replaceable>OLDPATH</replaceable></term>
+    <listitem><para>
+	Don't install files whose name begins with
+	<replaceable>OLDPATH</replaceable>.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--excludedocs</option></term>
+    <listitem><para>
+	Don't install any files which are marked as documentation
+	(which includes man pages and texinfo documents).
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>--force</option></term>
     <listitem><para>
 	Same as using
@@ -236,10 +362,64 @@
 	<option>--oldpackage</option>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>[--hash|-h]</option></term>
+    <term><option>-h, --hash</option></term>
     <listitem><para>
 	Print 50 hash marks as the package archive is unpacked.
-	Use with <option>-v</option> for a nicer display.
+	Use with <option>-v | --verbose</option> for a nicer display.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--ignoresize</option></term>
+    <listitem><para>
+	Don't check mount file systems for sufficient disk space before
+	installing this package.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--ignorearch</option></term>
+    <listitem><para>
+	Allow installation or upgrading even if the architectures
+	of the binary package and host don't match.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--ignoreos</option></term>
+    <listitem><para>
+	Allow installation or upgrading even if the operating
+systems of the binary package and host don't match.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--includedocs</option></term>
+    <listitem><para>
+	Install documentation files. This is the default behavior.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--justdb</option></term>
+      <listitem><para>
+	Update only the database, not the filesystem.
+      </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nodeps</option></term>
+    <listitem><para>
+	Don't do a dependency check before installing or upgrading
+	a package.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--noorder</option></term>
+    <listitem><para>
+	Don't reorder the packages for an install. The list of
+	packages would normally be reordered to satisfy dependancies.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--noscripts</option></term>
+    <listitem><para>
+	Don't execute the
+		<command>%pre</command> or
+		<command>%post</command>
+	scriptlet(s).
+    </para></ListItem>
+    </varlistentry><varlistentry>
+    <term><option>--notriggers</option></term>
+    <listitem><para>
+	Don't execute scripts which are triggered by the installation
+	of this package.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--oldpackage</option></term>
@@ -250,7 +430,25 @@
     <term><option>--percent</option></term>
     <listitem><para>
 	Print percentages as files are unpacked from the package archive.
-	This is intended to make RPM easy to run from other tools.
+	This is intended to make <command>rpm</command> easy to run from
+	other tools.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--prefix</option> <replaceable>NEWPATH</replaceable></term>
+    <listitem><para>
+	For relocateable binary packages, translate all file paths that
+	start with the installation prefix in the package relocation hint(s)
+	to <replaceable>NEWPATH</replaceable>.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--relocate</option> <replaceable>OLDPATH</replaceable>=<replaceable>NEWPATH</replaceable></term>
+    <listitem><para>
+	For relocatable binary packages, translate all file paths
+	that start with <replaceable>OLDPATH</replaceable> in the
+	package relocation hint(s) to <replaceable>NEWPATH</replaceable>.
+	This option can be used repeatedly if several
+	<replaceable>OLDPATH</replaceable>'s in the package are to
+	be relocated.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--replacefiles</option></term>
@@ -265,134 +463,62 @@
 	on this system.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--allfiles</option></term>
-    <listitem><para>
-	Installs or upgrades all the missingok files in the package,
-	regardless if they exist.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--nodeps</option></term>
-    <listitem><para>
-	Don't do a dependency check before installing or upgrading
-	a package.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--noscripts</option></term>
-    <listitem><para>
-	Don't execute the preinstall or postinstall scripts.
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><option>--notriggers</option></term>
-    <listitem><para>
-	Don't execute scripts which are triggered by the installation
-	of this package.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--ignoresize</option></term>
-    <listitem><para>
-	Don't check mount file systems for sufficient disk space before
-	installing this package.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--excludepath <replaceable>&lt;path&gt;</replaceable></option></term>
-    <listitem><para>
-	Don't install files whose name begins with
-	<replaceable>&lt;path&gt;</replaceable>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--excludedocs</option></term>
-    <listitem><para>
-	Don't install any files which are marked as documentation
-	(which includes man pages and texinfo documents).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--includedocs</option></term>
-    <listitem><para>
-	Install documentation files. This is the default behavior.
-    </para></listitem>
-    </varlistentry><varlistentry>
     <term><option>--test</option></term>
     <listitem><para>
 	Do not install the package, simply check for and report
 	potential conflicts.
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--ignorearch</option></term>
-    <listitem><para>
-	This allows installation or upgrading even if the architectures
-	of the binary RPM and host don't match.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--ignoreos</option></term>
-    <listitem><para>
-	This allows installation or upgrading even if the operating
-systems of the binary RPM and host don't match.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--prefix <replaceable>&lt;path&gt;</replaceable></option></term>
-    <listitem><para>
-	This sets the installation prefix to
-	<replaceable>&lt;path&gt;</replaceable> for relocatable packages.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--relocate</option> <replaceable>&lt;oldpath&gt;</replaceable>=<replaceable>&lt;newpath&gt;</replaceable></term>
-    <listitem><para>
-	For relocatable packages, translates the files that would be
-	put in <replaceable>&lt;oldpath&gt;</replaceable> to
-	<replaceable>&lt;newpath&gt;</replaceable>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--badreloc</option></term>
-    <listitem><para>
-	To be used in conjunction with --relocate, this forces
-	the relocation even if the package isn't relocatable.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--noorder</option></term>
-    <listitem><para>
-	Don't reorder the packages for an install. The list of
-	packages would normally be reordered to satisfy dependancies.
-    </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
-    </RefSect1>
+    </refsect1>
 
-<RefSect1><Title>Query Options</Title>
+<refsect1><title>Query Options</title>
     <para>
 	The general form of an rpm query command is 
     </para>
 
     <para>
-	&rpm; -q [query-options]
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-q | --query</option></arg
+	<arg>pkgselect-options</arg>
+	<arg>query-options</arg>
+      </cmdsynopsis>
     </para>
  
     <para>
 	You may specify the format that package information should be
-	printed in. To do this, you use the <option>[--queryformat|-qf]</option>
-	option, followed by the format string.  Query formats are
-	modifed versions of the standard <Command>printf(3)</Command>
+	printed in. To do this, you use the
+	<cmdsynopsis>
+	<arg choice="req"><option>--queryformat | -qf</option></arg>
+	<arg choice="plain"><replaceable>QUERYFMT</replaceable></arg>
+	</cmdsynopsis>
+	option, followed by the <replaceable>QUERYFMT</replaceable>
+	format string.  Query formats are
+	modifed versions of the standard <command>printf(3)</command>
 	formatting.  The format is made up of static strings (which
 	may include standard C character escapes for newlines, tabs,
-	and other special characters) and <Command>printf(3)</Command>
-	type formatters. As &rpm; already knows the type to print, the
+	and other special characters) and <command>printf(3)</command>
+	type formatters. As <command>rpm</command> already knows the type to print, the
 	type specifier must be omitted however, and replaced by the name
-	of the header tag to be printed, enclosed by <Command>{}</Command>
-	characters. The  <Command>RPMTAG_</Command> portion of the tag name
-	may be omitted.  Alternate output formats may be requested by following
+	of the header tag to be printed, enclosed by <command>{}</command>
+	characters. Tag names are case insesitive, and the
+	<command>RPMTAG_</command> portion of the tag name may be omitted
+	as well.  Alternate output formats may be requested by following
 	the tag with <option>:<replaceable>typetag</replaceable></option>.
 	Currently, the following types are supported:
-		<Command>octal</Command>,
-		<Command>date</Command>,
-		<Command>shescape</Command>,
-		<Command>perms</Command>,
-		<Command>fflags</Command>, and
-		<Command>depflags</Command>.
+		<command>octal</command>,
+		<command>date</command>,
+		<command>shescape</command>,
+		<command>perms</command>,
+		<command>fflags</command>, and
+		<command>depflags</command>.
 	For example, to print only the names of the packages queried,
-	you could use <Command>%{NAME}</Command> as the format string.
+	you could use <command>%{NAME}</command> as the format string.
 	To print the packages name and distribution information in
-	two columns, you could use <Command>%-30{NAME}%{DISTRIBUTION}</Command>.
-	&rpm; will print a list of all of the tags it knows about when it
+	two columns, you could use <command>%-30{NAME}%{DISTRIBUTION}</command>.
+	<command>rpm</command> will print a list of all of the tags it knows about when it
 	is invoked with the <option>--querytags</option> argument.
     </para>
     <para>
@@ -401,138 +527,97 @@ systems of the binary RPM and host don't match.
 
     <variablelist>
     <varlistentry>
-    <term><option><replaceable>&lt;package_name&gt;</replaceable></option></term>
+    <term><option><replaceable>PACKAGE</replaceable></option></term>
     <listitem><para>
-	Query installed package named <replaceable>&lt;package_name&gt;</replaceable>.
+	Query installed package named <replaceable>PACKAGE</replaceable>.
     </para></ListItem>
     </varlistentry><varlistentry>
-    <term><option>[--all|-a]</option></term>
+    <term><option>-a, --all</option></term>
     <listitem><para>
 	Query all installed packages
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--whatrequires <replaceable>&lt;capability&gt;</replaceable></option></term>
+    <term><option>-f, --file</option> <replaceable>FILE</replaceable></term>
     <listitem><para>
-    Query all packages that requires <replaceable>&lt;capability&gt;</replaceable> for proper functioning.
+	Query package owning <replaceable>FILE</replaceable>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--whatprovides <replaceable>&lt;virtual&gt;</replaceable></option></term>
+    <term><option>-g, --group</option> <replaceable>GROUP</replaceable></term>
     <listitem><para>
-	Query all packages that provide the <replaceable>&lt;virtual&gt;</replaceable> capability.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--file|-f] <replaceable>&lt;file&gt;</replaceable></option></term>
-    <listitem><para>
-	Query package owning <replaceable>&lt;file&gt;</replaceable>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--group|-g] <replaceable>&lt;group&gt;</replaceable></option></term>
-    <listitem><para>
-	Query packages with the group of <replaceable>&lt;group&gt;</replaceable>.
+	Query packages with the group of <replaceable>GROUP</replaceable>.
     </para></ListItem>
     </varlistentry><varlistentry>
-    <term><option>-p <replaceable>&lt;package_file&gt;</replaceable></option></term>
+    <term><option>-p, --package</option> <replaceable>URLFILE</replaceable></term>
     <listitem><para>
-	Query an (uninstalled) package <replaceable>&lt;package_file&gt;</replaceable>.
-	The <replaceable>&lt;package_file&gt;</replaceable> may be specified
-	as an <Command>ftp</Command> or <Command>http</Command> style URL, in
+	Query an (uninstalled) package <replaceable>URLFILE</replaceable>.
+	The <replaceable>URLFILE</replaceable> may be specified
+	as an <command>ftp</command> or <command>http</command> style URL, in
 	which case the package header will be downloaded and queried.
-	See <Command>FTP/HTTP OPTIONS</Command> for information on RPM's
-	built-in <Command>ftp</Command> and <Command>http</Command> client
-	support. The &lt;package_file&gt; argument(s), if not an rpm package,
-	will be interpreted as an ASCII package manifest. Comments are
-	permitted, starting with a '#', and each line of the package manifest
-	file includes white space seperated glob expressions, including URL's
-	with remote glob expressions, that will be expanded to paths that
-	are substituted in place of the package manifest as
-	<replaceable>&lt;package_file&gt;</replaceable> arguments to the query.
+	See <command>FTP/HTTP OPTIONS</command> for information on
+		<command>rpm</command>'s internal
+		<command>ftp</command> and
+		<command>http</command>
+	client support. The <replaceable>URLFILE</replaceable> argument(s),
+	if not a binary package, will be interpreted as an ASCII package
+	manifest.  Comments are permitted, starting with a '#', and each
+	line of a package manifest file may include white space seperated
+	glob expressions, including URL's with remote glob expressions,
+	that will be expanded to paths that are substituted in place of
+	the package manifest as additional <replaceable>URLFILE</replaceable>
+	arguments to the query.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--specfile <replaceable>&lt;specfile&gt;</replaceable></option></term>
+    <term><option>--querybynumber</option> <replaceable>NUMBER</replaceable></term>
     <listitem><para>
-	Parse and query <replaceable>&lt;specfile&gt;</replaceable> as if
+	Query the <replaceable>NUMBER</replaceable>th database entry
+	directly; this is helpful for debugging  purposes.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--specfile</option> <replaceable>SPECFILE</replaceable></term>
+    <listitem><para>
+	Parse and query <replaceable>SPECFILE</replaceable> as if
 	it were a package. Although not all the information (e.g. file lists)
 	is available, this type of query permits rpm to be used to extract
 	information from spec files without having to write a specfile
 	parser.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--querybynumber <replaceable>&lt;num&gt;</replaceable></option></term>
+    <term><option>--triggeredby</option> <replaceable>PACKAGE</replaceable></term>
     <listitem><para>
-	Query the <replaceable>&lt;num&gt;</replaceable>th database entry
-	directly; this is helpful for debugging  purposes.
+	Query packages that are triggered by package(s)
+	<replaceable>PACKAGE</replaceable>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--triggeredby <replaceable>&lt;pkg&gt;</replaceable></option></term>
+    <term><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></term>
     <listitem><para>
-	Query packages that are triggered by packages
-	<replaceable>&lt;pkg&gt;</replaceable>.
+	Query all packages that provide the <replaceable>CAPABILITY</replaceable> capability.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></term>
+    <listitem><para>
+    Query all packages that requires <replaceable>CAPABILITY</replaceable> for proper functioning.
     </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
 
-
     <para>
 	Information selection options:
     <variablelist>
     <varlistentry>
-    <term><option>-i</option></term>
-    <listitem><para>
-	Display package information, including name, version, and description.
-	This uses the <option>--queryformat</option> if one was specified.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--requires|-R]</option></term>
-    <listitem><para>
-	List packages on which this package depends.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--provides</option></term>
-    <listitem><para>
-	List capabilities this package provides.
-    </para></listitem>
-    </varlistentry><varlistentry>
     <term><option>--changelog</option></term>
     <listitem><para>
 	Display change information for the package.
     </para></ListItem>
     </varlistentry><varlistentry>
-    <term><option>[--list|-l]</option></term>
-    <listitem><para>
-	List files in package.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--state|-s]-s</option></term>
-    <listitem><para>
-	Display the <replaceable>states</replaceable> of files in the package
-	(implies <option>-l</option>).  The state of each file is one of
-	<replaceable>normal</replaceable>,
-	<replaceable>not installed</replaceable>, or
-	<replaceable>replaced</replaceable>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--docfiles|-d]</option></term>
-    <listitem><para>
-	List only documentation files (implies <option>-l</option>).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--configfiles|-c]</option></term>
+    <term><option>-c, --configfiles</option></term>
     <listitem><para>
 	List only configuration files (implies <option>-l</option>).
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--scripts</option></term>
+    <term><option>-d, --docfiles</option></term>
     <listitem><para>
-	List the package specific shell scripts that are used as part
-	of the  installation and uninstallation processes, if there are
-	any.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>[--triggers|--triggerscripts]</option></term>
-    <listitem><para>
-	Display the trigger scripts, if any, which are contained in
-	the package.
+	List only documentation files (implies <option>-l</option>).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--dump</option></term>
@@ -545,42 +630,96 @@ systems of the binary RPM and host don't match.
 		<option>-d</option>.
     </para></listitem>
     </varlistentry><varlistentry>
+    <term><option>--filesbypkg</option></term>
+    <listitem><para>
+	This lists all the files in each package.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>-i, --info</option></term>
+    <listitem><para>
+	Display package information, including name, version, and description.
+	This uses the <option>--queryformat</option> if one was specified.
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>--last</option></term>
     <listitem><para>
 	Orders the package listing by install time such that the latest
 	packages are at the top.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--filesbypkg</option></term>
+    <term><option>-l, --list</option></term>
     <listitem><para>
-	This lists all the files in each package.
+	List files in package.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--provides</option></term>
+    <listitem><para>
+	List capabilities this package provides.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>-R, --requires</option></term>
+    <listitem><para>
+	List packages on which this package depends.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--scripts</option></term>
+    <listitem><para>
+	List the package specific scriptlet(s) that are used as part
+	of the installation and uninstallation processes.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>-s, --state</option></term>
+    <listitem><para>
+	Display the <replaceable>states</replaceable> of files in the package
+	(implies <option>-l</option>).  The state of each file is one of
+	<replaceable>normal</replaceable>,
+	<replaceable>not installed</replaceable>, or
+	<replaceable>replaced</replaceable>.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--triggers , --triggerscripts</option></term>
+    <listitem><para>
+	Display the trigger scripts, if any, which are contained in
+	the package.
     </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>Verify Options</Title>
+<refsect1><title>Verify Options</title>
     <para>
 	The general form of an rpm verify command is 
     </para>
 
     <para>
-	&rpm; -V|-y|--verify [verify-options]
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--verify | -V</option></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--nofiles</option></arg>
+	<arg><option>--nomd5</option></arg>
+	<arg><option>--noscripts</option></arg>
+	<arg>pkgselect-options</arg>
+      </cmdsynopsis>
     </para>
  
     <para>
 	Verifying a package compares information about the installed files in
-	the package with information about the files taken from the original
-	package and stored in the rpm database.  Among other things, verifying
+	the package with information about the files taken from the package
+	metadata stored in the rpm database.  Among other things, verifying
 	compares the size, MD5 sum, permissions, type, owner and group of
-	each file.  Any discrepencies are displayed.  The package
-	specification options are the
-	same as for package querying (including package manifest files as
-	arguments).  Files that were not installed from the package, for
-	example documentation files excluded on installation using the
-	"<option>--excludedocs</option>" option, will be silently ignored.
-	Options that can be used in verify mode:
+	each file.  Any discrepencies are displayed.
+	Files that were not installed from the package, for example,
+	documentation files excluded on installation using the
+		"<option>--excludedocs</option>" option,
+	will be silently ignored.
+    </para>
+
+    <para>
+	The package selection options are the same as for package
+	querying (including package manifest files as arguments).
+	Other options that can be used only in verify mode are:
     <variablelist>
     <varlistentry>
     <term><option>--nodeps</option></term>
@@ -600,91 +739,93 @@ systems of the binary RPM and host don't match.
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
     <listitem><para>
-	Don't execute the verify script (if any).  The format of the
-	output is a string of 8 characters, a possible "<Command>c</Command>"
-	denoting a configuration file, and then the file name. Each of
-	the 8 characters denotes the result of a comparison of one
-	attribute of the file to the value of that attribute recorded
-	in the RPM database.  A  single "<Command>.</Command>" (period)
-	means the test passed, while a single "<Command>?</Command>"
-	indicates the test could not be performed (e.g. file permissions
-	prevent reading). The following characters denote failure of
-	certain tests:
-    </para></listitem>
-    </varlistentry>
-    </variablelist>
-
-    <variablelist>
-    <varlistentry>
-    <term><Command>5</Command></term>
-    <listitem><para>
-	MD5 sum
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>S</Command></term>
-    <listitem><para>
-	File size
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>L</Command></term>
-    <listitem><para>
-	Symlink
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>T</Command></term>
-    <listitem><para>
-	Mtime
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>D</Command></term>
-    <listitem><para>
-	Device
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>U</Command></term>
-    <listitem><para>
-	User
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>G</Command></term>
-    <listitem><para>
-	Group
-    </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><Command>M</Command></term>
-    <listitem><para>
-	Mode (includes permissions and file type)
+	Don't execute the <command>%verifyscript</command> scriptlet (if any).
     </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
-    </RefSect1>
 
-    <RefSect1><Title>Signature Checking</Title>
+    <para>
+	The format of the output is a string of 8 characters, a possible
+	"<command>c</command>" denoting a configuration file, and then
+	the file name. Each of the 8 characters denotes the result of
+	a comparison of attribute(s) of the file to the value of those
+	attribute(s) recorded in the database.
+	A single
+		"<command>.</command>" (period)
+	means the test passed, while a single
+		"<command>?</command>"
+	indicates the test could not be performed (e.g. file permissions
+	prevent reading). Otherwise, the (mnemonically
+		em<command>B</command>oldened) character denotes failure of
+	the corresponding <option>--verify</option> test:
+
+	<simplelist>
+	<member>
+		<command>S</command>
+		file <command>S</command>ize differs
+	</member><member>
+		<command>M</command>
+		<command>M</command>ode differs (includes permissions and file type)
+	</member><member>
+		<command>5</command>
+		MD<command>5</command> sum differs
+	</member><member>
+		<command>D</command>
+		<command>D</command>evice major/minor number mis-match
+	</member><member>
+		<command>L</command>
+		read<command>L</command>ink(2) path mis-match
+	</member><member>
+		<command>U</command>
+		<command>U</command>ser ownership differs
+	</member><member>
+		<command>G</command>
+		<command>G</command>roup ownership differs
+	</member><member>
+		<command>T</command>
+		m<command>T</command>ime differs
+	</member>
+	</simplelist>
+    </para>
+</refsect1>
+
+<refsect1><title>Signature Checking</title>
     <para>
 	The general form of an rpm signature check command is 
     </para>
 
     <para>
-	&rpm; --checksig <replaceable>&lt;package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command> <arg choice="plain"><option>--checksig</option> <replaceable>FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
 	This checks the PGP signature of package
-	<replaceable>&lt;package_file&gt;</replaceable> to ensure
+	<replaceable>FILE</replaceable> to ensure
 	its integrity and origin. PGP configuration information is
 	read from configuration files.  See the section on PGP SIGNATURES
 	for details.
     </para>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>Uninstall Options</Title>
+<refsect1><title>Erase Options</title>
     <para>
-	The general form of an rpm uninstall command is 
+	The general form of an rpm erase command is 
     </para>
 
     <para>
-	&rpm; -e <replaceable>&lt;package_name&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-e | --erase</option></arg>
+	<arg><option>--allmatches</option></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--noscripts</option></arg>
+	<arg><option>--notriggers</option></arg>
+	<arg><option>--test</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
@@ -693,25 +834,27 @@ systems of the binary RPM and host don't match.
     <term><option>--allmatches</option></term>
     <listitem><para>
 	Remove all versions of the package which match
-	<replaceable>&lt;package_name&gt;</replaceable>. Normally an
-	error is issued if <replaceable>&lt;package_name&gt;</replaceable>
+	<replaceable>PACKAGE_NAME</replaceable>. Normally an
+	error is issued if <replaceable>PACKAGE_NAME</replaceable>
 	matches multiple packages.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nodeps</option></term>
+    <listitem><para>
+	Don't check dependencies before uninstalling the packages.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
     <listitem><para>
-	Don't execute the preuninstall or postuninstall scripts.
+	Don't execute the
+	<command>%preun</command>, or
+	<command>%postun</command> scriptlet(s).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--notriggers</option></term>
     <listitem><para>
 	Don't execute scripts which are triggered by the removal of
 	this package.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--nodeps</option></term>
-    <listitem><para>
-	Don't check dependencies before uninstalling the packages.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--test</option></term>
@@ -722,22 +865,27 @@ systems of the binary RPM and host don't match.
     </varlistentry>
     </variablelist>
     </para>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>Build Options</Title>
+<refsect1><title>Build Options</title>
     <para>
 	The general form of an rpm build command is 
     </para>
     <para>
-	&rpm; <option>-[b|t]<replaceable>O</replaceable></option> [build-options] <replaceable>&lt;package_spec&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>-b<replaceable>OPT</replaceable> | -t<replaceable>OPT</replaceable></option></arg>
+	<arg>build-options</arg>
+	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
 	The argument used is <option>-b</option> if a spec file is being
-	used to build the package and <option>-t</option> if &rpm;
+	used to build the package and <option>-t</option> if <command>rpm</command>
 	should look inside of a (possibly compressed) tar file for
 	the spec file to use. After the first argument, the next
-	argument (<replaceable>O</replaceable>) specifies the stages
+	character (<replaceable>OPT</replaceable>) specifies the stages
 	of building and packaging to be done and is one of:
     <variablelist>
     <varlistentry>
@@ -790,124 +938,113 @@ systems of the binary RPM and host don't match.
     <para>
 	The following options may also be used:
     </para>
-    <variablelist>
-    <varlistentry>
-    <term><option>--short-circuit</option></term>
+  <variablelist>
+  <varlistentry>
+    <term><option>--buildroot</option> <replaceable>DIRECTORY</replaceable></term>
     <listitem><para>
-	Skip straight to specified stage (ie, skip all stages leading
-	up to the specified stage).  Only valid with <option>-bc</option>
-	and <option>-bi</option>. </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--timecheck</option></term>
-    <listitem><para>
-	Set the "timecheck" age (0 to disable). This value can also be
-	configured by defining the macro <Command>%_timecheck</Command>.
-	The timecheck value expresses, in seconds, the maximum age of
-	a file being packaged. Warnings will be printed for all files
-	beyond the timecheck age.
-	</para></listitem>
-    </varlistentry><varlistentry>
+	When building a package, override the BuildRoot tag with directory
+	<replaceable>DIRECTORY</replaceable>.
+    </para></listitem>
+  </varlistentry><varlistentry>
     <term><option>--clean</option></term>
     <listitem><para>
 	Remove the build tree after the packages are made.
     </para></listitem>
-    </varlistentry><varlistentry>
+  </varlistentry><varlistentry>
     <term><option>--rmsource</option></term>
     <listitem><para>
-	Remove the sources and spec file after the build (may also be
-	used standalone, eg. "&rpm; <option>--rmsource foo.spec</option>").
+	Remove the sources after the build (may also be
+	used standalone, e.g. "<command>rpm</command> <option>--rmsource foo.spec</option>").
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--test</option></term>
+  </varlistentry><varlistentry>
+    <term><option>--rmspec</option></term>
     <listitem><para>
-	Do not execute any build stages. Useful for testing out spec files.
+	Remove the spec file after the build (may also be
+	used standalone, eg. "<command>rpm</command> <option>--rmspec foo.spec</option>").
     </para></listitem>
-    </varlistentry><varlistentry>
+  </varlistentry><varlistentry>
+    <term><option>--short-circuit</option></term>
+    <listitem><para>
+	Skip straight to specified stage (i.e., skip all stages leading
+	up to the specified stage).  Only valid with <option>-bc</option>
+	and <option>-bi</option>.
+    </para></listitem>
+  </varlistentry><varlistentry>
     <term><option>--sign</option></term>
     <listitem><para>
 	Embed a PGP signature in the package. This signature can be used
 	to verify the integrity and the origin of the package.  See the
 	section on PGP SIGNATURES for configuration details.
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--buildroot <replaceable>&lt;dir&gt;</replaceable></option></term>
+  </varlistentry><varlistentry>
+    <term><option>--target</option> <replaceable>PLATFORM</replaceable></term>
     <listitem><para>
-	When building the package, override the BuildRoot tag with directory
-	<replaceable>&lt;dir&gt;</replaceable>.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--target <replaceable>&lt;platform&gt;</replaceable></option></term>
-    <listitem><para>
-	When building the package, interpret <replaceable>&lt;platform&gt;</replaceable>
+	When building the package, interpret <replaceable>PLATFORM</replaceable>
 	as <option>arch-vendor-os</option> and set the macros
-		<Command>%_target</Command>,
-		<Command>%_target_arch</Command>, and
-		<Command>_target_os</Command>
-    accordingly.
+		<command>%_target</command>,
+		<command>%_target_arch</command>, and
+		<command>%_target_os</command>
+	accordingly.
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--buildarch <replaceable>&lt;arch&gt;</replaceable></option></term>
+  </varlistentry><varlistentry>
+    <term><option>--test</option></term>
     <listitem><para>
-	When building the package, set the architecture to
-	<replaceable>&lt;arch&gt;</replaceable>. This option
-	has been obsoleted by <option>--target</option> in RPM 3.0.
+	Do not execute any build stages. Useful for testing out spec files.
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--buildos <replaceable>&lt;os&gt;</replaceable></option></term>
-    <listitem><para>
-	When building the package, set the architecture to
-	<replaceable>&lt;os&gt;</replaceable>. This option has been obsoleted
-	by <option>--target</option> in RPM 3.0.
-	</para></listitem>
-    </varlistentry>
-    </variablelist>
-    </RefSect1>
+  </varlistentry>
+  </variablelist>
+</refsect1>
 
-    <RefSect1><Title>Rebuild and Recompile Options</Title>
+<refsect1><title>Rebuild and Recompile Options</title>
     <para>
 	There are two other ways to invoke building with rpm:
     </para>
     <para>
-	&rpm; <option>--recompile</option> <replaceable>&lt;source_package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--rebuild | --recompile</option></arg>
+	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
+      </cmdsynopsis>
     </para>
     <para>
-	&rpm; <option>--rebuild</option> <replaceable>&lt;source_package_file&gt;+</replaceable>
-    </para>
-    <para>
-	When invoked this way, &rpm; installs the named source
+	When invoked this way, <command>rpm</command> installs the named source
 	package, and does a prep, compile and install.  In addition,
 	<option>--rebuild</option> builds a new binary package. When the build
 	has completed, the build directory is removed (as in
 	<option>--clean</option>) and the the sources and spec file for
 	the package are removed.
     </para>
-    </RefSect1>
+    </refsect1>
 
-    <RefSect1><Title>Signing an Existing Rpm</Title>
+    <refsect1><title>Signing a Package</title>
     <para>
-	&rpm; <option>--resign</option> <replaceable>&lt;binary_package_file&gt;+</replaceable>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--addsign | --resign</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+      </cmdsynopsis>
     </para>
     <para>
-	This option generates and inserts new signatures for the listed
-	packages.  Any existing signatures are removed.
+	The <option>--addsign</option> option generates and inserts
+	new signatures for each package.  Any existing signatures will
+	be discarded.
     </para>
     <para>
-	&rpm; <option>--addsign</option> <replaceable>&lt;binary_package_file&gt;+</replaceable>
+	The <option>--resign</option> option generates and appends signatures
+	for the listed packages while preserving the existing signatures.
     </para>
-    <para>
-	This option generates and appends new signatures for the listed
-	packages to those that already exist.
-    </para>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>PGP Signatures</Title>
+<refsect1><title>PGP Signatures</title>
     <para>
-	In order to use the signature feature RPM must be configured
-	to run PGP, and it must be able to find a public key ring with
-	RPM public keys in it. By default, RPM uses the PGP defaults
-	to find the keyrings (honoring PGPPATH). If your key rings are
-	not located where PGP expects them to be, you will need to
-	configure the macro <Command>%_pgp_path</Command>
+	In order to use the signature feature, <command>rpm</command>
+	must be configured to run PGP and be able to find a public key
+	ring with Red Hat (or other vendor) public keys. By default,
+	<command>rpm</command> uses the same conventions as PGP
+	to find key rings, namely the <envar>$PGPPATH</envar> environment
+	variable.  If your key rings are not located where PGP expects
+	them to be, you will need to configure the macro
+		<command>%_pgp_path</command>
 	to be the location of the PGP key rings to use.
     </para>
 
@@ -917,12 +1054,12 @@ systems of the binary RPM and host don't match.
 	PGP manual). You will also need to configure the macros
     <variablelist>
     <varlistentry>
-    <term><Command>%_signature</Command></term>
+    <term><command>%_signature</command></term>
     <listitem><para>
 	The signature type.  Right now only pgp is supported.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><Command>%_pgp_name</Command></term>
+    <term><command>%_pgp_name</command></term>
     <listitem><para>
 	The name of the "user" whose key you wish to use to sign your packages.
     </para></listitem>
@@ -935,130 +1072,138 @@ systems of the binary RPM and host don't match.
 	the command line. You will be prompted for your pass phrase, and
 	your package will be built and signed.  For example, to be able
 	to use PGP to sign packages as the user
-	<replaceable>>"John Doe &lt;jdoe@foo.com&gt;"</replaceable>>
+	<replaceable>>"John Doe (jdoe@foo.com)"</replaceable>>
 	from the key rings located in <filename>/etc/rpm/.pgp</filename>
 	using the executable <filename>/usr/bin/pgp</filename> you would include
 <computeroutput>
 %_signature pgp
 %_pgp_path /etc/rpm/.pgp
-%_pgp_name John Doe &lt;jdoe@foo.com&gt;
+%_pgp_name John Doe (jdoe@foo.com)
 %_pgpbin /usr/bin/pgp
 </computeroutput>
 	in a macro configuration file. Use <filename>/etc/rpm/macros</filename>
 	for per-system configuration and <filename>~/.rpmmacros</filename>
 	for per-user configuration. 
     </para>
-    </RefSect1>
+    </refsect1>
 
-    <RefSect1>
-    <Title>Rebuild Database Options</Title>
+    <refsect1>
+    <title>Rebuild Database Options</title>
     <para>
 	The general form of an rpm rebuild database command is 
     </para>
 
     <para>
-	&rpm; <option>--rebuilddb</option>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
+	<arg><option>-v</option></arg>
+	<arg><option>--dbpath</option> <replaceable>DIRECTORY</replaceable></arg>
+	<arg><option>--root</option> <replaceable>DIRECTORY</replaceable></arg>
+      </cmdsynopsis>
     </para>
  
     <para>
-	To rebuild a new database, do: 
+	Use <option>--initdb</option> to create a new database, use
+	<option>--rebuilddb</option> to rebuild the database indices from
+	the installed package headers.
     </para>
+</refsect1>
 
-    <para>
-	&rpm; <option>--initdb</option>
-    </para>
-
-    <para>
-	The only options for these modes are
-		<option>--dbpath</option> and
-		<option>--root</option>.
-    </para>
-    </RefSect1>
-
-    <RefSect1><Title>Showrc</Title>
+<refsect1><title>Showrc</title>
     <para>
 	Running
     </para>
   
     <para>
-	&rpm; <option>--showrc</option>
+      <cmdsynopsis>
+	<command>rpm</command>
+	<arg choice="plain"><option>--showrc</option></arg>
+      </cmdsynopsis>
     </para>
 
     <para>
-	shows the values &rpm will use for all of the options that may
-	be set in <filename>rpmrc</filename> and <filename>macros</filename>
+	shows the values <command>rpm</command> will use for all of the
+	options that may be set in
+		<filename>rpmrc</filename> and
+		<filename>macros</filename>
 	configuration files.
     </para>
-    </RefSect1>
+    </refsect1>
 
-    <RefSect1><Title>Ftp/Http Options</Title>
+    <refsect1><title>Ftp/Http Options</title>
     <para>
-	RPM includes simple FTP and HTTP clients to simplify installing
-	and querying packages which are available over the internet.
+	<command>rpm</command> can act as an FTP and/or HTTP client so
+	that packages can be queried or installed from the internet.
 	Package files for install, upgrade, and query operations may be
-	specified as an ftp or <Command>http</Command> style URL:  
+	specified as an
+		<command>ftp</command> or
+		<command>http</command>
+	style URL:  
     </para>
 
     <para>
-	ftp://&lt;user&gt;:&lt;password&gt;@hostname:&lt;port&gt;/path/to/package.rpm
+	ftp://USER:PASSWORD@HOST:PORT/path/to/package.rpm
     </para>
  
     <para>
-	If the <Command>:password</Command> portion is omitted, the password will be
+	If the <command>:PASSWORD</command> portion is omitted, the password will be
 	prompted for (once per user/hostname pair). If both the user and
-	password are omitted, anonymous ftp is used. In all cases passive
-	(PASV) ftp transfers are used.
+	password are omitted, anonymous <command>ftp</command> is used.
+	In all case,s passive (PASV) <command>ftp</command> transfers are
+	performed.
     </para>
     <para>
-	&rpm allows the following options to be used with ftp URLs:
+	<command>rpm</command> allows the following options to be used with
+	ftp URLs:
     <variablelist>
     <varlistentry>
-    <term><option>--ftpproxy</option> <replaceable>&lt;hostname&gt;</replaceable></term>
+    <term><option>--ftpproxy</option> <replaceable>HOST</replaceable></term>
     <listitem><para>
-	The host <replaceable>&lt;hostname&gt;</replaceable> will be used as a proxy server
+	The host <replaceable>HOST</replaceable> will be used as a proxy server
 	for all ftp transfers, which allows users to ftp through firewall
 	machines which use proxy systems. This option may also be specified
-	by configuring the macro <Command>%_ftpproxy</Command>.
+	by configuring the macro <command>%_ftpproxy</command>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--ftpport <replaceable>&lt;port&gt;</replaceable></option></term>
+    <term><option>--ftpport</option> <replaceable>HOST</replaceable></term>
     <listitem><para>
-	The TCP <replaceable>&lt;port&gt;</replaceable> number to use for
+	The TCP <replaceable>PORT</replaceable> number to use for
 	the ftp connection on the proxy ftp server instead of the default
 	port. This option may also be specified by configuring the macro
-	<Command>%_ftpport</Command>.
+	<command>%_ftpport</command>.
     </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
 
     <para>
-	&rpm; allows the following options to be used with
-	<Command>http</Command> URLs:
+	<command>rpm</command> allows the following options to be used with
+	<command>http</command> URLs:
     <variablelist>
     <varlistentry>
-    <term><option>--httpproxy</option> <replaceable>&lt;hostname&gt;</replaceable></term>
+    <term><option>--httpproxy</option> <replaceable>HOST</replaceable></term>
     <listitem><para>
-	The host <replaceable>&lt;hostname&gt;</replaceable> will be used as
-	a proxy server for all <Command>http</Command> transfers. This
+	The host <replaceable>HOST</replaceable> will be used as
+	a proxy server for all <command>http</command> transfers. This
 	option may also be specified by configuring the macro
-	<Command>%_httpproxy</Command>.
+	<command>%_httpproxy</command>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--httpport</option> <replaceable>&lt;port&gt;</replaceable></term>
+    <term><option>--httpport</option> <replaceable>PORT</replaceable></term>
     <listitem><para>
-	The TCP <replaceable>&lt;port&gt;</replaceable> number to use for the
-	<Command>http</Command> connection on the proxy http server instead
+	The TCP <replaceable>PORT</replaceable> number to use for the
+	<command>http</command> connection on the proxy http server instead
 	of the default port. This option may also be specified by configuring
-	the macro <Command>%_httpport</Command>.
+	the macro <command>%_httpport</command>.
     </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
 
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>Files</Title>
+<refsect1><title>Files</title>
     <para>
     <simplelist>
 	<member><filename>/usr/lib/rpm/rpmrc</filename></member>
@@ -1078,22 +1223,30 @@ systems of the binary RPM and host don't match.
 	<member><filename>/var/tmp/rpm*</filename></member>
     </simplelist>
     </para>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>See Also</Title>
+<refsect1><title>See Also</title>
     <simplelist>
-      <member><Command>rpm2cpio</Command>(8),</member>
-      <member><Command>http://www.rpm.org/</Command></member>
+      <member><command>rpm2cpio</command>(8),</member>
+      <member>
+	<command>
+	<ulink URL="http://www.rpm.org/">http://www.rpm.org/</ulink>
+	</command>
+      </member>
     </simplelist>
-    </RefSect1>
+</refsect1>
 
-    <RefSect1><Title>Authors</Title>
-    <simplelist>
-	<member>Marc Ewing &lt;marc@redhat.com&gt;</member>
-	<member>Jeff Johnson &lt;jbj@redhat.com&gt;</member>
-	<member>Erik Troan &lt;ewt@redhat.com&gt;</member>
-    </simplelist>
-    </RefSect1>
+<refsect1><title>Authors</title>
+      <simplelist>
+	<member>
+	<author><firstname>Marc</firstname> <surname>Ewing</surname> <authorblurb><simpara><email>marc@redhat.com</email></simpara></authorblurb></author>
+	</member><member>
+	<author><firstname>Jeff</firstname> <surname>Johnson</surname> <authorblurb><simpara><email>jbj@redhat.com</email></simpara></authorblurb></author>
+	</member><member>
+	<author><firstname>Erik</firstname> <surname>Troan</surname> <authorblurb><simpara><email>ewt@redhat.com</email></simpara></authorblurb></author>
+	</member>
+      </simplelist>
+</refsect1>
 
   </RefEntry>
 </appendix>

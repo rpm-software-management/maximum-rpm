@@ -50,20 +50,20 @@
       </para>
 
       <sect3 id="s3-rpm-specref-name">
-        <title>The <command>name</command> Tag</title>
+        <title>The <command>Name:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>name</command></tertiary>
+          <tertiary><command>Name:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>name</command> tag</primary>
+          <primary><command>Name:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>name</command> tag is used to define the name of the
+          The <command>Name:</command> tag is used to define the name of the
           software being packaged.
 
           <screen width="60">
@@ -79,20 +79,20 @@ Name: cdplayer
       </sect3>
 
       <sect3 id="s3-rpm-specref-version">
-        <title>The <command>version</command> Tag</title>
+        <title>The <command>Version:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>version</command></tertiary>
+          <tertiary><command>Version:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>version</command> tag</primary>
+          <primary><command>Version:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>version</command> tag defines the version of the software
+          The <command>Version:</command> tag defines the version of the software
           being packaged.
 
           <screen width="60">
@@ -108,20 +108,20 @@ Version: 1.2
       </sect3>
 
       <sect3 id="s3-rpm-specref-release">
-        <title>The <command>release</command> Tag</title>
+        <title>The <command>Release:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>release</command></tertiary>
+          <tertiary><command>Release:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>release</command> tag</primary>
+          <primary><command>Release:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>release</command> tag can be thought of as the
+          The <command>Release:</command> tag can be thought of as the
           <emphasis>package's</emphasis> version.
 
           <screen width="60">
@@ -141,7 +141,8 @@ Release: 5
       <title>Descriptive Tags</title>
 
       <sect3 id="s3-rpm-specref-description">
-        <title>The <command>%description</command> Tag</title>
+        <title><command>%description</command> Directive -- Describe the packages intended use.
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
@@ -177,7 +178,7 @@ more mundane software...
         <para>
           The <command>%description</command> tag can be made specific to a
           particular subpackage by adding the subpackage name, and optionally,
-          the <command>-n</command> option:
+          the <option>-n</option> option:
 
           <screen width="60">
 <computeroutput>
@@ -189,7 +190,7 @@ more mundane software...
         </para>
 
         <para>
-          The subpackage name and usage of the <command>-n</command> option must
+          The subpackage name and usage of the <option>-n</option> option must
           match those defined with the <command>%package</command> directive.
         </para>
 
@@ -199,20 +200,21 @@ more mundane software...
       </sect3>
 
       <sect3 id="s3-rpm-specref-summary">
-        <title>The <command>summary</command> Tag</title>
+        <title>The <command>Summary:</command> Tag
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>summary</command></tertiary>
+          <tertiary><command>Summary:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>summary</command> tag</primary>
+          <primary><command>Summary:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>summary</command> tag is used to define a one-line
+          The <command>Summary:</command> tag is used to define a one-line
           description of the packaged software.
 
           <screen width="60">
@@ -228,20 +230,21 @@ Summary: A CD player app that rocks!
       </sect3>
 
       <sect3 id="s3-rpm-specref-copyright">
-        <title>The <command>copyright</command> Tag</title>
+        <title>The <command>Copyright:</command> Tag
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>copyright</command></tertiary>
+          <tertiary><command>Copyright:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>copyright</command> tag</primary>
+          <primary><command>Copyright:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>copyright</command> tag is used to define the copyright
+          The <command>Copyright:</command> tag is used to define the copyright
           terms applicable to the software being packaged.
 
           <screen width="60">
@@ -257,20 +260,20 @@ Copyright: GPL
       </sect3>
 
       <sect3 id="s3-rpm-specref-distribution">
-        <title>The <command>distribution</command> Tag</title>
+        <title>The <command>Distribution:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>distribution</command></tertiary>
+          <tertiary><command>Distribution:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>distribution</command> tag</primary>
+          <primary><command>Distribution:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>distribution</command> tag is used to define a group of
+          The <command>Distribution:</command> tag is used to define a group of
           packages, of which this package is a part.
 
           <screen width="60">
@@ -286,20 +289,20 @@ Distribution: Doors '95
       </sect3>
 
       <sect3 id="s3-rpm-specref-icon">
-        <title>The <command>icon</command> Tag</title>
+        <title>The <command>Icon:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>icon</command></tertiary>
+          <tertiary><command>Icon:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>icon</command> tag</primary>
+          <primary><command>Icon:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>icon</command> tag is used to name a file containing an
+          The <command>Icon:</command> tag is used to name a file containing an
           icon representing the packaged software.  The file may be in either
           GIF or XPM format, although XPM is preferred.  In either case, the
           background of the icon should be transparent.
@@ -317,20 +320,20 @@ Icon: foo.xpm
       </sect3>
 
       <sect3 id="s3-rpm-specref-vendor">
-        <title>The <command>vendor</command> Tag</title>
+        <title>The <command>Vendor:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>vendor</command></tertiary>
+          <tertiary><command>Vendor:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>vendor</command> tag</primary>
+          <primary><command>Vendor:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>vendor</command> tag is used to define the name of the
+          The <command>Vendor:</command> tag is used to define the name of the
           entity that is responsible for packaging the software.
 
           <screen width="60">
@@ -346,20 +349,20 @@ Vendor: White Socks Software, Inc.
       </sect3>
 
       <sect3 id="s3-rpm-specref-url">
-        <title>The <command>url</command> Tag</title>
+        <title>The <command>URL:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>url</command></tertiary>
+          <tertiary><command>URL:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>url</command> tag</primary>
+          <primary><command>URL:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>url</command> tag is used to define a Uniform Resource
+          The <command>URL:</command> tag is used to define a Uniform Resource
           Locator that can be used to obtain additional information about the
           packaged software.
 
@@ -376,20 +379,20 @@ URL: http://www.gnomovision.com/cdplayer.html
       </sect3>
 
       <sect3 id="s3-rpm-specref-group">
-        <title>The <command>group</command> Tag</title>
+        <title>The <command>Group:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>group</command></tertiary>
+          <tertiary><command>Group:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>group</command> tag</primary>
+          <primary><command>Group:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>group</command> tag is used to group packages together by
+          The <command>Group:</command> tag is used to group packages together by
           the types of functionality they provide.
 
           <screen width="60">
@@ -405,20 +408,20 @@ Group: Applications/Editors
       </sect3>
 
       <sect3 id="s3-rpm-specref-packager">
-        <title>The <command>packager</command> Tag</title>
+        <title>The <command>Packager:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>packager</command></tertiary>
+          <tertiary><command>Packager:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>packager</command> tag</primary>
+          <primary><command>Packager:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>packager</command> tag is used to hold the name and
+          The <command>Packager:</command> tag is used to hold the name and
           contact information for the person or persons who built the package.
 
           <screen width="60">
@@ -438,20 +441,20 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
       <title>Dependency Tags</title>
 
       <sect3 id="s3-rpm-specref-provides">
-        <title>The <command>provides</command> Tag</title>
+        <title>The <command>Provides:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>provides</command></tertiary>
+          <tertiary><command>Provides:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>provides</command> tag</primary>
+          <primary><command>Provides:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>provides</command> tag is used to specify a "virtual
+          The <command>Provides:</command> tag is used to specify a "virtual
           package" that the packaged software makes available when it is
           installed.
 
@@ -468,20 +471,20 @@ Provides: module-info
       </sect3>
 
       <sect3 id="s3-rpm-specref-requires">
-        <title>The <command>requires</command> Tag</title>
+        <title>The <command>Requires:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>requires</command></tertiary>
+          <tertiary><command>Requires:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>requires</command> tag</primary>
+          <primary><command>Requires:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>requires</command> tag is used to alert RPM to the fact
+          The <command>Requires:</command> tag is used to alert RPM to the fact
           that the package needs to have certain capabilities available in order
           to operate properly.
 
@@ -513,8 +516,8 @@ Requires: playmidi &gt;= 2.3
         </para>
 
         <para>
-          If the <command>Requires</command> tag needs to perform a comparison
-          against a serial numbered defined with the <command>serial</command>
+          If the <command>Requires:</command> tag needs to perform a comparison
+          against a serial numbered defined with the <command>Serial:</command>
           tag, then the proper format would be:
 
           <screen width="60">
@@ -530,20 +533,20 @@ Requires: playmidi =S 4
       </sect3>
 
       <sect3 id="s3-rpm-specref-serial">
-        <title>The <command>serial</command> Tag</title>
+        <title>The <command>Serial:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>serial</command></tertiary>
+          <tertiary><command>Serial:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>serial</command> tag</primary>
+          <primary><command>Serial:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>serial</command> tag is used to define a serial number
+          The <command>Serial:</command> tag is used to define a serial number
           for a package.  This is only necessary if RPM is unable to determine
           the ordering of a package's version numbers.
 
@@ -560,20 +563,20 @@ Serial: 4
       </sect3>
 
       <sect3 id="s3-rpm-specref-conflicts">
-        <title>The <command>conflicts</command> Tag</title>
+        <title>The <command>Conflicts:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>conflicts</command></tertiary>
+          <tertiary><command>Conflicts:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>conflicts</command> tag</primary>
+          <primary><command>Conflicts:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>conflicts</command> tag is used to alert RPM to the fact
+          The <command>Conflicts:</command> tag is used to alert RPM to the fact
           that the package is not compatible with other packages.
 
           <screen width="60">
@@ -604,8 +607,8 @@ Conflicts: playmidi &gt;= 2.3
         </para>
 
         <para>
-          If the <command>conflicts</command> tag needs to perform a comparison
-          against a serial numbered defined with the <command>serial</command>
+          If the <command>Conflicts:</command> tag needs to perform a comparison
+          against a serial numbered defined with the <command>Serial:</command>
           tag, then the proper format would be:
 
           <screen width="60">
@@ -621,20 +624,20 @@ Conflicts: playmidi =S 4
       </sect3>
 
       <sect3 id="s3-rpm-specref-autoreqprov">
-        <title>The <command>autoreqprov</command> Tag</title>
+        <title>The <command>AutoReqProv:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>autoreqprov</command></tertiary>
+          <tertiary><command>AutoReqProv:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>autoreqprov</command> tag</primary>
+          <primary><command>AutoReqProv:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>autoreqprov</command> tag is used to control the
+          The <command>AutoReqProv:</command> tag is used to control the
           automatic dependency processing performed when the package is being
           built.  To disable automatic dependency processing, add the following
           line:
@@ -650,7 +653,7 @@ AutoReqProv: no
           (The number <literal>0</literal> may be used instead of
           <literal>no</literal>) Although RPM defaults to performing automatic
           dependency processing, the effect of the
-          <command>autoreqprov</command> tag can be reversed by changing
+          <command>AutoReqProv:</command> tag can be reversed by changing
           <literal>no</literal> to <literal>yes</literal>.  (The number
           <literal>1</literal> may be used instead of <literal>yes</literal>)
         </para>
@@ -665,20 +668,20 @@ AutoReqProv: no
       <title>Architecture- and Operating System-Specific Tags</title>
 
       <sect3 id="s3-rpm-specref-excludearch">
-        <title>The <command>excludearch</command> Tag</title>
+        <title>The <command>ExcludeArch:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>excludearch</command></tertiary>
+          <tertiary><command>ExcludeArch:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>excludearch</command> tag</primary>
+          <primary><command>ExcludeArch:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>excludearch</command> tag is used to direct RPM to ensure
+          The <command>ExcludeArch:</command> tag is used to direct RPM to ensure
           that the package does <emphasis>not</emphasis> attempt to build on the
           excluded architecture(s).
 
@@ -695,20 +698,20 @@ ExcludeArch: sparc alpha
       </sect3>
 
       <sect3 id="s3-rpm-specref-exclusivearch">
-        <title>The <command>exclusivearch</command> Tag</title>
+        <title>The <command>ExclusiveArch:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>exclusivearch</command></tertiary>
+          <tertiary><command>ExclusiveArch:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>exclusivearch</command> tag</primary>
+          <primary><command>ExclusiveArch:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>exclusivearch</command> tag is used to direct RPM to
+          The <command>ExclusiveArch:</command> tag is used to direct RPM to
           ensure the package is <emphasis>only</emphasis> built on the specified
           architecture(s).
 
@@ -725,20 +728,20 @@ ExclusiveArch: sparc alpha
       </sect3>
 
       <sect3 id="s3-rpm-specref-excludeos">
-        <title>The <command>excludeos</command> Tag</title>
+        <title>The <command>ExcludeOs:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>excludeos</command></tertiary>
+          <tertiary><command>ExcludeOs:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>excludeos</command> tag</primary>
+          <primary><command>ExcludeOs:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>excludeos</command> tag is used to direct RPM to ensure
+          The <command>ExcludeOs:</command> tag is used to direct RPM to ensure
           that the package does <emphasis>not</emphasis> attempt to build on the
           excluded operating system(s).
 
@@ -755,20 +758,20 @@ ExcludeOS: linux irix
       </sect3>
 
       <sect3 id="s3-rpm-specref-exclusiveos">
-        <title>The <command>exclusiveos</command> Tag</title>
+        <title>The <command>ExclusiveOs:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>exclusiveos</command></tertiary>
+          <tertiary><command>ExclusiveOs:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>exclusiveos</command> tag</primary>
+          <primary><command>ExclusiveOs:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>exclusiveos</command> tag is used to denote which
+          The <command>ExclusiveOs:</command> tag is used to denote which
           operating system(s) should <emphasis>only</emphasis> be be permitted
           to build the package.
 
@@ -789,20 +792,20 @@ ExclusiveOS: linux
       <title>Directory-related Tags</title>
 
       <sect3 id="s3-rpm-specref-prefix">
-        <title>The <command>prefix</command> Tag</title>
+        <title>The <command>Prefix:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>prefix</command></tertiary>
+          <tertiary><command>Prefix:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>prefix</command> tag</primary>
+          <primary><command>Prefix:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>prefix</command> tag is used to define part of the path
+          The <command>Prefix:</command> tag is used to define part of the path
           RPM will use when installing the package's files.  The prefix can be
           redefined by the user when the package is installed, thereby changing
           where the package is installed.
@@ -820,20 +823,20 @@ Prefix: /opt
       </sect3>
 
       <sect3 id="s3-rpm-specref-buildroot">
-        <title>The <command>buildroot</command> Tag</title>
+        <title>The <command>BuildRoot:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>buildroot</command></tertiary>
+          <tertiary><command>BuildRoot:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>buildroot</command> tag</primary>
+          <primary><command>BuildRoot:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>buildroot</command> tag is used to define an alternate
+          The <command>BuildRoot:</command> tag is used to define an alternate
           build root, where the software will be installed during the build
           process.
 
@@ -854,22 +857,22 @@ BuildRoot: /tmp/cdplayer
       <title>Source and Patch Tags</title>
 
       <sect3 id="s3-rpm-specref-source">
-        <title>The <command>source</command> Tag</title>
+        <title>The <command>Source:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>source</command></tertiary>
+          <tertiary><command>Source:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>source</command> tag</primary>
+          <primary><command>Source:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>source</command> tag is used to define the filename of
+          The <command>Source:</command> tag is used to define the filename of
           the sources to be packaged.  When there is more than one
-          <command>source</command> tag in a spec file, each one must be
+          <command>Source:</command> tag in a spec file, each one must be
           numbered so they are unique, starting with the number
           <literal>0</literal>.  When there is only one tag, it does not need to
           be numbered.
@@ -894,24 +897,24 @@ Source1: foo.tgz
       </sect3>
 
       <sect3 id="s3-rpm-specref-nosource">
-        <title>The <command>nosource</command> Tag</title>
+        <title>The <command>NoSource:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>nosource</command></tertiary>
+          <tertiary><command>NoSource:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>nosource</command> tag</primary>
+          <primary><command>NoSource:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>nosource</command> tag is used to alert RPM to the fact
+          The <command>NoSource:</command> tag is used to alert RPM to the fact
           that one or more source files should be excluded from the source
           package file.  The tag is followed by one or more numbers.  The
           numbers correspond to the numbers following the
-          <command>source</command> tags that are to be excluded from packaging.
+          <command>Source:</command> tags that are to be excluded from packaging.
 
           <screen width="60">
 <computeroutput>
@@ -926,16 +929,16 @@ NoSource: 0, 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-patch">
-        <title>The <command>patch</command> Tag</title>
+        <title>The <command>Patch:</command> Tag</title>
 
         <indexterm>
-          <primary><command>patch</command> tag</primary>
+          <primary><command>Patch:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>patch</command> tag is used to define the name of a patch
+          The <command>Patch:</command> tag is used to define the name of a patch
           file to be applied to the package's sources.  When there is more than
-          one <command>patch</command> tag in a spec file, each one must be
+          one <command>Patch:</command> tag in a spec file, each one must be
           numbered so they are unique, starting with the number
           <literal>0</literal>.  When there is only one tag, it does not need to
           be numbered.
@@ -953,18 +956,18 @@ Patch: cdp-0.33-fsstnd.patch
       </sect3>
 
       <sect3 id="s3-rpm-specref-nopatch">
-        <title>The <command>nopatch</command> Tag</title>
+        <title>The <command>NoPatch:</command> Tag</title>
 
         <indexterm>
-          <primary><command>nopatch</command> tag</primary>
+          <primary><command>NoPatch:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>nopatch</command> tag is used to alert RPM to the fact
+          The <command>NoPatch:</command> tag is used to alert RPM to the fact
           that one or more patch files should be excluded from the source
           package file.  The tag is followed by one or more numbers.  The
           numbers correspond to the numbers following the
-          <command>patch</command> tags that are to be excluded from packaging.
+          <command>Patch:</command> tags that are to be excluded from packaging.
 
           <screen width="60">
 <computeroutput>
@@ -981,17 +984,17 @@ NoPatch: 2 3
   </sect1>
 
   <sect1 id="s1-rpm-specref-scripts">
-    <title>Scripts</title>
+    <title>Scriptlets</title>
 
     <para>
-      This section lists the various scripts found in a spec file.
+      This section lists the various scriptlets found in a spec file.
     </para>
 
     <sect2 id="s2-rpm-specref-build-time-scripts">
-      <title>Build-time Scripts</title>
+      <title>Build Scriptlets</title>
 
       <para>
-        Every build-time script has the following environment variables defined:
+        Every build scriptlet has the following environment variables defined:
 
         <itemizedlist mark="bullet">
           <listitem>
@@ -1063,29 +1066,31 @@ NoPatch: 2 3
       </para>
 
       <para>
-        For more information on these environment variables, and build-time
-        scripts in general, please see <xref
+        For more information on these environment variables, and build
+        scriptlets in general, please see <xref
         linkend="s2-rpm-inside-build-time-scripts">.
       </para>
 
       <sect3 id="s3-rpm-specref-prep">
-        <title>The <command>%prep</command> Script</title>
+        <title><command>%prep</command> Directive -- Unpack archives and apply patches.
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%prep</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%prep</command> script</primary>
+          <primary><command>%prep</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%prep</command> script is the first script RPM executes
-          during a build.  As the name implies, it is normally used to prepare
-          the sources for building.  The commands in the script can be any valid
-          <command>sh</command> commands.
+          The <command>%prep</command> scriptlet is executed first
+          during a build,
+	  The scriptlet normally prepares the contents of a source package
+	  for building, usually by unpacking archives and applying patches.
+The scriptlet can contain any valid <command>sh</command> commands.
 
           <screen width="60">
 <computeroutput>
@@ -1100,23 +1105,27 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-build">
-        <title>The <command>%build</command> Script</title>
+        <title><command>%build</command> Directive -- Configure and compile components
+	to be packaged.
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%build</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%build</command> script</primary>
+          <primary><command>%build</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%build</command> script is the second script RPM executes
-          during a build.  As the name implies, it is normally used to build the
-          software.  The commands in the script can be any valid
-          <command>sh</command> commands.
+          The <command>%build</command> scriptlet is the second scriptlet
+	  executed during a build, immediately after <command>%prep</command>.
+	  The scriptlet normally builds the components to be included in
+	  a binary package, usually by configuring and compiling source code
+	  from the previously unpacked and patched archives.
+The scriptlet can contain any valid <command>sh</command> commands.
 
           <screen width="60">
 <computeroutput>
@@ -1131,23 +1140,26 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-install">
-        <title>The <command>%install</command> Script</title>
+        <title><command>%install</command> Directive -- Install components to be packaged.
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%install</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%install</command> script</primary>
+          <primary><command>%install</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%install</command> script is the third script RPM
-          executes during a build.  As the name implies, it is normally used to
-          install the software.  The commands in the script can be any valid
-          <command>sh</command> commands.
+          The <command>%install</command> scriptlet is the third scriptlet
+          executed during a build, immediately after <command>%build</command>.
+	  The scriptlet normally installs components to be included in
+	  a binary package, usually by copying files from the build directory
+	  tree to an install directory tree.
+The scriptlet can contain any valid <command>sh</command> commands.
 
           <screen width="60">
 <computeroutput>
@@ -1162,25 +1174,25 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-clean">
-        <title>The <command>%clean</command> Script</title>
+        <title><command>%clean</command> Directive -- Remove build components.
+	</title>
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%clean</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%clean</command> script</primary>
+          <primary><command>%clean</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%clean</command> script, as the name implies, is used to
-          clean up the software's build directory tree.  RPM will normally do
-          this for you, but in certain cases (most notably in those packages
-          that use a build root) you'll need to include a
-          <command>%clean</command> script.  The commands in the script can be
-          any valid <command>sh</command> commands.
+          The <command>%clean</command> scriptlet is executed at the end of
+	  a build.
+	  The scriptlet cleans up files produced during a build, usually by
+	  removing the install directory tree.
+The scriptlet can contain any valid <command>sh</command> commands.
 
           <screen width="60">
 <computeroutput>
@@ -1196,17 +1208,18 @@ NoPatch: 2 3
     </sect2>
 
     <sect2 id="s2-rpm-specref-install-erase-scripts">
-      <title>Install-/Erase-time Scripts</title>
+      <title>Install/Erase Scriptlets</title>
 
       <para>
-        These scripts are executed whenever the package is installed or erased.
-        Each script can consist of any valid <command>sh</command> commands.
+        These scriptlets are executed whenever the package is installed or
+	erased.
+Each scriptlet can contain any valid <command>sh</command> commands.
       </para>
 
       <para>
-        Note: Each of the following scripts can be made specific to a particular
-        subpackage by adding the subpackage name, and optionally, the
-        <command>-n</command> option:
+        Note: Each of the following scriptlet can be made specific to a
+	particular subpackage by adding the subpackage name, and optionally,
+	the <option>-n</option> option:
 
         <screen width="60">
 <computeroutput>
@@ -1218,12 +1231,12 @@ NoPatch: 2 3
       </para>
 
       <para>
-        The subpackage name and usage of the <command>-n</command> option must
+        The subpackage name and usage of the <option>-n</option> option must
         match those defined with the <command>%package</command> directive.
       </para>
 
       <para>
-        Each script has the following environment variable defined:
+        Each scriptlet has the following environment variable defined:
 
         <itemizedlist mark="bullet">
           <listitem>
@@ -1244,16 +1257,16 @@ NoPatch: 2 3
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%pre</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%pre</command> script</primary>
+          <primary><command>%pre</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%pre</command> script executes just before the package is
+          The <command>%pre</command> scriptlet executes just before the package is
           to be installed.
 
           <screen width="60">
@@ -1273,16 +1286,16 @@ NoPatch: 2 3
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%post</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%post</command> script</primary>
+          <primary><command>%post</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%post</command> script executes just after the package is
+          The <command>%post</command> scriptlet executes just after the package is
           to be installed.
 
           <screen width="60">
@@ -1302,16 +1315,16 @@ NoPatch: 2 3
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%preun</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%preun</command> script</primary>
+          <primary><command>%preun</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%preun</command> script executes just before the package
+          The <command>%preun</command> scriptlet executes just before the package
           is to be erased.
 
           <screen width="60">
@@ -1327,20 +1340,20 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-postun">
-        <title>The <command>%postun</command> Script</title>
+        <title><command>%postun</command> Directive</title>
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%postun</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%postun</command> script</primary>
+          <primary><command>%postun</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%postun</command> script executes just after the package
+          The <command>%postun</command> scriptlet executes just after the package
           is to be erased.
 
           <screen width="60">
@@ -1357,7 +1370,8 @@ NoPatch: 2 3
     </sect2>
 
     <sect2 id="s2-rpm-specref-verification-script">
-      <title>Verification Script</title>
+	<title><command>%verifyscript</command> Directive
+	</title>
 
       <para>
         This section describes the verification script.
@@ -1368,18 +1382,18 @@ NoPatch: 2 3
 
         <indexterm>
           <primary>spec file</primary>
-          <secondary>scripts in</secondary>
+          <secondary>scriptlets</secondary>
           <tertiary><command>%verifyscript</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%verifyscript</command> script</primary>
+          <primary><command>%verifyscript</command> scriptlet</primary>
         </indexterm>
 
         <para>
-          The <command>%verifyscript</command> script executes whenever the
-          package is verified using RPM's <command>-V</command> option.  The
-          script can consist of any valid <command>sh</command> commands.
+          The <command>%verifyscript</command> scriptlet executes whenever the
+          package is verified using RPM's <option>-V</option> option.
+The scriptlet can contain any valid <command>sh</command> commands.
         </para>
 
         <para>
@@ -1428,7 +1442,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-setup-n-option">
         <title>
-          The <command>-n <replaceable>&lt;name&gt;</replaceable></command>
+          The <option>-n <replaceable>&lt;name&gt;</replaceable></option>
           Option
         </title>
 
@@ -1444,7 +1458,7 @@ NoPatch: 2 3
         </indexterm>
 
         <para>
-          The <command>-n</command> option is used to set the name of the
+          The <option>-n</option> option is used to set the name of the
           software's build directory.  This is necessary only when the source
           archive unpacks into a directory named other than
           <command><replaceable>&lt;name&gt;</replaceable>-
@@ -1463,10 +1477,10 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-setup-c-option">
-        <title>The <command>-c</command> Option</title>
+        <title>The <option>-c</option> Option</title>
 
         <para>
-          The <command>-c</command> option is used to direct
+          The <option>-c</option> option is used to direct
           <command>%setup</command> to create the top-level build directory
           before unpacking the sources.
 
@@ -1483,14 +1497,14 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-setup-d-option">
-        <title>The <command>-D</command> Option</title>
+        <title>The <option>-D</option> Option</title>
 
         <para>
-          The <command>-D</command> option is used to direct
+          The <option>-D</option> option is used to direct
           <command>%setup</command> to not delete the build directory prior to
           unpacking the sources.  This option is used when more than one source
           archive is to be unpacked into the build directory, normally with the
-          <command>-b</command> or <command>-a</command> options.
+          <option>-b</option> or <option>-a</option> options.
 
           <screen width="60">
 <computeroutput>
@@ -1505,13 +1519,13 @@ NoPatch: 2 3
       </sect3>
 
       <sect3 id="s3-rpm-specref-setup-t-option">
-        <title>The <command>-T</command> Option</title>
+        <title>The <option>-T</option> Option</title>
 
         <para>
-          The <command>-T</command> option is used to direct
+          The <option>-T</option> option is used to direct
           <command>%setup</command> to not perform the default unpacking of the
-          source archive specified by the first <command>source</command> tag.
-          It is used with the <command>-a</command> or <command>-b</command>
+          source archive specified by the first <command>Source:</command> tag.
+          It is used with the <option>-a</option> or <option>-b</option>
           options.
 
           <screen width="60">
@@ -1528,13 +1542,13 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-setup-b-option">
         <title>
-          The <command>-b <replaceable>&lt;n&gt;</replaceable></command> Option
+          The <option>-b <replaceable>&lt;n&gt;</replaceable></option> Option
         </title>
 
         <para>
-          The <command>-b</command> option is used to direct
+          The <option>-b</option> option is used to direct
           <command>%setup</command> to unpack the source archive specified on
-          the <emphasis>n</emphasis>th <command>source</command> tag line before
+          the <emphasis>n</emphasis>th <command>Source:</command> tag line before
           changing directory into the build directory.
 
           <screen width="60">
@@ -1551,13 +1565,13 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-setup-a-option">
         <title>
-          The <command>-a <replaceable>&lt;n&gt;</replaceable></command> Option
+          The <option>-a <replaceable>&lt;n&gt;</replaceable></option> Option
         </title>
 
         <para>
-          The <command>-a</command> option is used to direct
+          The <option>-a</option> option is used to direct
           <command>%setup</command> to unpack the source archive specified on
-          the <emphasis>n</emphasis>th <command>source</command> tag line after
+          the <emphasis>n</emphasis>th <command>Source:</command> tag line after
           changing directory into the build directory.
 
           <screen width="60">
@@ -1590,7 +1604,7 @@ NoPatch: 2 3
         The <command>%patch</command> macro, as its name implies, is used to
         apply patches to the unpacked sources.  With no additional options
         specified, it will apply the patch file specified by the
-        <command>patch</command> (or <command>patch0</command>) tag.
+        <command>Patch:</command> (or <command>Patch0:</command>) tag.
 
         <screen width="60">
 <computeroutput>
@@ -1600,9 +1614,9 @@ NoPatch: 2 3
       </para>
 
       <para>
-        When there is more than one <command>patch</command> tag line in a spec
+        When there is more than one <command>Patch:</command> tag line in a spec
         file, they can be specified by appending the number of the
-        <command>patch</command> tag to the <command>%patch</command> macro name
+        <command>Patch:</command> tag to the <command>%patch</command> macro name
         itself.
 
         <screen width="60">
@@ -1618,7 +1632,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-patch-p-option">
         <title>
-          The <command>-P <replaceable>&lt;n&gt;</replaceable></command> Option
+          The <option>-P <replaceable>&lt;n&gt;</replaceable></option> Option
         </title>
 
         <indexterm>
@@ -1633,11 +1647,11 @@ NoPatch: 2 3
         </indexterm>
 
         <para>
-          The <command>-P</command> option is another method of applying a
-          specific patch.  The number from the <command>patch</command> tag
-          follows the <command>-P</command> option.  The following
+          The <option>-P</option> option is another method of applying a
+          specific patch.  The number from the <command>Patch:</command> tag
+          follows the <option>-P</option> option.  The following
           <command>%patch</command> macros both apply the patch specified on the
-          <command>patch2</command> tag line:
+          <command>Patch2:</command> tag line:
 
           <screen width="60">
 <computeroutput>
@@ -1655,11 +1669,11 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-patch-p-option2">
         <title>
-          The <command>-p<replaceable>&lt;#&gt;</replaceable></command> Option
+          The <option>-p<replaceable>&lt;#&gt;</replaceable></option> Option
         </title>
 
         <para>
-          The <command>-p</command> option is sent directly to the
+          The <option>-p</option> option is sent directly to the
           <command>patch</command> command.  It is followed by a number which
           specifies the number of leading slashes (and the directories in
           between) to strip from any filenames present in the patch file.
@@ -1678,14 +1692,14 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-patch-b-option">
         <title>
-          The <command>-b <replaceable>&lt;name&gt;</replaceable></command>
+          The <option>-b <replaceable>&lt;name&gt;</replaceable></option>
           Option
         </title>
 
         <para>
           When the <command>patch</command> command is used to apply a patch,
           unmodified copies of the files patched are renamed to end with the
-          extension <filename>.orig</filename>.  The <command>-b</command>
+          extension <filename>.orig</filename>.  The <option>-b</option>
           option is used to change the extension used by
           <command>patch</command>.
 
@@ -1705,7 +1719,7 @@ NoPatch: 2 3
         <title>The <command>%patch -E</command> Option</title>
 
         <para>
-          The <command>-E</command> option is sent directly to the
+          The <option>-E</option> option is sent directly to the
           <command>patch</command> command.  It is used to direct
           <command>patch</command> to remove any empty files after the patches
           have been applied.
@@ -1745,7 +1759,7 @@ NoPatch: 2 3
     <para>
       The <command>%files</command> list can be made specific to a particular
       subpackage by adding the subpackage name, and optionally, the
-      <command>-n</command> option:
+      <option>-n</option> option:
 
       <screen width="60">
 <computeroutput>
@@ -1757,14 +1771,14 @@ NoPatch: 2 3
     </para>
 
     <para>
-      The subpackage name and usage of the <command>-n</command> option must
+      The subpackage name and usage of the <option>-n</option> option must
       match those defined with the <command>%package</command> directive.
     </para>
 
     <para>
       The <command>%files</command> list can also use the contents of a file as
       the list of files to be packaged.  This is done by using the
-      <command>-f</command> option, which is then followed by a filename:
+      <option>-f</option> option, which is then followed by a filename:
 
       <screen width="60">
 <computeroutput>
@@ -2049,7 +2063,7 @@ NoPatch: 2 3
   </sect1>
 
   <sect1 id="s1-rpm-specref-package">
-    <title>The <command>%package</command> Directive</title>
+    <title><command>%package</command> Directive</title>
 
     <indexterm>
       <primary><command>%package</command> directive</primary>
@@ -2058,9 +2072,9 @@ NoPatch: 2 3
     <para>
       The <command>%package</command> directive is used to control the creation
       of subpackages.  The subpackage name is derived from the first
-      <command>name</command> tag in the spec file, followed by the name
+      <command>Name:</command> tag in the spec file, followed by the name
       specified after the <command>%package</command> directive.  Therefore, if
-      the first <command>name</command> tag is:
+      the first <command>Name:</command> tag is:
 
       <screen width="60">
 <computeroutput>
@@ -2099,12 +2113,12 @@ Name: foo
 
       <indexterm>
         <primary><command>%package</command> directive</primary>
-        <secondary><command>-n</command> option</secondary>
+        <secondary><option>-n</option> option</secondary>
       </indexterm>
 
       <para>
-        The <command>-n</command> option is used to change how RPM derives the
-        subpackage name.  When the <command>-n</command> option is used, the
+        The <option>-n</option> option is used to change how RPM derives the
+        subpackage name.  When the <option>-n</option> option is used, the
         name following the <command>%package</command> directive becomes the
         complete subpackage name.  Therefore, if a subpackage is defined with
         the following <command>%package</command> directive:

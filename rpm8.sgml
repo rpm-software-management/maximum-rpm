@@ -1,0 +1,7 @@
+<!DOCTYPE BOOK PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+<!ENTITY RPM-MANPAGE SYSTEM "rpm-manpage.sgml">
+]>
+
+<book id="rpm8">
+    &RPM-MANPAGE;
+</book>

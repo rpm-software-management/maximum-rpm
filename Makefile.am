@@ -12,6 +12,7 @@ jade =		@__JADE@ -d $(redhat_dsl)
 EXTRA_DIST = \
 	fix-index \
 	redhat-html.dsl \
+	rpm8.sgml \
 	intro-to-rpm.sgml \
 	max-rpm.sgml \
 	pgp-intro.sgml \
@@ -28,6 +29,7 @@ EXTRA_DIST = \
 	rpm-file-format.sgml \
 	rpm-inside.sgml \
 	rpm-install.sgml \
+	rpm-manpage.sgml \
 	rpm-miscellania.sgml \
 	rpm-multi.sgml \
 	rpm-pgp.sgml \
@@ -90,3 +92,6 @@ install-data-local:
 	    $(INSTALL_DATA) $$p $(DESTDIR)$(htmldir)/$$p; \
 	  fi; fi; \
 	done
+
+rpm.8: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
+	docbook2man -d redhat-html.dsl rpm8.sgml

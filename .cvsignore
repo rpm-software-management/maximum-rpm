@@ -15,6 +15,9 @@ config.log
 config.status
 config.sub
 configure
+manpage.*
+rpm.8
 stamp-h
 stamp-h.in
+maximum-rpm.spec
 maximum-rpm-*.tar.gz

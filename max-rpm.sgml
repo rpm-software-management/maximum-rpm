@@ -1,4 +1,4 @@
-<!DOCTYPE BOOK PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!DOCTYPE BOOK PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
 <!-- *************** Shorthand entities... *************** -->
 <!-- The generic term "Red Hat"... -->
 <!ENTITY RH "Red Hat">
@@ -10,6 +10,8 @@
 <!ENTITY RHIS "RH">
 <!-- The basic operating system... -->
 <!ENTITY RHL "&RH; Linux">
+<!-- An rpm command... -->
+<!ENTITY rpm "<command>rpm</command>">
 <!-- *************** Chapter entities... *************** -->
 <!ENTITY PREFACE SYSTEM "preface.sgml">
 <!ENTITY INTRO-TO-RPM SYSTEM "intro-to-rpm.sgml">
@@ -37,6 +39,7 @@
 <!ENTITY RPMRC-FILE SYSTEM "rpmrc-file.sgml">
 <!ENTITY RPM-COMMANDS SYSTEM "rpm-commands.sgml">
 <!ENTITY QUERYFORMAT-TAGS SYSTEM "queryformat-tags.sgml">
+<!ENTITY RPM-MANPAGE SYSTEM "rpm-manpage.sgml">
 <!ENTITY RPM-SPECREF SYSTEM "rpm-specref.sgml">
 <!ENTITY RPM-RESOURCES SYSTEM "rpm-resources.sgml">
 <!ENTITY PGP-INTRO SYSTEM "pgp-intro.sgml">
@@ -87,10 +90,10 @@
     </revhistory>
     <edition>2</edition>
     <isbn>
-      <comment>
+      <remark>
         The current ISBN is for the first edition, and will need to be
         changed...
-      </comment>
+      </remark>
        1-888172-78-9
     </isbn>
     <printhistory>
@@ -233,6 +236,8 @@
     &RPM-COMMANDS;
 
     &QUERYFORMAT-TAGS;
+
+    &RPM-MANPAGE;
 
     &RPM-SPECREF;
 
