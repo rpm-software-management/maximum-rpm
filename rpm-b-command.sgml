@@ -2085,7 +2085,7 @@ timecheck: 3600
           This value can still be overridden by a value on the command line, if
           desired.  For more information on the use of
           <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 
@@ -2215,7 +2215,7 @@ volume.c:67: warning: implicit declaration of function `ioctl'
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
           <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
     </sect1>

@@ -203,7 +203,7 @@
                         For more information on <filename>rpmrc</filename>
                         files, <filename>rpmrc</filename> file entries, and how
                         to use them, please see Appendix <xref
-                        linkend="rpmrc-file">.
+                        linkend="ch-rpmrc-file">.
                       </para>
                     </footnote>
                   </para>
@@ -765,7 +765,7 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
           <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
     </sect1>

@@ -533,10 +533,10 @@ Build failed.
       <para>
         Take a closer look at the <command>%files</command> list.  See the line
         that reads <command>%doc README</command>?  In section <xref
-        linkend="rpm-macros-doc">, we discussed how the <command>%doc</command>
-        directive creates a directory under <filename>/usr/doc</filename>.
-        That's the file that killed the build --- the directory created by the
-        <command>%doc</command> directive.
+        linkend="s3-rpm-inside-flist-doc-directive">, we discussed how the
+        <command>%doc</command> directive creates a directory under
+        <filename>/usr/doc</filename>.  That's the file that killed the build
+        --- the directory created by the <command>%doc</command> directive.
       </para>
       <para>
         Let's temporarily remove that line from the <command>%files</command>
@@ -593,7 +593,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         absolute path, and that path started with the prefix
         <filename>/usr/local</filename>, there was no problem.  A more complete
         discussion of the <command>%doc</command> directive can be found in
-        section <xref linkend="rpm-macros-doc">.
+        section <xref linkend="s3-rpm-inside-flist-doc-directive">.
       </para>
 
       <sect2 id="s2-rpm-reloc-tying-loose-ends">

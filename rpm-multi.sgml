@@ -217,7 +217,7 @@
           following <filename>rpmrc</filename> file entries.  They can be
           overridden by entries in <filename>/etc/rpmrc</filename> or
           <filename>~/.rpmrc</filename>.  This is discussed more completely in
-          Appendix <xref linkend="rpmrc-file">.
+          Appendix <xref linkend="ch-rpmrc-file">.
         </para>
         <para>
           Because each entry type is available in both architecture and

@@ -3885,8 +3885,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             documentation directory is <filename>/usr/doc</filename>, and can be
             changed by setting the <command>defaultdocdir</command>
             <filename>rpmrc</filename> file entry.  For more information on
-            <filename>rpmrc</filename> files, please see chapter <xref
-            linkend="rpmrc-file">.
+            <filename>rpmrc</filename> files, please see appendix <xref
+            linkend="ch-rpmrc-file">.
           </para>
           <para>
             The file <filename>/usr/local/foonly/README</filename> was installed

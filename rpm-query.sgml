@@ -1523,7 +1523,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
                           <para>
                             For more information on <filename>rpmrc</filename>
                             file entries, please refer to Appendix <xref
-                            linkend="rpmrc-file">.
+                            linkend="ch-rpmrc-file">.
                           </para>
                         </footnote>
                       </para>
@@ -2785,7 +2785,7 @@ rpm-2.3-1
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="rpmrc-file">.
+              see Appendix <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2819,7 +2819,7 @@ rpm-2.3-1
           several sets of RPM options.  Software developer and package builders
           will be the people using <command>--rcfile</command>.  For more
           information on <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 

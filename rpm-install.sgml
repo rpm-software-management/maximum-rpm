@@ -1660,7 +1660,7 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           <footnote>
             <para>
               For more information on rpmrc files, refer to Appendix <xref
-              linkend="rpmrc-file">.
+              linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -1941,7 +1941,7 @@ total 5
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
           <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 
@@ -1972,7 +1972,7 @@ total 5
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="rpmrc-file">.
+              see Appendix <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2044,7 +2044,7 @@ total 5
         <footnote>
             <para>
               The use of <filename>rpmrc</filename> files is described in
-              Appendix <xref linkend="rpmrc-file">.
+              Appendix <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>
@@ -2083,7 +2083,7 @@ total 5
           <footnote>
             <para>
               The use of <filename>rpmrc</filename> files is described in
-              Appendix <xref linkend="rpmrc-file">.
+              Appendix <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>

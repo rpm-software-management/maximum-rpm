@@ -568,7 +568,7 @@ removing these packages would break dependencies:
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
           <filename>rpmrc</filename> files, see Appendix <xref
-          linkend="rpmrc-file">.
+          linkend="ch-rpmrc-file">.
         </para>
       </sect2>
 
@@ -598,7 +598,7 @@ removing these packages would break dependencies:
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see Appendix <xref linkend="rpmrc-file">.
+              see Appendix <xref linkend="ch-rpmrc-file">.
             </para>
           </footnote>
         </para>

@@ -220,7 +220,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
           RPM's configuration process is quite straightforward.  It consists of
           adding a few <filename>rpmrc</filename> entries in a file of your
           choice.  For more information on rpmrc files in general, please see
-          Appendix <xref linkend="rpmrc-file">.
+          Appendix <xref linkend="ch-rpmrc-file">.
         </para>
         <para>
           The entries that need to be added to an rpmrc file are:
