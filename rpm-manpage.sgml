@@ -640,7 +640,7 @@ systems of the binary package and host don't match.
 		<command>%_repackage_name_fmt</command>
 	and will be created in the directory named by
 	the macro <command>%_repackage_dir</command> (default value
-	is <filename>/var/tmp</filename>).
+	is <filename>/var/spool/repackage</filename>).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--replacefiles</option></term>
@@ -742,7 +742,7 @@ systems of the binary package and host don't match.
 		<command>%_repackage_name_fmt</command>
 	and will be created in the directory named by
 	the macro <command>%_repackage_dir</command> (default value
-	is <filename>/var/tmp</filename>).
+	is <filename>/var/spool/repackage</filename>).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--test</option></term>
@@ -1189,10 +1189,10 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 		MD<command>5</command> sum differs
 	</member><member>
 		<command>D</command>
-		<command>D</command>evice major/minor number mis-match
+		<command>D</command>evice major/minor number mismatch
 	</member><member>
 		<command>L</command>
-		read<command>L</command>ink(2) path mis-match
+		read<command>L</command>ink(2) path mismatch
 	</member><member>
 		<command>U</command>
 		<command>U</command>ser ownership differs
