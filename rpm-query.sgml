@@ -1,0 +1,3128 @@
+  <chapter id="ch-rpm-query">
+    <title>Getting Information About Packages</title>
+    <!-- label: rpm-q -->
+
+    <indexterm>
+      <primary><command>rpm -q</command></primary>
+    </indexterm>
+
+
+    <table id="tb-rpm-query-q-syntax">
+      <title><command>rpm -q</command> Command Syntax</title>
+      <tgroup cols="3">
+        <colspec colnum="1" colname="option">
+        <colspec colnum="2" colname="description">
+        <colspec colnum="3" colname="pageref">
+        <spanspec namest="option" nameend="pageref" spanname="spanall">
+        <spanspec namest="option" nameend="description" spanname="span12">
+        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <tbody>
+          <row>
+            <entry spanname="spanall">
+              <command>rpm -q</command> (or <command>--query</command>)
+              <emphasis>options</emphasis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              Package Selection Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <filename>pkg1</filename> &hellip; <filename>pkgN</filename>
+            </entry>
+            <entry>
+              Query installed package(s)
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-package-label">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-p <userinput>&lt;file&gt;</userinput></command>(or
+              "<command><userinput>-</userinput></command>")
+            </entry>
+            <entry>
+              Query package file
+              <command><userinput>&lt;file&gt;</userinput></command> (URLs OK)
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-p-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-f <userinput>&lt;file&gt;</userinput></command>
+            </entry>
+            <entry>
+              Query package owning
+              <command><userinput>&lt;file&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-by-file">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-a</command>
+            </entry>
+            <entry>
+              Query all installed packages
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-a-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--whatprovides <userinput>&lt;x&gt;</userinput></command>
+            </entry>
+            <entry>
+              Query packages providing capability
+              <command><userinput>&lt;x&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-whatprovides-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-g <userinput>&lt;group&gt;</userinput></command>
+            </entry>
+            <entry>
+              Query packages belonging to group
+              <command><userinput>&lt;group&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-g-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--whatrequires <userinput>&lt;x&gt;</userinput></command>
+            </entry>
+            <entry>
+              Query packages requiring capability
+              <command><userinput>&lt;x&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-whatrequires">
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              Information Selection Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command><userinput>&lt;null&gt;</userinput></command>
+            </entry>
+            <entry>
+              Display full package label
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-package-label">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-i</command>
+            </entry>
+            <entry>
+              Display summary package information
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-i-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-l</command>
+            </entry>
+            <entry>
+              Display list of files in package
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-l-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-c</command>
+            </entry>
+            <entry>
+              Display list of configuration files
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-c-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-d</command>
+            </entry>
+            <entry>
+              Display list of documentation files
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-d-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-s</command>
+            </entry>
+            <entry>
+              Display list of files in package, with state
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-s-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--scripts</command>
+            </entry>
+            <entry>
+              Display install, uninstall, verify scripts
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-scripts-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--queryformat</command> (or <command>--qf</command>)
+            </entry>
+            <entry>
+              Display queried data in custom format
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-queryformat-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--dump</command>
+            </entry>
+            <entry>
+              Display all verifiable information for each file
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-dump-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--provides</command>
+            </entry>
+            <entry>
+              Display capabilities package provides
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-provides-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--requires</command> (or <command>-R</command>)
+            </entry>
+            <entry>
+              Display capabilities package requires
+            </entry>
+            <entry>
+              <xref linkend="s3-rpm-query-requires-option">
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              General Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-v</command>
+            </entry>
+            <entry>
+              Display additional information
+            </entry>
+            <entry>
+              <xref linkend="s4-rpm-query-v-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-vv</command>
+            </entry>
+            <entry>
+              Display debugging information
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-query-vv-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--root <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate root to
+              <command><userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-query-root-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate <filename>rpmrc</filename> file to
+              <command><userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-query-rcfile-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Use <command><userinput>&lt;path&gt;</userinput></command> to find
+              the RPM database
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-query-dbpath-option">
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <sect1 id="s1-rpm-query-what-it-does">
+      <title><command>rpm -q</command> --- What does it do?</title>
+      <indexterm>
+        <primary><command>rpm -q</command>!what it does</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        One of the nice things about using RPM is that the packages you manage
+        don't end up going into some kind of black hole.  Nothing would be worse
+        than to install, upgrade, and erase several different packages and not
+        have a clue as to what's on your system.  In fact, RPM's query function
+        can help you get out of sticky situations like:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              You're poking around your system, and you come across a file that
+              you just can't identify.  Where did it come from?
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Your friend sends you a package file, and you have no idea what
+              the package does, what it installs, or where it originally came
+              from.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              You know that you installed XFree86 a couple months ago, but you
+              don't know what version, and you can't find any documentation on
+              it.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        The list could go on, but you get the idea.  The <command>rpm
+        -q</command> command is what you need.  If you're the kind of person
+        that doesn't like to have more options than you know what to do with,
+        <command>rpm -q</command> might look imposing.  But fear not.  Once you
+        have a handle on the basic structure of an RPM query, it'll be a piece
+        of cake. 
+      </para>
+    </sect1>
+
+    <sect1 id="s1-rpm-query-parts">
+      <title>The Parts of an RPM Query</title>
+      <para>
+        It becomes easy to construct a query command once you understand the
+        individual parts.  First is the <command>-q</command> (You can also use
+        <command>--query</command>, if you like).  After all, you need to tell
+        RPM what function to perform, right?  The rest of a query command
+        consists of two distinct parts: package selection (or what packages
+        you'd like to query), and information selection (or what information
+        you'd like to see).  Let's take a look at package selection first:
+      </para>
+
+      <sect2 id="s2-rpm-query-package-selection">
+        <title>Query Commands, Part One: Package Selection</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!options</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <indexterm>
+          <primary><command>rpm -q</command>!package selection options</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          The first thing you'll need to decide when issuing an RPM query is
+          what package (or packages) you'd like to query.  RPM has several ways
+          to specify packages, so you have quite an assortment to choose from.
+        </para>
+
+        <sect3 id="s3-rpm-query-package-label">
+          <title>The Package Label</title>
+          <!-- label: query-pkg-name --><!-- label: query-null -->
+          <indexterm>
+            <primary>package label</primary>
+          </indexterm>
+
+          <para>
+            In earlier chapters, we discussed RPM's package label, a string that
+            uniquely identifies every installed package.  Every label contains
+            three pieces of information:
+
+            <orderedlist>
+              <listitem>
+                <para>
+                  The <emphasis>name</emphasis> of the packaged software.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The <emphasis>version</emphasis> of the packaged software.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The package's <emphasis>release</emphasis> number.
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
+          <para>
+            When issuing a query command using package labels, you must always
+            include the package name.  You can also include the version and even
+            the release, if you like.  The only restrictions are that each part
+            of the package label specified must be complete, and that if any
+            parts of the package label are missing, all parts to the right must
+            be omitted as well.  This second restriction is just a long way of
+            saying that if you specify the release, you must also specify the
+            version as well.  Let's look at a few examples.
+          </para>
+          <para>
+            Say, for instance, you've recently installed a new version of the C
+            libraries, but you can't remember the version number:
+
+            <figure id="sc-rpm-query-query-example">
+              <title>
+                A Simple Package Query Using <command>rpm -q</command>
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q libc</userinput>
+<computeroutput>
+libc-5.2.18-1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            In this type of query, RPM returns the complete package label for
+            all installed packages that match the given information.  In the
+            example above, if version 5.2.17 of the C libraries was also
+            installed, its package label would have been displayed, too.
+          </para>
+          <para>
+            In this example, we've included the version as well as the package
+            name:
+
+            <figure id="sc-rpm-query-example2">
+              <title>Another Package Query</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q rpm-2.3</userinput>
+<computeroutput>
+rpm-2.3-1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Note, however, that RPM is a bit picky about specifying package
+            names.  Here are some queries for the C library that
+            <emphasis>won't</emphasis> work:
+
+            <figure id="sc-rpm-query-example3">
+              <title>Query Commands That <emphasis>Won't</emphasis> Work</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q LibC</userinput>
+<computeroutput>
+package LibC is not installed
+</computeroutput>
+<prompt>#</prompt>
+# <userinput>rpm -q lib</userinput>
+<computeroutput>
+package lib is not installed
+</computeroutput>
+<prompt>#</prompt>
+<prompt># </prompt><userinput>rpm -q "lib*"</userinput>
+<computeroutput>
+package lib* is not installed
+</computeroutput>
+<prompt>#</prompt>
+<prompt># </prompt><userinput>rpm -q libc-5</userinput>
+<computeroutput>
+package libc-5 is not installed
+</computeroutput>
+<prompt>#</prompt>
+<prompt># </prompt><userinput>rpm -q libc-5.2.1</userinput>
+<computeroutput>
+package libc-5.2.1 is not installed
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            As you can see, RPM is case sensitive about package names and cannot
+            match partial names, version numbers, or release numbers.  Nor can
+            it use the wildcard characters we've come to know and love.  As
+            we've seen, however, RPM can perform the query when more than one
+            field of the package label is present.  In the above case,
+            <command>rpm -q libc-5.2.18</command>, or even <command>rpm -q
+            libc-5.2.18-1</command> would have found the package,
+            <filename>libc-5.2.18-1</filename>.
+          </para>
+          <para>
+            Querying based on package labels may seem a bit restrictive.  After
+            all, you need to know the exact name of a package in order to
+            perform a query on it.  But there are other ways of specifying
+            packages&hellip;
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-a-option">
+          <title><command>-a</command> --- Query All Installed Packages</title>
+          <!-- label: query-a -->
+          <indexterm>
+            <primary><command>-a</command> option</primary>
+          </indexterm>
+
+          <para>
+            Want lots of information fast?  Using the <command>-a</command>
+            option, you can query every package installed on your system.  For
+            example:
+
+            <figure id="sc-rpm-query-query-a-example">
+              <title>
+                Querying All Installed Packages Using the <command>-a</command>
+                Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qa</userinput>
+<computeroutput>
+ElectricFence-2.0.5-2
+ImageMagick-3.7-2
+&hellip;
+tetex-xtexsh-0.3.3-8
+lout-3.06-4
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            (On a system installed using RPM, the number of packages can easily
+            number 200 or more; we've deleted most of the output.)
+</para>
+          <para>
+            The <command>-a</command> option can produce mountains of output,
+            which makes it a prime candidate for piping through the many
+            Linux/UNIX commands available.  One of the prime candidates would be
+            a pager such as <command>more</command>, so that the list of
+            installed packages could be viewed a screenful at a time.
+          </para>
+          <para>
+            Another handy command to pipe <command>rpm -qa</command>'s output
+            through is <command>grep</command>.  In fact, using
+            <command>grep</command>, it's possible to get around RPM's lack of
+            built-in wildcard processing:
+
+            <figure id="sc-rpm-query-pipe-grep">
+              <title>Piping a Query Through <command>grep</command></title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qa | grep -i sysv</userinput>
+<computeroutput>
+SysVinit-2.64-2
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            In this example, we were able to find the
+            <filename>SysVinit</filename> package, even though we didn't have
+            the complete package name, or capitalization.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-by-file">
+          <title>
+            <command>-f <userinput>&lt;file&gt;</userinput></command> --- Query
+            the Package Owning
+            <command><userinput>&lt;file&gt;</userinput></command>
+          </title>
+          <!-- label: query-f -->
+          <indexterm>
+            <primary><command>-f</command> option</primary>
+          </indexterm>
+
+          <para>
+            How many times have you found a program sitting on your system and
+            wondered "what does it do?"  Well, if the program was installed by
+            RPM as part of a package, it's easy to find out.  Simply use the
+            <command>-f</command> option.  Example: You find a strange program
+            called <command>ls</command> in <filename>/bin</filename> (Okay, it
+            <emphasis>is</emphasis> a contrived example).  Wonder what package
+            installed it?  Simple!
+
+            <figure id="sc-rpm-query-f-example">
+              <title>Using the <command>-f</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qf /bin/ls</userinput>
+<computeroutput>
+fileutils-3.12-3
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            If you happen to point RPM at a file it didn't install, you'll get a
+            message similar to the following:
+
+            <figure id="sc-rpm-query-f-unsuccessful">
+              <title>
+                When the <command>-f</command> Option Doesn't Find a Match
+              </title> 
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qf .cshrc</userinput>
+<computeroutput>
+file /home/ed/.cshrc is not owned by any package
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+
+          <sect4 id="s4-rpm-query-tricky-detail">
+            <title>A Tricky Detail</title>
+            <!-- label: -f:tricky -->
+            <indexterm>
+              <primary><command>-f</command> option!hint when using</primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              It's possible that you'll get the "not owned by any package"
+              message in error.  Here's an example of how it can happen:
+
+              <figure id="sc-rpm-query-tricky-detail">
+                <title>The <command>-f</command> Not Finding a Match</title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -qf /usr/X11/bin/xterm</userinput>
+<computeroutput>
+file /usr/X11/bin/xterm is not owned by any package
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              As you can see, we're trying to find out what package the
+              <filename>xterm</filename> program is part of.  The first example
+              failed, which might lead one to believe that
+              <filename>xterm</filename> really <emphasis>isn't</emphasis> owned
+              by any package.
+            </para>
+            <para>
+              However, let's look at a directory listing:
+
+              <figure id="sc-rpm-query-tricky-detail-setup">
+                <title>A Directory Listing</title>
+                <screen width="60">
+<prompt># </prompt><userinput>ls -lF /usr</userinput>
+<computeroutput>
+&hellip;
+lrwxrwxrwx   1 root     root            5 May 13 12:46 X11 -&gt; X11R6/
+drwxrwxr-x   7 root     root         1024 Mar 21 00:21 X11R6/
+&hellip;
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+
+              (We've truncated the list; normally <filename>/usr</filename> is
+              quite a bit more crowded than this.)
+            </para>
+            <para>
+              The key here is the line ending with "<computeroutput>X11 -&gt;
+              X11R6/</computeroutput>".  This is known as a "symbolic link".
+              It's a way of referring to a file (here, a directory file) by
+              another name.  In this case, if we used the path
+              <filename>/usr/X11</filename>, or <filename>/usr/X11R6</filename>,
+              it shouldn't make a difference.  It certainly doesn't make a
+              difference to programs that simply want access to the file.  But
+              it does make a difference to RPM, because RPM doesn't use the
+              filename to access the file.  RPM uses the filename as a key into
+              its database.  It would be very difficult, if not impossible, to
+              keep track of all the symlinks on a system and try every possible
+              path to a file during a query.
+            </para>
+            <para>
+              What to do?  There are two options:
+
+              <orderedlist>
+                <listitem>
+                  <para>
+                    Make sure you always specify a path free of symlinks.  This
+                    can be pretty tough, though.  An alternative approach is to
+                    use <command>namei</command> to track down symlinks:
+
+                    <figure id="sc-rpm-query-tricky-detail-setup2">
+                      <title>A <command>namei</command> Listing</title>
+                      <screen width="60">
+<prompt># </prompt><userinput>namei /usr/X11/bin/xterm</userinput>
+<computeroutput>
+f: /usr/X11/bin/xterm
+ d /
+ d usr
+ l X11 -&gt; X11R6
+   d X11R6
+ d bin
+ - xterm
+</computeroutput>
+<prompt>#</prompt>
+                      </screen>
+                    </figure>
+                  </para>
+                  <para>
+                    It's pretty easy to see the <filename>X11</filename> to
+                    <filename>X11R6</filename> symlink.  Using this approach you
+                    can enter the non-symlinked path and get the desired
+                    results:
+
+                   <figure id="sc-rpm-query-tricky-detail-payoff">
+                      <title>
+                        Using a Non-Symlinked Path With the
+                        <command>-f</command> Option
+                      </title>
+                      <screen width="60">
+<prompt># </prompt><userinput>rpm -qf /usr/X11R6/bin/xterm</userinput>
+<computeroutput>
+XFree86-3.1.2-5
+</computeroutput>
+<prompt>#</prompt>
+                      </screen>
+                    </figure>
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    Change your directory to the one holding the file you want
+                    to query.  Even if you use a symlinked path to get there,
+                    querying the file should then work as you'd expect:
+
+                    <figure id="sc-rpm-query-tricky-detail-payoff2">
+                      <title>
+                        Another Way to Ensure the <command>-f</command> Option
+                        Works as Desired
+                      </title> 
+                      <screen width="60">
+<prompt># </prompt><userinput>cd /usr/X11/bin</userinput>
+<prompt># </prompt><userinput>rpm -qf xterm</userinput>
+<computeroutput>
+XFree86-3.1.2-5
+</computeroutput>
+<prompt>#</prompt>
+                      </screen>
+                    </figure>
+                  </para>
+                </listitem>
+              </orderedlist>
+
+              So if you get a "not owned by any package" error, and you think it
+              may not be true, try one of the approaches above.
+            </para>
+          </sect4>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-p-option">
+          <title>
+            <command>-p <userinput>&lt;file&gt;</userinput></command> --- Query
+            a Specific RPM Package File
+          </title>
+          <!-- label: query-p -->
+          <indexterm>
+            <primary><command>-p</command> option</primary>
+          </indexterm>
+
+          <para>
+            Up to now, every means of specifying a package to an RPM query
+            focused on packages that had already been installed.  While it's
+            certainly very useful to be able to dredge up information about
+            packages that are already on your system, what about packages that
+            haven't yet been installed?  The <command>-p</command> option can do
+            that for you.
+          </para>
+          <para>
+            One situation where this capability would help, occurs when the name
+            of a package file has been changed.  Since the name of the file
+            containing a package has <emphasis>nothing</emphasis> to do with the
+            name of the package (though, by tradition it's nice to name package
+            files consistently), we can use this option to find out exactly what
+            package a file contains:
+
+            <figure id="sc-rpm-query-p-example">
+              <title>
+                Using the <command>-p</command> Option on an Unknown Package
+                File
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qp foo.bar</userinput>
+<computeroutput>
+rpm-2.3-1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            With one command RPM gives you the answer.
+            <footnote>
+              <para>
+                On most Linux systems, the <command>file</command> command can
+                be used to obtain similar information.  See Appendix <xref
+                linkend="rpm-file-format"> for details on how to add this
+                capability to your system's <command>file</command> command.
+              </para>
+            </footnote>
+          </para>
+          <para>
+            The <command>-p</command> option can also use Uniform Resource
+            Locators
+            <indexterm>
+              <primary>URL</primary>
+            </indexterm>
+            to specify package files.  See section <xref linkend="s2-rpm-install-urls">
+            for more information on using URLs.
+          </para>
+          <para>
+            There's one last trick up <command>-p</command>'s sleeve --- it can
+            also perform a query by reading a package from standard input.
+            Here's an example:
+
+            <figure id="sc-rpm-query-p-example2">
+              <title>Querying a Package by Reading From Standard Input</title>
+              <screen width="60">
+<prompt># </prompt><userinput>cat bother-3.5-1.i386.rpm | rpm -qp -</userinput>
+<computeroutput>
+bother-3.5-1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            We piped the output of <command>cat</command> into RPM.  The dash at
+            the end of the command line directs RPM to read the package from
+            standard input.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-g-option">
+          <title>
+            <command>-g <userinput>&lt;group&gt;</userinput></command>: Query
+            Packages Belonging To Group
+            <command><userinput>&lt;group&gt;</userinput></command>
+          </title>
+          <!-- label: query-g -->
+          <indexterm>
+            <primary><command>-g</command> option</primary>
+          </indexterm>
+
+          <para>
+            When a package is built, the package builder must classify the
+            package, grouping it with other packages that perform similar
+            functions.  RPM gives you the ability to query installed packages
+            based on their groups.  For example, there is a group known as
+            <filename>Base</filename>.  This group consists of packages that
+            provide low-level structure for a Linux distribution.  Let's see
+            what installed packages make up the <filename>Base</filename> group:
+
+            <figure id="sc-rpm-query-g-example">
+              <title>
+                Using the <command>-g</command> Option to Query By Group
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qg Base</userinput>
+<computeroutput>
+setup-1.5-1
+pamconfig-0.50-5
+filesystem-1.2-1
+crontabs-1.3-1
+dev-2.3-1
+etcskel-1.1-1
+initscripts-2.73-1
+mailcap-1.0-3
+pam-0.50-17
+passwd-0.50-2
+redhat-release-4.0-1
+rootfiles-1.3-1
+termcap-9.12.6-5
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            One thing to keep in mind is that group specifications are
+            case-sensitive.  Issuing the command <command>rpm -qg base</command>
+            won't produce any output.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-whatprovides-option">
+          <title>
+            <command>--whatprovides <userinput>&lt;x&gt;</userinput></command>:
+            Query the Packages That Provide Capability
+            <command><userinput>&lt;x&gt;</userinput></command>
+          </title>
+          <!-- label: query- -whatprovides -->
+          <indexterm>
+            <primary><command>--whatprovides</command> option</primary>
+          </indexterm>
+
+          <para>
+            RPM provides extensive support for dependencies between packages.
+            The basic mechanism used is that a package may
+            <emphasis>require</emphasis> what another package
+            <emphasis>provides</emphasis>.  The thing that is required and
+            provided can be a shared library's soname.  It can also be a
+            character string chosen by the package builder.  In any case, it's
+            important to be able to display which packages provide a given
+            capability.
+          </para>
+          <para>
+            This is just what the <command>--whatprovides</command> option does.
+            When the option, followed by a capability, is added to a query
+            command, RPM will select those packages that provide the capability.
+            Here's an example:
+
+            <figure id="sc-rpm-query-whatprovides-preview">
+              <title>Using the <command>--whatprovides</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --whatprovides module-info</userinput>
+<computeroutput>
+kernel-2.0.18-5
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+              In this case, the only package that provides the
+              <filename>module-info</filename> capability is
+              <filename>kernel-2.0.18-5</filename>.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-whatrequires">
+          <title>
+            <command>--whatrequires <userinput>&lt;x&gt;</userinput></command>:
+            Query the Packages That Require Capability
+            <command><userinput>&lt;x&gt;</userinput></command>
+          </title>
+          <!-- label: query- -whatrequires -->
+          <indexterm>
+            <primary><command>--whatrequires</command> option</primary>
+          </indexterm>
+
+          <para>
+            The <command>--whatrequires</command> option is the logical
+            complement to the <command>--whatprovides</command> option described
+            above.  It is used to display which packages require the specified
+            capability.  Expanding on the example we started with
+            <command>--whatprovides</command>, let's see which packages require
+            the <filename>module-info</filename> capability:
+
+            <figure id="sc-rpm-query-whatrequires-example">
+              <title>Using the <command>--whatrequires</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --whatrequires module-info</userinput>
+<computeroutput>
+kernelcfg-0.3-2
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            There's only one package that requires
+            <filename>module-info</filename> ---
+            <filename>kernelcfg-0.3-2</filename>.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-information-selection">
+        <title>Query Commands, Part Two: Information Selection</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!information selection options</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          After specifying the package (or packages) you wish to query, you'll
+          need to figure out just <emphasis>what</emphasis> information you'd
+          like RPM to retrieve.  As we've seen, by default, RPM only returns the
+          complete package label.  But there's much more to a package than that.
+          Here, we'll explore every information selection option available to
+          us.
+        </para>
+
+        <sect3 id="s3-rpm-query-i-option">
+          <title><command>-i</command> --- Display Package Information</title>
+          <!-- label: query-i -->
+          <indexterm>
+            <primary><command>-i</command> option</primary>
+          </indexterm>
+
+          <para>
+            Adding <command>-i</command> to <command>rpm -q</command> tells RPM
+            to give you some information on the package or packages you've
+            selected.  For the sake of clarity, let's take a look at what it
+            gives you and explain what you're looking at:
+
+            <figure id="sc-rpm-query-i-example">
+              <title>Using the <command>-i</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qi rpm</userinput>
+<computeroutput>
+Name        : rpm                    Distribution: Red Hat Linux Vanderbilt
+Version     : 2.3                          Vendor: Red Hat Software
+Release     : 1                        Build Date: Tue Dec 24 09:07:59 1996
+Install date: Thu Dec 26 23:01:51 1996 Build Host: porky.redhat.com
+Group       : Utilities/System         Source RPM: rpm-2.3-1.src.rpm
+Size        : 631157
+Summary     : Red Hat Package Manager
+Description :
+RPM is a powerful package manager, which can be used to build, install,
+query, verify, update, and uninstall individual software packages. A
+package consists of an archive of files, and package information, including
+name, version, and description.
+</computeroutput>
+<prompt># </prompt>
+              </screen>
+            </figure>
+</para>
+          <para>
+            There's quite a bit of information here, so let's go through it
+            entry by entry:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <computeroutput>Name</computeroutput> --- The name of the
+                  package you queried.  Usually (but not always) it bears some
+                  resemblance to the name of the underlying software.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Version</computeroutput> --- The version
+                  number of the software, as specified by the software's
+                  original creator.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Release</computeroutput> --- The number of
+                  times a package consisting of this software has been packaged.
+                  If the version number should change, the release number should
+                  start over again at "<computeroutput>1</computeroutput>".
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            As you've probably noticed, these three pieces of information
+            comprise the package label we've come to know and love.  Continuing,
+            we have:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <computeroutput>Install date</computeroutput> --- This is the
+                  time when the package was installed on your system.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Group</computeroutput> --- In our example,
+                  this looks suspiciously like a path.  If you went searching
+                  madly for a directory tree by that name, you'd come up dry ---
+                  it isn't a set of directories at all.
+                </para>
+                <para>
+                  When a package builder starts to create a new package, they
+                  enter a list of words that describe the software.  The list,
+                  which goes from least specific to most specific, attempts to
+                  categorize the software in a concise manner.  The primary use
+                  for the group is to enable graphically oriented package
+                  managers based on RPM to present packages grouped by function.
+                  &RHL;'s <command>glint</command> command does this.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Size</computeroutput> --- This is the size (in
+                  bytes) of every file in this package.  It might make your
+                  decision to erase an unused package easier if you see six or
+                  more digits here.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Summary</computeroutput> --- This is a concise
+                  description of the packaged software.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Description</computeroutput> --- This is a
+                  verbose description of the packaged software.  Some
+                  descriptions might be more, well,
+                  <emphasis>descriptive</emphasis> than others, but hopefully it
+                  will be enough to clue you in as to the software's role in the
+                  greater scheme of things.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Distribution</computeroutput> --- The word
+                  "distribution" is really not the best name for this
+                  field. "Product" might be a better choice.  In any case, this
+                  is the name of the product this package is a part of.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Vendor</computeroutput> --- The organization
+                  responsible for building this package.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Build Date</computeroutput> --- The time the
+                  package was created.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Build Host</computeroutput> --- The name of
+                  the computer system that built the package.
+                  <footnote>
+                    <para>
+                      Note to software packagers: Choose your build machine
+                      names wisely!  A silly or offensive name might be
+                      embarrassing&hellip;
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>Source RPM</computeroutput> --- The process of
+                  building a package results in two files:
+
+                  <orderedlist>
+                    <listitem>
+                      <para>
+                        The package file used to install the packaged software.
+                        This is sometimes called the <emphasis>binary</emphasis>
+                        package.
+                      </para>
+                    </listitem>
+
+                    <listitem>
+                      <para>
+                        The package file containing the source code and other
+                        files used to create the binary package file.  This is
+                        known as the <emphasis>source</emphasis> RPM package
+                        file.  This is the filename that is displayed in this
+                        field.
+                      </para>
+                    </listitem>
+                  </orderedlist>
+
+                  Unless you want to make changes to the software, you probably
+                  won't need to worry about source packages.  But if you do,
+                  stick around, because the second part of this book is for
+                  you&hellip;
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-l-option">
+          <title><command>-l</command> --- Display the Package's File List</title>
+          <!-- label: query-l -->
+          <indexterm>
+            <primary><command>-l</command> option</primary>
+          </indexterm>
+
+          <para>
+            Adding <command>-l</command> to <command>rpm -q</command> tells RPM
+            to display the list of files that are installed by the specified
+            package or packages.  If you've used <command>ls</command> before,
+            you won't be surprised by RPM's file list.
+          </para>
+          <para>
+            Here's a look at one of the smaller packages on &RHL; ---
+            <filename>adduser</filename>: 
+
+            <figure id="sc-rpm-query-l-option">
+              <title>
+                Displaying a Package's File List Using the <command>-l</command>
+                Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -ql adduser</userinput>
+<computeroutput>
+/usr/sbin/adduser
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            The <filename>adduser</filename> package consists of only one file,
+            so there's only one filename displayed.
+          </para>
+
+          <sect4 id="s4-rpm-query-v-option">
+            <title>
+              <command>-v</command> --- Display Additional Information
+            </title>
+            <!-- label: query-v -->
+            <indexterm>
+              <primary><command>-v</command> option</primary>
+            </indexterm>
+
+            <para>
+              In some cases, the <command>-v</command> option can be added to a
+              query command for additional information.  The
+              <command>-l</command> option we've been discussing is an example
+              of just such a case.  Note how the <command>-v</command> option
+              adds verbosity:
+
+              <figure id="sc-rpm-query-v-option">
+                <title>
+                  Displaying More Data With the <command>-v</command> Option
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -qlv adduser</userinput>
+<computeroutput>
+-rwxr-xr-x-     root     root       3894 Feb 25 13:45 /usr/sbin/adduser
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+
+              Looks a lot like the output from <command>ls</command>, doesn't
+              it?  Looks can be deceiving.  Everything you see here is straight
+              from RPM's database.  However, the format is identical to
+              <command>ls</command>, so it's more easily understood.  If this is
+              Greek to you, consult the <command>ls</command> man page.
+            </para>
+          </sect4>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-c-option">
+          <title>
+            <command>-c</command> --- Display the Package's List of
+            Configuration Files
+          </title> 
+          <!-- label: query-c -->
+          <indexterm>
+            <primary><command>-c</command> option</primary>
+          </indexterm>
+
+          <indexterm>
+            <primary>config files</primary>
+          </indexterm>
+
+          <para>
+            When <command>-c</command> is added to an <command>rpm -q</command>
+            command, RPM will display the configuration files that are part of
+            the specified package or packages.  As mentioned earlier in the
+            book, config files are important, because they control the behavior
+            of the packaged software.  Let's take a look at the list of config
+            files for <filename>XFree86</filename>:
+
+            <figure id="sc-rpm-query-c-example">
+              <title>
+                Listing Config Files Using the <command>-c</command> Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qc XFree86</userinput>
+<computeroutput>
+/etc/X11/fs/config
+/etc/X11/twm/system.twmrc
+/etc/X11/xdm/GiveConsole
+/etc/X11/xdm/TakeConsole
+/etc/X11/xdm/Xaccess
+/etc/X11/xdm/Xresources
+/etc/X11/xdm/Xservers
+/etc/X11/xdm/Xsession
+/etc/X11/xdm/Xsetup_0
+/etc/X11/xdm/chooser
+/etc/X11/xdm/xdm-config
+/etc/X11/xinit/xinitrc
+/etc/X11/xsm/system.xsm
+/usr/X11R6/lib/X11/XF86Config
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            These are the files you'd want to look at first if you were looking
+            to customize XFree86 for your particular needs.  Just like
+            <command>-l</command>, we can also add <command>v</command> for more
+            information:
+
+            <figure id="sc-rpm-query-c-verbosity">
+              <title>
+                Getting More Information With the <command>-v</command> Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qcv XFree86</userinput>
+<computeroutput>
+-r--r--r---  root  root    423 Mar 21 00:17 /etc/X11/fs/config
+&hellip;
+lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; ../../../../etc/X11/XF86Config
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            (Note that last file: RPM will display symbolic links, as well.)
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-d-option">
+          <title>
+            <command>-d</command> --- Display a List of the Package's
+            Documentation
+          </title>
+          <!-- label: query-d -->
+          <indexterm>
+            <primary><command>-d</command> option</primary>
+          </indexterm>
+
+          <para>
+            When <command>-d</command> is added to a query, we get a list of all
+            files containing documentation for the named package or packages.
+            This is a great way to get up to speed when you're having problems
+            with unfamiliar software.  As with <command>-c</command> and
+            <command>-l</command>, you'll see either a simple list of filenames,
+            or (if you've added <command>-v</command>) a more comprehensive
+            list.  Here's an example that might look daunting at first, but
+            really isn't:
+
+            <figure id="sc-rpm-query-d-example">
+              <title>Display All Documentation, Config Files</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qdcf /sbin/dump</userinput>
+<computeroutput>
+/etc/dumpdates
+/usr/doc/dump-0.3-5
+/usr/doc/dump-0.3-5/CHANGES
+/usr/doc/dump-0.3-5/COPYRIGHT
+/usr/doc/dump-0.3-5/INSTALL
+/usr/doc/dump-0.3-5/KNOWNBUGS
+/usr/doc/dump-0.3-5/THANKS
+/usr/doc/dump-0.3-5/dump-0.3.announce
+/usr/doc/dump-0.3-5/dump.lsm
+/usr/doc/dump-0.3-5/linux-1.2.x.patch
+/usr/man/man8/dump.8
+/usr/man/man8/rdump.8
+/usr/man/man8/restore.8
+/usr/man/man8/rmt.8
+/usr/man/man8/rrestore.8
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Let's take that alphabet soup set of options, one letter at a time:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <command>q</command> --- Perform a query.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <command>d</command> --- List all documentation files.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <command>c</command> --- List all config files.
+                  <indexterm>
+                    <primary>config files</primary>
+                  </indexterm>
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <command>f</command> --- Query the package that owns the
+                  specified file (<filename>/sbin/dump</filename>, in this
+                  case).
+                </para>
+              </listitem>
+            </itemizedlist>
+
+            The list of files represents all the documentation and config files
+            that apply to the package owning <filename>/sbin/dump</filename>.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-s-option">
+          <title>
+            <command>-s</command> --- Display the State of Each File in the
+            Package
+          </title>
+          <!-- label: query-s -->
+          <indexterm>
+            <primary><command>-s</command> option</primary>
+          </indexterm>
+
+          <para>
+            Unlike the past three sections, which dealt with a list of files of
+            one type or another, adding <command>-s</command> to a query will
+            list the <emphasis>state</emphasis> of the files that comprise one
+            or more packages.  I can hear you out there; you're saying, "What is
+            the <emphasis>state</emphasis> of a file?"  For every file that RPM
+            installs, there is an associated state.  There are four possible
+            states:
+
+            <orderedlist>
+              <listitem>
+                <para>
+                  <computeroutput>normal</computeroutput> --- A file in the
+                  <computeroutput>normal</computeroutput> state has not been
+                  modified by installing another package on the system.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>replaced</computeroutput> --- Files in the
+                  <computeroutput>replaced</computeroutput> state have been
+                  modified by installing another package on the system.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>not installed</computeroutput> --- A file is
+                  classified as <computeroutput>not installed</computeroutput>
+                  when it, er, isn't installed!  This state is normally seen
+                  only if the package was partially installed.  An example of a
+                  partially installed package would be one that was installed
+                  with the <command>--excludedocs</command>
+                  <indexterm>
+                    <primary><command>--excludedocs</command></primary>
+                  </indexterm>
+                  option.  Using this option, no documentation files would be
+                  installed.  The RPM database would still contain entries for
+                  these missing files, but their state would be
+                  <computeroutput>not installed</computeroutput>.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>net shared</computeroutput> --- The
+                  <computeroutput>net shared</computeroutput> state is used to
+                  support client systems that NFS mount portions of their
+                  filesystems from a server.  Since the server most likely
+                  exports filesystems to more than one client, if a client
+                  erased a package that contained files on a shared filesystem,
+                  other client systems would have incompletely installed
+                  packages.  The <computeroutput>net shared</computeroutput>
+                  state is used to alert RPM to the fact that a file is on a
+                  shared filesystem and should not be erased.  Files will be in
+                  the <computeroutput>net shared</computeroutput> state when two
+                  things happen:
+
+                  <orderedlist>
+                    <listitem>
+                      <para>
+                        The <command>netsharedpath</command>
+                        <indexterm>
+                          <primary>
+                            <filename>rpmrc</filename>
+                            file!entries!<command>netsharedpath</command>
+                          </primary>
+                          <secondary></secondary>
+                          <tertiary></tertiary>
+                        </indexterm>
+                        <filename>rpmrc</filename> file entry has been changed
+                        from its default (null) value.
+                        <footnote>
+                          <para>
+                            For more information on <filename>rpmrc</filename>
+                            file entries, please refer to Appendix <xref
+                            linkend="rpmrc-file">.
+                          </para>
+                        </footnote>
+                      </para>
+                    </listitem>
+
+                    <listitem>
+                      <para>
+                        The file is to be installed in a directory within a net
+                        shared path.
+                      </para>
+                    </listitem>
+                  </orderedlist>
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
+          <para>
+            Here's an example showing how file states appear:
+
+            <figure id="sc-rpm-query-">
+              <title>
+                Viewing File States With the <command>-s</command> Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -qs adduser</userinput>
+<computeroutput>
+normal        /usr/sbin/adduser
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            (That <computeroutput>normal</computeroutput> at the start of the
+            line is the state, followed by the file name)
+          </para>
+          <para>
+            The file state is one of the tools RPM uses to determine the most
+            appropriate action to take when packages are installed or erased.
+          </para>
+          <para>
+            Now would the average person need to check the states of files?  Not
+            really.  But if there should be problems, this kind of information
+            can help get things back on track.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-provides-option">
+          <title>
+            <command>--provides</command>: Display Capabilities Provided by the
+            Package
+          </title>
+          <!-- label: query- -provides -->
+          <indexterm>
+            <primary><command>--provides</command> option</primary>
+          </indexterm>
+
+          <para>
+            By adding <command>--provides</command> to a query command, we can
+            see the capabilities provided by one or more packages.  If the
+            package doesn't provide any capabilities, the
+            <command>--provides</command> option produces no output:
+
+            <figure id="sc-rpm-query-provides-example">
+              <title>
+                Sometimes the <command>--provides</command> Option Doesn't
+                Produce Much Output&hellip;
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --provides rpm</userinput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            However, if a package <emphasis>does</emphasis> provide
+            capabilities, they will be displayed:
+
+            <figure id="sc-rpm-query-provides-example2">
+              <title>But Sometimes it Does&hellip;</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --provides foonly</userinput>
+<computeroutput>
+index
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            It's important to remember that capabilities are
+            <emphasis>not</emphasis> filenames.  In the above example, the
+            <filename>foonly</filename> package contains no file called
+            <filename>index</filename>; it's just a character string the package
+            builder chose.  This is no different from the following example:
+
+            <figure id="sc-rpm-query-provides-example3">
+              <title>
+                The Output From <command>--provides</command> is
+                <emphasis>Not</emphasis> Related to Files!
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --provides libc</userinput>
+<computeroutput>
+libm.so.5
+libc.so.5
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+            While there might be symlinks by those names in
+            <filename>/lib</filename>, capabilities are a property of the
+            <emphasis>package</emphasis>, not a file contained in the package!
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-requires-option">
+          <title>
+            <command>--requires</command>: Display Capabilities Required by the
+            Package
+          </title>
+          <!-- label: query- -requires -->
+          <indexterm>
+            <primary><command>--requires</command> option</primary>
+          </indexterm>
+
+          <para>
+            The <command>--requires</command> option (<command>-R</command> is
+            equivalent) is the logical complement to the
+            <command>--provides</command> option.  It displays the capabilities
+            required by the specified package(s).  If a package has no
+            requirements, there's no output:
+
+            <figure id="sc-rpm-query-requires-example">
+              <title>
+                The <command>--requires</command> Option Doesn't Always Produce
+                Output
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --requires adduser</userinput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            In cases where there <emphasis>are</emphasis> requirements, they are
+            displayed as follows:
+
+            <figure id="sc-rpm-query-requires-example2">
+              <title>
+                Output From the <command>--requires</command> Option
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --requires rpm</userinput>
+<computeroutput>
+libz.so.1
+libdb.so.2
+libc.so.5
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            It's also possible that you'll come across something like this:
+
+            <figure id="sc-rpm-query-requires-example3">
+              <title>
+                Another Kind of Output From <command>--requires</command>
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --requires blather</userinput>
+<computeroutput>
+bother &gt;= 3.1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+
+              Packages may also be built to require another package.  This
+              requirement can also include specific versions.  In the example
+              above, the <filename>bother</filename> package is required by
+              <filename>blather</filename>; specifically, a version of
+              <filename>bother</filename> greater than or equal to 3.1.
+          </para>
+          <para>
+            Here's something worth understanding.  Let's say we decide to track
+            down the <filename>bother</filename> that
+            <filename>blather</filename> says it requires.  If we use RPM's
+            query capabilities, we could use the
+            <command>--whatprovides</command> package selection option to try to
+            find it:
+
+            <figure id="sc-rpm-query-whatprovides-example">
+              <title>Using the <command>--whatprovides</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --whatprovides bother</userinput>
+<computeroutput>
+no package provides bother
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            No dice.  This might lead you to believe that the
+            <filename>blather</filename> package has a problem.  The moral of
+            this story is that, when trying to find out what package fulfills
+            another package's requirements, it's a good idea to also try a
+            simple query using the requirement as a package name.  Continuing
+            our example above, let's see if there's a package called
+            <filename>bother</filename>:
+
+            <figure id="sc-rpm-query-provides-setup">
+              <title>Looking For the <filename>bother</filename> Package</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q bother</userinput>
+<computeroutput>
+bother-3.5-1
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Bingo!  However, if we see what capabilities the
+            <filename>bother</filename> package provides, we come up dry:
+
+            <figure id="sc-rpm-query-provides-setup2">
+              <title>
+                Looking for Capabilities in the <filename>bother</filename>
+                Package
+              </title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --provides bother</userinput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The reason for the lack of output is that all packages, by default,
+            "provide" their package name (and version).
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-dump-option">
+          <title>
+            <command>--dump</command>: Display All Verifiable Information for
+            Each File
+          </title>
+          <!-- label: query- -dump -->
+          <indexterm>
+            <primary><command>--dump</command> option</primary>
+          </indexterm>
+
+          <para>
+            The <command>--dump</command> option is used to display every piece
+            of information RPM has on one or more files listed in its database.
+            The information is listed in a very concise fashion.  Since the
+            <command>--dump</command> option displays file-related information,
+            the list of files must be chosen by using the <command>-l</command>,
+            <command>-c</command>, or <command>-d</command> options (or some
+            combination thereof):
+
+            <figure id="sc-rpm-query-dump-example">
+              <title>Using the <command>--dump</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -ql --dump adduser</userinput>
+<computeroutput>
+/usr/sbin/adduser 4442 841083888 ca5fa53dc74952aa5b5e3a5fa5d8904b 0100755
+root root 0 0 0 X
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            What does all this stuff mean?  Let's go through it, item-by-item:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  The <filename>/usr/sbin/adduser</filename> is simple: it's the
+                  name of the file being <command>dump</command>'ed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  <computeroutput>4442</computeroutput> is the size of the file,
+                  in bytes.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  How about <computeroutput>841083888</computeroutput>?  It's
+                  the time the file was last modified, in seconds past the Unix
+                  zero date of January 1, 1970.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The
+                  <computeroutput>ca5fa53dc74952aa5b5e3a5fa5d8904b</computeroutput>
+                  is the MD5 checksum of the file's contents, all 128 bits of
+                  it.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  If you guessed <computeroutput>0100755</computeroutput> was
+                  the file's mode, you'd be right.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The first <computeroutput>root</computeroutput> represents the
+                  file's owner.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The second <computeroutput>root</computeroutput> is the file's
+                  group.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  We'll take the next part (<computeroutput>0
+                  0</computeroutput>) in one chunk.  The first zero shows
+                  whether the file is a config file.
+                  <indexterm>
+                    <primary>config files</primary>
+                  </indexterm>
+                  If zero, as in this case, then the file is not a config file.
+                  The next zero shows whether the file is documentation.  Again,
+                  since there is a zero here, this file isn't documentation,
+                  either.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The final <computeroutput>0</computeroutput> represents the
+                  file's major and minor numbers.  These are set only for device
+                  special files.  Otherwise, it will be zero.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  If the file were a symlink, the spot taken by the
+                  <computeroutput>X</computeroutput> would contain a path
+                  pointing to the linked file.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            Normally, the <command>--dump</command> option is used by people
+            that want to extract the file-related information from RPM and
+            process it somehow.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-scripts-option">
+          <title>
+            <command>--scripts</command> --- Show Scripts Associated With a
+            Package
+          </title>
+          <!-- label: query- -scripts -->
+          <indexterm>
+            <primary><command>--scripts</command> option</primary>
+          </indexterm>
+
+          <para>
+            If you add <command>--scripts</command> (that's
+            <emphasis>two</emphasis> dashes) to a query, you get to see a little
+            bit more of RPM's underlying magic:
+
+            <figure id="sc-rpm-query-scripts-example">
+              <title>Output From the <command>--scripts</command> Option</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -q --scripts XFree86</userinput>
+<computeroutput>
+preinstall script:
+(none)
+
+postinstall script:
+/sbin/ldconfig
+/sbin/pamconfig --add --service=xdm --password=none --sesslist=none
+
+preuninstall script:
+(none)
+
+postuninstall script:
+/sbin/ldconfig
+if [ "$1" = 0 ] ; then
+  /sbin/pamconfig --remove --service=xdm --password=none --sesslist=none
+fi
+
+verify script:
+(none)
+
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            In this particular case, the <filename>XFree86</filename> package
+            has two scripts: one labeled <filename>postinstall</filename>, and
+            one labeled <filename>postuninstall</filename>.  As you might
+            imagine, the postinstall script is executed just after the package's
+            files have been installed; the postuninstall script is executed just
+            after the package's files have been erased.
+          </para>
+          <para>
+            Based on the labels in this example, you'd probably imagine that a
+            package can have as many as five different scripts.  You'd be right:
+
+            <orderedlist>
+              <listitem>
+                <para>
+                  The preinstall script, which is executed just
+                  <emphasis>before</emphasis> the package's files are installed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The postinstall script, which is executed just
+                  <emphasis>after</emphasis> the package's files are installed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The preuninstall script, which is executed just
+                  <emphasis>before</emphasis> the package's files are removed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The postuninstall script, which is executed just
+                  <emphasis>after</emphasis> the package's files are removed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  And finally, the verify script.  While it's easy to figure out
+                  the other scripts' functions based on their name, what does a
+                  script called <emphasis>verify</emphasis> do?  Well, we
+                  haven't gotten to it yet, but packages can also be verified
+                  for proper installation.  This script is used during
+                  verification.
+                  <footnote>
+                    <para>
+                      For more information on package verification, please see
+                      section <xref linkend="s1-rpm-verify-">.
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
+          <para>
+            Is this something you'll need very often?  As in the case of
+            displaying file states, not really.  But when you need it, you
+            <emphasis>really</emphasis> need it!
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-query-queryformat-option">
+          <title>
+            <command>--queryformat</command> - Construct a Custom Query Response
+          </title>
+          <!-- label: query- -queryformat -->
+          <indexterm>
+            <primary><command>--queryformat</command> option</primary>
+          </indexterm>
+
+          <para>
+            OK, say you're <emphasis>still</emphasis> not satisfied.  You'd like
+            some additional information, or you think a different format would
+            be easier on the eyes.  Maybe you want to take some information on
+            the packages you've installed and run it through a script for some
+            specialized processing.  You can do it, using the
+            <command>--queryformat</command> option.  In fact, if you look back
+            at the output of the <command>-i</command> option, RPM was using
+            <command>--queryformat</command> internally.  Here's how it works:
+          </para>
+          <para>
+            On the RPM command line, include <command>--queryformat</command>.
+            Right after that, enter a format string, enclosed in single quotes
+            "<userinput>'</userinput>".
+          </para>
+          <para>
+            The format string can consist of a number of different components:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Literal text, including escape sequences.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Tags, with optional field width, formatting, and iteration
+                  information.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Array Iterators.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            Let's look at each of these components.
+          </para>
+
+          <sect4 id="s4-rpm-query-queryformat-literal-text">
+            <title>Literal text</title>
+            <indexterm>
+              <primary><command>--queryformat</command> option!literal text in</primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              Any part of a format string that is not associated with tags or
+              array iterators will be treated as literal text.  Literal text is
+              just that: It's text that is printed just as it appears in the
+              format string.  In fact, a format string can consist of nothing
+              but literal text, although the output wouldn't tell us much about
+              the packages being queried.  Let's give the
+              <command>--queryformat</command> option a try, using a format
+              string with nothing but literal text:
+
+              <figure id="sc-rpm-query-queryformat-literal">
+                <title>Literal Text and <command>--queryformat</command></title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat 'This is a test!' rpm</userinput>
+<computeroutput>
+This is a test!</computeroutput><prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              The RPM command might look a little unusual, but if you take out
+              the <command>--queryformat</command> option, along with its format
+              string, you'll see this is just an ordinary query of the
+              <filename>rpm</filename> package.  When the
+              <command>--queryformat</command> option is present, RPM will use
+              the text immediately following the option as a format string.  In
+              our case, the format string is <command>'This is a
+              test!'</command>.  The single quotes are required.  Otherwise,
+              it's likely your shell will complain about some of the characters
+              contained in the average format string.
+            </para>
+            <para>
+              The output of this command appears on the second line.  As we can
+              see, the literal text from the format string was printed exactly
+              as it was entered.
+            </para>
+          </sect4>
+
+          <sect4 id="s4-rpm-query-queryformat-carriage-control">
+            <title>Carriage Control Escape Sequences</title>
+            <indexterm>
+              <primary><command>--queryformat</command> option!carriage control in</primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              Wait a minute.  What is that <computeroutput>#</computeroutput>
+              doing at the end of the output?  Well, that's our shell prompt.
+              You see, we didn't direct RPM to move to a new line after
+              producing the output, so the shell prompt ended up being tacked to
+              the end of our output.
+            </para>
+            <para>
+              Is there a way to fix that?  Yes, there is.  We need to use an
+              escape sequence.  An escape sequence is a sequence of characters
+              that starts with a backslash (<command>\</command>).  Escape
+              sequences add carriage control information to a format string.
+              The following escape sequences can be used:
+
+              <itemizedlist mark="bullet">
+                <listitem>
+                  <para>
+                    <command>\a</command> --- Produces a bell or similar alert.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\b</command> --- Backspaces one character.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\f</command> --- Outputs a form-feed character.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\n</command> --- Outputs a newline character sequence.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\r</command> --- Outputs a carriage return character.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\t</command> --- Causes a horizontal tab.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\v</command> --- Causes a vertical tab.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    <command>\\</command> --- Displays a backslash character.
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </para>
+            <para>
+              Based on this list, it seems that a <command>\n</command> escape
+              sequence at the end of the format string will put our shell prompt
+              on the next line:
+
+              <figure id="sc-rpm-query-queryformat-cc-example">
+                <title>
+                  Using Carriage Control with <command>--queryformat</command>
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat 'This is a test!\n' rpm</userinput>
+<computeroutput>
+This is a test!
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+
+              Much better&hellip;
+            </para>
+          </sect4>
+
+          <sect4 id="s4-rpm-query-queryformat-tags">
+            <title>Tags</title>
+            <indexterm>
+              <primary><command>--queryformat</command> option!tags for</primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              The most important parts of a format string are the tags.  Each
+              tag specifies what information is to be displayed and can
+              optionally include field-width, as well as justification and data
+              formatting instructions.
+              <footnote>
+                <para>
+                  RPM uses <function>printf</function> to do
+                  <command>--queryformat</command> formatting.  Therefore, you
+                  can use any of the <function>printf</function> format
+                  modifiers discussed in the <function>printf(3)</function> man
+                  page.
+                </para>
+              </footnote>
+              But for now, let's look at the basic tag.  In fact, let's look at
+              three --- the tags that print the package name, version, and
+              release.
+            </para>
+            <para>
+              Strangely enough, these tags are called <command>NAME</command>,
+              <command>VERSION</command>, and <command>RELEASE</command>.  In
+              order to be used in a format string, the tag names must be
+              enclosed in curly braces and preceded by a percent sign.  Let's
+              give it a try:
+
+              <figure id="sc-rpm-query-queryformat-tag-example">
+                <title>Using a Tag With <command>--queryformat</command></title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}%{VERSION}%{RELEASE}\n' rpm</userinput>
+<computeroutput>
+rpm2.31
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              Let's add a dash between the tags and see if that makes the output
+              a little easier to read:
+
+              <figure id="sc-rpm-query-tag-example2">
+                <title>
+                  Slightly Nicer Output From <command>--queryformat</command>
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%{VERSION}-%{RELEASE}\n' rpm</userinput>
+<computeroutput>
+rpm-2.3-1
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+
+              Now our format string outputs standard package labels.
+            </para>
+
+            <sect5 id="s5-rpm-query-queryformat-widths">
+              <title>Field Width and Justification</title>
+                <indexterm>
+                  <primary>
+                    queryformat@<command>--queryformat</command> option!tags,
+                    width and justification
+                  </primary>
+                <secondary></secondary>
+              </indexterm>
+
+              <para>
+                Sometimes it's desirable to allocate fields of a particular size
+                for a tag.  This is done by putting the desired field width
+                between the tag's leading percent sign, and the opening curly
+                brace.  Using our package-label-producing format string, let's
+                allocate a 20-character field for the version:
+
+                <figure id="sc-rpm-query-width-example">
+                  <title>
+                    Declaring a Field Width for <command>--queryformat</command>
+                  </title>
+                  <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%20{VERSION}-%{RELEASE}\n' rpm</userinput>
+<computeroutput>
+rpm-                 2.3-1
+</computeroutput>
+<prompt>#</prompt>
+                  </screen>
+                </figure>
+
+                The result is a field of 20 characters: 17 spaces, followed by
+                the three characters that make up the version.
+              </para>
+              <para>
+                In this case, the version field is right justified; that is, the
+                data is printed at the far right of the output field.  We can
+                left justify the field by preceding the field width
+                specification with a dash:
+
+                <figure id="sc-rpm-query-queryformat-justification">
+                  <title>Controlling Justification</title>
+                  <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}-%-20{VERSION}-%{RELEASE}\n' rpm</userinput>
+<computeroutput>
+rpm-2.3                 -1
+</computeroutput>
+<prompt>#</prompt>
+                  </screen>
+                </figure>
+              </para>
+              <para>
+                Now the version is printed at the far left of the output field.
+                You might be wondering what would happen if the field width
+                specification didn't leave enough room for the data being
+                printed.  The field width specification can be considered the
+                <emphasis>minimum</emphasis> width the field will take.  If the
+                data being printed is wider, the field will expand to
+                accommodate the data.
+              </para>
+            </sect5>
+
+            <sect5 id="s5-rpm-query-queryformat-modifiers">
+              <title>Modifiers --- Making Data More Readable</title>
+              <indexterm>
+                <primary>
+                  <command>--queryformat</command> option!tags, modifiers
+                </primary>
+                <secondary></secondary>
+              </indexterm>
+
+              <para>
+                While RPM does its best to appropriately display the data from a
+                <command>--queryformat</command>, there are times when you'll
+                need to lend a helping hand.  Here's an example.  Say we want to
+                display the name of each installed package, followed by the time
+                the package was installed.  Looking through the available tags,
+                we see <command>INSTALLTIME</command>.  Great!  Looks like this
+                will be simple:
+
+                <figure id="sc-rpm-query-queryformat-modifier-setup">
+                  <title>
+                    <command>--queryformat</command> Output Without Modifiers
+                  </title>
+                  <screen width="60">
+<prompt># </prompt><userinput>rpm -qa --queryformat '%{NAME} was installed on %{INSTALLTIME}\n'</userinput>
+<computeroutput>
+setup was installed on 845414601
+pamconfig was installed on 845414602
+filesystem was installed on 845414607
+&hellip;
+rpm was installed on 851659311
+pgp was installed on 846027549
+</computeroutput>
+<prompt>#</prompt>
+                  </screen>
+                </figure>
+              </para>
+              <para>
+                Well, that's a <emphasis>lot</emphasis> of output, but not very
+                useful.  What <emphasis>are</emphasis> those numbers?  RPM
+                didn't lie -- they're the time the packages were installed.  The
+                problem is, the times are being displayed in their numeric form
+                used internally by the operating system, and humans like to see
+                the day, month, year, and so on.
+              </para>
+              <para>
+                Fortunately, there's a modifier for just this situation.  The
+                name of the modifier is <command>:date</command>, and it follows
+                the tag name.  Let's try our example again, this time using
+                <command>:date</command>:
+
+                <figure id="sc-rpm-query-queryformat-modifier-payoff">
+                  <title>
+                    <command>--queryformat</command> Output With Modifiers
+                  </title>
+                  <screen width="60">
+<prompt># </prompt><userinput>rpm -qa --queryformat '%{NAME} was installed on %{INSTALLTIME:date}\n'</userinput>
+<computeroutput>
+setup was installed on Tue Oct 15 17:23:21 1996
+pamconfig was installed on Tue Oct 15 17:23:22 1996
+filesystem was installed on Tue Oct 15 17:23:27 1996
+&hellip;
+rpm was installed on Thu Dec 26 23:01:51 1996
+pgp was installed on Tue Oct 22 19:39:09 1996
+</computeroutput>
+<prompt>#</prompt>
+                  </screen>
+                </figure>
+
+                That sure is a lot easier to understand, isn't it?
+              </para>
+              <para>
+                Here's a list of the available modifiers:
+
+                <itemizedlist mark="bullet">
+                  <listitem>
+                    <para>
+                      The <command>:date</command> modifier displays dates in
+                      human-readable form.  It transforms
+                      <computeroutput>846027549</computeroutput> into
+                      <computeroutput>Tue Oct 22 19:39:09 1996</computeroutput>.
+                    </para>
+                  </listitem>
+
+                  <listitem>
+                    <para>
+                      The <command>:perms</command> modifier displays file
+                      permissions in an easy-to-read format.  It changes
+                      <computeroutput>-32275</computeroutput> to
+                      <computeroutput>-rwxr-xr-x-</computeroutput>.
+                    </para>
+                  </listitem>
+
+                  <listitem>
+                    <para>
+                      The <command>:depflags</command> modifier displays the
+                      version comparison flags used in dependency processing, in
+                      human-readable form.  It turns
+                      <computeroutput>12</computeroutput> into
+                      <computeroutput>&gt;=</computeroutput>.
+                    </para>
+                  </listitem>
+
+                  <listitem>
+                    <para>
+                      The <command>:fflags</command> modifier displays a
+                      <computeroutput>c</computeroutput> if the file has been
+                      marked as being a configuration file,
+                      <indexterm>
+                        <primary>config files</primary>
+                      </indexterm>
+                      a <computeroutput>d</computeroutput> if the file has been
+                      marked as being a documentation file, and blank otherwise.
+                      Thus, <computeroutput>2</computeroutput> becomes
+                      <computeroutput>d</computeroutput>.
+                    </para>
+                  </listitem>
+                </itemizedlist>
+              </para>
+            </sect5>
+          </sect4>
+
+          <sect4 id="s4-rpm-query-queryformat-iterators">
+            <title>Array Iterators</title>
+            <indexterm>
+              <primary><command>--queryformat</command> option!tags, array iterators</primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              Until now, we've been using tags that represent single data items.
+              There is, for example, only one package name or installation date
+              for each package.  However, there are other tags that can
+              represent many different pieces of data.  One such tag is
+              <command>FILENAMES</command>, which can be used to display the
+              names of every file contained in a package.
+            </para>
+            <para>
+              Let's put together a format string that will display the package
+              name, followed by the name of every file that package contains.
+              We'll try it on the <filename>adduser</filename> package first,
+              since it contains only one file:
+
+              <figure id="sc-rpm-query-queryformat-iterator-setup">
+                <title>
+                  A Typical Query Using <command>--queryformat</command>
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: %{FILENAMES}\n' adduser</userinput>
+<computeroutput>
+adduser: /usr/sbin/adduser
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              Hey, not bad --- got it on the first try.  Now let's try it on a
+              package with more than one file:
+
+              <figure id="sc-rpm-query-queryformat-iterator-ooops">
+                <title>
+                  A <command>--queryformat</command> Query That Didn't Go As
+                  Expected
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: %{FILENAMES}\n' etcskel</userinput>
+<computeroutput>
+etcskel: (array)
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              Hmmm.  What went wrong?  It worked before&hellip; Well, it worked
+              before because the <filename>adduser</filename> package contained
+              only one file.  The <command>FILENAMES</command> tag points to an
+              array of names, so when there is more than one file in a package,
+              there's a problem.
+            </para>
+            <para>
+              But there is a solution.  It's called an
+              <emphasis>iterator</emphasis>.  An iterator can step through each
+              entry in an array, producing output as it goes.  Iterators are
+              created when square braces enclose one or more tags and literal
+              text.  Since we want to iterate through the
+              <command>FILENAMES</command> array, let's enclose that tag in the
+              iterator:
+
+              <figure id="sc-rpm-query-queryformat-iterator-example">
+                <title>
+                  Using an Iterator With <command>--queryformat</command>
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES}]\n' etcskel</userinput>
+<computeroutput>
+etcskel: /etc/skel/etc/skel/.Xclients/etc/skel/.Xdefaults/etc/skel/.ba
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              There was more output --- it went right off the screen in one long
+              line.  The problem?  We didn't include a newline escape sequence
+              inside the iterator.  Let's try it again:
+
+              <figure id="sc-rpm-query-queryformat-iterator-example2">
+                <title>
+                  Nicer Output Using an Interator With
+                  <command>--queryformat</command>
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES}\n]' etcskel</userinput>
+<computeroutput>
+etcskel: /etc/skel
+/etc/skel/.Xclients
+/etc/skel/.Xdefaults
+/etc/skel/.bash_logout
+/etc/skel/.bash_profile
+/etc/skel/.bashrc
+/etc/skel/.xsession
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              That's more like it.  If we wanted, we could put another
+              file-related tag inside the iterator.  If we included the
+              <command>FILESIZES</command> tag, we'd be able to see the name of
+              each file, as well as how big it was:
+
+              <figure id="sc-rpm-query-single-iterator-setup">
+                <title>More Fun With Iterators</title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES} (%{FILESIZES} bytes)\n]' etcskel</userinput>
+<computeroutput>
+etcskel: /etc/skel (1024 bytes)
+/etc/skel/.Xclients (551 bytes)
+/etc/skel/.Xdefaults (3785 bytes)
+/etc/skel/.bash_logout (24 bytes)
+/etc/skel/.bash_profile (220 bytes)
+/etc/skel/.bashrc (124 bytes)
+/etc/skel/.xsession (9 bytes)
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              That's pretty nice.  But it would be even nicer if the package
+              name appeared on each line, along with the filename and size.
+              Maybe if we put the <command>NAME</command> tag inside the
+              iterator:
+
+              <figure id="sc-rpm-query-single-iterator-oops">
+                <title>An Iterator-related Problem</title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '[%{NAME}: %{FILENAMES} \</userinput>
+<prompt>?  </prompt><userinput>(%{FILESIZES} bytes)\n]' etcskel</userinput>
+<computeroutput>
+etcskel: /etc/skel(parallel array size mismatch)</computeroutput><prompt>#</prompt>
+                </screen>
+              </figure>
+
+              The error message says it all.  The <command>FILENAMES</command>
+              and <command>FILESIZES</command> arrays are the same size.  The
+              <command>NAME</command> tag isn't even an array.  Of course the
+              sizes don't match!
+            </para>
+
+            <sect5 id="s5-rpm-query-interatoring-single-entry-tags">
+              <title>Iterating Single-Entry Tags</title>
+              <indexterm>
+                <primary>
+                  queryformat@<command>--queryformat</command> option!tags,
+                  iterating single-entry
+                </primary>
+                <secondary></secondary>
+              </indexterm>
+
+              <para>
+                If a tag only has one piece of data, it's possible to put it in
+                an iterator and have its one piece of data displayed with every
+                iteration.  This is done by preceding the tag name with an equal
+                sign.  Let's try it out on our current example:
+
+                <figure id="sc-rpm-query-single-entry-interators">
+                  <title>A New Way of Iterating</title>
+                  <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '[%{=NAME}: %{FILENAMES} (%{FILESIZES} bytes)\n]' etcskel</userinput>
+<computeroutput>
+etcskel: /etc/skel (1024 bytes)
+etcskel: /etc/skel/.Xclients (551 bytes)
+etcskel: /etc/skel/.Xdefaults (3785 bytes)
+etcskel: /etc/skel/.bash_logout (24 bytes)
+etcskel: /etc/skel/.bash_profile (220 bytes)
+etcskel: /etc/skel/.bashrc (124 bytes)
+etcskel: /etc/skel/.xsession (9 bytes)
+</computeroutput>
+<prompt>#</prompt>
+                  </screen>
+                </figure>
+
+                That's about all there is to format strings.  Now, if RPM's
+                standard output doesn't give you what you want, you have no
+                reason to complain.  Just <command>--queryformat</command> it!
+              </para>
+            </sect5>
+          </sect4>
+
+          <sect4 id="s4-rpm-query-queryformat-listing-tags">
+            <title>In Case You Were Wondering&hellip;</title>
+            <indexterm>
+              <primary>
+                queryformat@<command>--queryformat</command> option!tags,
+                listing available
+              </primary>
+              <secondary></secondary>
+            </indexterm>
+
+            <para>
+              What's that?  You say you don't know what tags are available?  You
+              can use RPM's <command>--querytags</command> option.  When used as
+              the only option (ie, <command>rpm --querytags</command>), it
+              produces a list of available tags.  It should be noted that RPM
+              displays the complete tag name.  For instance,
+              <command>RPMTAG_ARCH</command> is the complete name, yet you'll
+              only need to use <command>ARCH</command> in your format string.
+              Here's a partial example of the <command>--querytags</command>
+              option in action:
+
+              <figure id="sc-rpm-query-querytags-example">
+                <title>
+                  Using the <command>--querytags</command> Option to List
+                  Available Tags
+                </title>
+                <screen width="60">
+<prompt># </prompt><userinput>rpm --querytags</userinput>
+<computeroutput>
+RPMTAG_NAME
+RPMTAG_VERSION
+RPMTAG_RELEASE
+&hellip;
+RPMTAG_VERIFYSCRIPT
+</computeroutput>
+<prompt>#</prompt>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              Be forewarned: the full list is quite lengthy.  At the time this
+              book was written, there were over 70 tags!  You'll notice that
+              each tag is printed in uppercase, and is preceded with
+              <command>RPMTAG_</command>.  If we were to use that last tag,
+              <command>RPMTAG_VERIFYSCRIPT</command>, in a format string, it
+              could be specified in any of the following ways:
+
+              <figure id="sc-rpm-query-querytag-examples">
+                <title>Examples of Valid Tags</title>
+                <screen width="60">
+<command>
+%{RPMTAG_VERIFYSCRIPT}
+
+%{RPMTAG_VerifyScript}
+
+%{RPMTAG_VeRiFyScRiPt}
+
+%{VERIFYSCRIPT}
+
+%{VerifyScript}
+
+%{VeRiFyScRiPt}
+</command>
+                </screen>
+              </figure>
+            </para>
+            <para>
+              The only hard-and-fast rule regarding tags is that if you include
+              the <command>RPMTAG_</command> prefix, it
+              <emphasis>must</emphasis> be all uppercase.  The fourth example
+              above shows the traditional way of specifying a tag --- prefix
+              omitted, all uppercase.  The choice, however, is yours.
+            </para>
+            <para>
+              One other thing to keep in mind is that not every package will
+              have every type of tagged information available.  In cases where
+              the requested information is not available, RPM will display
+              <computeroutput>(none)</computeroutput> or
+              <computeroutput>(unknown)</computeroutput>.  There are also a few
+              tags that, for one reason or another, will not produce useful
+              output when using in a format string.  For a comprehensive list of
+              queryformat tags, please see Appendix <xref
+              linkend="queryformat-tags">.
+            </para>
+          </sect4>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-vv-option">
+        <title>
+          Getting a <emphasis>lot</emphasis> more information with
+          <command>-vv</command>
+        </title>
+        <!-- label: query-vv -->
+        <indexterm>
+          <primary><command>-vv</command> option</primary>
+        </indexterm>
+
+        <para>
+          Sometimes it's necessary to have even <emphasis>more</emphasis>
+          information than we can get with <command>-v</command>.  By adding
+          another <command>v</command>, we can start to see more of RPM's inner
+          workings:
+
+          <figure id="sc-rpm-query-vv-example">
+            <title>Using the <command>-vv</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qvv rpm</userinput>
+<computeroutput>
+D: opening database in //var/lib/rpm/
+D: querying record number 2341208
+rpm-2.3-1
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The lines starting with <computeroutput>D:</computeroutput> have been
+          added by using <command>-vv</command>.  We can see where the RPM
+          database is located and what record number contains information on the
+          <filename>rpm-2.3-1</filename> package.  Following that is the usual
+          output.
+        </para>
+        <para>
+          In the vast majority of cases, it will not be necessary to use
+          <command>-vv</command>.  It is normally used by software engineers
+          working on RPM itself, and the output can change without notice.
+          However, it's a handy way to gain insights into RPM's inner workings.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-root-option">
+        <title>
+          <command>--root <userinput>&lt;path&gt;</userinput></command>: Use
+          <command><userinput>&lt;path&gt;</userinput></command> As An Alternate
+          Root
+        </title>
+        <!-- label: query- -root -->
+        <indexterm>
+          <primary><command>--root</command> option</primary>
+        </indexterm>
+
+        <para>
+          Adding <command>--root <userinput>&lt;path&gt;</userinput></command>
+          to a query command forces RPM to assume that the directory specified
+          by <command><userinput>&lt;path&gt;</userinput></command> is actually
+          the "root" directory.  In addition, RPM expects its database to reside
+          in the directory specified by the <command>dbpath</command>
+          <filename>rpmrc</filename> file entry, relative to
+          <command><userinput>&lt;path&gt;</userinput></command>.
+          <footnote>
+            <para>
+              For more information on <filename>rpmrc</filename> file entries,
+              see Appendix <xref linkend="rpmrc-file">.
+            </para>
+          </footnote>
+        </para>
+        <para>
+          Normally this option is only used during an initial system install, or
+          when a system has been booted off a "rescue disk", and some packages
+          need to be re-installed in order to restore normal operation.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-rcfile-option">
+        <title>
+          <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>: Use
+          <command><userinput>&lt;rcfile&gt;</userinput></command> As An
+          Alternate <filename>rpmrc</filename> File
+        </title>
+        <!-- label: query- -rcfile -->
+        <indexterm>
+          <primary><command>--rcfile</command> option</primary>
+        </indexterm>
+
+        <para>
+          The <command>--rcfile</command> option is used to specify a file
+          containing default settings for RPM.  Normally, this option is not
+          needed.  By default, RPM uses <filename>/etc/rpmrc</filename> and a
+          file named <filename>.rpmrc</filename>, located in your login
+          directory.
+        </para>
+        <para>
+          This option would be used if there was a need to switch between
+          several sets of RPM options.  Software developer and package builders
+          will be the people using <command>--rcfile</command>.  For more
+          information on <filename>rpmrc</filename> files, see Appendix <xref
+          linkend="rpmrc-file">.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-dbpath-option">
+        <title>
+          <command>--dbpath <userinput>&lt;path&gt;</userinput></command>: Use
+          <command><userinput>&lt;path&gt;</userinput></command> To Find RPM
+          Database
+        </title>
+        <!-- label: query- -dbpath -->
+        <indexterm>
+          <primary><command>--dbpath</command> option</primary>
+        </indexterm>
+
+        <para>
+          In order for RPM to do its handiwork, it needs access to an RPM
+          database.  Normally, this database exists in the directory specified
+          by the <filename>rpmrc</filename> file entry,
+          <command>dbpath</command>.  By default, <command>dbpath</command> is
+          set to <filename>/var/lib/rpm</filename>.
+        </para>
+        <para>
+          Although the <command>dbpath</command> entry can be modified in the
+          appropriate <filename>rpmrc</filename> file, the
+          <command>--dbpath</command> option is probably a better choice when
+          the database path needs to be changed temporarily.  An example of a
+          time the <command>--dbpath</command> option would come in handy is
+          when it's necessary to examine an RPM database copied from another
+          system.  Granted, it's not a common occurrence, but it's difficult to
+          handle any other way.
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-query-handy-queries">
+      <title>A Few Handy Queries</title>
+      <indexterm>
+        <primary><command>rpm -q</command>!examples using</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        Below are some examples of situations you might find yourself in, and
+        ways you can use RPM to get the information you need.  Keep in mind that
+        these are just examples.  Don't be afraid to experiment!
+      </para>
+
+      <sect2 id="s2-rpm-query-finding-config-files">
+        <title>Finding Config Files Based on a Program Name</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!finding config files with</primary>
+          <secondary></secondary>
+        </indexterm>
+        <indexterm>
+          <primary>config files</primary>
+        </indexterm>
+
+        <para>
+          You're setting up a new system, and you'd like to implement some
+          system-wide aliases for people using the Bourne Again SHell,
+          <command>bash</command>.  The problem is you just can't remember the
+          name of the system-wide initialization file used by
+          <command>bash</command>, or where it resides:
+
+          <figure id="sc-rpm-query-bash-config">
+            <title>Finding Configuration Files Associated With a Program</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qcf /bin/bash</userinput>
+<computeroutput>
+/etc/bashrc
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+          Rather than spending time trying to hunt down the file, RPM finds it
+          for you in seconds.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-uninstalled-packages">
+        <title>Learning More About an Uninstalled Package</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!querying uninstalled packages with</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Practically any option can be combined with <command>-qp</command> to
+          extract information from a .rpm file.  Let's say you have an unknown
+          .rpm file, and you'd like to know a bit more before installing it:
+
+          <figure id="sc-rpm-query-uninstalled-package">
+            <title>Querying An Uninstalled Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qpil foo.bar</userinput>
+<computeroutput>
+Name        : rpm                  Distribution: Red Hat Linux Vanderbilt
+Version     : 2.3                        Vendor: Red Hat Software
+Release     : 1                      Build Date: Tue Dec 24 09:07:59 1996
+Install date: (none)                 Build Host: porky.redhat.com
+Group       : Utilities/System       Source RPM: rpm-2.3-1.src.rpm
+Size        : 631157
+Summary     : Red Hat Package Manager
+Description :
+RPM is a powerful package manager, which can be used to build, install,
+query, verify, update, and uninstall individual software packages. A
+package consists of an archive of files, and package information,
+including name, version, and description.
+/bin/rpm
+/usr/bin/find-provides
+/usr/bin/find-requires
+/usr/bin/gendiff
+/usr/bin/rpm2cpio
+/usr/doc/rpm-2.3-1
+&hellip;
+/usr/src/redhat/SOURCES
+/usr/src/redhat/SPECS
+/usr/src/redhat/SRPMS
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          By displaying the package information, we know that we have a package
+          file containing RPM version 2.3.  We can then peruse the file list,
+          and see exactly what it would install before installing it.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-finding-docs">
+        <title>Finding Documentation for a Specific Package</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!finding documentation with</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Picking on <command>bash</command> some more, you realize that your
+          knowledge of the software is lacking.  You'd like to see when it was
+          installed on your system, and what documentation is available for it:
+
+          <figure id="sc-rpm-query-bash-info">
+            <title>Getting Additional Information With RPM</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qid bash</userinput>
+<computeroutput>
+Name        :bash                   Distribution: Red Hat Linux (Picasso)
+Version     :1.14.6                       Vendor: Red Hat Software
+Release     :2                        Build Date: Sun Feb 25 13:59:26 1996
+Install date:Mon May 13 12:47:22 1996 Build Host: porky.redhat.com
+Group       :Shells                   Source RPM: bash-1.14.6-2.src.rpm
+Size        :486557
+Description :GNU Bourne Again Shell (bash)
+/usr/doc/bash-1.14.6-2
+/usr/doc/bash-1.14.6-2/NEWS
+/usr/doc/bash-1.14.6-2/README
+/usr/doc/bash-1.14.6-2/RELEASE
+/usr/info/bash.info.gz
+/usr/man/man1/bash.1
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+          You never realized that there could be so much documentation for a
+          shell!
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-similar-packages">
+        <title>Finding Similar Packages</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!finding similar packages with</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Looking at <filename>bash</filename>'s information, we see that it
+          belongs to the group "Shells".  You're not sure what other shell
+          packages are installed on your system.  If you can find other packages
+          in the "Shells" group, you'll have found the other installed shells:
+
+          <figure id="sc-rpm-query-similar-packages">
+            <title>Using RPM to Find Similar Packages</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qa --queryformat '%10{NAME} %20{GROUP}\n' | grep -i shells</userinput>
+<computeroutput>
+       ash               Shells
+      bash               Shells
+       csh               Shells
+        mc               Shells
+      tcsh               Shells
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+          Now you can query each of these packages, and learn more about them,
+          too.
+          <footnote>
+            <para>
+              Did you see this example and say to yourself, "Hey, they could've
+              used the -g option to query for that group directly"?  If you did,
+              you've been paying attention.  This is a more general way of
+              searching the RPM database for information: we just happened to
+              search by group in this example.
+            </para>
+          </footnote>
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-recently-installed-packages">
+        <title>Finding Recently Installed Packages, Part I</title>
+        <!-- label: -F-example -->
+        <indexterm>
+          <primary><command>rpm -q</command>!finding recently installed packages with</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          You remember installing a new package a few days ago.  All you know
+          for certain is that the package installed a new command in the
+          <filename>/bin</filename> directory.  Let's try to find the package:
+
+          <figure id="sc-rpm-query-recent-packages1">
+            <title>One Way to Find Recently-Installed Packages</title>
+            <screen width="60">
+<prompt># </prompt><userinput>find /bin -type f -mtime -14 | rpm -qF</userinput>
+<computeroutput>
+rpm-2.3-1
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+          Looks like RPM version 2.3 was installed sometime in the last two
+          weeks.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-recently-installed-packages2">
+        <title>Finding Recently Installed Packages, Part II</title>
+        <para>
+          Another way to see which packages were recently installed is to use
+          the <command>--queryformat</command> option:
+
+          <figure id="sc-rpm-query-recent-packages2">
+            <title>Another Way to Find Recently-Installed Packages</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qa --queryformat '%{installtime} %{name}-%{version}-%{release} %{installtime:date}\n' | sort -nr +1 | sed -e 's/^[^ ]* //'</userinput>
+<computeroutput>
+rpm-devel-2.3-1 Thu Dec 26 23:02:05 1996
+rpm-2.3-1 Thu Dec 26 23:01:51 1996
+pgp-2.6.3usa-2 Tue Oct 22 19:39:09 1996
+&hellip;
+pamconfig-0.50-5 Tue Oct 15 17:23:22 1996
+setup-1.5-1 Tue Oct 15 17:23:21 1996
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+            By having RPM include the installation time in numeric form, it was
+            simple to sort the packages and then use <command>sed</command> to
+            remove the user-unfriendly numeric time.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-query-largest-packages">
+        <title>Finding the Largest Installed Packages</title>
+        <indexterm>
+          <primary><command>rpm -q</command>!finding largest packages with</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Let's say that you're running low on disk space, and you'd like to see
+          what packages you have installed, along with the amount of space each
+          package takes up.  You'd also like to see the largest packages first,
+          so you can get back as much disk space as possible:
+
+          <figure id="sc-rpm-query-largest-packages">
+            <title>Finding the Largest Installed Packages</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qa --queryformat '%{name-%{version}-%{release} %{size}\n' | sort -nr +1</userinput>
+<computeroutput>
+kernel-source-2.0.18-5  20608472
+tetex-0.3.4-3  19757371
+emacs-el-19.34-1  12259914
+&hellip;
+rootfiles-1.3-1  3494
+mkinitrd-1.0-1  1898
+redhat-release-4.0-1  22
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+
+          If you don't build custom kernels, or use TeX, it's easy to see how
+          much space could be reclaimed by removing those packages.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>
