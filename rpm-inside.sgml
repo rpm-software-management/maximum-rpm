@@ -85,7 +85,17 @@
 # This is the spec file for playmidi 2.3...
 </computeroutput>
         </screen>
-        Comments can be placed in any section of the spec file.
+        Comments can be placed in any section of the spec file. Note
+        that macros are expanded everywhere, so with multiline macros
+        which would only have the first line commented also escape the
+        percent (<command>%</command>) character:
+
+        <screen width="60">
+<computeroutput>
+# %%configure
+</computeroutput>
+        </screen> 
+
       </para>
     </sect1>
 
@@ -740,7 +750,7 @@ Requires: playmidi = 2.3
 
             <screen width="60">
 <computeroutput>
-Requires: playmidi =S 4
+Requires: playmidi >= 4:2.3
 </computeroutput>
             </screen>
           </para>

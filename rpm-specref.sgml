@@ -27,7 +27,16 @@
     </para>
 
     <para>
-      Comments can be placed in any section of the spec file.
+      Comments can be placed in any section of the spec file. Note
+      that macros are expanded everywhere, so that with multiline
+      macros which would only have the first line commented also
+      escape the percent (<command>%</command>) character:
+
+      <screen width="60">
+<computeroutput>
+# %%configure
+</computeroutput>
+      </screen> 
     </para>
 
     <para>
