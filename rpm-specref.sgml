@@ -1175,6 +1175,39 @@ The scriptlet can contain any valid <command>sh</command> commands.
         </para>
       </sect3>
 
+      <sect3 id="s3-rpm-specref-check">
+        <title><command>%check</command> Directive -- Run included tests.
+	</title>
+
+        <indexterm>
+          <primary>spec file</primary>
+          <secondary>scriptlets</secondary>
+          <tertiary><command>%check</command></tertiary>
+        </indexterm>
+
+        <indexterm>
+          <primary><command>%check</command> scriptlet</primary>
+        </indexterm>
+
+        <para>
+          The <command>%check</command> scriptlet is the fourth scriptlet
+          executed during a build, immediately after
+          <command>%install</command>.  The scriptlet normally runs the test
+          suite for the built components if one is available.
+          The scriptlet can contain any valid <command>sh</command> commands.
+
+          <screen width="60">
+<computeroutput>
+%check
+</computeroutput>
+          </screen>
+        </para>
+
+        <para>
+          See also: <xref linkend="s3-rpm-inside-check-script">.
+        </para>
+      </sect3>
+
       <sect3 id="s3-rpm-specref-clean">
         <title><command>%clean</command> Directive -- Remove build components.
 	</title>

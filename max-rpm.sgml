@@ -164,7 +164,7 @@
       <othercredit>
 	<firstname>Ville</firstname>
 	<surname>Skytt&auml;</surname>
-	<contrib>Various typo fixes</contrib>
+	<contrib>Various typo fixes, %check section, documentation on --recompil</contrib>
       </othercredit>
   </authorgroup>
   <copyright>

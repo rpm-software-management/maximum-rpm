@@ -59,7 +59,7 @@
             </entry>
             <entry>
               Execute <command>%prep</command>, <command>%build</command>,
-              <command>%install</command>
+              <command>%install</command>, <command>%check</command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-b-command-bi-option">
@@ -71,7 +71,8 @@
             </entry>
             <entry>
               Execute <command>%prep</command>, <command>%build</command>,
-              <command>%install</command>.  Package (bin)
+              <command>%install</command>, <command>%check</command>,
+              package (bin)
             </entry>
             <entry>
               <xref linkend="s2-rpm-b-command-bb-option">
@@ -83,7 +84,8 @@
             </entry>
             <entry>
               Execute <command>%prep</command>, <command>%build</command>,
-              <command>%install</command>.  Package (bin, src)
+              <command>%install</command>, <command>%check</command>,
+              package (bin, src)
             </entry>
             <entry>
               <xref linkend="s2-rpm-b-command-ba-option">
@@ -354,9 +356,8 @@
 <prompt># </prompt>&rpmb; <command>-bp cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
+Executing(%prep):
 + umask 022
-+ echo Executing: %prep
-Executing: %prep
 + cd /usr/src/redhat/BUILD
 + cd /usr/src/redhat/BUILD
 + rm -rf cdplayer-1.0
@@ -469,10 +470,10 @@ total 216
 <prompt># </prompt>&rpmb; <command>-bc cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + make
@@ -518,16 +519,18 @@ make
         </para>
         <para>
           The next step in the build process would be to install the newly built
-          software.  This is done in the <command>%install</command> section of
-          the spec file.  RPM can be stopped after the install has taken place
-          by using the <command>-bi</command> option:
+          software.  This is done in the <command>%install</command> (and
+          <command>%check</command>) section of the spec file.  RPM can be
+          stopped after the install has taken place by using the
+          <command>-bi</command> option:
         </para>
       </sect2>
 
       <sect2 id="s2-rpm-b-command-bi-option">
         <title>
           &rpmb; <command>-bi</command> &mdash; Execute <command>%prep</command>,
-          <command>%build</command>, <command>%install</command>
+          <command>%build</command>, <command>%install</command>,
+          <command>%check</command>
         </title>
         <!-- label: build-bi -->
         <indexterm>
@@ -538,21 +541,21 @@ make
 
         <para>
           By using the <command>-bi</command> option, RPM is directed to stop
-          once the software is completely built and installed on the build
-          system.  Here's what the output of a build using the
-          <command>-bi</command> option looks like:
+          once the software is completely built and installed, and the
+          test suite has been run on the build system.  Here's what the
+          output of a build using the <command>-bi</command> option looks like:
 
           <screen width="60">
 <prompt># </prompt>&rpmb; <command>-bi cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + make install
@@ -562,9 +565,14 @@ cp cdp /usr/local/bin
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 cp cdp.1 /usr/local/man/man1
 + exit 0
+Executing(%check):
 + umask 022
-+ echo Executing: special doc
-Executing: special doc
++ cd /usr/src/redhat/BUILD
++ cd cdplayer-1.0
++ make test
+All tests run successfully.
++ exit 0
+Executing(%doc):
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + DOCDIR=//usr/doc/cdplayer-1.0-1
@@ -596,6 +604,10 @@ make install
           <command>%install</command> section.  The output from that point until
           the first <computeroutput>exit 0</computeroutput>, is from
           <command>make install</command>.
+        </para>
+        <para>
+          The next part of the output is from the <command>%check</command>
+          section, ie. the sole command <command>make test</command>.
         </para>
         <para>
           The remaining commands are due to the contents of the spec file's
@@ -630,8 +642,8 @@ make install
       <sect2 id="s2-rpm-b-command-bb-option">
         <title>
           &rpmb; <command>-bb</command> &mdash; Execute <command>%prep</command>,
-          <command>%build</command>, <command>%install</command>, package
-          (bin)
+          <command>%build</command>, <command>%install</command>,
+          <command>%check</command>, package (bin)
         </title>
         <!-- label: build-bb -->
         <indexterm>
@@ -644,16 +656,19 @@ make install
 <prompt># </prompt>&rpmb; <command>-bb cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 &hellip;
 + exit 0
-Executing: special doc
+Executing(%check):
+&hellip;
++ exit 0
+Executing(%doc):
 &hellip;
 + exit 0
 Binary Packaging: cdplayer-1.0-1
@@ -667,9 +682,8 @@ usr/local/man/man1/cdp.1
 93 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
+Executing(%clean):
 + umask 022
-+ echo Executing: %clean
-Executing: %clean
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + exit 0
@@ -679,9 +693,10 @@ Executing: %clean
 
         <para>
           After executing the <command>%prep</command>,
-          <command>%build</command>, and <command>%install</command> sections,
-          and handling any special documentation files, RPM then creates a
-          binary package file.  In the sample output, we see that first RPM
+          <command>%build</command>, <command>%install</command>, and
+          <command>%check</command> sections, and handling any special
+          documentation files, RPM then creates a binary package file.
+          In the sample output, we see that first RPM
           performs automatic dependency checking.  It does this by determining
           which shared libraries are required by the executable programs
           contained in the package.  Next, RPM actually archives the files to be
@@ -701,8 +716,8 @@ Executing: %clean
       <sect2 id="s2-rpm-b-command-ba-option">
         <title>
           &rpmb; <command>-ba</command> &mdash; Execute <command>%prep</command>,
-          <command>%build</command>, <command>%install</command>, package
-          (bin, src)
+          <command>%build</command>, <command>%install</command>,
+          <command>%check</command>, package (bin, src)
         </title>
         <!-- label: build-ba -->
         <indexterm>
@@ -743,6 +758,12 @@ Executing: %clean
 
             <listitem>
               <para>
+                Runs the test suite for the software.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
                 Creates the binary package file.
               </para>
             </listitem>
@@ -761,21 +782,24 @@ Executing: %clean
 <prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 &hellip;
 + exit 0
-Executing: special doc
+Executing(%check):
+&hellip;
++ exit 0
+Executing(%doc):
 &hellip;
 + exit 0
 Binary Packaging: cdplayer-1.0-1
 &hellip;
-Executing: %clean
+Executing(%clean):
 &hellip;
 + exit 0
 Source Packaging: cdplayer-1.0-1
@@ -790,9 +814,10 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </para>
         <para>
           As in previous examples, RPM executes the <command>%prep</command>,
-          <command>%build</command>, and <command>%install</command> sections,
-          handles any special documentation files, creates a binary package
-          file, and cleans up after itself.
+          <command>%build</command>, <command>%install</command>, and
+          <command>%check</command> sections, handles any special
+          documentation files, creates a binary package file, and cleans up
+          after itself.
         </para>
         <para>
           The final step in the build process is to create a source package
@@ -1022,18 +1047,21 @@ Build failed.
 <prompt># </prompt>&rpmb; <command>-bi cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 &hellip;
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 &hellip;
 + exit 0
-Executing: special doc
+Executing(%check):
+&hellip;
++ exit 0
+Executing(%doc):
 &hellip;
 + exit 0
 </computeroutput>
@@ -1167,9 +1195,8 @@ Requires (2): libc.so.5 libncurses.so.2.0
 <prompt># </prompt>&rpmb; <command>-bc --short-circuit cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
+Executing(%build):
 + umask 022
-+ echo Executing: %build
-Executing: %build
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + make
@@ -1232,9 +1259,8 @@ groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
 <prompt># </prompt>&rpmb; <command>-bi --short-circuit cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
+Executing(%install):
 + umask 022
-+ echo Executing: %install
-Executing: %install
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 /var/tmp/rpmbu01157aaa: cdplayer-1.0: No such file or directory
@@ -1505,7 +1531,7 @@ set -x
 
 umask 022
 
-echo Executing: %prep
+echo Executing(%prep)
 cd /usr/src/redhat/BUILD
 
 cd /usr/src/redhat/BUILD
@@ -1567,11 +1593,10 @@ chmod -R a+rX,g-w,o-w .
 <prompt># </prompt>&rpmb; <command>-bp --clean cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-+ echo Executing: sweep
-Executing: sweep
+Executing(--clean):
 + cd /usr/src/redhat/BUILD
 + rm -rf cdplayer-1.0
 + exit 0
@@ -1581,9 +1606,10 @@ Executing: sweep
         </para>
         <para>
           In this example, we see a typical <command>%prep</command> section
-          being executed.  The line "<computeroutput>+ echo Executing:
-          sweep</computeroutput>" indicates the start of
-          <command>--clean</command>'s activity.  After changing directory into
+          being executed.  The line
+          "<computeroutput>Executing(--clean):</computeroutput>" indicates
+          the start of the <command>--clean</command>'s activity.
+          After changing directory into
           the build directory, RPM then issues a recursive delete on the
           package's top-level directory.
         </para>
@@ -1695,17 +1721,17 @@ Build failed.
 <prompt># </prompt>&rpmb; <command>-ba --buildroot /tmp/foonly cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 + cd /usr/src/redhat/BUILD
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 &hellip;
 + exit 0
+Executing(%install):
 + umask 022
-Executing: %install
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + make ROOT=/tmp/foonly install
@@ -1716,7 +1742,11 @@ ln -s /tmp/foonly/usr/local/bin/cdp /tmp/foonly/usr/local/bin/cdplay
 install -m 755 -o 0 -g 0 -d /tmp/foonly/usr/local/man/man1/
 install -m 755 -o 0 -g 0 cdp.1 /tmp/foonly/usr/local/man/man1/cdp.1
 + exit 0
-Executing: special doc
+Executing(%check):
++ umask 022
+&hellip;
++ exit 0
+Executing(%doc):
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + DOCDIR=/tmp/foonly//usr/doc/cdplayer-1.0-1
@@ -1735,9 +1765,8 @@ usr/local/man/man1/cdp.1
 93 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
+Executing(%clean):
 + umask 022
-+ echo Executing: %clean
-Executing: %clean
 + cd /usr/src/redhat/BUILD
 + cd cdplayer-1.0
 + exit 0
@@ -1998,9 +2027,8 @@ D: fileFile =
 D: Switched to package: (null)
 * Package: cdplayer
 D: RUNNING: %prep
+Executing(%prep):
 + umask 022
-+ echo Executing: %prep
-Executing: %prep
 + cd /usr/src/redhat/BUILD
 + cd /usr/src/redhat/BUILD
 + rm -rf cdplayer-1.0
@@ -2151,9 +2179,10 @@ volume.c:67: warning: implicit declaration of function `ioctl'
 
             <listitem>
               <para>
-                Remove the software's build directory structure.
+                Run the tests.
               </para>
             </listitem>
+
           </itemizedlist>
         </para>
         <para>
@@ -2178,19 +2207,19 @@ volume.c:67: warning: implicit declaration of function `ioctl'
 <computeroutput>
 Installing cdplayer-1.0-1.src.rpm
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 &hellip;
 + exit 0
-Executing: special doc
+Executing(%check):
 &hellip;
 + exit 0
-Executing: sweep
+Executing(%doc):
 &hellip;
 + exit 0
 </computeroutput>
@@ -2201,9 +2230,7 @@ Executing: sweep
           The very first line shows RPM installing the source package.  After
           that are ordinary executions of the <command>%prep</command>,
           <command>%build</command>, and <command>%install</command> sections of
-          the spec file.  Finally, the cleanup of the software's build directory
-          takes place, just as if the <command>--clean</command> option had been
-          specified.
+          the spec file.
         </para>
         <para>
           Since &rpm; <command>-i</command> or &rpm; <command>-U</command> are not
@@ -2255,20 +2282,27 @@ Executing: sweep
 
             <listitem>
               <para>
+                Run the tests.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
                 Create a binary package file.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                Remove the software's build directory tree.
+                Remove the software's build directory tree and run the
+                <command>%clean</command> script.
               </para>
             </listitem>
           </itemizedlist>
         </para>
         <para>
-          Like the <command>--recompile</command> option,
-          <command>--rebuild</command> cleans up after itself.  The only
+          Unlike the <command>--recompile</command> option,
+          <command>--rebuild</command> cleans up after itself.  The other
           difference between the two commands is the fact that
           <command>--rebuild</command> also creates a binary package file.  The
           only remnants of a <command>--rebuild</command> are the original
@@ -2306,24 +2340,27 @@ Executing: sweep
 <computeroutput>
 Installing cdplayer-1.0-1.src.rpm
 * Package: cdplayer
-Executing: %prep
+Executing(%prep):
 &hellip;
 + exit 0
-Executing: %build
+Executing(%build):
 &hellip;
 + exit 0
-Executing: %install
+Executing(%install):
 &hellip;
 + exit 0
-Executing: special doc
+Executing(%check):
+&hellip;
++ exit 0
+Executing(%doc):
 &hellip;
 + exit 0
 Binary Packaging: cdplayer-1.0-1
 &hellip;
-Executing: %clean
+Executing(%clean):
 &hellip;
 + exit 0
-Executing: sweep
+Executing(--clean):
 &hellip;
 + exit 0
 </computeroutput>
@@ -2333,8 +2370,9 @@ Executing: sweep
         <para>
           The very first line shows RPM installing the source package.  The
           lines after that are ordinary executions of the
-          <command>%prep</command>, <command>%build</command>, and
-          <command>%install</command> sections of the spec file.  Next, a binary
+          <command>%prep</command>, <command>%build</command>,
+          <command>%install</command> and <command>%check</command>
+          (if any) sections of the spec file.  Next, a binary
           package file is created.  Finally, the spec file's
           <command>%clean</command> section (if one exists) is executed.  The
           cleanup of the software's build directory takes place, just as if the

@@ -1956,6 +1956,45 @@ umask 022
           </para>
         </sect3>
 
+        <sect3 id="s3-rpm-inside-check-script">
+          <title>The <command>%check</command> Script</title>
+          <!-- label: inside-check -->
+          <indexterm>
+            <primary><command>%check</command> script</primary>
+          </indexterm>
+
+          <para>
+            The environment in which the <command>%check</command> script
+            executes is identical to the other scripts.  Like the other
+            scripts, the <command>%check</command> script's working directory
+            is set to the software's top-level directory.
+          </para>
+          <para>
+            This script's primary function is to run the test suite of the
+            built software to ensure that the binaries work correctly.
+            Some typical commands to run in this script are
+            <command>make test</command> or <command>make check</command>.
+          </para>
+          <para>
+            The <command>%check</command> script is available in RPM
+            version 4.2 and newer.
+            <footnote>
+              <para>
+                One popular hack to make spec files containing the
+                <command>%check</command> script "work" with RPM versions
+                older than 4.2 roughly similarly as in newer versions is to
+                include it immediately after the <command>%install</command>
+                script in the spec file and append "|| :" to it, like:
+                <screen width="60">
+<computeroutput>
+%check || :
+</computeroutput>
+                </screen>
+              </para>
+            </footnote>
+          </para>
+        </sect3>
+
         <sect3 id="s3-rpm-inside-clean-script">
           <title>The <command>%clean</command> Script</title>
           <!-- label: inside-clean -->
