@@ -151,6 +151,21 @@
      <simpara><email>ed@redhat.com</email></simpara>
     </authorblurb>
    </author>
+      <othercredit>
+	<firstname>Paul</firstname>
+	<surname>Nasrat</surname>
+	<contrib>%ghost description</contrib>
+      </othercredit>
+      <othercredit>
+	<firstname>Matthias</firstname>
+	<surname>Saou</surname>
+	<contrib>Start of updates, epoch, rpmbuild, etc</contrib>
+      </othercredit>
+      <othercredit>
+	<firstname>Ville</firstname>
+	<surname>Skytt&auml;</surname>
+	<contrib>Various typo fixes</contrib>
+      </othercredit>
   </authorgroup>
   <copyright>
    <year>2000</year>

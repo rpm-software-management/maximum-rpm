@@ -1930,6 +1930,55 @@ The scriptlet can contain any valid <command>sh</command> commands.
         </para>
       </sect3>
 
+      <sect3 id="s3-rpm-specref-defattr">
+	<title>The <command>%attr</command> Directive</title>
+
+	<indexterm>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%defattr</command></tertiary>
+        </indexterm>
+
+        <indexterm>
+          <primary><command>%defattr</command> directive</primary>
+        </indexterm>
+
+        <para>
+	  The <command>%defattr</command> sets default
+	  <command>%attr</command> for RPM.
+	</para>
+
+	<para>
+
+	  The <command>%defattr</command>
+          directive has the following format:
+
+          <screen width="60">
+<computeroutput>
+%attr(<replaceable>&lt;file mode&gt;</replaceable>, <replaceable>&lt;user&gt;</replaceable>, <replaceable>&lt;group&gt;</replaceable>, <replaceable>&lt;dir mode&gt;</replaceable>)
+</computeroutput>
+          </screen>
+        </para>
+
+        <para>
+          The user and group identifiers must be non-numeric.
+          Attributes that do not need to be set by
+          <command>%defattr</command> may be replaced with a
+          dash. Directory mode may be ommited:
+
+          <screen width="60">
+<computeroutput>
+%defattr(644, root, root, -)
+</computeroutput>
+          </screen>
+        </para>
+
+        <para>
+          See also: <xref linkend="s3-rpm-inside-flist-defattr-directive">.
+       </para>
+
+      </sect3>
+
       <sect3 id="s3-rpm-specref-verify">
         <title>The <command>%verify</command> Directive</title>
 

@@ -3658,6 +3658,68 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           </para>
         </sect3>
 
+	<sect3 id="s3-rpm-inside-flist-defattr-directive">
+	  <title>The <command>%defattr</command></title>
+	  <!-- label: inside-defattr -->
+	  <indexterm>
+	    <primary><command>%defattr</command> Directive</primary>
+	  </indexterm>
+	  
+	  <para>
+	    The <command>%defattr</command> directive allows setting
+	    of default attributes for files and directives. The
+	    <command>%defattr</command> has a similar format to the
+	    <command>%attr</command> directive:
+
+            <orderedlist>
+              <listitem>
+                <para>
+                  The default permissions, or "mode" for files.
+                </para>
+              </listitem>
+
+	      <listitem>
+		<para>
+		  The default user id.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  The default group id.
+		</para>
+	      </listitem>
+
+	      <listitem>
+		<para>
+		  The default permissions, or "mode" for directories.
+		</para>
+	      </listitem>
+	    </orderedlist>
+	  </para>
+
+	    <para>
+            The <command>%attr</command> directive has the following
+            format:
+
+            <screen width="60">
+<computeroutput>
+%defattr(<replaceable>&lt;file mode&gt;</replaceable>, <replaceable>&lt;user&gt;</replaceable>, <replaceable>&lt;group&gt;</replaceable>, <replaceable>&lt;dir mode&gt;</replaceable>)
+</computeroutput>
+            </screen>
+	    </para>
+
+	    <para>
+	      As with <command>%attr</command> if a particular
+	      attribute does not need to be specified (usually because
+	      the file is installed with that attribute set properly),
+	      then that attribute may be replaced with a dash. In
+	      addition the directory mode may be ommited.
+	      <command>%defattr</command> tends to be used at the top
+	      of <command>%files</command>.
+	    </para>
+	</sect3>
+
         <sect3 id="s3-rpm-inside-flist-ghost-directive">
           <title>The <command>%ghost</command> Directive</title>
           <!-- label: inside-ghost -->
