@@ -174,35 +174,39 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
         </sect3>
       </sect2>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title>Getting Package Information</title>
-<indexterm>
-<primary>rpmlib!functions!package information</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rpmlib-getting-package-information">
+        <title>Getting Package Information</title>
+        <indexterm>
+          <primary>rpmlib!functions!package information</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-The following functions are used to obtain information about a package
-file.
+        <para>
+          The following functions are used to obtain information about a package
+          file.
+        </para>
+        <para>
+          It should be noted that most information is returned in the form of a
+          <structname>Header</structname> structure.  This data structure is
+          widely used throughout rpmlib.  We will discuss more header-related
+          functions in sections <xref linkend="header-manipulation"> and <xref
+          linkend="header-entry-manipulation">.
+        </para>
 
-It should be noted that most information is returned in the form of a
-<structname>Header</structname> structure.  This data structure is widely used throughout
-rpmlib.  We will discuss more header-related functions in sections
-<xref linkend="header-manipulation"> and <xref linkend="header-entry-manipulation">.
+        <sect3 id="s3-rpm-rpmlib-rpmreadpackageinfo">
+          <title>
+            Read Package Information ---
+            <function>rpmReadPackageInfo()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmReadPackageInfo()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Read Package Information --- <function>rpmReadPackageInfo()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmReadPackageInfo()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmreadpackageinfo">
+            <title><function>rpmReadPackageInfo()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -211,58 +215,63 @@ int rpmReadPackageInfo(int fd,
                        Header * signatures,
                        Header * hdr);
 </computeroutput>
-</screen>
-</figure>
-Given an open package on <parameter>fd</parameter>, read in the header and signature.
-This function operates as expected with both socket and pipe file
-descriptors passed as <parameter>fd</parameter>.  Safe on nonseekable <parameter>fd</parameter>s.  When
-the function returns, <parameter>fd</parameter> is left positioned at the start of the
-package's archive section.
+            </screen>
+          </figure>
 
-If either <parameter>signatures</parameter> or <parameter>hdr</parameter> are <symbol>NULL</symbol>,
-information for the <symbol>NULL</symbol> parameter will not be passed back to the
-caller.  Otherwise, they will return the package's signatures and header,
-respectively.
+          <para>
+            Given an open package on <parameter>fd</parameter>, read in the
+            header and signature.  This function operates as expected with both
+            socket and pipe file descriptors passed as
+            <parameter>fd</parameter>.  Safe on nonseekable
+            <parameter>fd</parameter>s.  When the function returns,
+            <parameter>fd</parameter> is left positioned at the start of the
+            package's archive section.
+          </para>
+          <para>
+            If either <parameter>signatures</parameter> or
+            <parameter>hdr</parameter> are <symbol>NULL</symbol>, information
+            for the <symbol>NULL</symbol> parameter will not be passed back to
+            the caller.  Otherwise, they will return the package's signatures
+            and header, respectively.
+          </para>
+          <para>
+            This function returns the following status values:
 
-This function returns the following status values:
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- Success.
+                </para>
+              </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- Success.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- Bad magic numbers found in
+                  package.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>2</returnvalue> --- Other error.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-<listitem>
-<para>
---- Bad magic numbers found in package.
+        <sect3 id="s3-rpm-rpmlib-rpmreadpackageheader">
+          <title>
+            Read Package Header --- <function>rpmReadPackageHeader()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmReadPackageHeader()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</para>
-</listitem>
-
-<listitem>
-<para>
---- Other error.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Read Package Header --- <function>rpmReadPackageHeader()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmReadPackageHeader()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmreadpackageheader">
+            <title><function>rpmReadPackageHeader()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -273,187 +282,196 @@ int rpmReadPackageHeader(int fd,
                          int * major,
                          int * minor);
 </computeroutput>
-</screen>
-</figure>
-Given an open package on <parameter>fd</parameter>, read in the header.
-This function operates as expected with both socket and pipe file
-descriptors passed as <parameter>fd</parameter>.  Safe on nonseekable <parameter>fd</parameter>s.  When
-the function returns, <parameter>fd</parameter> is left positioned at the start of the
-package's archive section.
+            </screen>
+          </figure>
 
-If <parameter>hdr</parameter>, <parameter>isSource</parameter>, <parameter>major</parameter>, or <parameter>minor</parameter> are
-<symbol>NULL</symbol>, information for the <symbol>NULL</symbol> parameter(s) will not be
-passed back to the caller.  Otherwise, they will return the package's
-header (<parameter>hdr</parameter>), information on whether the package is a source
-package file or not (<parameter>isSource</parameter>), and the package format's major and
-minor revision number (<parameter>major</parameter> and <parameter>minor</parameter>, respectively).
+          <para>
+            Given an open package on <parameter>fd</parameter>, read in the
+            header.  This function operates as expected with both socket and
+            pipe file descriptors passed as <parameter>fd</parameter>.  Safe on
+            nonseekable <parameter>fd</parameter>s.  When the function returns,
+            <parameter>fd</parameter> is left positioned at the start of the
+            package's archive section.
+          </para>
+          <para>
+            If <parameter>hdr</parameter>, <parameter>isSource</parameter>,
+            <parameter>major</parameter>, or <parameter>minor</parameter> are
+            <symbol>NULL</symbol>, information for the <symbol>NULL</symbol>
+            parameter(s) will not be passed back to the caller.  Otherwise, they
+            will return the package's header (<parameter>hdr</parameter>),
+            information on whether the package is a source package file or not
+            (<parameter>isSource</parameter>), and the package format's major
+            and minor revision number (<parameter>major</parameter> and
+            <parameter>minor</parameter>, respectively).
+          </para>
+          <para>
+            This function returns the following status values:
 
-This function returns the following status values:
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- Success.
+                </para>
+              </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- Success.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- Bad magic numbers found in
+                  package.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>2</returnvalue> --- Other error.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
+      </sect2>
 
-<listitem>
-<para>
---- Bad magic numbers found in package.
+      <sect2 id="s2-rpm-rpmlib-variable-manipulation">
+        <title>Variable Manipulation</title>
+        <indexterm>
+          <primary>rpmlib!functions!variable manipulation</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</para>
-</listitem>
+        <para>
+          The following functions are used to get, set, and interpret RPM's
+          internal variables.  Variables are set according to various pieces of
+          system information, as well as from <filename>rpmrc</filename> files.
+          They control various aspects of RPM's operation.
+        </para>
+        <para>
+          The variables have symbolic names in the form
+          <symbol>RPMVAR_<replaceable>xxx</replaceable></symbol>, where
+          <symbol><replaceable>xxx</replaceable></symbol> is the name of the
+          variable.  All variable names are defined in
+          <filename>rpmlib.h</filename>.
+        </para>
 
-<listitem>
-<para>
---- Other error.
+        <sect3 id="s3-rpm-rpmlib-rpmgetvar">
+          <title>
+            Return Value of RPM Variable --- <function>rpmGetVar()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmGetVar()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</para>
-</listitem>
-
-</itemizedlist>
-<indexterm>
-<primary>rpmlib!functions!package information|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-rpmlib-">
-<title>Variable Manipulation</title>
-<indexterm>
-<primary>rpmlib!functions!variable manipulation</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The following functions are used to get, set, and interpret RPM's internal
-variables.  Variables are set according to various pieces of system
-information, as well as from <filename>rpmrc</filename> files.  They control various
-aspects of RPM's operation.
-
-The variables have symbolic names in the form <symbol>RPMVAR_<replaceable>xxx</replaceable></symbol>,
-where <symbol><replaceable>xxx</replaceable></symbol> is the name of the variable.  All variable names
-are defined in <filename>rpmlib.h</filename>.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Value of RPM Variable --- <function>rpmGetVar()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmGetVar()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmgetvar">
+            <title><function>rpmGetVar()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetVar(int var);
 </computeroutput>
-</screen>
-</figure>
-This function returns the value of the variable specified in <parameter>var</parameter>.
+            </screen>
+          </figure>
 
-On error, the function returns <symbol>NULL</symbol>.
+          <para>
+            This function returns the value of the variable specified in
+            <parameter>var</parameter>.
+          </para>
+          <para>           
+            On error, the function returns <symbol>NULL</symbol>.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmgetbooleanvar">
+          <title>
+            Return Boolean Value Of RPM Variable ---
+            <function>rpmGetBooleanVar()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmGetBooleanVar()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Boolean Value Of RPM Variable --- <function>rpmGetBooleanVar()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmGetBooleanVar()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmgetbooleanvar">
+            <title><function>rpmGetBooleanVar()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmGetBooleanVar(int var);
 </computeroutput>
-</screen>
-</figure>
-This function looks up the variable specified in <parameter>var</parameter> and returns
-a 0 or 1 depending on the variable's value.
+            </screen>
+          </figure>
 
-On error, the function returns 0.
+          <para>
+            This function looks up the variable specified in
+            <parameter>var</parameter> and returns a 0 or 1 depending on the
+            variable's value.
+          </para>
+          <para>
+            On error, the function returns 0.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmsetvar">
+          <title>
+            Set Value Of RPM Variable --- <function>rpmSetVar()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmSetVar()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Set Value Of RPM Variable --- <function>rpmSetVar()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmSetVar()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmsetvar">
+            <title><function>rpmSetVar()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmSetVar(int var,
                char *val);
 </computeroutput>
-</screen>
-</figure>
-This function sets the variable specified in <parameter>var</parameter> to the value
-passed in <parameter>val</parameter>.  It is also possible for <parameter>val</parameter> to be
-<symbol>NULL</symbol>.
+            </screen>
+          </figure>
 
-<indexterm>
-<primary>rpmlib!functions!variable manipulation|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            This function sets the variable specified in
+            <parameter>var</parameter> to the value passed in
+            <parameter>val</parameter>.  It is also possible for
+            <parameter>val</parameter> to be <symbol>NULL</symbol>.
+          </para>
+        </sect3>
+      </sect2>
 
-</sect3>
+      <sect2 id="s2-rpm-rpmlib-rpmrc-related-info">
+        <title><filename>rpmrc</filename>-Related Information</title>
+        <indexterm>
+          <primary>rpmlib!functions!<filename>rpmrc</filename>-related</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          The functions in this section are all related to
+<filename>rpmrc</filename> information --- the <filename>rpmrc</filename> files
+as well as the variables set from those files.  This information also includes
+the architecture and operating system information based on
+<filename>rpmrc</filename> file entries.
+        </para>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title><filename>rpmrc</filename>-Related Information</title>
-<indexterm>
-<primary>rpmlib!functions!<filename>rpmrc</filename>-related</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmreadconfigfiles">
+          <title>
+            Read <filename>rpmrc</filename> Files ---
+            <function>rpmReadConfigFiles()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmReadConfigFiles()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-The functions in this section are all related to <filename>rpmrc</filename> information
---- the <filename>rpmrc</filename> files as well as the variables set from those files.
-This information also includes the architecture and operating system
-information based on <filename>rpmrc</filename> file entries.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Read <filename>rpmrc</filename> Files --- <function>rpmReadConfigFiles()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmReadConfigFiles()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmreadconfigfiles">
+            <title><function>rpmReadConfigFiles()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -462,213 +480,229 @@ int rpmReadConfigFiles(char * file,
                        char * os,
                        int building);
 </computeroutput>
-</screen>
-</figure>
-This function reads <filename>rpmrc</filename> files according to the following rules:
+            </screen>
+          </figure>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Always read <filename>/usr/lib/rpmrc</filename>.
+          <para>
+            This function reads <filename>rpmrc</filename> files according to
+            the following rules:
 
-</para>
-</listitem>
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Always read <filename>/usr/lib/rpmrc</filename>.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-If <parameter>file</parameter> is specified, read it.
+              <listitem>
+                <para>
+                  If <parameter>file</parameter> is specified, read it.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  If <parameter>file</parameter> is not specified, read
+                  <filename>/etc/rpmrc</filename> and
+                  <filename>~/.rpmrc</filename>.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            Every <filename>rpmrc</filename> file entry is used with
+            <function>rpmSetVar()</function> to set the appropriate RPM
+            variable.  Part of the normal <filename>rpmrc</filename> file
+            processing also includes setting the architecture and operating
+            system variables for the system executing this function.  These
+            default settings can be overridden by entering architecture and/or
+            operating system information in <parameter>arch</parameter> and
+            <parameter>os</parameter>, respectively.  This information will
+            still go through the normal <filename>rpmrc</filename> translation
+            process.
+          </para>
+          <para>
+            The <parameter>building</parameter> argument should be set to 1 only
+            if a package is being built when this function is called.  Since
+            most rpmlib-based applications will probably not duplicate RPM's
+            package building capabilities, <parameter>building</parameter>
+            should normally be set to 0.
+          </para>
+        </sect3>
 
-<listitem>
-<para>
-If <parameter>file</parameter> is not specified, read <filename>/etc/rpmrc</filename> and
-<filename>~/.rpmrc</filename>.
+        <sect3 id="s3-rpm-rpmlib-rpmgetosname">
+          <title>
+            Return Operating System Name --- <function>rpmGetOsName()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmGetOsName()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-</para>
-</listitem>
-
-</itemizedlist>
-Every <filename>rpmrc</filename> file entry is used with <function>rpmSetVar()</function> to set
-the appropriate RPM variable.  Part of the normal <filename>rpmrc</filename> file
-processing also includes setting the architecture and operating system
-variables for the system executing this function.  These default settings
-can be overridden by entering architecture and/or operating system
-information in <parameter>arch</parameter> and <parameter>os</parameter>, respectively.  This
-information will still go through the normal <filename>rpmrc</filename> translation
-process.
-
-The <parameter>building</parameter> argument should be set to 1 only if a package is
-being built when this function is called.  Since most rpmlib-based
-applications will probably not duplicate RPM's package building
-capabilities, <parameter>building</parameter> should normally be set to 0.
-
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Operating System Name --- <function>rpmGetOsName()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmGetOsName()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmgetosname">
+            <title><function>rpmGetOsName()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetOsName(void);
 </computeroutput>
-</screen>
-</figure>
-This function returns the name of the operating system, as determined by
-rpmlib's normal <filename>rpmrc</filename> file processing.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function returns the name of the operating system, as
+            determined by rpmlib's normal <filename>rpmrc</filename> file
+            processing.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Architecture Name --- <function>rpmGetArchName()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmGetArchName()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmgetarchname">
+          <title>
+            Return Architecture Name --- <function>rpmGetArchName()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmGetArchName()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmgetarchname">
+            <title><function>rpmGetArchName()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetArchName(void);
 </computeroutput>
-</screen>
-</figure>
-This function returns the name of the architecture, as determined by
-rpmlib's normal <filename>rpmrc</filename> file processing.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function returns the name of the architecture, as determined by
+            rpmlib's normal <filename>rpmrc</filename> file processing.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Print all <filename>rpmrc</filename>-Derived Variables --- <function>rpmShowRC()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmShowRC()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmshowrc">
+          <title>
+            Print all <filename>rpmrc</filename>-Derived Variables ---
+            <function>rpmShowRC()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmShowRC()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmshowrc">
+            <title><function>rpmShowRC()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmShowRC(FILE *f);
 </computeroutput>
-</screen>
-</figure>
-This function writes all variable names and their values to the file
-<parameter>f</parameter>.  Always returns 0.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function writes all variable names and their values to the file
+            <parameter>f</parameter>.  Always returns 0.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Architecture Compatibility Score --- <function>rpmArchScore()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmArchScore()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmarchscore">
+          <title>
+            Return Architecture Compatibility Score ---
+            <function>rpmArchScore()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmArchScore()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmarchscore">
+            <title><function>rpmArchScore()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmArchScore(char * arch);
 </computeroutput>
-</screen>
-</figure>
-This function returns the "distance" between the architecture whose name
-is specified in <parameter>arch</parameter>, and the current architecture.  Returns 0 if
-the two architectures are incompatible.  The smaller the number returned,
-the more compatible the two architectures are.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function returns the "distance" between the architecture whose
+            name is specified in <parameter>arch</parameter>, and the current
+            architecture.  Returns 0 if the two architectures are incompatible.
+            The smaller the number returned, the more compatible the two
+            architectures are.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Operating System Compatibility Score --- <function>rpmOsScore()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmOsScore()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmosscore">
+          <title>
+            Return Operating System Compatibility Score ---
+            <function>rpmOsScore()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmOsScore()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmosscore">
+            <title><function>rpmOsScore()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmOsScore(char * os);
 </computeroutput>
-</screen>
-</figure>
-This function returns the "distance" between the operating system whose
-name is specified in <parameter>os</parameter>, and the current operating system.
-Returns 0 if the two operating systems are incompatible.  The smaller the
-number returned, the more compatible the two operating systems are.
+            </screen>
+          </figure>
 
-<indexterm>
-<primary>rpmlib!functions!<filename>rpmrc</filename>-related|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            This function returns the "distance" between the operating system
+            whose name is specified in <parameter>os</parameter>, and the
+            current operating system.  Returns 0 if the two operating systems
+            are incompatible.  The smaller the number returned, the more
+            compatible the two operating systems are.
+          </para>
+        </sect3>
+      </sect2>
 
-</sect3>
+      <sect2 id="s2-rpm-rpmlib-rpm-database-manipulation">
+        <title>RPM Database Manipulation</title>
+        <indexterm>
+          <primary>rpmlib!functions!RPM database manipulation</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          The functions in this section perform the basic operations on the RPM
+          database.  This includes opening and closing the database, as well as
+          creating the database.  A function also exists to rebuild a database
+          that has been corrupted.
+        </para>
+        <para>
+          Every function that accesses the RPM database in some fashion makes
+          use of the <structname>rpmdb</structname> structure.  This structure
+          is used as a handle to refer to a particular RPM database.
+        </para>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title>RPM Database Manipulation</title>
-<indexterm>
-<primary>rpmlib!functions!RPM database manipulation</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdbopen">
+          <title>
+            Open RPM Database --- <function>rpmdbOpen()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbOpen()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-The functions in this section perform the basic operations on the RPM
-database.  This includes opening and closing the database, as well as
-creating the database.  A function also exists to rebuild a database that
-has been corrupted.
-
-Every function that accesses the RPM database in some fashion makes use of
-the <structname>rpmdb</structname> structure.  This structure is used as a handle to refer
-to a particular RPM database.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Open RPM Database --- <function>rpmdbOpen()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbOpen()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbopen">
+            <title><function>rpmdbOpen()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -677,300 +711,336 @@ int rpmdbOpen(char * root,
                int mode,
                int perms);
 </computeroutput>
-</screen>
-</figure>
-This function opens the RPM database located in <symbol>RPMVAR_DBPATH</symbol>,
-returning the <structname>rpmdb</structname> structure <parameter>dbp</parameter>.  If <parameter>root</parameter> is
-specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol> prior to opening.
-The <parameter>mode</parameter> and <parameter>perms</parameter> parameters are identical to
-<function>open(2)</function>'s <parameter>flags</parameter> and <parameter>mode</parameter> parameters,
-respectively.
+            </screen>
+          </figure>
 
-The function returns 1 on error, 0 on success.
+          <para>
+            This function opens the RPM database located in
+            <symbol>RPMVAR_DBPATH</symbol>, returning the
+            <structname>rpmdb</structname> structure <parameter>dbp</parameter>.
+            If <parameter>root</parameter> is specified, it is prepended to
+            <symbol>RPMVAR_DBPATH</symbol> prior to opening.  The
+            <parameter>mode</parameter> and <parameter>perms</parameter>
+            parameters are identical to <function>open(2)</function>'s
+            <parameter>flags</parameter> and <parameter>mode</parameter>
+            parameters, respectively.
+          </para>
+          <para>
+            The function returns 1 on error, 0 on success.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdbclose">
+          <title>
+            Close RPM Database --- <function>rpmdbClose()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbClose()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Close RPM Database --- <function>rpmdbClose()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbClose()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbclose">
+            <title><function>rpmdbClose()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdbClose(rpmdb db);
 </computeroutput>
-</screen>
-</figure>
-This function closes the RPM database specified by the <structname>rpmdb</structname>
-structure <parameter>db</parameter>.  The <parameter>db</parameter> structure is also freed.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function closes the RPM database specified by the
+            <structname>rpmdb</structname> structure <parameter>db</parameter>.
+            The <parameter>db</parameter> structure is also freed.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Create RPM Database --- <function>rpmdbInit()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbInit()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdbinit">
+          <title>
+            Create RPM Database --- <function>rpmdbInit()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbInit()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbinit">
+            <title><function>rpmdbInit()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmdbInit(char * root,
               int perms);
 </computeroutput>
-</screen>
-</figure>
-This function creates a new RPM database to be located in
-<symbol>RPMVAR_DBPATH</symbol>.  If the database already exists, it is left
-unchanged.  If <parameter>root</parameter> is specified, it is prepended to
-<symbol>RPMVAR_DBPATH</symbol> prior to creation.  The <parameter>perms</parameter> parameter is
-identical to <function>open(2)</function>'s <parameter>mode</parameter> parameter.
+            </screen>
+          </figure>
 
-The function returns 1 on error, 0 on success.
+          <para>
+            This function creates a new RPM database to be located in
+            <symbol>RPMVAR_DBPATH</symbol>.  If the database already exists, it
+            is left unchanged.  If <parameter>root</parameter> is specified, it
+            is prepended to <symbol>RPMVAR_DBPATH</symbol> prior to creation.
+            The <parameter>perms</parameter> parameter is identical to
+            <function>open(2)</function>'s <parameter>mode</parameter>
+            parameter.
+          </para>
+          <para>
+            The function returns 1 on error, 0 on success.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdbrebuild">
+          <title>
+            Rebuild RPM Database --- <function>rpmdbRebuild()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbRebuild()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Rebuild RPM Database --- <function>rpmdbRebuild()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbRebuild()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbrebuild">
+            <title><function>rpmdbRebuild()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmdbRebuild(char * root);
 </computeroutput>
-</screen>
-</figure>
-This function rebuilds the RPM database located in <symbol>RPMVAR_DBPATH</symbol>.
-If <parameter>root</parameter> is specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol>
-prior to rebuilding.
+            </screen>
+          </figure>
 
-The function returns 1 on error, 0 on success.
+          <para>
+            This function rebuilds the RPM database located in
+            <symbol>RPMVAR_DBPATH</symbol>.  If <parameter>root</parameter> is
+            specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol> prior
+            to rebuilding.
+          </para>
+          <para>
+            The function returns 1 on error, 0 on success.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>rpmlib!functions!RPM database manipulation|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rpmlib-rpm-database-traversal">
+        <title>RPM Database Traversal</title>
+        <indexterm>
+          <primary>rpmlib!functions!RPM database traversal</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The following functions are used to traverse the RPM database.  Also
+          described in this section is a function to retrieve a database record
+          by its record number.
+        </para>
+        <para>
+          It should be noted that database records are returned in the form of a
+          <structname>Header</structname> structure.  This data structure is
+          widely used throughout rpmlib.  We will discuss more header-related
+          functions in sections <xref linkend="header-manipulation"> and <xref
+          linkend="header-entry-manipulation">.
+        </para>
 
-</sect2>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfirstrecnum">
+          <title>
+            Begin RPM Database Traversal ---
+            <function>rpmdbFirstRecNum()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFirstRecNum()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect2 id="s2-rpm-rpmlib-">
-<title>RPM Database Traversal</title>
-<indexterm>
-<primary>rpmlib!functions!RPM database traversal</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The following functions are used to traverse the RPM database.  Also
-described in this section is a function to retrieve a database record by
-its record number.
-
-It should be noted that database records are returned in the form of a
-<structname>Header</structname> structure.  This data structure is widely used throughout
-rpmlib.  We will discuss more header-related functions in sections
-<xref linkend="header-manipulation"> and <xref linkend="header-entry-manipulation">.
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Begin RPM Database Traversal --- <function>rpmdbFirstRecNum()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFirstRecNum()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfirstrecnum">
+            <title><function>rpmdbFirstRecNum()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 unsigned int rpmdbFirstRecNum(rpmdb db);
 </computeroutput>
-</screen>
-</figure>
-This function returns the record number of the first record in the database
-specified by <parameter>db</parameter>.
+            </screen>
+          </figure>
 
-On error, it returns 0.
+          <para>
+            This function returns the record number of the first record in the
+            database specified by <parameter>db</parameter>.
+          </para>
+          <para>
+            On error, it returns 0.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdbnextrecnum">
+          <title>
+            Traverse To Next RPM Database Record ---
+            <function>rpmdbNextRecNum()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbNextRecNum()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Traverse To Next RPM Database Record --- <function>rpmdbNextRecNum()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbNextRecNum()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbnextrecnum">
+            <title><function>rpmdbNextRecNum()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 unsigned int rpmdbNextRecNum(rpmdb db,
                              unsigned int lastOffset);  
 </computeroutput>
-</screen>
-</figure>
-This function returns the record number of the record following the record
-number passed in <parameter>lastOffset</parameter>, in the database specified by
-<parameter>db</parameter>.
+            </screen>
+          </figure>
 
-On error, this function returns 0.
+          <para>
+            This function returns the record number of the record following the
+            record number passed in <parameter>lastOffset</parameter>, in the
+            database specified by <parameter>db</parameter>.
+          </para>
+          <para>
+            On error, this function returns 0.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-rpmlib-rpmdbgetrecord">
+          <title>
+            Return Record From RPM Database ---
+            <function>rpmdbGetRecord()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbGetRecord()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Return Record From RPM Database --- <function>rpmdbGetRecord()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbGetRecord()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbgetrecord">
+            <title><function>rpmdbGetRecord()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 Header rpmdbGetRecord(rpmdb db,
                       unsigned int offset);
 </computeroutput>
-</screen>
-</figure>
-This function returns the record at the record number specified by
-<parameter>offset</parameter> from the database specified by <parameter>db</parameter>.
+            </screen>
+          </figure>
 
-This function returns <symbol>NULL</symbol> on error.
+          <para>
+            This function returns the record at the record number specified by
+            <parameter>offset</parameter> from the database specified by
+            <parameter>db</parameter>.
+          </para>
+          <para>
+            This function returns <symbol>NULL</symbol> on error.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>rpmlib!functions!RPM database traversal|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rpmlib-rpm-database-search">
+        <title>RPM Database Search</title>
+        <indexterm>
+          <primary>rpmlib!functions!RPM database search</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The functions in this section search the various parts of the RPM
+          database.  They all return a structure of type
+          <structname>dbiIndexSet</structname>, which contains the records that
+          match the search term.  Here is the definition of the structure, as
+          found in <filename>&lt;rpm/dbindex.h&gt;</filename>:
 
-</sect2>
-
-<sect2 id="s2-rpm-rpmlib-">
-<title>RPM Database Search</title>
-<indexterm>
-<primary>rpmlib!functions!RPM database search</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The functions in this section search the various parts of the RPM
-database.  They all return a structure of type <structname>dbiIndexSet</structname>, which
-contains the records that match the search term.  Here is the definition of
-the structure, as found in <filename>&lt;rpm/dbindex.h&gt;</filename>:
-
-<figure id="sc-rpm-rpmlib-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-dbiindexset-struct">
+            <title>
+              Synopsis of the <structname>dbiIndexSet</structname> Structure
+            </title>
+            <screen width="60">
 <computeroutput>
 typedef struct {
     dbiIndexRecord * recs;
     int count;
 } dbiIndexSet;
 </computeroutput>
-</screen>
-</figure>
-Each <structname>dbiIndexRecord</structname> is also defined in <filename>&lt;rpm/dbindex.h&gt;</filename> as
-follows:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Each <structname>dbiIndexRecord</structname> is also defined in
+          <filename>&lt;rpm/dbindex.h&gt;</filename> as follows:
 
-<figure id="sc-rpm-rpmlib-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-dbiindexrecord-struct">
+            <title>
+              Synopsis of the <structname>dbiIndexRecord</structname> Structure
+            </title>
+            <screen width="60">
 <computeroutput>
 typedef struct {
     unsigned int recOffset;
     unsigned int fileNumber;
 } dbiIndexRecord;
 </computeroutput>
-</screen>
-</figure>
-The <structfield>recOffset</structfield> element is the offset of the record from the start
-of the database file.  The <structfield>fileNumber</structfield> element is only used by
-<function>rpmdbFindByFile()</function>.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <structfield>recOffset</structfield> element is the offset of the
+          record from the start of the database file.  The
+          <structfield>fileNumber</structfield> element is only used by
+          <function>rpmdbFindByFile()</function>.
+        </para>
+        <para>
+          Keep in mind that the
+          <function>rpmdbFind<replaceable>xxx</replaceable></function> search
+          functions each return <structname>dbiIndexSet</structname> structures,
+          which must be freed with <function>dbiFreeIndexRecord()</function>
+          when no longer needed.
+        </para>
 
-Keep in mind that the <function>rpmdbFind<replaceable>xxx</replaceable></function> search functions each
-return <structname>dbiIndexSet</structname> structures, which must be freed with
-<function>dbiFreeIndexRecord()</function> when no longer needed.
+        <sect3 id="s3-rpm-rpmlib-dbifreeindexrecord">
+          <title>
+            Free Database Index --- <function>dbiFreeIndexRecord()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>dbiFreeIndexRecord()</function></primary>
+            <secondary></secondary>
+            </indexterm>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Free Database Index --- <function>dbiFreeIndexRecord()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>dbiFreeIndexRecord()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-dbifreeindexrecord">
+            <title><function>dbiFreeIndexRecord()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
 
 void dbiFreeIndexRecord(dbiIndexSet set);
 </computeroutput>
-</screen>
-</figure>
-This function frees the database index set specified by <parameter>set</parameter>.
+            </screen>
+          </figure>
 
-</sect3>
+          <para>
+            This function frees the database index set specified by
+            <parameter>set</parameter>.
+          </para>
+        </sect3>
 
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By File --- <function>rpmdbFindByFile()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindByFile()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfindbyfile">
+          <title>
+            Search RPM Database By File ---
+            <function>rpmdbFindByFile()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindByFile()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindbyfile">
+            <title><function>rpmdbFindByFile()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -979,51 +1049,56 @@ int rpmdbFindByFile(rpmdb db,
                     char * filespec,
                     dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-package which owns the file specified by <parameter>filespec</parameter>.  It returns
-matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the package which owns the file
+            specified by <parameter>filespec</parameter>.  It returns matching
+            records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmdbyfindbygroup">
+          <title>
+            Search RPM Database By Group ---
+            <function>rpmdbFindByGroup()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindByGroup()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By Group --- <function>rpmdbFindByGroup()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindByGroup()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindbygroup">
+            <title><function>rpmdbFindByGroup()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1032,51 +1107,56 @@ int rpmdbFindByGroup(rpmdb db,
                      char * group,
                      dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-packages which are members of the group specified by <parameter>group</parameter>.  It
-returns matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the packages which are members of the
+            group specified by <parameter>group</parameter>.  It returns
+            matching records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfindpackage">
+          <title>
+            Search RPM Database By Package ---
+            <function>rpmdbFindPackage()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindPackage()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By Package --- <function>rpmdbFindPackage()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindPackage()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindpackage">
+            <title><function>rpmdbFindPackage()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1085,51 +1165,56 @@ int rpmdbFindPackage(rpmdb db,
                      char * name,
                      dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-packages with the package name (not label) specified by <parameter>name</parameter>.  It
-returns matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the packages with the package name
+            (not label) specified by <parameter>name</parameter>.  It returns
+            matching records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfindbyprovides">
+          <title>
+            Search RPM Database By Provides ---
+            <function>rpmdbFindByProvides()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindByProvides()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By Provides --- <function>rpmdbFindByProvides()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindByProvides()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindbyprovides">
+            <title><function>rpmdbFindByProvides()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1138,51 +1223,58 @@ int rpmdbFindByProvides(rpmdb db,
                         char * provides,
                         dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-packages which provide the provides information specified by
-<parameter>provides</parameter>.  It returns matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the packages which provide the
+            provides information specified by <parameter>provides</parameter>.
+            It returns matching records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfindbyrequiredby">
+          <title>
+            Search RPM Database By Requires ---
+            <function>rpmdbFindByRequiredBy()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindByRequiredBy()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By Requires --- <function>rpmdbFindByRequiredBy()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindByRequiredBy()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindbyrequiredby">
+            <title>
+              <function>rpmdbFindByRequiredBy()</function> Synopsis
+            </title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1191,51 +1283,56 @@ int rpmdbFindByRequiredBy(rpmdb db,
                           char * requires,
                           dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-packages which require the requires information specified by
-<parameter>requires</parameter>.  It returns matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the packages which require the
+            requires information specified by <parameter>requires</parameter>.
+            It returns matching records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
 
-</para>
-</listitem>
+        <sect3 id="s3-rpm-rpmlib-rpmdbfindbyconflicts">
+          <title>
+            Search RPM Database By Conflicts ---
+            <function>rpmdbFindByConflicts()</function>
+          </title>
+          <indexterm>
+            <primary>rpmlib functions, list of!<function>rpmdbFindByConflicts()</function></primary>
+            <secondary></secondary>
+          </indexterm>
 
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-</sect3>
-
-<sect3 id="s3-rpm-rpmlib-">
-<title>Search RPM Database By Conflicts --- <function>rpmdbFindByConflicts()</function></title>
-<indexterm>
-<primary>rpmlib functions, list of!<function>rpmdbFindByConflicts()</function></primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<figure id="sc-rpm-rpmlib-">
-<title><function></function> Synopsis</title>
-<screen width="60">
+          <figure id="sc-rpm-rpmlib-rpmdbfindbyconflicts">
+            <title><function>rpmdbFindByConflicts()</function> Synopsis</title>
+            <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1244,47 +1341,43 @@ int rpmdbFindByConflicts(rpmdb db,
                          char * conflicts,
                          dbiIndexSet * matches);
 </computeroutput>
-</screen>
-</figure>
-This function searches the RPM database specified by <parameter>db</parameter> for the
-packages which conflict with the conflicts information specified by
-<parameter>conflicts</parameter>.  It returns matching records in <parameter>matches</parameter>.
+            </screen>
+          </figure>
 
-This function returns the following status values:
+          <para>
+            This function searches the RPM database specified by
+            <parameter>db</parameter> for the packages which conflict with the
+            conflicts information specified by <parameter>conflicts</parameter>.
+            It returns matching records in <parameter>matches</parameter>.
+          </para>
+          <para>
+            This function returns the following status values:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- An error occurred reading a database record.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <returnvalue>-1</returnvalue> --- An error occurred reading a
+                  database record.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <returnvalue>0</returnvalue> --- The search completed
+                  normally.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- The search completed normally.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
---- The search term was not found.
-
-</para>
-</listitem>
-
-</itemizedlist>
-<indexterm>
-<primary>rpmlib!functions!RPM database search|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
+              <listitem>
+                <para>
+                  <returnvalue>1</returnvalue> --- The search term was not
+                  found.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </sect3>
+      </sect2>
 
 <sect2 id="s2-rpm-rpmlib-">
 <title>Package Manipulation</title>
