@@ -1,301 +1,281 @@
-<chapter id="ch-rpm-file-format">
-<title>Format of the RPM File</title>
-<!-- label: rpm-file-format -->
+  <appendix id="ch-rpm-file-format">
+    <title>Format of the RPM File</title>
+    <!-- label: rpm-file-format -->
 
-<indexterm>
-<primary>format, RPM file</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <indexterm>
+      <primary>format, RPM file</primary>
+    </indexterm>
 
-<sect1 id="s1-rpm-file-format-">
-<title>RPM File naming convention</title>
-<indexterm>
-<primary>format, RPM file!naming convention</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-file-format-file-naming-convention">
+      <title>RPM File Naming Convention</title>
+      <indexterm>
+        <primary>format, RPM file!naming convention</primary>
+        <secondary></secondary>
+      </indexterm>
 
-While RPM will run just as well if a package file has been renamed, when
-the packages are created during RPM's build process, they follow a specific
-naming convention.  The convention is:
+      <para>
+        While RPM will run just as well if a package file has been renamed, when
+        the packages are created during RPM's build process, they follow a
+        specific naming convention.  The convention is:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
+        <figure id="sc-rpm-file-format-file-naming-convention">
+          <title>RPM's File Naming Convention</title>
+          <screen width="60">
+<computeroutput>
+<symbol><replaceable>name</replaceable>-<replaceable>version</replaceable>-<replaceable>release</replaceable>.<replaceable>architecture</replaceable>.rpm</symbol>
+</computeroutput>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      where:
+
+      <itemizedlist mark="bullet">
+        <listitem>
+          <para>
+            <symbol><replaceable>name</replaceable></symbol> is a name
+            describing the packaged software.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <symbol><replaceable>version</replaceable></symbol> is the version
+            of the packaged software.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <symbol><replaceable>release</replaceable></symbol> is the number of
+            times this version of the software has been packaged.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <symbol><replaceable>architecture</replaceable></symbol> is a
+            shorthand name describing the type of computer hardware the packaged
+            software is meant to run on.  It may also be the string
+            <literal>src</literal>, or <literal>nosrc</literal>.  Both of these
+            strings indicate the file is an RPM source package.  The
+            <literal>nosrc</literal> string means that the file contains only
+            package building files, while the <literal>src</literal> string
+            means the file contains the necessary package building files
+            <emphasis>and</emphasis> the software's source code.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+    <para>
+      A few notes are in order.  Normally, the package name is taken verbatim
+      from the packaged software's name.  Occasionally, this approach won't work
+      --- usually this occurs when the software is split into multiple
+      "subpackages," each supporting a different set of functions.  An example
+      of this situation would be the way <filename>ncurses</filename> was
+      packaged on &RHL; Linux.  The package incorporating
+      <filename>ncurses</filename> basic functionality was called
+      <filename>ncurses</filename>, while the package incorporating those parts
+      of <filename>ncurses</filename>' program development functionality was
+      named <filename>ncurses-devel</filename>.
+    </para>
+    <para>
+      The version number is normally taken verbatim from the package's version.
+      The only restriction placed on the version is that it cannot contain a
+      dash "<literal>-</literal>".
+    </para>
+    <para>
+      The release can be thought of as the <emphasis>package's</emphasis>
+      version.  Traditionally it is a number, starting at 1, that shows how many
+      times the packaged software, at a given version, has been built.  This is
+      tradition and not a restriction, however.  Like the version number, the
+      only restriction is that dashes are not allowed.
+    </para>
+    <para>
+      The architecture specifier is a string that indicates what hardware the
+      package has been built for.  There are a number of architectures defined:
+
+      <itemizedlist mark="bullet">
+        <listitem>
+          <para>
+            <literal>i386</literal> --- The Intel x86 family of microprocessors,
+            starting with the 80386.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>alpha</literal> --- The Digital Alpha/AXP series of
+            microprocessors.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>sparc</literal> --- Sun Microsystem's SPARC series of
+            chips.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>mips</literal> --- MIPS Technologies' processors.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>ppc</literal> --- The Power PC microprocessor family.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>m68k</literal> --- Motorola's 68000 series of CISC
+            microprocessors.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <literal>SGI</literal> --- Equivalent to "MIPS".
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+    <para>
+      This list will almost certainly change.  For the most up-to-date list,
+      please refer to the file <filename>/usr/lib/rpmrc</filename>.  It contains
+      information used internally by RPM, including a list of architectures and
+      equivalent code numbers.
+    </para>
+  </sect1>
+
+  <sect1 id="s1-rpm-file-format-rpm-file-format">
+    <title>RPM File Format</title>
+    <indexterm>
+      <primary>format, RPM file!caveats</primary>
+      <secondary></secondary>
+    </indexterm>
+
+    <para>
+      While the following details concerning the actual format of an RPM package
+      file were accurate at the time this was written, three points should be
+      kept in mind:
+
+      <orderedlist>
+        <listitem>
+          <para>
+            The file format is subject to change.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            If a package file is to be manipulated somehow, you are
+            <emphasis>strongly</emphasis> urged to use the appropriate rpmlib
+            routines to access the package file.  Why?  See point number 1!
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            This appendix describes the most recent version of the RPM file
+            format: version 3.  The <command>file(1)</command> utility can be
+            used to see a package's file format version.
+          </para>
+        </listitem>
+      </orderedlist>
+    </para>
+    <para>
+      With those caveats out of the way, let's take a look inside an RPM
+      file&hellip;
+    </para>
+
+    <sect2 id="s2-rpm-file-format-parts-of-rpm-file">
+      <title>Parts of an RPM File</title>
+      <indexterm>
+        <primary>format, RPM file!parts of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        Every RPM package file can be divided into four distinct sections.  They
+        are:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              The lead.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              The signature.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              The header.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              The archive.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        Package files are written to disk in network byte order.  If required,
+        RPM will automatically convert to host byte order when the package file
+        is read.  Let's take a look at each section, starting with the lead.
+      </para>
+    </sect2>
+
+    <sect2 id="s2-rpm-file-format-the-lead">
+      <title>The Lead</title>
+      <indexterm>
+        <primary>format, RPM file!parts of!lead</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        The lead is the first part of an RPM package file.  In previous versions
+        of RPM, it was used to store information used internally by RPM.  Today,
+        however, the lead's sole purpose is to make it easy to identify an RPM
+        package file.  For example, the <command>file(1)</command> command uses
+        the lead.
+        <footnote>
+          <para>
+            Please refer to section <xref
+            linkend="s1-rpm-file-format-file-command"> for a discussion on
+            identifying RPM package files with the <command>file</command>
+            command.
+          </para>
+        </footnote>
+        All the information contained in the lead has been duplicated or
+        superseded by information contained in the header.
+        <footnote>
+          <para>
+            The header is discussed in section <xref
+            linkend="s2-rpm-file-format-header">.
+          </para>
+        </footnote>
+      </para>
+
+      <para>
+        RPM defines a C structure that describes the lead:
+
+        <!-- label: rpm-file-format-lead -->
+        <figure id="sc-rpm-file-format-lead-struct">
+          <title>The <structname>rpmlead</structname> Structure</title>
 <screen width="60">
-<emphasis>name</emphasis>-<emphasis>version</emphasis>-<emphasis>release</emphasis>.<emphasis>architecture</emphasis>.rpm
-</screen>
-</figure>
-where:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<tt?><emphasis>name</tt?></emphasis> is a name describing the packaged software.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?><emphasis>version</tt?></emphasis> is the version of the packaged software.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?><emphasis>release</tt?></emphasis> is the number of times this version of the
-software has been packaged.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?><emphasis>architecture</tt?></emphasis> is a shorthand name describing the type
-of computer hardware the packaged software is meant to run on.  It may also
-be the string <tt?>src</tt?>, or <tt?>nosrc</tt?>.  Both of these strings
-indicate the file is an RPM source package.  The <tt?>nosrc</tt?> string
-means that the file contains only package building files, while the
-<tt?>src</tt?> string means the file contains the necessary package building
-files <emphasis>and</emphasis> the software's source code.
-
-</para>
-</listitem>
-
-</itemizedlist>
-A few notes are in order.  Normally, the package name is taken verbatim
-from the packaged software's name.  Occasionally, this approach won't work
---- usually this occurs when the software is split into multiple
-"subpackages," each supporting a different set of functions.  An example
-of this situation would be the way <tt?>ncurses</tt?> was packaged on Red Hat
-<!-- *** RED HAT *** -->Linux.  The package incorporating <tt?>ncurses</tt?> basic functionality was
-called <tt?>ncurses</tt?>, while the package incorporating those parts of
-<tt?>ncurses</tt?>' program development functionality was named
-<tt?>ncurses-devel</tt?>.
-
-The version number is normally taken verbatim from the package's version.
-The only restriction placed on the version is that it cannot contain a dash
-"<tt?>-</tt?>".
-
-The release can be thought of as the <emphasis>package's</emphasis> version.
-Traditionally it is a number, starting at 1, that shows how many times the
-packaged software, at a given version, has been built.  This is tradition
-and not a restriction, however.  Like the version number, the only
-restriction is that dashes are not allowed.
-
-The architecture specifier is a string that indicates what hardware the
-package has been built for.  There are a number of architectures defined:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<tt?>i386</tt?> --- The Intel x86 family of microprocessors, starting with the 80386.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>alpha</tt?> --- The Digital Alpha/AXP series of microprocessors.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>sparc</tt?> --- Sun Microsystem's SPARC series of chips.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>mips</tt?> --- MIPS Technologies' processors.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>ppc</tt?> --- The Power PC microprocessor family.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>m68k</tt?> --- Motorola's 68000 series of CISC microprocessors.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>SGI</tt?> --- Equivalent to "MIPS".
-
-</para>
-</listitem>
-
-</itemizedlist>
-This list will almost certainly change.  For the most up-to-date list,
-please refer to the file <tt?>/usr/lib/rpmrc</tt?>.  It contains information
-used internally by RPM, including a list of architectures and equivalent
-code numbers.
-
-<indexterm>
-<primary>format, RPM file!naming convention|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect1>
-
-<sect1 id="s1-rpm-file-format-">
-<title>RPM File Format</title>
-<indexterm>
-<primary>format, RPM file!caveats</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-While the following details concerning the actual format of an RPM package
-file were accurate at the time this was written, two points should be
-kept in mind:
-
-<orderedlist>
-<listitem>
-<para>
-The file format is subject to change.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-If a package file is to be manipulated somehow, you are
-<emphasis>strongly</emphasis> urged to use the appropriate rpmlib routines to access the
-package file.  Why?  See point number 1!
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-This appendix describes the most recent version of the RPM file
-format: version 3.  The <tt?>file(1)</tt?> utility can be used to see a
-package's file format version.
-
-</para>
-</listitem>
-
-</orderedlist>
-With those caveats out of the way, let's take a look inside an RPM
-file&hellip;
-
-<indexterm>
-<primary>format, RPM file!caveats|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<sect2 id="s2-rpm-file-format-">
-<title>Parts of an RPM File</title>
-<indexterm>
-<primary>format, RPM file!parts of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Every RPM package file can be divided into four distinct sections.  They
-are:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The lead.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The signature.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The header.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The archive.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Package files are written to disk in network byte order.  If required, RPM
-will automatically convert to host byte order when the package file is
-read.  Let's take a look at each section, starting with the lead.
-
-<indexterm>
-<primary>format, RPM file!parts of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-<sect2 id="s2-rpm-file-format-">
-<title>The Lead</title>
-<indexterm>
-<primary>format, RPM file!parts of!lead</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The lead is the first part of an RPM package file.  In previous versions of
-RPM, it was used to store information used internally by RPM.  Today,
-however, the lead's sole purpose is to make it easy to identify an RPM
-package file.  For example, the <tt?>file(1)</tt?> command uses the
-lead.
-<footnote>
-<para>
-Please refer to section <xref linkend="rpm-file-command"> for a
-discussion on identifying RPM package files with the <tt?>file</tt?>
-command.
-</para>
-</footnote>
-  All the information contained in the lead has been duplicated or
-superseded by information contained in the header.
-<footnote>
-<para>
-The header is
-discussed in section <xref linkend="rpm-file-format-header">.
-</para>
-</footnote>
-
-RPM defines a C structure that describes the lead:
-
-<!-- label: rpm-file-format-lead -->
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+<computeroutput>
 struct rpmlead {
     unsigned char magic[4];
     unsigned char major, minor;
@@ -306,616 +286,690 @@ struct rpmlead {
     short signature_type;
     char reserved[16];
 } ;
-</screen>
-</figure>
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Let's take a look at an actual package file and examine the various
+        pieces of data that make up the lead.  In the following display, the
+        number to the left of the colon is the byte offset, in hexadecimal, from
+        the start of the file.  The eight groups of four characters show the hex
+        value of the bytes in the file --- two bytes per group of four
+        characters.  Finally, the characters on the right show the ASCII values
+        of the data bytes.  When a data byte's value results in a non-printable
+        character, a dot (".")  is inserted instead.  Here are the first
+        thirty-two bytes of a package file --- in this case, the package file
+        <filename>rpm-2.2.1-1.i386.rpm</filename>:
 
-Let's take a look at an actual package file and examine the various pieces
-of data that make up the lead.  In the following display, the number to the
-left of the colon is the byte offset, in hexadecimal, from the start of the
-file.  The eight groups of four characters show the hex value of the bytes
-in the file --- two bytes per group of four characters.  Finally, the
-characters on the right show the ASCII values of the data bytes.  When a
-data byte's value results in a non-printable character, a dot (".")  is
-inserted instead.  Here are the first thirty-two bytes of a package file
---- in this case, the package file <tt?>rpm-2.2.1-1.i386.rpm</tt?>:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-file-format-listing">
+          <title>
+            First 32 Bytes of <filename>rpm-2.2.1-1.i386.rpm</filename>
+          </title>
+          <screen width="60">
+<computeroutput>
 00000000: edab eedb 0300 0000 0001 7270 6d2d 322e  ..........rpm-2.
 00000010: 322e 312d 3100 0000 0000 0000 0000 0000  2.1-1...........
-</screen>
-</figure>
-The first four bytes (<tt?>edab eedb</tt?>) are the magic values that
-identify the file as an RPM package file.  Both the <tt?>file</tt?> command
-and RPM use these magic numbers to determine whether a file is legitimate
-or not.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The first four bytes (<literal>edab eedb</literal>) are the magic values
+        that identify the file as an RPM package file.  Both the
+        <command>file</command> command and RPM use these magic numbers to
+        determine whether a file is legitimate or not.
+      </para>
+      <para>
+        The next two bytes (<literal>0300</literal>) indicate RPM file format
+        version.  In this case, the file's major version number is 3, and the
+        minor version number is 0.  Versions of RPM later than 2.1 create
+        version 3.0 package files.
+      </para>
+      <para>
+        The next two bytes (<literal>0000</literal>) determine what type of RPM
+        file the file is.  There are presently two types defined:
 
-The next two bytes (<tt?>0300</tt?>) indicate RPM file format version.  In
-this case, the file's major version number is 3, and the minor version
-number is 0.  Versions of RPM later than 2.1 create version 3.0 package
-files.
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Binary package file (type = <literal>0000</literal>)
+            </para>
+          </listitem>
 
-The next two bytes (<tt?>0000</tt?>) determine what type of RPM file the file
-is.  There are presently two types defined:
+          <listitem>
+            <para>
+              Source package file (type = <literal>0001</literal>)
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Binary package file (type = <tt?>0000</tt?>)
+      <para>
+        In this case, the file is a binary package file.
+      </para>
+      <para>
+        The next two bytes (<literal>0001</literal>) are used to store the
+        architecture that the package was built for.  In this case, the number 1
+        refers to the i386 architecture.
+        <footnote>
+          <para>
+            It should be noted that the architecture used internally by RPM is
+            actually stored in the header.  This value is strictly for
+            <command>file(1)</command>'s use.
+          </para>
+        </footnote>
+        In the case of a source package file, these two bytes should be ignored,
+        as source packages are not built for a specific architecture.
+      </para>
+      <para>
+        The next sixty-six bytes (starting with <literal>7270 6d2d</literal>)
+        contain the name of the package.  The name must end with a null byte,
+        which leaves sixty-five bytes for RPM's usual
+        <symbol>name-version-release</symbol>-style name.  In this case, we can
+        read the name from the right side of the output:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-Source package file (type = <tt?>0001</tt?>)
-
-</para>
-</listitem>
-
-</itemizedlist>
-In this case, the file is a binary package file.
-
-The next two bytes (<tt?>0001</tt?>) are used to store the architecture that
-the package was built for.  In this case, the number 1 refers to the i386
-architecture.
-<footnote>
-<para>
-It should be noted that the architecture used
-internally by RPM is actually stored in the header.  This value is
-strictly for <tt?>file(1)</tt?>'s use.
-</para>
-</footnote>
-  In the case of a source package
-file, these two bytes should be ignored, as source packages are not built
-for a specific architecture.
-
-The next sixty-six bytes (starting with <tt?>7270 6d2d</tt?>) contain the
-name of the package.  The name must end with a null byte, which leaves
-sixty-five bytes for RPM's usual <tt?>name-version-release</tt?>-style name.
-In this case, we can read the name from the right side of the output:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-file-format-listing2">
+          <title>ASCII Representation of the Next 66 Bytes</title>
+          <screen width="60">
+<computeroutput>
 rpm-2.2.1-1
-</screen>
-</figure>
-Since the name <tt?>rpm-2.2.1-1</tt?> is shorter than the sixty-five bytes
-allocated for the name, the leftover bytes are filled with nulls.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Since the name <literal>rpm-2.2.1-1</literal> is shorter than the
+        sixty-five bytes allocated for the name, the leftover bytes are filled
+        with nulls.
+      </para>
+      <para>
+        Skipping past the space allocated for the name, we see two bytes
+        (<literal>0001</literal>):
 
-Skipping past the space allocated for the name, we see two bytes
-(<tt?>0001</tt?>):
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-file-format-listing3">
+          <title>File Listing (Continued)</title>
+          <screen width="60">
+<computeroutput>
 00000040: 0000 0000 0000 0000 0000 0000 0001 0005  ................
 00000050: 0400 0000 24e1 ffbf 6bb3 0008 00e6 ffbf  ....$...k.......
-</screen>
-</figure>
-These bytes represent the operating system for which this package was
-built.  In this case, 1 equals Linux.  As with the architecture-to-number
-translations, the operating system and corresponding code numbers can be
-found in the file, <tt?>/usr/lib/rpmrc</tt?>.
-
-The next two bytes (<tt?>0005</tt?>) indicate the type of signature used in
-the file.  A type 5 signature is new to version 3 RPM files.  The signature
-appears next in the file, but we need to discuss an additional detail
-before exploring the signature.
-
-<indexterm>
-<primary>format, RPM file!parts of!lead|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-<sect2 id="s2-rpm-file-format-">
-<title>Wanted: A New RPM Data Structure</title>
-By looking at the C structure that defines the lead, and matching it with
-the bytes in an actual package file, it's trivial to extract the data from
-the lead.  From a programming standpoint, it's also easy to manipulate data
-in the lead --- It's simply a matter of using the element names from the
-structure.  But there's a problem.  And because of that problem the lead is
-no longer used internally by RPM.
-
-<sect3 id="s3-rpm-file-format-">
-<title>The lead: An Abandoned Data Structure</title>
-<indexterm>
-<primary>format, RPM file!parts of!lead, reduced use of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-What's the problem, and why is the lead no longer used by RPM?  The answer
-to these questions is a single word: inflexibility.  The technique of
-defining a C structure to access data in a file just isn't very flexible.
-Let's look at an example.
-
-Flip back to the lead's C structure on page <xref linkend="rpm-file-format-lead">.
-Say, for example, that some software comes along, and it has a long name.
-A <emphasis>very</emphasis> long name.  A name so long, in fact, that the 66 bytes
-defined in the structure element <tt?>name</tt?> just couldn't hold it.
-
-What can we do?  Well, we could certainly change the structure such that
-the <tt?>name</tt?> element would be 100 bytes long.  But once a new version
-of RPM is created using this new structure, we have two problems:
-
-<orderedlist>
-<listitem>
-<para>
-Any package file created with the new version of RPM wouldn't be able
-to read older package formats.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Any older version of RPM would be unable to install packages created
-with the newer version of RPM.
-
-</para>
-</listitem>
-
-</orderedlist>
-Not a very good situation!  Ideally, we would like to somehow eliminate the
-requirement that the format of the data written to a package file be
-engraved in granite.  We should be able to do the following things, all
-without losing compatibility with existing versions of RPM.
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Add extra data to the file format.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Change the size of existing data.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Reorder the data.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Sounds like a big problem, but there's a solution&hellip;
-
-<indexterm>
-<primary>format, RPM file!parts of!lead, reduced use of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-<sect3 id="s3-rpm-file-format-">
-<title>Is There a Solution?</title>
-The solution is to standardize the method by which information is retrieved
-from a file.  This is done by creating a well-defined data structure that
-contains easily searched information about the data, and then physically
-separating that information from the data.
-
-When the data is required, it is found by using the easily searched
-information, which points to the data itself.  The benefits are, that the
-data can be placed anywhere in the file, and that the format of the data
-itself can change.
-
-</sect3>
-
-<sect3 id="s3-rpm-file-format-">
-<title>The Solution: The Header Structure</title>
-<indexterm>
-<primary>format, RPM file!parts of!header structure</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The header structure is RPM's solution to the problem of easily
-manipulating information in a standard way.  The header structure's sole
-purpose in life is to contain zero or more pieces of data.  A file can
-have more than one header structure in it.  In fact, an RPM package file
-has two --- the signature, and the header.  It was from this header that
-the header structure got its name.
-
-There are three sections to each header structure.  The first section is
-known as the "header structure header".  The header structure header is
-used to identify the start of a header structure, its size, and the number
-of data items it contains.
-
-Following the header structure header is an area called the "index".  The
-index contains one or more index entries.  Each index entry contains
-information about, and a pointer to, a specific data item.
-
-After the index comes the "store".  It is in the store that the data
-items are kept.  The data in the store is packed together as closely as
-possible.  The order in which the data is stored is immaterial --- a far
-cry from the C structure used in the lead.
-
-</sect3>
-
-<sect3 id="s3-rpm-file-format-">
-<title>The Header Structure in Depth</title>
-Let's take a more in-depth look at the actual format of a header structure,
-starting with the header structure header:
-
-<sect4 id="s4-rpm-file-format-">
-<title>The Header Structure Header</title>
- --- The header structure header
-always starts with a three-byte magic number: <tt?>8e ad e8</tt?>.  Following
-this is a one-byte version number.  Next are four bytes that are reserved
-for future expansion.  After the reserved bytes, there is a four-byte
-number that indicates how many index entries exist in this header
-structure, followed by another four-byte number indicating how many bytes
-of data are part of the header structure.
-
-</sect4>
-
-<sect4 id="s4-rpm-file-format-">
-<title>The Index Entry</title>
- --- The header structure's index is made up of
-zero or more index entries.  Each entry is sixteen bytes longs.  The first
-four bytes contain a "tag" --- a numeric value that identifies what type
-of data is pointed to by the entry.  The tag values change according to the
-header structure's position in the RPM file.  A list of the actual tag
-values, and what they represent, will be included later in this appendix.
-
-Following the tag, is a four-byte "type", which is a numeric value that
-describes the format of the data pointed to by the entry.  The types and
-their values do not change from header structure to header structure.  Here
-is the current list:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-NULL = 0
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-CHAR = 1
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-INT8 = 2
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-INT16 = 3
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-INT32 = 4
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-INT64 = 5
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-STRING = 6
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-BIN = 7
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-STRING_ARRAY = 8
-
-</para>
-</listitem>
-
-</itemizedlist>
-A few of the data types might need some clarification.  The STRING data
-type is simply a null-terminated string, while the STRING_ARRAY is a
-collection of strings.  Finally, the BIN data type is a collection of
-binary data.  This is normally used to identify data that is longer than an
-INT, but not a printable STRING.
-
-Next is a four-byte "offset" that contains the position of the data,
-relative to the beginning of the store.  We'll talk about the store in just
-a moment.
-
-Finally, there is a four-byte "count" that contains the number of data
-items pointed to by the index entry.  There are a few wrinkles to the
-meaning of the count, and they center around the STRING and STRING_ARRAY
-data types.  STRING data always has a count of 1, while STRING_ARRAY data
-has a count equal to the number of strings contained in the store.
-
-</sect4>
-
-<sect4 id="s4-rpm-file-format-">
-<title>The Store</title>
- --- The store is where the data contained in the
-header structure is stored.  Depending on the data type being stored, there
-are some details that should be kept in mind:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-For STRING data, each string is terminated with a null byte.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-For INT data, each integer is stored at the natural boundary for its
-type.  A 64-bit INT is stored on an 8-byte boundary, a 16-bit INT is stored
-on a 2-byte boundary, and so on.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-All data is in network byte order.
-
-</para>
-</listitem>
-
-</itemizedlist>
-With all these details out of the way, let's take a look at the signature.
-
-<indexterm>
-<primary>format, RPM file!parts of!header structure|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect4>
-
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-file-format-">
-<title>The Signature</title>
-<indexterm>
-<primary>format, RPM file!parts of!signature</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The signature section follows the lead in the RPM package file.  It
-contains information that can be used to verify the integrity, and
-optionally, the authenticity of the majority of the package file.  The
-signature is implemented as a header structure.
-
-You probably noticed the word, "majority", above.  The information in the
-signature header structure is based on the contents of the package file's
-header and archive only.  The data in the lead and the signature header
-structure are not included when the signature information is created, nor
-are they part of any subsequent checks based on that information.
-
-While that omission might seem to be a weakness in RPM's design, it really
-isn't.  In the case of the lead, since it is used only for easy
-identification of package files, any changes made to that part of the file
-would, at worst, leave the file in such a state that RPM wouldn't recognize
-it as a valid package file.  Likewise, any changes to the signature header
-structure would make it impossible to verify the file's integrity, since
-the signature information would have been changed from their original
-values.
-
-<sect3 id="s3-rpm-file-format-">
-<title>Analyzing the Signature Area</title>
-<indexterm>
-<primary>format, RPM file!parts of!signature, analysis of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Using our new-found knowledge of header structures, let's take a look at
-the signatures in <tt?>rpm-2.2.1-1.i386.rpm</tt?>:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        These bytes represent the operating system for which this package was
+        built.  In this case, 1 equals Linux.  As with the
+        architecture-to-number translations, the operating system and
+        corresponding code numbers can be found in the file,
+        <filename>/usr/lib/rpmrc</filename>.
+      </para>
+      <para>
+        The next two bytes (<literal>0005</literal>) indicate the type of
+        signature used in the file.  A type 5 signature is new to version 3 RPM
+        files.  The signature appears next in the file, but we need to discuss
+        an additional detail before exploring the signature.
+      </para>
+    </sect2>
+
+    <sect2 id="s2-rpm-file-format-new-data-structure">
+      <title>Wanted: A New RPM Data Structure</title>
+
+      <para>
+        By looking at the C structure that defines the lead, and matching it
+        with the bytes in an actual package file, it's trivial to extract the
+        data from the lead.  From a programming standpoint, it's also easy to
+        manipulate data in the lead --- It's simply a matter of using the
+        element names from the structure.  But there's a problem.  And because
+        of that problem the lead is no longer used internally by RPM.
+      </para>
+
+      <sect3 id="s3-rpm-file-format-lead-abandoned">
+        <title>The lead: An Abandoned Data Structure</title>
+        <indexterm>
+          <primary>format, RPM file!parts of!lead, reduced use of</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          What's the problem, and why is the lead no longer used by RPM?  The
+          answer to these questions is a single word: inflexibility.  The
+          technique of defining a C structure to access data in a file just
+          isn't very flexible.  Let's look at an example.
+        </para>
+        <para>
+          Flip back to the lead's C structure on page <xref
+          linkend="sc-rpm-file-format-lead-struct">.  Say, for example, that
+          some software comes along, and it has a long name.  A
+          <emphasis>very</emphasis> long name.  A name so long, in fact, that
+          the 66 bytes defined in the structure element
+          <structfield>name</structfield> just couldn't hold it.
+        </para>
+        <para>
+          What can we do?  Well, we could certainly change the structure such
+          that the <structfield>name</structfield> element would be 100 bytes
+          long.  But once a new version of RPM is created using this new
+          structure, we have two problems:
+
+          <orderedlist>
+            <listitem>
+              <para>
+                Any package file created with the new version of RPM wouldn't be
+                able to read older package formats.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Any older version of RPM would be unable to install packages
+                created with the newer version of RPM.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+
+        <para>
+          Not a very good situation!  Ideally, we would like to somehow
+          eliminate the requirement that the format of the data written to a
+          package file be engraved in granite.  We should be able to do the
+          following things, all without losing compatibility with existing
+          versions of RPM.
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                Add extra data to the file format.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Change the size of existing data.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Reorder the data.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          Sounds like a big problem, but there's a solution&hellip;
+        </para>
+      </sect3>
+
+      <sect3 id="s3-rpm-file-format-solution">
+        <title>Is There a Solution?</title>
+
+        <para>
+          The solution is to standardize the method by which information is
+          retrieved from a file.  This is done by creating a well-defined data
+          structure that contains easily searched information about the data,
+          and then physically separating that information from the data.
+        </para>
+        <para>
+          When the data is required, it is found by using the easily searched
+          information, which points to the data itself.  The benefits are, that
+          the data can be placed anywhere in the file, and that the format of
+          the data itself can change.
+        </para>
+      </sect3>
+
+      <sect3 id="s3-rpm-file-format-header-structure">
+        <title>The Solution: The Header Structure</title>
+        <indexterm>
+          <primary>format, RPM file!parts of!header structure</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The header structure is RPM's solution to the problem of easily
+          manipulating information in a standard way.  The header structure's
+          sole purpose in life is to contain zero or more pieces of data.  A
+          file can have more than one header structure in it.  In fact, an RPM
+          package file has two --- the signature, and the header.  It was from
+          this header that the header structure got its name.
+        </para>
+        <para>
+          There are three sections to each header structure.  The first section
+          is known as the "header structure header".  The header structure
+          header is used to identify the start of a header structure, its size,
+          and the number of data items it contains.
+        </para>
+        <para>
+          Following the header structure header is an area called the "index".
+          The index contains one or more index entries.  Each index entry
+          contains information about, and a pointer to, a specific data item.
+        </para>
+        <para>
+          After the index comes the "store".  It is in the store that the data
+          items are kept.  The data in the store is packed together as closely
+          as possible.  The order in which the data is stored is immaterial ---
+          a far cry from the C structure used in the lead.
+        </para>
+      </sect3>
+
+      <sect3 id="s3-rpm-file-format-header-structure-indepth">
+        <title>The Header Structure in Depth</title>
+
+        <para>
+          Let's take a more in-depth look at the actual format of a header
+          structure, starting with the header structure header:
+        </para>
+
+        <sect4 id="s4-rpm-file-format-header-structure-header">
+          <title>The Header Structure Header</title>
+
+          <para>
+            The header structure header always starts with a three-byte magic
+            number: <literal>8e ad e8</literal>.  Following this is a one-byte
+            version number.  Next are four bytes that are reserved for future
+            expansion.  After the reserved bytes, there is a four-byte number
+            that indicates how many index entries exist in this header
+            structure, followed by another four-byte number indicating how many
+            bytes of data are part of the header structure.
+          </para>
+        </sect4>
+
+        <sect4 id="s4-rpm-file-format-index-entry">
+          <title>The Index Entry</title>
+
+          <para>
+            The header structure's index is made up of zero or more index
+            entries.  Each entry is sixteen bytes longs.  The first four bytes
+            contain a "tag" --- a numeric value that identifies what type of
+            data is pointed to by the entry.  The tag values change according to
+            the header structure's position in the RPM file.  A list of the
+            actual tag values, and what they represent, will be included later
+            in this appendix.
+          </para>
+          <para>
+            Following the tag, is a four-byte "type", which is a numeric value
+            that describes the format of the data pointed to by the entry.  The
+            types and their values do not change from header structure to header
+            structure.  Here is the current list:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  NULL = 0
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  CHAR = 1
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  INT8 = 2
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  INT16 = 3
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  INT32 = 4
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  INT64 = 5
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  STRING = 6
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  BIN = 7
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  STRING_ARRAY = 8
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            A few of the data types might need some clarification.  The STRING
+            data type is simply a null-terminated string, while the STRING_ARRAY
+            is a collection of strings.  Finally, the BIN data type is a
+            collection of binary data.  This is normally used to identify data
+            that is longer than an INT, but not a printable STRING.
+          </para>
+          <para>
+            Next is a four-byte "offset" that contains the position of the data,
+            relative to the beginning of the store.  We'll talk about the store
+            in just a moment.
+          </para>
+          <para>
+            Finally, there is a four-byte "count" that contains the number of
+            data items pointed to by the index entry.  There are a few wrinkles
+            to the meaning of the count, and they center around the STRING and
+            STRING_ARRAY data types.  STRING data always has a count of 1, while
+            STRING_ARRAY data has a count equal to the number of strings
+            contained in the store.
+          </para>
+        </sect4>
+
+        <sect4 id="s4-rpm-file-format-store">
+          <title>The Store</title>
+
+          <para>
+            The store is where the data contained in the header structure is
+            stored.  Depending on the data type being stored, there are some
+            details that should be kept in mind:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  For STRING data, each string is terminated with a null byte.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  For INT data, each integer is stored at the natural boundary
+                  for its type.  A 64-bit INT is stored on an 8-byte boundary, a
+                  16-bit INT is stored on a 2-byte boundary, and so on.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  All data is in network byte order.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            With all these details out of the way, let's take a look at the
+            signature.
+          </para>
+        </sect4>
+      </sect3>
+    </sect2>
+
+    <sect2 id="s2-rpm-file-format-signature">
+      <title>The Signature</title>
+      <indexterm>
+        <primary>format, RPM file!parts of!signature</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        The signature section follows the lead in the RPM package file.  It
+        contains information that can be used to verify the integrity, and
+        optionally, the authenticity of the majority of the package file.  The
+        signature is implemented as a header structure.
+      </para>
+      <para>
+        You probably noticed the word, "majority", above.  The information in
+        the signature header structure is based on the contents of the package
+        file's header and archive only.  The data in the lead and the signature
+        header structure are not included when the signature information is
+        created, nor are they part of any subsequent checks based on that
+        information.
+      </para>
+      <para>
+        While that omission might seem to be a weakness in RPM's design, it
+        really isn't.  In the case of the lead, since it is used only for easy
+        identification of package files, any changes made to that part of the
+        file would, at worst, leave the file in such a state that RPM wouldn't
+        recognize it as a valid package file.  Likewise, any changes to the
+        signature header structure would make it impossible to verify the file's
+        integrity, since the signature information would have been changed from
+        their original values.
+      </para>
+
+      <sect3 id="s3-rpm-file-format-signature-analysis">
+        <title>Analyzing the Signature Area</title>
+        <indexterm>
+          <primary>format, RPM file!parts of!signature, analysis of</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          Using our new-found knowledge of header structures, let's take a look
+          at the signatures in <filename>rpm-2.2.1-1.i386.rpm</filename>:
+
+          <figure id="sc-rpm-file-format-signature-listing">
+            <title>File Listing</title>
+            <screen width="60">
+<computeroutput>
 00000060: 8ead e801 0000 0000 0000 0003 0000 00ac  ................
-</screen>
-</figure>
-The first three bytes (<tt?>8ead e8</tt?>) contain the magic number for the
-start of the header structure.  The next byte (<tt?>01</tt?>) is the header
-structure's version.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The first three bytes (<literal>8ead e8</literal>) contain the magic
+          number for the start of the header structure.  The next byte
+          (<literal>01</literal>) is the header structure's version.
+        </para>
+        <para>
+          As we discussed earlier, the next four bytes (<literal>0000
+          0000</literal>) are reserved.  The four bytes after that
+          (<literal>0000 0003</literal>) represent the number of index entries
+          in the signature section, namely, three.  Following that are four
+          bytes (<literal>0000 00ac</literal>) that indicate how many bytes of
+          data are stored in the signature.  The hex value
+          <literal>00ac</literal>, when converted to decimal, means the store is
+          172 bytes long.
+        </para>
+        <para>
+          Following the first 16 bytes is the index.  Each of the three index
+          entries in this header structure consists of four 32-bit integers, in
+          the following order:
 
-As we discussed earlier, the next four bytes (<tt?>0000 0000</tt?>) are
-reserved.  The four bytes after that (<tt?>0000 0003</tt?>) represent the
-number of index entries in the signature section, namely, three.  Following
-that are four bytes (<tt?>0000 00ac</tt?>) that indicate how many bytes of
-data are stored in the signature.  The hex value <tt?>00ac</tt?>, when
-converted to decimal, means the store is 172 bytes long.
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                Tag
+              </para>
+            </listitem>
 
-Following the first 16 bytes is the index.  Each of the three index entries
-in this header structure consists of four 32-bit integers, in the following
-order:
+            <listitem>
+              <para>
+                Type
+              </para>
+            </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Tag
+            <listitem>
+              <para>
+                Offset
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                Count
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          Let's take a look at the first index entry:
 
-<listitem>
-<para>
-Type
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Offset
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Count
-
-</para>
-</listitem>
-
-</itemizedlist>
-Let's take a look at the first index entry:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-first-index-entry">
+            <title>The First Index Entry</title>
+            <screen width="60">
+<computeroutput>
 00000070: 0000 03e8 0000 0004 0000 0000 0000 0001  ................
-</screen>
-</figure>
-The tag consists of the first four bytes (<tt?>0000 03e8</tt?>), which is
-1000 when translated from hex.  Looking in the RPM source directory at the
-file <tt?>lib/signature.h</tt?>, we find the following tag definitions:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The tag consists of the first four bytes (<literal>0000
+          03e8</literal>), which is 1000 when translated from hex.  Looking in
+          the RPM source directory at the file
+          <filename>lib/signature.h</filename>, we find the following tag
+          definitions:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-signature-defines">
+            <title>
+              Signature-Related <command>#define</command> Statements
+            </title>
+            <screen width="60">
+<computeroutput>
 #define SIGTAG_SIZE         1000
 #define SIGTAG_MD5          1001
 #define SIGTAG_PGP          1002
-</screen>
-</figure>
-So the tag we are studying is for a size signature.  Let's continue.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          So the tag we are studying is for a size signature.  Let's continue.
+        </para>
+        <para>
+          The next four bytes (<literal>0000 0004</literal>) contain the data
+          type.  As we saw earlier, data type 4 means that the data stored for
+          this index entry, is a 32-bit integer.  Skipping the next four bytes
+          for a moment, the last four bytes (<literal>0000 0001</literal>) are
+          the number of 32-bit integers pointed to by this index entry.
+        </para>
+        <para>
+          Now, let's go back to the four bytes prior to the count (<literal>0000
+          0000</literal>).  This number is the offset, in bytes, at which the
+          size signature is located.  It has a value of zero, but the question
+          is, zero bytes from what?  The answer, although it doesn't do us much
+          good, is that the offset is calculated from the start of the store.
+          So first we must find where the store begins, and we can do that by
+          performing a simple calculation.
+        </para>
+        <para>
+          First, go back to the start of the signature section.  (We've made a
+          copy here so you won't need to flip from page to page)
 
-The next four bytes (<tt?>0000 0004</tt?>) contain the data type.  As we saw
-earlier, data type 4 means that the data stored for this index entry, is a
-32-bit integer.  Skipping the next four bytes for a moment, the last four
-bytes (<tt?>0000 0001</tt?>) are the number of 32-bit integers pointed to by
-this index entry.
-
-Now, let's go back to the four bytes prior to the count (<tt?>0000
-0000</tt?>).  This number is the offset, in bytes, at which the size signature
-is located.  It has a value of zero, but the question is, zero bytes from
-what?  The answer, although it doesn't do us much good, is that the offset
-is calculated from the start of the store.  So first we must find where the
-store begins, and we can do that by performing a simple calculation.
-
-First, go back to the start of the signature section.  (We've made a copy
-here so you won't need to flip from page to page)
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-signature-again">
+            <title>The Signature, Revisited</title>
+            <screen width="60">
+<computeroutput>
 00000060: 8ead e801 0000 0000 0000 0003 0000 00ac  ................
-</screen>
-</figure>
-After the magic, the version, and the four reserved bytes, there is the
-number of index entries (<tt?>0000 0003</tt?>).  Since we know that each
-index entry is sixteen bytes long (four for the tag, four for the type,
-four for the offset, and four for the count), we can multiply the number of
-entries (3) by the number of bytes in each entry (16), and obtain the total
-size of the index, which is 48 decimal, or 30 in hex.  Since the first
-index entry starts at hex offset 70, we can simply add hex 30 to hex 70,
-and get, in hex, offset a0.  So let's skip down to offset a0, and see
-what's there:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          After the magic, the version, and the four reserved bytes, there is
+          the number of index entries (<literal>0000 0003</literal>).  Since we
+          know that each index entry is sixteen bytes long (four for the tag,
+          four for the type, four for the offset, and four for the count), we
+          can multiply the number of entries (3) by the number of bytes in each
+          entry (16), and obtain the total size of the index, which is 48
+          decimal, or 30 in hex.  Since the first index entry starts at hex
+          offset 70, we can simply add hex 30 to hex 70, and get, in hex, offset
+          a0.  So let's skip down to offset a0, and see what's there:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-offset-a0">
+            <title>Listing of Offset <literal>a0</literal></title>
+            <screen width="60">
+<computeroutput>
 000000a0: 0004 4c4f b025 b097 1597 0132 df35 d169  ..LO.%.....2.5.i
-</screen>
-</figure>
-If we've done our math correctly, the first four bytes (<tt?>0004 4c4f</tt?>)
-should represent the size of this file.  Converting to decimal, this is
-281,679.  Let's take a look at the size of the actual file:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          If we've done our math correctly, the first four bytes (<literal>0004
+          4c4f</literal>) should represent the size of this file.  Converting to
+          decimal, this is 281,679.  Let's take a look at the size of the actual
+          file:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>ls -al rpm-2.2.1-1.i386.rpm</userinput>
+          <figure id="sc-rpm-file-format-file-size">
+            <title>List of Package File</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al rpm-2.2.1-1.i386.rpm</userinput>
+<computeroutput>
 -rw-rw-r--   1 ed       ed         \ovalbox{282015} Jul 21 16:05 rpm-2.2.1-1.i386.rpm
-#
-</screen>
-</figure>
-Hmmm, something's not right.  Or is it?  It looks like we're short by 336
-bytes, or in hex, 150.  Interesting how that's a nice round hex number,
-isn't it?  For now, let's continue through the remainder of the index
-entries, and see if hex 150 pops up elsewhere.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Hmmm, something's not right.  Or is it?  It looks like we're short by
+          336 bytes, or in hex, 150.  Interesting how that's a nice round hex
+          number, isn't it?  For now, let's continue through the remainder of
+          the index entries, and see if hex 150 pops up elsewhere.
+        </para>
+        <para>
+          Here's the next index entry.  It has a tag of decimal 1001, which is
+          an MD5 checksum.  It is type 7, which is the BIN data type, it is 16
+          bytes long, and its data starts four bytes after the beginning of the
+          store:
 
-Here's the next index entry.  It has a tag of decimal 1001, which is an MD5
-checksum.  It is type 7, which is the BIN data type, it is 16 bytes long,
-and its data starts four bytes after the beginning of the store:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-next-index">
+            <title>The Next Index Entry</title>
+            <screen width="60">
+<computeroutput>
 00000080: 0000 03e9 0000 0007 0000 0004 0000 0010  ................
-</screen>
-</figure>
-And here's the data.  It starts with <tt?>b025</tt?> (Remember that offset of
-four!) and ends on the second line with <tt?>5375</tt?>.  This is a 128-bit
-MD5 checksum of the package file's header and archive sections.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          And here's the data.  It starts with <literal>b025</literal> (Remember
+          that offset of four!) and ends on the second line with
+          <literal>5375</literal>.  This is a 128-bit MD5 checksum of the
+          package file's header and archive sections.
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-md5-checksum">
+            <title>MD5 Checksum</title>
+            <screen width="60">
+<computeroutput>
 000000a0: 0004 4c4f b025 b097 1597 0132 df35 d169  ..LO.%.....2.5.i
 000000b0: 329c 5375 8900 9503 0500 31ed 6390 a520  2.Su......1.c.. 
-</screen>
-</figure>
-Ok, let's jump back to the last index entry:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Ok, let's jump back to the last index entry:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-last-index">
+            <title>The Last Index Entry</title>
+            <screen width="60">
+<computeroutput>
 00000090: 0000 03ea 0000 0007 0000 0014 0000 0098  ................
-</screen>
-</figure>
-It has a tag value of <tt?>03ea</tt?> (1002 in decimal --- a PGP signature
-block) and is also a BIN data type.  The data starts 20 decimal bytes from
-the start of the data area, which would put it at file offset b4 (in hex).
-It's a biggie --- 152 bytes long!  Here's the data, starting with
-<tt?>8900</tt?>:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          It has a tag value of <literal>03ea</literal> (1002 in decimal --- a
+          PGP signature block) and is also a BIN data type.  The data starts 20
+          decimal bytes from the start of the data area, which would put it at
+          file offset b4 (in hex).  It's a biggie --- 152 bytes long!  Here's
+          the data, starting with <literal>8900</literal>:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-pgp-signature">
+            <title>The PGP Signature</title>
+            <screen width="60">
+<computeroutput>
 000000b0: 329c 5375 8900 9503 0500 31ed 6390 a520  2.Su......1.c.. 
 000000c0: e8f1 cba2 9bf9 0101 437b 0400 9c8e 0ad4  ........C{......
 000000d0: 3790 364e dfb0 9a8a 22b5 b0b3 dc30 4c6f  7.6N...."....0Lo
@@ -926,166 +980,191 @@ It's a biggie --- 152 bytes long!  Here's the data, starting with
 00000120: 279f 0306 28ed 0ba0 0855 9e82 2b1c 2ede  '...(....U..+...
 00000130: e8e3 5090 6260 0b3c ba04 69a9 2573 1bbb  ..P.b`.&lt;..i.%s..
 00000140: 5b65 4de1 b1d2 c07f 8afa 4a9b 0000 0000  [eM.......J.....
-</screen>
-</figure>
-It ends with the bytes <tt?>4a9b</tt?>.  This is a 1,216-bit PGP signature
-block.  It is also the end of the signature section.  There are four null
-bytes following the last data item in order to round the size out so that
-it ends on an 8-byte boundary.  This means that the offset of the next
-section starts at offset 150, in hex.  Say, wasn't the size in the size
-signature off by 150 hex?  Yes, the size in the signature is the size of
-the file --- <emphasis>minus</emphasis> the size of the lead and the signature sections.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          It ends with the bytes <literal>4a9b</literal>.  This is a 1,216-bit
+          PGP signature block.  It is also the end of the signature section.
+          There are four null bytes following the last data item in order to
+          round the size out so that it ends on an 8-byte boundary.  This means
+          that the offset of the next section starts at offset 150, in hex.
+          Say, wasn't the size in the size signature off by 150 hex?  Yes, the
+          size in the signature is the size of the file ---
+          <emphasis>minus</emphasis> the size of the lead and the signature
+          sections.
+        </para>
+      </sect3>
+    </sect2>
 
-<indexterm>
-<primary>format, RPM file!parts of!signature, analysis of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect2 id="s2-rpm-file-format-header">
+      <title>The Header</title>
+      <!-- label: rpm-file-format-header -->
+      <indexterm>
+        <primary>format, RPM file!parts of!header</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-<indexterm>
-<primary>format, RPM file!parts of!signature|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        The header section contains all available information about the package.
+        Entries such as the package's name, version, and file list, are
+        contained in the header.  Like the signature section, the header is in
+        header structure format.  Unlike the signature, which has only three
+        possible tag types, the header has more than <emphasis>sixty</emphasis>
+        different tags.  The list of currently defined tags appears later in
+        this appendix on page <xref
+        linkend="s3-rpm-file-format-header-tag-listing">.  Be aware that the
+        list of tags changes frequently --- the definitive list appears in the
+        RPM sources in <filename>lib/rpmlib.h</filename>.
+      </para>
 
-</sect3>
+      <sect3 id="s3-rpm-file-format-header-analysis">
+        <title>Analyzing the Header</title>
+        <indexterm>
+          <primary>format, RPM file!parts of!header, analysis of</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          The easiest way to find the start of the header is to look for the
+          second header structure by scanning for its magic number
+          (<literal>8ead e8</literal>).  The sixteen bytes, starting with the
+          magic, are the header structures's header.  They follow the same
+          format as the header in the signature's header structure:
 
-<sect2 id="s2-rpm-file-format-">
-<title>The Header</title>
-<!-- label: rpm-file-format-header -->
-<indexterm>
-<primary>format, RPM file!parts of!header</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The header section contains all available information about the package.
-Entries such as the package's name, version, and file list, are contained
-in the header.  Like the signature section, the header is in header
-structure format.  Unlike the signature, which has only three possible tag
-types, the header has more than <emphasis>sixty</emphasis> different tags.  The list of
-currently defined tags appears later in this appendix on page
-<xref linkend="rpm-header-tags">.  Be aware that the list of tags changes
-frequently --- the definitive list appears in the RPM sources in
-<tt?>lib/rpmlib.h</tt?>.
-
-<sect3 id="s3-rpm-file-format-">
-<title>Analyzing the Header</title>
-<indexterm>
-<primary>format, RPM file!parts of!header, analysis of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The easiest way to find the start of the header is to look for the second
-header structure by scanning for its magic number (<tt?>8ead e8</tt?>).  The
-sixteen bytes, starting with the magic, are the header structures's header.
-They follow the same format as the header in the signature's header
-structure:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-header-listing">
+            <title>Start of the Header</title>
+            <screen width="60">
+<computeroutput>
 00000150: 8ead e801 0000 0000 0000 0021 0000 09d3  ...........!....
-</screen>
-</figure>
-As before, the byte following the magic identifies this header structure as
-being in version 1 format.  Following the four reserved bytes, we find the
-count of entries stored in the header (<tt?>0000 0021</tt?>).  Converting to
-decimal, we find that there are 33 entries in the header.  The next four
-bytes (<tt?>0000 09d3</tt?>) converted to decimal, tell us that there are
-2,515 bytes of data in the store.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As before, the byte following the magic identifies this header
+          structure as being in version 1 format.  Following the four reserved
+          bytes, we find the count of entries stored in the header
+          (<literal>0000 0021</literal>).  Converting to decimal, we find that
+          there are 33 entries in the header.  The next four bytes
+          (<literal>0000 09d3</literal>) converted to decimal, tell us that
+          there are 2,515 bytes of data in the store.
+        </para>
+        <para>
+          Since the header is a header structure just like the signature, we
+          know that the next 16 bytes are the first index entry:
 
-Since the header is a header structure just like the signature, we know
-that the next 16 bytes are the first index entry:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-header-listing2">
+            <title>More of the Header</title>
+            <screen width="60">
+<computeroutput>
 00000160: 0000 03e8 0000 0006 0000 0000 0000 0001  ................
-</screen>
-</figure>
-The first four bytes (<tt?>0000 03e8</tt?>) are the tag, which is the tag for
-the package name.  The next four bytes indicate the data is type 6, or a
-null-terminated string.  There's an offset of zero in the next four bytes,
-meaning that the data for this tag is first in the store.  Finally, the
-last four bytes (<tt?>0000 0001</tt?>) show that the data count is 1, which
-is the only legal value for data of type STRING.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The first four bytes (<literal>0000 03e8</literal>) are the tag, which
+          is the tag for the package name.  The next four bytes indicate the
+          data is type 6, or a null-terminated string.  There's an offset of
+          zero in the next four bytes, meaning that the data for this tag is
+          first in the store.  Finally, the last four bytes (<literal>0000
+          0001</literal>) show that the data count is 1, which is the only legal
+          value for data of type STRING.
+        </para>
+        <para>
+          To find the data, we need to take the offset from the start of the
+          first index entry in the header (160), and add in the count of index
+          entries (21) multiplied by the size of an index entry (10).  Doing the
+          math (all the values shown, are in hex, remember!), we arrive at the
+          offset to the store, hex 370.  Since the offset for this particular
+          index entry is zero, the data should start at offset 370:
 
-To find the data, we need to take the offset from the start of the first
-index entry in the header (160), and add in the count of index entries (21)
-multiplied by the size of an index entry (10).  Doing the math (all the
-values shown, are in hex, remember!), we arrive at the offset to the store,
-hex 370.  Since the offset for this particular index entry is zero, the
-data should start at offset 370:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-data-start">
+            <title>Start of the Data</title>
+            <screen width="60">
+<computeroutput>
 00000370: 7270 6d00 322e 322e 3100 3100 5265 6420  rpm.2.2.1.1.Red 
-</screen>
-</figure>
-Since the data type for this entry is a null-terminated string, we need to
-keep reading bytes until we reach a byte whose numeric value is zero.  We
-find the bytes <tt?>72</tt?>, <tt?>70</tt?>, <tt?>6d</tt?>, and <tt?>00</tt?> --- a
-null.  Looking at the ASCII display on the right, we find that the bytes
-form the string <tt?>rpm</tt?>, which is the name of this package.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Since the data type for this entry is a null-terminated string, we
+          need to keep reading bytes until we reach a byte whose numeric value
+          is zero.  We find the bytes <literal>72</literal>,
+          <literal>70</literal>, <literal>6d</literal>, and
+          <literal>00</literal> --- a null.  Looking at the ASCII display on the
+          right, we find that the bytes form the string <literal>rpm</literal>,
+          which is the name of this package.
+        </para>
+        <para>
+          Now for a slightly more complicated example.  Let's look at the
+          following index entry:
 
-Now for a slightly more complicated example.  Let's look at the following
-index entry:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-more-complex">
+            <title>A More Complex Example</title>
+            <screen width="60">
+<computeroutput>
 00000250: 0000 0403 0000 0008 0000 0199 0000 0018  ................
-</screen>
-</figure>
-Tag 403 means that this entry is a list of filenames.  The data type 8, or
-STRING_ARRAY, seems to bear this out.  From the previous example, we found
-that the data area for the header began at offset 370.  Adding the offset
-to the first filename (199), gives us 509.  Finally, the count of 18 hex
-means that there should be 24 null-terminated strings containing filenames:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Tag 403 means that this entry is a list of filenames.  The data type
+          8, or STRING_ARRAY, seems to bear this out.  From the previous
+          example, we found that the data area for the header began at offset
+          370.  Adding the offset to the first filename (199), gives us 509.
+          Finally, the count of 18 hex means that there should be 24
+          null-terminated strings containing filenames:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-filename-list">
+            <title>The Filename List</title>
+            <screen width="60">
+<computeroutput>
 00000500: 696e 6974 6462 0a0a 002f 6269 6e2f 7270  initdb.../bin/rp
 00000510: 6d00 2f65 7463 2f72 706d 7263 002f 7573  m./etc/rpmrc./us
-</screen>
-</figure>
-The byte at offset 509 is 2f --- a "/".  Reading up to the first null
-byte, we find that the first filename is <tt?>/bin/rpm</tt?>, followed by
-<tt?>/etc/rpmrc</tt?>.  This continues on for 22 more filenames.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The byte at offset 509 is 2f --- a "/".  Reading up to the first null
+          byte, we find that the first filename is
+          <filename>/bin/rpm</filename>, followed by
+          <filename>/etc/rpmrc</filename>.  This continues on for 22 more
+          filenames.
+        </para>
+        <para>
+          There are many more tags that we could decode, but they are all done in
+          the same manner.
+        </para>
+      </sect3>
 
-There are many more tags that we could decode, but they are all done in
-the same manner.
+      <sect3 id="s3-rpm-file-format-header-tag-listing">
+        <title>Header Tag Listing</title>
+        <!-- label: rpm-header-tags -->
+        <indexterm>
+          <primary>format, RPM file!parts of!header, tags used in</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The following list shows the tags available, along with their defined
+          values, for use in the header.  This list is current as of version 2.3
+          of RPM.  For the most up-to-date version, look in the file
+          <filename>lib/rpmlib.h</filename> in the latest version of the RPM
+          sources.
 
-<sect3 id="s3-rpm-file-format-">
-<title>Header Tag Listing</title>
-<!-- label: rpm-header-tags -->
-<indexterm>
-<primary>format, RPM file!parts of!header, tags used in</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The following list shows the tags available, along with their defined values,
-for use in the header.  This list is current as of version 2.3 of RPM.
-For the most up-to-date version, look in the file <tt?>lib/rpmlib.h</tt?> in
-the latest version of the RPM sources.
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-file-format-header-tag-listing">
+            <title>List of Header Tags</title>
+            <screen width="60">
+<computeroutput>
 #define RPMTAG_NAME                     1000
 #define RPMTAG_VERSION                  1001
 #define RPMTAG_RELEASE                  1002
@@ -1157,177 +1236,166 @@ the latest version of the RPM sources.
 #define RPMTAG_TRIGGERFLAGS             1068
 #define RPMTAG_TRIGGERINDEX             1069
 #define RPMTAG_VERIFYSCRIPT             1079
-</screen>
-</figure>
-<indexterm>
-<primary>format, RPM file!parts of!header, tags used in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+      </sect3>
+    </sect2>
 
-<indexterm>
-<primary>format, RPM file!parts of!header, analysis of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect2 id="s2-rpm-file-format-the-archive">
+      <title>The Archive</title>
+      <indexterm>
+        <primary>format, RPM file!parts of!archive</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-<indexterm>
-<primary>format, RPM file!parts of!header|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        Following the header section is the archive.  The archive holds the
+        actual files that comprise the package.  The archive is compressed using
+        GNU zip.  We can verify this if we look at the start of the archive:
 
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-file-format-">
-<title>The Archive</title>
-<indexterm>
-<primary>format, RPM file!parts of!archive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Following the header section is the archive.  The archive holds the actual
-files that comprise the package.  The archive is compressed using GNU zip.
-We can verify this if we look at the start of the archive:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-file-format-archive-start">
+          <title>Start of the Archive</title>
+          <screen width="60">
+<computeroutput>
 00000d40: 0000 001f 8b08 0000 0000 0002 03ec fd7b  ...............{
 00000d50: 7c13 d516 388e 4e92 691b 4a20 010a 1428  |...8.N.i.J ...(
-</screen>
-</figure>
-In this example, the archive starts at offset <tt?>d43</tt?>.  According to
-the contents of <tt?>/usr/lib/magic</tt?>, the first two bytes of a
-<tt?>gzipped</tt?> file should be <tt?>1f8b</tt?>, which is, in fact, what we
-see.  The following byte (<tt?>08</tt?>) is the flag used by GNU zip to
-indicate the file has been compressed with <tt?>gzip</tt?>'s "deflation"
-method.  The eighth byte has a value of <tt?>02</tt?>, which means that the
-archive has been compresed using <tt?>gzip</tt?>'s maximum compression
-setting.  The following byte contains a code indicating the operating
-system under which the archive was compressed.  A <tt?>03</tt?> in this byte
-indicates that the compression ran under a UNIX-like operating system.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        In this example, the archive starts at offset <literal>d43</literal>.
+        According to the contents of <filename>/usr/lib/magic</filename>, the
+        first two bytes of a <command>gzipped</command> file should be
+        <literal>1f8b</literal>, which is, in fact, what we see.  The following
+        byte (<literal>08</literal>) is the flag used by GNU zip to indicate the
+        file has been compressed with <command>gzip</command>'s "deflation"
+        method.  The eighth byte has a value of <literal>02</literal>, which
+        means that the archive has been compresed using
+        <command>gzip</command>'s maximum compression setting.  The following
+        byte contains a code indicating the operating system under which the
+        archive was compressed.  A <literal>03</literal> in this byte indicates
+        that the compression ran under a UNIX-like operating system.
+      </para>
+      <para>
+        The remainder of the RPM package file is the compressed archive.  After
+        the archive is uncompressed, it is an ordinary <command>cpio</command>
+        archive in SVR4 format with a CRC checksum.
+      </para>
+    </sect2>
+  </sect1>
 
-The remainder of the RPM package file is the compressed archive.  After the
-archive is uncompressed, it is an ordinary <tt?>cpio</tt?> archive in SVR4
-format with a CRC checksum.
+  <sect1 id="s1-rpm-file-format-rpm-tools">
+    <title>Tools For Studying RPM Files</title>
+    <indexterm>
+      <primary>format, RPM file!tools for studying</primary>
+      <secondary></secondary>
+    </indexterm>
 
-<indexterm>
-<primary>format, RPM file!parts of!archive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <para>
+      In the <filename>tools</filename> directory packaged with the RPM sources,
+      are a number of small programs that use the RPM library to extract the
+      various sections of a package file.  Normally used by the RPM developers
+      for debugging purposes, these tools can also be used to make it easier to
+      understand the RPM package file format.  Here is a list of the programs,
+      and what they do:
 
-</sect2>
+      <itemizedlist mark="bullet">
+        <listitem>
+          <para>
+            <command>rpmlead</command> --- Extracts the lead section from a
+            package file.
+          </para>
+        </listitem>
 
-</sect1>
+        <listitem>
+          <para>
+            <command>rpmsignature</command> --- Extracts the signature section
+            from a package file.
+          </para>
+        </listitem>
 
-<sect1 id="s1-rpm-file-format-">
-<title>Tools For Studying RPM Files</title>
-<indexterm>
-<primary>format, RPM file!tools for studying</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <listitem>
+          <para>
+            <command>rpmheader</command> --- Extracts the header from a package
+            file.
+          </para>
+        </listitem>
 
-In the <tt?>tools</tt?> directory packaged with the RPM sources, are a number
-of small programs that use the RPM library to extract the various sections
-of a package file.  Normally used by the RPM developers for debugging
-purposes, these tools can also be used to make it easier to understand the
-RPM package file format.  Here is a list of the programs, and what they do:
+        <listitem>
+          <para>
+            <command>rpmarchive</command> --- Extracts the archive from a
+            package file.
+          </para>
+        </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<tt?>rpmlead</tt?> --- Extracts the lead section from a package file.
+        <listitem>
+          <para>
+            <command>dump</command> --- Displays a header structure in an easily
+            readable format.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
 
-</para>
-</listitem>
+    <para>
+      The first four programs take an RPM package file as their input.  The
+      package file can be read either from standard input, or by including the
+      file name on the command line.  In either case, the programs write to
+      standard output.  Here is how <command>rpmlead</command> can be used to
+      display the lead from a package file:
 
-<listitem>
-<para>
-<tt?>rpmsignature</tt?> --- Extracts the signature section from a
-package file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>rpmheader</tt?> --- Extracts the header from a package file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>rpmarchive</tt?> --- Extracts the archive from a package file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?>dump</tt?> --- Displays a header structure in an easily readable
-format.
-
-</para>
-</listitem>
-
-</itemizedlist>
-The first four programs take an RPM package file as their input.  The
-package file can be read either from standard input, or by including the
-file name on the command line.  In either case, the programs write to
-standard output.  Here is how <tt?>rpmlead</tt?> can be used to display the
-lead from a package file:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpmlead foo.rpm | od -x</userinput>
+      <figure id="sc-rpm-file-format-rpmlead-example">
+        <title>Using <command>rpmlead</command></title>
+        <screen width="60">
+<prompt># </prompt><userinput>rpmlead foo.rpm | od -x</userinput>
+<computeroutput>
 0000000 abed dbee 0003 0000 0100 7072 2d6d 2e32
 0000020 2e32 2d31 0031 0000 0000 0000 0000 0000
 0000040 0000 0000 0000 0000 0000 0000 0000 0000
-*
+&hellip;
 0000100 0000 0000 0000 0000 0000 0000 0100 0500
 0000120 0004 0000 e124 bfff b36b 0800 e600 bfff
 0000140
-#
-</screen>
-</figure>
-Since each of these programs can also act as filters, the following command
-is equivalent to the one above:
+</computeroutput>
+<prompt>#</prompt>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      Since each of these programs can also act as filters, the following
+      command is equivalent to the one above:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cat foo.rpm | rpmlead | od -x</userinput>
+      <figure id="sc-rpm-file-format-rpmlead-example2">
+        <title>Using <command>rpmlead</command> as a Filter</title>
+        <screen width="60">
+<prompt># </prompt><userinput>cat foo.rpm | rpmlead | od -x</userinput>
+<computeroutput>
 0000000 abed dbee 0003 0000 0100 7072 2d6d 2e32
 0000020 2e32 2d31 0031 0000 0000 0000 0000 0000
 0000040 0000 0000 0000 0000 0000 0000 0000 0000
-*
+&hellip;
 0000100 0000 0000 0000 0000 0000 0000 0100 0500
 0000120 0004 0000 e124 bfff b36b 0800 e600 bfff
 0000140
-#
-</screen>
-</figure>
-The <tt?>dump</tt?> program is used in conjunction with <tt?>rpmsignature</tt?>
-or <tt?>rpmheader</tt?>.  It makes decoding header structures a snap:
+</computeroutput>
+<prompt>#</prompt>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      The <command>dump</command> program is used in conjunction with
+      <command>rpmsignature</command> or <command>rpmheader</command>.  It makes
+      decoding header structures a snap:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpmsignature foo.rpm | dump</userinput>
+      <figure id="sc-rpm-file-format-dump-example">
+        <title>Using <command>dump</command></title>
+        <screen width="60">
+<prompt># </prompt><userinput>rpmsignature foo.rpm | dump</userinput>
+<computeroutput>
 Entry count: 3
 Data count : 172
 
@@ -1357,44 +1425,42 @@ Entry      : 002 (1002)RELEASE        BIN_TYPE         0x00000014 00000152
        Data: 128 62 60 0b 3c ba 04 69 a9 
        Data: 136 25 73 1b bb 5b 65 4d e1 
        Data: 144 b1 d2 c0 7f 8a fa 4a 9b 
-#
-</screen>
-</figure>
-One aspect of <tt?>dump</tt?> worth noting, is that it is optimized for
-decoding the header section of a package file.  When used with
-<tt?>rpmsignature</tt?>, it displays the tag names used in the header,
-instead of the signature tag names.  The data is displayed properly in
-either case, however.
+</computeroutput>
+<prompt>#</prompt>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      One aspect of <command>dump</command> worth noting, is that it is
+      optimized for decoding the header section of a package file.  When used
+      with <command>rpmsignature</command>, it displays the tag names used in
+      the header, instead of the signature tag names.  The data is displayed
+      properly in either case, however.
+    </para>
+  </sect1>
 
-<indexterm>
-<primary>format, RPM file!tools for studying|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+  <sect1 id="s1-rpm-file-format-file-command">
+    <title>
+      Identifying RPM files with the <command>file(1)</command> command
+    </title>
+    <!-- label: rpm-file-command -->
+    <indexterm>
+      <primary>format, RPM file!<command>file()</command> command,identifying with</primary>
+      <secondary></secondary>
+    </indexterm>
 
-</sect1>
+    <para>
+      The <filename>magic</filename> file on most UNIX-like systems today should
+      have the necessary information to identify RPM files.  But in case your
+      system doesn't, the following information can be added to the file:
 
-<sect1 id="s1-rpm-file-format-">
-<title>Identifying RPM files with the <tt?>file(1)</tt?> command</title>
-<!-- label: rpm-file-command -->
-<indexterm>
-<primary>format, RPM file!<tt?>file()</tt?> command,identifying with</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <tt?>magic</tt?> file on most UNIX-like systems today should have the
-necessary information to identify RPM files.  But in case your system
-doesn't, the following information can be added to the file:
-
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+      <figure id="sc-rpm-file-format-rpm-magic">
+        <title>RPM-Related Portion of <filename>magic</filename></title>
+        <screen width="60">
+<computeroutput>
 #-------------------------------------------------------------------
 #
-# RPM: file(1) magic for Red Hat <!-- *** RED HAT *** -->Packages
+# RPM: file(1) magic for Red Hat Packages
 #
 0       beshort         0xedab          
 &gt;2      beshort         0xeedb          RPM
@@ -1409,37 +1475,29 @@ doesn't, the following information can be added to the file:
 &gt;&gt;8     beshort         6               68000
 &gt;&gt;8     beshort         7               SGI
 &gt;&gt;10    string          x               %s
-</screen>
-</figure>
-The output of the <tt?>file</tt?> command is succinct:
+</computeroutput>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      The output of the <command>file</command> command is succinct:
 
-<figure id="sc-rpm-file-format-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>file baz</userinput>
+      <figure id="sc-rpm-file-format-file-example">
+        <title>Using the <command>file</command> Command</title>
+        <screen width="60">
+<prompt># </prompt><userinput>file baz</userinput>
+<computeroutput>
 baz: RPM v3 bin i386 vlock-1.0-2
-#
-</screen>
-</figure>
-In this case, the file called <tt?>baz</tt?> is a version 3 format RPM file
-containing release 2 of version 1.0 of the <tt?>vlock</tt?> package, which
-has been built for the Intel x86 architecture.
-
-<indexterm>
-<primary>format, RPM file!<tt?>file()</tt?> command,identifying with|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>format, RPM file|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect1>
-
-</chapter>
-
+</computeroutput>
+<prompt>#</prompt>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      In this case, the file called <filename>baz</filename> is a version 3
+      format RPM file containing release 2 of version 1.0 of the
+      <filename>vlock</filename> package, which has been built for the Intel x86
+      architecture.
+    </para>
+  </sect1>
+</appendix>

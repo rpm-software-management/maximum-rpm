@@ -1,0 +1,1254 @@
+<chapter id="ch-rpmrc-file">
+<title>The <tt?>rpmrc</tt?> File</title>
+<!-- label: rpmrc-file -->
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>rpmrc</tt?> file is used to control RPM's actions.  The file's
+entries have an effect on nearly every aspect of RPM's operations.  Here,
+we describe the <tt?>rpmrc</tt?> files in more detail, as well as the command
+used to show how RPM interprets the files.
+
+<sect1 id="s1-rpmrc-file-">
+<title>Using the <tt?>--showrc</tt?> Option</title>
+<indexterm>
+<primary>showrc@<tt?>--showrc</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we'll see in a moment, RPM can read more than one <tt?>rpmrc</tt?> file,
+and each file can contain nearly thirty different types of entries.  This
+can make it difficult to determine what values RPM is actually using.
+
+Luckily, there's an option that can be used to help make sense of it all.
+The <tt?>--showrc</tt?> option displays the value for each of the
+entries.  The output is divided into two sections:
+
+<orderedlist>
+<listitem>
+<para>
+Architecture and operating system values.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>rpmrc</tt?> values.
+
+</para>
+</listitem>
+
+</orderedlist>
+The architecture and operating system values define the architecture and
+operating system that RPM is running on.  These values define the
+environment for both building and installing packages. They also define
+which architectures and operating systems are compatible with each other.
+
+The <tt?>rpmrc</tt?> values define many aspects of RPM's operation.  These
+values range from the path to RPM's database, to the name of the person
+listed as having built the package.
+
+Here's an example of <tt?>--showrc</tt?>'s output:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --showrc</userinput>
+ARCHITECTURE AND OS:
+build arch           : i386
+build os             : Linux
+install arch         : i486
+install os           : Linux
+compatible arch list : i486 i386
+compatible os list   : Linux
+RPMRC VALUES:
+builddir             : /usr/src/redhat/BUILD
+buildroot            : (not set)
+cpiobin              : cpio
+dbpath               : /var/lib/rpm
+defaultdocdir        : /usr/doc
+distribution         : (not set)
+excludedocs          : (not set)
+ftpport              : (not set)
+ftpproxy             : (not set)
+messagelevel         : (not set)
+netsharedpath        : (not set)
+optflags             : -O2 -m486 -fno-strength-reduce
+packager             : (not set)
+pgp_name             : (not set)
+pgp_path             : (not set)
+require_distribution : (not set)
+require_icon         : (not set)
+require_vendor       : (not set)
+root                 : (not set)
+rpmdir               : /usr/src/redhat/RPMS
+signature            : none
+sourcedir            : /usr/src/redhat/SOURCES
+specdir              : /usr/src/redhat/SPECS
+srcrpmdir            : /usr/src/redhat/SRPMS
+timecheck            : (not set)
+tmppath              : /var/tmp
+topdir               : /usr/src/redhat
+vendor               : (not set)
+#
+</screen>
+</figure>
+As you can see, the <tt?>--showrc</tt?> option clearly displays the values
+RPM will use.  <tt?>--showrc</tt?> can also be used with the
+<tt?>--rcfile</tt?> option, which makes it easy to see the effect of
+specifying a different <tt?>rpmrc</tt?> file.
+
+<indexterm>
+<primary>showrc@<tt?>--showrc</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpmrc-file-">
+<title>Different Places an <tt?>rpmrc</tt?> File Resides</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+RPM looks for <tt?>rpmrc</tt?> files in four places:
+
+<orderedlist>
+<listitem>
+<para>
+In <tt?>/usr/lib/</tt?>, for a file called <tt?>rpmrc</tt?>.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+In <tt?>/etc/</tt?>, for a file called <tt?>rpmrc</tt?>.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+In a file called <tt?>.rpmrc</tt?> in the user's login directory.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+In a file specified by the <tt?>--rcfile</tt?> option, if the option
+is present on the command line.
+
+</para>
+</listitem>
+
+</orderedlist>
+The first three files are read in the order listed, such that if a given
+<tt?>rmprc</tt?> entry is present in each file, the value of the entry read
+<emphasis>last</emphasis> is the one used by RPM.  This means, for example, that an entry
+in <tt?>.rpmrc</tt?> in the user's login directory will always override the
+same entry in <tt?>/etc/rpmrc</tt?>.  Likewise, an entry in
+<tt?>/etc/rpmrc</tt?> will always override the same entry in
+<tt?>/usr/lib/rpmrc</tt?>.
+
+If the <tt?>--rcfile</tt?> option is used, then only
+<tt?>/usr/lib/rpmrc</tt?> and the file following the <tt?>--rcfile</tt?>
+option are read, in that order.  The <tt?>/usr/lib/rpmrc</tt?> file is
+<emphasis>always</emphasis> read first.  This cannot be changed.
+
+Let's look at each of these files, starting with <tt?>/usr/lib/rpmrc</tt?>.
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>/usr/lib/rpmrc</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>/usr/lib/rpmrc</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The file <tt?>/usr/lib/rpmrc</tt?> is <emphasis>always</emphasis> read.  It contains
+information that RPM uses to set some default values.  <emphasis>This file
+should never be modified!</emphasis>  Doing so may cause RPM to operate incorrectly.
+
+After this stern warning, we should note that it's perfectly all right to
+look at it.  Here it is, in fact:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#############################################################
+# Default values, often overridden in /etc/rpmrc
+
+dbpath:		/var/lib/rpm
+topdir:		/usr/src/redhat
+tmppath:	/var/tmp
+cpiobin:	cpio
+defaultdocdir:  /usr/doc
+
+#############################################################
+
+# Please send new entries to rpm-list@redhat.com
+
+#############################################################
+# Values for RPM_OPT_FLAGS for various platforms
+
+optflags: i386 -O2 -m486 -fno-strength-reduce
+optflags: alpha -O2
+optflags: sparc -O2
+optflags: m68k -O2 -fomit-frame-pointer
+
+#############################################################
+# Canonical arch names and numbers
+
+arch_canon:	i986:	i986	1
+arch_canon:	i886:	i886	1
+arch_canon:	i786:	i786	1
+arch_canon:	i686:	i686	1
+arch_canon:	i586:	i586	1
+arch_canon:	i486:	i486	1
+arch_canon:	i386:	i386	1
+arch_canon:	alpha:	alpha	2
+arch_canon: 	sparc:	sparc	3
+arch_canon: 	sun4:	sparc	3
+arch_canon: 	sun4m:	sparc	3
+arch_canon: 	sun4c:	sparc	3
+# This is really a place holder for MIPS.
+arch_canon:	mips:	mips	4
+arch_canon:	ppc:	ppc	5
+# This is really a place holder for 68000
+arch_canon:	m68k:	m68k	6
+# This is wrong. We really need globbing in here :-(
+arch_canon:	IP:	sgi	7
+arch_canon:     IP22:   sgi     7
+
+arch_canon:    9000/712:       hppa1.1 9
+
+arch_canon:    sun4u:   usparc  10
+
+#############################################################
+# Canonical OS names and numbers
+
+os_canon:	Linux:	Linux	1
+os_canon:	IRIX:	Irix	2
+# This is wrong
+os_canon:	SunOS5:	solaris	3
+os_canon:	SunOS4:	SunOS	4
+
+os_canon:      AmigaOS: AmigaOS 5
+os_canon:          AIX: AIX     5
+os_canon:        HP-UX: hpux10  6
+os_canon:         OSF1: osf1    7
+os_canon:      FreeBSD: FreeBSD 8
+
+#############################################################
+# For a given uname().machine, the default build arch
+
+buildarchtranslate: osfmach3_i986: i386
+buildarchtranslate: osfmach3_i886: i386
+buildarchtranslate: osfmach3_i786: i386
+buildarchtranslate: osfmach3_i686: i386
+buildarchtranslate: osfmach3_i586: i386
+buildarchtranslate: osfmach3_i486: i386
+buildarchtranslate: osfmach3_i386: i386
+
+buildarchtranslate: i986: i386
+buildarchtranslate: i886: i386
+buildarchtranslate: i786: i386
+buildarchtranslate: i686: i386
+buildarchtranslate: i586: i386
+buildarchtranslate: i486: i386
+buildarchtranslate: i386: i386
+
+buildarchtranslate: osfmach3_ppc: ppc
+
+#############################################################
+# Architecture compatibility
+
+arch_compat: alpha: axp
+
+arch_compat: i986: i886
+arch_compat: i886: i786
+arch_compat: i786: i686
+arch_compat: i686: i586
+arch_compat: i586: i486
+arch_compat: i486: i386
+
+arch_compat: osfmach3_i986: i986 osfmach3_i886
+arch_compat: osfmach3_i886: i886 osfmach3_i786
+arch_compat: osfmach3_i786: i786 osfmach3_i686
+arch_compat: osfmach3_i686: i686 osfmach3_i586
+arch_compat: osfmach3_i586: i586 osfmach3_i486
+arch_compat: osfmach3_i486: i486 osfmach3_i386
+arch_compat: osfmach3_i386: i486
+
+arch_compat: osfmach3_ppc: ppc
+
+arch_compat: usparc: sparc
+</screen>
+</figure>
+Quite a bunch of stuff, isn't it?  With the exception of the first five
+lines, which indicate where several important directories and programs are
+located, the remainder of this file contains <tt?>rpmrc</tt?> entries that
+are related to RPM's architecture and operating system processing.  As you
+might imagine, any tinkering here will probably not be very productive, so
+leave any modifications here to the RPM developers.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>/usr/lib/rpmrc</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Next, we have <tt?>/etc/rpmrc</tt?>.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>/etc/rpmrc</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>/etc/rpmrc</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The file <tt?>/etc/rpmrc</tt?>, unlike <tt?>/usr/lib/rpmrc</tt?>, is fair game
+for modifications and additions.  In fact, <tt?>/etc/rpmrc</tt?> isn't
+created by default, so its contents are entirely up to you.  It's the
+perfect place to keep <tt?>rpmrc</tt?> entries of a system-wide or global
+nature.
+
+The <tt?>vendor</tt?> entry is a great example of a good candidate for
+inclusion in <tt?>/etc/rpmrc</tt?>.  In most cases, a particular system is
+dedicated to building packages for one vendor.  In these instances, setting
+the <tt?>vendor</tt?> entry in <tt?>/etc/rpmrc</tt?> is best.
+
+Next in the hierarchy is a file named <tt?>.rpmrc</tt?>, residing in the
+user's login directory.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>/etc/rpmrc</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>.rpmrc</tt?> in the user's login directory</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>~/.rpmrc</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As you might imagine, a file called <tt?>.rpmrc</tt?> in a user's login
+directory is only going to be read by that user when he or she runs RPM.
+Like <tt?>/etc/rpmrc</tt?>, this file is not created by default,  but it can
+contain the same <tt?>rpmrc</tt?> entries as the other files.  The
+<tt?>packager</tt?> entry, which should contain the name and contact
+information for the person who built the package, is an appropriate
+candidate for <tt?>~/.rpmrc</tt?>.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of!<tt?>~/.rpmrc</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title>File indicated by the <tt?>--rcfile</tt?> option</title>
+<indexterm>
+<primary>rcfile@<tt?>--rcfile</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>--rcfile</tt?> option is best used only when a totally different
+RPM configuration is desired for one or two packages.  Since the only other
+<tt?>rpmrc</tt?> file read is <tt?>/usr/lib/rpmrc</tt?> with its low-level
+default settings, the file specified with the <tt?>--rcfile</tt?> option
+will have to be more comprehensive than either <tt?>/etc/rpmrc</tt?> or
+<tt?>~/.rmprc</tt?>.
+
+<indexterm>
+<primary>rcfile@<tt?>--rcfile</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!locations of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpmrc-file-">
+<title><tt?>rpmrc</tt?> File Syntax</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!syntax of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As you might have surmised from the example file we briefly reviewed, the
+basic syntax of an <tt?>rpmrc</tt?> file entry is:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;name&gt;:&lt;value&gt;
+</screen>
+</figure>
+The <tt?>&lt;name&gt;</tt?> part of the entry is not case sensitive, so any
+capitalization is acceptable.  The colon separating the name from its value
+must immediately follow the name.  No spaces are allowed here.  The
+formatting requirements on the value side of the entry vary from value to
+value and will be discussed along with each entry.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!syntax of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpmrc-file-">
+<title><tt?>rpmrc</tt?> File Entries</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In this section, we discuss the various entries that can be used in each of
+the <tt?>rpmrc</tt?> files.
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>arch_canon</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>arch_canon</tt?> entry is used to define a table of architecture
+names and their associated numbers.  These canonical architecture names and
+numbers are then used internally by RPM whenever architecture-specific
+processing takes place.  This entry's format is:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+arch_canon:&lt;label&gt;: &lt;string&gt; &lt;value&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?> after it's been translated using the appropriate
+<tt?>buildarchtranslate</tt?> entry.  If a match is found, then
+<tt?>&lt;string&gt;</tt?> is used by RPM to reference the system's architecture.
+When building a binary package, RPM uses <tt?>&lt;string&gt;</tt?> as part of the
+package's filename, for instance.
+
+The <tt?>&lt;value&gt;</tt?> is a numeric value RPM uses internally to identify the
+architecture.  For example, this number is written in the header of each
+package file so that the <tt?>file</tt?> command can identify the
+architecture for which the package was built.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>os_canon</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>os_canon</tt?> entry is used to define a table of operating system
+names and their associated numbers.  These canonical operating system names
+and numbers are then used internally by RPM whenever operating
+system-specific processing takes place.  This entry's format is:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+os_canon:&lt;label&gt;: &lt;string&gt; &lt;value&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?> after it's been translated using the appropriate
+<tt?>buildostranslate</tt?> entry.
+<footnote>
+<para>
+The <tt?>buildostranslate</tt?>
+<tt?>rpmrc</tt?> file entry is discussed on page
+<xref linkend="rpmrc-buildostranslate">.
+</para>
+</footnote>
+  If a match is found, then
+<tt?>&lt;string&gt;</tt?> is used by RPM to reference the operating system.
+
+The <tt?>&lt;value&gt;</tt?> is a numeric value used to uniquely identify the
+operating system.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>buildarchtranslate</tt?></title>
+<!-- label: rpmrc-buildarchtranslate -->
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildarchtranslate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>buildarchtranslate</tt?> entry is used in the process of defining
+the architecture that RPM will use as the "build" architecture.  As the
+name implies, it is used to translate the raw information returned
+from <tt?>uname(2)</tt?> to the canonical architecture defined by
+<tt?>arch_canon</tt?>.
+
+The format of the <tt?>buildarchtranslate</tt?> entry is slightly different
+from most other <tt?>rpmrc</tt?> file entries.  Instead of the usual
+<tt?>&lt;name&gt;:&lt;value&gt;</tt?> format, the <tt?>buildarchtranslate</tt?> entry looks
+like this:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+buildarchtranslate:&lt;label&gt;: &lt;string&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?>.  If a match is found, then <tt?>&lt;string&gt;</tt?> is used by
+RPM to define the build architecture.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>buildostranslate</tt?></title>
+<!-- label: rpmrc-buildostranslate -->
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildostranslate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>buildostranslate</tt?> entry is used in the process of defining the
+operating system RPM will use as the "build" operating system.  As the
+name implies, it is used to translate the raw information returned by
+<tt?>uname(2)</tt?> to the canonical operating sysetm defined by
+<tt?>os_canon</tt?>.
+
+The format of the <tt?>buildostranslate</tt?> entry is slightly different
+from most other <tt?>rpmrc</tt?> file entries.  Instead of the usual
+<tt?>&lt;name&gt;:&lt;value&gt;</tt?> format, the <tt?>buildostranslate</tt?> entry looks
+like this:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+buildostranslate:&lt;label&gt;: &lt;string&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?>.  If a match is found, then <tt?>&lt;string&gt;</tt?> is used by
+RPM to define the build operating system.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>arch_compat</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>arch_compat</tt?> entry is used to define which architectures are
+compatible with one another.  This information is used when packages are
+installed; in this way, RPM can determine whether a given package file is
+compatible with the system.  The format of the entry is:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+arch_compat:&lt;label&gt;: &lt;list&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is an architecture string, as defined by an
+<tt?>arch_canon</tt?> entry.  The <tt?>&lt;list&gt;</tt?> following it consists of
+one or more architectures, also defined by <tt?>arch_canon</tt?>.  If there
+is more than one architecture in the list, they should be separated by a
+space.
+
+The architectures in the list are considered compatible to the architecture
+specified in the label.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>os_compat</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (operating system-specific)
+
+The <tt?>os_compat</tt?> entry is used to define which operating systems are
+compatible with one another.  This information is used when packages are
+installed; in this way, RPM can determine whether a given package file is
+compatible with the system.  The format of the entry is:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;name&gt;:&lt;label&gt;: &lt;list&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is an operating system string, as defined by an
+<tt?>os_canon</tt?> entry.  The <tt?>&lt;list&gt;</tt?> following it consists of one
+or more operating systems, also defined by <tt?>os_canon</tt?>.  If there is
+more than one operating system in the list, they should be separated by a
+space.
+
+The operating systems in the list are considered compatible to the
+operating system specified in the label.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>builddir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>builddir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>(topdir)/BUILD</tt?>
+
+The <tt?>builddir</tt?> entry is used to define the path to the directory in
+which RPM will build packages.  Its default value is taken from the value
+of the <tt?>topdir</tt?> entry, with "<tt?>/BUILD</tt?>" appended to it.
+Note that if you redefine <tt?>builddir</tt?>, you'll need to specify a
+complete path.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>buildroot</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildroot</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>buildroot</tt?> entry defines the path used as the root directory
+during the install phase of a package build.  For more information on using
+build roots, please see section <xref linkend="rpm-anywhere-buildroot">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>cpiobin</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>cpiobin</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>cpio</tt?>
+
+The <tt?>cpiobin</tt?> entry is used to define the name (and optionally,
+path) of the <tt?>cpio</tt?> program.  RPM uses <tt?>cpio</tt?> to perform a
+variety of functions, and needs to know where the program can be found.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>dbpath</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>dbpath</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>/var/lib/rpm</tt?>
+
+The <tt?>dbpath</tt?> entry is used to define the directory in which the RPM
+database files are stored.  It can be overridden by using the
+<tt?>--dbpath</tt?> option on the RPM command line.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>defaultdocdir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>defaultdocdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>/usr/doc</tt?>
+
+The <tt?>defaultdocdir</tt?> entry is used to define the directory in which
+RPM will store documentation for all installed packages.  It is used only
+during builds to support the <tt?>%doc</tt?> directive.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>distribution</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>distribution</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>distribution</tt?> entry is used to define the distribution for each
+package.  The distribution can also be set by adding the
+<tt?>distribution</tt?> tag to a particular spec file.  The
+<tt?>distribution</tt?> tag in the spec file overrides the
+<tt?>distribution</tt?> <tt?>rpmrc</tt?> file entry.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>excludedocs</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>excludedocs</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>0</tt?>
+
+The <tt?>excludedocs</tt?> entry is used to control if documentation should
+be written to disk when a package is installed.  By default, documentation
+<emphasis>is</emphasis> installed; however, this can be overridden by setting the value
+of <tt?>excludedocs</tt?> to <tt?>1</tt?>.  Note also that the
+<tt?>--excludedocs</tt?> and <tt?>--includedocs</tt?> options can be added
+to the RPM command line to override the <tt?>excludedocs</tt?> entry's
+behavior.  For more information on the <tt?>--excludedocs</tt?> and
+<tt?>--includedocs</tt?> options, please refer to chapter <xref linkend="rpm-i">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>ftpport</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>ftpport</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>ftpport</tt?> entry is used to define the port RPM should use when
+manipulating package files via FTP.  See section <xref linkend="install--ftpport">
+for more information on how FTP ports are used by RPM.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>ftpproxy</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>ftpproxy</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>ftpproxy</tt?> entry is used to define the hostname of the FTP proxy
+system RPM should use when manipulating package files via FTP.  See section
+<xref linkend="install--ftpproxy"> for more information on how FTP proxy systems are
+used by RPM.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>messagelevel</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>messagelevel</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: 3
+
+The <tt?>messagelevel</tt?> entry is used to define the desired verbosity
+level.  Levels less than 3 produce greater amounts of output, while levels
+greater than 3 produce less output.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>netsharedpath</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>netsharedpath</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>netsharedpath</tt?> entry is used to define one or more paths that,
+on the local system, are shared with other systems.  If more than one path
+is specified, they must be separated with colons.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>optflags</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>optflags</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (architecture-specific)
+
+The <tt?>optflags</tt?> entry is used to define a standard set of options
+that can be used during the build process, specifically during
+compilation.
+
+The format of the <tt?>optflags</tt?> entry is slightly different from most
+other <tt?>rpmrc</tt?> file entries.  Instead of the usual
+<tt?>&lt;name&gt;:&lt;value&gt;</tt?> format, the <tt?>optflags</tt?> entry looks like
+this:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+optflags:&lt;architecture&gt; &lt;value&gt;
+</screen>
+</figure>
+For example, assume the following <tt?>optflags</tt?> entries were placed in
+an <tt?>rpmrc</tt?> file:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+optflags: i386 -O2 -m486 -fno-strength-reduce
+optflags: sparc -O2
+</screen>
+</figure>
+If RPM was running on an Intel 80386-compatible architecture, the
+<tt?>optflags</tt?> value would be set to <tt?>-O2 -m486
+-fno-strength-reduce</tt?>.  If, however, RPM was running on a Sun SPARC-based
+system, <tt?>optflags</tt?> would be set to <tt?>-O2</tt?>.
+
+This entry sets the <tt?>RPM_OPT_FLAGS</tt?> environment variable, which
+can be used in the <tt?>%prep</tt?>, <tt?>%build</tt?>, and
+<tt?>%install</tt?> scripts.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>packager</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>packager</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>packager</tt?> entry is used to define the name and contact
+information for the individual responsible for building the package.  The
+contact information is traditionally defined in the following format:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+packager:Erik Troan &lt;ewt@redhat.com&gt;
+</screen>
+</figure>
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>pgp_name</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>pgp_name</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>pgp_name</tt?> entry is used to define the name of the PGP public
+key that will be used to sign each package built.  The value is not case
+sensitive, but the key name entered here must match the actual key name in
+every other aspect.
+
+For more information on signing packages with PGP, please read chapter
+<xref linkend="rpm-pgp">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>pgp_path</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>pgp_path</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>pgp_path</tt?> entry is used to point to a directory containing
+PGP keyring files.  These files will be searched for the public key
+specified by the <tt?>pgp_name</tt?> entry.
+
+For more information on signing packages with PGP, please read chapter
+<xref linkend="rpm-pgp">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>require_distribution</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>require_distribution</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>0</tt?>
+
+The <tt?>require_distribution</tt?> entry is used to direct RPM to require
+that every package built must contain distribution information.  The
+default value directs RPM to not enforce this requirement.  If the entry
+has a non-zero value, RPM will only build packages that define a
+distribution.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>require_icon</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>require_icon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>0</tt?>
+
+The <tt?>require_icon</tt?> entry is used to direct RPM to require
+that every package built must contain an icon.  The default value directs
+RPM to not enforce this requirement.  If the entry has a non-zero value,
+RPM will only build packages that contain an icon.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>require_vendor</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>require_vendor</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>0</tt?>
+
+The <tt?>require_vendor</tt?> entry is used to direct RPM to require
+that every package built must contain vendor information.  The default
+value directs RPM to not enforce this requirement.  If the entry has a
+non-zero value, RPM will only build packages that define a vendor.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>rpmdir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>rpmdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>(topdir)/RPMS</tt?>
+
+The <tt?>rpmdir</tt?> entry is used to define the path to the directory in
+which RPM will write binary package files.  Its default value is taken from
+the value of the <tt?>topdir</tt?> entry, with "<tt?>/RPMS</tt?>" appended
+to it.  Note that if you redefine <tt?>rpmdir</tt?>, you'll need to specify
+a complete path.  RPM will automatically add an architecture-specific
+directory to the end of the path.  For example, on an Intel-based system,
+the actual path would be:
+
+<figure id="sc-rpmrc-file-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+/usr/src/redhat/RPMS/i386
+</screen>
+</figure>
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>signature</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>signature</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>signature</tt?> entry is used to define the type of signature that
+is to be added to each package built.  At the present time, only signatures
+from PGP are supported.  Therefore, the only acceptable value is
+"<tt?>pgp</tt?>".
+
+For more information on signing packages with PGP, please read chapter
+<xref linkend="rpm-pgp">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>sourcedir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>sourcedir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>(topdir)/SOURCES</tt?>
+
+The <tt?>sourcedir</tt?> entry is used to define the path to the directory in
+which RPM will look for sources.  Its default value is taken from the value
+of the <tt?>topdir</tt?> entry, with "<tt?>/SOURCES</tt?>" appended to it.
+Note that if you redefine <tt?>sourcedir</tt?>, you'll need to specify a 
+complete path.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>specdir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>specdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>(topdir)/SPECS</tt?>
+
+The <tt?>specdir</tt?> entry is used to define the path to the directory in
+which RPM will look for spec files.  Its default value is taken from the
+value of the <tt?>topdir</tt?> entry, with "<tt?>/SPECS</tt?>" appended to
+it.  Note that if you redefine <tt?>specdir</tt?>, you'll need to specify a
+complete path.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>srcrpmdir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>srcrpmdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>(topdir)/SRPMS</tt?>
+
+The <tt?>srcrpmdir</tt?> entry is used to define the path to the directory in
+which RPM will write source package files.  Its default value is taken from
+the value of the <tt?>topdir</tt?> entry, with "<tt?>/SRPMS</tt?>" appended
+to it.  Note that if you redefine <tt?>srcrpmdir</tt?>, you'll need to
+specify a complete path.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>timecheck</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>timecheck</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>timecheck</tt?> entry is used to define the default number of
+seconds to apply to the <tt?>--timecheck</tt?> option when building
+packages.  For more information on the <tt?>--timecheck</tt?> option,
+please see section <xref linkend="build--timecheck">.
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>tmppath</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>tmppath</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>/var/tmp</tt?>
+
+The <tt?>tmpdir</tt?> entry is used to define a path to the directory that
+RPM will use for temporary work space.  This normally consists of temporary
+scripts that are used during the build process.  It should be set to an
+absolute path (ie, starting with "<tt?>/</tt?>").
+
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>topdir</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>topdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: <tt?>/usr/src/redhat</tt?>
+
+The <tt?>topdir</tt?> entry is used to define the path to the top-level
+directory in RPM's build directory tree.  It should be set to an absolute
+path (ie, starting with "<tt?>/</tt?>").  The following entries base their
+default values on the value of <tt?>topdir</tt?>:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<tt?>builddir</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>rpmdir</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>sourcedir</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>specdir</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>srcrpmdir</tt?>
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect2>
+
+<sect2 id="s2-rpmrc-file-">
+<title><tt?>vendor</tt?></title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>vendor</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Default value: (none)
+
+The <tt?>vendor</tt?> entry is used to define the name of the organization
+that is responsible for distributing the packaged software.  Normally, this
+would be the name of a business or other such entity.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+

@@ -826,7 +826,7 @@ rpm-2.3-1
               <para>
                 On most Linux systems, the <command>file</command> command can
                 be used to obtain similar information.  See Appendix <xref
-                linkend="rpm-file-format"> for details on how to add this
+                linkend="ch-rpm-file-format"> for details on how to add this
                 capability to your system's <command>file</command> command.
               </para>
             </footnote>

@@ -910,8 +910,8 @@
         parts of an RPM package
         <footnote>
           <para>
-            See Appendix <xref linkend="rpm-file-format"> for complete details
-            on the contents of a .rpm file.
+            See Appendix <xref linkend="ch-rpm-file-format"> for complete
+            details on the contents of a .rpm file.
           </para>
         </footnote>
         .
@@ -1013,7 +1013,8 @@
           However, a package file may be renamed, and the new filename won't
           confuse RPM in the least.  That's because the package label is
           contained within the file.  For a fairly technical view of the inside
-          of a package file, refer to Appendix <xref linkend="rpm-file-format">.
+          of a package file, refer to Appendix <xref
+          linkend="ch-rpm-file-format">.
         </para>
       </sect2>
 
