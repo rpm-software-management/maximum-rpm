@@ -226,62 +226,65 @@ Prefix: /opt
       </para>
     </sect1>
 
-<sect1 id="s1-rpm-reloc-">
-<title>Relocatable Wrinkles: Things to Consider</title>
-<indexterm>
-<primary>relocatable packages!requirements</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-reloc-wrinkles">
+      <title>Relocatable Wrinkles: Things to Consider</title>
+      <indexterm>
+        <primary>relocatable packages!requirements</primary>
+        <secondary></secondary>
+      </indexterm>
 
-While it's certainly no problem to add a <command>prefix</command> tag line to a spec
-file, it's necessary to consider a few other issues:
+      <para>
+        While it's certainly no problem to add a <command>prefix</command> tag
+        line to a spec file, it's necessary to consider a few other issues:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Every file in the <command>%files</command> list must start with the path
-specified on the <command>prefix</command> tag line.
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Every file in the <command>%files</command> list must start with
+              the path specified on the <command>prefix</command> tag line.
+            </para>
+          </listitem>
 
-</para>
-</listitem>
+          <listitem>
+            <para>
+              The software must be written such that it can operate properly if
+              relocated.  Absolute symlinks are a prime example of this.
+            </para>
+          </listitem>
 
-<listitem>
-<para>
-The software must be written such that it can operate properly if
-relocated.  Absolute symlinks are a prime example of this.
+          <listitem>
+            <para>
+              Other software must not rely on the relocatable package being
+              installed in any particular location.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        Let's cover each of these issues, starting with the
+        <command>%files</command> list.
+      </para>
 
-</para>
-</listitem>
+      <sect2 id="s2-rpm-reloc-files-list-restrictions">
+        <title><command>%files</command> List Restrictions</title>
+        <indexterm>
+          <primary>relocatable packages!<command>%files</command> list restrictions</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<listitem>
-<para>
-Other software must not rely on the relocatable package being
-installed in any particular location.
+        <para>
+          As mentioned above, each file in the <command>%files</command> list
+          must start with the relocation prefix.  If this isn't done, the build
+          will fail:
 
-</para>
-</listitem>
-
-</itemizedlist>
-Let's cover each of these issues, starting with the <command>%files</command> list.
-
-<sect2 id="s2-rpm-reloc-">
-<title><command>\%files</command> List Restrictions</title>
-<indexterm>
-<primary>relocatable packages!<command>%files</command> list restrictions</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-As mentioned above, each file in the <command>%files</command> list must start with
-the relocation prefix.  If this isn't done, the build will fail:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+          <figure id="sc-rpm-reloc-failure-example">
+            <title>
+              Package Build Failing Due to Improper Path in
+            <command>%files</command> List
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<computeroutput>
 * Package: cdplayer
 + umask 022
 + echo Executing: %prep
@@ -291,195 +294,177 @@ Package Prefix = usr/local
 File doesn't match prefix (usr/local): /usr/doc/cdplayer-1.0-1
 File not found: /usr/doc/cdplayer-1.0-1
 Build failed.
-# 
-</screen>
-</figure>
-In our example, the build proceeded normally until the time came to create
-the binary package file.  At that point RPM detected the problem.  The
-error message says it all: The <command>prefix</command> line in the spec file
-(<filename>/usr/local</filename>) was not present in the first part of the file's
-(<filename>/usr/doc/cdplayer-1.0-1</filename>) path.  This stopped the build in its
-tracks.
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In our example, the build proceeded normally until the time came to
+          create the binary package file.  At that point RPM detected the
+          problem.  The error message says it all: The <command>prefix</command>
+          line in the spec file (<filename>/usr/local</filename>) was not
+          present in the first part of the file's
+          (<filename>/usr/doc/cdplayer-1.0-1</filename>) path.  This stopped the
+          build in its tracks.
+        </para>
+        <para>
+          The fact that every file in a relocatable package must be installed
+          under the directory specified in the <command>prefix</command> line,
+          raises some issues.  For example, what about a program that reads a
+          configuration file normally kept in <filename>/etc</filename>?
+          <indexterm>
+            <primary>config files</primary>
+          </indexterm>
+        </para>
+        <para>
+          This question leads right into our next section.
+        </para>
+      </sect2>
 
-The fact that every file in a relocatable package must be installed under
-the directory specified in the <command>prefix</command> line, raises some issues.
-For example, what about a program that reads a configuration file normally
-kept in <filename>/etc</filename>?
+      <sect2 id="s2-rpm-reloc-must-be-relocatable">
+        <title>Relocatable Packages Must Contain Relocatable Software</title>
+        <indexterm>
+          <primary>relocatable packages!software requirements</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          While this section's title seems pretty obvious, it's not always easy
+          to tell if a particular piece of software can be relocated.  Let's
+          take a look at the question raised at the end of the previous section.
+          If a program has been written to read its configuration file from
+          <filename>/etc</filename>, there are three possible approaches to
+          making that program relocatable:
 
-  This question leads right into our next section.
+          <orderedlist>
+            <listitem>
+              <para>
+                Set the prefix to <filename>/etc</filename> and package
+                everything under <filename>/etc</filename>.
+              </para>
+            </listitem>
 
-<indexterm>
-<primary>relocatable packages!<command>%files</command> list restrictions|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <listitem>
+              <para>
+                Package everything somewhere other than
+                <filename>/etc</filename> and leave out the config file
+                entirely.
+                <indexterm>
+                  <primary>config files</primary>
+                </indexterm>
+              </para>
+            </listitem>
 
-</sect2>
+            <listitem>
+              <para>
+                Modify the program.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          The first approach would certainly work from a purely technical
+          standpoint, but not many people would be happy with a program that
+          installed itself in <filename>/etc</filename>.  So this approach isn't
+          viable.
+        </para>
+        <para>
+          The second approach might be more appropriate, but it forces users to
+          complete the install by having them create the config file themselves.
+          If RPM's goal is to make software easier to install and remove, this
+          is not a viable approach, either!
+        </para>
+        <para>
+          The final approach might be the best.  Once the program is installed,
+          when the rewritten software is first run, it could see that no
+          configuration file existed in <filename>/etc</filename>, and create
+          one.
+          <indexterm>
+            <primary>config files</primary>
+          </indexterm>
+        </para>
+        <para>
+          However, even though this would work, when the time came to erase the
+          package, the config file would be left behind.  RPM had never
+          installed it, so RPM couldn't get rid of it.  There's also the fact
+          that this approach is probably more labor intensive than most package
+          builders would like.
+        </para>
+        <para>
+          None of these approaches are very appealing, are they?  Some software
+          just doesn't relocate very well.  In general, any of the following
+          things are warning signs that relocation is going to be a problem:
 
-<sect2 id="s2-rpm-reloc-">
-<title>Relocatable Packages Must Contain Relocatable Software</title>
-<indexterm>
-<primary>relocatable packages!software requirements</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The software contains one or more files that must be installed
+                in specific directories
+              </para>
+            </listitem>
 
-While this section's title seems pretty obvious, it's not always easy to
-tell if a particular piece of software can be relocated.  Let's take a look
-at the question raised at the end of the previous section.  If a program
-has been written to read its configuration file from <filename>/etc</filename>, there
-are three possible approaches to making that program relocatable:
+            <listitem>
+              <para>
+                The software refers to system files using relative paths (Which
+                is really just another way of saying the software must be
+                installed in a particular directory)
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          If these kinds of issues crop up, then making the software relocatable
+          is going to be tough.  And there's still one issue left to consider.
+        </para>
+      </sect2>
 
-<orderedlist>
-<listitem>
-<para>
-Set the prefix to <filename>/etc</filename> and package everything under
-<filename>/etc</filename>.
+      <sect2 id="s2-rpm-reloc-referenced">
+        <title>The Relocatable Software Is Referenced By Other Software</title>
 
-</para>
-</listitem>
+        <para>
+          Even assuming the software is written so that it can be put in a
+          relocatable package, there still might be a problem.  And that problem
+          centers not on the relocatable software itself, but on other programs
+          that reference the relocatable software.
+        </para>
+        <para>
+          For example, there are times when a package needs to execute other
+          programs.  This might include backup software that needs to send mail,
+          or a communications program that needs to compress files.  If these
+          underlying programs were relocatable, and not installed where other
+          packages expect them, then they would be of little use.
+        </para>
+        <para>
+          Granted, this isn't a common problem, but it can happen.  And for the
+          package builder interested in building relocatable packages, it's an
+          issue that needs to be explored.  Unfortunately, this type of problem
+          can be the hardest to find.
+        </para>
+        <para>
+          If, however, a software product has been found to be relocatable, the
+          mechanics of actually building a relocatable package are pretty
+          straightforward.  Let's give it a try.
+        </para>
+      </sect2>
+    </sect1>
 
-<listitem>
-<para>
-Package everything somewhere other than <filename>/etc</filename> and leave out
-the config file entirely.
+    <sect1 id="s1-rpm-reloc-building-relocatable">
+      <title>Building a Relocatable Package</title>
+      <indexterm>
+        <primary>relocatable packages!building</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        For this example, we'll use our tried-and-true
+        <filename>cdplayer</filename> application.  Let's start by reviewing the
+        spec file for possible problems:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-Modify the program.
-
-</para>
-</listitem>
-
-</orderedlist>
-The first approach would certainly work from a purely technical standpoint,
-but not many people would be happy with a program that installed itself in
-<filename>/etc</filename>.  So this approach isn't viable.
-
-The second approach might be more appropriate, but it forces users to
-complete the install by having them create the config file themselves.  If
-RPM's goal is to make software easier to install and remove, this is not a
-viable approach, either!
-
-The final approach might be the best.  Once the program is installed, when
-the rewritten software is first run, it could see that no configuration
-file existed in <filename>/etc</filename>, and create one.
-
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-  However, even though this
-would work, when the time came to erase the package, the config file would
-be left behind.  RPM had never installed it, so RPM couldn't get rid of
-it.  There's also the fact that this approach is probably more labor
-intensive than most package builders would like.
-
-None of these approaches are very appealing, are they?  Some software just
-doesn't relocate very well.  In general, any of the following things are
-warning signs that relocation is going to be a problem:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The software contains one or more files that must be installed in
-specific directories
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The software refers to system files using relative paths (Which is
-really just another way of saying the software must be installed in a
-particular directory)
-
-</para>
-</listitem>
-
-</itemizedlist>
-If these kinds of issues crop up, then making the software relocatable is
-going to be tough.  And there's still one issue left to consider.
-
-</sect2>
-
-<sect2 id="s2-rpm-reloc-">
-<title>The Relocatable Software Is Referenced By Other Software</title>
-Even assuming the software is written so that it can be put in a
-relocatable package, there still might be a problem.  And that problem
-centers not on the relocatable software itself, but on other programs that
-reference the relocatable software.
-
-For example, there are times when a package needs to execute other
-programs.  This might include backup software that needs to send mail, or a
-communications program that needs to compress files.  If these underlying
-programs were relocatable, and not installed where other packages expect
-them, then they would be of little use.
-
-Granted, this isn't a common problem, but it can happen.  And for the
-package builder interested in building relocatable packages, it's an issue
-that needs to be explored.  Unfortunately, this type of problem can be the
-hardest to find.
-
-If, however, a software product has been found to be relocatable, the
-mechanics of actually building a relocatable package are pretty
-straightforward.  Let's give it a try.
-
-<indexterm>
-<primary>relocatable packages!software requirements|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>relocatable packages!requirements|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-reloc-">
-<title>Building a Relocatable Package</title>
-<indexterm>
-<primary>relocatable packages!building</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-For this example, we'll use our tried-and-true <filename>cdplayer</filename>
-application.  Let's start by reviewing the spec file for possible problems:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-reloc-spec-review">
+          <title>Checking a Spec File for Relocatability</title>
+          <screen width="60">
+<computeroutput>
 #
 # Example spec file for cdplayer app...
 #
@@ -492,23 +477,32 @@ Name: cdplayer
 /usr/local/bin/cdplay
 %doc /usr/local/man/man1/cdp.1
 %config /etc/cdp-config
-</screen>
-</figure>
-Everything looks all right, except for the <command>%files</command> list.  There
-are files in <filename>/usr/local/bin</filename>, a <command>man</command> page in
-<filename>/usr/local/man/man1</filename>, and a config file in <filename>/etc</filename>.  A prefix
-of <filename>/usr/local</filename> would work pretty well, except for that
-<filename>cdp-config</filename> file.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Everything looks all right, except for the <command>%files</command>
+        list.  There are files in <filename>/usr/local/bin</filename>, a
+        <command>man</command> page in <filename>/usr/local/man/man1</filename>,
+        and a config file in <filename>/etc</filename>.  A prefix of
+        <filename>/usr/local</filename> would work pretty well, except for that
+        <filename>cdp-config</filename> file.
+      </para>
+      <para>
+        For the sake of this first build, we'll declare the config file
+        unnecessary and remove it from the <command>%files</command> list.
+        We'll then add a <command>prefix</command> tag line, setting the prefix
+        to <filename>/usr/local</filename>.  After these changes are made, let's
+        try a build:
 
-For the sake of this first build, we'll declare the config file unnecessary
-and remove it from the <command>%files</command> list.  We'll then add a
-<command>prefix</command> tag line, setting the prefix to <filename>/usr/local</filename>.  After
-these changes are made, let's try a build:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+        <figure id="sc-rpm-reloc-build-attempt">
+          <title>
+            Attempting a First Build Using the <command>%prefix</command> Tag
+          </title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<computeroutput>
 * Package: cdplayer
 + umask 022
 + echo Executing: %prep
@@ -523,28 +517,36 @@ Package Prefix = usr/local
 File doesn't match prefix (usr/local): /usr/doc/cdplayer-1.0-1
 File not found: /usr/doc/cdplayer-1.0-1
 Build failed.
-# 
-</screen>
-</figure>
-The build proceeded normally up to the point of actually creating the
-binary package.  The <computeroutput>Package Prefix = usr/local</computeroutput> line confirms that
-RPM picked up our <command>prefix</command> tag line.  But the build stopped -- and
-on a file called <filename>/usr/doc/cdplayer-1.0-1</filename>.  But that file isn't
-even in the <command>%files</command> list.  What's going on?
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The build proceeded normally up to the point of actually creating the
+        binary package.  The <computeroutput>Package Prefix =
+        usr/local</computeroutput> line confirms that RPM picked up our
+        <command>prefix</command> tag line.  But the build stopped --- and on a
+        file called <filename>/usr/doc/cdplayer-1.0-1</filename>.  But that file
+        isn't even in the <command>%files</command> list.  What's going on?
+      </para>
+      <para>
+        Take a closer look at the <command>%files</command> list.  See the line
+        that reads <command>%doc README</command>?  In section <xref
+        linkend="rpm-macros-doc">, we discussed how the <command>%doc</command>
+        directive creates a directory under <filename>/usr/doc</filename>.
+        That's the file that killed the build --- the directory created by the
+        <command>%doc</command> directive.
+      </para>
+      <para>
+        Let's temporarily remove that line from the <command>%files</command>
+        list and try again:
 
-Take a closer look at the <command>%files</command> list.  See the line that reads
-<command>%doc README</command>?  In section <xref linkend="rpm-macros-doc">, we discussed how
-the <command>%doc</command> directive creates a directory under <filename>/usr/doc</filename>.
-That's the file that killed the build -- the directory created by the
-<command>%doc</command> directive.
-
-Let's temporarily remove that line from the <command>%files</command> list and try
-again:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+        <figure id="sc-rpm-reloc-build-attempt2">
+          <title>A Second Build Attempt</title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<computeroutput>
 * Package: cdplayer
 + umask 022
 + echo Executing: %prep
@@ -576,159 +578,177 @@ cdplayer-1.0.tgz
 82 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
-# 
-</screen>
-</figure>
-The build completed normally.  Note how the files to be placed in the
-binary package file are listed, minus the prefix of <filename>/usr/local</filename>.
-Some of you might be wondering why the <filename>cdp.1</filename> file didn't cause
-problems.  After all, it had a <command>%doc</command> directive, too.  The answer
-lies in the way the file was specified.  Since the file was specified using
-an absolute path, and that path started with the prefix
-<filename>/usr/local</filename>, there was no problem.  A more complete discussion of
-the <command>%doc</command> directive can be found in section
-<xref linkend="rpm-macros-doc">.
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The build completed normally.  Note how the files to be placed in the
+        binary package file are listed, minus the prefix of
+        <filename>/usr/local</filename>.  Some of you might be wondering why the
+        <filename>cdp.1</filename> file didn't cause problems.  After all, it
+        had a <command>%doc</command> directive, too.  The answer lies in the
+        way the file was specified.  Since the file was specified using an
+        absolute path, and that path started with the prefix
+        <filename>/usr/local</filename>, there was no problem.  A more complete
+        discussion of the <command>%doc</command> directive can be found in
+        section <xref linkend="rpm-macros-doc">.
+      </para>
 
-<sect2 id="s2-rpm-reloc-">
-<title>Tying Up the Loose Ends</title>
-In the course of building this package, we ran into two hitches:
+      <sect2 id="s2-rpm-reloc-tying-loose-ends">
+        <title>Tying Up the Loose Ends</title>
 
-<orderedlist>
-<listitem>
-<para>
-The config file <filename>cdp-config</filename> couldn't be installed in
-<filename>/etc</filename>.
+        <para>
+          In the course of building this package, we ran into two hitches:
 
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <orderedlist>
+            <listitem>
+              <para>
+                The config file <filename>cdp-config</filename> couldn't be
+                installed in <filename>/etc</filename>.
+                <indexterm>
+                  <primary>config files</primary>
+                </indexterm>
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                The <filename>README</filename> file could not be packaged using
+                the <command>%doc</command> directive.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          Both of these issues are due to the fact that the files' paths do not
+          start with the default prefix path <filename>/usr/local</filename>.
+          Does this mean this package cannot be relocated?  Possibly, but there
+          are two options to consider.  The first option is to review the
+          prefix.  In the case of our example, if we chose a prefix of
+          <filename>/usr</filename> instead of <filename>/usr/local</filename>,
+          the <filename>README</filename> file could be packaged using the
+          <command>%doc</command> directive, since the default documentation
+          directory is <filename>/usr/doc</filename>.  Another approach would be
+          to use the <command>%docdir</command> directive to define another
+          documentation-holding directory somewhere along the prefix path.
+          <footnote>
+            <para>
+              For more information on the <command>%docdir</command> directive,
+              please see section <xref
+              linkend="s3-rpm-inside-docdir-directive">.
+            </para>
+          </footnote>
+        </para>
+        <para>
+          This approach wouldn't work for <filename>/etc/cdp-config</filename>,
+          though.  To package that file, we'd need to resort to more extreme
+          measures.  Basically, this approach would entail packaging the file in
+          an acceptable directory (something under
+          <filename>/usr/local</filename>) and using the
+          <command>%post</command> post-install script to move the file to
+          <filename>/etc</filename>.  Pointing a symlink at the config file is
+          another possibility.
+          <indexterm>
+            <primary>config files</primary>
+          </indexterm>
+        </para>
+        <para>
+          Of course, this approach has some problems.  First, you'll need to
+          write a <command>%postun</command> script to undo what the
+          <command>%post</command> script does.
+          <footnote>
+            <para>
+              Install and erase-time scripts have an environment variable,
+              <envar>RPM_INSTALL_PREFIX</envar>, that can be used to write
+              scripts that are able to act appropriately if the package is
+              relocated.  See section <xref
+              linkend="s2-rpm-inside-erase-time-scripts"> for more information.
+            </para>
+          </footnote>
+          A <command>%verifyscript</command> that made sure the files were in
+          place would be nice, too.  Second, because the file or symlink wasn't
+          installed by RPM, there's no entry for it in the RPM database.  This
+          reduces the utility of RPM's <command>-c</command> and
+          <command>-d</command> options when issuing queries.  Finally, if you
+          actually move files around using the <command>%post</command> script,
+          the files you move will not verify properly, and when the package is
+          erased, your users will get some disconcerting messages when RPM can't
+          find the moved files to erase them.  If you have to resort to these
+          kinds of tricks, it's probably best to forget trying to make the
+          package relocatable.
+        </para>
+      </sect2>
 
-<listitem>
-<para>
-The <filename>README</filename> file could not be packaged using the
-<command>%doc</command> directive.
+      <sect2 id="s2-rpm-reloc-test-drive">
+        <title>Test-Driving a Relocatable Package</title>
+        <indexterm>
+          <primary>relocatable packages!testing</primary>
+          <secondary></secondary>
+        </indexterm>
 
-</para>
-</listitem>
+        <para>
+          Looks like <filename>cdplayer</filename> is a poor candidate for being
+          made relocatable.  However, since we did get a hamstrung version to
+          build successfully, we can use it to show how to test a relocatable
+          package.
+        </para>
+        <para>
+          First, let's see if the binary package file's prefix has been recorded
+          properly.  We can do this by using the
+          <command>--queryformat</command> option to RPM's query mode:
 
-</orderedlist>
-Both of these issues are due to the fact that the files' paths do not start
-with the default prefix path <filename>/usr/local</filename>.  Does this mean this
-package cannot be relocated?  Possibly, but there are two options to
-consider.  The first option is to review the prefix.  In the case of our
-example, if we chose a prefix of <filename>/usr</filename> instead of
-<filename>/usr/local</filename>, the <filename>README</filename> file could be packaged using the
-<command>%doc</command> directive, since the default documentation directory is
-<filename>/usr/doc</filename>.  Another approach would be to use the <command>%docdir</command>
-directive to define another documentation-holding directory somewhere along
-the prefix path.
-<footnote>
-<para>
-For more information on the <command>%docdir</command>
-directive, please see section <xref linkend="inside-docdir">.
-</para>
-</footnote>
-
-This approach wouldn't work for <filename>/etc/cdp-config</filename>, though.  To
-package that file, we'd need to resort to more extreme measures.
-Basically, this approach would entail packaging the file in an acceptable
-directory (something under <filename>/usr/local</filename>) and using the
-<command>%post</command> post-install script to move the file to <filename>/etc</filename>.
-Pointing a symlink at the config file is another possibility.
-
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Of course, this approach has some problems.  First, you'll need to write a
-<command>%postun</command> script to undo what the <command>%post</command> script
-does.
-<footnote>
-<para>
-Install and erase-time scripts have an environment variable,
-<envar>RPM_INSTALL_PREFIX</envar>, that can be used to write scripts that are
-able to act appropriately if the package is relocated.  See section
-<xref linkend="inside-install/erase"> for more information.
-</para>
-</footnote>
-  A
-<command>%verifyscript</command> that made sure the files were in place would be
-nice, too.  Second, because the file or symlink wasn't installed by RPM,
-there's no entry for it in the RPM database.  This reduces the utility of
-RPM's <command>-c</command> and <command>-d</command> options when issuing queries.  Finally,
-if you actually move files around using the <command>%post</command> script, the
-files you move will not verify properly, and when the package is erased,
-your users will get some disconcerting messages when RPM can't find the
-moved files to erase them.  If you have to resort to these kinds of tricks,
-it's probably best to forget trying to make the package relocatable.
-
-<indexterm>
-<primary>relocatable packages!building|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-<sect2 id="s2-rpm-reloc-">
-<title>Test-Driving a Relocatable Package</title>
-<indexterm>
-<primary>relocatable packages!testing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Looks like <filename>cdplayer</filename> is a poor candidate for being made
-relocatable.  However, since we did get a hamstrung version to build
-successfully, we can use it to show how to test a relocatable package.
-
-First, let's see if the binary package file's prefix has been recorded
-properly.  We can do this by using the <command>--queryformat</command> option to
-RPM's query mode:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -qp --queryformat '%{DEFAULTPREFIX</userinput>\n' cdplayer-1.0-1.i386.rpm}
+          <figure id="sc-rpm-reloc-queryformat-test">
+            <title>
+              Using the <command>--queryformat</command> Option to Check
+              for a Default Prefix
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qp --queryformat '%{DEFAULTPREFIX}\n' cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 /usr/local
-#
-</screen>
-</figure>
-The <command>DEFAULTPREFIX</command> tag directs RPM to display the prefix used
-during the build.  As we can see, it's <filename>/usr/local</filename>, just as we
-intended.  The <command>--queryformat</command> option is discussed in section
-<xref linkend="query--queryformat">.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>DEFAULTPREFIX</command> tag directs RPM to display the
+          prefix used during the build.  As we can see, it's
+          <filename>/usr/local</filename>, just as we intended.  The
+          <command>--queryformat</command> option is discussed in section <xref
+          linkend="s3-rpm-query-queryformat-option">.
+        </para>
+        <para>
+          So it looks like we have a relocatable package.  Let's try a couple of
+          installs and see if we really <emphasis>can</emphasis> install it in
+          different locations.  First, let's try a regular install with no
+          prefix specified:
 
-So it looks like we have a relocatable package.  Let's try a couple of
-installs and see if we really <emphasis>can</emphasis> install it in different
-locations.  First, let's try a regular install with no prefix specified:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Uvh cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-reloc-install-no-prefix">
+            <title>
+              Installing Our Package Without the <command>--prefix</command>
+              Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Uvh cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer    ##################################################
-#
-</screen>
-</figure>
-That seemed to work well enough.  Let's see if the files went where we
-intended:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          That seemed to work well enough.  Let's see if the files went where we
+          intended:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>ls -al /usr/local/bin</userinput>
+          <figure id="sc-rpm-reloc-no-prefix-check">
+            <title>Checking the Results of Our "No Prefix" Install</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al /usr/local/bin</userinput>
+<computeroutput>
 total 558
 -rwxr-xr-x   1 root     root        40739 Oct  7 13:23 cdp*
 lrwxrwxrwx   1 root     root           18 Oct  7 13:40 cdplay -&gt; /usr/local/bin/cdp*
@@ -737,166 +757,213 @@ lrwxrwxrwx   1 root     root           18 Oct  7 13:40 cdplay -&gt; /usr/local/b
 total 9
 -rwxr-xr-x   1 root     root         4550 Oct  7 13:23 cdp.1*
 &hellip;
-#
-</screen>
-</figure>
-Looks good.  Let's erase the package and reinstall it with a different
-prefix:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Looks good.  Let's erase the package and reinstall it with a different
+          prefix:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -e cdplayer</userinput>
-# <userinput>rpm -Uvh --prefix /usr/foonly/blather cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-reloc-install-with-prefix">
+            <title>
+              Reinstalling the Package Using the <command>--prefix</command>
+              Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -e cdplayer</userinput>
+<prompt># </prompt><userinput>rpm -Uvh --prefix /usr/foonly/blather cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer    ##################################################
-#
-</screen>
-</figure>
-(We should mention that directories <filename>foonly</filename> and <filename>blather</filename>
-didn't exist prior to installing <filename>cdplayer</filename>.)
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          (We should mention that directories <filename>foonly</filename> and
+          <filename>blather</filename> didn't exist prior to installing
+          <filename>cdplayer</filename>.)
+        </para>
+        <para>
+          RPM has another tag that can be used with the
+          <command>--queryformat</command> option.  It's called
+          <command>INSTALLPREFIX</command> and using it displays the prefix
+          under which a package was installed.  Let's give it a try:
 
-RPM has another tag that can be used with the <command>--queryformat</command>
-option.  It's called <command>INSTALLPREFIX</command> and using it displays the
-prefix under which a package was installed.  Let's give it a try:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -q --queryformat '%{INSTALLPREFIX</userinput>\n' cdplayer}
+          <figure id="sc-rpm-reloc-queryformat-installprefix">
+            <title>
+              Using the <command>--queryformat</command> Option to Display the
+              Prefix a Package Was Installed Under
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -q --queryformat '%{INSTALLPREFIX}\n' cdplayer</userinput>
+<computeroutput>
 /usr/foonly/blather
-#
-</screen>
-</figure>
-As we can see, it displays the prefix we entered on the command line.
-Let's see if the files were installed as we directed:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we can see, it displays the prefix we entered on the command line.
+          Let's see if the files were installed as we directed:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/foonly/blather/</userinput>
-# ls -al
+          <figure id="sc-rpm-reloc-with-prefix-check">
+            <title>Verifying That the Package Was Relocated</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/foonly/blather/</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
 total 2
 drwxr-xr-x   2 root     root         1024 Oct  7 13:45 bin/
 drwxr-xr-x   3 root     root         1024 Oct  7 13:45 man/
-#
-</screen>
-</figure>
-So far, so good -- the proper directories are there.  Let's look at the
-<command>man</command> page first:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          So far, so good --- the proper directories are there.  Let's look at
+          the <command>man</command> page first:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/foonly/blather/man/man1/</userinput>
-# ls -al
+          <figure id="sc-rpm-reloc-with-prefix-chec2">
+            <title>Verifying File Locations: Part I</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/foonly/blather/man/man1/</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
 total 5
 -rwxr-xr-x   1 root     root         4550 Oct  7 13:23 cdp.1*
-#
+</computeroutput>
+<prompt>#</prompt>
 </screen>
 </figure>
-That looks ok.  Now on to the files in <filename>bin</filename>:
+        </para>
+        <para>
+          That looks ok.  Now on to the files in <filename>bin</filename>:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/foonly/blather/bin</userinput>
-# <userinput>ls -al</userinput>
+          <figure id="sc-rpm-reloc-with-prefix-check3">
+            <title>Verifying File Locations: Part II</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/foonly/blather/bin</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
 total 41
 -rwxr-xr-x   1 root     root        40739 Oct  7 13:23 cdp*
 lrwxrwxrwx   1 root     root           18 Oct  7 13:45 cdplay -&gt; /usr/local/bin/cdp
-#
-</screen>
-</figure>
-Uh-oh.  That <filename>cdplay</filename> symlink isn't right.  What happened?  If we
-look at <filename>cdplayer</filename>'s makefile, we see the answer:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Uh-oh.  That <filename>cdplay</filename> symlink isn't right.  What
+          happened?  If we look at <filename>cdplayer</filename>'s makefile, we
+          see the answer:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-reloc-bad-symlink">
+            <title>A Symbolic Link Causes Trouble</title>
+            <screen width="60">
+<computeroutput>
 install: cdp cdp.1.Z
 &hellip;
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
-</screen>
-</figure>
-Ah, when the software is installed during RPM's build process, the make
-file sets up the symbolic link.  Looking back at the <command>%files</command> list,
-we see <filename>cdplay</filename> listed.  RPM blindly packaged the symlink, complete
-with its non-relocatable string.  This is why we mentioned absolute
-symlinks as a prime example of non-relocatable software.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Ah, when the software is installed during RPM's build process, the
+          make file sets up the symbolic link.  Looking back at the
+          <command>%files</command> list, we see <filename>cdplay</filename>
+          listed.  RPM blindly packaged the symlink, complete with its
+          non-relocatable string.  This is why we mentioned absolute symlinks as
+          a prime example of non-relocatable software.
+        </para>
+        <para>
+          Fortunately, this problem isn't that difficult to fix.  All we need to
+          do is change the line in the makefile that creates the symlink from:
 
-Fortunately, this problem isn't that difficult to fix.  All we need to do
-is change the line in the makefile that creates the symlink from:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-reloc-change-from">
+            <title>A Non-Relocatable Symlink</title>
+            <screen width="60">
+<computeroutput>
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
-</screen>
-</figure>
-To:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          To:
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-reloc-change-to">
+            <title>A Relocatable Symlink</title>
+            <screen width="60">
+<computeroutput>
 ln -s ./cdp /usr/local/bin/cdplay
-</screen>
-</figure>
-Now <filename>cdplay</filename> will always point to <filename>cdp</filename>, no matter where it's
-installed.  When building relocatable packages, relative symlinks are your
-friend!
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Now <filename>cdplay</filename> will always point to
+          <filename>cdp</filename>, no matter where it's installed.  When
+          building relocatable packages, relative symlinks are your friend!
+        </para>
+        <para>
+          After rebuilding the package, let's see if our modifications have the
+          desired effect.  First, a normal install with the default prefix:
 
-After rebuilding the package, let's see if our modifications have the
-desired effect.  First, a normal install with the default prefix:
-
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Uvh --nodeps cdplayer-1.0-1.i386.rpm</userinput>
+<figure id="sc-rpm-reloc-fixed-no-prefix-check">
+            <title>Installing the Fixed Package With No Prefix</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Uvh cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer    ##################################################
-# <userinput>cd /usr/local/bin/</userinput>
-# <userinput>ls -al cdplay</userinput>
+</computeroutput>
+<prompt># </prompt><userinput>cd /usr/local/bin/</userinput>
+<prompt># </prompt><userinput>ls -al cdplay</userinput>
+<computeroutput>
 lrwxrwxrwx   1 root     root           18 Oct  8 22:32 cdplay -&gt; ./cdp*
-</screen>
-</figure>
-Next, we'll try a second install using the <command>--prefix</command> option
-(after we first delete the original package):
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Next, we'll try a second install using the <command>--prefix</command>
+          option (after we first delete the original package):
 
-<figure id="sc-rpm-reloc-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -e cdplayer</userinput>
-# <userinput>rpm -Uvh --nodeps --prefix /a/dumb/prefix cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-reloc-fixed-with-prefix-check">
+            <title>Installing the Fixed Package With a Prefix</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -e cdplayer</userinput>
+<prompt># </prompt><userinput>rpm -Uvh --prefix /a/dumb/prefix cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer    ##################################################
-# <userinput>cd /a/dumb/prefix/bin/</userinput>
-# <userinput>ls -al cdplay</userinput>
+</computeroutput>
+<prompt># </prompt><userinput>cd /a/dumb/prefix/bin/</userinput>
+<prompt># </prompt><userinput>ls -al cdplay</userinput>
+<computeroutput>
 lrwxrwxrwx   1 root     root           30 Oct  8 22:34 cdplay -&gt; ./cdp*
-#
-</screen>
-</figure>
-As you can see, the trickiest part about building relocatable packages is
-making sure the software you're packaging is up to the task.  Once that
-part of the job is done, the actual modifications are straightforward.
-
-In the next chapter, we'll cover how packages can be built in non-standard
-directories, as well as how non-root users can build packages.
-
-<indexterm>
-<primary>relocatable packages!testing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>relocatable packages|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-</sect1>
-
-</chapter>
-
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As you can see, the trickiest part about building relocatable packages
+          is making sure the software you're packaging is up to the task.  Once
+          that part of the job is done, the actual modifications are
+          straightforward.
+        </para>
+        <para>
+          In the next chapter, we'll cover how packages can be built in
+          non-standard directories, as well as how non-root users can build
+          packages.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>

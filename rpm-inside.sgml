@@ -1344,7 +1344,7 @@ Prefix: /opt
           </para>
           <para>
             For more information about creating relocatable packages, see
-            chapter <xref linkend="rpm-reloc">.
+            chapter <xref linkend="ch-rpm-reloc">.
           </para>
         </sect3>
 
@@ -3749,7 +3749,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           <para>
             This is not entirely the case when a relocatable package is being
             built.  For more information on relocatable packages, see chapter
-            <xref linkend="rpm-reloc">.
+            <xref linkend="ch-rpm-reloc">.
           </para>
         </footnote>
       </para>
