@@ -1,6 +1,5 @@
 AUTOMAKE_OPTIONS = 1.4 foreign
 
-docbook_css =	@DOCBOOK_CSS@
 images_gif =	@IMAGES_GIF@
 hdir =		html
 
@@ -57,7 +56,6 @@ noinst_DATA =	setup genhtml ChangeLog
 $(hdir):
 	rm -rf $(hdir)
 	mkdir -p $(hdir)/stylesheet-images
-	cp $(docbook_css) $(hdir)
 	cp $(images_gif)/*.gif $(hdir)/stylesheet-images
 	touch generated-index.sgml
 

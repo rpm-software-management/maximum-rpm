@@ -15,18 +15,8 @@ else
 fi
 AC_SUBST(COLLATEINDEX_PL)
 
-if test -f /usr/share/sgml/docbook/dsssl-stylesheets-*/test/docbook.dsl ; then
-    DOCBOOK_CSS="`echo /usr/share/sgml/docbook/dsssl-stylesheets-*/test/docbook.css`"
-
-elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/test/docbook.css ; then
-    DOCBOOK_CSS=/usr/lib/sgml/stylesheets/nwalsh-modular/test/docbook.css
-else
-    DOCBOOK_CSS="`pwd`/docbook.css"
-fi
-AC_SUBST(DOCBOOK_CSS)
-
-if test -f /usr/share/sgml/docbook/dsssl-stylesheets-*/html/docbook.dsl ; then
-    DOCBOOK_DSL="`echo /usr/share/sgml/docbook/dsssl-stylesheets-*/html/docbook.dsl`"
+if test -f /usr/share/sgml/docbook/dsssl-stylesheets/html/docbook.dsl ; then
+    DOCBOOK_DSL=/usr/share/sgml/docbook/dsssl-stylesheets/html/docbook.dsl
 
 elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl ; then
     DOCBOOK_DSL=/usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl
@@ -35,8 +25,8 @@ else
 fi
 AC_SUBST(DOCBOOK_DSL)
 
-if test -d /usr/share/sgml/docbook/dsssl-stylesheets-*/images ; then
-    IMAGES_GIF="`echo /usr/share/sgml/docbook/dsssl-stylesheets-*/images`"
+if test -d /usr/share/sgml/docbook/dsssl-stylesheets/images ; then
+    IMAGES_GIF=/usr/share/sgml/docbook/dsssl-stylesheets/images
 elif test -d /usr/lib/sgml/stylesheets/nwalsh-modular/images ; then
     IMAGES_GIF=/usr/lib/sgml/stylesheets/nwalsh-modular/images
 else
