@@ -1,0 +1,24 @@
+#!/bin/sh
+set -x
+
+subdir=./html
+docbook_css="/usr/share/sgml/docbook/dsssl-stylesheets-1.59/test/docbook.css"
+images="/usr/share/sgml/docbook/dsssl-stylesheets-1.59/images"
+
+rm -rf $subdir
+mkdir -p $subdir/stylesheet-images
+cp $docbook_css $subdir
+cp $images/*.gif $subdir/stylesheet-images
+
+cd $subdir
+
+jade -t sgml -ihtml -d ../redhat-html.dsl -V html-index ../max-rpm.sgml
+
+perl /usr/bin/collateindex.pl -o ../temp-index.sgml HTML.index
+
+cat ../temp-index.sgml | ../fix-index > ../generated-index.sgml
+
+jade -t sgml -ihtml -d ../redhat-html.dsl ../max-rpm.sgml
+
+cd ..
+
