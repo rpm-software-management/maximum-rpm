@@ -3,8 +3,8 @@
     <!-- label: rpm-depend -->
 
     <indexterm>
-      <primary>dependencies!adding</primary>
-      <secondary></secondary>
+      <primary>dependencies</primary>
+      <secondary>adding</secondary>
     </indexterm>
 
     <para>
@@ -55,8 +55,8 @@
     <sect1 id="s1-rpm-depend-overview">
       <title>An Overview of Dependencies</title>
       <indexterm>
-        <primary>dependencies!basic concepts</primary>
-        <secondary></secondary>
+        <primary>dependencies</primary>
+        <secondary>basic concepts</secondary>
       </indexterm>
 
       <para>
@@ -99,8 +99,8 @@
     <sect1 id="s1-rpm-depend-auto-depend">
       <title>Automatic Dependencies</title>
       <indexterm>
-        <primary>dependencies!automatically added</primary>
-        <secondary></secondary>
+        <primary>dependencies</primary>
+        <secondary>automatically added</secondary>
       </indexterm>
 
       <para>
@@ -137,8 +137,8 @@
       <sect2 id="s2-rpm-depend-auto-depend-scripts">
         <title>The Automatic Dependency Scripts</title>
         <indexterm>
-          <primary>dependencies!scripts related to</primary>
-          <secondary></secondary>
+          <primary>dependencies</primary>
+          <secondary>scripts related to</secondary>
         </indexterm>
 
         <para>
@@ -169,9 +169,9 @@
             Shared Library Requirements
           </title>
           <indexterm>
-            <primary>dependencies!scripts related to!<filename>find-requires</filename></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>dependencies</primary>
+            <secondary>scripts related to</secondary>
+            <tertiary><filename>find-requires</filename></tertiary>
           </indexterm>
 
           <indexterm>
@@ -217,9 +217,9 @@ done | sort -u | xargs -r -n 1 basename | sort -u
             Shared Library Sonames
           </title>
           <indexterm>
-            <primary>dependencies!scripts related to!<filename>find-provides</filename></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>dependencies</primary>
+            <secondary>scripts related to</secondary>
+            <tertiary><filename>find-provides</filename></tertiary>
           </indexterm>
 
           <indexterm>
@@ -269,9 +269,9 @@ done | sort -u
       <sect2 id="s2-rpm-depend-auto-depend-example">
         <title>Automatic Dependencies: An Example</title>
         <indexterm>
-          <primary>dependencies!automatically added!example of</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>dependencies</primary>
+          <secondary>automatically added</secondary>
+          <tertiary>example of</tertiary>
         </indexterm>
 
         <para>
@@ -385,8 +385,8 @@ libc.so.5
           Dependency Processing
         </title>
         <indexterm>
-          <primary>dependencies!<command>autoreqprov</command> tag</primary>
-          <secondary></secondary>
+          <primary>dependencies</primary>
+          <secondary><command>autoreqprov</command> tag</secondary>
         </indexterm>
 
         <indexterm>
@@ -415,8 +415,8 @@ AutoReqProv: no
     <sect1 id="s1-rpm-depend-manual-dependencies">
       <title>Manual Dependencies</title>
       <indexterm>
-        <primary>dependencies!manually added</primary>
-        <secondary></secondary>
+        <primary>dependencies</primary>
+        <secondary>manually added</secondary>
       </indexterm>
 
       <para>
@@ -430,8 +430,8 @@ AutoReqProv: no
       <sect2 id="s2-rpm-depend-requires-tag">
         <title>The <command>requires</command> Tag</title>
         <indexterm>
-          <primary>dependencies!<command>requires</command> tag</primary>
-          <secondary></secondary>
+          <primary>dependencies</primary>
+          <secondary><command>requires</command> tag</secondary>
         </indexterm>
 
         <indexterm>
@@ -498,8 +498,8 @@ requires: bar, baz
         <sect3 id="s3-rpm-depend-version-requirements">
           <title>Adding Version Requirements</title>
           <indexterm>
-            <primary>dependencies!version requirements, adding</primary>
-            <secondary></secondary>
+            <primary>dependencies</primary>
+            <secondary>version requirements, adding</secondary>
           </indexterm>
 
           <para>
@@ -598,8 +598,8 @@ requires: bar &gt;= 2.7-4, baz = 2.1-1
           <sect4 id="s4-rpm-depend-version-serial">
             <title>Solution Number 1: Serial numbers</title>
             <indexterm>
-              <primary>dependencies!serial numbers, using</primary>
-              <secondary></secondary>
+              <primary>dependencies</primary>
+              <secondary>serial numbers, using</secondary>
             </indexterm>
 
             <para>
@@ -682,8 +682,8 @@ Requires: foo &gt;=S 42
       <sect2 id="s2-rpm-depend-conflicts-tag">
         <title>The <command>conflicts</command> Tag</title>
         <indexterm>
-          <primary>dependencies!<command>conflicts</command> tag</primary>
-          <secondary></secondary>
+          <primary>dependencies</primary>
+          <secondary><command>conflicts</command> tag</secondary>
         </indexterm>
 
         <indexterm>
@@ -708,8 +708,8 @@ Requires: foo &gt;=S 42
       <sect2 id="s2-rpm-depend-provides-tag">
         <title>The <command>provides</command> Tag</title>
         <indexterm>
-          <primary>dependencies!<command>provides</command> tag</primary>
-          <secondary></secondary>
+          <primary>dependencies</primary>
+          <secondary><command>provides</command> tag</secondary>
         </indexterm>
 
         <indexterm>
@@ -741,8 +741,8 @@ Requires: foo &gt;=S 42
         <sect3 id="s3-rpm-depend-virtual-packages">
           <title>Virtual Packages</title>
           <indexterm>
-            <primary>dependencies!virtual packages</primary>
-            <secondary></secondary>
+            <primary>dependencies</primary>
+            <secondary>virtual packages</secondary>
           </indexterm>
 
           <para>

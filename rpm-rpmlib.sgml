@@ -2,8 +2,8 @@
     <title>A Guide to the RPM Library API</title>
 
     <indexterm>
-      <primary>rpmlib!guide to using</primary>
-      <secondary></secondary>
+      <primary>rpmlib</primary>
+      <secondary>guide to using</secondary>
     </indexterm>
 
     <para>
@@ -17,8 +17,8 @@
     <sect1 id="s1-rpm-rpmlib-overview">
       <title>An Overview of rpmlib</title>
       <indexterm>
-        <primary>rpmlib!overview</primary>
-        <secondary></secondary>
+        <primary>rpmlib</primary>
+        <secondary>overview</secondary>
       </indexterm>
 
       <para>
@@ -78,9 +78,9 @@
       <sect2 id="s2-rpm-rpmlib-error-handling">
         <title>Error Handling</title>
         <indexterm>
-          <primary>rpmlib!functions!error handling</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>error handling</tertiary>
         </indexterm>
 
         <para>
@@ -96,8 +96,8 @@
             Return Error Code --- <function>rpmErrorCode()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmErrorCode()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmErrorCode()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmerrorcode">
@@ -123,8 +123,8 @@ int rpmErrorCode(void);
             Return Error String --- <function>rpmErrorString()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmErrorString()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmErrorString()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmerrorstring">
@@ -151,8 +151,8 @@ char *rpmErrorString(void);
             <function>rpmErrorSetCallback()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmErrorSetCallback()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmErrorSetCallback()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmerrorssetcallback">
@@ -177,9 +177,9 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
       <sect2 id="s2-rpm-rpmlib-getting-package-information">
         <title>Getting Package Information</title>
         <indexterm>
-          <primary>rpmlib!functions!package information</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>package information</tertiary>
         </indexterm>
 
         <para>
@@ -201,8 +201,8 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
             <function>rpmReadPackageInfo()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmReadPackageInfo()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmReadPackageInfo()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmreadpackageinfo">
@@ -266,8 +266,8 @@ int rpmReadPackageInfo(int fd,
             Read Package Header --- <function>rpmReadPackageHeader()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmReadPackageHeader()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmReadPackageHeader()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmreadpackageheader">
@@ -335,9 +335,9 @@ int rpmReadPackageHeader(int fd,
       <sect2 id="s2-rpm-rpmlib-variable-manipulation">
         <title>Variable Manipulation</title>
         <indexterm>
-          <primary>rpmlib!functions!variable manipulation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>variable manipulation</tertiary>
         </indexterm>
 
         <para>
@@ -359,8 +359,8 @@ int rpmReadPackageHeader(int fd,
             Return Value of RPM Variable --- <function>rpmGetVar()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmGetVar()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmGetVar()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmgetvar">
@@ -389,8 +389,8 @@ char *rpmGetVar(int var);
             <function>rpmGetBooleanVar()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmGetBooleanVar()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmGetBooleanVar()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmgetbooleanvar">
@@ -419,8 +419,8 @@ int rpmGetBooleanVar(int var);
             Set Value Of RPM Variable --- <function>rpmSetVar()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmSetVar()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmSetVar()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmsetvar">
@@ -447,9 +447,9 @@ void rpmSetVar(int var,
       <sect2 id="s2-rpm-rpmlib-rpmrc-related-info">
         <title><filename>rpmrc</filename>-Related Information</title>
         <indexterm>
-          <primary>rpmlib!functions!<filename>rpmrc</filename>-related</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary><filename>rpmrc</filename>-related</tertiary>
         </indexterm>
 
         <para>
@@ -466,8 +466,8 @@ the architecture and operating system information based on
             <function>rpmReadConfigFiles()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmReadConfigFiles()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmReadConfigFiles()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmreadconfigfiles">
@@ -536,8 +536,8 @@ int rpmReadConfigFiles(char * file,
             Return Operating System Name --- <function>rpmGetOsName()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmGetOsName()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmGetOsName()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmgetosname">
@@ -563,8 +563,8 @@ char *rpmGetOsName(void);
             Return Architecture Name --- <function>rpmGetArchName()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmGetArchName()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmGetArchName()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmgetarchname">
@@ -590,8 +590,8 @@ char *rpmGetArchName(void);
             <function>rpmShowRC()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmShowRC()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmShowRC()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmshowrc">
@@ -617,8 +617,8 @@ int rpmShowRC(FILE *f);
             <function>rpmArchScore()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmArchScore()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmArchScore()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmarchscore">
@@ -647,8 +647,8 @@ int rpmArchScore(char * arch);
             <function>rpmOsScore()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmOsScore()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmOsScore()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmosscore">
@@ -675,9 +675,9 @@ int rpmOsScore(char * os);
       <sect2 id="s2-rpm-rpmlib-rpm-database-manipulation">
         <title>RPM Database Manipulation</title>
         <indexterm>
-          <primary>rpmlib!functions!RPM database manipulation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>RPM database manipulation</tertiary>
         </indexterm>
 
         <para>
@@ -697,8 +697,8 @@ int rpmOsScore(char * os);
             Open RPM Database --- <function>rpmdbOpen()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbOpen()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbOpen()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbopen">
@@ -736,8 +736,8 @@ int rpmdbOpen(char * root,
             Close RPM Database --- <function>rpmdbClose()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbClose()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbClose()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbclose">
@@ -763,8 +763,8 @@ void rpmdbClose(rpmdb db);
             Create RPM Database --- <function>rpmdbInit()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbInit()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbInit()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbinit">
@@ -798,8 +798,8 @@ int rpmdbInit(char * root,
             Rebuild RPM Database --- <function>rpmdbRebuild()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbRebuild()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbRebuild()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbrebuild">
@@ -828,9 +828,9 @@ int rpmdbRebuild(char * root);
       <sect2 id="s2-rpm-rpmlib-rpm-database-traversal">
         <title>RPM Database Traversal</title>
         <indexterm>
-          <primary>rpmlib!functions!RPM database traversal</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>RPM database traversal</tertiary>
         </indexterm>
 
         <para>
@@ -853,8 +853,8 @@ int rpmdbRebuild(char * root);
             <function>rpmdbFirstRecNum()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFirstRecNum()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFirstRecNum()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfirstrecnum">
@@ -883,8 +883,8 @@ unsigned int rpmdbFirstRecNum(rpmdb db);
             <function>rpmdbNextRecNum()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbNextRecNum()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbNextRecNum()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbnextrecnum">
@@ -915,8 +915,8 @@ unsigned int rpmdbNextRecNum(rpmdb db,
             <function>rpmdbGetRecord()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbGetRecord()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbGetRecord()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbgetrecord">
@@ -945,9 +945,9 @@ Header rpmdbGetRecord(rpmdb db,
       <sect2 id="s2-rpm-rpmlib-rpm-database-search">
         <title>RPM Database Search</title>
         <indexterm>
-          <primary>rpmlib!functions!RPM database search</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>RPM database search</tertiary>
         </indexterm>
 
         <para>
@@ -1008,8 +1008,8 @@ typedef struct {
             Free Database Index --- <function>dbiFreeIndexRecord()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>dbiFreeIndexRecord()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>dbiFreeIndexRecord()</function></secondary>
             </indexterm>
 
           <figure id="sc-rpm-rpmlib-dbifreeindexrecord">
@@ -1036,8 +1036,8 @@ void dbiFreeIndexRecord(dbiIndexSet set);
             <function>rpmdbFindByFile()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindByFile()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindByFile()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindbyfile">
@@ -1094,8 +1094,8 @@ int rpmdbFindByFile(rpmdb db,
             <function>rpmdbFindByGroup()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindByGroup()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindByGroup()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindbygroup">
@@ -1152,8 +1152,8 @@ int rpmdbFindByGroup(rpmdb db,
             <function>rpmdbFindPackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindPackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindPackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindpackage">
@@ -1210,8 +1210,8 @@ int rpmdbFindPackage(rpmdb db,
             <function>rpmdbFindByProvides()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindByProvides()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindByProvides()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindbyprovides">
@@ -1268,8 +1268,8 @@ int rpmdbFindByProvides(rpmdb db,
             <function>rpmdbFindByRequiredBy()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindByRequiredBy()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindByRequiredBy()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindbyrequiredby">
@@ -1328,8 +1328,8 @@ int rpmdbFindByRequiredBy(rpmdb db,
             <function>rpmdbFindByConflicts()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdbFindByConflicts()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdbFindByConflicts()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdbfindbyconflicts">
@@ -1384,9 +1384,9 @@ int rpmdbFindByConflicts(rpmdb db,
       <sect2 id="s2-rpm-rpmlib-package-manipulation">
         <title>Package Manipulation</title>
         <indexterm>
-          <primary>rpmlib!functions!package manipulation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>package manipulation</tertiary>
         </indexterm>
 
         <para>
@@ -1401,8 +1401,8 @@ int rpmdbFindByConflicts(rpmdb db,
             <function>rpmInstallSourcePackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmInstallSourcePackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmInstallSourcePackage()</function></secondary>
 </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpminstallsourcepackage">
@@ -1480,8 +1480,8 @@ int rpmInstallSourcePackage(char * root,
             <function>rpmInstallPackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmInstallPackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmInstallPackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpminstallpackage">
@@ -1648,8 +1648,8 @@ int rpmInstallPackage(char * rootdir,
           </title>
           <!-- label: notify-function -->
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmNotifyFunction()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmNotifyFunction()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmnotifyfunction">
@@ -1699,8 +1699,8 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
             Remove Installed Package --- <function>rpmRemovePackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmRemovePackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmRemovePackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmremovepackage">
@@ -1775,9 +1775,9 @@ int rpmRemovePackage(char * root,
       <sect2 id="s2-rpm-rpmlib-package-file-verification">
         <title>Package And File Verification</title>
         <indexterm>
-          <primary>rpmlib!functions!package/file verification</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>package/file verification</tertiary>
         </indexterm>
 
         <para>
@@ -1820,8 +1820,8 @@ int rpmRemovePackage(char * root,
             Verify File --- <function>rpmVerifyFile()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmVerifyFile()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmVerifyFile()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmverifyfile">
@@ -1866,8 +1866,8 @@ int rpmVerifyFile(char * root,
             Script --- <function>rpmVerifyScript()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmVerifyScript()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmVerifyScript()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmverifyscript">
@@ -1903,9 +1903,9 @@ int rpmVerifyScript(char * root,
       <sect2 id="s2-rpm-rpmlib-dependency-related-ops">
         <title>Dependency-Related Operations</title>
         <indexterm>
-          <primary>rpmlib!functions!dependency processing</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>dependency processing</tertiary>
         </indexterm>
 
         <para>
@@ -1952,8 +1952,8 @@ int rpmVerifyScript(char * root,
             <function>rpmdepDependencies()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepDependencies()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepDependencies()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepdependencies">
@@ -1983,8 +1983,8 @@ rpmDependencies rpmdepDependencies(rpmdb db);
             <function>rpmdepAddPackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepAddPackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepAddPackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepaddpackage">
@@ -2014,8 +2014,8 @@ void rpmdepAddPackage(rpmDependencies rpmdep,
             <function>rpmdepUpgradePackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepUpgradePackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepUpgradePackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepupgradepackage">
@@ -2047,8 +2047,8 @@ void rpmdepUpgradePackage(rpmDependencies rpmdep,
             <function>rpmdepRemovePackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepRemovePackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepRemovePackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepremovepackage">
@@ -2077,8 +2077,8 @@ void rpmdepRemovePackage(rpmDependencies rpmdep,
             <function>rpmdepAvailablePackage()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepAvailablePackage()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepAvailablePackage()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepavailablepackage">
@@ -2117,8 +2117,8 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
             Perform a Dependency Check --- <function>rpmdepCheck()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepCheck()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepCheck()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepcheck">
@@ -2153,8 +2153,8 @@ int rpmdepCheck(rpmDependencies rpmdep,
             <function>rpmdepFreeConflicts()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepFreeConflicts()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepFreeConflicts()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepfreeconflicts">
@@ -2182,8 +2182,8 @@ void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
             <function>rpmdepDone()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmdepDone()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmdepDone()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmdepdone">
@@ -2207,9 +2207,9 @@ void rpmdepDone(rpmDependencies rpmdep);
       <sect2 id="s2-rpm-rpmlib-diagnostic-output-control">
         <title>Diagnostic Output Control</title>
         <indexterm>
-          <primary>rpmlib!functions!output control</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>output control</tertiary>
         </indexterm>
 
         <para>
@@ -2238,8 +2238,8 @@ void rpmdepDone(rpmDependencies rpmdep);
             <function>rpmIncreaseVerbosity()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmIncreaseVerbosity()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmIncreaseVerbosity()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmincreaseverbosity">
@@ -2264,8 +2264,8 @@ void rpmIncreaseVerbosity(void);
             Set Verbosity Level --- <function>rpmSetVerbosity()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmSetVerbosity()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmSetVerbosity()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmsetverbosity">
@@ -2291,8 +2291,8 @@ void rpmSetVerbosity(int level);
             Return Verbosity Level --- <function>rpmGetVerbosity()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmGetVerbosity()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmGetVerbosity()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmgetverbosity">
@@ -2316,8 +2316,8 @@ int rpmGetVerbosity(void);
             Check Verbosity Level --- <function>rpmIsVerbose()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmIsVerbose()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmIsVerbose()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmisverbose">
@@ -2344,8 +2344,8 @@ int rpmIsVerbose(void);
             Check Debug Level --- <function>rpmIsDebug()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmIsDebug()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmIsDebug()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmisdebug">
@@ -2371,9 +2371,9 @@ int rpmIsDebug(void);
       <sect2 id="s2-rpm-rpmlib-signature-verification">
         <title>Signature Verification</title>
         <indexterm>
-          <primary>rpmlib!functions!signature verification</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>signature verification</tertiary>
         </indexterm>
 
         <para>
@@ -2398,8 +2398,8 @@ int rpmIsDebug(void);
             <function>rpmVerifySignature()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmVerifySignature()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmVerifySignature()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmverifysignature">
@@ -2472,8 +2472,8 @@ int rpmVerifySignature(char *file,
             <function>rpmFreeSignature()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>rpmFreeSignature()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>rpmFreeSignature()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-rpmfreesignature">
@@ -2498,9 +2498,9 @@ void rpmFreeSignature(Header h);
         <title>Header Manipulation</title>
         <!-- label: header-manipulation -->
         <indexterm>
-          <primary>rpmlib!functions!header manipulation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>header manipulation</tertiary>
         </indexterm>
 
         <para>
@@ -2525,8 +2525,8 @@ void rpmFreeSignature(Header h);
             Read A Header --- <function>headerRead()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerRead()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerRead()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerread">
@@ -2563,8 +2563,8 @@ Header headerRead(int fd,
             Write A Header --- <function>headerWrite()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerWrite()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerWrite()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerwrite">
@@ -2599,8 +2599,8 @@ void headerWrite(int fd,
             Copy A Header --- <function>headerCopy()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerCopy()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerCopy()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headercopy">
@@ -2625,8 +2625,8 @@ Header headerCopy(Header h);
             Calculate A Header's Size --- <function>headerSizeof()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerSizeof()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerSizeof()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headersizeof">
@@ -2658,8 +2658,8 @@ unsigned int headerSizeof(Header h,
             Create A New Header --- <function>headerNew()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerNew()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerNew()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headernew">
@@ -2684,8 +2684,8 @@ Header headerNew(void);
             Deallocate A Header --- <function>headerFree()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerFree()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerFree()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerfree">
@@ -2712,8 +2712,8 @@ void headerFree(Header h);
             <function>headerDump()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerDump()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerDump()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerdump">
@@ -2744,9 +2744,9 @@ void headerDump(Header h,
         <title>Header Entry Manipulation</title>
         <!-- label: header-entry-manipulation -->
         <indexterm>
-          <primary>rpmlib!functions!header entry manipulation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>header entry manipulation</tertiary>
         </indexterm>
 
         <para>
@@ -2824,8 +2824,8 @@ void headerDump(Header h,
             Get Entry From Header --- <function>headerGetEntry()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerGetEntry()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerGetEntry()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headergetentry">
@@ -2867,8 +2867,8 @@ int headerGetEntry(Header h,
             Add Entry To Header --- <function>headerAddEntry()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerAddEntry()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerAddEntry()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headeraddentry">
@@ -2918,8 +2918,8 @@ int headerAddEntry(Header h,
             <function>headerIsEntry()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerIsEntry()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerIsEntry()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerisentry">
@@ -2947,9 +2947,9 @@ int headerIsEntry(Header h,
       <sect2 id="s2-rpm-rpmlib-header-iterator-support">
         <title>Header Iterator Support</title>
         <indexterm>
-          <primary>rpmlib!functions!header iterator</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>rpmlib</primary>
+          <secondary>functions</secondary>
+          <tertiary>header iterator</tertiary>
         </indexterm>
 
         <para>
@@ -2963,8 +2963,8 @@ int headerIsEntry(Header h,
             Create an Iterator --- <function>headerInitIterator()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerInitIterator()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerInitIterator()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerinititerator">
@@ -2990,8 +2990,8 @@ HeaderIterator headerInitIterator(Header h);
             Step To the Next Entry --- <function>headerNextIterator()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerNextIterator()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerNextIterator()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headernextiterator">
@@ -3033,8 +3033,8 @@ int headerNextIterator(HeaderIterator iter,
             Free An Iterator --- <function>headerFreeIterator()</function>
           </title>
           <indexterm>
-            <primary>rpmlib functions, list of!<function>headerFreeIterator()</function></primary>
-            <secondary></secondary>
+            <primary>rpmlib functions, list of</primary>
+            <secondary><function>headerFreeIterator()</function></secondary>
           </indexterm>
 
           <figure id="sc-rpm-rpmlib-headerfreeiterator">
@@ -3060,8 +3060,8 @@ void headerFreeIterator(HeaderIterator iter);
     <sect1 id="s1-rpm-rpmlib-example-code">
       <title>Example Code</title>
       <indexterm>
-        <primary>rpmlib!examples using</primary>
-        <secondary></secondary>
+        <primary>rpmlib</primary>
+        <secondary>examples using</secondary>
       </indexterm>
 
       <para>

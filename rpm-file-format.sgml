@@ -9,8 +9,8 @@
     <sect1 id="s1-rpm-file-format-file-naming-convention">
       <title>RPM File Naming Convention</title>
       <indexterm>
-        <primary>format, RPM file!naming convention</primary>
-        <secondary></secondary>
+        <primary>format, RPM file</primary>
+        <secondary>naming convention</secondary>
       </indexterm>
 
       <para>
@@ -154,8 +154,8 @@
   <sect1 id="s1-rpm-file-format-rpm-file-format">
     <title>RPM File Format</title>
     <indexterm>
-      <primary>format, RPM file!caveats</primary>
-      <secondary></secondary>
+      <primary>format, RPM file</primary>
+      <secondary>caveats</secondary>
     </indexterm>
 
     <para>
@@ -195,8 +195,8 @@
     <sect2 id="s2-rpm-file-format-parts-of-rpm-file">
       <title>Parts of an RPM File</title>
       <indexterm>
-        <primary>format, RPM file!parts of</primary>
-        <secondary></secondary>
+        <primary>format, RPM file</primary>
+        <secondary>parts of</secondary>
       </indexterm>
 
       <para>
@@ -239,9 +239,9 @@
     <sect2 id="s2-rpm-file-format-the-lead">
       <title>The Lead</title>
       <indexterm>
-        <primary>format, RPM file!parts of!lead</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>format, RPM file</primary>
+        <secondary>parts of</secondary>
+        <tertiary>lead</tertiary>
       </indexterm>
 
       <para>
@@ -427,9 +427,9 @@ rpm-2.2.1-1
       <sect3 id="s3-rpm-file-format-lead-abandoned">
         <title>The lead: An Abandoned Data Structure</title>
         <indexterm>
-          <primary>format, RPM file!parts of!lead, reduced use of</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>format, RPM file</primary>
+          <secondary>parts of</secondary>
+          <tertiary>lead, reduced use of</tertiary>
         </indexterm>
 
         <para>
@@ -521,9 +521,9 @@ rpm-2.2.1-1
       <sect3 id="s3-rpm-file-format-header-structure">
         <title>The Solution: The Header Structure</title>
         <indexterm>
-          <primary>format, RPM file!parts of!header structure</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>format, RPM file</primary>
+          <secondary>parts of</secondary>
+          <tertiary>header structure</tertiary>
         </indexterm>
 
         <para>
@@ -712,9 +712,9 @@ rpm-2.2.1-1
     <sect2 id="s2-rpm-file-format-signature">
       <title>The Signature</title>
       <indexterm>
-        <primary>format, RPM file!parts of!signature</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>format, RPM file</primary>
+        <secondary>parts of</secondary>
+        <tertiary>signature</tertiary>
       </indexterm>
 
       <para>
@@ -745,9 +745,9 @@ rpm-2.2.1-1
       <sect3 id="s3-rpm-file-format-signature-analysis">
         <title>Analyzing the Signature Area</title>
         <indexterm>
-          <primary>format, RPM file!parts of!signature, analysis of</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>format, RPM file</primary>
+          <secondary>parts of</secondary>
+          <tertiary>signature, analysis of</tertiary>
         </indexterm>
 
         <para>
@@ -1002,9 +1002,9 @@ rpm-2.2.1-1
       <title>The Header</title>
       <!-- label: rpm-file-format-header -->
       <indexterm>
-        <primary>format, RPM file!parts of!header</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>format, RPM file</primary>
+        <secondary>parts of</secondary>
+        <tertiary>header</tertiary>
       </indexterm>
 
       <para>
@@ -1023,9 +1023,9 @@ rpm-2.2.1-1
       <sect3 id="s3-rpm-file-format-header-analysis">
         <title>Analyzing the Header</title>
         <indexterm>
-          <primary>format, RPM file!parts of!header, analysis of</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>format, RPM file</primary>
+          <secondary>parts of</secondary>
+          <tertiary>header, analysis of</tertiary>
         </indexterm>
 
         <para>
@@ -1149,9 +1149,9 @@ rpm-2.2.1-1
         <title>Header Tag Listing</title>
         <!-- label: rpm-header-tags -->
         <indexterm>
-          <primary>format, RPM file!parts of!header, tags used in</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>format, RPM file</primary>
+          <secondary>parts of</secondary>
+          <tertiary>header, tags used in</tertiary>
         </indexterm>
 
         <para>
@@ -1246,9 +1246,9 @@ rpm-2.2.1-1
     <sect2 id="s2-rpm-file-format-the-archive">
       <title>The Archive</title>
       <indexterm>
-        <primary>format, RPM file!parts of!archive</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>format, RPM file</primary>
+        <secondary>parts of</secondary>
+        <tertiary>archive</tertiary>
       </indexterm>
 
       <para>
@@ -1291,8 +1291,8 @@ rpm-2.2.1-1
   <sect1 id="s1-rpm-file-format-rpm-tools">
     <title>Tools For Studying RPM Files</title>
     <indexterm>
-      <primary>format, RPM file!tools for studying</primary>
-      <secondary></secondary>
+      <primary>format, RPM file</primary>
+      <secondary>tools for studying</secondary>
     </indexterm>
 
     <para>
@@ -1445,8 +1445,8 @@ Entry      : 002 (1002)RELEASE        BIN_TYPE         0x00000014 00000152
     </title>
     <!-- label: rpm-file-command -->
     <indexterm>
-      <primary>format, RPM file!<command>file()</command> command,identifying with</primary>
-      <secondary></secondary>
+      <primary>format, RPM file</primary>
+      <secondary><command>file()</command> command,identifying with</secondary>
     </indexterm>
 
     <para>

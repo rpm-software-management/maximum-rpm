@@ -3,8 +3,8 @@
     <!-- label: rpm-anywhere -->
 
     <indexterm>
-      <primary>package!building anywhere</primary>
-      <secondary></secondary>
+      <primary>package</primary>
+      <secondary>building anywhere</secondary>
     </indexterm>
 
     <para>
@@ -71,8 +71,8 @@
       <title>Using Build Roots in a Package</title>
       <!-- label: rpm-anywhere-buildroot -->
       <indexterm>
-        <primary>build roots!defining</primary>
-        <secondary></secondary>
+        <primary>build roots</primary>
+        <secondary>defining</secondary>
       </indexterm>
 
       <para>
@@ -360,8 +360,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
       <sect2 id="s2-rpm-anywhere-things-to-consider">
         <title>Some Things to Consider</title>
         <indexterm>
-          <primary>build roots!issues surrounding</primary>
-          <secondary></secondary>
+          <primary>build roots</primary>
+          <secondary>issues surrounding</secondary>
         </indexterm>
 
         <para>
@@ -425,8 +425,8 @@ rm -rf $RPM_BUILD_ROOT
           doing.  We're also doing the right thing by using the
           <envar>RPM_BUILD_ROOT</envar>, instead of a hard-coded path.
           <indexterm>
-            <primary>build roots!danger using</primary>
-            <secondary></secondary>
+            <primary>build roots</primary>
+            <secondary>danger using</secondary>
           </indexterm>
         </para>
         <para>
@@ -464,8 +464,8 @@ rm -rf $RPM_BUILD_ROOT
     <sect1 id="s1-rpm-anywhere-different-build-area">
       <title>Having RPM Use a Different Build Area</title>
       <indexterm>
-        <primary>build area!alternate</primary>
-        <secondary></secondary>
+        <primary>build area</primary>
+        <secondary>alternate</secondary>
       </indexterm>
 
       <para>
@@ -478,9 +478,9 @@ rm -rf $RPM_BUILD_ROOT
       <sect2 id="s2-rpm-anywhere-creating-build-area">
         <title>Setting up a Build Area</title>
         <indexterm>
-          <primary>build area!alternate!creating</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>build area</primary>
+          <secondary>alternate</secondary>
+          <tertiary>creating</tertiary>
         </indexterm>
 
         <para>
@@ -568,9 +568,9 @@ rm -rf $RPM_BUILD_ROOT
       <sect2 id="s2-rpm-anywhere-using-new-build-area">
         <title>Directing RPM to Use the New Build Area</title>
         <indexterm>
-          <primary>build area!alternate!using</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>build area</primary>
+          <secondary>alternate</secondary>
+          <tertiary>using</tertiary>
         </indexterm>
 
         <para>
@@ -616,9 +616,9 @@ topdir: /home/ed/mybuild
       <sect2 id="s2-rpm-anywhere-performing-build">
         <title>Performing a Build in a New Build Area</title>
         <indexterm>
-          <primary>build area!alternate!building in</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>build area</primary>
+          <secondary>alternate</secondary>
+          <tertiary>building in</tertiary>
         </indexterm>
 
         <para>

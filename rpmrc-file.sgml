@@ -115,8 +115,8 @@ vendor               : (not set)
   <sect1 id="s1-rpmrc-file-rpmrc-file-locations">
     <title>Different Places an <filename>rpmrc</filename> File Resides</title>
     <indexterm>
-      <primary><filename>rpmrc</filename> file!locations of</primary>
-      <secondary></secondary>
+      <primary><filename>rpmrc</filename> file</primary>
+      <secondary>locations of</secondary>
     </indexterm>
 
     <para>
@@ -178,9 +178,9 @@ vendor               : (not set)
     <sect2 id="s2-rpmrc-file-usr-lib-rpmrc">
       <title><filename>/usr/lib/rpmrc</filename></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!locations of!<filename>/usr/lib/rpmrc</filename></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>locations of</secondary>
+        <tertiary><filename>/usr/lib/rpmrc</filename></tertiary>
       </indexterm>
 
       <para>
@@ -326,9 +326,9 @@ arch_compat: usparc: sparc
     <sect2 id="s2-rpmrc-file-etc-rpmrc">
       <title><filename>/etc/rpmrc</filename></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!locations of!<filename>/etc/rpmrc</filename></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>locations of</secondary>
+        <tertiary><filename>/etc/rpmrc</filename></tertiary>
       </indexterm>
 
       <para>
@@ -355,9 +355,9 @@ arch_compat: usparc: sparc
     <sect2 id="s2-rpmrc-file-rpmrc-user-login">
       <title><filename>.rpmrc</filename> in the user's login directory</title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!locations of!<filename>~/.rpmrc</filename></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>locations of</secondary>
+        <tertiary><filename>~/.rpmrc</filename></tertiary>
       </indexterm>
 
       <para>
@@ -393,8 +393,8 @@ arch_compat: usparc: sparc
   <sect1 id="s1-rpmrc-file-rpmrc-file-syntax">
     <title><filename>rpmrc</filename> File Syntax</title>
     <indexterm>
-      <primary><filename>rpmrc</filename> file!syntax of</primary>
-      <secondary></secondary>
+      <primary><filename>rpmrc</filename> file</primary>
+      <secondary>syntax of</secondary>
     </indexterm>
 
     <para>
@@ -423,8 +423,8 @@ arch_compat: usparc: sparc
   <sect1 id="s1-rpmrc-file-rpmrc-file-entries">
     <title><filename>rpmrc</filename> File Entries</title>
     <indexterm>
-      <primary><filename>rpmrc</filename> file!entries</primary>
-      <secondary></secondary>
+      <primary><filename>rpmrc</filename> file</primary>
+      <secondary>entries</secondary>
     </indexterm>
 
     <para>
@@ -435,9 +435,9 @@ arch_compat: usparc: sparc
     <sect2 id="s2-rpmrc-file-arch-canon">
       <title><command>arch_canon</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>arch_canon</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>arch_canon</command></tertiary>
       </indexterm>
 
       <para>
@@ -478,9 +478,9 @@ arch_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><r
     <sect2 id="s2-rpmrc-file-os-canon">
       <title><command>os_canon</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>os_canon</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>os_canon</command></tertiary>
       </indexterm>
 
       <para>
@@ -525,9 +525,9 @@ os_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><rep
       <title><command>buildarchtranslate</command></title>
       <!-- label: rpmrc-buildarchtranslate -->
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>buildarchtranslate</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>buildarchtranslate</command></tertiary>
       </indexterm>
 
       <para>
@@ -566,9 +566,9 @@ buildarchtranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <s
       <title><command>buildostranslate</command></title>
       <!-- label: rpmrc-buildostranslate -->
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>buildostranslate</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>buildostranslate</command></tertiary>
       </indexterm>
 
       <para>
@@ -606,9 +606,9 @@ buildostranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <sym
     <sect2 id="s2-rpmrc-file-arch-compat">
       <title><command>arch_compat</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>arch_compat</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>arch_compat</command></tertiary>
       </indexterm>
 
       <para>
@@ -644,9 +644,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-os-compat">
       <title><command>os_compat</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>os_compat</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>os_compat</command></tertiary>
       </indexterm>
 
       <para>
@@ -684,9 +684,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-builddir">
       <title><command>builddir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>builddir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>builddir</command></tertiary>
       </indexterm>
 
       <para>
@@ -704,9 +704,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-buildroot">
       <title><command>buildroot</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>buildroot</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>buildroot</command></tertiary>
       </indexterm>
 
       <para>
@@ -723,9 +723,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-cpiobin">
       <title><command>cpiobin</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>cpiobin</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>cpiobin</command></tertiary>
       </indexterm>
 
       <para>
@@ -742,9 +742,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-dbpath">
       <title><command>dbpath</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>dbpath</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>dbpath</command></tertiary>
       </indexterm>
 
       <para>
@@ -760,9 +760,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-defaultdocdir">
       <title><command>defaultdocdir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>defaultdocdir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>defaultdocdir</command></tertiary>
       </indexterm>
 
       <para>
@@ -779,9 +779,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-distribution">
       <title><command>distribution</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>distribution</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>distribution</command></tertiary>
       </indexterm>
 
       <para>
@@ -800,9 +800,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-excludedocs">
       <title><command>excludedocs</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>excludedocs</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>excludedocs</command></tertiary>
       </indexterm>
 
       <para>
@@ -826,9 +826,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-ftpport">
       <title><command>ftpport</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>ftpport</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>ftpport</command></tertiary>
       </indexterm>
 
       <para>
@@ -845,9 +845,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-ftpproxy">
       <title><command>ftpproxy</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>ftpproxy</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>ftpproxy</command></tertiary>
       </indexterm>
 
       <para>
@@ -864,9 +864,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-messagelevel">
       <title><command>messagelevel</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>messagelevel</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>messagelevel</command></tertiary>
       </indexterm>
 
       <para>
@@ -882,9 +882,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-netsharedpath">
       <title><command>netsharedpath</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>netsharedpath</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>netsharedpath</command></tertiary>
       </indexterm>
 
       <para>
@@ -900,9 +900,9 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
     <sect2 id="s2-rpmrc-file-optflags">
       <title><command>optflags</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>optflags</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>optflags</command></tertiary>
       </indexterm>
 
       <para>
@@ -960,9 +960,9 @@ optflags: sparc -O2
     <sect2 id="s2-rpmrc-file-packager">
       <title><command>packager</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>packager</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>packager</command></tertiary>
       </indexterm>
 
       <para>
@@ -988,9 +988,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-pgp-name">
       <title><command>pgp_name</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>pgp_name</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>pgp_name</command></tertiary>
       </indexterm>
 
       <para>
@@ -1011,9 +1011,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-pgp-path">
       <title><command>pgp_path</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>pgp_path</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>pgp_path</command></tertiary>
       </indexterm>
 
       <para>
@@ -1033,9 +1033,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-require-distribution">
       <title><command>require_distribution</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>require_distribution</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>require_distribution</command></tertiary>
       </indexterm>
 
       <para>
@@ -1053,9 +1053,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-require-icon">
       <title><command>require_icon</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>require_icon</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>require_icon</command></tertiary>
       </indexterm>
 
       <para>
@@ -1072,9 +1072,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-require-vendor">
       <title><command>require_vendor</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>require_vendor</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>require_vendor</command></tertiary>
       </indexterm>
 
       <para>
@@ -1091,9 +1091,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-rpmdir">
       <title><command>rpmdir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>rpmdir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>rpmdir</command></tertiary>
       </indexterm>
 
       <para>
@@ -1123,9 +1123,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-signature">
       <title><command>signature</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>signature</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>signature</command></tertiary>
       </indexterm>
 
       <para>
@@ -1146,9 +1146,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-sourcedir">
       <title><command>sourcedir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>sourcedir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>sourcedir</command></tertiary>
       </indexterm>
 
       <para>
@@ -1167,9 +1167,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-specdir">
       <title><command>specdir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>specdir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>specdir</command></tertiary>
       </indexterm>
 
       <para>
@@ -1187,9 +1187,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-srcrpmdir">
       <title><command>srcrpmdir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>srcrpmdir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>srcrpmdir</command></tertiary>
       </indexterm>
 
       <para>
@@ -1208,9 +1208,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-timecheck">
       <title><command>timecheck</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>timecheck</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>timecheck</command></tertiary>
       </indexterm>
 
       <para>
@@ -1228,9 +1228,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-tmppath">
       <title><command>tmppath</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>tmppath</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>tmppath</command></tertiary>
       </indexterm>
 
       <para>
@@ -1248,9 +1248,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-topdir">
       <title><command>topdir</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>topdir</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>topdir</command></tertiary>
       </indexterm>
 
       <para>
@@ -1300,9 +1300,9 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
     <sect2 id="s2-rpmrc-file-vendor">
       <title><command>vendor</command></title>
       <indexterm>
-        <primary><filename>rpmrc</filename> file!entries!<command>vendor</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><filename>rpmrc</filename> file</primary>
+        <secondary>entries</secondary>
+        <tertiary><command>vendor</command></tertiary>
       </indexterm>
 
       <para>

@@ -3,8 +3,8 @@
     <!-- label: rpm-rw-build -->
 
     <indexterm>
-      <primary>package building!real-world example</primary>
-      <secondary></secondary>
+      <primary>package building</primary>
+      <secondary>real-world example</secondary>
     </indexterm>
 
     <para>
@@ -26,9 +26,9 @@
     <sect1 id="s1-rpm-rw-build-amanda-overview">
       <title>An Overview of Amanda</title>
       <indexterm>
-        <primary>package building!real-world example!overview</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>real-world example</secondary>
+        <tertiary>overview</tertiary>
       </indexterm>
 
       <para>
@@ -70,9 +70,9 @@
     <sect1 id="s1-rpm-rw-build-build-without-rpm">
       <title>Initial Building Without RPM</title>
       <indexterm>
-        <primary>package building!real-world example!initial build</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>real-world example</secondary>
+        <tertiary>initial build</tertiary>
       </indexterm>
 
       <para>
@@ -88,9 +88,9 @@
       <sect2 id="s2-rpm-rw-build-test-build-area">
         <title>Setting Up A Test Build Area</title>
         <indexterm>
-          <primary>package building!real-world example!build area, creating</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>build area, creating</tertiary>
         </indexterm>
 
         <para>
@@ -182,9 +182,9 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
       <sect2 id="s2-rpm-rw-build-getting-to-build">
         <title>Getting Software to build</title>
         <indexterm>
-          <primary>package building!real-world example!initial build, performing</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>initial build, performing</tertiary>
         </indexterm>
 
         <para>
@@ -342,9 +342,9 @@ make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
       <sect2 id="s2-rpm-rw-build-installing-testing">
         <title>Installing and testing</title>
         <indexterm>
-          <primary>package building!real-world example!initial build, installing</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>initial build, installing</tertiary>
         </indexterm>
 
         <para>
@@ -519,9 +519,9 @@ Installing Amanda man pages:
     <sect1 id="s1-rpm-rw-build-initial-build-with-rpm">
       <title>Initial Building With RPM</title>
       <indexterm>
-        <primary>package building!real-world example!building, initial</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>real-world example</secondary>
+        <tertiary>building, initial</tertiary>
       </indexterm>
 
       <para>
@@ -534,9 +534,9 @@ Installing Amanda man pages:
       <sect2 id="s2-rpm-rw-build-generating-patches">
         <title>Generating patches</title>
         <indexterm>
-          <primary>package building!real-world example!patches, generating</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>patches, generating</tertiary>
         </indexterm>
 
         <para>
@@ -702,9 +702,9 @@ diff -uNr amanda-2.3.0-orig/tools/munge amanda-2.3.0/tools/munge
       <sect2 id="s2-rpm-rw-build-first-cut-spec-file">
         <title>Making a first-cut spec file</title>
         <indexterm>
-          <primary>package building!real-world example!spec file, first-cut</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>spec file, first-cut</tertiary>
         </indexterm>
 
         <para>
@@ -841,9 +841,9 @@ the client and server packages!
         <sect3 id="s3-rpm-rw-build-adding-build-time-scripts">
           <title>Adding the build-time scripts</title>
           <indexterm>
-            <primary>package building!real-world example!scripts, adding built-time</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>real-world example</secondary>
+            <tertiary>scripts, adding built-time</tertiary>
           </indexterm>
 
           <para>
@@ -887,9 +887,9 @@ make install
         <sect3 id="s3-rpm-rw-build-adding-files-lists">
           <title>Adding <command>%files</command> Lists</title>
           <indexterm>
-            <primary>package building!real-world example!<command>%files</command> list, adding</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>real-world example</secondary>
+            <tertiary><command>%files</command> list, adding</tertiary>
           </indexterm>
 
           <para>
@@ -922,9 +922,9 @@ make install
       <sect2 id="s2-rpm-rw-build-rpm-unpacking-sources">
         <title>Getting the original sources unpacked</title>
         <indexterm>
-          <primary>package building!real-world example!sources, unpacking w/RPM</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>sources, unpacking w/RPM</tertiary>
         </indexterm>
 
         <para>
@@ -998,9 +998,9 @@ drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
       <sect2 id="s2-rpm-rw-build-applying-patches">
         <title>Getting patches properly applied</title>
         <indexterm>
-          <primary>package building!real-world example!patches, applying w/RPM</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>patches, applying w/RPM</tertiary>
         </indexterm>
 
         <para>
@@ -1131,9 +1131,9 @@ total 58
       <sect2 id="s2-rpm-rw-build-rpm-building">
         <title>Letting RPM do the Building</title>
         <indexterm>
-          <primary>package building!real-world example!building with RPM</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>building with RPM</tertiary>
         </indexterm>
 
         <para>
@@ -1188,9 +1188,9 @@ make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
       <sect2 id="s2-rpm-rw-build-rpm-installing">
         <title>Letting RPM do the Installing</title>
         <indexterm>
-          <primary>package building!real-world example!installing with RPM</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>installing with RPM</tertiary>
         </indexterm>
 
         <para>
@@ -1267,9 +1267,9 @@ Executing: special doc
       <sect2 id="s2-rpm-rw-build-building-packages">
         <title>Testing RPM's Handiwork</title>
         <indexterm>
-          <primary>package building!real-world example!testing after build</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>testing after build</tertiary>
         </indexterm>
 
         <para>
@@ -1283,9 +1283,9 @@ Executing: special doc
     <sect1 id="s1-rpm-rw-build-package-building">
       <title>Package Building</title>
       <indexterm>
-        <primary>package building!real-world example!package files, creating</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>real-world example</secondary>
+        <tertiary>package files, creating</tertiary>
       </indexterm>
 
       <para>
@@ -1430,9 +1430,9 @@ the client and server packages!
       <sect2 id="s2-rpm-rw-build-creating-files-list">
         <title>Creating the <command>%files</command> list</title>
         <indexterm>
-          <primary>package building!real-world example!<command>%files</command> list, finalizing</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary><command>%files</command> list, finalizing</tertiary>
         </indexterm>
 
         <para>
@@ -1574,9 +1574,9 @@ example
         <sect3 id="s3-rpm-rw-build-appying-directives">
           <title>Applying Directives</title>
           <indexterm>
-            <primary>package building!real-world example!directives, adding</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>real-world example</secondary>
+            <tertiary>directives, adding</tertiary>
           </indexterm>
 
           <para>
@@ -1849,9 +1849,9 @@ the client and server packages!
       <sect2 id="s2-rpm-rw-build-testing-first-packages">
         <title>Testing those first packages</title>
         <indexterm>
-          <primary>package building!real-world example!packages, testing</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>real-world example</secondary>
+          <tertiary>packages, testing</tertiary>
         </indexterm>
 
         <para>
@@ -1946,9 +1946,9 @@ amanda-server       ##################################################
         <sect3 id="s3-rpm-rw-build-creating-install-scripts">
           <title>Creating Install Scripts</title>
           <indexterm>
-            <primary>package building!real-world example!scripts, creating</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>real-world example</secondary>
+            <tertiary>scripts, creating</tertiary>
           </indexterm>
 
           <para>

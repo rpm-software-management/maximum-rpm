@@ -14,8 +14,8 @@
     <sect1 id="s1-rpm-subpack-what-are-they">
       <title>What Are Subpackages?</title>
       <indexterm>
-        <primary>subpackages!definition of</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>definition of</secondary>
       </indexterm>
 
       <para>
@@ -29,8 +29,8 @@
     <sect1 id="s1-rpm-subpack-why">
       <title>Why Are They Needed?</title>
       <indexterm>
-        <primary>subpackages!why needed</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>why needed</secondary>
       </indexterm>
 
       <para>
@@ -73,8 +73,8 @@
     <sect1 id="s1-rpm-subpack-example-intro">
       <title>Our Example Spec File: Subpackages Galore!</title>
       <indexterm>
-        <primary>subpackages!example requirements</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>example requirements</secondary>
       </indexterm>
 
       <para>
@@ -170,8 +170,8 @@ build it...
     <sect1 id="s1-rpm-subpack-spec-file-changes">
       <title>Spec File Changes For Subpackages</title>
       <indexterm>
-        <primary>subpackages!spec file changes</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>spec file changes</secondary>
       </indexterm>
 
       <para>
@@ -220,8 +220,8 @@ build it...
         <sect3 id="s3-rpm-subpack-package-directive">
           <title>The <command>%package</command> Directive</title>
           <indexterm>
-            <primary>subpackages!<command>%package</command> directive</primary>
-            <secondary></secondary>
+            <primary>subpackages</primary>
+            <secondary><command>%package</command> directive</secondary>
           </indexterm>
 
           <indexterm>
@@ -281,14 +281,14 @@ name: foo
             directive
           </title>
           <indexterm>
-            <primary>subpackages!<command>%package</command> directive!<command>-n</command> option</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>subpackages</primary>
+            <secondary><command>%package</command> directive</secondary>
+            <tertiary><command>-n</command> option</tertiary>
           </indexterm>
 
           <indexterm>
-            <primary><command>%package</command> directive!<command>-n</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%package</command> directive</primary>
+            <secondary><command>-n</command> option</secondary>
           </indexterm>
 
           <para>
@@ -447,8 +447,8 @@ Summary: The baz library
         <sect3 id="s3-rpm-subpack-required-tags">
           <title>Required Tags In Subpackages</title>
           <indexterm>
-            <primary>subpackages!tags required by</primary>
-            <secondary></secondary>
+            <primary>subpackages</primary>
+            <secondary>tags required by</secondary>
           </indexterm>
 
           <para>
@@ -637,8 +637,8 @@ This is the long description for the bazlib...
       <sect2 id="s2-rpm-subpack-files-list">
         <title>The <command>%files</command> List</title>
         <indexterm>
-          <primary>subpackages!<command>%files</command> list changes</primary>
-          <secondary></secondary>
+          <primary>subpackages</primary>
+          <secondary><command>%files</command> list changes</secondary>
         </indexterm>
 
         <para>
@@ -854,8 +854,8 @@ Group: bogus/junque
       <sect2 id="s2-rpm-subpack-install-erase-scripts">
         <title>Install- and Erase-time Scripts</title>
         <indexterm>
-          <primary>subpackages!script changes</primary>
-          <secondary></secondary>
+          <primary>subpackages</primary>
+          <secondary>script changes</secondary>
         </indexterm>
 
         <para>
@@ -989,8 +989,8 @@ echo "This is the bazlib subpackage preinstall script"
     <sect1 id="s1-rpm-subpack-build-time-scripts">
       <title>Build-Time Scripts: Unchanged For Subpackages</title>
       <indexterm>
-        <primary>subpackages!build-time scripts, unchanged</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>build-time scripts, unchanged</secondary>
       </indexterm>
 
       <para>
@@ -1104,8 +1104,8 @@ echo "This is the bazlib subpackage preinstall script"
     <sect1 id="s1-rpm-subpack-building-subpackages">
       <title>Building Subpackages</title>
       <indexterm>
-        <primary>subpackages!building</primary>
-        <secondary></secondary>
+        <primary>subpackages</primary>
+        <secondary>building</secondary>
       </indexterm>
 
       <para>
@@ -1208,8 +1208,8 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
       <sect2 id="s2-rpm-subpack-subpackage-testing">
         <title>Giving Subpackages the Once-Over</title>
         <indexterm>
-          <primary>subpackages!testing</primary>
-          <secondary></secondary>
+          <primary>subpackages</primary>
+          <secondary>testing</secondary>
         </indexterm>
 
         <para>
@@ -1353,8 +1353,8 @@ build it...
             Verifying Subpackage-specific Install and Erase Scripts
           </title>
           <indexterm>
-            <primary>subpackages!scripts, testing</primary>
-            <secondary></secondary>
+            <primary>subpackages</primary>
+            <secondary>scripts, testing</secondary>
           </indexterm>
 
           <para>

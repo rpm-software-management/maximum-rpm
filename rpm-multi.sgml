@@ -26,8 +26,8 @@
     <sect1 id="s1-rpm-multi-primer">
       <title>Architectures and Operating Systems: A Primer</title>
       <indexterm>
-        <primary>multi-platform package building!reasons for</primary>
-        <secondary></secondary>
+        <primary>multi-platform package building</primary>
+        <secondary>reasons for</secondary>
       </indexterm>
 
       <para>
@@ -109,8 +109,8 @@
     <sect1 id="s1-rpm-multi-multi-platform-easier">
       <title>What Does RPM Do To Make Multi-Platform Packaging Easier?</title>
       <indexterm>
-        <primary>multi-platform package building!features supporting</primary>
-        <secondary></secondary>
+        <primary>multi-platform package building</primary>
+        <secondary>features supporting</secondary>
       </indexterm>
 
       <para>
@@ -187,8 +187,8 @@
     <sect1 id="s1-rpm-multi-build-install-detection">
       <title>Build and Install Platform Detection</title>
       <indexterm>
-        <primary>multi-platform package building!platform detection</primary>
-        <secondary></secondary>
+        <primary>multi-platform package building</primary>
+        <secondary>platform detection</secondary>
       </indexterm>
 
       <para>
@@ -208,8 +208,8 @@
       <sect2 id="s2-rpm-multi-platform-rpmrc-entries">
         <title>Platform-Specific <filename>rpmrc</filename> Entries</title>
         <indexterm>
-          <primary>platform-dependent!<filename>rpmrc</filename> file entries</primary>
-          <secondary></secondary>
+          <primary>platform-dependent</primary>
+          <secondary><filename>rpmrc</filename> file entries</secondary>
         </indexterm>
 
         <para>
@@ -233,27 +233,27 @@
             Canonical Platform Name and Number
           </title>
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>arch_canon</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>arch_canon</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>os_canon</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>os_canon</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>arch_canon</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>arch_canon</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>os_canon</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>os_canon</command></tertiary>
           </indexterm>
 
           <para>
@@ -324,27 +324,27 @@ os_canon:  Linux:  Linux  1
             Define Build Platform
           </title>
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>buildarch_translate</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>buildarch_translate</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>buildos_translate</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>buildos_translate</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>buildarch_translate</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>buildarch_translate</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>buildos_translate</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>buildos_translate</command></tertiary>
           </indexterm>
 
           <para>
@@ -411,27 +411,27 @@ buildostranslate: Linux: Linux
           </title>
           <!-- label: multi-xxx_compat -->
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>arch_compat</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>arch_compat</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>os_compat</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>os_compat</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>arch_compat</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>arch_compat</command></tertiary>
           </indexterm>
 
           <indexterm>
-            <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>os_compat</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary><filename>rpmrc</filename> file entries</secondary>
+            <tertiary><command>os_compat</command></tertiary>
           </indexterm>
 
           <para>
@@ -562,9 +562,9 @@ os_compat: Linux: AIX
         Entry
       </title>
       <indexterm>
-        <primary>platform-dependent!<filename>rpmrc</filename> file entries!<command>optflags</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>platform-dependent</primary>
+        <secondary><filename>rpmrc</filename> file entries</secondary>
+        <tertiary><command>optflags</command></tertiary>
       </indexterm>
 
       <para>
@@ -616,8 +616,8 @@ optflags: sparc -O2
     <sect1 id="s1-rpm-multi-platform-dependent-tags">
       <title>Platform-Dependent Tags</title>
       <indexterm>
-        <primary>platform-dependent!tags</primary>
-        <secondary></secondary>
+        <primary>platform-dependent</primary>
+        <secondary>tags</secondary>
       </indexterm>
 
       <para>
@@ -658,15 +658,15 @@ optflags: sparc -O2
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!tags!<command>excludearch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>tags</secondary>
+          <tertiary><command>excludearch</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!tags!<command>excludeos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>tags</secondary>
+          <tertiary><command>excludeos</command></tertiary>
         </indexterm>
 
         <para>
@@ -735,15 +735,15 @@ cdplayer-1.0.spec doesn't build on this architecture
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!tags!<command>exclusivearch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>tags</secondary>
+          <tertiary><command>exclusivearch</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!tags!<command>exclusiveos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>tags</secondary>
+          <tertiary><command>exclusiveos</command></tertiary>
         </indexterm>
 
         <para>
@@ -790,8 +790,8 @@ ExclusiveOS: Irix
     <sect1 id="s1-rpm-multi-platform-dependent-conditional">
       <title>Platform-Dependent Conditionals</title>
       <indexterm>
-        <primary>platform-dependent!conditionals</primary>
-        <secondary></secondary>
+        <primary>platform-dependent</primary>
+        <secondary>conditionals</secondary>
       </indexterm>
 
       <para>
@@ -813,9 +813,9 @@ ExclusiveOS: Irix
       <sect2 id="s2-rpm-multi-conditionals-common-features">
         <title>Common Features of All Conditionals</title>
         <indexterm>
-          <primary>platform-dependent!conditionals!features of</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>conditionals</secondary>
+          <tertiary>features of</tertiary>
         </indexterm>
 
         <para>
@@ -885,9 +885,9 @@ Summary: This is a package for some other operating system
         <sect3 id="s3-rpm-multi-nested-conditionals">
           <title>Conditionals Can Be Nested</title>
           <indexterm>
-            <primary>platform-dependent!conditionals!nesting</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>platform-dependent</primary>
+            <secondary>conditionals</secondary>
+            <tertiary>nesting</tertiary>
           </indexterm>
 
           <para>
@@ -956,15 +956,15 @@ echo "This is not an i386"
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!conditionals!<command>%ifarch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>conditionals</secondary>
+          <tertiary><command>%ifarch</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!conditionals!<command>%ifos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>conditionals</secondary>
+          <tertiary><command>%ifos</command></tertiary>
         </indexterm>
 
         <para>
@@ -1012,15 +1012,15 @@ echo "This is not an i386"
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!conditionals!<command>%ifnarch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>conditionals</secondary>
+          <tertiary><command>%ifnarch</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary>platform-dependent!conditionals!<command>%ifnos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>platform-dependent</primary>
+          <secondary>conditionals</secondary>
+          <tertiary><command>%ifnos</command></tertiary>
         </indexterm>
 
         <para>
@@ -1063,8 +1063,8 @@ echo "This is not an i386"
     <sect1 id="s1-rpm-multi-hints-and-kinks">
       <title>Hints and Kinks</title>
       <indexterm>
-        <primary>multi-platform package building!hints</primary>
-        <secondary></secondary>
+        <primary>multi-platform package building</primary>
+        <secondary>hints</secondary>
       </indexterm>
 
       <para>

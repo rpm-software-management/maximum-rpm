@@ -2,16 +2,16 @@
     <title>Concise RPM Command Reference</title>
 
     <indexterm>
-      <primary>RPM!command reference</primary>
-      <secondary></secondary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
     </indexterm>
 
     <sect1 id="s1-rpm-commands-global-options">
       <title>Global Options</title>
       <indexterm>
-        <primary>RPM!command reference!global options</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>command reference</secondary>
+        <tertiary>global options</tertiary>
       </indexterm>
 
       <para>
@@ -68,9 +68,9 @@
     <sect1 id="s1-rpm-commands-information-options">
       <title>Informational Options</title>
       <indexterm>
-        <primary>RPM!command reference!informational options</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>command reference</secondary>
+        <tertiary>informational options</tertiary>
       </indexterm>
 
       <para>
@@ -112,9 +112,9 @@
     <sect1 id="s1-rpm-commands-query-mode">
       <title>Query Mode</title>
       <indexterm>
-        <primary>RPM!command reference!query mode</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>command reference</secondary>
+        <tertiary>query mode</tertiary>
       </indexterm>
 
       <para>
@@ -297,9 +297,9 @@
     <sect1 id="s1-rpm-commands-verify-mode">
       <title>Verify Mode</title>
       <indexterm>
-        <primary>RPM!command reference!verify mode</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>command reference</secondary>
+        <tertiary>verify mode</tertiary>
       </indexterm>
 
       <para>
@@ -359,9 +359,9 @@
     <sect1 id="s1-rpm-commands-install-mode">
       <title>Install Mode</title>
       <indexterm>
-        <primary>RPM!command reference!install mode</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>command reference</secondary>
+        <tertiary>install mode</tertiary>
       </indexterm>
 
       <para>
@@ -487,9 +487,9 @@
   <sect1 id="s1-rpm-commands-upgrade-mode">
     <title>Upgrade Mode</title>
     <indexterm>
-      <primary>RPM!command reference!upgrade mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>upgrade mode</tertiary>
     </indexterm>
 
     <para>
@@ -622,9 +622,9 @@
   <sect1 id="s1-rpm-commands-erase-mode">
     <title>Erase Mode</title>
     <indexterm>
-      <primary>RPM!command reference!erase mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>erase mode</tertiary>
     </indexterm>
 
     <para>
@@ -670,9 +670,9 @@
   <sect1 id="s1-rpm-commands-build-mode">
     <title>Build Mode</title>
     <indexterm>
-      <primary>RPM!command reference!build mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>build mode</tertiary>
     </indexterm>
 
     <para>
@@ -812,9 +812,9 @@
   <sect1 id="s1-rpm-commands-rebuild-mode">
     <title>Rebuild Mode</title>
     <indexterm>
-      <primary>RPM!command reference!rebuild mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>rebuild mode</tertiary>
     </indexterm>
 
     <para>
@@ -844,9 +844,9 @@
   <sect1 id="s1-rpm-commands-recompile-mode">
     <title>Recompile Mode</title>
     <indexterm>
-      <primary>RPM!command reference!recompile mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>recompile mode</tertiary>
     </indexterm>
 
     <para>
@@ -875,9 +875,9 @@
   <sect1 id="s1-rpm-commands-resign-mode">
     <title>Resign Mode</title>
     <indexterm>
-      <primary>RPM!command reference!resign mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>resign mode</tertiary>
     </indexterm>
 
     <para>
@@ -900,9 +900,9 @@
   <sect1 id="s1-rpm-commands-add-signature-mode">
     <title>Add Signature Mode</title>
     <indexterm>
-      <primary>RPM!command reference!add signature mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>add signature mode</tertiary>
     </indexterm>
 
     <para>
@@ -925,9 +925,9 @@
   <sect1 id="s1-rpm-commands-check-signature-mode">
     <title>Check Signature Mode</title>
     <indexterm>
-      <primary>RPM!command reference!check signature mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>check signature mode</tertiary>
     </indexterm>
 
     <para>
@@ -966,9 +966,9 @@
   <sect1 id="s1-rpm-commands-initialize-database-mode">
     <title>Initalize Database Mode</title>
     <indexterm>
-      <primary>RPM!command reference!initialize database mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>initialize database mode</tertiary>
     </indexterm>
 
     <para>
@@ -991,9 +991,9 @@
   <sect1 id="s1-rpm-commands-rebuild-database-mode">
     <title>Rebuild Database Mode</title>
     <indexterm>
-      <primary>RPM!command reference!rebuild database mode</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>RPM</primary>
+      <secondary>command reference</secondary>
+      <tertiary>rebuild database mode</tertiary>
     </indexterm>
 
     <para>

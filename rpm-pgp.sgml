@@ -3,9 +3,9 @@
     <!-- label: rpm-pgp -->
 
     <indexterm>
-      <primary>PGP!signatures!adding</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>PGP</primary>
+      <secondary>signatures</secondary>
+      <tertiary>adding</tertiary>
     </indexterm>
 
     <para>
@@ -24,9 +24,9 @@
     <sect1 id="s1-rpm-pgp-why-sign">
       <title>Why Sign a Package?</title>
       <indexterm>
-        <primary>PGP!signatures!reasons for</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>PGP</primary>
+        <secondary>signatures</secondary>
+        <tertiary>reasons for</tertiary>
       </indexterm>
 
       <para>
@@ -57,9 +57,9 @@
       <sect2 id="s2-rpm-pgp-creating-key-pair">
         <title>Preparing PGP: Creating a Key Pair</title>
         <indexterm>
-          <primary>PGP!signatures!key pair generation</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>PGP</primary>
+          <secondary>signatures</secondary>
+          <tertiary>key pair generation</tertiary>
         </indexterm>
 
         <para>
@@ -211,9 +211,9 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
       <sect2 id="s2-rpm-pgp-preparing-rpm">
         <title>Preparing RPM</title>
         <indexterm>
-          <primary>PGP!signatures!configuring RPM for</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>PGP</primary>
+          <secondary>signatures</secondary>
+          <tertiary>configuring RPM for</tertiary>
         </indexterm>
 
         <para>
@@ -321,9 +321,9 @@ pgp_path: /root/.pgp
     <sect1 id="s1-rpm-pgp-signing-packages">
       <title>Signing Packages</title>
       <indexterm>
-        <primary>PGP!signatures!signing packages</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>PGP</primary>
+        <secondary>signatures</secondary>
+        <tertiary>signing packages</tertiary>
       </indexterm>
 
       <para>
@@ -444,8 +444,8 @@ blather-7.9-1.i386.rpm: size pgp md5 OK
         <sect3 id="s3-rpm-pgp-multiple-builds">
           <title>Multiple Builds?  No Problem!</title>
           <indexterm>
-            <primary><command>--sign</command> option!using with multiple builds</primary>
-            <secondary></secondary>
+            <primary><command>--sign</command> option</primary>
+            <secondary>using with multiple builds</secondary>
           </indexterm>
 
           <para>
@@ -567,8 +567,8 @@ bother-3.5-1.i386.rpm:
         <sect3 id="s3-rpm-pgp-resign-limitations">
           <title>There Are Limits, However&hellip;</title>
           <indexterm>
-            <primary><command>--resign</command> option!limitations to</primary>
-            <secondary></secondary>
+            <primary><command>--resign</command> option</primary>
+            <secondary>limitations to</secondary>
           </indexterm>
 
           <para>
@@ -698,8 +698,8 @@ blather-7.9-1.i386.rpm: size pgp pgp md5 OK
         <sect3 id="s3-rpm-pgp-addsign-caveats">
           <title>A Few Caveats</title>
           <indexterm>
-            <primary><command>--addsign</command> option!limitations to</primary>
-            <secondary></secondary>
+            <primary><command>--addsign</command> option</primary>
+            <secondary>limitations to</secondary>
           </indexterm>
 
           <para>

@@ -19,8 +19,8 @@
     <sect1 id="s1-rpm-reloc-why">
       <title>Why relocatable packages?</title>
       <indexterm>
-        <primary>relocatable packages!reasons for</primary>
-        <secondary></secondary>
+        <primary>relocatable packages</primary>
+        <secondary>reasons for</secondary>
       </indexterm>
 
       <para>
@@ -110,8 +110,8 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
     <sect1 id="s1-rpm-reloc-prefix-tag">
       <title>The <command>prefix</command> tag: Relocation Central</title>
       <indexterm>
-        <primary>relocatable packages!<command>prefix</command> tag</primary>
-        <secondary></secondary>
+        <primary>relocatable packages</primary>
+        <secondary><command>prefix</command> tag</secondary>
       </indexterm>
 
       <indexterm>
@@ -229,8 +229,8 @@ Prefix: /opt
     <sect1 id="s1-rpm-reloc-wrinkles">
       <title>Relocatable Wrinkles: Things to Consider</title>
       <indexterm>
-        <primary>relocatable packages!requirements</primary>
-        <secondary></secondary>
+        <primary>relocatable packages</primary>
+        <secondary>requirements</secondary>
       </indexterm>
 
       <para>
@@ -268,8 +268,8 @@ Prefix: /opt
       <sect2 id="s2-rpm-reloc-files-list-restrictions">
         <title><command>%files</command> List Restrictions</title>
         <indexterm>
-          <primary>relocatable packages!<command>%files</command> list restrictions</primary>
-          <secondary></secondary>
+          <primary>relocatable packages</primary>
+          <secondary><command>%files</command> list restrictions</secondary>
         </indexterm>
 
         <para>
@@ -325,8 +325,8 @@ Build failed.
       <sect2 id="s2-rpm-reloc-must-be-relocatable">
         <title>Relocatable Packages Must Contain Relocatable Software</title>
         <indexterm>
-          <primary>relocatable packages!software requirements</primary>
-          <secondary></secondary>
+          <primary>relocatable packages</primary>
+          <secondary>software requirements</secondary>
         </indexterm>
 
         <para>
@@ -452,8 +452,8 @@ Build failed.
     <sect1 id="s1-rpm-reloc-building-relocatable">
       <title>Building a Relocatable Package</title>
       <indexterm>
-        <primary>relocatable packages!building</primary>
-        <secondary></secondary>
+        <primary>relocatable packages</primary>
+        <secondary>building</secondary>
       </indexterm>
 
       <para>
@@ -684,8 +684,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
       <sect2 id="s2-rpm-reloc-test-drive">
         <title>Test-Driving a Relocatable Package</title>
         <indexterm>
-          <primary>relocatable packages!testing</primary>
-          <secondary></secondary>
+          <primary>relocatable packages</primary>
+          <secondary>testing</secondary>
         </indexterm>
 
         <para>
