@@ -1,0 +1,40 @@
+#!/usr/bin/perl
+
+#
+# Parse LaTeX source, and translate \section, \subsection, etc. into the
+# appropriate DocBook tags...
+#
+# ECB, 5/1/99
+#
+
+#
+# Let's work on the entire file in one massive buffer...
+#
+
+undef $/;
+undef $\;
+
+#
+# Start the big loop (although we're really just going through it once, due
+#to $/ and $\)...
+#
+
+while (<STDIN>) {
+
+    s/<port>/&lt;port&gt;/gis;
+    s/<path>/&lt;path&gt;/gis;
+    s/<host>/&lt;host&gt;/gis;
+    s/<rcfile>/&lt;rcfile&gt;/gis;
+    s/<x>/&lt;x&gt;/gis;
+    s/<group>/&lt;group&gt;/gis;
+    s/<string>/&lt;string&gt;/gis;
+    s/<name>/&lt;name&gt;/gis;
+    s/<n>/&lt;n&gt;/gis;
+    s/<arch>/&lt;arch&gt;/gis;
+    s/<os>/&lt;os&gt;/gis;
+    s/<secs>/&lt;secs&gt;/gis;
+    s/<file>/&lt;file&gt;/gis;
+
+print;
+}
+
