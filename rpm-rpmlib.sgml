@@ -1,0 +1,3242 @@
+<chapter id="ch-rpm-rpmlib">
+<title>A Guide to the RPM Library API</title>
+
+<indexterm>
+<primary>rpmlib!guide to using</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In this chapter, we'll explore the functions used internally by RPM.  These
+functions are available for anyone to use, making it possible to add RPM
+functionality to new and existing programs.  Rather than continually refer
+to "the RPM library" throughout this chapter, we'll use the name of the
+library's main include file --- rpmlib.
+
+<sect1 id="s1-rpm-rpmlib-">
+<title>An Overview of rpmlib</title>
+<indexterm>
+<primary>rpmlib!overview</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There are a number of files that make up rpmlib.  First and foremost, of
+course, is the rpmlib library, <filename>librpm.a</filename>.  This library contains
+all the functions required to implement all the basic functions contained
+in RPM.
+
+The remaining files define the various data structures, parameters, and
+symbols used by rpmlib:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<filename>rpmlib.h</filename>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<filename>dbindex.h</filename>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<filename>header.h</filename>
+
+</para>
+</listitem>
+
+</itemizedlist>
+In general, <filename>rpmlib.h</filename> will always be required.  When using rpmlib's
+header-related functions, <filename>header.h</filename> will be required, while the
+database-related function will require <filename>dbindex.h</filename>.  As each
+function is described in this chapter, we'll provide the function's
+prototype as well as the <command>#include</command> statements the function
+requires.
+
+<indexterm>
+<primary>rpmlib!overview|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-rpmlib-">
+<title>rpmlib Functions</title>
+<indexterm>
+<primary>rpmlib functions, list of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There are more than sixty different functions in rpmlib.  The
+tasks they perform range from low-level database record traversal, to
+high-level package manipulation.  We've grouped the functions into
+different categories for easy reference.
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Error Handling</title>
+<indexterm>
+<primary>rpmlib!functions!error handling</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section perform rpmlib's basic error
+handling.  All error handling centers on the use of specific status codes.
+The status codes are defined in <filename>rpmlib.h</filename> and are of the form
+<symbol>RPMERR_<emphasis>xxx</symbol></emphasis>, where <symbol><emphasis>xxx</symbol></emphasis> is the name of the
+error.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Error Code --- <function>rpmErrorCode()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmErrorCode()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmErrorCode(void);
+</screen>
+</figure>
+This function returns the error code set by the last rpmlib function that
+failed.  Should only be used in an error callback function defined by
+<function>rpmErrorSetCallBack()</function>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Error String --- <function>rpmErrorString()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmErrorString()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+char *rpmErrorString(void);
+</screen>
+</figure>
+This function returns the error string set by the last rpmlib function that
+failed.  Should only be used in an error callback function defined by
+<function>rpmErrorSetCallBack()</function>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Set Error CallBack Function ---  <function>rpmErrorSetCallback()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmErrorSetCallback()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
+</screen>
+</figure>
+This function sets the current error callback function to the error
+callback function passed to it.  The previous error callback function is
+returned.
+
+<indexterm>
+<primary>rpmlib!functions!error handling|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Getting Package Information</title>
+<indexterm>
+<primary>rpmlib!functions!package information</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The following functions are used to obtain information about a package
+file.
+
+It should be noted that most information is returned in the form of a
+<structname>Header</structname> structure.  This data structure is widely used throughout
+rpmlib.  We will discuss more header-related functions in sections
+<xref linkend="header-manipulation"> and <xref linkend="header-entry-manipulation">.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Read Package Information --- <function>rpmReadPackageInfo()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmReadPackageInfo()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int rpmReadPackageInfo(int fd,
+                       Header * signatures,
+                       Header * hdr);
+</screen>
+</figure>
+Given an open package on <parameter>fd</parameter>, read in the header and signature.
+This function operates as expected with both socket and pipe file
+descriptors passed as <parameter>fd</parameter>.  Safe on nonseekable <parameter>fd</parameter>s.  When
+the function returns, <parameter>fd</parameter> is left positioned at the start of the
+package's archive section.
+
+If either <parameter>signatures</parameter> or <parameter>hdr</parameter> are <symbol>NULL</symbol>,
+information for the <symbol>NULL</symbol> parameter will not be passed back to the
+caller.  Otherwise, they will return the package's signatures and header,
+respectively.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- Success.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Bad magic numbers found in package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Other error.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Read Package Header --- <function>rpmReadPackageHeader()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmReadPackageHeader()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int rpmReadPackageHeader(int fd,
+                         Header * hdr,
+                         int * isSource,
+                         int * major,
+                         int * minor);
+</screen>
+</figure>
+Given an open package on <parameter>fd</parameter>, read in the header.
+This function operates as expected with both socket and pipe file
+descriptors passed as <parameter>fd</parameter>.  Safe on nonseekable <parameter>fd</parameter>s.  When
+the function returns, <parameter>fd</parameter> is left positioned at the start of the
+package's archive section.
+
+If <parameter>hdr</parameter>, <parameter>isSource</parameter>, <parameter>major</parameter>, or <parameter>minor</parameter> are
+<symbol>NULL</symbol>, information for the <symbol>NULL</symbol> parameter(s) will not be
+passed back to the caller.  Otherwise, they will return the package's
+header (<parameter>hdr</parameter>), information on whether the package is a source
+package file or not (<parameter>isSource</parameter>), and the package format's major and
+minor revision number (<parameter>major</parameter> and <parameter>minor</parameter>, respectively).
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- Success.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Bad magic numbers found in package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Other error.
+
+</para>
+</listitem>
+
+</itemizedlist>
+<indexterm>
+<primary>rpmlib!functions!package information|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Variable Manipulation</title>
+<indexterm>
+<primary>rpmlib!functions!variable manipulation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The following functions are used to get, set, and interpret RPM's internal
+variables.  Variables are set according to various pieces of system
+information, as well as from <filename>rpmrc</filename> files.  They control various
+aspects of RPM's operation.
+
+The variables have symbolic names in the form <symbol>RPMVAR_<emphasis>xxx</symbol></emphasis>,
+where <symbol><emphasis>xxx</symbol></emphasis> is the name of the variable.  All variable names
+are defined in <filename>rpmlib.h</filename>.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Value of RPM Variable --- <function>rpmGetVar()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmGetVar()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+char *rpmGetVar(int var);
+</screen>
+</figure>
+This function returns the value of the variable specified in <parameter>var</parameter>.
+
+On error, the function returns <symbol>NULL</symbol>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Boolean Value Of RPM Variable --- <function>rpmGetBooleanVar()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmGetBooleanVar()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmGetBooleanVar(int var);
+</screen>
+</figure>
+This function looks up the variable specified in <parameter>var</parameter> and returns
+a 0 or 1 depending on the variable's value.
+
+On error, the function returns 0.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Set Value Of RPM Variable --- <function>rpmSetVar()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmSetVar()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmSetVar(int var,
+               char *val);
+</screen>
+</figure>
+This function sets the variable specified in <parameter>var</parameter> to the value
+passed in <parameter>val</parameter>.  It is also possible for <parameter>val</parameter> to be
+<symbol>NULL</symbol>.
+
+<indexterm>
+<primary>rpmlib!functions!variable manipulation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title><filename>rpmrc</filename>-Related Information</title>
+<indexterm>
+<primary>rpmlib!functions!<filename>rpmrc</filename>-related</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section are all related to <filename>rpmrc</filename> information
+--- the <filename>rpmrc</filename> files as well as the variables set from those files.
+This information also includes the architecture and operating system
+information based on <filename>rpmrc</filename> file entries.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Read <filename>rpmrc</filename> Files --- <function>rpmReadConfigFiles()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmReadConfigFiles()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmReadConfigFiles(char * file,
+                       char * arch,
+                       char * os,
+                       int building);
+</screen>
+</figure>
+This function reads <filename>rpmrc</filename> files according to the following rules:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Always read <filename>/usr/lib/rpmrc</filename>.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+If <parameter>file</parameter> is specified, read it.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+If <parameter>file</parameter> is not specified, read <filename>/etc/rpmrc</filename> and
+<filename>~/.rpmrc</filename>.
+
+</para>
+</listitem>
+
+</itemizedlist>
+Every <filename>rpmrc</filename> file entry is used with <function>rpmSetVar()</function> to set
+the appropriate RPM variable.  Part of the normal <filename>rpmrc</filename> file
+processing also includes setting the architecture and operating system
+variables for the system executing this function.  These default settings
+can be overridden by entering architecture and/or operating system
+information in <parameter>arch</parameter> and <parameter>os</parameter>, respectively.  This
+information will still go through the normal <filename>rpmrc</filename> translation
+process.
+
+The <parameter>building</parameter> argument should be set to 1 only if a package is
+being built when this function is called.  Since most rpmlib-based
+applications will probably not duplicate RPM's package building
+capabilities, <parameter>building</parameter> should normally be set to 0.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Operating System Name --- <function>rpmGetOsName()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmGetOsName()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+char *rpmGetOsName(void);
+</screen>
+</figure>
+This function returns the name of the operating system, as determined by
+rpmlib's normal <filename>rpmrc</filename> file processing.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Architecture Name --- <function>rpmGetArchName()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmGetArchName()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+char *rpmGetArchName(void);
+</screen>
+</figure>
+This function returns the name of the architecture, as determined by
+rpmlib's normal <filename>rpmrc</filename> file processing.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Print all <filename>rpmrc</filename>-Derived Variables --- <function>rpmShowRC()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmShowRC()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmShowRC(FILE *f);
+</screen>
+</figure>
+This function writes all variable names and their values to the file
+<parameter>f</parameter>.  Always returns 0.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Architecture Compatibility Score --- <function>rpmArchScore()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmArchScore()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmArchScore(char * arch);
+</screen>
+</figure>
+This function returns the "distance" between the architecture whose name
+is specified in <parameter>arch</parameter>, and the current architecture.  Returns 0 if
+the two architectures are incompatible.  The smaller the number returned,
+the more compatible the two architectures are.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Operating System Compatibility Score --- <function>rpmOsScore()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmOsScore()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmOsScore(char * os);
+</screen>
+</figure>
+This function returns the "distance" between the operating system whose
+name is specified in <parameter>os</parameter>, and the current operating system.
+Returns 0 if the two operating systems are incompatible.  The smaller the
+number returned, the more compatible the two operating systems are.
+
+<indexterm>
+<primary>rpmlib!functions!<filename>rpmrc</filename>-related|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>RPM Database Manipulation</title>
+<indexterm>
+<primary>rpmlib!functions!RPM database manipulation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section perform the basic operations on the RPM
+database.  This includes opening and closing the database, as well as
+creating the database.  A function also exists to rebuild a database that
+has been corrupted.
+
+Every function that accesses the RPM database in some fashion makes use of
+the <structname>rpmdb</structname> structure.  This structure is used as a handle to refer
+to a particular RPM database.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Open RPM Database --- <function>rpmdbOpen()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbOpen()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmdbOpen(char * root,
+               rpmdb * dbp,
+               int mode,
+               int perms);
+</screen>
+</figure>
+This function opens the RPM database located in <symbol>RPMVAR_DBPATH</symbol>,
+returning the <structname>rpmdb</structname> structure <parameter>dbp</parameter>.  If <parameter>root</parameter> is
+specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol> prior to opening.
+The <parameter>mode</parameter> and <parameter>perms</parameter> parameters are identical to
+<function>open(2)</function>'s <parameter>flags</parameter> and <parameter>mode</parameter> parameters,
+respectively.
+
+The function returns 1 on error, 0 on success.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Close RPM Database --- <function>rpmdbClose()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbClose()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmdbClose(rpmdb db);
+</screen>
+</figure>
+This function closes the RPM database specified by the <structname>rpmdb</structname>
+structure <parameter>db</parameter>.  The <parameter>db</parameter> structure is also freed.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Create RPM Database --- <function>rpmdbInit()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbInit()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmdbInit(char * root,
+              int perms);
+</screen>
+</figure>
+This function creates a new RPM database to be located in
+<symbol>RPMVAR_DBPATH</symbol>.  If the database already exists, it is left
+unchanged.  If <parameter>root</parameter> is specified, it is prepended to
+<symbol>RPMVAR_DBPATH</symbol> prior to creation.  The <parameter>perms</parameter> parameter is
+identical to <function>open(2)</function>'s <parameter>mode</parameter> parameter.
+
+The function returns 1 on error, 0 on success.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Rebuild RPM Database --- <function>rpmdbRebuild()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbRebuild()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmdbRebuild(char * root);
+</screen>
+</figure>
+This function rebuilds the RPM database located in <symbol>RPMVAR_DBPATH</symbol>.
+If <parameter>root</parameter> is specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol>
+prior to rebuilding.
+
+The function returns 1 on error, 0 on success.
+
+<indexterm>
+<primary>rpmlib!functions!RPM database manipulation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>RPM Database Traversal</title>
+<indexterm>
+<primary>rpmlib!functions!RPM database traversal</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The following functions are used to traverse the RPM database.  Also
+described in this section is a function to retrieve a database record by
+its record number.
+
+It should be noted that database records are returned in the form of a
+<structname>Header</structname> structure.  This data structure is widely used throughout
+rpmlib.  We will discuss more header-related functions in sections
+<xref linkend="header-manipulation"> and <xref linkend="header-entry-manipulation">.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Begin RPM Database Traversal --- <function>rpmdbFirstRecNum()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFirstRecNum()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+unsigned int rpmdbFirstRecNum(rpmdb db);
+</screen>
+</figure>
+This function returns the record number of the first record in the database
+specified by <parameter>db</parameter>.
+
+On error, it returns 0.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Traverse To Next RPM Database Record --- <function>rpmdbNextRecNum()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbNextRecNum()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+unsigned int rpmdbNextRecNum(rpmdb db,
+                             unsigned int lastOffset);  
+</screen>
+</figure>
+This function returns the record number of the record following the record
+number passed in <parameter>lastOffset</parameter>, in the database specified by
+<parameter>db</parameter>.
+
+On error, this function returns 0.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Record From RPM Database --- <function>rpmdbGetRecord()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbGetRecord()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+Header rpmdbGetRecord(rpmdb db,
+                      unsigned int offset);
+</screen>
+</figure>
+This function returns the record at the record number specified by
+<parameter>offset</parameter> from the database specified by <parameter>db</parameter>.
+
+This function returns <symbol>NULL</symbol> on error.
+
+<indexterm>
+<primary>rpmlib!functions!RPM database traversal|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>RPM Database Search</title>
+<indexterm>
+<primary>rpmlib!functions!RPM database search</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section search the various parts of the RPM
+database.  They all return a structure of type <structname>dbiIndexSet</structname>, which
+contains the records that match the search term.  Here is the definition of
+the structure, as found in <filename>&lt;rpm/dbindex.h&gt;</filename>:
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+typedef struct {
+    dbiIndexRecord * recs;
+    int count;
+} dbiIndexSet;
+</screen>
+</figure>
+Each <structname>dbiIndexRecord</structname> is also defined in <filename>&lt;rpm/dbindex.h&gt;</filename> as
+follows:
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+typedef struct {
+    unsigned int recOffset;
+    unsigned int fileNumber;
+} dbiIndexRecord;
+</screen>
+</figure>
+The <structfield>recOffset</structfield> element is the offset of the record from the start
+of the database file.  The <structfield>fileNumber</structfield> element is only used by
+<function>rpmdbFindByFile()</function>.
+
+Keep in mind that the <function>rpmdbFind<emphasis>xxx</function></emphasis> search functions each
+return <structname>dbiIndexSet</structname> structures, which must be freed with
+<function>dbiFreeIndexRecord()</function> when no longer needed.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Free Database Index --- <function>dbiFreeIndexRecord()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>dbiFreeIndexRecord()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+void dbiFreeIndexRecord(dbiIndexSet set);
+</screen>
+</figure>
+This function frees the database index set specified by <parameter>set</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By File --- <function>rpmdbFindByFile()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindByFile()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindByFile(rpmdb db,
+                    char * filespec,
+                    dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+package which owns the file specified by <parameter>filespec</parameter>.  It returns
+matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By Group --- <function>rpmdbFindByGroup()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindByGroup()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindByGroup(rpmdb db,
+                     char * group,
+                     dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+packages which are members of the group specified by <parameter>group</parameter>.  It
+returns matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By Package --- <function>rpmdbFindPackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindPackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindPackage(rpmdb db,
+                     char * name,
+                     dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+packages with the package name (not label) specified by <parameter>name</parameter>.  It
+returns matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By Provides --- <function>rpmdbFindByProvides()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindByProvides()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindByProvides(rpmdb db,
+                        char * provides,
+                        dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+packages which provide the provides information specified by
+<parameter>provides</parameter>.  It returns matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By Requires --- <function>rpmdbFindByRequiredBy()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindByRequiredBy()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindByRequiredBy(rpmdb db,
+                          char * requires,
+                          dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+packages which require the requires information specified by
+<parameter>requires</parameter>.  It returns matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Search RPM Database By Conflicts --- <function>rpmdbFindByConflicts()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdbFindByConflicts()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/dbindex.h&gt;
+
+int rpmdbFindByConflicts(rpmdb db,
+                         char * conflicts,
+                         dbiIndexSet * matches);
+</screen>
+</figure>
+This function searches the RPM database specified by <parameter>db</parameter> for the
+packages which conflict with the conflicts information specified by
+<parameter>conflicts</parameter>.  It returns matching records in <parameter>matches</parameter>.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- An error occurred reading a database record.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search completed normally.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The search term was not found.
+
+</para>
+</listitem>
+
+</itemizedlist>
+<indexterm>
+<primary>rpmlib!functions!RPM database search|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Package Manipulation</title>
+<indexterm>
+<primary>rpmlib!functions!package manipulation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+These functions perform the operations most RPM users are familiar with.
+Functions that install and erase packages are here, along with a few
+related lower-level support functions.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Install Source Package File --- <function>rpmInstallSourcePackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmInstallSourcePackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmInstallSourcePackage(char * root,
+                            int fd,
+                            char ** specFile,
+                            rpmNotifyFunction notify,
+                            char * labelFormat);
+</screen>
+</figure>
+This function installs the source package file specified by <parameter>fd</parameter>.
+If <parameter>root</parameter> is not <symbol>NULL</symbol>, it is prepended to the variables
+<symbol>RPMVAR_SOURCEDIR</symbol> and <symbol>RPMVAR_SPECDIR</symbol> prior to the actual
+installation.  If <parameter>specFile</parameter> is not <symbol>NULL</symbol>, the complete path
+and filename of the just-installed spec file is returned.
+
+The <parameter>notify</parameter> parameter is used to specify a progress-tracking
+function that will be called during the installation.  Please refer to
+page <xref linkend="notify-function"> for more information on this parameter.
+
+The <parameter>labelFormat</parameter> parameter can be used to specify how the package
+label should be formatted.  It is used when printing the package label once
+the package install is ready to proceed.  If <parameter>labelformat</parameter> is
+<symbol>NULL</symbol>, the package label is not printed.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- The source package was installed successfully.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The source package file contained incorrect magic
+numbers.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Another type of error occurred.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Install Binary Package File --- <function>rpmInstallPackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmInstallPackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmInstallPackage(char * rootdir,
+                      rpmdb db,
+                      int fd,
+                      char * prefix, 
+                      int flags,
+                      rpmNotifyFunction notify,
+                      char * labelFormat,
+                      char * netsharedPath);
+</screen>
+</figure>
+This function installs the binary package specified by <parameter>fd</parameter>.  If a
+path is specified in <parameter>rootdir</parameter>, the package will be installed with
+that path acting as the root directory.  If a path is specified in
+<parameter>prefix</parameter>, it will be used as the prefix for relocatable packages.
+The RPM database specified by <parameter>db</parameter> is updated to reflect the newly
+installed package.
+
+The <parameter>flags</parameter> parameter is used to control the installation behavior.
+The flags are defined in <filename>rpmlib.h</filename> and take the form
+<symbol>RPMINSTALL_<emphasis>xxx</symbol></emphasis>, where <symbol><emphasis>xxx</symbol></emphasis> is the name of
+the flag.
+
+The following flags are currently defined:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<symbol>RPMINSTALL_REPLACEPKG</symbol> --- Install the package even if it is
+already installed.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_REPLACEFILES</symbol> --- Install the package even if it
+will replace files owned by another package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_TEST</symbol> --- Perform all install-time checks, but do
+not actually install the package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_UPGRADE</symbol> --- Install the package, and remove all
+older versions of the package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_UPGRADETOOLD</symbol> --- Install the package, even if
+the package is an older version of an already-installed package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_NODOCS</symbol> --- Do not install the package's
+documentation files.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_NOSCRIPTS</symbol> --- Do not execute the package's
+install- and erase-time (in the case of an upgrade) scripts.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_NOARCH</symbol> --- Do not perform architecture
+compatibility tests.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMINSTALL_NOOS</symbol> --- Do not perform operating system
+compatibility tests.
+
+</para>
+</listitem>
+
+</itemizedlist>
+The <parameter>notify</parameter> parameter is used to specify a progress tracking
+function that will be called during the installation.  Please refer to
+page <xref linkend="notify-function"> for more information on this parameter.
+
+The <parameter>labelFormat</parameter> parameter can be used to specify how the package
+label should be formatted.  This information is used when printing the
+package label once the package install is ready to proceed.  It is used
+when printing the package label once the package install is ready to
+proceed.  If <parameter>labelformat</parameter> is <symbol>NULL</symbol>, the package label is
+not printed.
+
+The <parameter>netsharedPath</parameter> parameter is used to specify that part of the
+local filesystem that is shared with other systems.  If there is more than
+one path that is shared, the paths should be separated with a colon.
+
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- The binary package was installed successfully.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The binary package file contained incorrect magic
+numbers.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- Another type of error occurred.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Track Package Installation Progress --- <function>rpmNotifyFunction()</function></title>
+<!-- label: notify-function -->
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmNotifyFunction()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+typedef void (*rpmNotifyFunction)(const unsigned long amount,
+                                  const unsigned long total);
+</screen>
+</figure>
+A function can be passed to <function>rpmIstallSourcePackage</function> or
+<function>rpmInstallPackage</function> via the <parameter>notify</parameter> parameter.  The function
+will be called at regular intervals during the installation, and will have
+two parameters passed to it:
+
+<orderedlist>
+<listitem>
+<para>
+<parameter>amount</parameter> --- The number of bytes of the install that have been
+completed so far.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<parameter>total</parameter> --- The total number of bytes that will be installed.
+
+</para>
+</listitem>
+
+</orderedlist>
+This function permits the creation of a dynamically updating progress meter
+during package installation.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Remove Installed Package --- <function>rpmRemovePackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmRemovePackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmRemovePackage(char * root,
+                     rpmdb db,
+                     unsigned int offset,
+                     int flags);
+</screen>
+</figure>
+This function removes the package at record number <parameter>offset</parameter> in the
+RPM database specified by <parameter>db</parameter>.  If <parameter>root</parameter> is specified, it
+is used as the path to a directory that will serve as the root directory
+while the package is being removed.
+
+The <parameter>flags</parameter> parameter is used to control the package removal
+behavior.  The flags that may be passed are defined in <filename>rpmlib.h</filename>,
+and are of the form <symbol>RPMUNINSTALL_<emphasis>xxx</symbol></emphasis>, where
+<symbol><emphasis>xxx</symbol></emphasis> is the name of the flag.
+
+The following flags are currently defined:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<symbol>RPMUNINSTALL_TEST</symbol> --- Perform all erase-time checks, but do
+not actually remove the package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMUNINSTALL_NOSCRIPTS</symbol> --- Do not execute the package's
+erase-time scripts.
+
+</para>
+</listitem>
+
+</itemizedlist>
+This function returns the following status values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+--- The package was removed successfully.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+--- The package removal failed.
+
+</para>
+</listitem>
+
+</itemizedlist>
+<indexterm>
+<primary>rpmlib!functions!package manipulation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Package And File Verification</title>
+<indexterm>
+<primary>rpmlib!functions!package/file verification</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section perform the verification operations necessary
+to ensure that the files comprising a package have not been modified since
+they were installed.
+
+Verification takes place on three distinct levels:
+
+<orderedlist>
+<listitem>
+<para>
+On the file-by-file level.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+On a package-wide level, through the use of the
+<command>%verifyscript</command> verification script.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+On an inter-package level, through RPM's normal dependency
+processing.
+
+</para>
+</listitem>
+
+</orderedlist>
+Because of this, there are two functions to perform each specific
+verification operation.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Verify File --- <function>rpmVerifyFile()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmVerifyFile()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int rpmVerifyFile(char * root,
+                  Header h,
+                  int filenum,
+                  int * result);
+</screen>
+</figure>
+This function verifies the <parameter>filenum</parameter>'th file from the package whose
+header is <parameter>h</parameter>.  If <parameter>root</parameter> is specified, it is used as the
+path to a directory that will serve as the root directory while the file is
+being verified.  The results of the file verification are returned in
+<parameter>result</parameter>, and consist of a number of flags.  Each flag that is set
+indicates a verification failure.
+
+The flags are defined in <filename>rpmlib.h</filename>, and are of the form
+<symbol>RPMVERIFY_<emphasis>xxx</symbol></emphasis>, where <symbol><emphasis>xxx</symbol></emphasis> is the name of
+the data that failed verification.
+
+This function returns <returnvalue>0</returnvalue> on success, and <returnvalue>1</returnvalue> on failure.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Execute Package's <command>\%verifyscript</command> Verification Script --- <function>rpmVerifyScript()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmVerifyScript()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int rpmVerifyScript(char * root,
+                    Header h,
+                    int err);
+</screen>
+</figure>
+This function executes the <command>%verifyscript</command> verification script for
+the package whose header is <parameter>h</parameter>.  <parameter>err</parameter> must contain a valid
+file descriptor.  If <function>rpmIsVerbose()</function> returns true, the
+<command>%verifyscript</command> verification script will direct all status messages
+to <parameter>err</parameter>.
+
+This function returns <returnvalue>0</returnvalue> on success, <returnvalue>1</returnvalue> on failure.
+
+<indexterm>
+<primary>rpmlib!functions!package/file verification|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Dependency-Related Operations</title>
+<indexterm>
+<primary>rpmlib!functions!dependency processing</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section are used to perform the various
+dependency-related operations supported by rpmlib.
+
+Dependency processing is entirely separate from normal package-based
+operations.  The package installation and removal functions do not perform
+any dependency processing themselves.  Therefore, dependency processing is
+somewhat different from other aspects of rpmlib's operation.
+
+Dependency processing centers around the <structname>rpmDependencies</structname> data
+structure.  The operations that are to be performed against the RPM
+database (adding, removing, and upgrading packages) are performed against
+this data structure, using functions that are described below.  These
+functions simply populate the data structure according to the operation
+being performed.  They do <emphasis>not</emphasis> perform the actual operation on the
+package.  This is an important point to keep in mind.
+
+Once the data structure has been completely populated, a dependency check
+function is called to determine if there are any dependency-related
+problems.  The result is a structure of dependency conflicts.  This
+structure, <structname>rpmDependencyConflict</structname>, is defined in
+<filename>rpmlib.h</filename>.
+
+Note that it is necessary to free both the conflicts structure <emphasis>and</emphasis>
+the <structname>rpmDependencies</structname> structure when they are no longer needed.
+However, <function>free()</function> should <emphasis>not</emphasis> be used --- special functions
+for this are provided, and will be discussed in this section.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Create a New Dependency Data Structure --- <function>rpmdepDependencies()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepDependencies()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+rpmDependencies rpmdepDependencies(rpmdb db);
+</screen>
+</figure>
+This function returns an initialized <structname>rpmDependencies</structname> structure.
+The dependency checking to be done will be based on the RPM database
+specified in the <parameter>db</parameter> parameter.  If this parameter is
+<symbol>NULL</symbol>, the dependency checking will be done as if an empty RPM
+database was being used.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Add a Package Install To the Dependency Data Structure ---  <function>rpmdepAddPackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepAddPackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void rpmdepAddPackage(rpmDependencies rpmdep,
+                      Header h);
+</screen>
+</figure>
+This function adds the installation of the package whose header is
+<parameter>h</parameter>, to the <structname>rpmDependencies</structname> data structure,
+<parameter>rpmdep</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Add a Package Upgrade To the Dependency Data Structure --- <function>rpmdepUpgradePackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepUpgradePackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void rpmdepUpgradePackage(rpmDependencies rpmdep,
+                          Header h);
+</screen>
+</figure>
+This function adds the upgrading of the package whose header is
+<parameter>h</parameter>, to the <structname>rpmDependencies</structname> data structure,
+<parameter>rpmdep</parameter>.  It is similar to <function>rpmdepAddPackage()</function>, but older
+versions of the package are removed.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Add a Package Removal To the Dependency Data Structure --- <function>rpmdepRemovePackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepRemovePackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmdepRemovePackage(rpmDependencies rpmdep,
+                         int dboffset);
+</screen>
+</figure>
+This function adds the removal of the package whose RPM database offset is
+<parameter>dboffset</parameter>, to the <structname>rpmDependencies</structname> data structure,
+<parameter>rpmdep</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Add an Available Package To the Dependency Data Structure ---  <function>rpmdepAvailablePackage()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepAvailablePackage()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void rpmdepAvailablePackage(rpmDependencies rpmdep,
+                            Header h,
+                            void * key);
+</screen>
+</figure>
+This function adds the package whose header is <parameter>h</parameter>, to the
+<structname>rpmDependencies</structname> structure, <parameter>rpmdep</parameter>.
+
+The <parameter>key</parameter> parameter can be anything that uniquely identifies the
+package being added.  It will be returned as part of the
+<structname>rpmDependencyConflict</structname> structure returned by
+<function>rpmdepCheck()</function>, specifically in that structure's
+<structfield>suggestedPackage</structfield> element.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Perform a Dependency Check --- <function>rpmdepCheck()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepCheck()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmdepCheck(rpmDependencies rpmdep,
+                struct rpmDependencyConflict ** conflicts,
+                int * numConflicts);
+</screen>
+</figure>
+This function performs a dependency check on the <structname>rpmDependencies</structname>
+structure <parameter>rpmdep</parameter>.  It returns an array of size
+<parameter>numConflicts</parameter>, pointed to by <parameter>conflicts</parameter>.
+
+This function returns <returnvalue>0</returnvalue> on success, and <returnvalue>1</returnvalue> on error.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Free Results of <function>rpmdepCheck()</function> --- <function>rpmdepFreeConflicts()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepFreeConflicts()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
+                         int numConflicts);
+</screen>
+</figure>
+This function frees the dependency conflict information of size
+<parameter>numConflicts</parameter> pointed to by <parameter>conflicts</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Free a Dependency Data Structure --- <function>rpmdepDone()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmdepDone()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmdepDone(rpmDependencies rpmdep);
+</screen>
+</figure>
+This function frees the <structname>rpmDependencies</structname> structure pointed to by
+<parameter>rpmdep</parameter>.
+
+<indexterm>
+<primary>rpmlib!functions!dependency processing|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Diagnostic Output Control</title>
+<indexterm>
+<primary>rpmlib!functions!output control</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section are used to control the amount of diagnostic
+output produced by other rpmlib functions.  The rpmlib
+library can produce a wealth of diagnostic output, making it easy to see
+what is going on at any given time.
+
+There are several different verbosity levels defined in <filename>rpmlib.h</filename>.
+Their symbolic names are of the form <symbol>RPMMESS_<emphasis>xxx</symbol></emphasis>, where
+<symbol><emphasis>xxx</symbol></emphasis> is the name of the verbosity level.  It should be noted
+that the numeric values of the verbosity levels <emphasis>increase</emphasis> with a
+<emphasis>decrease</emphasis> in verbosity.
+
+Unless otherwise set, the default verbosity level is <symbol>RPMMESS_NORMAL</symbol>.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Increase Verbosity Level --- <function>rpmIncreaseVerbosity()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmIncreaseVerbosity()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmIncreaseVerbosity(void);
+</screen>
+</figure>
+This function is used to increase the current verbosity level by one.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Set Verbosity Level --- <function>rpmSetVerbosity()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmSetVerbosity()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+void rpmSetVerbosity(int level);
+</screen>
+</figure>
+This function is used to set the current verbosity level to
+<parameter>level</parameter>.  Note that no range checking is done to <parameter>level</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Return Verbosity Level --- <function>rpmGetVerbosity()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmGetVerbosity()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmGetVerbosity(void);
+</screen>
+</figure>
+This function returns the current verbosity level.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Check Verbosity Level --- <function>rpmIsVerbose()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmIsVerbose()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmIsVerbose(void);
+</screen>
+</figure>
+This function checks the current verbosity level and returns <returnvalue>1</returnvalue>
+if the current level is set to <symbol>RPMMESS_VERBOSE</symbol> or a level of
+higher verbosity.  Otherwise, it returns <returnvalue>0</returnvalue>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Check Debug Level --- <function>rpmIsDebug()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmIsDebug()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmIsDebug(void);
+</screen>
+</figure>
+This function checks the current verbosity level and returns <returnvalue>1</returnvalue>
+if the current level is set to <symbol>RPMMESS_DEBUG</symbol>, or a level of
+higher verbosity.  Otherwise, it returns <returnvalue>0</returnvalue>.
+
+<indexterm>
+<primary>rpmlib!functions!output control|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Signature Verification</title>
+<indexterm>
+<primary>rpmlib!functions!signature verification</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section deal with the verification of package
+signatures.  A package file may contain more than one type of signature.
+For example, a package may contain a signature that contains the package's
+size, as well as a signature that contains cryptographically-derived data
+that can be used to prove the package's origin.
+
+Each type of signature has its own tag value.  These tag values are defined
+in <filename>rpmlib.h</filename> and are of the form <symbol>RPMSIGTAG_<emphasis>xxx</symbol></emphasis>,
+where <symbol><emphasis>xxx</symbol></emphasis> is the type of signature.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Verify A Package File's Signature --- <function>rpmVerifySignature()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmVerifySignature()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+
+int rpmVerifySignature(char *file,
+                       int_32 sigTag,
+                       void *sig,
+                       int count,
+                       char *result);
+</screen>
+</figure>
+This function verifies the signature of the package pointed to by
+<parameter>file</parameter>.  The result of the verification is stored in
+<parameter>result</parameter>, in a format suitable for printing.
+
+The <parameter>sigTag</parameter> parameter specifies the type of signature to be
+checked.  The <parameter>sig</parameter> parameter specifies the signature against which
+the package is to be verified.  The <parameter>count</parameter> parameter specifies the
+size of the signature; at present, this parameter is only used for
+PGP-based signatures.
+
+This function returns the following values:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<symbol>RPMSIG_OK</symbol> --- The signature verified correctly.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMSIG_UNKNOWN</symbol> --- The signature type is unknown.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMSIG_BAD</symbol> --- The signature did not verify correctly.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPMSIG_NOKEY</symbol> --- The key required to check this signature
+is not available.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Free Signature Read By <function>rpmReadPackageInfo()</function> --- <function>rpmFreeSignature()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>rpmFreeSignature()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void rpmFreeSignature(Header h);
+</screen>
+</figure>
+This function frees the signature <parameter>h</parameter>.
+
+<indexterm>
+<primary>rpmlib!functions!signature verification|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Header Manipulation</title>
+<!-- label: header-manipulation -->
+<indexterm>
+<primary>rpmlib!functions!header manipulation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The header is one of the key data structures in rpmlib.  The
+functions in this section perform basic manipulations of the header.
+
+The header is actually a data structure.  It is not necessary to fully
+understand the actual data structure.  However, it <emphasis>is</emphasis> necessary to
+understand the basic concepts on which the header is based.
+
+The header serves as a kind of miniature database.  The header can be
+searched for specific information, which can be retrieved easily.  Like a
+database, the information contained in the header can be of varying sizes.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Read A Header --- <function>headerRead()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerRead()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+Header headerRead(int fd,
+                  int magicp);
+</screen>
+</figure>
+This function reads a header from file <parameter>fd</parameter>, converting it from
+network byte order to the host system's byte order.  If <parameter>magicp</parameter> is
+defined to be <symbol>HEADER_MAGIC_YES</symbol>, <function>headerRead()</function> will
+expect header magic numbers, and will return an error if they are not
+present.  Likewise, if <parameter>magicp</parameter> is defined to be
+<symbol>HEADER_MAGIC_NO</symbol>, <function>headerRead()</function> will not check the
+header's magic numbers, and will return an error if they are present.
+
+On error, this function returns <symbol>NULL</symbol>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Write A Header --- <function>headerWrite()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerWrite()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void headerWrite(int fd,
+                 Header h,
+                 int magicp);
+</screen>
+</figure>
+This function writes the header <parameter>h</parameter>, to file <parameter>fd</parameter>, converting
+it from host byte order to network byte order.  If <parameter>magicp</parameter> is
+defined to be <symbol>HEADER_MAGIC_YES</symbol>, <function>headerWrite()</function> will add
+the appropriate magic numbers to the header being written.  If
+<parameter>magicp</parameter> is defined to be <symbol>HEADER_MAGIC_NO</symbol>,
+<function>headerWrite()</function> will not include magic numbers.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Copy A Header --- <function>headerCopy()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerCopy()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+Header headerCopy(Header h);
+</screen>
+</figure>
+This function returns a copy of header <parameter>h</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Calculate A Header's Size --- <function>headerSizeof()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerSizeof()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+unsigned int headerSizeof(Header h,
+                          int magicp);
+</screen>
+</figure>
+This function returns the number of bytes the header <parameter>h</parameter> takes up on
+disk.  Note that in versions of RPM prior to 2.3.3, this function also
+changes the location of the data in the header.  The result is that
+pointers from <function>headerGetEntry()</function> will no longer be valid.
+Therefore, any pointers acquired before calling <function>headerSizeof()</function>
+should be discarded.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Create A New Header --- <function>headerNew()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerNew()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+Header headerNew(void);
+</screen>
+</figure>
+This function returns a new header.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Deallocate A Header --- <function>headerFree()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerFree()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void headerFree(Header h);
+</screen>
+</figure>
+This function deallocates the header specified by <parameter>h</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Print Header Structure In Human-Readable Form --- <function>headerDump()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerDump()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void headerDump(Header h,
+                FILE *f,
+                int flags);
+</screen>
+</figure>
+This function prints the structure of the header <parameter>h</parameter>, to the file
+<parameter>f</parameter>.  If the <parameter>flags</parameter> parameter is defined to be
+<symbol>HEADER_DUMP_INLINE</symbol>, the header's data is also printed.
+
+<indexterm>
+<primary>rpmlib!functions!header manipulation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Header Entry Manipulation</title>
+<!-- label: header-entry-manipulation -->
+<indexterm>
+<primary>rpmlib!functions!header entry manipulation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The functions in this section provide the basic operations necessary to
+manipulate header entries.  The following header entry types are currently
+defined:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<symbol>RPM_NULL_TYPE</symbol> --- This type is not used.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_CHAR_TYPE</symbol> --- The entry contains a single character.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_INT8_TYPE</symbol> --- The entry contains an eight-bit integer.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_INT16_TYPE</symbol> --- The entry contains a sixteen-bit
+integer.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_INT32_TYPE</symbol> --- The entry contains a thirty-two-bit
+integer.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_INT64_TYPE</symbol> --- The entry contains a sixty-four-bit
+integer.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_STRING_TYPE</symbol> --- The entry contains a null-terminated
+character string.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_BIN_TYPE</symbol> --- The entry contains binary data that will
+not be interpreted by rpmlib.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<symbol>RPM_STRING_ARRAY_TYPE</symbol> --- The entry contains an array of
+null-terminated strings.
+
+</para>
+</listitem>
+
+</itemizedlist>
+<sect3 id="s3-rpm-rpmlib-">
+<title>Get Entry From Header --- <function>headerGetEntry()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerGetEntry()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int headerGetEntry(Header h,
+                   int_32 tag,
+                   int_32 *type,
+                   void **p,
+                   int_32 *c);
+</screen>
+</figure>
+This function retrieves the entry matching <parameter>tag</parameter> from header
+<parameter>h</parameter>.  The type of the entry is returned in <parameter>type</parameter>, a pointer
+to the data is returned in <parameter>p</parameter>, and the size of the data is returned
+in <parameter>c</parameter>.  Both <parameter>type</parameter> and <parameter>c</parameter> may be null, in which
+case that data will not be returned.  Note that if the entry type is
+<symbol>RPM_STRING_ARRAY_TYPE</symbol>, you must issue a <function>free()</function> on
+<parameter>p</parameter> when done with the data.
+
+This function returns <returnvalue>1</returnvalue> on sucess, and <returnvalue>0</returnvalue> on failure.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Add Entry To Header --- <function>headerAddEntry()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerAddEntry()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int headerAddEntry(Header h,
+                   int_32 tag,
+                   int_32 type,
+                   void *p,
+                   int_32 c);
+</screen>
+</figure>
+This function adds a new entry to the header <parameter>h</parameter>.  The entry's tag
+is specified by the <parameter>tag</parameter> parameter, and the entry's type is
+specified by the <parameter>type</parameter> parameter.
+
+The entry's data is pointed to by <parameter>p</parameter>, and the size of the data is
+specified by <parameter>c</parameter>.
+
+This function always returns <returnvalue>1</returnvalue>.
+
+Note: In versions of RPM prior to 2.3.3, <function>headerAddEntry()</function> will
+only work successfully with headers produced by <function>headerCopy()</function> and
+<function>headerNew()</function>.  In particular, <function>headerAddEntry()</function> is not
+supported when used to add entries to a header produced by
+<function>headerRead()</function>.  Later versions of RPM lift this restriction.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Determine If Entry Is In Header --- <function>headerIsEntry()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerIsEntry()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int headerIsEntry(Header h,
+                  int_32 tag);
+</screen>
+</figure>
+This function returns <returnvalue>1</returnvalue> if an entry with tag <parameter>tag</parameter> is
+present in header <parameter>h</parameter>.  If the tag is not present, this function
+returns <returnvalue>0</returnvalue>.
+
+<indexterm>
+<primary>rpmlib!functions!header entry manipulation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Header Iterator Support</title>
+<indexterm>
+<primary>rpmlib!functions!header iterator</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Iterators are used as a means to step from entry to entry, through an
+entire header.  The functions in this section are used to create, use, and
+free iterators.
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Create an Iterator --- <function>headerInitIterator()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerInitIterator()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+HeaderIterator headerInitIterator(Header h);
+</screen>
+</figure>
+This function returns a newly-created iterator for the header <parameter>h</parameter>.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Step To the Next Entry --- <function>headerNextIterator()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerNextIterator()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+int headerNextIterator(HeaderIterator iter,
+                       int_32 *tag,
+                       int_32 *type,
+                       void **p,
+                       int_32 *c);
+</screen>
+</figure>
+This function steps to the next entry in the header specified when the
+iterator <parameter>iter</parameter> was created with <function>headerInitIterator()</function>.  The
+next entry's tag, type, data, and size are returned in <parameter>tag</parameter>,
+<parameter>type</parameter>, <parameter>p</parameter>, and <parameter>c</parameter>, respectively.  Note that if the
+entry type is <symbol>RPM_STRING_ARRAY_TYPE</symbol>, you must issue a
+<function>free()</function> on <parameter>p</parameter> when done with the data.
+
+This function returns <returnvalue>1</returnvalue> if successful, and <returnvalue>0</returnvalue> if there are
+no more entries in the header.
+
+</sect3>
+
+<sect3 id="s3-rpm-rpmlib-">
+<title>Free An Iterator --- <function>headerFreeIterator()</function></title>
+<indexterm>
+<primary>rpmlib functions, list of!<function>headerFreeIterator()</function></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;rpm/rpmlib.h&gt;
+#include &lt;rpm/header.h&gt;
+
+void headerFreeIterator(HeaderIterator iter);
+</screen>
+</figure>
+This function frees the resources used by the iterator <parameter>iter</parameter>.
+
+<indexterm>
+<primary>rpmlib!functions!header iterator|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmlib functions, list of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-rpmlib-">
+<title>Example Code</title>
+<indexterm>
+<primary>rpmlib!examples using</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In this section, we'll study example programs that make use of
+rpmlib to perform an assortment of commonly-required operations.
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Example #1</title>
+In this example, we'll use a number of rpmlib's header
+manipulation functions.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+#include &lt;rpm/rpmlib.h&gt;
+</screen>
+</figure>
+Here we've included <filename>rpmlib.h</filename>, which is necessary for all programs
+that use rpmlib.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+void main(int argc, char ** argv)
+{
+  HeaderIterator iter;
+    Header h, sig;
+    int_32 itertag, type, count;
+    void **p = NULL;
+    char *blather;
+    char * name;
+
+    int fd, stat;
+</screen>
+</figure>
+Here we've defined the program's storage.  Note in particular the
+<structname>HeaderIterator</structname>, <structname>Header</structname>, and <structname>int_32</structname> datatypes.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    if (argc == 1) {
+        fd = 0;
+    } else {
+        fd = open(argv[1], O_RDONLY, 0644);
+    }
+
+    if (fd &lt; 0) {
+        perror("open");
+        exit(1);
+    }
+</screen>
+</figure>
+Standard stuff here.  The first argument is supposed to be an RPM package
+file.  It is opened here.  If there is no argument on the command line, the
+program will use stdin instead.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    stat = rpmReadPackageInfo(fd, &sig, &h);
+    if (stat) {
+      fprintf(stderr,
+              "rpmReadPackageInfo error status: %d\n%s\n",
+              stat, strerror(errno));
+        exit(stat);
+    }
+</screen>
+</figure>
+Here things start to get interesting!  The signature and headers are read
+from package file that was just opened.  If you noticed above, we've
+defined <parameter>sig</parameter> and <parameter>h</parameter> to be of type <structname>Header</structname>.  That
+means we can use rpmlib's header-related functions on them.
+After a little bit of error checking, and it's time to move on&hellip;
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    headerGetEntry(h, RPMTAG_NAME, &type, (void **) &name, &count);
+
+    if (headerIsEntry(h, RPMTAG_PREIN)) {
+        printf("There is a preinstall script for %s\n", name);
+    }
+
+    if (headerIsEntry(h, RPMTAG_POSTIN)) {
+        printf("There is a postinstall script for %s\n", name);
+    }
+</screen>
+</figure>
+Now that we have the package's header, we get the package name (specified
+by the <symbol>RPMTAG_NAME</symbol> above).  Next, we see if the package has
+pre-install (<symbol>RPMTAG_PREIN</symbol>) or post-install
+(<symbol>RPMTAG_POSTIN</symbol>) scripts.  If there are, we print out a message,
+along with the package name.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    printf("Dumping signatures...\n");
+    headerDump(sig, stdout, 1);
+
+    rpmFreeSignature(sig);
+</screen>
+</figure>
+Turning to the other <structname>Header</structname> structure we've read, we print out the
+package's signatures in human-readable form.  When we're done, we free the
+block of signatures.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    printf("Iterating through the header...\n");
+
+    iter = headerInitIterator(h);
+</screen>
+</figure>
+Here we set up an iterator for the package's header.  This will allow us to
+step through each entry in the header.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    while (headerNextIterator(iter, &itertag, &type, p, &count)) {
+      switch (itertag) {
+      case RPMTAG_SUMMARY:
+        blather = *p;
+        printf("The Summary: %s\n", blather);
+        break;
+      case RPMTAG_FILENAMES:
+        printf("There are %d files in this package\n", count);
+        break;
+      }
+</screen>
+</figure>
+This loop uses <function>headerNextIterator()</function> to return each entry's tag,
+type, data, and size.  By using a <command>switch</command> statement on the tag, we
+can perform different operations on each type of entry in the header.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    }
+
+    headerFreeIterator(iter);
+
+    headerFree(h);
+
+}
+</screen>
+</figure>
+This is the housecleaning section of the program.  First we free the
+iterator that we've been using, and finally the header itself.  Running
+this program on a package gives us the following output:
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>./dump amanda-client-2.3.0-2.i386.rpm</userinput>
+There is a postinstall script for amanda-client
+Dumping signatures...
+Entry count: 2
+Data count : 20
+
+             CT  TAG                  TYPE           OFSET      COUNT
+Entry      : 000 (1000)NAME           INT32_TYPE     0x00000000 00000001
+       Data: 000 0x00029f5d (171869)
+Entry      : 001 (1003)SERIAL         BIN_TYPE       0x00000004 00000016
+       Data: 000 27 01 f9 97 d8 2c 36 40 
+       Data: 008 c6 4a 91 45 32 13 d1 62 
+Iterating through the header...
+The Summary: Client-side Amanda package
+There are 11 files in this package
+# 
+</screen>
+</figure>
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Example #2</title>
+This example delves a bit more into the database-related side of
+rpmlib.  After initializing rpmlib's variables by reading
+the appropriate <filename>rpmrc</filename> files, the code traverses the database
+records, looking for a specific package.  That package's header is then
+dumped in its entirety.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include &lt;rpm/rpmlib.h&gt;
+</screen>
+</figure>
+As before, this is the normal way of including all of rpmlib's
+definitions.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+void main(int argc, char ** argv)
+{
+    Header h;
+    int offset;
+    int dspBlockNum = 0;                /* default to all */
+    int blockNum = 0;
+    int_32 type, count;
+    char * name;
+    rpmdb db;
+</screen>
+</figure>
+Here are the data declarations.  Note the declaration of <parameter>db</parameter>: this
+is how we will be accessing the RPM database.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    printf("The database path is: %s\n",
+        rpmGetVar(RPMVAR_DBPATH) ? rpmGetVar(RPM_DBPATH) : "(none)");
+
+    rpmReadConfigFiles(NULL, NULL, NULL, 0);
+
+    printf("The database path is: %s\n",
+        rpmGetVar(RPMVAR_DBPATH) ? rpmGetVar(RPM_DBPATH) : "(none)");
+</screen>
+</figure>
+Before opening the RPM database, it's necessary to know where the database
+resides.  This information is stored in <filename>rpmrc</filename> files, which are
+read by <function>rpmReadConfigFiles()</function>.  To show that this function is
+really doing its job, we retrieve the RPM database path before and after
+the <filename>rpmrc</filename> files are read.  Note that we test the return value of
+<function>rpmGetVar(RPM_DBPATH)</function> and, if it is null, we insert
+<computeroutput>(none)</computeroutput> in the <function>printf()</function> output.  This prevents possible
+core dumps if no database path has been set, and besides, it's more
+user-friendly.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    if (rpmdbOpen("", &db, O_RDONLY, 0644) != 0) {
+        fprintf(stderr, "cannot open /var/lib/rpm/packages.rpm\n");
+        exit(1);
+    }
+</screen>
+</figure>
+Here we're opening the RPM database, and doing some cursory error checking
+to make sure we should continue.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    offset = rpmdbFirstRecNum(db);
+</screen>
+</figure>
+We get the offset of the first database record&hellip;
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    while (offset) {
+
+        h = rpmdbGetRecord(db, offset);
+        if (!h) {
+                fprintf(stderr, "headerRead failed\n");
+        exit(1);
+                }
+</screen>
+</figure>
+Here we start a <command>while</command> loop based on the record offset.  As long as
+there is a non-zero offset (meaning that there is still an available
+record), we get the record.  If there's a problem getting the record, we
+exit.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+            headerGetEntry(h, RPMTAG_NAME, &type, (void **) &name, &count);
+            if (strcmp(name, argv[1]) == 0)
+              headerDump(h, stdout, 1);
+</screen>
+</figure>
+Next, we get the package name entry from the record, and compare it with
+the name of the package we're interested in.  If it matches, we dump the
+contents of the entire record.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+        headerFree(h);
+    
+        offset = rpmdbNextRecNum(db, offset);
+    }
+</screen>
+</figure>
+At the end of the loop, we free the record, and get the offset to the next
+record.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+
+    rpmdbClose(db);
+}
+</screen>
+</figure>
+At the end, we close the database, and exit.
+
+Here's the program's output, edited for brevity.  Notice that the database
+path changes from <computeroutput>(null)</computeroutput> to <filename>/var/lib/rpm</filename> after the
+<filename>rpmrc</filename> files are read.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>./showdb amanda-client</userinput>
+The database path is: (null)
+The database path is: /var/lib/rpm
+Entry count: 37
+Data count : 5219
+
+             CT  TAG                  TYPE               OFSET      COUNT
+Entry      : 000 (1000)NAME        STRING_TYPE        0x00000000 00000001
+       Data: 000 amanda-client
+Entry      : 001 (1001)VERSION     STRING_TYPE        0x0000000e 00000001
+       Data: 000 2.3.0
+Entry      : 002 (1002)RELEASE     STRING_TYPE        0x00000014 00000001
+       Data: 000 7
+Entry      : 003 (1004)SUMMARY     STRING_TYPE        0x00000016 00000001
+       Data: 000 Client-side Amanda package
+Entry      : 004 (1005)DESCRIPTION STRING_TYPE        0x00000031 00000001
+&hellip;
+Entry      : 017 (1027)FILENAMES   STRING_ARRAY_TYPE  0x00000df3 00000015
+       Data: 000 /usr/doc/amanda-client-2.3.0-7
+       Data: 001 /usr/doc/amanda-client-2.3.0-7/COPYRIGHT
+       Data: 002 /usr/doc/amanda-client-2.3.0-7/INSTALL
+       Data: 003 /usr/doc/amanda-client-2.3.0-7/README
+       Data: 004 /usr/doc/amanda-client-2.3.0-7/SYSTEM.NOTES
+       Data: 005 /usr/doc/amanda-client-2.3.0-7/WHATS.NEW
+       Data: 006 /usr/doc/amanda-client-2.3.0-7/amanda-client.README
+&hellip;
+Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
+       Data: 000 libc.so.5
+       Data: 001 libdb.so.2
+       Data: 002 grep
+       Data: 003 sed
+       Data: 004 NetKit-B
+       Data: 005 dump
+&hellip;
+#
+</screen>
+</figure>
+As can be seen, everything that you could possibly want to know about an
+installed package is available using this method.
+
+</sect2>
+
+<sect2 id="s2-rpm-rpmlib-">
+<title>Example #3</title>
+This example is similar in function to the previous one, except that it
+uses rpmlib's search functions to find the desired package record:
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#include &lt;errno.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;stdlib.h&gt;
+
+#include &lt;rpm/rpmlib.h&gt;
+</screen>
+</figure>
+Here we include rpmlib's definitions.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+void main(int argc, char ** argv)
+{
+    Header h;
+    int stat;
+    rpmdb db;
+    dbiIndexSet matches;
+</screen>
+</figure>
+Here are the storage declarations.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    if (argc != 2) {
+        fprintf(stderr, "showdb2 &lt;search term&gt;\n");
+        exit(1);
+    }
+
+    rpmReadConfigFiles(NULL, NULL, NULL, 0);
+
+    if (rpmdbOpen("", &db, O_RDONLY, 0644) != 0) {
+        fprintf(stderr, "cannot open /var/lib/rpm/packages.rpm\n");
+        exit(1);
+    }
+</screen>
+</figure>
+In this section, we do some argument processing, processing the
+<filename>rpmrc</filename> files, and open the RPM database.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    stat = rpmdbFindPackage(db, argv[1], &matches);
+    printf("Status is: %d\n", stat);
+    if (stat == 0) {
+      if (matches.count) {
+        printf("Number of matches: %d\n", matches.count);
+        h = rpmdbGetRecord(db, matches.recs[0].recOffset);
+        if (h) headerDump(h, stdout, 1);
+        headerFree(h);
+        dbiFreeIndexRecord(matches);
+      }
+    }
+</screen>
+</figure>
+In this section we use <function>rpmdbFindPackage()</function> to search for the
+desired package.  After checking for successful status, the count of
+matching package records is checked.  If there is at least one match, the
+first matching record is retrieved, and dumped.  Note that there could be
+more than one match.  Although this example doesn't dump more than the
+first matching record, it would be simple to access all matches by stepping
+through the <structname>matches.recs</structname> array.
+
+Once we're done with the record, we free it, as well as the list of
+matching records.
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+    rpmdbClose(db);
+}
+</screen>
+</figure>
+The last thing we do before exiting is to close the database.  Here's some
+sample output from the program.  Note the successful status, and the number
+of matches printed before the dump:
+
+<figure id="sc-rpm-rpmlib-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>./showdb2 rpm</userinput>
+Status is: 0
+Number of matches: 1
+Entry count: 37
+Data count : 2920
+
+             CT  TAG                  TYPE               OFSET      COUNT
+Entry      : 000 (1000)NAME        STRING_TYPE        0x00000000 00000001
+       Data: 000 rpm
+Entry      : 001 (1001)VERSION     STRING_TYPE        0x00000004 00000001
+       Data: 000 2.2.9
+Entry      : 002 (1002)RELEASE     STRING_TYPE        0x0000000a 00000001
+       Data: 000 1
+Entry      : 003 (1004)SUMMARY     STRING_TYPE        0x0000000c 00000001
+       Data: 000 Red Hat <!-- *** RED HAT *** -->Package Manager
+&hellip;
+Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x00000b40 00000003
+       Data: 000 libz.so.1
+       Data: 001 libdb.so.2
+       Data: 002 libc.so.5
+Entry      : 035 (1050)REQUIREVERSION STRING_ARRAY_TYPE 0x00000b5f 00000003
+       Data: 000 
+       Data: 001 
+       Data: 002 
+Entry      : 036 (1064)RPMVERSION  STRING_TYPE        0x00000b62 00000001
+       Data: 000 2.2.9
+#
+</screen>
+</figure>
+<indexterm>
+<primary>rpmlib!examples using|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmlib!guide to using|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+

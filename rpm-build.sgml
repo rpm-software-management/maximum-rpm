@@ -417,8 +417,8 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
           properly.  The <command>%prep</command> section is the appropriate
           place to patch the sources, but in this example, no patching is
           required.  Fear not, however, as we'll explore patching in all its
-          glory in chapter <xref linkend="rpm-rw-build">, when we build a more
-          complex package.
+          glory in chapter <xref linkend="ch-rpm-rw-build">, when we build a
+          more complex package.
         </para>
 
         <sect3 id="s3-rpm-build-macros">
@@ -679,7 +679,7 @@ make install
           </para>
           <para>
             We'll see how these scripts are used in chapter <xref
-            linkend="rpm-rw-build">.
+            linkend="ch-rpm-rw-build">.
           </para>
         </sect3>
 

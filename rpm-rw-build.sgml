@@ -1,106 +1,113 @@
-<chapter id="ch-rpm-rw-build">
-<title>Real-World Package Building</title>
-<!-- label: rpm-rw-build -->
+  <chapter id="ch-rpm-rw-build">
+    <title>Real-World Package Building</title>
+    <!-- label: rpm-rw-build -->
 
-<indexterm>
-<primary>package building!real-world example</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <indexterm>
+      <primary>package building!real-world example</primary>
+      <secondary></secondary>
+    </indexterm>
 
-In chapter <xref linkend="rpm-build">, we packaged a fairly simple application.
-Since our goal was to introduce package building, we kept things as simple
-as possible.  However, things aren't always that simple in the real world.
+    <para>
+      In chapter <xref linkend="ch-rpm-build">, we packaged a fairly simple
+      application.  Since our goal was to introduce package building, we kept
+      things as simple as possible.  However, things aren't always that simple
+      in the real world.
+    </para>
+    <para>
+      In this chapter, we'll package a more complex application that will call
+      on most of RPM's capabilities.  We'll start with a general overview of the
+      application and end with a completed package, just as you would if you
+      were tasked with packaging an application that you'd not seen before.
+    </para>
+    <para>
+      So without further ado, let's meet amanda&hellip;
+    </para>
 
-In this chapter, we'll package a more complex application that will call on
-most of RPM's capabilities.  We'll start with a general overview of the
-application and end with a completed package, just as you would if you were
-tasked with packaging an application that you'd not seen before.
+    <sect1 id="s1-rpm-rw-build-amanda-overview">
+      <title>An Overview of Amanda</title>
+      <indexterm>
+        <primary>package building!real-world example!overview</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-So without further ado, let's meet amanda&hellip;
+      <para>
+        Amanda is a network backup utility.  The name amanda stands for
+        "Advanced Maryland Automatic Network Disk Archiver".  If the word
+        "Maryland" seems somewhat incongruous, it helps to realize that the
+        program was developed at the University of Maryland by James Da Silva,
+        and has subsequently been enhanced by many people around the world.
+      </para>
+      <para>
+        The sources are available at <filename>ftp.cs.umd.edu</filename>, in
+        directory <filename>/pub/amanda</filename>.  At the time of writing, the
+        latest version of amanda is version 2.3.0.  Therefore, it should come as
+        no surprise that the amanda source <command>tar</command> file is called
+        amanda-2.3.0.tar.gz.
+      </para>
+      <para>
+        As with most network-centric applications, amanda has a server
+        component, and a client component.  An amanda server controls how the
+        various client systems are backed up to the server's tape drive.  Each
+        amanda client uses the operating system's native <command>dump</command>
+        utility to perform the actual backup, which is then compressed and sent
+        to the server.  A server can back itself up simply by having the client
+        software installed and configured, just like any other client system.
+      </para>
+      <para>
+        The software builds with <command>make</command>, and most customization
+        is done in two <filename>.h</filename> files in the
+        <filename>config</filename> subdirectory.  A fair amount of
+        documentation is available in the <filename>doc</filename> subdirectory.
+        All in all, amanda is a typical non-trivial application.
+      </para>
+      <para>
+        Amanda can be built on several Unix-based operating systems.  In this
+        chapter, we'll build and package amanda for &RHL; Linux version 4.0.
+      </para>
+    </sect1>
 
-<sect1 id="s1-rpm-rw-build-">
-<title>An Overview of Amanda</title>
-<indexterm>
-<primary>package building!real-world example!overview</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-rw-build-build-without-rpm">
+      <title>Initial Building Without RPM</title>
+      <indexterm>
+        <primary>package building!real-world example!initial build</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-Amanda is a network backup utility.  The name amanda stands for "Advanced
-Maryland Automatic Network Disk Archiver".  If the word "Maryland" seems
-somewhat incongruous, it helps to realize that the program was developed at
-the University of Maryland by James Da Silva, and has subsequently been
-enhanced by many people around the world.
+      <para>
+        Since amanda can be built on numerous platforms, there needs to be some
+        initial customization when first building the software.  Since
+        customization implies that mistakes will be made, we'll start off by
+        building amanda without any involvement on the part of RPM.
+      </para>
+      <para>
+        But before we can build amanda, we have to get it and unpack it, first.
+      </para>
 
-The sources are available at <tt?>ftp.cs.umd.edu</tt?>, in directory
-<tt?>/pub/amanda</tt?>.  At the time of writing, the latest version of amanda
-is version 2.3.0.  Therefore, it should come as no surprise that the amanda
-source <tt?>tar</tt?> file is called amanda-2.3.0.tar.gz.
+      <sect2 id="s2-rpm-rw-build-test-build-area">
+        <title>Setting Up A Test Build Area</title>
+        <indexterm>
+          <primary>package building!real-world example!build area, creating</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-As with most network-centric applications, amanda has a server component,
-and a client component.  An amanda server controls how the various client
-systems are backed up to the server's tape drive.  Each amanda client uses
-the operating system's native <tt?>dump</tt?> utility to perform the actual
-backup, which is then compressed and sent to the server.  A server can back
-itself up simply by having the client software installed and configured,
-just like any other client system.
+        <para>
+          As we mentioned above, the home FTP site for amanda is
+          <filename>ftp.cs.umd.edu</filename>.  The sources are in
+          <filename>/pub/amanda</filename>.
+        </para>
+        <para>
+          After getting the sources, it's necessary to unpack them.  We'll
+          unpack them into RPM's <filename>SOURCES</filename> directory, so that
+          we can keep all our work in one place:
 
-The software builds with <tt?>make</tt?>, and most customization is done in
-two <tt?>.h</tt?> files in the <tt?>config</tt?> subdirectory.  A fair amount
-of documentation is available in the <tt?>doc</tt?> subdirectory.  All in
-all, amanda is a typical non-trivial application.
-
-Amanda can be built on several Unix-based operating systems.  In this
-chapter, we'll build and package amanda for Red Hat <!-- *** RED HAT *** -->Linux version 4.0.
-
-<indexterm>
-<primary>package building!real-world example!overview|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect1>
-
-<sect1 id="s1-rpm-rw-build-">
-<title>Initial Building Without RPM</title>
-<indexterm>
-<primary>package building!real-world example!initial build</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Since amanda can be built on numerous platforms, there needs to be some
-initial customization when first building the software.  Since
-customization implies that mistakes will be made, we'll start off by
-building amanda without any involvement on the part of RPM.
-
-But before we can build amanda, we have to get it and unpack it, first.
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Setting Up A Test Build Area</title>
-<indexterm>
-<primary>package building!real-world example!build area, creating</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-As we mentioned above, the home FTP site for amanda is
-<tt?>ftp.cs.umd.edu</tt?>.  The sources are in <tt?>/pub/amanda</tt?>.
-
-After getting the sources, it's necessary to unpack them.  We'll unpack
-them into RPM's <tt?>SOURCES</tt?> directory, so that we can keep all our
-work in one place:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>tar zxvf amanda-2.3.0.tar.gz</userinput>
+          <figure id="sc-rpm-rw-build-first-untar">
+            <title>Untarring the Amanda Sources</title>
+            <screen width="60">
+<prompt># </prompt><userinput>tar zxvf amanda-2.3.0.tar.gz</userinput>
+<computeroutput>
 amanda-2.3.0/
 amanda-2.3.0/COPYRIGHT
 amanda-2.3.0/Makefile
@@ -110,21 +117,27 @@ amanda-2.3.0/man/amtape.8
 amanda-2.3.0/tools/
 amanda-2.3.0/tools/munge
 &hellip;
-</screen>
-</figure>
-As we saw, the sources unpacked into a directory called
-<tt?>amanda-2.3.0</tt?>.  Let's rename that directory to
-<tt?>amanda-2.3.0-orig</tt?>, and unpack the sources again:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we saw, the sources unpacked into a directory called
+          <filename>amanda-2.3.0</filename>.  Let's rename that directory to
+          <filename>amanda-2.3.0-orig</filename>, and unpack the sources again:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>ls</userinput>
+          <figure id="sc-rpm-rw-build-second-untar">
+            <title>Untarring the Amanda Sources (Again)</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls</userinput>
+<computeroutput>
 total 177
 drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0/
 -rw-r--r--   1 root     root       178646 Nov 20 10:42 amanda-2.3.0.tar.gz
-# <userinput>mv amanda-2.3.0 amanda-2.3.0-orig</userinput>
-# <userinput>tar zxvf amanda-2.3.0.tar.gz</userinput>
+</computeroutput>
+<prompt># </prompt><userinput>mv amanda-2.3.0 amanda-2.3.0-orig</userinput>
+<prompt># </prompt><userinput>tar zxvf amanda-2.3.0.tar.gz</userinput>
+<computeroutput>
 amanda-2.3.0/
 amanda-2.3.0/COPYRIGHT
 amanda-2.3.0/Makefile
@@ -133,59 +146,64 @@ amanda-2.3.0/README
 amanda-2.3.0/man/amtape.8
 amanda-2.3.0/tools/
 amanda-2.3.0/tools/munge
-# <userinput>ls</userinput>
+</computeroutput>
+<prompt># </prompt><userinput>ls</userinput>
+<computeroutput>
 total 178
 drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0/
 drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
 -rw-r--r--   1 root     root       178646 Nov 20 10:42 amanda-2.3.0.tar.gz
-#
-</screen>
-</figure>
-Now why did we do that?  The reason lies in the fact that we will
-undoubtedly need to make changes to the original sources in order to get
-amanda to build on Linux.  We'll do all our hacking in the
-<tt?>amanda-2.3.0</tt?> directory, and leave the <tt?>amanda-2.3.0-orig</tt?>
-untouched.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Now why did we do that?  The reason lies in the fact that we will
+          undoubtedly need to make changes to the original sources in order to
+          get amanda to build on Linux.  We'll do all our hacking in the
+          <filename>amanda-2.3.0</filename> directory, and leave the
+          <filename>amanda-2.3.0-orig</filename> untouched.
+        </para>
+        <para>
+          Since one of RPM's design features is to build packages from the
+          original, unmodified sources, that means the changes we'll make will
+          need to be kept as a set of patches.  The
+          <filename>amanda-2.3.0-orig</filename> directory will let us issue a
+          simple recursive <command>diff</command> command to create our patches
+          when the time comes.
+        </para>
+        <para>
+          Now that our sources are unpacked, it's time to work on building the
+          software.
+        </para>
+      </sect2>
 
-Since one of RPM's design features is to build packages from the original,
-unmodified sources, that means the changes we'll make will need to be kept
-as a set of patches.  The <tt?>amanda-2.3.0-orig</tt?> directory will let us
-issue a simple recursive <tt?>diff</tt?> command to create our patches when
-the time comes.
+      <sect2 id="s2-rpm-rw-build-getting-to-build">
+        <title>Getting Software to build</title>
+        <indexterm>
+          <primary>package building!real-world example!initial build, performing</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-Now that our sources are unpacked, it's time to work on building the
-software.
+        <para>
+          Looking at the <filename>docs/INSTALL</filename> file, we find that
+          the steps required to get amanda configured and ready to build are
+          actually fairly simple.  The first step is to modify
+          <filename>tools/munge</filename> to point to <command>cpp</command>,
+          the C preprocessor.
+        </para>
+        <para>
+          Amanda uses CPP to create makefiles containing the appropriate
+          configuration information.  This approach is a bit unusual, but not
+          unheard of.  In <filename>munge</filename>, we find the following
+          section:
 
-<indexterm>
-<primary>package building!real-world example!build area, creating|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Getting Software to build</title>
-<indexterm>
-<primary>package building!real-world example!initial build, performing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Looking at the <tt?>docs/INSTALL</tt?> file, we find that the steps required
-to get amanda configured and ready to build are actually fairly simple.
-The first step is to modify <tt?>tools/munge</tt?> to point to <tt?>cpp</tt?>,
-the C preprocessor.
-
-Amanda uses CPP to create makefiles containing the appropriate
-configuration information.  This approach is a bit unusual, but not unheard
-of.  In <tt?>munge</tt?>, we find the following section:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-munge-listing">
+            <title>Part of <filename>munge</filename></title>
+            <screen width="60">
+<computeroutput>
 # Customize CPP to point to your system's C preprocessor.
 
 # if cpp is on your path:
@@ -195,14 +213,18 @@ CPP=cpp
 # CPP=/lib/cpp                  # traditional
 # CPP=/usr/lib/cpp              # also traditional
 # CPP=/usr/ccs/lib/cpp          # Solaris 2.x
-</screen>
-</figure>
-Since <tt?>cpp</tt?> exists in <tt?>/lib</tt?> on Red Hat <!-- *** RED HAT *** -->Linux, we need to
-change this part of <tt?>munge</tt?> to:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Since <command>cpp</command> exists in <filename>/lib</filename> on
+          &RHL;, we need to change this part of <filename>munge</filename> to:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-munge-listing2">
+            <title>Revised Version of <filename>munge</filename></title>
+            <screen width="60">
+<computeroutput>
 # Customize CPP to point to your system's C preprocessor.
 
 # if cpp is on your path:
@@ -212,123 +234,131 @@ change this part of <tt?>munge</tt?> to:
 CPP=/lib/cpp                    # traditional
 # CPP=/usr/lib/cpp              # also traditional
 # CPP=/usr/ccs/lib/cpp          # Solaris 2.x
-</screen>
-</figure>
-Next, we need to take a look in <tt?>config/</tt?> and create two files:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Next, we need to take a look in <filename>config/</filename> and
+          create two files:
 
-<orderedlist>
-<listitem>
-<para>
-<tt?>config.h</tt?> --- contains platform-specific configuration
-information
+          <orderedlist>
+            <listitem>
+              <para>
+                <filename>config.h</filename> --- contains platform-specific
+                configuration information
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                <filename>options.h</filename> --- contains site-specific
+                configuration information
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
 
-<listitem>
-<para>
-<tt?>options.h</tt?> --- contains site-specific configuration
-information
+        <para>
+          There are a number of example <filename>config.h</filename> files for
+          a number of different platforms.  There is a Linux-specific version,
+          so we copy that file to <filename>config.h</filename> and review it.
+          After a few changes to reflect our &RHL; Linux environment, it's
+          ready.  Now let's turn our attention to
+          <filename>options.h</filename>.
+        </para>
+        <para>
+          In the case of <filename>options.h</filename>, there's only one
+          example file called <filename>options.h-vanilla</filename>.  As the
+          name implies, this is a basic file that contains a series of
+          <command>#define</command>s that configure amanda for a typical
+          environment.  We'll need to make a few changes:
 
-</para>
-</listitem>
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                Define the paths to common utility programs.
+              </para>
+            </listitem>
 
-</orderedlist>
-There are a number of example <tt?>config.h</tt?> files for a number of
-different platforms.  There is a Linux-specific version, so we copy that
-file to <tt?>config.h</tt?> and review it.  After a few changes to reflect
-our Red Hat <!-- *** RED HAT *** -->Linux environment, it's ready.  Now let's turn our attention to
-<tt?>options.h</tt?>.
+            <listitem>
+              <para>
+                Keep the programs from being named with the suffix
+                <filename>-2.3.0</filename>.
+              </para>
+            </listitem>
 
-In the case of <tt?>options.h</tt?>, there's only one example file called
-<tt?>options.h-vanilla</tt?>.  As the name implies, this is a basic file that
-contains a series of <tt?>#define</tt?>s that configure amanda for a typical
-environment.  We'll need to make a few changes:
+            <listitem>
+              <para>
+                Define the directories where the programs should be installed.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          While the first change is pretty much standard fare for anyone used to
+          building software, the last two changes are really due to RPM.  With
+          RPM, there's no need to name the programs with a version-specific
+          name, as RPM can easily upgrade to a new version and even downgrade
+          back, if the new version doesn't work as well.  The default paths
+          amanda uses segregate the files so that they can be easily maintained.
+          With RPM, there's no need to do this, since every file installed by
+          RPM gets written into the database.  In addition, &RHL; systems adhere
+          to the File System Standard, so any package destined for &RH; systems
+          should really be FSSTND-compliant, too.  Fortunately for us, amanda
+          was written to make these types of changes easy.  But even if we had
+          to hack an installation script, RPM would pick up the changes as part
+          of its patch handling.
+        </para>
+        <para>
+          We'll spare you the usual discovery of typos, incompatibilities, and
+          the resulting rebuilds.  After an undisclosed number of iterations,
+          our <filename>config.h</filename> and <filename>options.h</filename>
+          files are perfect.  Amanda builds:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Define the paths to common utility programs.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Keep the programs from being named with the suffix <tt?>-2.3.0</tt?>.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Define the directories where the programs should be installed.
-
-</para>
-</listitem>
-
-</itemizedlist>
-While the first change is pretty much standard fare for anyone used to
-building software, the last two changes are really due to RPM.  With RPM,
-there's no need to name the programs with a version-specific name, as RPM
-can easily upgrade to a new version and even downgrade back, if the new
-version doesn't work as well.  The default paths amanda uses segregate the
-files so that they can be easily maintained.  With RPM, there's no need to
-do this, since every file installed by RPM gets written into the database.
-In addition, Red Hat <!-- *** RED HAT *** -->Linux systems adhere to the File System Standard, so
-any package destined for Red Hat <!-- *** RED HAT *** -->systems should really be FSSTND-compliant,
-too.  Fortunately for us, amanda was written to make these types of changes
-easy.  But even if we had to hack an installation script, RPM would pick up
-the changes as part of its patch handling.
-
-We'll spare you the usual discovery of typos, incompatibilities, and the
-resulting rebuilds.  After an undisclosed number of iterations, our
-<tt?>config.h</tt?> and <tt?>options.h</tt?> files are perfect.  Amanda builds:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>make</userinput>
+          <figure id="sc-rpm-rw-build-amanda-builds">
+            <title>Amanda Builds!</title>
+            <screen width="60">
+<prompt># </prompt><userinput>make</userinput>
+<computeroutput>
 Making all in common-src
 make[1]: Entering directory `/usr/src/redhat/SOURCES/amanda-2.3.0/common-src'
 &hellip;
 make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
-#
-</screen>
-</figure>
-As we noted, amanda is constructed so that most of the time changes will
-only be necessary in <tt?>tools/munge</tt?>, and the two files in
-<tt?>config</tt?>.  Our situation was no different --- after all was said and
-done, that was all we needed to hack.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we noted, amanda is constructed so that most of the time changes
+          will only be necessary in <filename>tools/munge</filename>, and the
+          two files in <filename>config</filename>.  Our situation was no
+          different --- after all was said and done, that was all we needed to
+          hack.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!initial build, performing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-installing-testing">
+        <title>Installing and testing</title>
+        <indexterm>
+          <primary>package building!real-world example!initial build, installing</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          As we all know, just because software builds doesn't mean that it's
+          ready for prime-time.  It's necessary to test it first.  In order to
+          test amanda, we need to install it.  Amanda's makefile has an install
+          target, so let's use that to get started.  We'll also get a copy of
+          the output, because we'll need that later:
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Installing and testing</title>
-<indexterm>
-<primary>package building!real-world example!initial build, installing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-As we all know, just because software builds doesn't mean that it's ready
-for prime-time.  It's necessary to test it first.  In order to test amanda,
-we need to install it.  Amanda's makefile has an install target, so let's
-use that to get started.  We'll also get a copy of the output, because
-we'll need that later:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>make install</userinput>
+          <figure id="sc-rpm-rw-build-make-install">
+            <title>Issuing a <command>make install</command> Command</title>
+            <screen width="60">
+<prompt># </prompt><userinput>make install</userinput>
+<computeroutput>
 Making install in common-src
 &hellip;
 make[1]: Entering directory `/usr/src/redhat/SOURCES/amanda-2.3.0/client-src'
@@ -381,174 +411,157 @@ Installing Amanda man pages:
   install -c -o bin amrestore.8 /usr/man/man8
   install -c -o bin amtape.8 /usr/man/man8
 &hellip;
-# 
-</screen>
-</figure>
-OK, no major problems there.  Amanda does require a bit of additional
-effort to get everything running, though.  Looking at
-<tt?>docs/INSTALL</tt?>, we follow the steps to get amanda running on our
-test system, as both a client and a server.  As we perform each step, we
-note it for future reference:
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          OK, no major problems there.  Amanda does require a bit of additional
+          effort to get everything running, though.  Looking at
+          <filename>docs/INSTALL</filename>, we follow the steps to get amanda
+          running on our test system, as both a client and a server.  As we
+          perform each step, we note it for future reference:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-For the client:
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                For the client:
+                <orderedlist>
+                  <listitem>
+                    <para>
+                      Set up a <filename>~/.rhosts</filename> file allowing the
+                      server to connect.
+                    </para>
+                  </listitem>
 
-<orderedlist>
-<listitem>
-<para>
-Set up a <tt?>~/.rhosts</tt?> file allowing the server to connect.
+                  <listitem>
+                    <para>
+                      Make the disk device files readable by the client.
+                    </para>
+                  </listitem>
 
-</para>
-</listitem>
+                  <listitem>
+                    <para>
+                      Make <filename>/etc/dumpdates</filename> readable and
+                      writeable by the client.
+                    </para>
+                  </listitem>
 
-<listitem>
-<para>
-Make the disk device files readable by the client.
+                  <listitem>
+                    <para>
+                      Put an amanda entry in <filename>/etc/services</filename>.
+                    </para>
+                  </listitem>
 
-</para>
-</listitem>
+                  <listitem>
+                    <para>
+                      Put an amanda entry in
+                      <filename>/etc/inetd.conf</filename>.
+                    </para>
+                  </listitem>
 
-<listitem>
-<para>
-Make <tt?>/etc/dumpdates</tt?> readable and writeable by the client.
+                  <listitem>
+                    <para>
+                      Issue a <command>kill -HUP</command> on inetd.
+                    </para>
+                  </listitem>
+                </orderedlist>
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                For the server:
+                <orderedlist>
+                  <listitem>
+                    <para>
+                      Create a directory to hold the server configuration files.
+                    </para>
+                  </listitem>
 
-<listitem>
-<para>
-Put an amanda entry in <tt?>/etc/services</tt?>.
+                  <listitem>
+                    <para>
+                      Modify the provided example configuration files to suit
+                      our site.
+                    </para>
+                  </listitem>
 
-</para>
-</listitem>
+                  <listitem>
+                    <para>
+                      Add crontab entries to run amanda nightly.
+                    </para>
+                  </listitem>
 
-<listitem>
-<para>
-Put an amanda entry in <tt?>/etc/inetd.conf</tt?>.
+                  <listitem>
+                    <para>
+                      Put an amanda entry in <filename>/etc/services</filename>.
+                    </para>
+                  </listitem>
+                </orderedlist>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          Once everything is ready, we run a few tests.  Everything performs
+          flawlessly.
+          <footnote>
+            <para>
+              Well, eventually it did!
+            </para>
+          </footnote>
+          Looks like we've got a good build.  Let's start getting RPM involved.
+        </para>
+      </sect2>
+    </sect1>
 
-</para>
-</listitem>
+    <sect1 id="s1-rpm-rw-build-initial-build-with-rpm">
+      <title>Initial Building With RPM</title>
+      <indexterm>
+        <primary>package building!real-world example!building, initial</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-<listitem>
-<para>
-Issue a <tt?>kill -HUP</tt?> on inetd.
+      <para>
+        Now that amanda has been configured, built, and is operational on our
+        build system, it's time to have RPM take over each of these tasks.  The
+        first task is to have RPM make the necessary changes to the original
+        sources.  To do that, RPM needs a patch file.
+      </para>
 
-</para>
-</listitem>
+      <sect2 id="s2-rpm-rw-build-generating-patches">
+        <title>Generating patches</title>
+        <indexterm>
+          <primary>package building!real-world example!patches, generating</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</orderedlist>
-</para>
-</listitem>
+        <para>
+          The <filename>amanda-2.3.0</filename> directory tree is where we did
+          all our work building amanda.  We need to take all the work we've done
+          in that directory tree and compare it against the original sources
+          contained in the <filename>amanda-2.3.0-orig</filename> directory
+          tree.  But before we do that, we need to clean things up a bit.
+        </para>
 
-<listitem>
-<para>
-For the server:
+        <sect3 id="s3-rpm-rw-build-cleaning-up-test-build-area">
+          <title>Cleaning up the test build area</title>
 
-<orderedlist>
-<listitem>
-<para>
-Create a directory to hold the server configuration files.
+          <para>
+            Looking through our work tree, it has all sorts of junk in it: emacs
+            save files, object files, and the executable programs.  In order to
+            generate a clean set of patches, all these extraneous files must go.
+            Looking over amanda's makefiles, there is a <command>clean</command>
+            target that should take care of most of the junk:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-Modify the provided example configuration files to suit our site.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Add crontab entries to run amanda nightly.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Put an amanda entry in <tt?>/etc/services</tt?>.
-
-</para>
-</listitem>
-
-</orderedlist>
-</para>
-</listitem>
-
-</itemizedlist>
-Once everything is ready, we run a few tests.  Everything performs
-flawlessly.
-<footnote>
-<para>
-Well, eventually it did!
-</para>
-</footnote>
-  Looks like we've got a good
-build.  Let's start getting RPM involved.
-
-<indexterm>
-<primary>package building!real-world example!initial build, installing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>package building!real-world example!initial build|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-rw-build-">
-<title>Initial Building With RPM</title>
-<indexterm>
-<primary>package building!real-world example!building, initial</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Now that amanda has been configured, built, and is operational on our build
-system, it's time to have RPM take over each of these tasks.  The first
-task is to have RPM make the necessary changes to the original sources.  To
-do that, RPM needs a patch file.
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Generating patches</title>
-<indexterm>
-<primary>package building!real-world example!patches, generating</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <tt?>amanda-2.3.0</tt?> directory tree is where we did all our work
-building amanda.  We need to take all the work we've done in that directory
-tree and compare it against the original sources contained in the
-<tt?>amanda-2.3.0-orig</tt?> directory tree.  But before we do that, we need
-to clean things up a bit.
-
-<sect3 id="s3-rpm-rw-build-">
-<title>Cleaning up the test build area</title>
-Looking through our work tree, it has all sorts of junk in it: emacs save
-files, object files, and the executable programs.  In order to generate a
-clean set of patches, all these extraneous files must go.  Looking over
-amanda's makefiles, there is a <tt?>clean</tt?> target that should take care
-of most of the junk:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>make clean</userinput>
+            <figure id="sc-rpm-rw-build-make-clean-listing">
+              <title>Issuing a <command>make clean</command></title>
+              <screen width="60">
+<prompt># </prompt><userinput>make clean</userinput>
+<computeroutput>
 Making clean in common-src
 &hellip;
 rm -f *~ *.o *.a genversion version.c Makefile.out
@@ -572,62 +585,80 @@ Making clean in man
 &hellip;
 rm -f *~ Makefile.out
 &hellip;
-# 
-</screen>
-</figure>
-Looking in the <tt?>tools</tt?> and <tt?>config</tt?> directories where we did
-all our work, we see there are still emacs save files there.  A bit of
-studying confirms that the makefiles don't bother to clean these two
-directories.  That's a nice touch because a <tt?>make clean</tt?> won't wipe
-out old copies of the config files, giving you a chance to go back to them
-in case you've botched something.  However, in our case, we're sure we
-won't need the save files, so out they go:
+</computeroutput>
+<prompt># </prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Looking in the <filename>tools</filename> and
+            <filename>config</filename> directories where we did all our work,
+            we see there are still emacs save files there.  A bit of studying
+            confirms that the makefiles don't bother to clean these two
+            directories.  That's a nice touch because a <command>make
+            clean</command> won't wipe out old copies of the config files,
+            giving you a chance to go back to them in case you've botched
+            something.  However, in our case, we're sure we won't need the save
+            files, so out they go:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/SOURCES/amanda-2.3.0</userinput>
-# <userinput>find . -name "*~" -exec rm -vf {</userinput> \;}
+            <figure id="sc-rpm-rw-build-delete-save-files">
+              <title>Removing Emacs Save Files</title>
+              <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/SOURCES/amanda-2.3.0</userinput>
+<prompt># </prompt><userinput>find . -name "*~" -exec rm -vf \;</userinput>
+<computeroutput>
 ./config/config.h~
 ./config/options.h~
 ./tools/munge~
-#
-</screen>
-</figure>
-We let <tt?>find</tt?> take a look at the whole directory tree, just in case
-there was something still out there that we'd forgotten about.  As you can
-see, the only save files are from the three files we've been working on.
+</computeroutput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            We let <command>find</command> take a look at the whole directory
+            tree, just in case there was something still out there that we'd
+            forgotten about.  As you can see, the only save files are from the
+            three files we've been working on.
+          </para>
+          <para>
+            You'll note that we've left our modified <filename>munge</filename>
+            file, as well as the <filename>config.h</filename> and
+            <filename>options.h</filename> files we so carefully crafted.
+            That's intentional, as we want to make sure those changes are
+            applied when RPM patches the sources.  Everything looks pretty
+            clean, so it's time to make the patches.
+          </para>
+        </sect3>
 
-You'll note that we've left our modified <tt?>munge</tt?> file, as well as
-the <tt?>config.h</tt?> and <tt?>options.h</tt?> files we so carefully crafted.
-That's intentional, as we want to make sure those changes are applied when
-RPM patches the sources.  Everything looks pretty clean, so it's time to
-make the patches.
+        <sect3 id="s3-rpm-rw-build-actually-generating-patches">
+          <title>Actually Generating patches</title>
 
-</sect3>
+          <para>
+            This step is actually pretty anticlimactic:
 
-<sect3 id="s3-rpm-rw-build-">
-<title>Actually Generating patches</title>
-This step is actually pretty anticlimactic:
+            <figure id="sc-rpm-rw-build-patch-command">
+              <title>Generating Patches</title>
+              <screen width="60">
+<prompt># </prompt><userinput>diff -uNr amanda-2.3.0-orig/ amanda-2.3.0/ &gt; amanda-2.3.0-linux.patch</userinput>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            With that one command, we've compared each file in the untouched
+            directory tree (<filename>amanda-2.3.0-orig</filename>) with the
+            directory tree we've been working in
+            (<filename>amanda-2.3.0</filename>).  If we've done our homework,
+            the only things in the patch file should be related to the files
+            we've changed.  Let's take a look through it to make sure:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>diff -uNr amanda-2.3.0-orig/ amanda-2.3.0/ &gt; amanda-2.3.0-linux.patch</userinput>
-#
-</screen>
-</figure>
-With that one command, we've compared each file in the untouched directory
-tree  (<tt?>amanda-2.3.0-orig</tt?>) with the directory tree we've been
-working in (<tt?>amanda-2.3.0</tt?>).  If we've done our homework, the only
-things in the patch file should be related to the files we've changed.
-Let's take a look through it to make sure:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/SOURCES</userinput>
-# <userinput>cat amanda-2.3.0-linux.patch</userinput>
+            <figure id="sc-rpm-rw-build-patch-listing">
+              <title>Looking at the Patch File</title>
+              <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/SOURCES</userinput>
+<prompt># </prompt><userinput>cat amanda-2.3.0-linux.patch</userinput>
+<computeroutput>
 diff -uNr amanda-2.3.0-orig/config/config.h amanda-2.3.0/config/config.h
 --- amanda-2.3.0-orig/config/config.h	Wed Dec 31 19:00:00 1969
 +++ amanda-2.3.0/config/config.h	Sat Nov 16 16:22:47 1996
@@ -654,41 +685,39 @@ diff -uNr amanda-2.3.0-orig/tools/munge amanda-2.3.0/tools/munge
  # CPP=/usr/lib/cpp             # also traditional
  # CPP=/usr/ccs/lib/cpp         # Solaris 2.x
 #
-</screen>
-</figure>
-The patch file contains complete copies of our <tt?>config.h</tt?> and
-<tt?>options.h</tt?> files, followed by the changes we've made to
-<tt?>munge</tt?>.  Looks good!  Time to hand this grunt work over to RPM.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The patch file contains complete copies of our
+            <filename>config.h</filename> and <filename>options.h</filename>
+            files, followed by the changes we've made to
+            <filename>munge</filename>.  Looks good!  Time to hand this grunt
+            work over to RPM.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!patches, generating|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-first-cut-spec-file">
+        <title>Making a first-cut spec file</title>
+        <indexterm>
+          <primary>package building!real-world example!spec file, first-cut</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Since amanda comes in two parts, it's obvious we'll need to use
+          subpackages: one for the client software, and one for the server.
+          Given that, and the fact that the first part of any spec file consists
+          of tags that are easily filled in, let's sit down and fill in the
+          blanks, tag-wise:
 
-</sect2>
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Making a first-cut spec file</title>
-<indexterm>
-<primary>package building!real-world example!spec file, first-cut</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Since amanda comes in two parts, it's obvious we'll need to use
-subpackages: one for the client software, and one for the server.  Given
-that, and the fact that the first part of any spec file consists of tags
-that are easily filled in, let's sit down and fill in the blanks,
-tag-wise:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-first-cut-spec-listing">
+            <title>Our First-Cut Spec File</title>
+            <screen width="60">
+<computeroutput>
 Summary: Amanda Network Backup System
 Name: amanda
 Version: 2.3.08
@@ -703,26 +732,33 @@ Patch: amanda-2.3.0-linux.patch
 Amanda is a client/server backup system.  It uses standard tape
 devices and networking, so all you need is any working tape drive
 and a network.  You can use it for local backups as well.
-</screen>
-</figure>
-That part was pretty easy.  We set the package's release number to 1.
-We'll undoubtedly be changing that as we continue work on the spec file.
-You'll notice that we've included a <tt?>URL</tt?> tag line; the Uniform
-Resource Locator there points to the homepage for the amanda project,
-making it easier for the user to get additional information on amanda.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          That part was pretty easy.  We set the package's release number to 1.
+          We'll undoubtedly be changing that as we continue work on the spec
+          file.  You'll notice that we've included a <command>URL</command> tag
+          line; the Uniform Resource Locator there points to the homepage for
+          the amanda project, making it easier for the user to get additional
+          information on amanda.
+        </para>
+        <para>
+          The <command>Source</command> tag above includes the name of the
+          original source tar file and is preceded by the URL pointing to the
+          file's primary location.  Again, this makes it easy for the user to
+          grab a copy of the sources from the software's "birthplace".
+        </para>
+        <para>
+          Finally, the patch file that we've just created gets a line of its own
+          on the <command>Patch</command> tag line.  Next, let's take a look at
+          the tags for our two subpackages.  Let's start with the client:
 
-The <tt?>Source</tt?> tag above includes the name of the original source tar
-file and is preceded by the URL pointing to the file's primary location.
-Again, this makes it easy for the user to grab a copy of the sources from
-the software's "birthplace".
-
-Finally, the patch file that we've just created gets a line of its own on
-the <tt?>Patch</tt?> tag line.  Next, let's take a look at the tags for our
-two subpackages.  Let's start with the client:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-client-spec">
+            <title>The Client Portion of Our Spec File</title>
+            <screen width="60">
+<computeroutput>
 %package client
 Summary: Client-side Amanda package
 Group: System/Backup
@@ -737,27 +773,35 @@ filesystems backed up by a system running the Amanda server.
 
 NOTE: In order for a system to perform backups of itself, install both
 the client and server packages!
-</screen>
-</figure>
-The <tt?>%package</tt?> directive names the package.  Since we wanted the
-subpackages to be named <tt?>amanda-&lt;something&gt;</tt?>, we didn't use the
-<tt?>-n</tt?> option.  This means our client subpackage will be called
-<tt?>amanda-client</tt?>, just as we wanted.  RPM requires unique
-<tt?>summary</tt?>, <tt?>%description</tt?>, and <tt?>group</tt?> tags for each
-subpackage, so we've included them.  Of course, it would be a good idea
-even if RPM <emphasis>didn't</emphasis> require them --- we've used the tags to provide
-client-specific information.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>%package</command> directive names the package.  Since we
+          wanted the subpackages to be named
+          <filename>amanda-&lt;something&gt;</filename>, we didn't use the
+          <command>-n</command> option.  This means our client subpackage will
+          be called <filename>amanda-client</filename>, just as we wanted.  RPM
+          requires unique <command>summary</command>,
+          <command>%description</command>, and <command>group</command> tags for
+          each subpackage, so we've included them.  Of course, it would be a
+          good idea even if RPM <emphasis>didn't</emphasis> require them ---
+          we've used the tags to provide client-specific information.
+        </para>
+        <para>
+          The <command>requires</command> tag is the only other tag in the
+          client subpackage.  Since amanda uses <command>dump</command> on the
+          client system, we included this tag so that RPM will ensure that the
+          <command>dump</command> package is present on client systems.
+        </para>
+        <para>
+          Next, let's take a look at the tags for the server subpackage:
 
-The <tt?>requires</tt?> tag is the only other tag in the client subpackage.
-Since amanda uses <tt?>dump</tt?> on the client system, we included this tag
-so that RPM will ensure that the <tt?>dump</tt?> package is present on client
-systems.
-
-Next, let's take a look at the tags for the server subpackage:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-server-spec-file">
+            <title>The Server Portion of Our Spec File</title>
+            <screen width="60">
+<computeroutput>
 %package server
 Summary: Server-side Amanda package
 Group: System/Backup
@@ -773,37 +817,43 @@ the server system requires a tape drive.
 
 NOTE: In order for a system to perform backups of itself, install both
 the client and server packages!
-</screen>
-</figure>
-No surprises here, really.  You'll note that the server subpackage has no
-<tt?>requires</tt?> tag for the dump package.  The reason for that is due to
-a design decision we've made.  Since amanda is comprised of a client and a
-server component, in order for the server system to perform backups of
-itself, the client component must be installed.  Since we've already made
-the client subpackage require <tt?>dump</tt?>, we've already covered the
-bases.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          No surprises here, really.  You'll note that the server subpackage has
+          no <command>requires</command> tag for the dump package.  The reason
+          for that is due to a design decision we've made.  Since amanda is
+          comprised of a client and a server component, in order for the server
+          system to perform backups of itself, the client component must be
+          installed.  Since we've already made the client subpackage require
+          <command>dump</command>, we've already covered the bases.
+        </para>
+        <para>
+          Since an amanda server cannot back itself up without the client
+          software, why don't we have the server subpackage require the client
+          subpackage?  Well, that could be done, but the fact of the matter is
+          that there are cases where an amanda server won't need to back itself
+          up.  So the server subpackage needs no package requirements.
+        </para>
 
-Since an amanda server cannot back itself up without the client software,
-why don't we have the server subpackage require the client subpackage?
-Well, that could be done, but the fact of the matter is that there are
-cases where an amanda server won't need to back itself up.  So the server
-subpackage needs no package requirements.
+        <sect3 id="s3-rpm-rw-build-adding-build-time-scripts">
+          <title>Adding the build-time scripts</title>
+          <indexterm>
+            <primary>package building!real-world example!scripts, adding built-time</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-<sect3 id="s3-rpm-rw-build-">
-<title>Adding the build-time scripts</title>
-<indexterm>
-<primary>package building!real-world example!scripts, adding built-time</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            Next we need to add the build-time scripts.  There's really not much
+            to them:
 
-Next we need to add the build-time scripts.  There's really not much to
-them:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-build-time-scripts">
+              <title>Build-Time Script Listings</title>
+              <screen width="60">
+<computeroutput>
 %prep
 %setup
 
@@ -812,89 +862,82 @@ make
 
 %install
 make install
-</screen>
-</figure>
-The <tt?>%prep</tt?> script consists of one line containing the simplest
-flavor of <tt?>%setup</tt?> macro.  Since we only need <tt?>%setup</tt?> to
-unpack one set of sources, there are no options we need to add.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The <command>%prep</command> script consists of one line containing
+            the simplest flavor of <command>%setup</command> macro.  Since we
+            only need <command>%setup</command> to unpack one set of sources,
+            there are no options we need to add.
+          </para>
+          <para>
+            The <command>%build</command> script is just as simple, with the
+            single <command>make</command> command required to build amanda.
+          </para>
+          <para>
+            Finally, the <command>%install</command> script maintains our
+            singe-line trend for build-time scripts.  Here a simple
+            <command>make install</command> will put all the files where they
+            need to be for RPM to package them.
+          </para>
+        </sect3>
 
-The <tt?>%build</tt?> script is just as simple, with the single
-<tt?>make</tt?> command required to build amanda.
+        <sect3 id="s3-rpm-rw-build-adding-files-lists">
+          <title>Adding <command>%files</command> Lists</title>
+          <indexterm>
+            <primary>package building!real-world example!<command>%files</command> list, adding</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-Finally, the <tt?>%install</tt?> script maintains our singe-line trend for
-build-time scripts.  Here a simple <tt?>make install</tt?> will put all the
-files where they need to be for RPM to package them.
+          <para>
+            The last part of our initial attempt at a spec file is a
+            <command>%files</command> list for each package the spec file will
+            build.  Since we're planning on a client and a server subpackage,
+            we'll need two <command>%files</command> lists.  For the time being,
+            we'll just add the <command>%files</command> lines --- we'll be
+            adding the actual filenames later:
 
-<indexterm>
-<primary>package building!real-world example!spec file, first-cut|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>package building!real-world example!scripts, adding built-time|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-<sect3 id="s3-rpm-rw-build-">
-<title>Adding <tt?>\%files</tt?> Lists</title>
-<indexterm>
-<primary>package building!real-world example!<tt?>%files</tt?> list, adding</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The last part of our initial attempt at a spec file is a <tt?>%files</tt?>
-list for each package the spec file will build.  Since we're planning on a
-client and a server subpackage, we'll need two <tt?>%files</tt?> lists.  For
-the time being, we'll just add the <tt?>%files</tt?> lines --- we'll be
-adding the actual filenames later:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-dummy-files-lists">
+              <title>Placeholder <command>%files</command> Lists</title>
+              <screen width="60">
+<computeroutput>
 %files client
 
 %file server
-</screen>
-</figure>
-There's certainly more to come, but this is enough to get us started.  And
-the first thing we want RPM to do is to unpack the amanda sources.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            There's certainly more to come, but this is enough to get us
+            started.  And the first thing we want RPM to do is to unpack the
+            amanda sources.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!<tt?>%files</tt?> list, adding|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-rpm-unpacking-sources">
+        <title>Getting the original sources unpacked</title>
+        <indexterm>
+          <primary>package building!real-world example!sources, unpacking w/RPM</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect3>
+        <para>
+          In keeping with a step-by-step approach, RPM has an option that let's
+          us stop the build process after the <command>%prep</command> script
+          has run.  Let's give the <command>-bp</command> option a try, and see
+          how things look:
 
-</sect2>
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Getting the original sources unpacked</title>
-<indexterm>
-<primary>package building!real-world example!sources, unpacking w/RPM</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-In keeping with a step-by-step approach, RPM has an option that let's us
-stop the build process after the <tt?>%prep</tt?> script has run.  Let's
-give the <tt?>-bp</tt?> option a try, and see how things look:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -bp amanda-2.3.0.spec</userinput>
+          <figure id="sc-rpm-rw-build-build-prep">
+            <title>Issuing an <command>rpm -bp</command> Command</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -920,89 +963,102 @@ drwxr-xr-x 3/20              0 May 19 22:11 1996 amanda-2.3.0/tools/
 + chown -R root.root .
 + chmod -R a+rX,g-w,o-w .
 + exit 0
-# 
-</screen>
-</figure>
-By looking at the output, it would be pretty hard to miss the fact that the
-sources were unpacked.  If we look in RPM's default build area
-(<tt?>/usr/src/redhat/BUILD</tt?>), we'll see an amanda directory tree:
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          By looking at the output, it would be pretty hard to miss the fact
+          that the sources were unpacked.  If we look in RPM's default build
+          area (<filename>/usr/src/redhat/BUILD</filename>), we'll see an amanda
+          directory tree:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/BUILD/</userinput>
-# <userinput>ls -l</userinput>
+          <figure id="sc-rpm-rw-build-directory-tree-listing">
+            <title>Looking at the RPM-Unpacked Source Tree</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/BUILD/</userinput>
+<prompt># </prompt><userinput>ls -l</userinput>
+<computeroutput>
 total 3
 drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
-#
-</screen>
-</figure>
-After a quick look around, it seems like the sources were unpacked
-properly.  But wait --- where are our carefully crafted configuration files
-in <tt?>config</tt?>?  Why isn't <tt?>tools/munge</tt?> modified?
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          After a quick look around, it seems like the sources were unpacked
+          properly.  But wait --- where are our carefully crafted configuration
+          files in <filename>config</filename>?  Why isn't
+          <filename>tools/munge</filename> modified?
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!sources, unpacking w/RPM|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-applying-patches">
+        <title>Getting patches properly applied</title>
+        <indexterm>
+          <primary>package building!real-world example!patches, applying w/RPM</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          Ah, perhaps our <command>%prep</command> script was a bit
+          <emphasis>too</emphasis> simple.  We need to apply our patch.  So
+          let's add two things to our spec file:
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Getting patches properly applied</title>
-<indexterm>
-<primary>package building!real-world example!patches, applying w/RPM</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <orderedlist>
+            <listitem>
+              <para>
+                A <command>patch</command> tag line pointing to our patch file
+              </para>
+            </listitem>
 
-Ah, perhaps our <tt?>%prep</tt?> script was a bit <emphasis>too</emphasis> simple.  We
-need to apply our patch.  So let's add two things to our spec file:
+            <listitem>
+              <para>
+                A <command>%patch</command> macro in our
+                <command>%prep</command> script
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          Easy enough.  At the top of the spec file, along with the other tags,
+          let's add:
 
-<orderedlist>
-<listitem>
-<para>
-A <tt?>patch</tt?> tag line pointing to our patch file
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-A <tt?>%patch</tt?> macro in our <tt?>%prep</tt?> script
-
-</para>
-</listitem>
-
-</orderedlist>
-Easy enough.  At the top of the spec file, along with the other tags, let's
-add:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-patch-tag-line">
+            <title>The <command>patch</command> Tag Line</title>
+            <screen width="60">
+<computeroutput>
 Patch: amanda-2.3.0-linux.patch
-</screen>
-</figure>
-Then we'll make our <tt?>%prep</tt?> script look like this:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Then we'll make our <command>%prep</command> script look like this:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-rw-build-prep-with-patch">
+            <title>Revised <command>%prep</command> Script</title>
+            <screen width="60">
+<computeroutput>
 %prep
 %setup
 %patch -p 1
-</screen>
-</figure>
-There, that should do it.  Let's give that <tt?>-bp</tt?> option another try:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          There, that should do it.  Let's give that <command>-bp</command>
+          option another try:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -bp amanda-2.3.0.spec</userinput>
+          <figure id="sc-rpm-rw-build-rpm-bp-try2">
+            <title>Trying <command>rpm -bp</command> Again</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -1031,18 +1087,22 @@ drwxr-xr-x 3/20              0 May 19 22:11 1996 amanda-2.3.0/tools/
 Patch #0:
 + patch -p1 -s
 + exit 0
-# 
-</screen>
-</figure>
-Not much difference, until the very end, where we see the patch being
-applied.  Let's take a look into the build area and see if our
-configuration files are there:
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Not much difference, until the very end, where we see the patch being
+          applied.  Let's take a look into the build area and see if our
+          configuration files are there:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/BUILD/amanda-2.3.0/config</userinput>
-# <userinput>ls -l</userinput>
+          <figure id="sc-rpm-rw-build-config-file-check">
+            <title>Looking For Patched Configuration Files</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/BUILD/amanda-2.3.0/config</userinput>
+<prompt># </prompt><userinput>ls -l</userinput>
+<computeroutput>
 total 58
 -rw-r--r--   1 root     root         7518 May 19  1996 config-common.h
 -rw-r--r--   1 root     root         1846 Nov 20 20:46 config.h
@@ -1054,41 +1114,40 @@ total 58
 -rw-r--r--   1 root     root         7196 Nov 20 20:46 options.h
 -rw-r--r--   1 root     root         7236 May 19  1996 options.h-vanilla
 -rw-r--r--   1 root     root            0 Nov 20 20:46 options.h.orig
-# 
-</screen>
-</figure>
-Much better.  Those zero-length <tt?>.orig</tt?> files are a dead giveaway
-that patch has been here, as are the dates on <tt?>config.h</tt?>, and
-<tt?>options.h</tt?>.  In the <tt?>tools</tt?> directory, <tt?>munge</tt?> has
-been modified, too.  These sources are ready for building!
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Much better.  Those zero-length <filename>.orig</filename> files are a
+          dead giveaway that patch has been here, as are the dates on
+          <filename>config.h</filename>, and <filename>options.h</filename>.  In
+          the <filename>tools</filename> directory, <filename>munge</filename>
+          has been modified, too.  These sources are ready for building!
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!patches, applying w/RPM|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-rpm-building">
+        <title>Letting RPM do the Building</title>
+        <indexterm>
+          <primary>package building!real-world example!building with RPM</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          We know that the sources are ready.  We know that the
+          <command>%build</command> script is ready.  There shouldn't be much in
+          the way of surprises if we let RPM build amanda.  Let's use the
+          <command>-bc</command> option to stop things after the
+          <command>%build</command> script completes:
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Letting RPM do the Building</title>
-<indexterm>
-<primary>package building!real-world example!building with RPM</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-We know that the sources are ready.  We know that the <tt?>%build</tt?>
-script is ready.  There shouldn't be much in the way of surprises if we let
-RPM build amanda.  Let's use the <tt?>-bc</tt?> option to stop things after
-the <tt?>%build</tt?> script completes:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -bc amanda-2.3.0.spec</userinput>
+          <figure id="sc-rpm-rw-build-rpm-bc-listing">
+            <title>Using the <command>rpm -bc</command> Command</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -bc amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -1113,38 +1172,37 @@ make[2]: Nothing to be done for `all'.
 make[2]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
 make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
 + exit 0
-# 
-</screen>
-</figure>
-As we thought, no surprises.  A quick look through the build area shows a
-full assortment of binaries, all ready to be installed.  So it seems that
-the most natural thing to do next would be to let RPM install amanda.
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we thought, no surprises.  A quick look through the build area
+          shows a full assortment of binaries, all ready to be installed.  So it
+          seems that the most natural thing to do next would be to let RPM
+          install amanda.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!building, initial|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-rpm-installing">
+        <title>Letting RPM do the Installing</title>
+        <indexterm>
+          <primary>package building!real-world example!installing with RPM</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          And that's just what we're going to do!  Our
+          <command>%install</command> script has the necessary <command>make
+          install</command> command, so let's give it a shot:
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Letting RPM do the Installing</title>
-<indexterm>
-<primary>package building!real-world example!installing with RPM</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-And that's just what we're going to do!  Our <tt?>%install</tt?> script has
-the necessary <tt?>make install</tt?> command, so let's give it a shot:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -bi amanda-2.3.0.spec</userinput>
+          <figure id="sc-rpm-rw-build-rpm-bi-listing">
+            <title>Issuing an <command>rpm -bi</command> Command</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -bi amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -1184,79 +1242,61 @@ Executing: special doc
 + DOCDIR=//usr/doc/amanda-client-2.3.0-1
 + DOCDIR=//usr/doc/amanda-server-2.3.0-1
 + exit 0
-# 
-</screen>
-</figure>
-Everything looks pretty good.  At this point, the amanda software, built by
-RPM, has been installed on the build system.  Since performed all the
-configuration steps before, when we were manually building amanda,
-everything should still be configured properly to test this new
-build.
-<footnote>
-<para>
-Of course, if the process of installing the software
-changed some necessary config files, they would have to be redone, but in
-this case it didn't happen.
-</para>
-</footnote>
-  So why don't we give the new binaries a try?
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Everything looks pretty good.  At this point, the amanda software,
+          built by RPM, has been installed on the build system.  Since performed
+          all the configuration steps before, when we were manually building
+          amanda, everything should still be configured properly to test this
+          new build.
+          <footnote>
+            <para>
+              Of course, if the process of installing the software changed some
+              necessary config files, they would have to be redone, but in this
+              case it didn't happen.
+            </para>
+          </footnote>
+          So why don't we give the new binaries a try?
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!installing with RPM|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-building-packages">
+        <title>Testing RPM's Handiwork</title>
+        <indexterm>
+          <primary>package building!real-world example!testing after build</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          After a quick double-check to ensure that all the configuration steps
+          were still in place from our manual build, we reran our tests.  No
+          problems were found.  It's time to build some packages!
+        </para>
+      </sect2>
+    </sect1>
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Testing RPM's Handiwork</title>
-<indexterm>
-<primary>package building!real-world example!testing after build</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-rw-build-package-building">
+      <title>Package Building</title>
+      <indexterm>
+        <primary>package building!real-world example!package files, creating</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-After a quick double-check to ensure that all the configuration steps were
-still in place from our manual build, we reran our tests.  No problems were
-found.  It's time to build some packages!
+      <para>
+        OK, let's go for broke and tell RPM to do the works, including the
+        creation of the binary and source packages:
 
-<indexterm>
-<primary>package building!real-world example!testing after build|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>package building!real-world example!building with RPM|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-rw-build-">
-<title>Package Building</title>
-<indexterm>
-<primary>package building!real-world example!package files, creating</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-OK, let's go for broke and tell RPM to do the works, including the creation
-of the binary and source packages:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba amanda-2.3.0.spec</userinput>
+        <figure id="sc-rpm-rw-build-rpm-ba-listing">
+          <title>Building Packages With <command>rpm -ba</command></title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -1302,29 +1342,39 @@ amanda-2.3.0.tar.gz
 374 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-1.src.rpm
-# 
-</screen>
-</figure>
-Great!  Let's take a look at our handiwork:
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Great!  Let's take a look at our handiwork:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
-# <userinput>ls -l</userinput>
+        <figure id="sc-rpm-rw-build-package-files">
+          <title>Listing of Package Files</title>
+          <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
+<prompt># </prompt><userinput>ls -l</userinput>
+<computeroutput>
 total 2
 -rw-r--r-- 1 root  root   1246 Nov 20 21:19 amanda-client-2.3.0-1.i386.rpm
 -rw-r--r-- 1 root  root   1308 Nov 20 21:19 amanda-server-2.3.0-1.i386.rpm
-# 
-</screen>
-</figure>
-Hmmm, those binary packages look sort of small.  We'd better see what's in
-there:
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Hmmm, those binary packages look sort of small.  We'd better see what's
+        in there:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -qilp amanda-*-1.i386.rpm</userinput>
+        <figure id="sc-rpm-rw-build-querying-packages">
+          <title>
+            Querying the Packages With <command>rpm -qilp</command>
+          </title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -qilp amanda-*-1.i386.rpm</userinput>
+<computeroutput>
 Name        : amanda-client         Distribution: (none)
 Version     : 2.3.0                       Vendor: (none)
 Release     : 1                       Build Date: Wed Nov 20 21:19:44 1996
@@ -1364,54 +1414,65 @@ the server system requires a tape drive.
 NOTE: In order for a system to perform backups of itself, install both
 the client and server packages!
 (contains no files)
-# 
-</screen>
-</figure>
-What do they mean, <tt?>(contains no files)</tt?>?  The spec file has
-perfectly good <tt?>%files</tt?> lists&hellip;
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        What do they mean, <computeroutput>(contains no files)</computeroutput>?
+        The spec file has perfectly good <command>%files</command> lists&hellip;
+      </para>
+      <para>
+        Oops.
+      </para>
 
-Oops.
+      <sect2 id="s2-rpm-rw-build-creating-files-list">
+        <title>Creating the <command>%files</command> list</title>
+        <indexterm>
+          <primary>package building!real-world example!<command>%files</command> list, finalizing</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-<indexterm>
-<primary>package building!real-world example!package files, creating|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          Everything was going so smoothly, we forgot that the
+          <command>%files</command> lists were going to need files.  No problem,
+          we just need to put the filenames in there, and we'll be all set.  But
+          is it <emphasis>really</emphasis> that easy?
+        </para>
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Creating the <tt?>\%files</tt?> list</title>
-<indexterm>
-<primary>package building!real-world example!<tt?>%files</tt?> list, finalizing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-rw-build-how-to-find-files">
+          <title>How to find the installed files?</title>
 
-Everything was going so smoothly, we forgot that the <tt?>%files</tt?> lists
-were going to need files.  No problem, we just need to put the filenames in
-there, and we'll be all set.  But is it <emphasis>really</emphasis> that easy?
+          <para>
+            Luckily, it's not too bad.  Since we saved the output from our first
+            <command>make install</command>, we can see the filenames as they're
+            installed.  Of course, it's important to make sure the install
+            output is valid.  Fortunately for us, amanda didn't require much
+            fiddling by the time we got it built and tested.  If it had, we
+            would have had to get more recent output from the installation
+            phase.
+          </para>
+          <para>
+            It's time for more decisions.  We have one list of installed files,
+            and two <command>%files</command> lists.  It would be silly to put
+            all the files in both <command>%files</command> lists, so we have to
+            decide which file goes where.
+          </para>
+          <para>
+            This is where experience with the software really pays off, because
+            the wrong decision made here can result in awkward, ill-featured
+            packages.  Here's the <command>%files</command> list we came up with
+            for the client subpackage:
 
-<sect3 id="s3-rpm-rw-build-">
-<title>How to find the installed files?</title>
-Luckily, it's not too bad.  Since we saved the output from our first
-<tt?>make install</tt?>, we can see the filenames as they're installed.  Of
-course, it's important to make sure the install output is valid.
-Fortunately for us, amanda didn't require much fiddling by the time we got
-it built and tested.  If it had, we would have had to get more recent
-output from the installation phase.
-
-It's time for more decisions.  We have one list of installed files, and two
-<tt?>%files</tt?> lists.  It would be silly to put all the files in both
-<tt?>%files</tt?> lists, so we have to decide which file goes where.
-
-This is where experience with the software really pays off, because the
-wrong decision made here can result in awkward, ill-featured packages.
-Here's the <tt?>%files</tt?> list we came up with for the client subpackage:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-files-list">
+              <title>
+                The <command>%files</command> List For
+                <filename>amanda-client</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %files client
 /usr/lib/amanda/amandad
 /usr/lib/amanda/sendsize
@@ -1425,20 +1486,28 @@ COPYRIGHT
 docs/INSTALL
 docs/SYSTEM.NOTES
 docs/WHATS.NEW
-</screen>
-</figure>
-The files in <tt?>/usr/lib/amanda</tt?> are all the client-side amanda
-programs, so that part was easy.  The remaining files are part of the
-original source archive.  Amanda doesn't install them, but they contain
-information that users should see.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The files in <filename>/usr/lib/amanda</filename> are all the
+            client-side amanda programs, so that part was easy.  The remaining
+            files are part of the original source archive.  Amanda doesn't
+            install them, but they contain information that users should see.
+          </para>
+          <para>
+            Realizing that RPM can't package these files specified as they are,
+            let's leave the client <command>%files</command> list for a moment,
+            and check out the list for the server subpackage:
 
-Realizing that RPM can't package these files specified as they are, let's
-leave the client <tt?>%files</tt?> list for a moment, and check out the list
-for the server subpackage:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-server-files-list">
+              <title>
+                The <command>%files</command> List For
+                <filename>amanda-server</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %files server
 /usr/sbin/amadmin
 /usr/sbin/amcheck
@@ -1474,76 +1543,90 @@ docs/TAPE.CHANGERS
 docs/WHATS.NEW
 docs/MULTITAPE
 example
-</screen>
-</figure>
-The files in <tt?>/usr/sbin</tt?> are programs that will be run by the amanda
-administrator in order to perform backups and restores.  The files in
-<tt?>/usr/lib/amanda</tt?> are the server-side programs that do the actual
-work during backups.  Following that are a number of man pages: one for
-each program to be run by the amanda administrator, and one with an
-overview of amanda.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The files in <filename>/usr/sbin</filename> are programs that will
+            be run by the amanda administrator in order to perform backups and
+            restores.  The files in <filename>/usr/lib/amanda</filename> are the
+            server-side programs that do the actual work during backups.
+            Following that are a number of man pages: one for each program to be
+            run by the amanda administrator, and one with an overview of amanda.
+          </para>
+          <para>
+            Bringing up the rear are a number of files that are not installed,
+            but would be handy for the amanda administrator to have available.
+            There is some overlap with the files that will be part of the client
+            subpackage, but the additional files here discuss features that
+            would interest only amanda administrators.  Included here is the
+            <filename>example</filename> subdirectory, which contains a few
+            example configuration files for the amanda server.
+          </para>
+          <para>
+            As in the client <command>%files</command> list, these last files
+            can't be packaged by RPM as we've listed them.  We need to use a few
+            more of RPM's tricks to get them packaged.
+          </para>
+        </sect3>
 
-Bringing up the rear are a number of files that are not installed, but
-would be handy for the amanda administrator to have available.  There is
-some overlap with the files that will be part of the client subpackage, but
-the additional files here discuss features that would interest only amanda
-administrators.  Included here is the <tt?>example</tt?> subdirectory, which
-contains a few example configuration files for the amanda server.
+        <sect3 id="s3-rpm-rw-build-appying-directives">
+          <title>Applying Directives</title>
+          <indexterm>
+            <primary>package building!real-world example!directives, adding</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-As in the client <tt?>%files</tt?> list, these last files can't be packaged
-by RPM as we've listed them.  We need to use a few more of RPM's tricks to
-get them packaged.
+          <para>
+            Since we'd like the client subpackage to include those files that
+            are not normally installed, and since the files are documentation,
+            let's use the <command>%doc</command> directive on them.  That will
+            accomplish two things:
 
-</sect3>
+            <orderedlist>
+              <listitem>
+                <para>
+                  When the client subpackage is installed, it will direct RPM to
+                  place them in a package-specific directory in
+                  <filename>/usr/doc</filename>
+                </para>
+              </listitem>
 
-<sect3 id="s3-rpm-rw-build-">
-<title>Applying Directives</title>
-<indexterm>
-<primary>package building!real-world example!directives, adding</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+              <listitem>
+                <para>
+                  It will tag the files as being documentation, making it
+                  possible for users to easily track down the documentation with
+                  a simple <command>rpm -qd</command> command
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
 
-Since we'd like the client subpackage to include those files that are not
-normally installed, and since the files are documentation, let's use the
-<tt?>%doc</tt?> directive on them.  That will accomplish two things:
+          <para>
+            In the course of looking over the <command>%files</command> lists,
+            it becomes apparent that the directory
+            <filename>/usr/lib/amanda</filename> will contain only files from
+            the two amanda subpackages.  If the subpackages are erased, the
+            directory will remain, which won't hurt anything, but it isn't as
+            neat as it could be.  But if we add the directory to the list, RPM
+            will automatically package every file in the directory.  Since the
+            files in that directory are part of both the client and the server
+            subpackages, we'll need to use the <command>%dir</command> directive
+            to instruct RPM to package only the directory.
+          </para>
+          <para>
+            After these changes, here's what the client
+            <command>%files</command> list looks like now:
 
-<orderedlist>
-<listitem>
-<para>
-When the client subpackage is installed, it will direct RPM to place
-them in a package-specific directory in <tt?>/usr/doc</tt?>
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-It will tag the files as being documentation, making it possible for
-users to easily track down the documentation with a simple <tt?>rpm -qd</tt?>
-command
-
-</para>
-</listitem>
-
-</orderedlist>
-In the course of looking over the <tt?>%files</tt?> lists, it becomes
-apparent that the directory <tt?>/usr/lib/amanda</tt?> will contain only
-files from the two amanda subpackages.  If the subpackages are erased, the
-directory will remain, which won't hurt anything, but it isn't as neat as
-it could be.  But if we add the directory to the list, RPM will
-automatically package every file in the directory.  Since the files in
-that directory are part of both the client and the server subpackages,
-we'll need to use the <tt?>%dir</tt?> directive to instruct RPM to package
-only the directory.
-
-After these changes, here's what the client <tt?>%files</tt?> list looks
-like now:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-files-list2">
+              <title>
+                The <command>%files</command> List For
+                <filename>amanda-client</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %files client
 %dir /usr/lib/amanda/
 /usr/lib/amanda/amandad
@@ -1558,13 +1641,21 @@ like now:
 %doc docs/INSTALL
 %doc docs/SYSTEM.NOTES
 %doc docs/WHATS.NEW
-</screen>
-</figure>
-We've also applied the same directives to the server <tt?>%files</tt?> list:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            We've also applied the same directives to the server
+            <command>%files</command> list:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-server-files-list2">
+              <title>
+                The <command>%files</command> List For
+                <filename>amanda-server</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %files server
 /usr/sbin/amadmin
 /usr/sbin/amcheck
@@ -1601,19 +1692,24 @@ We've also applied the same directives to the server <tt?>%files</tt?> list:
 %doc docs/WHATS.NEW
 %doc docs/MULTITAPE
 %doc example
-</screen>
-</figure>
-You'll note that we neglected to use the <tt?>%doc</tt?> directive on the
-man page files.  The reason is that RPM automatically tags any file
-destined for <tt?>/usr/man</tt?> as documentation.  Now our spec file has a
-complete set of tags, the two subpackages are defined, it has build-time
-scripts that work, and now, <tt?>%files</tt?> lists for each subpackage.
-Why don't we try that build again?
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            You'll note that we neglected to use the <command>%doc</command>
+            directive on the man page files.  The reason is that RPM
+            automatically tags any file destined for
+            <filename>/usr/man</filename> as documentation.  Now our spec file
+            has a complete set of tags, the two subpackages are defined, it has
+            build-time scripts that work, and now, <command>%files</command>
+            lists for each subpackage.  Why don't we try that build again?
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba amanda-2.3.0.spec</userinput>
+            <figure id="sc-rpm-rw-build-build-again-listing">
+              <title>Trying Another Build</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
+<computeroutput>
 * Package: amanda
 * Package: amanda-client
 * Package: amanda-server
@@ -1668,20 +1764,26 @@ amanda-2.3.0.tar.gz
 393 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-6.src.rpm
-# 
-</screen>
-</figure>
-If we take a quick look at the client and server subpackages, we find that,
-sure enough, this time they contain files:
+</computeroutput>
+<prompt># </prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            If we take a quick look at the client and server subpackages, we
+            find that, sure enough, this time they contain files:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
-# <userinput>ls -l amanda-*</userinput>
+            <figure id="sc-rpm-rw-build-package-listing">
+              <title>Checking Out the New Packages</title>
+              <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
+<prompt># </prompt><userinput>ls -l amanda-*</userinput>
+<computeroutput>
 -rw-r--r-- 1 root  root  211409 Nov 21 15:56 amanda-client-2.3.0-1.i386.rpm
 -rw-r--r-- 1 root  root  512814 Nov 21 15:57 amanda-server-2.3.0-1.i386.rpm
-# <userinput>rpm -qilp amanda-*</userinput>
+</computeroutput>
+<prompt># </prompt><userinput>rpm -qilp amanda-*</userinput>
+<computeroutput>
 Name        : amanda-client         Distribution: (none)
 Version     : 2.3.0                       Vendor: (none)
 Release     : 1                       Build Date: Thu Nov 21 15:55:59 1996
@@ -1733,128 +1835,133 @@ the client and server packages!
 &hellip;
 /usr/sbin/amrestore
 /usr/sbin/amtape
-# 
-</screen>
-</figure>
-We're finally ready to test these packages!
+</computeroutput>
+<prompt># </prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            We're finally ready to test these packages!
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary>package building!real-world example!directives, adding|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-rw-build-testing-first-packages">
+        <title>Testing those first packages</title>
+        <indexterm>
+          <primary>package building!real-world example!packages, testing</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-<indexterm>
-<primary>package building!real-world example!<tt?>%files</tt?> list, finalizing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          The system we've built the packages on already has amanda installed.
+          This is due to the build process itself.  However, we can install the
+          new packages on top of the already-existing files:
 
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-rw-build-">
-<title>Testing those first packages</title>
-<indexterm>
-<primary>package building!real-world example!packages, testing</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The system we've built the packages on already has amanda installed.  This
-is due to the build process itself.  However, we can install the new
-packages on top of the already-existing files:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cd /usr/src/redhat/RPMS/i386</userinput>
-# <userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
+          <figure id="sc-rpm-rw-build-installing-first-packages">
+            <title>Installing the First Packages</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386</userinput>
+<prompt># </prompt><userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
+<computeroutput>
 amanda-client       ##################################################
 amanda-server       ##################################################
-#
-</screen>
-</figure>
-Running some tests, it looks like everything is running well.  But back in
-section <xref linkend="build-simple-test">, we mentioned that it was possible to
-install a newly-built package on the build system, and not realize that the
-package was missing files.  Well, there's another reason why installing the
-package on the build-system for testing is a bad idea.  Let's bring our
-packages to a different system, test them there, and see what happens.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Running some tests, it looks like everything is running well.  But
+          back in section <xref linkend="s2-rpm-build-testing-packages">, we
+          mentioned that it was possible to install a newly-built package on the
+          build system, and not realize that the package was missing files.
+          Well, there's another reason why installing the package on the
+          build-system for testing is a bad idea.  Let's bring our packages to a
+          different system, test them there, and see what happens.
+        </para>
 
-<sect3 id="s3-rpm-rw-build-">
-<title>Installing the Package On A Different System</title>
-Looks like we're almost through.  Let's install the packages on another
-system that had not previously run amanda, and test it there:
+        <sect3 id="s3-rpm-rw-build-installing-different-system">
+          <title>Installing the Package On A Different System</title>
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
+          <para>
+            Looks like we're almost through.  Let's install the packages on
+            another system that had not previously run amanda, and test it
+            there:
+
+            <figure id="sc-rpm-rw-build-installing-different">
+              <title>Installing the Packages on Another System</title>
+              <screen width="60">
+<prompt># </prompt><userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
+<computeroutput>
 amanda-client       ##################################################
 amanda-server       ##################################################
-# 
-</screen>
-</figure>
-The install went smoothly enough.  However, testing did not.  Why?  Nothing
-was set up!  The server configuration files, the <tt?>inetd.conf</tt?> entry
-for the client, everything was missing.  If we stop and think about it for
-a moment that makes sense: we had gone through all those steps on the build
-system, but none of those steps can be packaged as files.
+</computeroutput>
+<prompt># </prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The install went smoothly enough.  However, testing did not.  Why?
+            Nothing was set up!  The server configuration files, the
+            <filename>inetd.conf</filename> entry for the client, everything was
+            missing.  If we stop and think about it for a moment that makes
+            sense: we had gone through all those steps on the build system, but
+            none of those steps can be packaged as files.
+          </para>
+          <para>
+            After following the steps in the installation instructions,
+            everything works.  While we could expect users to do most of the
+            grunt work associated with getting amanda configured, RPM
+            <emphasis>does</emphasis> have the ability to run scripts when
+            packages are installed and erased.  Why don't we use that feature to
+            make life easier for our users?
+          </para>
+        </sect3>
+      </sect2>
 
-After following the steps in the installation instructions, everything
-works.  While we could expect users to do most of the grunt work associated
-with getting amanda configured, RPM <emphasis>does</emphasis> have the ability to run
-scripts when packages are installed and erased.  Why don't we use that
-feature to make life easier for our users?
+      <sect2 id="s2-rpm-rw-build-finishing-touches">
+        <title>Finishing Touches</title>
 
-<indexterm>
-<primary>package building!real-world example!packages, testing|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          At this point in the build process, we're on the home stretch.  The
+          software builds correctly and is packaged.  It's time to stop looking
+          at things from a "build the software" perspective, and time to
+          starting looking at things from a "package the software" point of
+          view.
+        </para>
+        <para>
+          The difference lies in looking at the packages from the user's
+          perspective.  Does the package install easily, or does it require a
+          lot of effort to make it operative?  When the package is removed, does
+          it clean up after itself, or does it leave bits and pieces strewn
+          throughout the filesystem?
+        </para>
+        <para>
+          Let's put a bit more effort into this spec file, and make life easier
+          on our users.
+        </para>
 
-</sect3>
+        <sect3 id="s3-rpm-rw-build-creating-install-scripts">
+          <title>Creating Install Scripts</title>
+          <indexterm>
+            <primary>package building!real-world example!scripts, creating</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-</sect2>
+          <para>
+            When it comes to needing post-installation configuration, amanda
+            certainly is no slouch!  We'll work on the client first.  Let's look
+            at a section of the script we wrote, comment on it, and move on:
 
-<sect2 id="s2-rpm-rw-build-">
-<title>Finishing Touches</title>
-At this point in the build process, we're on the home stretch.  The
-software builds correctly and is packaged.  It's time to stop looking at
-things from a "build the software" perspective, and time to starting
-looking at things from a "package the software" point of view.
-
-The difference lies in looking at the packages from the user's
-perspective.  Does the package install easily, or does it require a lot of
-effort to make it operative?  When the package is removed, does it clean up
-after itself, or does it leave bits and pieces strewn throughout the
-filesystem?
-
-Let's put a bit more effort into this spec file, and make life easier on
-our users.
-
-<sect3 id="s3-rpm-rw-build-">
-<title>Creating Install Scripts</title>
-<indexterm>
-<primary>package building!real-world example!scripts, creating</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-When it comes to needing post-installation configuration, amanda certainly
-is no slouch!  We'll work on the client first.  Let's look at a section of
-the script we wrote, comment on it, and move on:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-install-script">
+              <title>
+                Part of <filename>amanda-client</filename>'s Install Script
+              </title>
+              <screen width="60">
+<computeroutput>
 %post client
 
 # See if they've installed amanda before...
@@ -1862,25 +1969,33 @@ the script we wrote, comment on it, and move on:
 
 if [ "$1" = 1 ];
 then
-</screen>
-</figure>
-First, we start the script with a <tt?>%post</tt?> statement, and indicate
-that this script is for the <tt?>client</tt?> subpackage.  As the comments
-indicate, we only want to perform the following tasks if this is the first
-time the client subpackage has been installed.  To do this, we use the
-first and only argument passed to the script.  It is a number indicating
-how many instances of this package will be installed after the current
-installation is complete.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            First, we start the script with a <command>%post</command>
+            statement, and indicate that this script is for the
+            <filename>client</filename> subpackage.  As the comments indicate,
+            we only want to perform the following tasks if this is the first
+            time the client subpackage has been installed.  To do this, we use
+            the first and only argument passed to the script.  It is a number
+            indicating how many instances of this package will be installed
+            after the current installation is complete.
+          </para>
+          <para>
+            If the argument is equal to 1, that means that no other instances of
+            the client subpackage are presently installed, and that this one is
+            the first.  Let's continue:
 
-If the argument is equal to 1, that means that no other instances of the
-client subpackage are presently installed, and that this one is the first.
-Let's continue:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-install-script2">
+              <title>
+                More of <filename>amanda-client</filename>'s Install Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Set disk devices so that bin can read them
-# (This is actually done on Red Hat <!-- *** RED HAT *** -->Linux; only need to add bin to
+# (This is actually done on Red Hat Linux; only need to add bin to
 #  group disk)
 
 if grep "^disk::.*bin" /etc/group &gt; /dev/null
@@ -1897,41 +2012,61 @@ sed -e 's/\(^disk::[0-9]\{1,\}:$\)/\1bin/' /etc/group.tmp &gt; /etc/group
 # clean up!
  rm -f /etc/group.tmp
 fi
-</screen>
-</figure>
-One of amanda's requirements is that the user ID running the dumps on the
-client needs to be able to read from every disk's device file.  The folks
-at Red Hat <!-- *** RED HAT *** -->have done half the work for us by creating a group
-<tt?>disk</tt?> and giving that group read/write access to every disk
-device.  Since our dumpuser is <tt?>bin</tt?>, we only need to add
-<tt?>bin</tt?> to the <tt?>disk</tt?> group.  Two lines of <tt?>sed</tt?>, and
-we're done!
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            One of amanda's requirements is that the user ID running the dumps
+            on the client needs to be able to read from every disk's device
+            file.  The folks at &RH; have done half the work for us by creating
+            a group <filename>disk</filename> and giving that group read/write
+            access to every disk device.  Since our dumpuser is
+            <filename>bin</filename>, we only need to add
+            <filename>bin</filename> to the <filename>disk</filename> group.
+            Two lines of <command>sed</command>, and we're done!
+          </para>
+          <para>
+            The next section is related to the last.  It also focuses on making
+            sure <filename>bin</filename> can access everything it needs while
+            doing backups:
 
-The next section is related to the last.  It also focuses on making sure
-<tt?>bin</tt?> can access everything it needs while doing backups:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-install-script3">
+              <title>
+                Even More of <filename>amanda-clients</filename>'s Install
+                Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Also set /etc/dumpdates to be writable by group disk
 
 chgrp disk /etc/dumpdates
 chmod g+w /etc/dumpdates
-</screen>
-</figure>
-Since amanda uses <tt?>dump</tt?> to obtain the backups, and since
-<tt?>dump</tt?> keeps track of the backups in <tt?>/etc/dumpdates</tt?>, it's
-only natural that <tt?>bin</tt?> will need read/write access to the file.  In
-a perfect world, <tt?>/etc/dumpdates</tt?> would have already been set to
-allow group <tt?>disk</tt?> to read and write, but we had to do it
-ourselves.  It's not a big problem, though.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Since amanda uses <command>dump</command> to obtain the backups, and
+            since <command>dump</command> keeps track of the backups in
+            <filename>/etc/dumpdates</filename>, it's only natural that
+            <command>bin</command> will need read/write access to the file.  In
+            a perfect world, <filename>/etc/dumpdates</filename> would have
+            already been set to allow group <filename>disk</filename> to read
+            and write, but we had to do it ourselves.  It's not a big problem,
+            though.
+          </para>
+          <para>
+            Next, we need to create the appropriate network-related entries, so
+            that amanda clients can communicate with amanda servers, and vice
+            versa:
 
-Next, we need to create the appropriate network-related entries, so that
-amanda clients can communicate with amanda servers, and vice versa:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-install-script4">
+              <title>
+                Revenge of the <filename>amanda-client</filename> Install Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Add amanda line to /etc/services
 
 if grep "^amanda" /etc/services &gt;/dev/null
@@ -1941,22 +2076,32 @@ else
         echo "amanda    10080/udp # Added by package amanda-client" &gt;&gt;
 /etc/services
 fi
-</screen>
-</figure>
-By using <tt?>grep</tt?> to look for lines that begin with the letters
-<tt?>amanda</tt?>, we can easily see if <tt?>/etc/services</tt?> is already
-configured properly.  It it isn't, we simply append a line to the end.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            By using <command>grep</command> to look for lines that begin with
+            the letters <command>amanda</command>, we can easily see if
+            <filename>/etc/services</filename> is already configured properly.
+            It it isn't, we simply append a line to the end.
+          </para>
+          <para>
+            We also added a comment so that sysadmins will know where the entry
+            came from, and either take our word for it or issue an <command>rpm
+            -q --scripts amanda-client</command> command and see for themselves.
+            We did it all on one line because it makes the script simpler.
+          </para>
+          <para>
+            Let's look at the rest of the network-related part of this script:
 
-We also added a comment so that sysadmins will know where the entry came
-from, and either take our word for it or issue an <tt?>rpm -q
---scripts amanda-client</tt?> command and see for themselves.  We did it all
-on one line because it makes the script simpler.
-
-Let's look at the rest of the network-related part of this script:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-install-script5">
+              <title>
+                The Never-Ending <filename>amanda-client</filename> Install
+                Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Add amanda line to /etc/inetd.conf
 
 if grep "^amanda" /etc/inetd.conf &gt;/dev/null
@@ -1974,19 +2119,27 @@ then
 fi
 fi
 fi
-</screen>
-</figure>
-Here, we've used the same approach to add an entry to
-<tt?>/etc/inetd.conf</tt?>.  We then hup <tt?>inetd</tt?> so the change will
-take affect, and we're done!
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Here, we've used the same approach to add an entry to
+            <filename>/etc/inetd.conf</filename>.  We then hup
+            <command>inetd</command> so the change will take affect, and we're
+            done!
+          </para>
+          <para>
+            Oh, and that last <command>fi</command> at the end?  That's to close
+              the <command>if [ "$1" = 1 ]</command> at the start of the
+              script.  Now let's look at the server's post-install script:
 
-Oh, and that last <tt?>fi</tt?> at the end?  That's to close the <tt?>if [
-"\$1" = 1 ]</tt?> at the start of the script.  Now let's look at the server's
-post-install script:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-server-install-script">
+              <title>
+                <filename>amanda-server</filename>'s Install Script
+              </title>
+              <screen width="60">
+<computeroutput>
 %post server
 
 # See if they've installed amanda before...
@@ -2005,81 +2158,93 @@ else
 fi
 
 fi
-</screen>
-</figure>
-That was short!  And this huge difference brings up a good point about
-writing install scripts:  It's important to understand what you as the
-package builder should do for the user, and what they should do for
-themselves.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            That was short!  And this huge difference brings up a good point
+            about writing install scripts: It's important to understand what you
+            as the package builder should do for the user, and what they should
+            do for themselves.
+          </para>
+          <para>
+            In the case of the client package, every one of the steps performed
+            by the post-install script was something that a fairly knowledgeable
+            user could have done.  But each of these steps have one thing in
+            common.  No matter how the user configures amanda, these steps will
+            never change.  And given the nature of client/server applications,
+            there's a good chance that <emphasis>many</emphasis> more amanda
+            client packages will be installed than amanda servers.  Would
+            <emphasis>you</emphasis> like to be tasked with installing this
+            package on twenty systems, and performing each of the steps we've
+            automated, twenty times?  We thought not.
+          </para>
+          <para>
+            There is one step that we did <emphasis>not</emphasis> automate for
+            the client package.  The step we left out is the creation of a
+            <filename>.rhosts</filename> file.  Since this file must contain the
+            name of the amanda server, we have no way of knowing what the file
+            should look like.  Therefore, that's one step we can't automate.
+          </para>
+          <para>
+            The server's post-install script is so short because there's little
+            else that can be automated.  The other steps required to set up an
+            amanda server include:
 
-In the case of the client package, every one of the steps performed by the
-post-install script was something that a fairly knowledgeable user could
-have done.  But each of these steps have one thing in common.  No matter
-how the user configures amanda, these steps will never change.  And given
-the nature of client/server applications, there's a good chance that
-<emphasis>many</emphasis> more amanda client packages will be installed than amanda
-servers.  Would <emphasis>you</emphasis> like to be tasked with installing this package
-on twenty systems, and performing each of the steps we've automated, twenty
-times?  We thought not.
+            <orderedlist>
+              <listitem>
+                <para>
+                  Choosing a configuration name, which requires user input
+                </para>
+              </listitem>
 
-There is one step that we did <emphasis>not</emphasis> automate for the client package.
-The step we left out is the creation of a <tt?>.rhosts</tt?> file.  Since
-this file must contain the name of the amanda server, we have no way of
-knowing what the file should look like.  Therefore, that's one step we
-can't automate.
+              <listitem>
+                <para>
+                  Creating a directory to hold the server configuration files,
+                  named according to the configuration name, which depends on
+                  the first step
+                </para>
+              </listitem>
 
-The server's post-install script is so short because there's little else
-that can be automated.  The other steps required to set up an amanda server
-include:
+              <listitem>
+                <para>
+                  Modifying example configuration files to suit the site, which
+                  requires user input
+                </para>
+              </listitem>
 
-<orderedlist>
-<listitem>
-<para>
-Choosing a configuration name, which requires user input
+              <listitem>
+                <para>
+                  Adding crontab entries to run amanda nightly, which requires
+                  user input
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
 
-</para>
-</listitem>
+          <para>
+            Since every step depends on the user making decisions, the best way
+            to handle them is to not handle them at all.  Let the user do it!
+          </para>
+        </sect3>
 
-<listitem>
-<para>
-Creating a directory to hold the server configuration files, named
-according to the configuration name, which depends on the first step
+        <sect3 id="s3-rpm-rw-build-uninstall-scripts">
+          <title>Creating Uninstall Scripts</title>
 
-</para>
-</listitem>
+          <para>
+            Where there are install scripts, there are uninstall scripts.  While
+            there is no ironclad rule to that effect, it is a good practice.
+            Following this practice, we have an uninstall script for the client
+            package, and one for the server.  Let's take the client first:
 
-<listitem>
-<para>
-Modifying example configuration files to suit the site, which
-requires user input
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Adding crontab entries to run amanda nightly, which requires user
-input
-
-</para>
-</listitem>
-
-</orderedlist>
-Since every step depends on the user making decisions, the best way to
-handle them is to not handle them at all.  Let the user do it!
-
-</sect3>
-
-<sect3 id="s3-rpm-rw-build-">
-<title>Creating Uninstall Scripts</title>
-Where there are install scripts, there are uninstall scripts.  While there
-is no ironclad rule to that effect, it is a good practice.  Following this
-practice, we have an uninstall script for the client package, and one for
-the server.  Let's take the client first:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-uninstall-script">
+              <title>
+                The Start of <filename>amanda-client</filename>'s Uninstall
+                Script
+              </title>
+              <screen width="60">
+<computeroutput>
 %postun client
 
 # First, see if we're the last amanda-client package on the system...
@@ -2087,22 +2252,30 @@ the server.  Let's take the client first:
 
 if [ "$1" = 0 ];
 then
-</screen>
-</figure>
-As before, we start out with a declaration of the type of script this is,
-and which subpackage it is for.  Following that we have an <tt?>if</tt?>
-statement similar to the one we used in the install scripts, save one
-difference.  Here, we're comparing the argument against zero.  The reason
-is that we are trying to see if there will be zero instances of this
-package after the uninstall is complete.  If this is the case, the
-remainder of the script needs to be run, since there are no other amanda
-client packages left.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            As before, we start out with a declaration of the type of script
+            this is, and which subpackage it is for.  Following that we have an
+            <command>if</command> statement similar to the one we used in the
+            install scripts, save one difference.  Here, we're comparing the
+            argument against zero.  The reason is that we are trying to see if
+            there will be zero instances of this package after the uninstall is
+            complete.  If this is the case, the remainder of the script needs to
+            be run, since there are no other amanda client packages left.
+          </para>
+          <para>
+            Next, we remove <filename>bin</filename> from the
+            <filename>disk</filename> group:
 
-Next, we remove <tt?>bin</tt?> from the <tt?>disk</tt?> group:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-uninstall-script2">
+              <title>
+                More of <filename>amanda-client</filename>'s Uninstall Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # First, get rid of bin from the disk group...
 
 if grep "^disk::.*bin" /etc/group &gt; /dev/null
@@ -2123,14 +2296,21 @@ then
 #       Clean up after ourselves...
         rm -f /etc/group.tmp /etc/group1.tmp /etc/group2.tmp
 fi
-</screen>
-</figure>
-No surprises there.  Continuing our uninstall, we start on the
-network-related tasks:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            No surprises there.  Continuing our uninstall, we start on the
+            network-related tasks:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-uninstall-script3">
+              <title>
+                Even More of <filename>amanda-client</filename>'s Uninstall
+                Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Next, lose the amanda line in /etc/services...
 # We only want to do this if the server package isn't installed
 # Look for /usr/sbin/amdump, and leave it if there...
@@ -2144,40 +2324,54 @@ then
                 mv -f /etc/services.tmp /etc/services
         fi
 fi
-</screen>
-</figure>
-That's odd.  Why are we looking for a file from the server package?  If you
-look back at the install scripts for the client and server packages, you'll
-find that the one thing they have in common is that both the client and the
-server require the same entry in <tt?>/etc/services</tt?>.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            That's odd.  Why are we looking for a file from the server package?
+            If you look back at the install scripts for the client and server
+            packages, you'll find that the one thing they have in common is that
+            both the client and the server require the same entry in
+            <filename>/etc/services</filename>.
+          </para>
+          <para>
+            If an amanda server is going to back itself up, it also needs the
+            amanda client software.  Therefore, both subpackages need to add an
+            entry to <filename>/etc/services</filename>.  But what if one of the
+            packages is removed?  Perhaps the server is being demoted to a
+            client, or maybe the server is no longer going to be backed up using
+            amanda.  In these cases, the entry
+            in <filename>/etc/services</filename> must stay.  So, in the case of
+            the client, we look for a file from the server subpackage, and if
+            it's there, we leave the entry alone.
+          </para>
+          <para>
+            Granted, this is a somewhat unsightly way to see if a certain
+            package is installed.  Some of you are probably even saying, "Why
+            can't RPM be used?  Just do an <command>rpm -q
+            amanda-server</command>, and decide what to do based on that."  And
+            that would be the best way to do it, except for one small point:
+          </para>
+          <para>
+            Only one invocation of RPM can run at any given time.
+          </para>
+          <para>
+            Since RPM is running to perform the uninstall, if the
+            uninstall-script were to attempt to run RPM again, it would fail.
+            The reason it would fail is because only one copy of RPM can access
+            the database at a time.  So we are stuck with our unsightly friend.
+          </para>
+          <para>
+            Continuing the network-related uninstall tasks:
 
-If an amanda server is going to back itself up, it also needs the amanda
-client software.  Therefore, both subpackages need to add an entry to
-<tt?>/etc/services</tt?>.  But what if one of the packages is removed?
-Perhaps the server is being demoted to a client, or maybe the server is no
-longer going to be backed up using amanda.  In these cases, the entry
-in<tt?>/etc/services</tt?> must stay.  So, in the case of the client, we look
-for a file from the server subpackage, and if it's there, we leave the
-entry alone.
-
-Granted, this is a somewhat unsightly way to see if a certain package is
-installed.  Some of you are probably even saying, "Why can't RPM be used?
-Just do an <tt?>rpm -q amanda-server</tt?>, and decide what to do based on
-that."  And that would be the best way to do it, except for one small
-point:
-
-Only one invocation of RPM can run at any given time.
-
-Since RPM is running to perform the uninstall, if the uninstall-script were
-to attempt to run RPM again, it would fail.  The reason it would fail is
-because only one copy of RPM can access the database at a time.  So we are
-stuck with our unsightly friend.
-
-Continuing the network-related uninstall tasks:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-uninstall-script4">
+              <title>
+                Revenge of the Flaming <filename>amanda-client</filename>
+                Uninstall Script
+              </title>
+              <screen width="60">
+<computeroutput>
 # Finally, the amanda entry in /etc/inetd.conf
 
 if grep "^amanda" /etc/inetd.conf &gt; /dev/null
@@ -2194,18 +2388,27 @@ fi
 fi
 
 fi
-</screen>
-</figure>
-Here, we're using <tt?>grep</tt?>'s ability to return lines that <emphasis>don't</emphasis>
-match the search string, in order to remove every trace of amanda from
-<tt?>/etc/inetd.conf</tt?>.  After issuing a hup on inetd, we're done.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Here, we're using <command>grep</command>'s ability to return lines
+            that <emphasis>don't</emphasis> match the search string, in order to
+            remove every trace of amanda from
+            <filename>/etc/inetd.conf</filename>.  After issuing a hup on inetd,
+            we're done.
+          </para>
+          <para>
+            On to the server.  If you've been noticing a pattern between the
+            various scripts, you won't be disappointed here:
 
-On to the server.  If you've been noticing a pattern between the various
-scripts, you won't be disappointed here:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-server-uninstall-script">
+              <title>
+                <filename>amanda-server</filename>'s Uninstall Script
+              </title>
+              <screen width="60">
+<computeroutput>
 %postun server
 
 # See if we're the last server package on the system...
@@ -2229,158 +2432,179 @@ then
 fi
 
 fi
-</screen>
-</figure>
-By now the opening <tt?>if</tt?> statement is an old friend.  As you might
-have expected, we are verifying whether the client package is installed, by
-looking for a file from that package.  If the client package isn't there,
-the entry is removed from <tt?>/etc/services</tt?>.  And that, is that.
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            By now the opening <command>if</command> statement is an old friend.
+            As you might have expected, we are verifying whether the client
+            package is installed, by looking for a file from that package.  If
+            the client package isn't there, the entry is removed from
+            <filename>/etc/services</filename>.  And that, is that.
+          </para>
+          <para>
+            Obviously, these scripts must be carefully tested.  In the case of
+            amanda, since the two subpackages have some measure of
+            interdependency, it's necessary to try different sequences of
+            installing and erasing the two packages to make sure the
+            <filename>/etc/services</filename> logic works properly in all
+            cases.
+          </para>
+          <para>
+            After a bit of testing, our install and uninstall scripts pass with
+            flying colors.  From a technological standpoint, the client and
+            server subpackages are ready to go.
+          </para>
+        </sect3>
 
-Obviously, these scripts must be carefully tested.  In the case of amanda,
-since the two subpackages have some measure of interdependency, it's
-necessary to try different sequences of installing and erasing the two
-packages to make sure the <tt?>/etc/services</tt?> logic works properly in
-all cases.
+        <sect3 id="s3-rpm-rw-build-bits-and-pieces">
+          <title>Bits and Pieces</title>
 
-After a bit of testing, our install and uninstall scripts pass with flying
-colors.  From a technological standpoint, the client and server subpackages
-are ready to go.
+          <para>
+            However, just because a package has been properly built, and
+            installs and can be erased without problems, doesn't mean that the
+            package builder's job is done.  It's necessary to look at each
+            newly-built package from the user's perspective.  Does the package
+            contain everything the user needs in order to deploy it effectively?
+            Or will the user need to fiddle with it, guessing as they go?
+          </para>
+          <para>
+            In the case of our amanda packages, it was obvious that some
+            additional documentation was required so that the user would know
+            what needed to be done in order to finalize the installation.
+            Simply directing the user to the standard amanda documentation
+            wasn't the right solution, either.  Many of the steps outlined in
+            the <filename>INSTALL</filename> document had already been done by
+            the post-install scripts.  No, an interim documente was required.
+            Two, actually: one for the client, and one for the server.
+          </para>
+          <para>
+            So two files were created, one to be added to each subpackage.  The
+            question was, how to do it?  Essentially, there were two options:
 
-<indexterm>
-<primary>package building!real-world example!scripts, creating|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <orderedlist>
+              <listitem>
+                <para>
+                  Put the files in the amanda directory tree that had been used
+                  to perform the initial builds and generate a new patch file
+                </para>
+              </listitem>
 
-</sect3>
+              <listitem>
+                <para>
+                  Create a <command>tar</command> file containing the two files,
+                  and modify the spec file to unpack the documentation into the
+                  amanda directory tree.
+                </para>
+              </listitem>
 
-<sect3 id="s3-rpm-rw-build-">
-<title>Bits and Pieces</title>
-However, just because a package has been properly built, and installs and
-can be erased without problems, doesn't mean that the package builder's job
-is done.  It's necessary to look at each newly-built package from the
-user's perspective.  Does the package contain everything the user needs in
-order to deploy it effectively?  Or will the user need to fiddle with it,
-guessing as they go?
+              <listitem>
+                <para>
+                  Drop the files directly into the amanda directory tree without
+                  using <command>tar</command>.
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
 
-In the case of our amanda packages, it was obvious that some additional
-documentation was required so that the user would know what needed to be
-done in order to finalize the installation.  Simply directing the user to
-the standard amanda documentation wasn't the right solution, either.  Many
-of the steps outlined in the <tt?>INSTALL</tt?> document had already been
-done by the post-install scripts.  No, an interim documente was required.
-Two, actually: one for the client, and one for the server.
+          <para>
+            Since the second approach was more interesting, that's the approach
+            we chose.  It required an additional <command>source</command> tag
+            in the spec file:
 
-So two files were created, one to be added to each subpackage.  The
-question was, how to do it?  Essentially, there were two options:
-
-<orderedlist>
-<listitem>
-<para>
-Put the files in the amanda directory tree that had been used to
-perform the initial builds and generate a new patch file
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Create a <tt?>tar</tt?> file containing the two files, and modify the
-spec file to unpack the documentation into the amanda directory tree.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Drop the files directly into the amanda directory tree without using
-<tt?>tar</tt?>.
-
-</para>
-</listitem>
-
-</orderedlist>
-Since the second approach was more interesting, that's the approach we
-chose.  It required an additional <tt?>source</tt?> tag in the spec file:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-instruction-source-line">
+              <title>
+                <command>source</command> Line For RPM-Related Installation
+                Instructions
+              </title>
+              <screen width="60">
+<computeroutput>
 Source1: amanda-rpm-instructions.tar.gz
-</screen>
-</figure>
-Also required was an additional <tt?>%setup</tt?> macro in the
-<tt?>%prep</tt?> script:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Also required was an additional <command>%setup</command> macro in
+            the <command>%prep</command> script:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-instruction-setup-macro">
+              <title>
+                <command>%setup</command> Macro to Unpack RPM-Related
+                Installation Instructions
+              </title>
+              <screen width="60">
+<computeroutput>
 %setup -T -D -a 1
-</screen>
-</figure>
-While the <tt?>%setup</tt?> macro might look intimidating, it wasn't that
-hard to construct.  Here's what each options means:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            While the <command>%setup</command> macro might look intimidating,
+            it wasn't that hard to construct.  Here's what each options means:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
---- Do not perform the default archive unpacking.
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <command>-T</command> --- Do not perform the default archive
+                  unpacking.
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  <command>-D</command> --- Do not delete the directory before
+                  unpacking.
+                </para>
+              </listitem>
 
-<listitem>
-<para>
---- Do not delete the directory before unpacking.
+              <listitem>
+                <para>
+                  <command>-a1</command> --- Unpack the archive specified by the
+                  <command>source1</command> tag after changing directory.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            Finally, two additions to the <command>%files</command> lists were
+            required.  One for the client:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
---- Unpack the archive specified by the
-<tt?>source1</tt?> tag after changing directory.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Finally, two additions to the <tt?>%files</tt?> lists were required.  One
-for the client:
-
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-client-file-addition">
+              <title>
+                Additional File for <filename>amanda-client</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %doc amanda-client.README
-</screen>
-</figure>
-And one for the server:
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            And one for the server:
 
-<figure id="sc-rpm-rw-build-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-rw-build-server-file-addition">
+              <title>
+                Additional File for <filename>amanda-server</filename>
+              </title>
+              <screen width="60">
+<computeroutput>
 %doc amanda-server.README
-</screen>
-</figure>
-At this point, the packages were complete.  Certainly there is software
-out there that doesn't require this level of effort to package.  Just as
-certainly there is software that is much more of a challenge.  Hopefully
-this chapter has given you some idea about how to approach package building
-for more complex applications.
-
-<indexterm>
-<primary>package building!real-world example|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
-
-</sect1>
-
-</chapter>
-
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            At this point, the packages were complete.  Certainly there is
+            software out there that doesn't require this level of effort to
+            package.  Just as certainly there is software that is much more of a
+            challenge.  Hopefully this chapter has given you some idea about how
+            to approach package building for more complex applications.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+  </chapter>
