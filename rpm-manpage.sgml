@@ -1287,7 +1287,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	must be configured to run GPG and be able to find a key
 	ring with the appropriate keys. By default,
 	&rpm; uses the same conventions as GPG
-	to find key rings, namely the <envar>$GPGPATH</envar> environment
+	to find key rings, namely the <envar>$GNUPGHOME</envar> environment
 	variable.  If your key rings are not located where GPG expects
 	them to be, you will need to configure the macro
 		<command>%_gpg_path</command>
