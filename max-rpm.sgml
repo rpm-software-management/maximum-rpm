@@ -48,7 +48,6 @@
 <!-- Referring to the kernel version, semi-generically... -->
 <!ENTITY KERNVER "2.2.x">
 <!-- *************** Chapter entities... *************** -->
-<!ENTITY XREF SYSTEM "xref.sgml">
 <!ENTITY PREFACE SYSTEM "preface.sgml">
 <!ENTITY INTRO-TO-RPM SYSTEM "intro-to-rpm.sgml">
 <!ENTITY RPM-INSTALL SYSTEM "rpm-install.sgml">
@@ -78,6 +77,7 @@
 <!ENTITY RPM-SPECREF SYSTEM "rpm-specref.sgml">
 <!ENTITY RPM-RESOURCES SYSTEM "rpm-resources.sgml">
 <!ENTITY PGP-INTRO SYSTEM "pgp-intro.sgml">
+<!ENTITY XREF SYSTEM "xref.sgml">
 ]>
 
 
