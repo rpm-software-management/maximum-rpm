@@ -14,7 +14,7 @@
       <itemizedlist mark="bullet">
         <listitem>
           <para>
-            Comments &mdash; Human&ndash;readable notes ignored by RPM.
+            Comments &mdash; Human-readable notes ignored by RPM.
           </para>
         </listitem>
 
