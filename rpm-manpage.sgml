@@ -22,64 +22,80 @@
 </RefNameDiv>
 
 <RefSynopsisDiv>
-  <variablelist>
-  <varlistentry>
-  <term>Querying:</term>
-  <listitem><para>
+  <refsect2>
+  <title>Querying and Verifying Packages:</title>
+  <para>
     <simplelist>
       <member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-q | --query</option></arg>
-<!-- ================================ -->
-	<sbr>
-    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
-    <arg><option>-a, --all</option></arg>
-    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
-    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
-	<sbr>
-    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
-    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
-    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
-    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
-    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
-	<sbr>
-<!-- ================================ -->
-	<arg>pkgselect-options</arg>
-	<arg>query-options</arg>
+	<arg choice="req"><option>-q|--query</option></arg>
+	<arg><synopfragmentref linkend="select-options">
+	    select-options
+	  </synopfragmentref></arg>
+	<arg><synopfragmentref linkend="query-options">
+	    query-options
+	  </synopfragmentref></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>-V|--verify</option></arg>
+	<arg><synopfragmentref linkend="select-options">
+	    select-options
+	  </synopfragmentref></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--nofiles</option></arg>
+	<arg><option>--nomd5</option></arg>
+	<arg><option>--noscripts</option></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>-K|--checksig</option></arg>
+	<arg><option>--nogpg</option></arg>
+	<arg><option>--nopgp</option></arg>
+	<arg><option>--nomd5</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member>
     </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Maintaining installed packages:</term>
-  <listitem><para>
+  </para>
+  </refsect2><refsect2>
+  <title>Installing, Upgrading, and Removing Packages:</title>
+  <para>
     <simplelist>
       <member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-i | --install</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-i|--install</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-U | --upgrade</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-U|--upgrade</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-F | --freshen</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-F|--freshen</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-e | --erase</option></arg>
+	<arg choice="req"><option>-e|--erase</option></arg>
 	<arg><option>--allmatches</option></arg>
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--noscripts</option></arg>
@@ -87,88 +103,35 @@
 	<arg><option>--test</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
 	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>-V | --verify</option></arg>
-	<arg><option>--nodeps</option></arg>
-	<arg><option>--nofiles</option></arg>
-	<arg><option>--nomd5</option></arg>
-	<arg><option>--noscripts</option></arg>
-<!-- ================================ -->
-	<sbr>
-    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
-    <arg><option>-a, --all</option></arg>
-    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
-    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
-	<sbr>
-    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
-    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
-    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
-    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
-    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
-	<sbr>
-<!-- ================================ -->
-	<arg>pkgselect-options</arg>
-	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
-	</cmdsynopsis>
       </member>
     </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Signatures:</term>
-  <listitem><para>
+  </para>
+  </refsect2><refsect2>
+  <title>Building Packages:</title>
+  <para>
     <simplelist>
       <member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-K | --checksig</option></arg>
-	<arg>signature-options</arg>
-	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>--addsign | --resign</option></arg>
-	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Database maintenance:</term>
-  <listitem><para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Building:</term>
-  <listitem><para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="plain"><option>-b<replaceable>OPT</replaceable></option></arg>
-	<arg>buildoptions</arg>
+	<arg choice="req"><option>-ba|-bb|-bp|-bc|-bi|-bl|-bs</option></arg>
+	<arg><synopfragmentref linkend="build-options">
+	    build-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>SPECFILE</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="plain"><option>-t<replaceable>OPT</replaceable></option></arg>
-	<arg>buildoptions</arg>
+	<arg choice="req"><option>-ta|-tb|-tp|-tc|-ti|-tl|-ts</option></arg>
+	<arg><synopfragmentref linkend="build-options">
+	    build-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--rebuild | --recompile</option></arg>
+	<arg choice="req"><option>--rebuild|--recompile</option></arg>
 	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
 	</cmdsynopsis>
       </member><member>
@@ -179,27 +142,176 @@
 	</cmdsynopsis>
       </member>
     </simplelist>
-  </para></listitem>
-  </varlistentry><varlistentry>
-  <term>Miscellaneous:</term>
-  <listitem><para>
+  </para>
+  </refsect2><refsect2>
+  <title>Miscellaneous:</title>
+  <para>
     <simplelist>
       <member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--querytags | --showrc</option></arg>
+	<arg choice="req"><option>--initdb|--rebuilddb</option></arg>
 	</cmdsynopsis>
       </member><member>
 	<cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--setperms | --setugids</option></arg>
-	<arg rep="repeat" choice="plain"><replaceable>PACKAGE</replaceable></arg>
+	<arg choice="req"><option>--addsign|--resign</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>--querytags|--showrc</option></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>--setperms|--setugids</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
 	</cmdsynopsis>
       </member>
     </simplelist>
-  </para></listitem>
-  </varlistentry>
-  </variablelist>
+  </para>
+  </refsect2><refsect2>
+  <title>select-options</title>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command></command>
+
+<!-- ================================ -->
+  <synopfragment id="select-options">
+  <group choice="plain">
+    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
+    <arg><option>-a,--all</option></arg>
+	<sbr>
+    <arg><option>-f,--file</option> <replaceable>FILE</replaceable></arg>
+    <arg><option>-g,--group</option> <replaceable>GROUP</replaceable></arg>
+    <arg><option>-p,--package</option> <replaceable>PACKAGE_FILE</replaceable></arg>
+	<sbr>
+    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
+    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
+	<sbr>
+    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
+    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
+  </group>
+  </synopfragment>
+<!-- ================================ -->
+
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+  </refsect2><refsect2>
+  <title>query-options</title>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command></command>
+
+<!-- ================================ -->
+  <synopfragment id="query-options">
+  <group choice="plain">
+    <arg><option>--changelog</option></arg>
+    <arg><option>-c,--configfiles</option></arg>
+    <arg><option>-d,--docfiles</option></arg>
+    <arg><option>--dump</option></arg>
+    <arg><option>--filesbypkg</option></arg>
+	<sbr>
+    <arg><option>-i,--info</option></arg>
+    <arg><option>--last</option></arg>
+    <arg><option>-l,--list</option></arg>
+    <arg><option>--provides</option></arg>
+    <arg><option>--qf,--queryformat</option> <replaceable>QUERYFMT</replaceable></arg>
+    <arg><option>-R,--requires</option></arg>
+	<sbr>
+    <arg><option>--scripts</option></arg>
+    <arg><option>-s,--state</option></arg>
+    <arg><option>--triggers,--triggerscripts</option></arg>
+  </group>
+  </synopfragment>
+<!-- ================================ -->
+
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+  </refsect2><refsect2>
+  <title>install-options</title>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command></command>
+
+<!-- ================================ -->
+  <synopfragment id="install-options">
+  <group choice="plain">
+    <arg><option>--allfiles</option></arg>
+    <arg><option>--badreloc</option></arg>
+    <arg><option>--excludepath</option> <replaceable>OLDPATH</replaceable></arg>
+    <arg><option>--excludedocs</option></arg>
+    <arg><option>--force</option></arg>
+    <arg><option>-h,--hash</option></arg>
+	<sbr>
+    <arg><option>--ignoresize</option></arg>
+    <arg><option>--ignorearch</option></arg>
+    <arg><option>--ignoreos</option></arg>
+    <arg><option>--includedocs</option></arg>
+    <arg><option>--justdb</option></arg>
+	<sbr>
+    <arg><option>--nodeps</option></arg>
+    <arg><option>--noorder</option></arg>
+    <arg><option>--noscripts</option></arg>
+    <arg><option>--notriggers</option></arg>
+	<sbr>
+    <arg><option>--oldpackage</option></arg>
+    <arg><option>--percent</option></arg>
+    <arg><option>--prefix</option> <replaceable>NEWPATH</replaceable></arg>
+    <arg><option>--relocate</option> <replaceable>OLDPATH</replaceable>=<replaceable>NEWPATH</replaceable></arg>
+	<sbr>
+    <arg><option>--replacefiles</option></arg>
+    <arg><option>--replacepkgs</option></arg>
+    <arg><option>--test</option></arg>
+  </group>
+  </synopfragment>
+<!-- ================================ -->
+
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+  </refsect2><refsect2>
+  <title>build-options</title>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command></command>
+
+<!-- ================================ -->
+  <synopfragment id="build-options">
+  <group choice="plain">
+    <arg><option>--buildroot</option> <replaceable>DIRECTORY</replaceable></arg>
+    <arg><option>--clean</option></arg>
+    <arg><option>--rmsource</option></arg>
+    <arg><option>--rmspec</option></arg>
+	<sbr>
+    <arg><option>--short-circuit</option></arg>
+    <arg><option>--sign</option></arg>
+    <arg><option>--target</option>=<replaceable>PLATFORM</replaceable></arg>
+    <arg><option>--test</option></arg>
+  </group>
+  </synopfragment>
+<!-- ================================ -->
+
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+  </refsect2>
 </RefSynopsisDiv>
 
 <refsect1><title>Description</title>
@@ -229,9 +341,8 @@
 	<emphasis>Set Owners/Groups</emphasis>, and
 	<emphasis>Show Configuration</emphasis>.
   </para>
-</refsect1>
 
-<refsect1><title>General Options</title>
+  <refsect2><title>General Options</title>
   <para>
   These options can be used in all the different modes.
   </para>
@@ -293,9 +404,9 @@
       </para></listitem>
     </varlistentry>
   </variablelist>
-</refsect1>
+  </refsect2>
 
-    <refsect1><title>Install and Upgrade Options</title>
+  <refsect2><title>Install and Upgrade Options</title>
     <para>
 	The general form of an rpm install command is 
     </para>
@@ -303,8 +414,10 @@
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-i | --install</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-i|--install</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -319,8 +432,10 @@
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-U | --upgrade</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-U|--upgrade</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -335,8 +450,10 @@
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-F | --freshen</option></arg>
-	<arg>install-options</arg>
+	<arg choice="req"><option>-F|--freshen</option></arg>
+	<arg><synopfragmentref linkend="install-options">
+	    install-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -394,7 +511,7 @@
     <term><option>-h, --hash</option></term>
     <listitem><para>
 	Print 50 hash marks as the package archive is unpacked.
-	Use with <option>-v | --verbose</option> for a nicer display.
+	Use with <option>-v|--verbose</option> for a nicer display.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--ignoresize</option></term>
@@ -500,9 +617,9 @@ systems of the binary package and host don't match.
     </varlistentry>
     </variablelist>
     </para>
-    </refsect1>
+  </refsect2>
 
-<refsect1><title>Query Options</title>
+  <refsect2><title>Query Options</title>
     <para>
 	The general form of an rpm query command is 
     </para>
@@ -510,23 +627,13 @@ systems of the binary package and host don't match.
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-q | --query</option></arg
-<!-- ================================ -->
-	<sbr>
-    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
-    <arg><option>-a, --all</option></arg>
-    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
-    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
-	<sbr>
-    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
-    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
-    <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
-    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
-    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
-	<sbr>
-<!-- ================================ -->
-	<arg>pkgselect-options</arg>
-	<arg>query-options</arg>
+	<arg choice="req"><option>-q|--query</option></arg
+	<arg><synopfragmentref linkend="select-options">
+	    select-options
+	  </synopfragmentref></arg>
+	<arg><synopfragmentref linkend="query-options">
+	    query-options
+	  </synopfragmentref></arg>
       </cmdsynopsis>
     </para>
  
@@ -534,7 +641,7 @@ systems of the binary package and host don't match.
 	You may specify the format that package information should be
 	printed in. To do this, you use the
 	<cmdsynopsis>
-	<arg choice="req"><option>--queryformat | -qf</option></arg>
+	<arg choice="req"><option>--qf|--queryformat</option></arg>
 	<arg choice="plain"><replaceable>QUERYFMT</replaceable></arg>
 	</cmdsynopsis>
 	option, followed by the <replaceable>QUERYFMT</replaceable>
@@ -569,7 +676,11 @@ systems of the binary package and host don't match.
     </para>
     <para>
 	There are two subsets of options for querying: package selection,
-	and information selection. Package selection options:
+	and information selection.
+    </para>
+  </refsect2>
+  <refsect2><title>Package selection options:</title>
+    <para>
 
     <variablelist>
     <varlistentry>
@@ -580,7 +691,7 @@ systems of the binary package and host don't match.
     </varlistentry><varlistentry>
     <term><option>-a, --all</option></term>
     <listitem><para>
-	Query all installed packages
+	Query all installed packages.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-f, --file</option> <replaceable>FILE</replaceable></term>
@@ -593,30 +704,30 @@ systems of the binary package and host don't match.
 	Query packages with the group of <replaceable>GROUP</replaceable>.
     </para></ListItem>
     </varlistentry><varlistentry>
-    <term><option>-p, --package</option> <replaceable>URLFILE</replaceable></term>
+    <term><option>-p, --package</option> <replaceable>PACKAGE_FILE</replaceable></term>
     <listitem><para>
-	Query an (uninstalled) package <replaceable>URLFILE</replaceable>.
-	The <replaceable>URLFILE</replaceable> may be specified
+	Query an (uninstalled) package <replaceable>PACKAGE_FILE</replaceable>.
+	The <replaceable>PACKAGE_FILE</replaceable> may be specified
 	as an <command>ftp</command> or <command>http</command> style URL, in
 	which case the package header will be downloaded and queried.
 	See <command>FTP/HTTP OPTIONS</command> for information on
 		&rpm;'s internal
 		<command>ftp</command> and
 		<command>http</command>
-	client support. The <replaceable>URLFILE</replaceable> argument(s),
+	client support. The <replaceable>PACKAGE_FILE</replaceable> argument(s),
 	if not a binary package, will be interpreted as an ASCII package
 	manifest.  Comments are permitted, starting with a '#', and each
 	line of a package manifest file may include white space seperated
 	glob expressions, including URL's with remote glob expressions,
 	that will be expanded to paths that are substituted in place of
-	the package manifest as additional <replaceable>URLFILE</replaceable>
+	the package manifest as additional <replaceable>PACKAGE_FILE</replaceable>
 	arguments to the query.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--querybynumber</option> <replaceable>NUMBER</replaceable></term>
     <listitem><para>
 	Query the <replaceable>NUMBER</replaceable>th database entry
-	directly; this is helpful for debugging  purposes.
+	directly; this is useful only for debugging.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--specfile</option> <replaceable>SPECFILE</replaceable></term>
@@ -646,9 +757,10 @@ systems of the binary package and host don't match.
     </varlistentry>
     </variablelist>
     </para>
+  </refsect2>
 
+  <refsect2><title>Package query options:</title>
     <para>
-	Information selection options:
     <variablelist>
     <varlistentry>
     <term><option>--changelog</option></term>
@@ -669,8 +781,12 @@ systems of the binary package and host don't match.
     <term><option>--dump</option></term>
     <listitem><para>
 	Dump file information as follows:
-	    path size mtime md5sum mode owner group isconfig isdoc rdev symlink.
-	This must be used with at least one of
+	</para>
+	<blockquote><literallayout>
+path size mtime md5sum mode owner group isconfig isdoc rdev symlink
+	</literallayout></blockquote>
+	<para>
+	This option must be used with at least one of
 		<option>-l</option>,
 		<option>-c</option>,
 		<option>-d</option>.
@@ -678,7 +794,7 @@ systems of the binary package and host don't match.
     </varlistentry><varlistentry>
     <term><option>--filesbypkg</option></term>
     <listitem><para>
-	This lists all the files in each package.
+	List all the files in each selected package.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-i, --info</option></term>
@@ -723,7 +839,7 @@ systems of the binary package and host don't match.
 	<replaceable>replaced</replaceable>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--triggers , --triggerscripts</option></term>
+    <term><option>--triggers, --triggerscripts</option></term>
     <listitem><para>
 	Display the trigger scripts, if any, which are contained in
 	the package.
@@ -731,9 +847,9 @@ systems of the binary package and host don't match.
     </varlistentry>
     </variablelist>
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Verify Options</title>
+  <refsect2><title>Verify Options</title>
     <para>
 	The general form of an rpm verify command is 
     </para>
@@ -741,26 +857,14 @@ systems of the binary package and host don't match.
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--verify | -V</option></arg>
+	<arg choice="req"><option>-V|--verify</option></arg>
+	<arg><synopfragmentref linkend="select-options">
+	    select-options
+	  </synopfragmentref></arg>
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--nofiles</option></arg>
 	<arg><option>--nomd5</option></arg>
 	<arg><option>--noscripts</option></arg>
-<!-- ================================ -->
-	<sbr>
-    <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
-    <arg><option>-a, --all</option></arg>
-    <arg><option>-f, --file</option> <replaceable>FILE</replaceable></arg>
-    <arg><option>-g, --group</option> <replaceable>GROUP</replaceable></arg>
-	<sbr>
-    <arg><option>-p, --package</option> <replaceable>URLFILE</replaceable></arg>
-    <arg><option>--querybynumber</option> <replaceable>NUMBER</replaceable></arg>
-    <arg><option>--triggeredby</option> <replaceable>PACKAGE</replaceable></arg>
-    <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
-    <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
-	<sbr>
-<!-- ================================ -->
-	<arg>pkgselect-options</arg>
       </cmdsynopsis>
     </para>
  
@@ -848,29 +952,34 @@ systems of the binary package and host don't match.
 	</member>
 	</simplelist>
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Signature Checking</title>
+  <refsect2><title>Signature Checking</title>
     <para>
 	The general form of an rpm signature check command is 
     </para>
 
     <para>
       <cmdsynopsis>
-	&rpm; <arg choice="plain"><option>--checksig</option> <replaceable>FILE</replaceable></arg>
+	&rpm;
+	<arg choice="plain"><option>--checksig</option></arg>
+	<arg><option>--nogpg</option></arg>
+	<arg><option>--nopgp</option></arg>
+	<arg><option>--nomd5</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
 
     <para>
-	This checks the PGP signature of package
-	<replaceable>FILE</replaceable> to ensure
-	its integrity and origin. PGP configuration information is
-	read from configuration files.  See the section on PGP SIGNATURES
+	This checks the GPG signature of package
+	<replaceable>PACKAGE_FILE</replaceable> to ensure
+	its integrity and origin. GPG configuration information is
+	read from configuration files.  See the section on GPG SIGNATURES
 	for details.
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Erase Options</title>
+  <refsect2><title>Erase Options</title>
     <para>
 	The general form of an rpm erase command is 
     </para>
@@ -878,7 +987,7 @@ systems of the binary package and host don't match.
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-e | --erase</option></arg>
+	<arg choice="req"><option>-e|--erase</option></arg>
 	<arg><option>--allmatches</option></arg>
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--noscripts</option></arg>
@@ -925,17 +1034,19 @@ systems of the binary package and host don't match.
     </varlistentry>
     </variablelist>
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Build Options</title>
+  <refsect2><title>Build Options</title>
     <para>
 	The general form of an rpm build command is 
     </para>
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-b<replaceable>OPT</replaceable> | -t<replaceable>OPT</replaceable></option></arg>
-	<arg>build-options</arg>
+	<arg choice="req"><option>-b<replaceable>STAGE</replaceable>|-t<replaceable>STAGE</replaceable></option></arg>
+	<arg><synopfragmentref linkend="build-options">
+	    build-options
+	  </synopfragmentref></arg>
 	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -945,22 +1056,27 @@ systems of the binary package and host don't match.
 	used to build the package and <option>-t</option> if &rpm;
 	should look inside of a (possibly compressed) tar file for
 	the spec file to use. After the first argument, the next
-	character (<replaceable>OPT</replaceable>) specifies the stages
+	character (<replaceable>STAGE</replaceable>) specifies the stages
 	of building and packaging to be done and is one of:
     <variablelist>
     <varlistentry>
+    <term><option>-ba</option></term>
+    <listitem><para>
+	Build binary and source packages (after doing the %prep, %build, and
+	%install stages).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>-bb</option></term>
+    <listitem><para>
+	Build a binary package (after doing the %prep, %build, and %install
+	stages).
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>-bp</option></term>
     <listitem><para>
 	Executes the "%prep" stage from the spec file. Normally this
 	involves unpacking the sources and applying any patches.
     </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bl</option></term>
-    <listitem><para>
-	Do a "list check".  The "%files" section from the spec file is
-	macro expanded, and checks are made to verify that each file
-	exists.
-	</para></listitem>
     </varlistentry><varlistentry>
     <term><option>-bc</option></term>
     <listitem><para>
@@ -975,22 +1091,17 @@ systems of the binary package and host don't match.
 	"make install".
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>-bb</option></term>
+    <term><option>-bl</option></term>
     <listitem><para>
-	Build a binary package (after doing the %prep, %build, and %install
-	stages).
-    </para></listitem>
+	Do a "list check".  The "%files" section from the spec file is
+	macro expanded, and checks are made to verify that each file
+	exists.
+	</para></listitem>
     </varlistentry><varlistentry>
     <term><option>-bs</option></term>
     <listitem><para>
 	Build just the source package.
     </para></ListItem>
-    </varlistentry><varlistentry>
-    <term><option>-ba</option></term>
-    <listitem><para>
-	Build binary and source packages (after doing the %prep, %build, and
-	%install stages).
-    </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
@@ -1032,9 +1143,9 @@ systems of the binary package and host don't match.
   </varlistentry><varlistentry>
     <term><option>--sign</option></term>
     <listitem><para>
-	Embed a PGP signature in the package. This signature can be used
+	Embed a GPG signature in the package. This signature can be used
 	to verify the integrity and the origin of the package.  See the
-	section on PGP SIGNATURES for configuration details.
+	section on GPG SIGNATURES for configuration details.
     </para></listitem>
   </varlistentry><varlistentry>
     <term><option>--target</option> <replaceable>PLATFORM</replaceable></term>
@@ -1053,16 +1164,16 @@ systems of the binary package and host don't match.
     </para></listitem>
   </varlistentry>
   </variablelist>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Rebuild and Recompile Options</title>
+  <refsect2><title>Rebuild and Recompile Options</title>
     <para>
 	There are two other ways to invoke building with rpm:
     </para>
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--rebuild | --recompile</option></arg>
+	<arg choice="req"><option>--rebuild|--recompile</option></arg>
 	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -1074,13 +1185,13 @@ systems of the binary package and host don't match.
 	<option>--clean</option>) and the the sources and spec file for
 	the package are removed.
     </para>
-    </refsect1>
+  </refsect2>
 
-    <refsect1><title>Signing a Package</title>
+  <refsect2><title>Signing a Package</title>
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--addsign | --resign</option></arg>
+	<arg choice="req"><option>--addsign|--resign</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
       </cmdsynopsis>
     </para>
@@ -1093,33 +1204,33 @@ systems of the binary package and host don't match.
 	The <option>--resign</option> option generates and appends signatures
 	for the listed packages while preserving the existing signatures.
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>PGP Signatures</title>
+  <refsect2><title>GPG Signatures</title>
     <para>
 	In order to use the signature feature, &rpm;
-	must be configured to run PGP and be able to find a public key
+	must be configured to run GPG and be able to find a public key
 	ring with Red Hat (or other vendor) public keys. By default,
-	&rpm; uses the same conventions as PGP
-	to find key rings, namely the <envar>$PGPPATH</envar> environment
-	variable.  If your key rings are not located where PGP expects
+	&rpm; uses the same conventions as GPG
+	to find key rings, namely the <envar>$GPGPATH</envar> environment
+	variable.  If your key rings are not located where GPG expects
 	them to be, you will need to configure the macro
-		<command>%_pgp_path</command>
-	to be the location of the PGP key rings to use.
+		<command>%_gpg_path</command>
+	to be the location of the GPG key rings to use.
     </para>
 
     <para>
 	If you want to be able to sign packages you create yourself, you
 	also need to create your own public and secret key pair (see the
-	PGP manual). You will also need to configure the macros
+	GPG manual). You will also need to configure the macros
     <variablelist>
     <varlistentry>
     <term><command>%_signature</command></term>
     <listitem><para>
-	The signature type.  Right now only pgp is supported.
+	The signature type.  Right now only gpg and pgp are supported.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><command>%_pgp_name</command></term>
+    <term><command>%_gpg_name</command></term>
     <listitem><para>
 	The name of the "user" whose key you wish to use to sign your packages.
     </para></listitem>
@@ -1131,24 +1242,27 @@ systems of the binary package and host don't match.
 	When building packages you then add <option>--sign</option> to
 	the command line. You will be prompted for your pass phrase, and
 	your package will be built and signed.  For example, to be able
-	to use PGP to sign packages as the user
-	<replaceable>>"John Doe (jdoe@foo.com)"</replaceable>>
-	from the key rings located in <filename>/etc/rpm/.pgp</filename>
-	using the executable <filename>/usr/bin/pgp</filename> you would include
+	to use GPG to sign packages as the user
+	<replaceable>"John Doe &lt;jdoe@foo.com&gt;"</replaceable>
+	from the key rings located in <filename>/etc/rpm/.gpg</filename>
+	using the executable <filename>/usr/bin/gpg</filename> you would include
+    </para>
+    <para>
 <computeroutput>
-%_signature pgp
-%_pgp_path /etc/rpm/.pgp
-%_pgp_name John Doe (jdoe@foo.com)
-%_pgpbin /usr/bin/pgp
+%_signature gpg
+%_gpg_path /etc/rpm/.gpg
+%_gpg_name John Doe &lt;jdoe@foo.com&gt;
+%_gpgbin /usr/bin/gpg
 </computeroutput>
+    </para>
+    <para>
 	in a macro configuration file. Use <filename>/etc/rpm/macros</filename>
 	for per-system configuration and <filename>~/.rpmmacros</filename>
 	for per-user configuration. 
     </para>
-    </refsect1>
+  </refsect2>
 
-    <refsect1>
-    <title>Rebuild Database Options</title>
+  <refsect2><title>Rebuild Database Options</title>
     <para>
 	The general form of an rpm rebuild database command is 
     </para>
@@ -1156,7 +1270,7 @@ systems of the binary package and host don't match.
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>--initdb | --rebuilddb</option></arg>
+	<arg choice="req"><option>--initdb|--rebuilddb</option></arg>
 	<arg><option>-v</option></arg>
 	<arg><option>--dbpath</option> <replaceable>DIRECTORY</replaceable></arg>
 	<arg><option>--root</option> <replaceable>DIRECTORY</replaceable></arg>
@@ -1168,11 +1282,11 @@ systems of the binary package and host don't match.
 	<option>--rebuilddb</option> to rebuild the database indices from
 	the installed package headers.
     </para>
-</refsect1>
+  </refsect2>
 
-<refsect1><title>Showrc</title>
+  <refsect2><title>Showrc</title>
     <para>
-	Running
+	The command
     </para>
   
     <para>
@@ -1184,14 +1298,14 @@ systems of the binary package and host don't match.
 
     <para>
 	shows the values &rpm; will use for all of the
-	options that may be set in
+	options are currently set in
 		<filename>rpmrc</filename> and
 		<filename>macros</filename>
-	configuration files.
+	configuration file(s).
     </para>
-    </refsect1>
+  </refsect2>
 
-    <refsect1><title>Ftp/Http Options</title>
+  <refsect2><title>Ftp/Http Options</title>
     <para>
 	&rpm; can act as an FTP and/or HTTP client so
 	that packages can be queried or installed from the internet.
@@ -1260,6 +1374,7 @@ systems of the binary package and host don't match.
     </varlistentry>
     </variablelist>
     </para>
+  </refsect2>
 
 </refsect1>
 
