@@ -246,10 +246,6 @@
 
     &QUERYFORMAT-TAGS;
 
-    &RPM-MANPAGE;
-
-    &RPMBUILD-MANPAGE;
-
     &RPM-SPECREF;
 
     &RPM-RESOURCES;
@@ -257,6 +253,15 @@
     &PGP-INTRO;
 
     &XREF;
+
+  </part>
+
+  <part>
+    <title>RPM Man Pages</title>
+
+    &RPM-MANPAGE;
+
+    &RPMBUILD-MANPAGE;
 
   </part>
 

@@ -25,5 +25,8 @@
 ]>
 
 <book id="rpmbuild8">
+  <reference id="ch-rpmbuild-manpage">
+    <title>&RHL;</title>
     &RPMBUILD-MANPAGE;
+  </reference>
 </book>

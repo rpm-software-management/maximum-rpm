@@ -25,5 +25,8 @@
 ]>
 
 <book id="rpm8">
+  <reference id="ch-rpm-manpage">
+    <title>&RHL;</title>
     &RPM-MANPAGE;
+  </reference>
 </book>
