@@ -1162,8 +1162,8 @@ cdplayer-1.0.spec doesn't build on this architecture
           <title>The <command>exclusivearch</command> Tag</title>
           <!-- label: inside-exclusivearch -->
           <indexterm>
-            <primary>tags</command></primary>
-            <secondary><command>exclusivearch</secondary>
+            <primary>tags</primary>
+            <secondary><command>exclusivearch</command></secondary>
           </indexterm>
 
           <indexterm>

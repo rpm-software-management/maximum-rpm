@@ -3,9 +3,8 @@
   <!-- label: queryformat-tags -->
 
   <indexterm>
-    <primary><command>--queryformat</command> option!tags for</primary>
-    <secondary></secondary>
-    <tertiary></tertiary>
+    <primary><command>--queryformat</command> option</primary>
+    <secondary>tags for</secondary>
   </indexterm>
 
   <para>
@@ -64,9 +63,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-name">
       <title>The <command>NAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>NAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>NAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -84,9 +83,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-version">
       <title>The <command>VERSION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>VERSION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>VERSION</command></tertiary>
       </indexterm>
 
       <para>
@@ -104,9 +103,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-release">
       <title>The <command>RELEASE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>RELEASE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>RELEASE</command></tertiary>
       </indexterm>
 
       <para>
@@ -124,9 +123,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-serial">
       <title>The <command>SERIAL</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>SERIAL</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>SERIAL</command></tertiary>
       </indexterm>
 
       <para>
@@ -144,9 +143,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-summary">
       <title>The <command>SUMMARY</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>SUMMARY</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>SUMMARY</command></tertiary>
       </indexterm>
 
       <para>
@@ -164,9 +163,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-description">
       <title>The <command>DESCRIPTION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>DESCRIPTION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>DESCRIPTION</command></tertiary>
       </indexterm>
 
       <para>
@@ -184,9 +183,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-buildtime">
       <title>The <command>BUILDTIME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>BUILDTIME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>BUILDTIME</command></tertiary>
       </indexterm>
 
       <para>
@@ -204,9 +203,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-buildhost">
       <title>The <command>BUILDHOST</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>BUILDHOST</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>BUILDHOST</command></tertiary>
       </indexterm>
 
       <para>
@@ -224,9 +223,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-installtime">
       <title>The <command>INSTALLTIME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>INSTALLTIME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>INSTALLTIME</command></tertiary>
       </indexterm>
 
       <para>
@@ -244,9 +243,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-size">
       <title>The <command>SIZE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>SIZE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>SIZE</command></tertiary>
       </indexterm>
 
       <para>
@@ -264,9 +263,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-distribution">
       <title>The <command>DISTRIBUTION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>DISTRIBUTION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>DISTRIBUTION</command></tertiary>
       </indexterm>
 
       <para>
@@ -284,9 +283,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-vendor">
       <title>The <command>VENDOR</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>VENDOR</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>VENDOR</command></tertiary>
       </indexterm>
 
       <para>
@@ -304,9 +303,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-gif">
       <title>The <command>GIF</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>GIF</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>GIF</command></tertiary>
       </indexterm>
 
       <para>
@@ -318,9 +317,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-xpm">
       <title>The <command>XPM</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>XPM</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>XPM</command></tertiary>
       </indexterm>
 
       <para>
@@ -332,9 +331,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-copyright">
       <title>The <command>COPYRIGHT</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>COPYRIGHT</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>COPYRIGHT</command></tertiary>
       </indexterm>
 
       <para>
@@ -352,9 +351,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-packager">
       <title>The <command>PACKAGER</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>PACKAGER</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>PACKAGER</command></tertiary>
       </indexterm>
 
       <para>
@@ -372,9 +371,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-group">
       <title>The <command>GROUP</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>GROUP</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>GROUP</command></tertiary>
       </indexterm>
 
       <para>
@@ -392,9 +391,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-changelog">
       <title>The <command>CHANGELOG</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>CHANGELOG</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>CHANGELOG</command></tertiary>
       </indexterm>
 
       <para>
@@ -406,9 +405,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-source">
       <title>The <command>SOURCE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>SOURCE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>SOURCE</command></tertiary>
       </indexterm>
 
       <para>
@@ -426,9 +425,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-patch">
       <title>The <command>PATCH</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>PATCH</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>PATCH</command></tertiary>
       </indexterm>
 
       <para>
@@ -446,9 +445,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-url">
       <title>The <command>URL</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>URL</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>URL</command></tertiary>
       </indexterm>
 
       <para>
@@ -466,9 +465,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-os">
       <title>The <command>OS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>OS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>OS</command></tertiary>
       </indexterm>
 
       <para>
@@ -486,9 +485,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-arch">
       <title>The <command>ARCH</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>ARCH</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>ARCH</command></tertiary>
       </indexterm>
 
       <para>
@@ -506,9 +505,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-prein">
       <title>The <command>PREIN</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>PREIN</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>PREIN</command></tertiary>
       </indexterm>
 
       <para>
@@ -526,9 +525,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-postin">
       <title>The <command>POSTIN</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>POSTIN</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>POSTIN</command></tertiary>
       </indexterm>
 
       <para>
@@ -546,9 +545,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-preun">
       <title>The <command>PREUN</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>PREUN</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>PREUN</command></tertiary>
       </indexterm>
 
       <para>
@@ -566,9 +565,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-postun">
       <title>The <command>POSTUN</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>POSTUN</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>POSTUN</command></tertiary>
       </indexterm>
 
       <para>
@@ -586,9 +585,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filename">
       <title>The <command>FILENAMES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILENAMES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILENAMES</command></tertiary>
       </indexterm>
 
       <para>
@@ -606,9 +605,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filesizes">
       <title>The <command>FILESIZES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILESIZES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILESIZES</command></tertiary>
       </indexterm>
 
       <para>
@@ -626,9 +625,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filestates">
       <title>The <command>FILESTATES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILESTATES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILESTATES</command></tertiary>
       </indexterm>
 
       <para>
@@ -658,9 +657,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filemodes">
       <title>The <command>FILEMODES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEMODES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEMODES</command></tertiary>
       </indexterm>
 
       <para>
@@ -678,9 +677,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-fileuids">
       <title>The <command>FILEUIDS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEUIDS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEUIDS</command></tertiary>
       </indexterm>
 
       <para>
@@ -698,9 +697,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filegids">
       <title>The <command>FILEGIDS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEGIDS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEGIDS</command></tertiary>
       </indexterm>
 
       <para>
@@ -718,9 +717,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filerdevs">
       <title>The <command>FILERDEVS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILERDEVS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILERDEVS</command></tertiary>
       </indexterm>
 
       <para>
@@ -739,9 +738,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filemtimes">
       <title>The <command>FILEMTIMES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEMTIMES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEMTIMES</command></tertiary>
       </indexterm>
 
       <para>
@@ -760,9 +759,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filemd5">
       <title>The <command>FILEMD5S</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEMD5S</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEMD5S</command></tertiary>
       </indexterm>
 
       <para>
@@ -780,9 +779,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filelinktos">
       <title>The <command>FILELINKTOS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILELINKTOS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILELINKTOS</command></tertiary>
       </indexterm>
 
       <para>
@@ -800,9 +799,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-fileflags">
       <title>The <command>FILEFLAGS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEFLAGS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEFLAGS</command></tertiary>
       </indexterm>
 
       <para>
@@ -821,9 +820,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-root">
       <title>The <command>ROOT</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>ROOT</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>ROOT</command></tertiary>
       </indexterm>
 
       <para>
@@ -835,9 +834,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-fileusername">
       <title>The <command>FILEUSERNAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEUSERNAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEUSERNAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -855,9 +854,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-filegroupname">
       <title>The <command>FILEGROUPNAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEGROUPNAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEGROUPNAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -875,9 +874,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-exclude">
       <title>The <command>EXCLUDE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUDE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUDE</command></tertiary>
       </indexterm>
 
       <para>
@@ -889,9 +888,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-exclusive">
       <title>The <command>EXCLUSIVE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUSIVE</command></tertiary>
       </indexterm>
 
       <para>
@@ -903,9 +902,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-icon">
       <title>The <command>ICON</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>ICON</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>ICON</command></tertiary>
       </indexterm>
 
       <para>
@@ -917,9 +916,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-sourcerpm">
       <title>The <command>SOURCERPM</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>SOURCERPM</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>SOURCERPM</command></tertiary>
       </indexterm>
 
       <para>
@@ -937,9 +936,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-fileverifyflags">
       <title>The <command>FILEVERIFYFLAGS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>FILEVERIFYFLAGS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>FILEVERIFYFLAGS</command></tertiary>
       </indexterm>
 
       <para>
@@ -970,9 +969,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-arhivesize">
       <title>The <command>ARCHIVESIZE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>ARCHIVESIZE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>ARCHIVESIZE</command></tertiary>
       </indexterm>
 
       <para>
@@ -990,9 +989,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-provides">
       <title>The <command>PROVIDES</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>PROVIDES</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>PROVIDES</command></tertiary>
       </indexterm>
 
       <para>
@@ -1010,9 +1009,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-requireflags">
       <title>The <command>REQUIREFLAGS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>REQUIREFLAGS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>REQUIREFLAGS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1030,9 +1029,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-requirename">
       <title>The <command>REQUIRENAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>REQUIRENAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>REQUIRENAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -1050,9 +1049,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-requireversion">
       <title>The <command>REQUIREVERSION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>REQUIREVERSION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>REQUIREVERSION</command></tertiary>
       </indexterm>
 
       <para>
@@ -1070,9 +1069,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-nosource">
       <title>The <command>NOSOURCE</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>NOSOURCE</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>NOSOURCE</command></tertiary>
       </indexterm>
 
       <para>
@@ -1090,9 +1089,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-nopatch">
       <title>The <command>NOPATCH</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>NOPATCH</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>NOPATCH</command></tertiary>
       </indexterm>
 
       <para>
@@ -1110,9 +1109,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-conflictflags">
       <title>The <command>CONFLICTFLAGS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>CONFLICTFLAGS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>CONFLICTFLAGS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1130,9 +1129,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-conflictname">
       <title>The <command>CONFLICTNAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>CONFLICTNAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>CONFLICTNAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -1150,9 +1149,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-conflictversion">
       <title>The <command>CONFLICTVERSION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>CONFLICTVERSION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>CONFLICTVERSION</command></tertiary>
       </indexterm>
 
       <para>
@@ -1170,9 +1169,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-defaultprefix">
       <title>The <command>DEFAULTPREFIX</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>DEFAULTPREFIX</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>DEFAULTPREFIX</command></tertiary>
       </indexterm>
 
       <para>
@@ -1190,9 +1189,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-buildroot">
       <title>The <command>BUILDROOT</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>BUILDROOT</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>BUILDROOT</command></tertiary>
       </indexterm>
 
       <para>
@@ -1204,9 +1203,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-installprefix">
       <title>The <command>INSTALLPREFIX</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>INSTALLPREFIX</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>INSTALLPREFIX</command></tertiary>
       </indexterm>
 
       <para>
@@ -1224,9 +1223,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-excludearch">
       <title>The <command>EXCLUDEARCH</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUDEARCH</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUDEARCH</command></tertiary>
       </indexterm>
 
       <para>
@@ -1244,9 +1243,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-excludeos">
       <title>The <command>EXCLUDEOS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUDEOS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUDEOS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1264,9 +1263,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-exclusivearch">
       <title>The <command>EXCLUSIVEARCH</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVEARCH</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUSIVEARCH</command></tertiary>
       </indexterm>
 
       <para>
@@ -1284,9 +1283,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-exclusiveos">
       <title>The <command>EXCLUSIVEOS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVEOS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>EXCLUSIVEOS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1304,9 +1303,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-autoreqprov">
       <title>The <command>AUTOREQPROV</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>AUTOREQPROV</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>AUTOREQPROV</command></tertiary>
       </indexterm>
 
       <para>
@@ -1318,9 +1317,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-rpmversion">
       <title>The <command>RPMVERSION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>RPMVERSION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>RPMVERSION</command></tertiary>
       </indexterm>
 
       <para>
@@ -1338,9 +1337,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-triggerscripts">
       <title>The <command>TRIGGERSCRIPTS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>TRIGGERSCRIPTS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>TRIGGERSCRIPTS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1352,9 +1351,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-triggername">
       <title>The <command>TRIGGERNAME</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>TRIGGERNAME</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>TRIGGERNAME</command></tertiary>
       </indexterm>
 
       <para>
@@ -1366,9 +1365,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-triggerversion">
       <title>The <command>TRIGGERVERSION</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>TRIGGERVERSION</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>TRIGGERVERSION</command></tertiary>
       </indexterm>
 
       <para>
@@ -1380,9 +1379,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-triggerflags">
       <title>The <command>TRIGGERFLAGS</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>TRIGGERFLAGS</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>TRIGGERFLAGS</command></tertiary>
       </indexterm>
 
       <para>
@@ -1394,9 +1393,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-triggerindex">
       <title>The <command>TRIGGERINDEX</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>TRIGGERINDEX</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>TRIGGERINDEX</command></tertiary>
       </indexterm>
 
       <para>
@@ -1409,9 +1408,9 @@ rpm --querytags
     <sect2 id="s2-queryformat-tags-verifyscript">
       <title>The <command>VERIFYSCRIPT</command> Tag</title>
       <indexterm>
-        <primary><command>--queryformat</command> option!tags for!<command>VERIFYSCRIPT</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary><command>--queryformat</command> option</primary>
+        <secondary>tags for</secondary>
+        <tertiary><command>VERIFYSCRIPT</command></tertiary>
       </indexterm>
 
       <para>

@@ -2,15 +2,15 @@
   <title>Concise Spec File Reference</title>
 
   <indexterm>
-    <primary>spec file!contents of</primary>
-    <secondary></secondary>
+    <primary>spec file</primary>
+    <secondary>contents of</secondary>
   </indexterm>
 
   <sect1 id="s1-rpm-specref-comments">
     <title>Comments</title>
     <indexterm>
-      <primary>spec file!comments in</primary>
-      <secondary></secondary>
+      <primary>spec file</primary>
+      <secondary>comments in</secondary>
     </indexterm>
 
     <para>
@@ -52,9 +52,9 @@
       <sect3 id="s3-rpm-specref-name">
         <title>The <command>name</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>name</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>name</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -82,9 +82,9 @@ Name: cdplayer
       <sect3 id="s3-rpm-specref-version">
         <title>The <command>version</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>version</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>version</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -112,9 +112,9 @@ Version: 1.2
       <sect3 id="s3-rpm-specref-release">
         <title>The <command>release</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>release</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>release</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -145,9 +145,9 @@ Release: 5
       <sect3 id="s3-rpm-specref-description">
         <title>The <command>%description</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>%description</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>%description</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -207,9 +207,9 @@ more mundane software...
       <sect3 id="s3-rpm-specref-summary">
         <title>The <command>summary</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>summary</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>summary</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -237,9 +237,9 @@ Summary: A CD player app that rocks!
       <sect3 id="s3-rpm-specref-copyright">
         <title>The <command>copyright</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>copyright</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>copyright</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -267,9 +267,9 @@ Copyright: GPL
       <sect3 id="s3-rpm-specref-distribution">
         <title>The <command>distribution</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>distribution</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>distribution</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -297,9 +297,9 @@ Distribution: Doors '95
       <sect3 id="s3-rpm-specref-icon">
         <title>The <command>icon</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>icon</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>icon</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -329,9 +329,9 @@ Icon: foo.xpm
       <sect3 id="s3-rpm-specref-vendor">
         <title>The <command>vendor</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>vendor</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>vendor</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -359,9 +359,9 @@ Vendor: White Socks Software, Inc.
       <sect3 id="s3-rpm-specref-url">
         <title>The <command>url</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>url</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>url</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -390,9 +390,9 @@ URL: http://www.gnomovision.com/cdplayer.html
       <sect3 id="s3-rpm-specref-group">
         <title>The <command>group</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>group</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>group</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -420,9 +420,9 @@ Group: Applications/Editors
       <sect3 id="s3-rpm-specref-packager">
         <title>The <command>packager</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>packager</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>packager</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -453,9 +453,9 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
       <sect3 id="s3-rpm-specref-provides">
         <title>The <command>provides</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>provides</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>provides</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -484,9 +484,9 @@ Provides: module-info
       <sect3 id="s3-rpm-specref-requires">
         <title>The <command>requires</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>requires</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>requires</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -555,9 +555,9 @@ Requires: playmidi =S 4
       <sect3 id="s3-rpm-specref-serial">
         <title>The <command>serial</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>serial</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>serial</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -586,9 +586,9 @@ Serial: 4
       <sect3 id="s3-rpm-specref-conflicts">
         <title>The <command>conflicts</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>conflicts</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>conflicts</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -656,9 +656,9 @@ Conflicts: playmidi =S 4
       <sect3 id="s3-rpm-specref-autoreqprov">
         <title>The <command>autoreqprov</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>autoreqprov</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>autoreqprov</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -699,9 +699,9 @@ AutoReqProv: no
       <sect3 id="s3-rpm-specref-excludearch">
         <title>The <command>excludearch</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>excludearch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>excludearch</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -730,9 +730,9 @@ ExcludeArch: sparc alpha
       <sect3 id="s3-rpm-specref-exclusivearch">
         <title>The <command>exclusivearch</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>exclusivearch</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>exclusivearch</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -761,9 +761,9 @@ ExclusiveArch: sparc alpha
       <sect3 id="s3-rpm-specref-excludeos">
         <title>The <command>excludeos</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>excludeos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>excludeos</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -792,9 +792,9 @@ ExcludeOS: linux irix
       <sect3 id="s3-rpm-specref-exclusiveos">
         <title>The <command>exclusiveos</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>exclusiveos</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>exclusiveos</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -826,9 +826,9 @@ ExclusiveOS: linux
       <sect3 id="s3-rpm-specref-prefix">
         <title>The <command>prefix</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>prefix</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>prefix</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -858,9 +858,9 @@ Prefix: /opt
       <sect3 id="s3-rpm-specref-buildroot">
         <title>The <command>buildroot</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>buildroot</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>buildroot</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -892,9 +892,9 @@ BuildRoot: /tmp/cdplayer
       <sect3 id="s3-rpm-specref-source">
         <title>The <command>source</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>source</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>source</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -932,9 +932,9 @@ Source1: foo.tgz
       <sect3 id="s3-rpm-specref-nosource">
         <title>The <command>nosource</command> Tag</title>
         <indexterm>
-          <primary>spec file!tags in!<command>nosource</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>tags in</secondary>
+          <tertiary><command>nosource</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1111,9 +1111,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-prep">
         <title>The <command>%prep</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%prep</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%prep</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1143,9 +1143,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-build">
         <title>The <command>%build</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%build</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%build</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1175,9 +1175,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-install">
         <title>The <command>%install</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%install</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%install</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1207,9 +1207,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-clean">
         <title>The <command>%clean</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%clean</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%clean</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1288,9 +1288,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-pre">
         <title>The <command>%pre</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%pre</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%pre</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1318,9 +1318,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-post">
         <title>The <command>%post</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%post</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%post</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1348,9 +1348,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-preun">
         <title>The <command>%preun</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%preun</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%preun</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1378,9 +1378,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-postun">
         <title>The <command>%postun</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%postun</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%postun</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1416,9 +1416,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-verifyscript">
         <title>The <command>%verifyscript</command> Script</title>
         <indexterm>
-          <primary>spec file!scripts in!<command>%verifyscript</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>scripts in</secondary>
+          <tertiary><command>%verifyscript</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1447,9 +1447,9 @@ NoPatch: 2 3
     <sect2 id="s2-rpm-specref-setup">
       <title>The <command>%setup</command> Macro</title>
       <indexterm>
-        <primary>spec file!macros in!<command>%setup</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>macros in</secondary>
+        <tertiary><command>%setup</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -1481,14 +1481,14 @@ NoPatch: 2 3
           Option
         </title>
         <indexterm>
-          <primary>spec file!macros in!<command>%setup</command>, options to</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>macros in</secondary>
+          <tertiary><command>%setup</command>, options to</tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%setup</command> macro!options to</primary>
-          <secondary></secondary>
+          <primary><command>%setup</command> macro</primary>
+          <secondary>options to</secondary>
         </indexterm>
 
         <para>
@@ -1639,9 +1639,9 @@ NoPatch: 2 3
     <sect2 id="s2-rpm-specref-patch-macro">
       <title>The <command>%patch</command> Macro</title>
       <indexterm>
-        <primary>spec file!macros in!<command>%patch</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>macros in</secondary>
+        <tertiary><command>%patch</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -1687,14 +1687,14 @@ NoPatch: 2 3
           The <command>-P <replaceable>&lt;n&gt;</replaceable></command> Option
         </title>
         <indexterm>
-          <primary>spec file!macros in!<command>%patch</command>, options to</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>macros in</secondary>
+          <tertiary><command>%patch</command>, options to</tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>%patch</command> macro!options to</primary>
-          <secondary></secondary>
+          <primary><command>%patch</command> macro</primary>
+          <secondary>options to</secondary>
         </indexterm>
 
         <para>
@@ -1791,9 +1791,8 @@ NoPatch: 2 3
   <sect1 id="s1-rpm-specref-files-list">
     <title>The <command>%files</command> List</title>
     <indexterm>
-      <primary>spec file!<command>%files</command> list in</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>spec file</primary>
+      <secondary><command>%files</command> list in</secondary>
     </indexterm>
 
     <para>
@@ -1871,9 +1870,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-doc">
         <title>The <command>%doc</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%doc</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%doc</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1901,9 +1900,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-config">
         <title>The <command>%config</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%config</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%config</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1932,9 +1931,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-attr">
         <title>The <command>%attr</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%attr</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%attr</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -1979,9 +1978,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-verify">
         <title>The <command>%verify</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%verify</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%verify</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -2074,9 +2073,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-docdir">
         <title>The <command>%docdir</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%docdir</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%docdir</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -2098,9 +2097,9 @@ NoPatch: 2 3
       <sect3 id="s3-rpm-specref-dir">
         <title>The <command>%dir</command> Directive</title>
         <indexterm>
-          <primary>spec file!directives in!<command>%dir</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>spec file</primary>
+          <secondary>directives in</secondary>
+          <tertiary><command>%dir</command></tertiary>
         </indexterm>
 
         <indexterm>
@@ -2175,14 +2174,14 @@ Name: foo
     <sect2 id="s2-rpm-specref-package-n-option">
       <title>The <command>%package -n</command> Option</title>
       <indexterm>
-        <primary>spec file!directives in!<command>%package</command>, options to</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>directives in</secondary>
+        <tertiary><command>%package</command>, options to</tertiary>
       </indexterm>
 
       <indexterm>
-        <primary><command>%package</command> directive!<command>-n</command> option</primary>
-        <secondary></secondary>
+        <primary><command>%package</command> directive</primary>
+        <secondary><command>-n</command> option</secondary>
       </indexterm>
 
       <para>
@@ -2228,9 +2227,9 @@ Name: foo
     <sect2 id="s2-rpm-specref-ifarch">
       <title>The <command>%ifarch</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%ifarch</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%ifarch</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -2260,9 +2259,9 @@ Name: foo
     <sect2 id="s2-rpm-specref-ifnarch">
       <title>The <command>%ifnarch</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%ifnarch</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%ifnarch</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -2292,9 +2291,9 @@ Name: foo
     <sect2 id="s2-rpm-specref-ifos">
       <title>The <command>%ifos</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%ifos</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%ifos</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -2324,9 +2323,9 @@ Name: foo
     <sect2 id="s2-rpm-specref-ifnos">
       <title>The <command>%ifnos</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%ifnos</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%ifnos</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -2356,9 +2355,9 @@ Name: foo
     <sect2 id="s2-rpm-specref-else">
       <title>The <command>%else</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%else</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%else</command></tertiary>
       </indexterm>
 
       <indexterm>
@@ -2392,9 +2391,9 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
     <sect2 id="s2-rpm-specref-endif">
       <title>The <command>%endif</command> Conditional</title>
       <indexterm>
-        <primary>spec file!conditionals in!<command>%endif</command></primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
+        <tertiary><command>%endif</command></tertiary>
       </indexterm>
 
       <indexterm>

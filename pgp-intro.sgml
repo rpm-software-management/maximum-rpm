@@ -3,8 +3,8 @@
   <!-- label: pgp-intro -->
 
   <indexterm>
-    <primary>PGP!introduction to</primary>
-    <secondary></secondary>
+    <primary>PGP</primary>
+    <secondary>introduction to</secondary>
   </indexterm>
 
   <para>
@@ -16,8 +16,8 @@
   <sect1 id="s1-pgp-intro-pgp-overview">
     <title>PGP - Privacy for Regular People</title>
     <indexterm>
-      <primary>PGP!overview of</primary>
-      <secondary></secondary>
+      <primary>PGP</primary>
+      <secondary>overview of</secondary>
     </indexterm>
 
     <para>
@@ -147,8 +147,8 @@ HZR2wSWSBteKezB5uK47A6uhwtvPokV0Owk9xPmBV+LPXkW4
     <sect2 id="s2-pgp-intro-rpm-packages-encrypted">
       <title>Are RPM Packages Encrypted?</title>
       <indexterm>
-        <primary>PGP!RPM's use of</primary>
-        <secondary></secondary>
+        <primary>PGP</primary>
+        <secondary>RPM's use of</secondary>
       </indexterm>
 
       <para>
@@ -218,8 +218,8 @@ rML3TxQSwdA=
     <sect2 id="s2-pgp-intro-so-much-so-little">
       <title>So Much to Cover, So Little Time</title>
       <indexterm>
-        <primary>PGP!getting more information on</primary>
-        <secondary></secondary>
+        <primary>PGP</primary>
+        <secondary>getting more information on</secondary>
       </indexterm>
 
       <para>
@@ -240,8 +240,8 @@ rML3TxQSwdA=
   <sect1 id="s1-pgp-intro-installing-pgp">
     <title>Installing PGP for RPM's Use</title>
     <indexterm>
-      <primary>PGP!setting up for RPM's use</primary>
-      <secondary></secondary>
+      <primary>PGP</primary>
+      <secondary>setting up for RPM's use</secondary>
     </indexterm>
 
     <para>
@@ -255,8 +255,8 @@ rML3TxQSwdA=
     <sect2 id="s2-pgp-intro-obtaining-pgp">
       <title>Obtaining PGP</title>
       <indexterm>
-        <primary>PGP!obtaining</primary>
-        <secondary></secondary>
+        <primary>PGP</primary>
+        <secondary>obtaining</secondary>
       </indexterm>
 
       <para>
@@ -276,8 +276,8 @@ rML3TxQSwdA=
       <sect3 id="s3-pgp-intro-know-laws">
         <title>Know Your Laws!</title>
         <indexterm>
-          <primary>PGP!legal, patent issues</primary>
-          <secondary></secondary>
+          <primary>PGP</primary>
+          <secondary>legal, patent issues</secondary>
         </indexterm>
 
         <para>
@@ -305,26 +305,23 @@ rML3TxQSwdA=
                 to use PGP for business purposes, you should look into getting
                 a commercial copy.  PGP is marketed in the United States by:
               </para>
+
               <para>
                 Pretty Good Privacy, Inc.
-              </para>
-              <para>
-                2121 S. El Camino Real
-              </para>
-              <para>
-                Suite 902
-              </para>
-              <para>
-                San Mateo, CA 94403
-              </para>
-              <para>
-                Main: (415) 572-0430
-              </para>
-              <para>
-                Fax: (415) 572-1932
-              </para>
-              <para>
-                http://www.pgp.com/
+                <address>
+                  <street>
+                    2121 S. El Camino Real
+                  </street>
+                  <otheraddr>
+                    Suite 902
+                  </otheraddr>
+                  <city>San Mateo</city>, <state>CA</state> <postcode>94403</postcode>
+                  <phone>(415) 572-0430</phone>
+                  <fax>(415) 572-1932</fax>
+                  <otheraddr>
+                    http://www.pgp.com/
+                  </otheraddr>
+                </address>
               </para>
             </listitem>
 
@@ -370,9 +367,9 @@ rML3TxQSwdA=
       <sect3 id="s3-pgp-intro-rsaref-based-pgp">
         <title>Getting RSAREF-based PGP</title>
         <indexterm>
-          <primary>PGP!obtaining!RSAREF-based version</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>PGP</primary>
+          <secondary>obtaining</secondary>
+          <tertiary>RSAREF-based version</tertiary>
         </indexterm>
 
         <para>
@@ -441,9 +438,9 @@ net-dist.mit.edu
       <sect3 id="s3-pgp-intro-pgp-outside-us">
         <title>Outside the United States and Canada</title>
         <indexterm>
-          <primary>PGP!obtaining!"international" version</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>PGP</primary>
+          <secondary>obtaining</secondary>
+          <tertiary>"international" version</tertiary>
         </indexterm>
 
         <para>
@@ -463,8 +460,8 @@ net-dist.mit.edu
     <sect2 id="s2-pgp-intro-building-pgp">
       <title>Building PGP</title>
       <indexterm>
-        <primary>PGP!building</primary>
-        <secondary></secondary>
+        <primary>PGP</primary>
+        <secondary>building</secondary>
       </indexterm>
 
       <para>
