@@ -1,0 +1,4529 @@
+<chapter id="ch-rpm-inside">
+<title>Inside the Spec File</title>
+
+<indexterm>
+<primary>spec file!contents of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In this chapter, we're going to cover the spec file in detail.  There are a
+number of different types of entries that comprise a spec file, and every
+one will be documented here.  The different types of entries are:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Comments --- Human-readable notes ignored by RPM.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Tags --- Define data.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Scripts --- Contain commands to be executed at specific times.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Macros --- A method of executing multiple commands easily.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The <tt?>%files</tt?> list --- A list of files to be included in the
+package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Directives --- Used in the <tt?>%files</tt?> list to direct RPM to
+handle certain files in a specific way.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Conditionals --- Permit operating system- or architecture-specific
+preprocessing of the spec file.
+
+</para>
+</listitem>
+
+</itemizedlist>
+Let's start by looking at comments.
+
+<sect1 id="s1-rpm-inside-">
+<title>Comments: Notes Ignored by RPM</title>
+<!-- label: inside-comments -->
+<indexterm>
+<primary>spec file!comments in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Comments are a way to make RPM ignore a line in the spec file.  The
+contents of a comment line are entirely up to the person writing the spec
+file.
+
+To create a comment, enter an octothorp (<tt?>#</tt?>) at the start of the
+line.  Any text following the comment character will be ignored by RPM.
+Here's an example comment:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# This is the spec file for playmidi 2.3...
+</screen>
+</figure>
+Comments can be placed in any section of the spec file.
+
+<indexterm>
+<primary>spec file!comments in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>Tags: Data Definitions</title>
+<indexterm>
+<primary>spec file!tags in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Looking at a spec file, the first thing you'll see are a number of lines,
+all following the same basic format:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;something&gt;:&lt;something-else&gt;
+</screen>
+</figure>
+The <tt?>&lt;something&gt;</tt?> is known as a "tag", because it is used by RPM
+to name or <emphasis>tag</emphasis> some data.  The tag is separated from its associated
+data by a colon.  The data is represented by the <tt?>&lt;something-else&gt;</tt?>
+above.  Tags are grouped together at the top of the spec file, in a section
+known as the preamble.  Here's an example of a tag and its data:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Vendor: White Socks Software, Inc.
+</screen>
+</figure>
+In this example, the tag is "<tt?>Vendor</tt?>".  Tags are not
+case-sensitive --- they may be all uppercase, all lowercase, or anything
+in-between.  The <tt?>Vendor</tt?> tag is used to define the name of the
+organization producing the package.  The data in this example is
+"<tt?>White Socks Software, Inc.</tt?>".  Therefore, RPM will store
+<tt?>White Socks Software, Inc.</tt?> as the vendor of the package.
+
+Note, also, that spacing between the tag, the colon, and the data is
+unimportant.  Given this, and the case-insensitivity of the tag, each of
+the following lines are equivalent to the one above:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+VeNdOr : White Socks Software, Inc.
+vendor:White Socks Software, Inc.
+VENDOR    :    White Socks Software, Inc.
+</screen>
+</figure>
+The bottom line is that you can make tag lines as neat or as ugly as you
+like -- RPM won't mind either way.  Note, however, the tag's data may need
+to be formatted in a particular fashion.  If there are any such
+restrictions, we'll mention them.  Below, we've grouped tags of similar
+functions together for easier reference, starting with the tags that are
+used to create the package name.
+
+<sect2 id="s2-rpm-inside-">
+<title>Package Naming Tags</title>
+The following tags are used by RPM to produce the package's final name.
+Since the name is always in the format:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;name&gt;-&lt;version&gt;-&lt;release&gt;
+</screen>
+</figure>
+it's only natural that the three tags are known as <tt?>name</tt?>,
+<tt?>version</tt?>, and <tt?>release</tt?>.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>name</tt?> Tag</title>
+<!-- label: inside-name -->
+<indexterm>
+<primary>tags!<tt?>name</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>name@<tt?>name</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>name</tt?> tag is used to define the name of the software being
+packaged.  In most (if not all) cases, the name used for a package should
+be identical in spelling and case to the software being packaged.  The name
+cannot contain any whitespace: If it does, RPM will only use the first part
+of the name (up to the first space).  Therefore, if the name of the
+software being packaged is <tt?>cdplayer</tt?>, the <tt?>name</tt?> tag should
+be something like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Name: cdplayer
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>version</tt?> Tag</title>
+<!-- label: inside-version -->
+<indexterm>
+<primary>tags!<tt?>version</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>version@<tt?>version</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>version</tt?> tag defines the version of the software being
+packaged.  The version specified should be as close as possible to the
+format of the original software's version.  In most cases, there should be
+no problem specifying the version just as the software's original developer
+did.  However, there is a restriction.  There can be no dashes in the
+version.  If you forget, RPM will remind you:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+* Package: cdplayer
+Illegal '-' char in version: 1.0-a
+#
+</screen>
+</figure>
+Spaces in the version will also cause problems, in that anything after the
+first space will be ignored by RPM.  Bottom line: Stick with alphanumeric
+characters and periods, and you'll never have to worry about it.  Here's a
+sample <tt?>version</tt?> tag:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Version: 1.2
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>release</tt?> Tag</title>
+<!-- label: inside-release -->
+<indexterm>
+<primary>tags!<tt?>release</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>release@<tt?>release</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>release</tt?> tag can be thought of as the <emphasis>package's</emphasis>
+version.  The release is traditionally an integer ---  for example, when a
+specific piece of software at a particular version is first packaged, the
+release should be "<tt?>1</tt?>".  If it is necessary to repackage that
+software at the same version, the release should be incremented.  When a
+new version of the software becomes available, the release should drop back
+to "<tt?>1</tt?>" when it is first packaged.
+
+Note that we used the word "traditionally", above.  The only hard and
+fast restriction to the release format is that there can be no dashes in
+it.  Be aware that if you buck tradition, your users may not understand
+what your release means.
+
+It is up to the package builder to determine which build represents a new
+release and to update the release manually.  Here is what a typical
+<tt?>release</tt?> tag might look like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Release: 5
+</screen>
+</figure>
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Descriptive Tags</title>
+These tags provide information primarily for people who want to know a bit
+more about the package, and who produced it.  They are part of the package
+file, and most of them can be seen by issuing an <tt?>rpm -qi</tt?> command.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%description</tt?> Tag</title>
+<!-- label: inside-description -->
+<indexterm>
+<primary>tags!<tt?>%description</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>description@<tt?>%description</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%description</tt?> tag is used to provide an in-depth description
+of the packaged software.  The description should be several sentences
+describing, to an uninformed user, what the software does.
+
+The <tt?>%description</tt?> tag is a bit different than the other tags in
+the preamble.  For one, it starts with a percent sign.  The other
+difference is that the data specified by the <tt?>%description</tt?> tag can
+span more than one line.  In addition, a primitive formatting capability
+exists.  If a line starts with a space, that line will be displayed
+verbatim by RPM.  Lines that do not start with a space are assumed to be
+part of a paragraph and will be formatted by RPM.  It's even possible to
+mix and match formatted and unformatted lines.  Here are some examples:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%description
+It slices!  It dices!  It's a CD player app that can't be beat.  By using
+the resonant frequency of the CD itself, it is able to simulate 20X
+oversampling.  This leads to sound quality that cannot be equaled with
+more mundane software...
+</screen>
+</figure>
+The example above contains no explicit formatting.  RPM will format the
+text as a single paragraph, breaking lines as needed.
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%description
+ It slices!
+ It dices!
+ It's a CD player app that can't be beat.
+By using the resonant frequency of the CD itself, it is able to simulate
+20X oversampling.  This leads to sound quality that cannot be equaled with
+more mundane software...
+</screen>
+</figure>
+In this example, the first three lines will be displayed by RPM, verbatim.
+The remainder of the text will be formatted by RPM.  The text will be
+formatted as one paragraph.
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%description
+ It slices!
+ It dices!
+ It's a CD player app that can't be beat.
+
+By using the resonant frequency of the CD itself, it is able to simulate
+20X oversampling.  This leads to sound quality that cannot be equaled with
+more mundane software...
+</screen>
+</figure>
+Above, we have a similar situation to the previous example, in that part of
+the text is formatted and part is not.  However, the blank line separates
+the text into two paragraphs.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>summary</tt?> Tag</title>
+<!-- label: inside-summary -->
+<indexterm>
+<primary>tags!<tt?>summary</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>summary@<tt?>summary</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>summary</tt?> tag is used to define a one-line description of the
+packaged software.  Unlike <tt?>%description</tt?>, <tt?>summary</tt?> is
+restricted to one line.  RPM uses it when a succinct description of the
+package is needed.  Here is an example of a <tt?>summary</tt?> line:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Summary: A CD player app that rocks!
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>copyright</tt?> Tag</title>
+<!-- label: inside-copyright -->
+<indexterm>
+<primary>tags!<tt?>copyright</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>copyright@<tt?>copyright</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>copyright</tt?> tag is used to define the copyright terms applicable
+to the software being packaged.  In many cases, this might be nothing more
+than "<tt?>GPL</tt?>", for software distributed under the terms of the GNU
+General Public License, or something similar.  For example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Copyright: GPL
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>distribution</tt?> Tag</title>
+<!-- label: inside-distribution -->
+<indexterm>
+<primary>tags!<tt?>distribution</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>distribution@<tt?>distribution</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>distribution</tt?> tag is used to define a group of packages, of
+which this package is a part.    Since Red Hat <!-- *** RED HAT *** -->Software is in the business
+of producing a group of packages known as a Linux <emphasis>distribution</emphasis>, the
+name stuck.  For example, if a suite of applications known as "Doors
+'95" were produced, each package that is part of the suite would define
+its <tt?>distribution</tt?> line like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Distribution: Doors '95
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>icon</tt?> Tag</title>
+<!-- label: inside-icon -->
+<indexterm>
+<primary>tags!<tt?>icon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>icon@<tt?>icon</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>icon</tt?> tag is used to name a file containing an icon
+representing the packaged software.  The file may be in either GIF or XPM
+format, although XPM is preferred.  In either case, the background of the
+icon should be transparent.  The file should be placed in RPM's
+<tt?>SOURCES</tt?> directory prior to performing a build, so no path is
+needed.
+
+The icon is normally used by graphically-oriented front ends to RPM.  RPM
+itself doesn't use the icon, but it's stored in the package file and
+retained in RPM's database after the package is installed.  An example
+<tt?>icon</tt?> tag might look like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Icon: foo.xpm
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>vendor</tt?> Tag</title>
+<!-- label: inside-vendor -->
+<indexterm>
+<primary>tags!<tt?>vendor</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>vendor@<tt?>vendor</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>vendor</tt?> tag is used to define the name of the entity that is
+responsible for packaging the software.  Normally, this would be the name
+of an organization.  Here's an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Vendor: White Socks Software, Inc.
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>url</tt?> Tag</title>
+<!-- label: inside-url -->
+<indexterm>
+<primary>tags!<tt?>url</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>url@<tt?>url</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>URL</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>url</tt?> tag is used to define a Uniform Resource Locator that can
+be used to obtain additional information about the packaged software.  At
+present, RPM doesn't actively make use of this tag.  The data is stored in
+the package however, and will be written into RPM's database when the
+package is installed.  It's only a matter of time before some web-based RPM
+adjunct makes use of this information, so make sure you include URLs!
+Something like this is all you'll need:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+URL: http://www.gnomovision.com/cdplayer.html
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>group</tt?> Tag</title>
+<!-- label: inside-group -->
+<indexterm>
+<primary>tags!<tt?>group</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>group@<tt?>group</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>group</tt?> tag is used to group packages together by the types of
+functionality they provide.  The group specification looks like a path and
+is similar in function, in that it specifies more general groupings before
+more detailed ones.  For example, a package containing a text editor might
+have the following group:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Group: Applications/Editors
+</screen>
+</figure>
+In this example, the package is part of the <tt?>Editors</tt?> group, which
+is itself a part of the <tt?>Applications</tt?> group.  Likewise, a
+spreadsheet package might have this group:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Group: Applications/Spreadsheets
+</screen>
+</figure>
+This <tt?>group</tt?> tag indicates that under the <tt?>Applications</tt?>
+group, we would find <tt?>Editors</tt?> and <tt?>Spreadsheets</tt?>, and
+probably some other subgroups as well.
+
+How is this information used?  It's primarily meant to permit graphical
+front-ends to RPM, to display packages in a hierarchical fashion.  Of
+course, in order for groups to be as effective as possible, it's necessary
+for all package builders to be consistent in their groupings.  In the case
+of packages for Linux, Red Hat <!-- *** RED HAT *** -->Software has the definitive list.
+Therefore, Linux package builders should give serious consideration to
+using Red Hat <!-- *** RED HAT *** -->Software's groups.  The current group hierarchy is installed
+with every copy of RPM, and is available in the RPM sources as well.  Check
+out the file <tt?>groups</tt?> in RPM's documentation directory (normally
+<tt?>/usr/doc/rpm-<emphasis>&lt;version&gt;</tt?></emphasis>), or in the top-level source
+directory.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>packager</tt?> Tag</title>
+<!-- label: inside-packager -->
+<indexterm>
+<primary>tags!<tt?>packager</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>packager@<tt?>packager</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>packager</tt?> tag is used to hold the name and contact information
+for the person or persons who built the package.  Normally, this would be
+the person that actually built the package, or in a larger organization, a
+public relations contact.  In either case, contact information such as an
+e-mail address or phone number should be included, so customers can send
+either money or hate mail, depending on their satisfaction with the
+packaged software.  Here's an example of a <tt?>packager</tt?> tag:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
+</screen>
+</figure>
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Dependency Tags</title>
+One RPM feature that's been recently implemented is a means of ensuring
+that if a package is installed, the system environment has everything the
+package requires in order to operate properly.  Likewise, when an installed
+package is erased RPM can make sure no other package relies on the package
+being erased.  This dependency capability can be very helpful when endusers
+install and erase packages on their own.  It makes it more difficult for
+them to paint themselves into a corner, package-wise.
+
+However, in order for RPM to be able to take more than basic dependency
+information into account, the package builder must add the appropriate
+dependency information to the package.  This is done by using the following
+tags.  Note, however, that adding dependency information to a package
+requires some forethought.  For additional information on RPM's dependency
+processing, please review chapter <xref linkend="rpm-depend">.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>provides</tt?> Tag</title>
+<!-- label: inside-provides -->
+<indexterm>
+<primary>tags!<tt?>provides</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>provides@<tt?>provides</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>provides</tt?> tag is used to specify a "virtual package" that the
+packaged software makes available when it is installed.  Normally, this tag
+would be used when different packages provide equivalent services.  For
+example, any package that allows a user to read mail might provide the
+<tt?>mail-reader</tt?> virtual package.  Another package that depends on a
+mail reader of some sort, could require the <tt?>mail-reader</tt?> virtual
+package.  It would then install without dependency problems, if any one of
+several mail programs were installed.  Here's what a <tt?>provides</tt?> tag
+might look like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Provides: mail-reader
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>requires</tt?> Tag</title>
+<!-- label: inside-requires -->
+<indexterm>
+<primary>tags!<tt?>requires</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>requires@<tt?>requires</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>requires</tt?> tag is used to alert RPM to the fact that the package
+needs to have certain capabilities available in order to operate properly.
+These capabilities refer to the name of another package, or to a virtual
+package provided by one or more packages that use the <tt?>provides</tt?>
+tag.  When the <tt?>requires</tt?> tag references a package name, version
+comparisons may also be included by following the package name with
+<tt?>&lt;</tt?>, <tt?>&gt;</tt?>, <tt?>=</tt?>, <tt?>&gt;=</tt?>, or <tt?>&lt;=</tt?>, and a
+version specification.  To get even more specific, a package's release may
+be included as well.  Here's a <tt?>requires</tt?> tag in action, with a
+specific version requirement:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Requires: playmidi = 2.3
+</screen>
+</figure>
+If the <tt?>Requires</tt?> tag needs to perform a comparison against a serial
+number defined with the <tt?>serial</tt?> tag (described below), then the
+proper format would be:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Requires: playmidi =S 4
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>conflicts</tt?> Tag</title>
+<!-- label: inside-conflicts -->
+<indexterm>
+<primary>tags!<tt?>conflicts</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>conflicts@<tt?>conflicts</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>conflicts</tt?> tag is the logical complement to the
+<tt?>requires</tt?> tag.  The <tt?>requires</tt?> tag is used to specify what
+packages <emphasis>must</emphasis> be present in order for the current package to operate
+properly.  The <tt?>conflicts</tt?> tag is used to specify what packages
+<emphasis>cannot</emphasis> be installed if the current package is to operate properly.
+
+The <tt?>conflicts</tt?> tag has the same format as the <tt?>requires</tt?>
+tag --- namely, the tag is followed by a real or virtual package name.
+Like <tt?>requires</tt?>, the <tt?>conflicts</tt?> tag also accepts version and
+release specifications:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Conflicts: playmidi = 2.3-1
+</screen>
+</figure>
+If the <tt?>conflicts</tt?> tag needs to perform a comparision against a
+serial number defined with the <tt?>serial</tt?> tag (described below), then
+the proper format would be:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Conflicts: playmidi =S 4
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>serial</tt?> Tag</title>
+<!-- label: inside-serial -->
+<indexterm>
+<primary>tags!<tt?>serial</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>serial@<tt?>serial</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>serial</tt?> tag is another part of RPM's dependency and upgrade
+processing.  The need for it is somewhat obscure, but goes something like
+this:
+
+<orderedlist>
+<listitem>
+<para>
+The package being built (call it package <emphasis>A</emphasis>) uses a version
+numbering scheme sufficiently obscure so that RPM cannot determine if one
+version is older or newer than another version.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Another package (package <emphasis>B</emphasis>) requires that package <emphasis>A</emphasis> be
+installed.  More specifically, it requires RPM to compare package
+<emphasis>A</emphasis>'s version against a specified minimum (or maximum) version.
+
+</para>
+</listitem>
+
+</orderedlist>
+Since RPM is unable to compare package <emphasis>A</emphasis>'s version against the
+version specified by package <emphasis>B</emphasis>, there is no way to determine if
+package <emphasis>B</emphasis>'s dependency requirements can be met.  What to do?
+
+The <tt?>serial</tt?> tag provides a way to get around this tricky
+problem.  By specifying a simple integer serial number for each version,
+you are, in essence, directing how RPM interprets the relative age of the
+package.  The key point to keep in mind is that in order for this to work,
+a unique serial number must be defined for each version of the software
+being packaged.  In addition, the serial number must increment along with
+the version.  Finally, the package that requires the serialized software
+needs to specify <emphasis>its</emphasis> version requirements in terms of the serial
+number.
+
+Does it sound like a lot of trouble?  You're right!  If you find yourself
+in the position of needing to use this tag, take a deep breath and
+seriously consider changing the way you assign version numbers.  If you're
+packaging someone else's software, perhaps you can convince them to make
+the change. Chances are, if RPM can't figure out the version number, most
+people can't, either!  An example <tt?>serial</tt?> tag would look something
+like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Serial: 4
+</screen>
+</figure>
+Note that RPM considers a package with a serial number as newer than a
+package without a serial number.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>autoreqprov</tt?> Tag</title>
+<!-- label: inside-autoreqprov -->
+<indexterm>
+<primary>tags!<tt?>autoreqprov</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>autoreqprov@<tt?>autoreqprov</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>autoreqprov</tt?> tag is used to control the automatic dependency
+processing performed when the package is being built.  Normally, as each
+package is built, the following steps are performed:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+All executable programs being packaged are analyzed to determine
+their shared library requirements.  These requirements are automatically
+added to the package's requirements.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The soname of each shared library being packaged is automatically
+added to the package's list of "provides" information.
+
+</para>
+</listitem>
+
+</itemizedlist>
+By doing this, RPM reduces the need for package builders to manually add
+dependency information to their packages.  However, there are times when
+RPM's automatic dependency processing may not be desirable.  In those cases
+the <tt?>autoreqprov</tt?> tag can be used to disable automatic dependency
+processing.
+
+To disable automatic dependency processing, add the following line:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+AutoReqProv: no
+</screen>
+</figure>
+(The number zero may be used instead of <tt?>no</tt?>)  Although RPM defaults
+to performing automatic dependency processing, the effect of the
+<tt?>autoreqprov</tt?> tag can be reversed by changing <tt?>no</tt?> to
+<tt?>yes</tt?>.  (The number one may be used instead of <tt?>yes</tt?>)
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Architecture- and Operating System-Specific Tags</title>
+As RPM gains in popularity, more people are putting it to work on different
+types of computer systems.  While this would not normally be a problem,
+things start to get a little tricky when one of the following two
+situations becomes commonplace:
+
+<orderedlist>
+<listitem>
+<para>
+A particular operating system is ported to several different hardware
+platforms, or architectures.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+A particular architecture runs several different operating systems.
+
+</para>
+</listitem>
+
+</orderedlist>
+The real bind hits when RPM is used to package software for several of
+these different system environments.  Without methods of controlling the
+build process based on architecture and operating system, package builders
+that develop software for more than one architecture or operating system
+will have a hard time indeed.  The only alternative would be to maintain
+parallel RPM build environments and accept all the coordination headaches
+that would entail.
+
+Fortunately, RPM makes it all easier than that.  With the following tags,
+it's possible to support package building under multiple environments, all
+from a single set of sources, patches, and a single spec file.  For a more
+complete discussion of multi-architecture package building, please see
+chapter <xref linkend="rpm-multi">.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>excludearch</tt?> Tag</title>
+<!-- label: inside-excludearch -->
+<indexterm>
+<primary>tags!<tt?>excludearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludearch@<tt?>excludearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>excludearch</tt?> tag directs RPM to ensure that the package does
+<emphasis>not</emphasis> attempt to build on the excluded architecture(s).  The reasons
+for preventing a package from building on a certain architecture might
+include:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+The software has not yet been ported to the excluded architecture.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The software would serve no purpose on the excluded architecture.
+
+</para>
+</listitem>
+
+</itemizedlist>
+An example of the first case might be that the software was designed based
+on the assumption that an integer is a 32-bit quantity.  Obviously, this
+assumption is not valid on a 64-bit processor.
+
+In the second case, software that depended on or manipulated low-level
+features of a given architecture, should be excluded from building on a
+different architecture.  Assembly language programs would fall into this
+category.
+
+One or more architectures may be specified after the <tt?>excludearch</tt?>
+tag, separated by either spaces or commas.  Here is an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExcludeArch: sparc alpha
+</screen>
+</figure>
+In this example, RPM would not attempt to build the package on either the
+Sun SPARC or Digital Alpha/AXP architectures.  The package would build on
+any other architectures, however.  If a build is attempted on an excluded
+architecture, the following message will be displayed, and the build will
+fail:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+Arch mismatch!
+cdplayer-1.0.spec doesn't build on this architecture
+#
+</screen>
+</figure>
+Note that if your goal is to ensure that a package will only build on
+<emphasis>one</emphasis> architecture, then you should use the <tt?>exclusivearch</tt?>
+tag.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>exclusivearch</tt?> Tag</title>
+<!-- label: inside-exclusivearch -->
+<indexterm>
+<primary>tags!<tt?>exclusivearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusivearch@<tt?>exclusivearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclusivearch</tt?> tag is used to direct RPM to ensure the package
+is <emphasis>only</emphasis> built on the specified architecture(s).  The reasons for
+this are similar to the those mentioned in the section on the
+<tt?>excludearch</tt?> tag above.  However, the <tt?>exclusivearch</tt?> tag is
+useful when the package builder needs to ensure that <emphasis>only</emphasis> the
+specified architectures will build the package.  This tag ensures that no
+future architectures will mistakenly attempt to build the package.  This
+would not be the case if the <tt?>excludearch</tt?> tag were used to specify
+every architecture known at the time the package is built.
+
+The syntax of the <tt?>exclusivearch</tt?> tag is identical to that of
+<tt?>excludearch</tt?>:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExclusiveArch: sparc alpha
+</screen>
+</figure>
+In this example, the package will only build on a Sun SPARC or Digital
+Alpha/AXP system.
+
+Note that if your goal is to ensure that a package will <emphasis>not</emphasis> build on
+specific architectures, then you should use the <tt?>excludearch</tt?> tag.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>excludeos</tt?> Tag</title>
+<!-- label: inside-excludeos -->
+<indexterm>
+<primary>tags!<tt?>excludeos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludeos@<tt?>excludeos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>excludeos</tt?> tag is used to direct RPM to ensure that the package
+does <emphasis>not</emphasis> attempt to build on the excluded operating system(s).  This
+is usually necessary when a package is to be built on more than one
+operating system, but it is necessary to keep a particular operating system
+from attempting a build.
+
+Note that if your goal is to ensure that a package will only build on
+<emphasis>one</emphasis> operating system, then you should use the <tt?>exclusiveos</tt?>
+tag.  Here's a sample <tt?>excludeos</tt?> tag:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExcludeOS: linux irix
+</screen>
+</figure>
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>exclusiveos</tt?> Tag</title>
+<!-- label: inside-exclusiveos -->
+<indexterm>
+<primary>tags!<tt?>exclusiveos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusiveos@<tt?>exclusiveos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclusiveos</tt?> tag has the same syntax as <tt?>excludeos</tt?>, but
+it has the opposite logic.  The <tt?>exclusiveos</tt?> tag is used to denote
+which operating system(s) should <emphasis>only</emphasis> be be permitted to build the
+package.  Here's <tt?>exclusiveos</tt?> in action:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExclusiveOS: linux
+</screen>
+</figure>
+Note that if your goal is to ensure that a package will <emphasis>not</emphasis> build on
+a specific operating system, then you should use the <tt?>excludeos</tt?>
+tag.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Directory-related Tags</title>
+A number of tags are used to specify directories and paths that are used in
+various phases of RPM's build and install processes.  There's not much more
+to say collectively about these tags, so let's dive right in and look them
+over.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>prefix</tt?> Tag</title>
+<!-- label: inside-prefix -->
+<indexterm>
+<primary>tags!<tt?>prefix</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>prefix@<tt?>prefix</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>prefix</tt?> tag is used when a relocatable package is to be built.
+A relocatable package can be installed normally or can be installed in a
+user-specified directory, by using RPM's <tt?>--prefix</tt?> install-time
+option.  The data specified after the <tt?>prefix</tt?> tag should be the
+part of the package's path that may be changed during installation.  For
+example, if the following <tt?>prefix</tt?> line was included in a spec
+file: 
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Prefix: /opt
+</screen>
+</figure>
+and the following file was specified in the spec file's <tt?>%files</tt?>
+list:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+/opt/blather/foonly
+</screen>
+</figure>
+then the file <tt?>foonly</tt?> would be installed in
+<tt?>/opt/blather</tt?> if the package was installed normally.  It would be
+installed in <tt?>/usr/local/blather</tt?> if the package was installed with
+the <tt?>--prefix /usr/local</tt?> option.
+
+For more information about creating relocatable packages, see chapter
+<xref linkend="rpm-reloc">.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>buildroot</tt?> Tag</title>
+<!-- label: inside-buildroot -->
+<indexterm>
+<primary>tags!<tt?>buildroot</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>buildroot@<tt?>buildroot</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>buildroot</tt?> tag is used to define an alternate build root.  The
+name is a bit misleading, as the build root is actually used when the
+software is <emphasis>installed</emphasis> during the build process.  In order for a
+build root to be defined and actually used, a number of issues must be
+taken into account.  These issues are covered in chapter
+<xref linkend="rpm-anywhere">.  This is what a <tt?>buildroot</tt?> tag would look like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+BuildRoot: /tmp/cdplayer
+</screen>
+</figure>
+The <tt?>buildroot</tt?> tag can be overridden at build-time by using the
+<tt?>--buildroot</tt?> command-line option.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Source and Patch Tags</title>
+In order to build and package software, RPM needs to know where to find the
+original sources.  But it's not quite that simple.  There might be more
+than one set of sources that need to be part of a particular build.  In
+some cases, it might be necessary to prevent some sources from being
+packaged.
+
+And then there is the matter of patches.  It's likely that changes will
+need to be made to the sources, so it's necessary to specify a patch file.
+But the same issues that apply to source specifications are also applicable
+to patches.  There might be more than one set of patches required.
+
+The tags that follow are crucial to RPM, so it pays to have a firm grasp of
+how they are used.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>source</tt?> Tag</title>
+<!-- label: inside-source -->
+<indexterm>
+<primary>tags!<tt?>source</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>source@<tt?>source</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>source</tt?> tag is central to nearly every spec file.  Although it
+has only one piece of data associated with it, it actually performs two
+functions:
+
+<orderedlist>
+<listitem>
+<para>
+It shows where the software's developer has made the original sources
+available.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+It gives RPM the name of the original source file.
+
+</para>
+</listitem>
+
+</orderedlist>
+While there is no hard and fast rule, for the first function, it's
+generally considered best to put this information in the form of a Uniform
+Resource Locator (URL).
+
+<indexterm>
+<primary>URL</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+  The URL should point directly to the source file
+itself.  This is due to the <tt?>source</tt?> tag's second function.
+
+As mentioned above, the <tt?>source</tt?> tag also needs to direct RPM to the
+source file on the build system.  How does it do this?  There's only one
+requirement, and it is ironclad:  The source filename must be at the end of
+the line as the final element in a path.  Here's an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Source: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
+</screen>
+</figure>
+Given this <tt?>source</tt?> line, RPM will search its <tt?>SOURCES</tt?>
+directory for <tt?>cdplayer-1.0.tgz</tt?>.  Everything prior to the filename
+is ignored by RPM.  It's there strictly for any interested humans.
+
+A spec file may contain more than one <tt?>source</tt?> tag.  This is
+necessary for those cases where the software being packaged is contained in
+more than one source file.  However, the <tt?>source</tt?> tags must be
+uniquely identified.  This is done by appending a number to the end of the
+tag itself.  In fact, RPM does this internally for the first
+<tt?>source</tt?> tag in a spec file, in essence turning it into
+<tt?>source0</tt?>.  Therefore, if a package contains two source files, they
+may either be specified as:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Source: blather-4.5.tar.gz
+Source1: bother-1.2.tar.gz
+</screen>
+</figure>
+or as:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Source0: blather-4.5.tar.gz
+Source1: bother-1.2.tar.gz
+</screen>
+</figure>
+Either approach may be used.  The choice is yours.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>nosource</tt?> Tag</title>
+<!-- label: rpm-nosource --><!-- label: inside-nosource -->
+<indexterm>
+<primary>tags!<tt?>nosource</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>nosource@<tt?>nosource</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>nosource</tt?> tag is used to direct RPM to omit one or more source
+files from the source package.  Why would someone want to go to the trouble
+of specifying a source file, only to exclude it?  The reasons for this can
+be varied, but let's look at one example: The software known as Pretty Good
+Privacy, or PGP.
+
+PGP contains encryption routines of such high quality that the United
+States government restricts their export.
+<footnote>
+<para>
+There is also an
+"international" version that may be used in non-US countries.  See
+Appendix <xref linkend="pgp-intro">.
+</para>
+</footnote>
+  While it would be nice to create a PGP
+package file, the resulting package could not legally be transferred
+between the U.S. and other countries, or vice-versa.
+
+However, what if all files other than the original source, were packaged
+using RPM?  Well, a binary package made without PGP would be of little use,
+but what about the source package?  It would contain the spec file, maybe
+some patches, and perhaps even an icon file.  Since the controversial PGP
+software was not a part of the source package, this sanitized source
+package could be downloaded legally in any country.  The person that
+downloaded a copy could then go about legally obtaining the PGP sources
+themselves, place them in RPM's <tt?>SOURCES</tt?> directory, and create a
+binary package.  They wouldn't even need to change the <tt?>nosource</tt?>
+tag.  One <tt?>rpm -ba</tt?> command later, and the user would have a
+perfectly usable PGP binary package file.
+
+Since there may be more than one <tt?>source</tt?> tag in a spec file, the
+format of the <tt?>nosource</tt?> tag is as follows:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+nosource: &lt;src-num&gt;, &lt;src-num&gt;&hellip;&lt;src-num&gt;
+</screen>
+</figure>
+The <tt?>&lt;src-num&gt;</tt?> represents the number following the <tt?>source</tt?>
+tag.  If there is more than one number in the list, they may be separated
+by either commas or spaces.  For example, consider a package containing the
+following <tt?>source</tt?> tags:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+source: blather-4.5.tar.gz
+Source1: bother-1.2.tar.gz
+source2: blather-lib-4.5.tar.gz
+source3: bother-lib-1.2.tar.gz
+</screen>
+</figure>
+If the source files for <tt?>blather</tt?> and <tt?>blather-lib</tt?> were not
+to be included in the package, the following <tt?>nosource</tt?> line could
+be added:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+NoSource: 0, 3
+</screen>
+</figure>
+What about that <tt?>0</tt?>?  Keep in mind that the first unnumbered
+<tt?>source</tt?> tag in a spec file is automatically numbered 0 by RPM.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>patch</tt?> Tag</title>
+<!-- label: inside-patch -->
+<indexterm>
+<primary>tags!<tt?>patch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>patch@<tt?>patch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>patch</tt?> tag is used to identify which patches are associated
+with the software being packaged.  The patch files are kept in RPM's
+<tt?>SOURCES</tt?> directory, so only the name of the patch file should be
+specified.  Here is an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Patch: cdp-0.33-fsstnd.patch
+</screen>
+</figure>
+There are no hard and fast requirements for naming the patch files, but
+traditionally the filename starts with the software name and version,
+separated by dashes.  The next part of the patch file name usually includes
+one or more words indicating the reason for the patch.  In our example
+above, the patch file contains changes necessary to bring the software into
+compliance with the Linux File System Standard, hence the <tt?>fsstnd</tt?>
+magic incantation.
+
+RPM processes <tt?>patch</tt?> tags the same way it does <tt?>source</tt?>
+tags.  Therefore, it's acceptable to use a Uniform Resource Locator (URL)
+
+<indexterm>
+<primary>URL</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+on a <tt?>patch</tt?> line, too.
+
+A spec file may contain more than one <tt?>patch</tt?> tag.  This is
+necessary for those cases where the software being packaged requires more
+than one patch.  However, the <tt?>patch</tt?> tags must be uniquely
+identified.  This is done by appending a number to the end of the tag
+itself.  In fact, RPM does this internally for the first <tt?>patch</tt?> tag
+in a spec file, in essence turning it into <tt?>patch0</tt?>.  Therefore, if
+a package contains three patches, the following two methods of specifying
+them are equivalent:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Patch: blather-4.5-bugfix.patch
+Patch1: blather-4.5-config.patch
+Patch2: blather-4.5-somethingelse.patch
+</screen>
+</figure>
+This is the same as:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Patch0: blather-4.5-bugfix.patch
+Patch1: blather-4.5-config.patch
+Patch2: blather-4.5-somethingelse.patch
+</screen>
+</figure>
+Either approach may be used, but the second method looks nicer.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>nopatch</tt?> Tag</title>
+<!-- label: inside-nopatch -->
+<indexterm>
+<primary>tags!<tt?>nopatch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>nopatch@<tt?>nopatch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>nopatch</tt?> tag is similar to the <tt?>nosource</tt?> tag discussed
+earlier.  Just like the <tt?>nosource</tt?> tag, the <tt?>nopatch</tt?> tag is
+used to direct RPM to omit something from the source package.  In the case
+of <tt?>nosource</tt?>, that "something" was one or more sources.  For the
+<tt?>nopatch</tt?> tag, the "something" is one or more patches.
+
+Since each <tt?>patch</tt?> tag in a spec file must be numbered, the
+<tt?>nopatch</tt?> tag uses those numbers to specify which patches are not to
+be included in the package.  The <tt?>nopatch</tt?> tag is used in this
+manner:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+NoPatch: 2 3
+</screen>
+</figure>
+In this example, the source files specified on the <tt?>source2</tt?> and
+<tt?>source3</tt?> lines are not to be included in the build.
+
+This concludes our study of RPM's tags.  In the next section, we'll look at
+the various scripts that RPM uses to build, as well as to install, and
+erase, packages.
+
+<indexterm>
+<primary>spec file!tags in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>Scripts: RPM's Workhorse</title>
+<indexterm>
+<primary>spec file!scripts in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The scripts that RPM uses to control the build process are among the most
+varied and interesting parts of the spec file.  Many spec files also
+contain scripts that perform a variety of tasks whenever the package is
+installed or erased.
+
+The start of each script is denoted by a keyword.  For example, the
+<tt?>%build</tt?> keyword marks the start of the script RPM will execute
+when building the software to be packaged.  It should be noted that, in the
+strictest sense of the word, these parts of the spec file are not scripts.
+For example, they do not start with the traditional invocation of a shell.
+However, the contents of each script section are copied into a file and
+executed by RPM as a full-fledged script.  This is part of the power of
+RPM: Anything that can be done in a script can be done by RPM.
+
+Let's start by looking at the scripts used during the build process.
+
+<sect2 id="s2-rpm-inside-">
+<title>Build-time Scripts</title>
+<!-- label: inside-scripts -->
+<indexterm>
+<primary>scripts!build-time</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The scripts that RPM uses during the building of a package follow the steps
+known to every software developer:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Unpacking the sources.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Building the software.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Installing the software.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Cleaning up.
+
+</para>
+</listitem>
+
+</itemizedlist>
+Although each of the scripts perform a specific function in the build
+process, they share a common environment.  Using RPM's <tt?>--test</tt?>
+option
+<footnote>
+<para>
+Described in section <xref linkend="build--test">.
+</para>
+</footnote>
+, we can see the
+common portion of each script.  In the following example, we've taken the
+<tt?>cdplayer</tt?> package, issued an <tt?>rpm -ba --test
+cdplayer-1.0-1.spec</tt?>, and viewed the script files left in RPM's temporary
+directory.  This section (with the appropriate package-specific values) is
+present in every script RPM executes during a build:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+#!/bin/sh -e
+# Script generated by rpm
+
+RPM_SOURCE_DIR="/usr/src/redhat/SOURCES"
+RPM_BUILD_DIR="/usr/src/redhat/BUILD"
+RPM_DOC_DIR="/usr/doc"
+RPM_OPT_FLAGS="-O2 -m486 -fno-strength-reduce"
+RPM_ARCH="i386"
+RPM_OS="Linux"
+RPM_ROOT_DIR="/tmp/cdplayer"
+RPM_BUILD_ROOT="/tmp/cdplayer"
+RPM_PACKAGE_NAME="cdplayer"
+RPM_PACKAGE_VERSION="1.0"
+RPM_PACKAGE_RELEASE="1"
+set -x
+
+umask 022
+</screen>
+</figure>
+<indexterm>
+<primary>scripts!build-time!environment variables in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we can see, the script starts with the usual invocation of a shell (in
+this case, the Bourne shell).  There are no arguments passed to the
+script.  Next, a number of environment variables are set.  Here's a brief
+description of each one:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<tt?>RPM_SOURCE_DIR</tt?> --- This environment variable gets its
+value from the rpmrc file entry <tt?>sourcedir</tt?>, which in turn can get
+part of its value from the <tt?>topdir</tt?> entry.  It is the path RPM will
+prepend to the file, specified in the <tt?>source</tt?> tag line.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_BUILD_DIR</tt?> --- This variable is based on the
+<tt?>builddir</tt?> rpmrc file entry, which in turn can get part of its value
+from the <tt?>topdir</tt?> entry.  This environment variable translates to
+the path of RPM's build directory, where most software will be unpacked and
+built.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_DOC_DIR</tt?> --- The value of this environment variable is
+based on the <tt?>defaultdocdir</tt?> <tt?>rpmrc</tt?> file entry.  Files
+marked with the <tt?>%doc</tt?> directive can be installed in a subdirectory
+of <tt?>defaultdocdir</tt?>.  For more information on the <tt?>%doc</tt?>
+directive, refer to section <xref linkend="rpm-macros-doc">.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_OPT_FLAGS</tt?> --- This environment variable gets its value
+from the <tt?>optflags</tt?> <tt?>rpmrc</tt?> file entry.  It contains options
+that can be passed on to the build procedures of the software being
+packaged.  Normally this means either a configuration script or the
+<tt?>make</tt?> command itself.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_ARCH</tt?> --- As one might infer from the example above,
+this environment  variable contains a string describing the build system's
+architecture.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_OS</tt?> --- This one contains the name of the build system's
+operating system.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_BUILD_ROOT</tt?> --- This environment variable is used to hold
+the "build root", into which the newly built software will be installed.
+If no explicit build root has been specified (either by command line
+option, spec file tag line, or rpmrc file entry), this variable will be null.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_NAME</tt?> --- This environment variable gets its value
+from the <tt?>name</tt?> tag line in the package's spec file.  It contains
+the name of the software being packaged.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_VERSION</tt?> --- The <tt?>version</tt?> tag line is the
+source of this variable's translation.  Predictably, this environment
+variable contains the software's version number.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_RELEASE</tt?> --- This environment variable contains
+the package's release number.  Its value is obtained from the
+<tt?>release</tt?> tag line in the spec file.
+
+</para>
+</listitem>
+
+</itemizedlist>
+All of these environment variables are set for your use, to make it easier
+to write scripts that will do the right thing even if the build environment
+changes.
+
+<indexterm>
+<primary>scripts!build-time!environment variables in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The script also sets an option that causes the shell to print out each
+command, complete with expanded arguments.  Finally, the default
+permissions are set.  Past this point, the scripts differ.  Let's look at
+the scripts in the order they are executed.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%prep</tt?> Script</title>
+<!-- label: inside-prep -->
+<indexterm>
+<primary>prep@<tt?>%prep</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%prep</tt?> script is the first script RPM executes during a
+build.  Prior to the <tt?>%prep</tt?> script, RPM has performed preliminary
+consistency checks, such as whether the spec file's <tt?>source</tt?> tag
+points to files that actually exist.  Just prior to passing control over to
+the <tt?>%prep</tt?> script's contents, RPM changes directory into RPM's
+build area, which, by default, is <tt?>/usr/src/redhat/BUILD</tt?>.
+
+At that point, it is the responsibility of the <tt?>%prep</tt?> script to:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Create the top-level build directory.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Unpack the original sources into the build directory.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Apply patches to the sources, if necessary.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Perform any other actions required to get the sources in a
+ready-to-build state.
+
+</para>
+</listitem>
+
+</itemizedlist>
+The first three items on this list are common to the vast majority of all
+software being packaged.  Because of this, RPM has two macros that greatly
+simplify these routine functions.  More information on RPM's
+<tt?>%setup</tt?> and <tt?>%patch</tt?> macros can be found in section
+<xref linkend="rpm-macros">.
+
+The last item on the list can include creating directories or anything else
+required to get the sources in a ready-to-build state.  As a result, a
+<tt?>%prep</tt?> script can range from one line invoking a single
+<tt?>%setup</tt?> macro, to many lines of tricky shell programming.
+
+<indexterm>
+<primary>prep@<tt?>%prep</tt?> script|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%build</tt?> Script</title>
+<!-- label: inside-build -->
+<indexterm>
+<primary>build@<tt?>%build</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%build</tt?> script picks up where the <tt?>%prep</tt?> script
+left off.  Once the <tt?>%prep</tt?> script has gotten everything ready
+for the build, the <tt?>%build</tt?> script is usually somewhat
+anti-climactic --- normally invoking <tt?>make</tt?>, maybe a configuration
+script, and little else.
+
+Like <tt?>%prep</tt?> before it, the <tt?>%build</tt?> script has the same
+assortment of environment variables to draw on.  Also, like
+<tt?>%prep</tt?>, <tt?>%build</tt?> changes directory into the software's
+top-level build directory (located in <tt?>RPM_BUILD_DIR</tt?>, or usually
+called <tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis>).
+
+Unlike <tt?>%prep</tt?>, there are no macros available for use in the
+<tt?>%build</tt?> script.  The reason is simple: Either the commands
+required to build the software are simple (such as a single <tt?>make</tt?>
+command), or they are so unique that a macro wouldn't make it easier to
+write the script.
+
+<indexterm>
+<primary>build@<tt?>%build</tt?> script|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%install</tt?> Script</title>
+<!-- label: inside-install -->
+<indexterm>
+<primary>install@<tt?>%install</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The environment in which the <tt?>%install</tt?> script executes is
+identical to the other scripts.  Like the other scripts, the
+<tt?>%install</tt?> script's working directory is set to the software's
+top-level directory.
+
+As the name implies, it is this script's responsibility to do whatever is
+necessary to actually install the newly built software.  In most cases,
+this means a single <tt?>make install</tt?> command, or a few commands to
+copy files and create directories.
+
+<indexterm>
+<primary>install@<tt?>%install</tt?> script|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%clean</tt?> Script</title>
+<!-- label: inside-clean -->
+<indexterm>
+<primary>clean@<tt?>%clean</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%clean</tt?> script, as the name implies, is used to clean up the
+software's build directory tree.  RPM normally does this for you, but in
+certain cases (most notably in those packages that use a build root) you'll
+need to include a <tt?>%clean</tt?> script.
+
+As usual, the <tt?>%clean</tt?> script has the same set of environment
+variables as the other scripts we've covered here.  Since a
+<tt?>%clean</tt?> script is normally used when the package is built in a
+build root, the <tt?>RPM_BUILD_ROOT</tt?> environment variable is
+particularly useful.  In many cases, a simple 
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+rm -rf $RPM_BUILD_ROOT
+</screen>
+</figure>
+will suffice.
+<footnote>
+<para>
+Keep in mind that this command in a <tt?>%clean</tt?>
+script can wreak havoc if used with a build root of, say, <tt?>/</tt?>.
+Section <xref linkend="buildroot-bite"> discusses this in more detail.
+</para>
+</footnote>
+
+<indexterm>
+<primary>clean@<tt?>%clean</tt?> script|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>scripts!build-time|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Install/Erase-time Scripts</title>
+<!-- label: inside-install/erase -->
+<indexterm>
+<primary>scripts!install/erase-time</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The other type of scripts that are present in the spec file are those that
+are only used when the package is either installed or erased.  There are
+four scripts, each one meant to be executed at different times during the
+life of a package:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Before installation.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+After installation.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Before erasure.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+After erasure.
+
+</para>
+</listitem>
+
+</itemizedlist>
+<indexterm>
+<primary>scripts!install/erase-time!environment variables in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Unlike the build-time scripts, there is little in the way of environment
+variables for these scripts.  The only environment variable available is
+<tt?>RPM_INSTALL_PREFIX</tt?>, and that is only set if the package uses an
+installation prefix.
+
+<indexterm>
+<primary>scripts!install/erase-time!environment variables in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>scripts!install/erase-time!arguments in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Unlike the build-time scripts, there <emphasis>is</emphasis> an argument defined.  The
+sole argument to these scripts, is a number representing the number of
+instances of the package currently installed on the system, <emphasis>after</emphasis>
+the current package has been installed or erased.  Sound tricky?  It really
+isn't.  Here's an example:
+
+Assume that a package, called <tt?>blather-1.0</tt?>, is being installed.  No
+previous versions of <tt?>blather</tt?> have been installed.  Since the
+software is being installed, only the <tt?>%pre</tt?> and <tt?>%post</tt?>
+scripts are executed.  The argument passed to these scripts will be
+1, since the the number of <tt?>blather</tt?> packages installed is
+1.
+<footnote>
+<para>
+Or it will be 1, once the package is completely installed.
+Remember, the number is based on the number of packages installed
+<emphasis>after</emphasis> the current package's install or erase has completed.
+</para>
+</footnote>
+
+Continuing our example, a new version of the <tt?>blather</tt?> package,
+version 1.3, is now available.  Clearly it's time to upgrade.  What will
+the scripts' values be during the upgrade?  As <tt?>blather-1.3</tt?> is
+installing, its <tt?>%pre</tt?> and <tt?>%post</tt?> scripts will have an
+argument equal to 2 (1 for version 1.0 already installed, plus 1 for
+version 1.3 being installed).  As the final part of the upgrade, it's then
+time to erase <tt?>blather</tt?> version 1.0.  As the package is being
+removed, its <tt?>%preun</tt?> and <tt?>%postun</tt?> scripts are executed.
+Since there will be only one <tt?>blather</tt?> package (version 1.3)
+installed after version 1.0 is erased, the argument passed to version 1.0's
+scripts is 1.
+
+To finally bring an end to this example, we've decided to erase
+<tt?>blather</tt?> 1.3.  We just don't need it anymore.  As the package is
+being erased, its <tt?>%preun</tt?> and <tt?>%postun</tt?> scripts will be
+executed.  Since there will be no <tt?>blather</tt?> packages installed once
+the erase completes, the argument passed to the scripts is 0.
+
+With all that said, of what possible use would this argument be?  Well, it
+has two very interesting properties:
+
+<orderedlist>
+<listitem>
+<para>
+When the first version of a package is installed, its <tt?>%pre</tt?>
+and <tt?>%post</tt?> scripts will be passed an argument equal to 1.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+When the last version of a package is erased, its <tt?>%preun</tt?>
+and <tt?>%postun</tt?> scripts will be passed an argument equal to 0.
+
+</para>
+</listitem>
+
+</orderedlist>
+Based on these properties, it's trivial to write an install-time script
+that can take certain actions in specific circumstances.  Usually, the
+argument is used in the <tt?>%preun</tt?> or <tt?>%postun</tt?> scripts to
+perform a special task when the last instance of a package is being
+erased.
+
+<indexterm>
+<primary>scripts!install/erase-time!arguments in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+What is normally done during these scripts?  The exact tasks may vary, but
+in general, the tasks are any that need to be performed at these points in
+the package's existence.  One very common task is to run <tt?>ldconfig</tt?>
+when shared libraries are installed or removed.  But that's not the only
+use for these scripts.  It's even possible to use the scripts to perform
+tests to ensure the package install/erasure should proceed.
+
+Since each of these scripts will be executing on whatever system installs
+the package, it's necessary to choose the script's choice of tools
+carefully.  Unless you're sure a given program is going to be available on
+<emphasis>all</emphasis> the systems that could possibly install your package, you should
+not use it in these scripts.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%pre</tt?> Script</title>
+<!-- label: inside-pre -->
+<indexterm>
+<primary>pre@<tt?>%pre</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%pre</tt?> script executes just before the package is to be
+installed.  It is the rare package that requires anything to be done prior
+to installation; none of the 350 packages that comprise Red Hat <!-- *** RED HAT *** -->Linux 4.0
+make use of it.
+
+\subsubsection{The <tt?>%post</tt?>
+Script}<!-- label: rpm-inside-post --><!-- label: inside-post -->
+
+<indexterm>
+<primary>post@<tt?>%post</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%post</tt?> script executes after the package has been installed.
+One of the most popular reasons a <tt?>%post</tt?> script is needed is to
+run <tt?>ldconfig</tt?> to update the list of available shared libraries
+after a new one has been installed.  Of course, other functions can be
+performed in a <tt?>%post</tt?> script.  For example, packages that install
+shells use the <tt?>%post</tt?> script to add the shell name to
+<tt?>/etc/shells</tt?>.
+
+If a package uses a <tt?>%post</tt?> script to perform some function, quite
+often it will include a <tt?>%postun</tt?> script that performs the inverse
+of the <tt?>%post</tt?> script, after the package has been removed.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%preun</tt?> Script</title>
+<!-- label: inside-preun -->
+<indexterm>
+<primary>preun@<tt?>%preun</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If there's a time when your package needs to have one last look around
+before the user erases it, the place to do it is in the <tt?>%preun</tt?>
+script.  Anything that a package needs to do immediately prior to RPM
+taking any action to erase the package, can be done here.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%postun</tt?> Script</title>
+<!-- label: inside-postun -->
+<indexterm>
+<primary>postun@<tt?>%postun</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%postun</tt?> script executes after the package has been removed.
+It is the last chance for a package to clean up after itself.  Quite often,
+<tt?>%postun</tt?> scripts are used to run <tt?>ldconfig</tt?> to remove newly
+erased shared libraries from <tt?>ld.so.cache</tt?>.
+
+<indexterm>
+<primary>scripts!install/erase-time|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Verification-Time Script --- The <tt?>\%verifyscript</tt?> Script</title>
+<!-- label: inside-verifyscript -->
+<indexterm>
+<primary>scripts!verification-time</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>verifyscript@<tt?>%verifyscript</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%verifyscript</tt?> executes whenever the installed package is
+verified by RPM's verification command.  The contents of this script is
+entirely up to the package builder, but in general the script should do
+whatever is necessary to verify the package's proper installation.  Since
+RPM automatically verifies the existence of a package's files, along with
+other file attributes, the <tt?>%verifyscript</tt?> should concentrate on
+different aspects of the package's installation.  For example, the script
+may ensure that certain configuration files contain the proper information
+for the package being verified:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+for n in ash bsh; do
+    echo -n "Looking for $n in /etc/shells... "
+    if ! grep "^/bin/${n}\$" /etc/shells &gt; /dev/null; then
+        echo "missing"
+        echo "${n} missing from /etc/shells" &gt;&2
+    else
+        echo "found"
+    fi
+done
+</screen>
+</figure>
+In this script, the config file <tt?>/etc/shells</tt?>, is checked to ensure
+that it has entries for the shells provided by this package.
+
+It is worth noting that the script sends informational and error messages
+to stdout, and error messages only to stderr.  Normally RPM will only
+display error output from a verification script; the output sent to stdout
+is only displayed when the verification is run in verbose mode.
+
+<indexterm>
+<primary>scripts!verification-time|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>spec file!scripts in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>Macros: Helpful Shorthand for Package Builders</title>
+<!-- label: rpm-macros -->
+<indexterm>
+<primary>spec file!macros in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+RPM does not support macros in the sense of ad-hoc sequences of commands
+being defined as a macro and executed by simply referring to the macro
+name.
+
+However, there are two parts of RPM's build process that are fairly
+constant from one package to another, and they are the unpacking and
+patching of sources.  Because of this, RPM makes two macros available to
+simplify these tasks:
+
+<orderedlist>
+<listitem>
+<para>
+The <tt?>%setup</tt?> macro, which is used to unpack the original
+sources.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The <tt?>%patch</tt?> macro, which is used to apply patches to the
+original sources.
+
+</para>
+</listitem>
+
+</orderedlist>
+These macros are used exclusively in the <tt?>%prep</tt?> script; it
+wouldn't make sense to use them anywhere else.  The use of these macros is
+not mandatory --- It is certainly possible to write a <tt?>%prep</tt?>
+script without them.  But in the vast majority of cases they make life
+easier for the package builder.
+
+<sect2 id="s2-rpm-inside-">
+<title><tt?>The \%setup</tt?> Macro</title>
+<!-- label: inside-setup -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned above, the <tt?>%setup</tt?> macro is used to unpack the
+original sources, in preparation for the build.  In its simplest form, the
+macro is used with no options and gets the name of the source archive from
+the <tt?>source</tt?> tag specified earlier in the spec file.  Let's look at
+an example.  The <tt?>cdplayer</tt?> package has the following
+<tt?>source</tt?> tag:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
+</screen>
+</figure>
+and the following <tt?>%prep</tt?> script:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%prep
+%setup
+</screen>
+</figure>
+In this simple case, the <tt?>%setup</tt?> macro expands into the following
+commands:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+As we can see, the <tt?>%setup</tt?> macro starts by changing directory into
+RPM's build area and removing any <tt?>cdplayer</tt?> build trees from
+previous builds.  It then uses <tt?>gzip</tt?> to uncompress the original
+source (whose name was taken from the <tt?>source</tt?> tag), and pipes the
+result to <tt?>tar</tt?> for unpacking.  The return status of the unpacking
+is tested.  If sucessful, the macro continues.
+
+At this point, the original sources have been unpacked.  The
+<tt?>%setup</tt?> macro continues by changing directory into
+<tt?>cdplayer</tt?>'s top-level directory.  The two <tt?>cd</tt?> commands are
+an artifact of <tt?>%setup</tt?>'s macro expansion.  Finally,
+<tt?>%setup</tt?> makes sure every file in the build tree is owned by root
+and has appropriate permissions set.
+
+But that's just the simplest way that <tt?>%setup</tt?> can be used.  There
+are a number of other options that can be added to accomodate different
+situations.  Let's look at them.
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-n <emphasis>&lt;name&gt;</tt?></emphasis> -- Set Name of Build Directory</title>
+<!-- label: inside-setup-n -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-n</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In our example above, the <tt?>%setup</tt?> macro simply uncompressed and
+unpacked the sources.  In this case, the <tt?>tar</tt?> file containing the
+original sources was created such that the top-level directory was included
+in the tar file.  The name of the top-level directory was also identical to
+that of the <tt?>tar</tt?> file, which was in
+<tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis> format.
+
+However, this is not always the case.  Quite often, the original sources
+unpack into a directory whose name is different than the original
+<tt?>tar</tt?> file.  Since RPM assumes the directory will be called
+<tt?><emphasis>&lt;name&gt;-&lt;version&gt;</tt?></emphasis>, when the directory is called something
+else, it's necessary to use <tt?>%setup</tt?>'s <tt?>-n</tt?> option.  Here's
+an example:
+
+Assume, for a moment, that the <tt?>cdplayer</tt?> sources, when unpacked,
+create a top-level directory named <tt?>cd-player</tt?>.  In this case, our
+<tt?>%setup</tt?> line would look like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+\%setup -n cd-player
+</screen>
+</figure>
+and the resulting commands would look like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cd-player
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cd-player
+cd /usr/src/redhat/BUILD/cd-player
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+The results are identical to using <tt?>%setup</tt?> with no options, except
+for the fact that <tt?>%setup</tt?> now does a recursive delete on the
+directory <tt?>cd-player</tt?> (instead of <tt?>cdplayer-1.0</tt?>), and
+changes directory into <tt?>cd-player</tt?> (instead of
+<tt?>cdplayer-1.0</tt?>).
+
+Note that all subsequent build-time scripts will change directory into the
+directory specified by the <tt?>-n</tt?> option.  This makes <tt?>-n</tt?>
+unsuitable as a means of unpacking sources in directories other than the
+top-level build directory.  In the upcoming example on page
+<xref linkend="multi-source-spec">, we'll show a way around this restriction.
+
+A quick word of warning: If the name specified with the <tt?>-n</tt?> option
+doesn't match the name of the directory created when the sources are
+unpacked, the build will stop pretty quickly, so it pays to be careful when
+using this option.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-n</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-c</tt?> -- Create Directory (and change to it) Before Unpacking</title>
+<!-- label: inside-setup-c -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-c</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+How many times have you grabbed a <tt?>tar</tt?> file and unpacked it, only
+to find that it splattered files all over your current directory?
+Sometimes source archives are created without a top-level directory.
+
+As you can see from the examples so far, <tt?>%setup</tt?> expects the
+archive to create its own top-level directory.  If this isn't the case,
+you'll need to use the <tt?>-c</tt?> option.
+
+This option simply creates the directory and changes directory into it
+before unpacking the sources.  Here's what it looks like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+mkdir -p cdplayer-1.0
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+The only changes from using <tt?>%setup</tt?> with no options, are the
+<tt?>mkdir</tt?> and <tt?>cd</tt?> commands, prior to the commands that unpack
+the sources.  Note that you can use the <tt?>-n</tt?> option along with
+<tt?>-c</tt?>, so something like <tt?>%setup -c -n blather</tt?> works as
+expected.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-c</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-D</tt?> -- Do Not Delete Directory Before Unpacking Sources</title>
+<!-- label: inside-setup-D -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-D</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-D</tt?> option keeps the <tt?>%setup</tt?> macro from deleting the
+software's top-level directory.  This option is handy when the sources
+being unpacked are to be added to an already-existing directory tree.  This
+would be the case when more than one <tt?>%setup</tt?> macro is used.
+Here's what <tt?>%setup</tt?> does when the <tt?>-D</tt?> option is employed:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+As advertised, the <tt?>rm</tt?> prior to the <tt?>tar</tt?> command is gone.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-D</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-T</tt?> -- Do Not Perform Default Archive Unpacking</title>
+<!-- label: inside-setup-T -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-T</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-T</tt?> option disables <tt?>%setup</tt?>'s normal unpacking of the
+archive file specified on the <tt?>source0</tt?> line.  Here's what the
+resulting commands look like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+Doesn't make much sense, does it?  There's a method to this madness.  We'll
+see the <tt?>-T</tt?> in action in the next section.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-T</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-b <emphasis>&lt;n&gt;</tt?></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources Before Changing Directory</title>
+<!-- label: inside-setup-b -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-b</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-b</tt?> option is used in conjunction with the <tt?>source</tt?>
+tag.  Specifically, it is used to identify which of the numbered
+<tt?>source</tt?> tags in the spec file are to be unpacked.
+
+The <tt?>-b</tt?> option requires a numeric argument matching an existing
+<tt?>source</tt?> tag.  If a numeric argument is not provided, the build will
+fail:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+* Package: cdplayer
+Need arg to %setup -b
+Build failed.
+#
+</screen>
+</figure>
+Remembering that the first <tt?>source</tt?> tag is implicitly numbered 0,
+let's see what happens when the <tt?>%setup</tt?> line is changed to
+<tt?>%setup -b 0</tt?>:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+That's strange.  The sources were unpacked twice.  It doesn't make sense,
+until you realize that this is why there is a <tt?>-T</tt?> option.  Since
+<tt?>-T</tt?> disables the default source file unpacking, and <tt?>-b</tt?>
+selects a particular source file to be unpacked, the two are meant to go
+together, like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+\%setup -T -b 0
+</screen>
+</figure>
+Looking at the resulting commands, we find:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+That's more like it!  Let's go on to the next option.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-b</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-a <emphasis>&lt;n&gt;</tt?></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources After Changing Directory</title>
+<!-- label: inside-setup-a -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-a</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-a</tt?> option works similarly to the <tt?>-b</tt?> option, except
+that the sources are unpacked <emphasis>after</emphasis> changing directory into the
+top-level build directory.  Like the <tt?>-b</tt?> option, <tt?>-a</tt?>
+requires <tt?>-T</tt?> in order to prevent two sets of unpacking commands.
+Here are the commands that a <tt?>%setup -T -a 0</tt?> line would produce:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+Note that there is no <tt?>mkdir</tt?> command to create the top-level
+directory prior to issuing a <tt?>cd</tt?> into it.  In our example, adding
+the <tt?>-c</tt?> option will make things right:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+mkdir -p cdplayer-1.0
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+The result is the proper sequence of commands for unpacking a <tt?>tar</tt?>
+file with no top-level directory.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!<tt?>-a</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>Using <tt?>\%setup</tt?> in a Multi-source Spec File</title>
+<!-- label: multi-source-spec -->
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!use in multi-source spec files</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If all these interrelated options seem like overkill for unpacking a single
+source file, you're right.  The real reason for the various options is to
+make it easier to combine several separate source archives into a single,
+build-able entity.  Let's see how they work in that type of environment.
+
+For the purposes of this example, our spec file will have the following
+three <tt?>source</tt?> tags:
+<footnote>
+<para>
+Yes, the <tt?>source</tt?> tags should
+include a URL pointing to the sources.
+</para>
+</footnote>
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+source: source-zero.tar.gz
+source1: source-one.tar.gz
+source2: source-two.tar.gz
+</screen>
+</figure>
+To unpack the first source is not hard; all that's required is to use
+<tt?>%setup</tt?> with no options:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+\%setup
+</screen>
+</figure>
+This produces the following set of commands:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+If <tt?>source-zero.tar.gz</tt?> didn't include a top-level directory, we
+could have made one by adding the <tt?>-c</tt?> option:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -c
+</screen>
+</figure>
+which would result in:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+mkdir -p cdplayer-1.0
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+Of course, if the top-level directory did not match the package name, the
+<tt?>-n</tt?> option could have been added:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -n blather
+</screen>
+</figure>
+which results in:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf blather
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd blather
+cd /usr/src/redhat/BUILD/blather
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+or
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -c -n blather
+</screen>
+</figure>
+This results in:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf blather
+mkdir -p blather
+cd blather
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/blather
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+Now let's add the second source file.  Things get a bit more interesting
+here.  First, we need to identify which <tt?>source</tt?> tag (and therefore,
+which source file) we're talking about.  So we need to use either the
+<tt?>-a</tt?> or <tt?>-b</tt?> option, depending on the characteristics of the
+source archive.  For this example, let's say that <tt?>-a</tt?> is the option
+we want.  Adding that option, plus a "1" to point to the source file
+specified in the <tt?>source1</tt?> tag, we have:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -a 1
+</screen>
+</figure>
+Since we've already seen that using the <tt?>-a</tt?> or <tt?>-b</tt?> option
+results in duplicate unpacking, we need to disable the default unpacking by
+adding the <tt?>-T</tt?> option:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -T -a 1
+</screen>
+</figure>
+Next, we need to make sure that the top-level directory isn't deleted.
+Otherwise, the first source file we just unpacked would be gone.  That
+means we need to include the <tt?>-D</tt?> option to prevent that from
+happening.  Adding this final option, and including the now complete macro
+in our <tt?>%prep</tt?> script, we now have:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup
+%setup -T -D -a 1
+</screen>
+</figure>
+This will result in the following commands:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+cd /usr/src/redhat/BUILD
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-one.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+</screen>
+</figure>
+So far, so good.  Let's include the last source file, but with this one,
+we'll say that it needs to be unpacked in a subdirectory of
+<tt?>cdplayer-1.0</tt?> called <tt?>database</tt?>.  Can we use
+<tt?>%setup</tt?> in this case?
+
+We could, if <tt?>source-two.tgz</tt?> created the <tt?>database</tt?>
+subdirectory.  If not, then it'll be necessary to do it by hand.  For the
+purposes of our example, let's say that <tt?>source-two.tgz</tt?> wasn't
+created to include the <tt?>database</tt?> subdirectory, so we'll have to do
+it ourselves.  Here's our <tt?>%prep</tt?> script now:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup
+%setup -T -D -a 1
+mkdir database
+cd database
+gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
+</screen>
+</figure>
+Here's the resulting script:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd /usr/src/redhat/BUILD
+rm -rf cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-zero.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+cd cdplayer-1.0
+cd /usr/src/redhat/BUILD/cdplayer-1.0
+chown -R root.root .
+chmod -R a+rX,g-w,o-w .
+cd /usr/src/redhat/BUILD
+cd cdplayer-1.0
+gzip -dc /usr/src/redhat/SOURCES/source-one.tar.gz | tar -xvvf -
+if [ $? -ne 0 ]; then
+  exit $?
+fi
+mkdir database
+cd database
+gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
+</screen>
+</figure>
+The three commands we added to unpack the last set of sources were added to
+the end of the <tt?>%prep</tt?> script.
+
+The bottom line to using the <tt?>%setup</tt?> macro is that you can
+probably get it to do what you want, but don't be afraid to tinker.  And
+even if <tt?>%setup</tt?> can't be used, it's easy enough to add the
+necessary commands to do the work manually.  Above all, make sure you use
+the <tt?>--test</tt?> option when testing your <tt?>%setup</tt?> macros, so
+you can see what commands they're translating to.
+
+Next, let's look at RPM's second macro, <tt?>%patch</tt?>.
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!use in multi-source spec files|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>The <tt?>\%patch</tt?> Macro</title>
+<!-- label: inside-patch-macro -->
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%patch</tt?> macro, as its name implies, is used to apply patches
+to the unpacked sources.  In the following examples, our spec file has the
+following <tt?>patch</tt?> tag lines:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+patch0: patch-zero
+patch1: patch-one
+patch2: patch-two
+</screen>
+</figure>
+At its simplest, the <tt?>%patch</tt?> macro can be invoked without any
+options:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch
+</screen>
+</figure>
+Here are the resulting commands:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+echo "Patch #0:"
+patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
+</screen>
+</figure>
+The <tt?>%patch</tt?> macro nicely displays a message showing that a patch
+is being applied, then invokes the <tt?>patch</tt?> command to actually do
+the dirty work.  There are two options to the <tt?>patch</tt?> command:
+
+<orderedlist>
+<listitem>
+<para>
+The <tt?>-p</tt?> option, which directs <tt?>patch</tt?> to remove the
+specified number of slashes (and any intervening directories) from the
+front of any filenames specified in the patch file.  In this case, nothing
+will be removed.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The <tt?>-s</tt?> option, which directs <tt?>patch</tt?> to apply the
+patch without displaying any informational messages.  Only errors from
+<tt?>patch</tt?> will be displayed.
+
+</para>
+</listitem>
+
+</orderedlist>
+How did the <tt?>%patch</tt?> macro know which patch to apply?  Keep in mind
+that, like the <tt?>source</tt?> tag lines, every <tt?>patch</tt?> tag is
+numbered, starting at zero.  The <tt?>%patch</tt?> macro, by default,
+applies the patch file named on the <tt?>patch</tt?> (or <tt?>patch0</tt?>) tag
+line.
+
+<sect3 id="s3-rpm-inside-">
+<title>Specifying Which <tt?>patch</tt?> Tag to Use</title>
+<!-- label: inside-patch-P -->
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-P</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%patch</tt?> macro actually has two different ways to specify the
+<tt?>patch</tt?> tag line it is to use.  The first method is to simply append
+the number of the desired <tt?>patch</tt?> tag to the end of the
+<tt?>%patch</tt?> macro itself.  For example, in order to apply the patch
+specified on the <tt?>patch2</tt?> tag line, the following <tt?>%patch</tt?>
+macro could be used:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch2
+</screen>
+</figure>
+The other approach is to use the <tt?>-P</tt?> option.  This option is
+followed by the number of the <tt?>patch</tt?> tag line desired.  Therefore,
+this line is identical in function to the previous one:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -P 2
+</screen>
+</figure>
+Note that the <tt?>-P</tt?> option will <emphasis>not</emphasis> apply the file specified
+on the <tt?>patch0</tt?> line, by default.  Therefore, if you choose to use
+the <tt?>-P</tt?> option to specify patch numbers, you'll need to use the
+following format when applying patch zero:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -P 0
+</screen>
+</figure>
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-P</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-p &lt;<emphasis>#</tt?>&gt;</emphasis> -- Strip <tt?>&lt;<emphasis>#</tt?>&gt;</emphasis> leading slashes and directories from patch filenames</title>
+<!-- label: inside-patch-p -->
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-p</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-p</tt?> (Note the <emphasis>lowercase</emphasis> "p"!) option is sent directly
+to the <tt?>patch</tt?> command.  It is followed by a number, which specifies
+the number of leading slashes (and the directories in between) to strip
+from any filenames present in the patch file.  For more information on this
+option, please consult the <tt?>patch</tt?> man page.
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-p</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-b <emphasis>&lt;name&gt;</tt?></emphasis> -- Set the backup file extension to <tt?><emphasis>&lt;name&gt;</tt?></emphasis></title>
+<!-- label: inside-patch-b -->
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-b</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+When the <tt?>patch</tt?> command is used to apply a patch, unmodified copies
+of the files patched are renamed to end with the extension <tt?>.orig</tt?>.
+The <tt?>-b</tt?> option is used to change the extension used by
+<tt?>patch</tt?>.  This is normally done when multiple patches are to be
+applied to a given file.  By doing this, copies of the file as it existed
+prior to each patch, are readily available.
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-b</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-E</tt?> --- Remove Empty Output Files</title>
+<!-- label: inside-patch-E -->
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-E</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-E</tt?> option is passed directly to the <tt?>patch</tt?> program.
+When <tt?>patch</tt?> is run with the <tt?>-E</tt?> option, any output files
+that are empty after the patches have been applied, are removed.
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!<tt?>-E</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Now let's take <tt?>%patch</tt?> on a test-drive, and put it through its
+paces.
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>An example of the <tt?>\%patch</tt?> Macro in Action</title>
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!example of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Using the example <tt?>patch</tt?> tag lines we've used throughout this
+section, let's put together an example and look at the resulting commands.
+In our example, the first patch to be applied needs to have the root
+directory stripped.  Its <tt?>%patch</tt?> macro will look like this:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -p1
+</screen>
+</figure>
+The next patch is to be applied to files in the software's <tt?>lib</tt?>
+subdirectory, so we'll need to add a <tt?>cd</tt?> command to get us there.
+We'll also need to strip an additional directory:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd lib
+%patch -P 1 -p2
+</screen>
+</figure>
+Finally, the last patch is to be applied from the software's top-level
+directory, so we need to <tt?>cd</tt?> back up a level.  In addition, this
+patch modifies some files that were also patched the first time, so we'll
+need to change the backup file extension:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+cd ..
+%patch -P 2 -p1 -b .last-patch
+</screen>
+</figure>
+Here's what the <tt?>%prep</tt?> script (minus any <tt?>%setup</tt?> macros)
+looks like:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -p1
+cd lib
+%patch -P 1 -p2
+cd ..
+%patch -P 2 -p1 -b .last-patch
+</screen>
+</figure>
+And here's what the macros expand to:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+echo "Patch #0:"
+patch -p1  -s &lt; /usr/src/redhat/SOURCES/patch-zero
+cd lib
+echo "Patch #1:"
+patch -p2  -s &lt; /usr/src/redhat/SOURCES/patch-one
+cd ..
+echo "Patch #2:"
+patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
+</screen>
+</figure>
+No surprises here.  Note that the <tt?>%setup</tt?> macro leaves the current
+working directory set to the software's top-level directory, so our
+<tt?>cd</tt?> commands with their relative paths will do the right thing.  Of
+course, we have environment variables available that could be used here,
+too.
+
+<sect4 id="s4-rpm-inside-">
+<title>Compressed Patch Files</title>
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!compressed patches</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If a patch file is compressed with <tt?>gzip</tt?>, RPM will automatically
+decompress it before applying the patch.  Here's a compressed patch file as
+specified in the spec file:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Patch: bother-3.5-hack.patch.gz
+</screen>
+</figure>
+This is part of the script RPM will execute when the <tt?>%prep</tt?>
+section is executed:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+echo Executing: %prep
+&hellip;
+echo "Patch #0:"
+gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
+&hellip;
+</screen>
+</figure>
+First, the patch file is decompressed using <tt?>gzip</tt?>.  The output from
+<tt?>gzip</tt?> is then piped into <tt?>patch</tt?>.
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!compressed patches|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+That's about it for RPM's macros.  Next, let's take a look at the
+<tt?>%files</tt?> list.
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!example of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>spec file!macros in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect4>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>The <tt?>\%files</tt?> List</title>
+<!-- label: rpm-files-list --><!-- label: inside-files -->
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%files</tt?> list indicates to RPM which files on the build system
+are to be packaged.  The list consists of one file per line.  The file may
+have one or more directives preceeding it.  These directives give RPM
+additional information about the file and are discussed more fully below.
+
+Normally, each file includes its full path.  The path performs two
+functions.  First, it specifies the file's location on the build system.
+Second, it denotes where the file should be placed when the package is to
+be installed.
+<footnote>
+<para>
+This is not entirely the case when a relocatable
+package is being built.  For more information on relocatable packages, see
+chapter <xref linkend="rpm-reloc">.
+</para>
+</footnote>
+
+For packages that create directories containing hundreds of files, it can
+be quite cumbersome creating a list that contains every file.  To make this
+situation a bit easier, if the <tt?>%files</tt?> list contains a path to a
+directory, RPM will automatically package every file in that directory, as
+well as every file in each subdirectory.  Shell-style globbing can also be
+used in the <tt?>%files</tt?> list.
+
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>Directives For the <tt?>\%files</tt?> list</title>
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list directives</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%files</tt?> list may contain a number of different directives.
+They are used to:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Identify documentation and configuration files.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Ensure that a file has the correct permissions and ownership set.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Control which aspects of a file are to be checked during package
+verification.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Eliminate some of the tedium in creating the <tt?>%files</tt?> list.
+
+</para>
+</listitem>
+
+</itemizedlist>
+In the <tt?>%files</tt?> list, one or more directives may be placed on a line,
+separated by spaces, before one or more filenames.  Therefore, if
+<tt?>%foo</tt?> and <tt?>%bar</tt?> are two <tt?>%files</tt?> list directives,
+they may be applied to a file <tt?>baz</tt?> in the following manner:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%foo %bar baz
+</screen>
+</figure>
+Now it's time to take a look at the directives that inhabit the
+<tt?>%files</tt?> list.
+
+<sect2 id="s2-rpm-inside-">
+<title>File-related Directives</title>
+RPM processes files differently according to their type.  However, RPM does
+not have a method of automatically determining file types.  Therefore, it
+is up to the package builder to appropriately mark files in the
+<tt?>%files</tt?> list.  This is done using one of the directives below.
+
+Keep in mind that not every file will need to be marked.  As you read the
+following sections, you'll see that directives are only used in special
+circumstances.  In most packages, the majority of files in the
+<tt?>%files</tt?> list will not need to be marked.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%doc</tt?> Directive</title>
+<!-- label: rpm-macros-doc --><!-- label: inside-doc -->
+<indexterm>
+<primary>doc@<tt?>%doc</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%doc</tt?> directive flags the filename(s) that follow, as being
+documentation.  RPM keeps track of documentation files in its database, so
+that a user can easily find information about an installed package.  In
+addition, RPM can create a package-specific documentation directory during
+installation and copy documentation into it.  Whether or not this
+additional step is taken, is dependent on how a file is specified.  Here is
+an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%doc README
+%doc /usr/local/foonly/README
+</screen>
+</figure>
+The file <tt?>README</tt?> exists in the software's top-level directory
+during the build, and is included in the package file.  When the package is
+installed, RPM creates a directory in the documentation directory named the
+same as the package (ie, <tt?>&lt;software&gt;-&lt;version&gt;-&lt;release&gt;</tt?>), and
+copies the <tt?>README</tt?> file there.  The newly created directory and the
+<tt?>README</tt?> file are marked in the RPM database as being documentation.
+The default documentation directory is <tt?>/usr/doc</tt?>, and can be
+changed by setting the <tt?>defaultdocdir</tt?> <tt?>rpmrc</tt?> file
+entry.  For more information on <tt?>rpmrc</tt?> files, please see chapter
+<xref linkend="rpmrc-file">.
+
+The file <tt?>/usr/local/foonly/README</tt?> was installed into that
+directory during the build and is included in the package file.  When the
+package is installed, the <tt?>README</tt?> file is copied into
+<tt?>/usr/local/foonly</tt?> and marked in the RPM database as being
+documentation.
+
+<indexterm>
+<primary>doc@<tt?>%doc</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%config</tt?> Directive</title>
+<!-- label: inside-config -->
+<indexterm>
+<primary>config@<tt?>%config</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%config</tt?> directive is used to flag the specified file as being
+a configuration file.  RPM performs additional processing for config files
+when packages are erased, and during installations and upgrades.  This is
+due to the nature of config files: They are often changed by the system
+administrator, and those changes should not be lost.
+
+There is a restriction to the <tt?>%config</tt?> directive, and that restriction
+is that no more than one filename may follow the <tt?>%config</tt?>.  This
+means that the following example is the only allowable way to specify
+config files:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%config /etc/foonly
+</screen>
+</figure>
+Note that the full path to the file, as it is installed at build time, is
+required.
+
+<indexterm>
+<primary>config@<tt?>%config</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%attr</tt?> Directive</title>
+<!-- label: inside-attr -->
+<indexterm>
+<primary>attr@<tt?>%attr</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%attr</tt?> directive permits finer control over three key file
+attributes:
+
+<orderedlist>
+<listitem>
+<para>
+The file's permissions, or "mode".
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The file's user ID.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The file's group ID.
+
+</para>
+</listitem>
+
+</orderedlist>
+The <tt?>%attr</tt?> directive has the following format:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <emphasis>file</emphasis>
+</screen>
+</figure>
+The mode is specified in the traditional numeric format, while the user and
+group are specifed as a string, such as "<tt?>root</tt?>".  Here's a sample
+<tt?>%attr</tt?> directive:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%attr(755, root, root) foo.bar
+</screen>
+</figure>
+This would set <tt?>foo.bar</tt?>'s permissions to 755.  The file would be
+owned by user root, group root.  If a particular attribute does not need to
+be specified (usually because the file is installed with that attribute set
+properly), then that attribute may be replaced with a dash:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%attr(755, -, root) foo.bar
+</screen>
+</figure>
+The main reason to use the <tt?>%attr</tt?> directive is to permit users without
+root access to build packages.  The techniques for doing this (and a more
+in-depth discussion of the <tt?>%attr</tt?> directive) can be found in
+chapter <xref linkend="rpm-anywhere">.
+
+<indexterm>
+<primary>attr@<tt?>%attr</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%verify</tt?> Directive</title>
+<!-- label: spec-verify --><!-- label: inside-verify -->
+<indexterm>
+<primary>verify@<tt?>%verify</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+RPM's ability to verify the integrity of the software it has installed is
+impressive.  But sometimes it's a bit <emphasis>too</emphasis> impressive.  After all,
+RPM can verify as many as nine different aspects of every file.  The
+<tt?>%verify</tt?> directive can control which of these file attributes are
+to be checked when an RPM verification is done.  Here are the attributes,
+along with the names used by the <tt?>%verify</tt?> directive:
+
+<orderedlist>
+<listitem>
+<para>
+Owner (<tt?>owner</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Group (<tt?>group</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Mode (<tt?>mode</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+MD5 Checksum (<tt?>md5</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Size (<tt?>size</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Major Number (<tt?>maj</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Minor Number (<tt?>min</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Symbolic Link String (<tt?>symlink</tt?>)
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Modification Time (<tt?>mtime</tt?>)
+
+</para>
+</listitem>
+
+</orderedlist>
+How is <tt?>%verify</tt?> used?  Say, for instance, that a package installs
+device files.  Since the owner of a device will change, it doesn't make
+sense to have RPM verify the device file's owner/group and give out a false
+alarm.  Instead, the following <tt?>%verify</tt?> directive could be used:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%verify(mode md5 size maj min symlink mtime) /dev/ttyS0
+</screen>
+</figure>
+We've left out <tt?>owner</tt?> and <tt?>group</tt?>, since we'd rather RPM
+not verify those.
+<footnote>
+<para>
+RPM will automatically exclude file attributes
+from verification if it doesn't make sense for the type of file.  In our
+example, getting the MD5 checksum of a device file is an example of such a
+situation.
+</para>
+</footnote>
+  However, if all you want to do is prevent RPM from verifying
+one or two attributes, you can use <tt?>%verify</tt?>'s alternate syntax:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%verify(not owner group) /dev/ttyS0
+</screen>
+</figure>
+This use of <tt?>%verify</tt?> produces identical results to the previous
+example.
+
+<indexterm>
+<primary>verify@<tt?>%verify</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-inside-">
+<title>Directory-related Directives</title>
+While the two directives in this section perform different functions, each
+is related to directories in some way.  Let's see what they do:
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%docdir</tt?> Directive</title>
+<!-- label: inside-docdir -->
+<indexterm>
+<primary>docdir@<tt?>%docdir</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%docdir</tt?> directive is used to add a directory to the list of
+directories that will contain documentation.  RPM includes the directories
+<tt?>/usr/doc</tt?>, <tt?>/usr/info</tt?>, and <tt?>/usr/man</tt?> in the
+<tt?>%docdir</tt?> list by default.
+
+For example, if the following
+line is part of the <tt?>%files</tt?> list:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%docdir /usr/blather
+</screen>
+</figure>
+any files in the <tt?>%files</tt?> list that RPM packages from
+<tt?>/usr/blather</tt?> will be included in the package as usual, but will
+also be automatically flagged as documentation.  This directive is handy
+when a package creates its own documentation directory and contains a large
+number of files.  Let's give it a try by adding the following line to our
+spec file:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%docdir /usr/blather
+</screen>
+</figure>
+Our <tt?>%files</tt?> list contains no references to the several files the
+package installs in the <tt?>/usr/blather</tt?> directory.  After building
+the package, looking at the package's file list shows:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+&hellip;
+#
+</screen>
+</figure>
+Wait a minute:  There's nothing there, not even <tt?>/usr/blather</tt?>!
+What happened?
+
+The problem is that <tt?>%docdir</tt?> only directs RPM to mark the
+specified directory as holding documentation.  It <emphasis>doesn't</emphasis> direct RPM
+to package any files in the directory.  To do that, we need to clue RPM in
+to the fact that there are files in the directory that must be packaged.
+
+One way to do this is to simply add the files to the <tt?>%files</tt?>
+list:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%docdir /usr/blather
+/usr/blather/INSTALL
+</screen>
+</figure>
+Looking at the package, we see that <tt?>INSTALL</tt?> was packaged:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+&hellip;
+/usr/blather/INSTALL
+#
+</screen>
+</figure>
+Directing RPM to only show the documentation files, we see that
+<tt?>INSTALL</tt?> has indeed been marked as documentation, even though the
+<tt?>%doc</tt?> directive had not been used:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+&hellip;
+/usr/blather/INSTALL
+#
+</screen>
+</figure>
+Of course, if you go to the trouble of adding each file to the
+<tt?>%files</tt?> list, it wouldn't be that much more work to add
+<tt?>%doc</tt?> to each one.  So the way to get the most benefit from
+<tt?>%docdir</tt?> is to add another line to the <tt?>%files</tt?> list:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%docdir /usr/blather
+/usr/blather
+</screen>
+</figure>
+Since the first line directs RPM to flag any file in <tt?>/usr/blather</tt?>
+as being documentation, and the second line tells RPM to automatically
+package any files found in <tt?>/usr/blather</tt?>, every single file in
+there will be packaged <emphasis>and</emphasis> marked as documentation:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+/usr/blather
+/usr/blather/COPYING
+/usr/blather/INSTALL
+/usr/blather/README
+&hellip;
+#
+</screen>
+</figure>
+The <tt?>%docdir</tt?> directive can save quite a bit of effort in
+creating the <tt?>%files</tt?> list.  The only caveat is that you must be
+sure the directory will only contain files you want marked as
+documentation.  Keep in mind, also, that all subdirectories of the
+<tt?>%docdir</tt?>'ed directory will be marked as documentation directories,
+too.
+
+<indexterm>
+<primary>docdir@<tt?>%docdir</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%dir</tt?> Directive</title>
+<!-- label: inside-dir -->
+<indexterm>
+<primary>dir@<tt?>%dir</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned in section <xref linkend="rpm-files-list">, if a directory is
+specified in the <tt?>%files</tt?> list, the contents of that directory, and
+the contents of every directory under it, will automatically be included in
+the package.  While this feature can be handy (assuming you are <emphasis>sure</emphasis>
+that every file under the directory should be packaged) there are times
+when this could be a problem.
+
+The way to get around this, is to use the <tt?>%dir</tt?> directive.  By
+adding this directive to the line containing the directory, RPM will
+package only the directory itself, regardless of what files are in the
+directory at the time the package is created.  Here's an example of
+<tt?>%dir</tt?> in action.
+
+The <tt?>blather-1.0</tt?> package creates the directory
+<tt?>/usr/blather</tt?> as part of its build.  It also puts several files in
+that directory.  In the spec file, the <tt?>/usr/blather</tt?> directory is
+included in the <tt?>%files</tt?> list:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%files
+&hellip;
+/usr/blather
+&hellip;
+</screen>
+</figure>
+There are no other entries in the <tt?>%files</tt?> list that have
+<tt?>/usr/blather</tt?> as part of their path.  After building the package,
+we use RPM to look at the files in the package:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+&hellip;
+/usr/blather
+/usr/blather/COPYING
+/usr/blather/INSTALL
+/usr/blather/README
+&hellip;
+#
+</screen>
+</figure>
+The files present in <tt?>/usr/blather</tt?> at the time the package was
+built were included in the package automatically, without entering their
+names in the <tt?>%files</tt?> list.
+
+However, after changing the <tt?>/usr/blather</tt?> line in the
+<tt?>%files</tt?> list to:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%dir /usr/blather
+</screen>
+</figure>
+and rebuilding the package, a listing of the package's files now includes
+only the <tt?>/usr/blather</tt?> directory:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+&hellip;
+/usr/blather
+&hellip;
+#
+</screen>
+</figure>
+<indexterm>
+<primary>dir@<tt?>%dir</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title><tt?>-f <emphasis>&lt;file&gt;</tt?></emphasis> --- Read the <tt?>\%files</tt?> List From <tt?><emphasis>&lt;file&gt;</tt?></emphasis></title>
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in!<tt?>-f</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-f</tt?> option is used to direct RPM to read the <tt?>%files</tt?>
+list from the named file.  Like the <tt?>%files</tt?> list in a spec file,
+the file named using the <tt?>-f</tt?> option should contain one filename per
+line and also include any of the directives named in this section.
+
+Why is it necessary to read filenames from a file rather than have the
+filenames in the spec file?  Here's a possible reason:
+
+The filenames' paths may contain a directory name that can only be
+determined at build-time, such as an architecture specification.  The list
+of files, minus the variable part of the path, can be created, and
+<tt?>sed</tt?> can be used at build-time to update the path appropriately.
+
+It's not necessary that every filename to be packaged reside in the file.
+If there are any filenames present in the spec file, they will be packaged
+as well:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%files latex -f tetex-latex-skel
+/usr/bin/latex
+/usr/bin/pslatex
+&hellip;
+</screen>
+</figure>
+Here, the filenames present in the file <tt?>tetex-latex-skel</tt?> would be
+packaged, followed by every filename following the <tt?>%files</tt?> line.
+
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in!<tt?>-f</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list directives|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>The Lone Directive: <tt?>\%package</tt?></title>
+<!-- label: inside-package -->
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+While every directive we've seen so far is used in the <tt?>%files</tt?>
+list, the <tt?>%package</tt?> directive is different.  It is used to permit
+the creation of more than one package per spec file and can appear at any
+point in the spec file.  These additional packages are known as
+subpackages.  Subpackages are named according to the contents of the line
+containing the <tt?>%package</tt?> directive.  The format of the package
+directive is:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%package: &lt;string&gt;
+</screen>
+</figure>
+The <tt?>&lt;string&gt;</tt?> should be a name that describes the subpackage.  This
+string is appended to the base package name to produce the subpackage's
+name.  For example, if a spec file contains a <tt?>name</tt?> tag value of
+"<tt?>foonly</tt?>", and a "<tt?>%package doc</tt?>" line, then the
+subpackage name will be <tt?>foonly-doc</tt?>.
+
+<sect2 id="s2-rpm-inside-">
+<title><tt?>-n <emphasis>&lt;string&gt;</tt?></emphasis> --- Use <tt?><emphasis>&lt;string&gt;</tt?></emphasis> As the Entire Subpackage Name</title>
+<!-- label: inside-package-n -->
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned above, the name of a subpackage normally includes the main
+package name.  When the <tt?>-n</tt?> option is added to the
+<tt?>%package</tt?> directive, it directs RPM to use the name specified on
+the <tt?>%package</tt?> line as the entire package name.  In the example
+above, the following <tt?>%package</tt?> line would create a subpackage
+named <tt?>foonly-doc</tt?>:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%package doc
+</screen>
+</figure>
+The following <tt?>%package</tt?> line would create a subpackage named
+<tt?>doc</tt?>:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%package -n doc
+</screen>
+</figure>
+The <tt?>%package</tt?> directive plays another role in subpackage
+building.  That role is to act as a place to collect tags that are specific
+to a given subpackage.  Any tag placed after a <tt?>%package</tt?>
+directive will only apply to that subpackage.
+
+Finally, the name string specified by the <tt?>%package</tt?> directive is
+also used to denote which parts of the spec file are a part of that
+subpackage. This is done by including the string (along with the
+<tt?>-n</tt?> option, if present on the <tt?>%package</tt?> line) on the
+starting line of the section that is to be subpackage-specific.  Here's an
+example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&hellip;
+%package -n bar
+&hellip;
+%post -n bar
+&hellip;
+</screen>
+</figure>
+In this heavily edited spec file segment, a subpackage called <tt?>bar</tt?>
+has been defined.  Later in the file is a post-install script.  Because it
+has subpackage <tt?>bar</tt?>'s name on the <tt?>%post</tt?> line, the
+post-install script will be part of the <tt?>bar</tt?> subpackage only.
+
+For more information on building subpackages, please see chapter
+<xref linkend="rpm-subpack">.
+
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-inside-">
+<title>Conditionals</title>
+<indexterm>
+<primary>spec file!conditionals in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+While the "exclude" and "exclusive" tags (<tt?>excludearch</tt?>,
+<tt?>exclusivearch</tt?>, <tt?>excludeos</tt?>, and <tt?>exclusiveos</tt?>)
+provide some control over whether a package will be built on a given
+architecture and/or operating system, that control is still rather coarse.
+
+For example, what should be done if a package will build under multiple
+architectures, but requires slightly different <tt?>%build</tt?> scripts?
+Or what if a package requires a certain set of files under one operating
+system, and an entirely different set under another operating system?  The
+architecture and operating system-specific tags we've discussed earlier in
+the chapter do nothing to help in such situations.  What can be done?
+
+One approach would be to simply create different spec files for each
+architecture or operating system.  While it would certainly work, this
+approach has some problems:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+More work.  The existence of multiple spec files for a given package
+means that the effort required to make any changes to the package is
+multiplied by however many different spec files there are.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+More chance for mistakes.  If any work needs to be done to the spec
+files, the fact they are separate means it is that much easier to forget to
+make the necessary changes to each one.  There is also the chance of
+introducing mistakes each time changes are made.
+
+</para>
+</listitem>
+
+</itemizedlist>
+The other approach is to somehow permit the conditional inclusion of
+architecture- or operating system-specific sections of the spec file.
+Fortunately, the RPM designers chose this approach, and it makes
+multi-platform package building easier and less prone to mistakes.
+
+We discuss multi-platform package building in depth in chapter
+<xref linkend="rpm-multi">.  For now, let's take a quick look at RPM's
+conditionals.
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%ifarch</tt?> Conditional</title>
+<!-- label: inside-ifarch -->
+<indexterm>
+<primary>ifarch@<tt?>%ifarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%ifarch</tt?> conditional is used to begin a section of the spec
+file that is architecture-specific.  It is followed by one or more
+architecture specifiers, each separated by commas or whitespace.  Here is
+an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386 sparc
+</screen>
+</figure>
+The contents of the spec file following this line would be processed only
+by Intel x86 or Sun SPARC-based systems.  However, if only this line were
+placed in a spec file, this is what would happen if a build was attempted:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+Unclosed %if
+Build failed.
+#
+</screen>
+</figure>
+The problem that surfaced here is that any conditional must be "closed"
+by using either <tt?>%else</tt?> or <tt?>%endif</tt?>.  We'll be covering
+them a bit later in the chapter.
+
+<indexterm>
+<primary>ifarch@<tt?>%ifarch</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%ifnarch</tt?> Conditional</title>
+<!-- label: inside-ifnarch -->
+<indexterm>
+<primary>ifnarch@<tt?>%ifnarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%ifnarch</tt?> conditional is used in a similar fashion to
+<tt?>%ifarch</tt?>, except that the logic is reversed.  If a spec file
+contains a conditional block starting with <tt?>%ifarch alpha</tt?>, that
+block would be processed only if the build was being done on a Digital
+Alpha/AXP-based system.  However, if the conditional block started with
+<tt?>%ifnarch alpha</tt?>, then that block would be processed only if the
+build were <emphasis>not</emphasis> being done on an Alpha.
+
+Like <tt?>%ifarch</tt?>, <tt?>%ifnarch</tt?> can be followed by one or more
+architectures and must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+
+<indexterm>
+<primary>ifnarch@<tt?>%ifnarch</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%ifos</tt?> Conditional</title>
+<!-- label: inside-ifos -->
+<indexterm>
+<primary>ifos@<tt?>%ifos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%ifos</tt?> conditional is used to control RPM's spec file
+processing based on the build system's operating system.  It is followed by
+one or more operating system names.  A conditional block started with
+<tt?>%ifos</tt?> must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+Here's an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifos linux
+</screen>
+</figure>
+The contents of the spec file following this line would be processed only
+if the build was done on a linux system.
+
+<indexterm>
+<primary>ifos@<tt?>%ifos</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%ifnos</tt?> Conditional</title>
+<!-- label: inside-ifnos -->
+<indexterm>
+<primary>ifnos@<tt?>%ifnos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%ifnos</tt?> conditional is the logical complement to
+<tt?>%ifos</tt?>: that is, if a conditional starting with the line
+<tt?>%ifnos irix</tt?> is present in a spec file, then the file contents
+after the <tt?>%ifnos</tt?> will not be processed if the build system is
+running Irix.  As always, a conditional block starting with
+<tt?>%ifnos</tt?> must be closed by a <tt?>%else</tt?> or <tt?>%endif</tt?>.
+
+<indexterm>
+<primary>ifnos@<tt?>%ifnos</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%else</tt?> Conditional</title>
+<!-- label: inside-else -->
+<indexterm>
+<primary>else@<tt?>%else</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%else</tt?> conditional is placed between a <tt?>%if</tt?>
+conditional of some persuasion, and a <tt?>%endif</tt?>.  It is used to
+create two blocks of spec file statements, only one of which will be used
+in any given case. Here's an example:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch alpha
+make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
+%else
+make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%endif
+</screen>
+</figure>
+When a build is performed on a Digital Alpha/AXP, some additional flags are
+added to the <tt?>make</tt?> command.  On all other systems, these flags are
+not added.
+
+<indexterm>
+<primary>else@<tt?>%else</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-inside-">
+<title>The <tt?>\%endif</tt?> Conditional</title>
+<!-- label: inside-endif -->
+<indexterm>
+<primary>endif@<tt?>%endif</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+A <tt?>%endif</tt?> is used to end a conditional block of spec file
+statements.  It can follow one of the <tt?>%if</tt?> conditionals,
+or the <tt?>%else</tt?>.  The <tt?>%endif</tt?> is always needed after a
+conditional, otherwise the build will fail.  Here's short conditional
+block, ending with a <tt?>%endif</tt?>:
+
+<figure id="sc-rpm-inside-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386
+make INTELFLAG=-DINTEL
+%endif
+</screen>
+</figure>
+In this example, we see the conditional block started with a
+<tt?>%ifarch</tt?> and ended with a <tt?>%endif</tt?>.
+
+<indexterm>
+<primary>endif@<tt?>%endif</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>spec file!conditionals in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Now that we have some more in-depth knowledge of the spec file, let's take
+a look at some of RPM's additional features.  In the next chapter, we'll
+explore how to add dependency information to a package.
+
+<indexterm>
+<primary>spec file!contents of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect1>
+
+</chapter>
+
