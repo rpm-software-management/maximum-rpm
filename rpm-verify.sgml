@@ -88,38 +88,113 @@
               <xref linkend="verify-g">
             </entry>
           </row>
-
-
-\multicolumn{2}{|c|}{Verify---specific Options} & Page
-
-
-<command>--noscripts</command> & Do not execute verification script &
-<xref linkend="verify--noscripts">
-
-<command>--nodeps</command> & Do not verify dependencies &
-<xref linkend="verify--nodeps">
-
-<command>--nofiles</command> & Do not verify file attributes &
-<xref linkend="verify--nofiles">
-
-
-
-\multicolumn{2}{|c|}{General Options} & Page
-
-
-<command>-v</command> & Display additional information & <xref linkend="verify-v">
-
-<command>-vv</command> & Display debugging information & <xref linkend="verify-vv">
-
-<command>--root <emphasis>&lt;path&gt;</command></emphasis> & Set alternate root to
-<command><emphasis>&lt;path&gt;</command></emphasis> & <xref linkend="verify--root">
-
-<command>--rcfile <emphasis>&lt;rcfile&gt;</command></emphasis> & Set alternate rpmrc file to
-<command><emphasis>&lt;rcfile&gt;</command></emphasis> & <xref linkend="verify--rcfile">
-
-<command>--dbpath <emphasis>&lt;path&gt;</command></emphasis> & Use <command><emphasis>&lt;path&gt;</command></emphasis> to find the
-RPM database & <xref linkend="verify--dbpath">
-
+          <row>
+            <entry spanname="span12">
+              Verify---specific Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--noscripts</command>
+            </entry>
+            <entry>
+              Do not execute verification script
+            </entry>
+            <entry>
+              <xref linkend="verify--noscripts">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--nodeps</command>
+            </entry>
+            <entry>
+              Do not verify dependencies
+            </entry>
+            <entry>
+              <xref linkend="verify--nodeps">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--nofiles</command>
+            </entry>
+            <entry>
+              Do not verify file attributes
+            </entry>
+            <entry>
+              <xref linkend="verify--nofiles">
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              General Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-v</command>
+            </entry>
+            <entry>
+              Display additional information
+            </entry>
+            <entry>
+              <xref linkend="verify-v">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-vv</command>
+            </entry>
+            <entry>
+              Display debugging information
+            </entry>
+            <entry>
+              <xref linkend="verify-vv">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--root <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate root to
+              <command><userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="verify--root">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate rpmrc file to
+              <command><userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="verify--rcfile">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Use <command><userinput>&lt;path&gt;</userinput></command> to find
+              the RPM database
+            </entry>
+            <entry>
+              <xref linkend="verify--dbpath">
+            </entry>
+          </row>
         </tbody>
       </tgroup>
     </table>
@@ -284,6 +359,7 @@ RPM database & <xref linkend="verify--dbpath">
         <para>
           Let's take a look at each of these attributes and why they are good
           things to check:
+        </para>
 
         <sect3 id="s3-rpm-verify-file-ownership">
           <title>File Ownership</title>
@@ -309,586 +385,499 @@ RPM database & <xref linkend="verify--dbpath">
           </para>
         </sect3>
 
-<sect3 id="s3-rpm-verify-">
-<title>File Group</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file group</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-In a similar manner to file ownership, a "group" specification is
-attached to each file.  Primarily used for determining access rights, a
-file's group specification can also become a user's group ID, should that
-user execute the file's contents.  Therefore, any changes in a file's group
-specification are important, and should be monitored.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file group|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>File Mode</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file mode</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Encompassing the file's "permissions", the mode is a set of bits
-that specifies permitted access for the file's owner, group members, and
-everyone else.  Even more important are two additional bits that determine
-whether a user's group or user ID should be changed if they execute the
-program contained in the file.  Since these little bombshells can let any
-user become <tt?>root</tt?> for the duration of the program, it pays to be
-extra careful with a file's permissions.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file mode|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>MD5 Checksum</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!MD5 checksum</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The MD5 checksum of a file is simply a 128-bit number that is
-mathematically derived from the contents of the file.  The MD5 algorithm
-was designed by Ron Rivest, the "R" in the popular RSA public-key
-encryption algorithm.  The "MD" in "MD5" stands for <emphasis>Message
-Digest</emphasis>, which is a pretty accurate description of what it does.
-
-Unlike literary digests, an MD5 checksum conveys no information about the
-contents of the original file.  However, it possesses one unique trait:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<emphasis>Any</emphasis> change to the file, no matter how small, results in a
-change to the MD5 checksum.
-<footnote>
-<para>
-From a strictly theoretical standpoint,
-this is not entirely true.  Using the lingo of cryptologists, it is
-believed to be "computationally infeasible" to find two messages that
-produce the same MD5 checksum.
-</para>
-</footnote>
-
-</para>
-</listitem>
-
-</itemizedlist>
-RPM creates MD5 checksums of all files it manipulates, and stores them in
-its database.  For all intents and purposes, if one of these files is
-changed, the MD5 checksum will change, and RPM will detect it.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!MD5 checksum|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>File Size</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file size</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-As if the use of MD5 isn't enough, RPM also keeps track of file sizes.  A
-difference of even one byte more or less will not go unnoticed.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!file size|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>Major Number</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!major number</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Device character and block files possess a major number.  The major number
-is used to communicate information to the device driver associated with the
-special file.  For instance, under Linux the special files for SCSI disk
-drives should have a major number of 8, while the major number for an IDE
-disk drive's special file would be 3.  As you can imagine, any change to a
-file's major number can have disastrous effects, and is tracked by RPM.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!major number|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>Minor Number</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!minor number</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-A file's minor number is similar in concept to the major number, but
-conveys different information to the device driver.  In the case of disk
-drives, this information can consist of a unit identifier.  Should the
-minor number change, RPM will detect it.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!minor number|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>Symbolic Link</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!symbolic link</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-If the file in question is really a symbolic link, the text string
-containing the name of the linked-to file is checked.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!symbolic link|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title>Modification Time</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!modification time</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Most operating systems keep track of the date and time that a file was last
-modified.  RPM uses this to its advantage by keeping modification times in
-its database.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!attributes verified!modification time|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!what it verifies|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!what it does|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-verify-">
-<title>When Verification Fails - <command>rpm -V</command> Output</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!output of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-When verifying a package, RPM produces output <emphasis>only</emphasis> if there is a
-verification failure.  When a file fails verification, the format of the
-output is a bit cryptic, but it packs all the information you need into one
-line per file.  Here is the format:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-SM5DLUGT c <emphasis>file</emphasis>
-</screen>
-</figure>
-Where:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<computeroutput>S</computeroutput> is the file size.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>M</computeroutput> is the file's mode.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>5</computeroutput> is the MD5 checksum of the file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>D</computeroutput> is the file's major and minor numbers.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>L</computeroutput> is the file's symbolic link contents.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>U</computeroutput> is owner of the file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>G</computeroutput> is the file's group.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>T</computeroutput> is the modification time of the file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<computeroutput>c</computeroutput> appears only if the file is a configuration file.
-
-<indexterm>
-<primary>config files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-  This is
-handy for quickly identifying config files, as they are very likely to
-change, and therefore, very <emphasis>unlikely</emphasis> to verify successfully.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<command><emphasis>file</computeroutput></emphasis> is the file that failed verification.  The
-complete path is listed to make it easy to find.
-
-</para>
-</listitem>
-
-</itemizedlist>
-It's unlikely that <emphasis>every</emphasis> file attribute will fail to verify, so each
-of the eight attribute flags will only appear if there is a problem.
-Otherwise, a "<computeroutput>.</computeroutput>" will be printed in that flag's place.  Let's
-look at an example or two:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <sect3 id="s3-rpm-verify-file-group">
+          <title>File Group</title>
+          <indexterm>
+            <primary>
+              <command>rpm -V</command>!attributes verified!file group
+            </primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            In a similar manner to file ownership, a "group" specification is
+            attached to each file.  Primarily used for determining access
+            rights, a file's group specification can also become a user's group
+            ID, should that user execute the file's contents.  Therefore, any
+            changes in a file's group specification are important, and should be
+            monitored.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-file-mode">
+          <title>File Mode</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!file mode</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Encompassing the file's "permissions", the mode is a set of bits
+            that specifies permitted access for the file's owner, group members,
+            and everyone else.  Even more important are two additional bits that
+            determine whether a user's group or user ID should be changed if
+            they execute the program contained in the file.  Since these little
+            bombshells can let any user become <filename>root</filename> for the
+            duration of the program, it pays to be extra careful with a file's
+            permissions.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-md5-checksum">
+          <title>MD5 Checksum</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!MD5 checksum</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            The MD5 checksum of a file is simply a 128-bit number that is
+            mathematically derived from the contents of the file.  The MD5
+            algorithm was designed by Ron Rivest, the "R" in the popular RSA
+            public-key encryption algorithm.  The "MD" in "MD5" stands for
+            <emphasis>Message Digest</emphasis>, which is a pretty accurate
+            description of what it does.
+          </para>
+          <para>
+            Unlike literary digests, an MD5 checksum conveys no information
+            about the contents of the original file.  However, it possesses one
+            unique trait:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  <emphasis>Any</emphasis> change to the file, no matter how
+                  small, results in a change to the MD5 checksum.
+                  <footnote>
+                    <para>
+                      From a strictly theoretical standpoint, this is not
+                      entirely true.  Using the lingo of cryptologists, it is
+                      believed to be "computationally infeasible" to find two
+                      messages that produce the same MD5 checksum.
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            RPM creates MD5 checksums of all files it manipulates, and stores
+            them in its database.  For all intents and purposes, if one of these
+            files is changed, the MD5 checksum will change, and RPM will detect
+            it.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-file-size">
+          <title>File Size</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!file size</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            As if the use of MD5 isn't enough, RPM also keeps track of file
+            sizes.  A difference of even one byte more or less will not go
+            unnoticed.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-major-number">
+          <title>Major Number</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!major number</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Device character and block files possess a major number.  The major
+            number is used to communicate information to the device driver
+            associated with the special file.  For instance, under Linux the
+            special files for SCSI disk drives should have a major number of 8,
+            while the major number for an IDE disk drive's special file would be
+            3.  As you can imagine, any change to a file's major number can have
+            disastrous effects, and is tracked by RPM.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-minor-number">
+          <title>Minor Number</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!minor number</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            A file's minor number is similar in concept to the major number, but
+            conveys different information to the device driver.  In the case of
+            disk drives, this information can consist of a unit identifier.
+            Should the minor number change, RPM will detect it.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-symbolic-link">
+          <title>Symbolic Link</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!symbolic link</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            If the file in question is really a symbolic link, the text string
+            containing the name of the linked-to file is checked.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-verify-modification-time">
+          <title>Modification Time</title>
+          <indexterm>
+            <primary><command>rpm -V</command>!attributes verified!modification time</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Most operating systems keep track of the date and time that a file
+            was last modified.  RPM uses this to its advantage by keeping
+            modification times in its database.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-verify-output">
+      <title>When Verification Fails - <command>rpm -V</command> Output</title>
+      <indexterm>
+        <primary><command>rpm -V</command>!output of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        When verifying a package, RPM produces output <emphasis>only</emphasis>
+        if there is a verification failure.  When a file fails verification, the
+        format of the output is a bit cryptic, but it packs all the information
+        you need into one line per file.  Here is the format:
+
+        <figure id="sc-rpm-verify-output-format">
+          <title>Output Format for <command>rpm -V</command></title>
+          <screen width="60">
+<computeroutput>
+SM5DLUGT c <userinput>file</userinput>
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Where:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              <computeroutput>S</computeroutput> is the file size.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>M</computeroutput> is the file's mode.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>5</computeroutput> is the MD5 checksum of the
+              file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>D</computeroutput> is the file's major and minor
+              numbers.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>L</computeroutput> is the file's symbolic link
+              contents.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>U</computeroutput> is owner of the file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>G</computeroutput> is the file's group.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>T</computeroutput> is the modification time of the
+              file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <computeroutput>c</computeroutput> appears only if the file is a
+              configuration file.
+              <indexterm>
+                <primary>config files</primary>
+              </indexterm>
+              This is handy for quickly identifying config files, as they are
+              very likely to change, and therefore, very
+              <emphasis>unlikely</emphasis> to verify successfully.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <command><computeroutput>file</computeroutput></emphasis> is the
+              file that failed verification.  The complete path is listed to
+              make it easy to find.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        It's unlikely that <emphasis>every</emphasis> file attribute will fail
+        to verify, so each of the eight attribute flags will only appear if
+        there is a problem.  Otherwise, a "<computeroutput>.</computeroutput>"
+        will be printed in that flag's place.  Let's look at an example or two:
+
+        <figure id="sc-rpm-verify-example">
+          <title>Example of <command>rpm -V</command> Output</title>
+          <screen width="60">
+<computeroutput>
 .M5....T   /usr/X11R6/lib/X11/fonts/misc/fonts.dir
-</screen>
-</figure>
-In this case, the mode, MD5 checksum, and modification time for the
-specified file have failed to verify.  The file is not a config file (Note
-the absence of a "<computeroutput>c</computeroutput>" between the attribute list and the
-filename).
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        In this case, the mode, MD5 checksum, and modification time for the
+        specified file have failed to verify.  The file is not a config file
+        (Note the absence of a "<computeroutput>c</computeroutput>" between the
+        attribute list and the filename).
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-verify-example2">
+          <title>Another Example of <command>rpm -V</command> Output</title>
+          <screen width="60">
+<computeroutput>
 S.5....T c /etc/passwd
-</screen>
-</figure>
-Here, the size, checksum, and modification time of the system password file
-have all changed.  The "<computeroutput>c</computeroutput>" indicates that this is a config file.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Here, the size, checksum, and modification time of the system password
+        file have all changed.  The "<computeroutput>c</computeroutput>"
+        indicates that this is a config file.
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-verify-example3">
+          <title>Yet Another Example of <command>rpm -V</command> Output</title>
+          <screen width="60">
+<computeroutput>
 missing    /var/spool/at/spool
-</screen>
-</figure>
-This last example illustrates what RPM does when a file, that should be
-there, is missing entirely.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        This last example illustrates what RPM does when a file, that should be
+        there, is missing entirely.
+      </para>
+      <sect2 id="s2-rpm-verify-verification-failure-messages">
+        <title>Other Verification Failure Messages</title>
+        <para>
+          When <command>rpm -V</command> finds other problems, the output is a
+          bit easier to understand:
 
-<sect2 id="s2-rpm-verify-">
-<title>Other Verification Failure Messages</title>
-When <command>rpm -V</command> finds other problems, the output is a bit easier to
-understand:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -V blather</userinput>
+          <figure id="sc-rpm-verify-dependency-message">
+            <title>
+              Dependency-Related Message from <computeroutput>rpm
+              -V</computeroutput>
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -V blather</userinput>
+<computeroutput>
 Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
-#
-</screen>
-</figure>
-It's pretty easy to see that the <filename>blather</filename> package requires at least
-version 3.1 of the <filename>bother</filename> package.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          It's pretty easy to see that the <filename>blather</filename> package
+          requires at least version 3.1 of the <filename>bother</filename>
+          package.
+        </para>
+        <para>
+          The output from a package's verification script is a bit harder to
+          categorize, as the script's contents, as well as its messages, are
+          entirely up to the package builder.
+        </para>
+      </sect2>
+    </sect1>
 
-The output from a package's verification script is a bit harder to
-categorize, as the script's contents, as well as its messages, are entirely
-up to the package builder.
+    <sect1 id="s1-rpm-verify-what-to-verify">
+      <title>Selecting What to Verify, and How</title>
+      <indexterm>
+        <primary><command>rpm -V</command>!options</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!output of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <para>
+        There are several ways to verify packages installed on your system.  If
+        you've taken a look at RPM's query command, you'll find that many of
+        them are similar.  Let's start with the simplest method of specifying
+        packages --- the package label.
+      </para>
 
-</sect2>
+      <sect2 id="s2-rpm-verify-package-label">
+        <title>
+          The Package Label --- Verify an Installed Package Against the RPM
+          Database
+        </title>
+        <!-- label: verify-pkg-name -->
+        <indexterm>
+          <primary>package label</primary>
+        </indexterm>
 
-</sect1>
+        <para>
+          You can simply follow the <command>rpm -V</command> command with all
+          or part of a package label.  As with every other RPM command that
+          accepts package labels, you'll need to carefully specify each part of
+          the label you include.  Keep in mind that package names are
+          case-sensitive, so <command>rpm -V PackageName</command> and
+          <command>rpm -V packagename</command> are <emphasis>not</emphasis> the
+          same.  Let's verify the <filename>initscripts</filename> package:
 
-<sect1 id="s1-rpm-verify-">
-<title>Selecting What to Verify, and How</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!options</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+          <figure id="sc-rpm-verify-example">
+            <title>An <command>rpm -V</command> Example</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -V initscripts</userinput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          While it looks like RPM didn't do anything, the following steps were
+          performed:
 
-There are several ways to verify packages installed on your system.  If
-you've taken a look at RPM's query command, you'll find that many of them
-are similar.  Let's start with the simplest method of specifying packages
---- the package label.
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                For every file in the package, RPM checked the nine file
+                attributes that were discussed above.
+              </para>
+            </listitem>
 
-<sect3 id="s3-rpm-verify-">
-<title>The Package Label --- Verify an Installed Package Against the RPM Database</title>
-<!-- label: verify-pkg-name -->
-<indexterm>
-<primary>package label</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+            <listitem>
+              <para>
+                If the package was built with dependencies, the RPM database was
+                searched to ensure the packages that satisfy those dependencies
+                were installed.
+              </para>
+            </listitem>
 
-You can simply follow the <command>rpm -V</command> command with all or part of a
-package label.  As with every other RPM command that accepts package
-labels, you'll need to carefully specify each part of the label you
-include.  Keep in mind that package names are case-sensitive, so
-<command>rpm -V PackageName</command> and <command>rpm -V packagename</command> are <emphasis>not</emphasis>
-the same.  Let's verify the <filename>initscripts</filename> package:
+            <listitem>
+              <para>
+                If the package was built with a verification script, that script
+                was executed.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          In our example, each of these steps was performed without error ---
+          the package verified successfully.  Remember, with <command>rpm
+          -V</command> you'll only see output if a package fails to verify.
+        </para>
+      </sect2>
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -V initscripts</userinput>
-# 
-</screen>
-</figure>
-While it looks like RPM didn't do anything, the following steps were
-performed:
+      <sect2 id="s2-rpm-verify-a-option">
+        <title>
+          <command>-a</command> --- Verify All Installed Packages Against the
+          RPM Database
+        </title>
+        <!-- label: verify-a -->
+        <indexterm>
+          <primary><command>-a</command> option</primary>
+        </indexterm>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-For every file in the package, RPM checked the nine file attributes
-that were discussed above.
+        <para>
+          If you add <command>-a</command> to <command>rpm -V</command>, you can
+          easily verify every installed package on your system.  It might take a
+          while, but when it's done, you'll know exactly what's been changed on
+          your system:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-If the package was built with dependencies, the RPM database was
-searched to ensure the packages that satisfy those dependencies were
-installed.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-If the package was built with a verification script, that script was
-executed.
-
-</para>
-</listitem>
-
-</itemizedlist>
-In our example, each of these steps was performed without error --- the
-package verified successfully.  Remember, with <command>rpm -V</command> you'll only
-see output if a package fails to verify.
-
-<indexterm>
-<primary>package label|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title><command>-a</command> --- Verify All Installed Packages Against the RPM Database</title>
-<!-- label: verify-a -->
-<indexterm>
-<primary>a@<command>-a</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-If you add <command>-a</command> to <command>rpm -V</command>, you can easily verify every
-installed package on your system.  It might take a while, but when it's
-done, you'll know exactly what's been changed on your system:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Va</userinput>
+          <figure id="sc-rpm-verify-">
+            <title>Verifying All Installed Packages</title>
+            <screen width="60">
+<prompt># <userinput>rpm -Va</userinput>
+<computeroutput>
 .M5....T   /usr/X11R6/lib/X11/fonts/misc/fonts.dir
 missing    /var/spool/at/.lockfile
 missing    /var/spool/at/spool
 S.5....T   /usr/lib/rhs/glint/icon.pyc
 ..5....T c /etc/inittab
 ..5.....   /usr/bin/loadkeys
-#
-</screen>
-</figure>
-Don't be too surprised if <command>rpm -Va</command> turns up a surprising number of
-files that failed verification.  RPM's verification process is <emphasis>very</emphasis>
-strict!  In many cases, the changes flagged don't indicate problems
---- they are only an indication of your system's configuration being
-different than what the builders of the installed packages had on
-<emphasis>their</emphasis> system.  Also, some attributes change during normal system
-operation.  However, it would be wise to check into each verification
-failure, just to make sure.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Don't be too surprised if <command>rpm -Va</command> turns up a
+          surprising number of files that failed verification.  RPM's
+          verification process is <emphasis>very</emphasis> strict!  In many
+          cases, the changes flagged don't indicate problems --- they are only
+          an indication of your system's configuration being different than what
+          the builders of the installed packages had on
+          <emphasis>their</emphasis> system.  Also, some attributes change
+          during normal system operation.  However, it would be wise to check
+          into each verification failure, just to make sure.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>a@<command>-a</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-f-option">
+        <title>
+          <command>-f <userinput>&lt;file&gt;</userinput></command> --- Verify
+          the Package Owning
+          <command><userinput>&lt;file&gt;</userinput></command> Against the RPM
+          Database
+        </title>
+        <!-- label: verify-f -->
+        <indexterm>
+          <primary><command>-f</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Imagine this: you're hard at work when a program you've used a million
+          times before suddenly stops working.  What do you do?  Well, before
+          using RPM, you probably tried to find other files associated with that
+          program and see if they had changed recently.
+        </para>
+        <para>
+          Now you can let RPM do at least part of that sleuthing for you.
+          Simply direct RPM to verify the package owning the ailing program:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>-f <emphasis>&lt;file&gt;</command></emphasis> --- Verify the Package Owning <command><emphasis>&lt;file&gt;</command></emphasis> Against the RPM Database</title>
-<!-- label: verify-f -->
-<indexterm>
-<primary>f@<command>-f</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Imagine this: you're hard at work when a program you've used a million
-times before suddenly stops working.  What do you do?  Well, before using
-RPM, you probably tried to find other files associated with that program
-and see if they had changed recently.
-
-Now you can let RPM do at least part of that sleuthing for you.  Simply
-direct RPM to verify the package owning the ailing program:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
+          <figure id="sc-rpm-verify-f-option-example">
+            <title>*** Enter New Title Here ***</title>
 <screen width="60">
 % <userinput>rpm -Vf /sbin/cardmgr</userinput>
 S.5....T c /etc/sysconfig/pcmcia
