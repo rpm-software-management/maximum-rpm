@@ -109,7 +109,7 @@
 
         <listitem>
           <para>
-            <literal>sparc</literal> &mdash; Sun Microsystem's SPARC series of
+            <literal>sparc</literal> &mdash; Sun Microsystems' SPARC series of
             chips.
           </para>
         </listitem>
@@ -1204,7 +1204,7 @@ rpm-2.2.1-1
         byte (<literal>08</literal>) is the flag used by GNU zip to indicate the
         file has been compressed with <command>gzip</command>'s "deflation"
         method.  The eighth byte has a value of <literal>02</literal>, which
-        means that the archive has been compresed using
+        means that the archive has been compressed using
         <command>gzip</command>'s maximum compression setting.  The following
         byte contains a code indicating the operating system under which the
         archive was compressed.  A <literal>03</literal> in this byte indicates

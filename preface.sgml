@@ -12,14 +12,15 @@
       </indexterm>
 
       <para>
-        Welcome!  This is a book about the &RH; Package Manager or, as it is
-        known to it's friends, RPM.  The history of RPM is inextricably linked
-        to the history of Linux, so a bit of Linux history may be in order.
-        Linux is a full-featured implementation of a UNIX-like operating system,
-        and has taken the computing world by storm.
+        Welcome!  This is a book about the &RH; Package Manager, or RPM Package
+        Manager, known to its friends as simply RPM.  The history of RPM is
+        inextricably linked to the history of GNU/Linux, so a bit of GNU/Linux
+        history may be in order.  GNU/Linux is a full-featured implementation of
+        a UNIX-like operating system, and has taken the computing world by
+        storm.
       </para>
       <para>
-        And for good reason &mdash; With the addition of Linux, an Intel-based
+        And for a good reason &mdash; When choosing GNU/Linux, an Intel-based
         personal computer that had previously been prisoner of the dreaded
         Windows hourglass is transformed into a fully multitasking, network
         capable, personal <emphasis>workstation</emphasis>.  All for the cost of
@@ -27,37 +28,37 @@
       </para>
       <para>
         Of course, if you're not the type to tinker with downloaded software,
-        many companies have created CDROMs containing Linux and associated
+        many companies have created CDROMs containing GNU/Linux and associated
         software.  The amount of tinkering required with these
         <firstterm>distributions</firstterm> has varied widely.  The phrase "You
-        get what you pay for" is never more true than in the area of Linux
+        get what you pay for" is never more true than in the area of GNU/Linux
         distributions.
       </para>
       <para>
         One distribution bears the curious name "&RHL;".  Produced by a
-        company of the same name, this Linux distribution was different.  One of
-        the key decisions a new Linux user needs to make is which of the many
-        different parts of the distribution to install on their system.  Most
-        distributions use some sort of menu, making it easy to pick and choose.
-        &RHL; is no different.
+        company of the same name, this GNU/Linux distribution was different.
+        One of the key decisions a new Linux user needs to make is which of the
+        many different parts of the distribution to install on their system.
+        Most distributions use some sort of menu, making it easy to pick and
+        choose.  &RHL; is no different.
       </para>
       <para>
         But what <emphasis>is</emphasis> different about &RHL; is that the
         creators of the distribution wanted their customers to have the the
         ability to make the same choices long <emphasis>after</emphasis> the
         installation process was over.  Some commercial UNIX systems have this
-        capability (called "package management"), and a few Linux distributors
-        were trying to come up with something similar, but none had the
-        extensive scope present in RPM.
+        capability (called "package management"), and a few GNU/Linux
+        distributors were trying to come up with something similar, but none had
+        at the time the extensive scope present in RPM.
       </para>
       <para>
         Over time, &RHL; has become the most popular distribution available
-        today.  For it to edge out the previous leader (known as Slackware) in
-        just two years is amazing.  There has to be a reason for this kind of
-        success, and a good part of the reason is RPM.  But until now, there has
-        been precious little in terms of RPM documentation.  You could say that
-        RPM's ease of use has made detailed instructions practically
-        unnecessary, and you'd be right.
+        today.  For it to edge out the previous leader (Slackware) in just two
+        years is amazing.  There has to be a reason for this kind of success,
+        and a good part of the reason is RPM.  But until the first edition of
+        this book, there had been precious little in terms of RPM documentation.
+        You could say that RPM's ease of use has made detailed instructions
+        practically unnecessary, and you'd be right.
       </para>
       <para>
         However, there are always people that want to know more about their
@@ -65,7 +66,7 @@
         a book on RPM worthwhile.  But there's more to the story than that.
       </para>
       <para>
-        There is a truism in the world of free software, that goes something
+        There is a truism in the world of Free Software, that goes something
         like this: If there's a better solution freely available, use it!  RPM
         is no exception to the rule.  Put under the terms of the GNU General
         Public License (Meaning: RPM cannot be made proprietary by
@@ -92,7 +93,7 @@
     </sect1>
 
     <sect1 id="s1-preface-parts">
-      <title>Parts of the book, and Who They're For</title>
+      <title>Parts of the book, and who they're for</title>
       <indexterm>
         <primary>book, sections of</primary>
       </indexterm>
@@ -104,12 +105,12 @@
       <para>
         This book is divided into two major sections.  The first section is for
         anyone that needs to know how to use RPM on their system.  Given the
-        state of the Linux arena today, this could include just about anyone,
-        including people that are new to Linux, or even UNIX.  So those of you
-        that think that
+        state of the GNU/Linux arena today, this could mean just about anyone,
+        including people that are new to GNU/Linux, or even UNIX.  So those of
+        you that think that
 
         <screen width="60">
-<userinput>ls -FAl !*|less</userinput>
+<userinput>ls -FAl !* | less</userinput>
         </screen>
 
          is serious magic (or maybe even a typing error), relax &mdash; we'll
@@ -117,8 +118,8 @@
       </para>
       <para>
         In the book's second half, we'll be covering all there is to know about
-        building packages using RPM.  Since software engineering on Linux and
-        UNIX systems requires in-depth knowledge of the operating system,
+        building packages using RPM.  Since software engineering on GNU/Linux
+        and UNIX systems requires in-depth knowledge of the operating system,
         available tools, and basic programming concepts, we're going to assume
         that the reader has sufficient background in these areas.  Feel free to
         browse through the second half, but don't hesitate to seek additional

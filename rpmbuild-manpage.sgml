@@ -158,7 +158,7 @@
     </varlistentry><varlistentry>
     <term><option>--dbpath</option> <replaceable>DIRECTORY</replaceable></term>
       <listitem><para>
-	Use the database in <replaceable>DIRECTORY</replaceable> rathen
+	Use the database in <replaceable>DIRECTORY</replaceable> rather
 	than the default path <filename>/var/lib/rpm</filename>
       </para></listitem>
     </varlistentry><varlistentry>

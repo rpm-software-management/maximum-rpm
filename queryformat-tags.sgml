@@ -113,16 +113,16 @@
       </para>
     </sect2>
 
-    <sect2 id="s2-queryformat-tags-serial">
-      <title>The <command>SERIAL</command> Tag</title>
+    <sect2 id="s2-queryformat-tags-epoch">
+      <title>The <command>EPOCH</command> Tag</title>
       <indexterm>
         <primary><command>--queryformat</command> option</primary>
         <secondary>tags for</secondary>
-        <tertiary><command>SERIAL</command></tertiary>
+        <tertiary><command>EPOCH</command></tertiary>
       </indexterm>
 
       <para>
-        The <command>SERIAL</command> tag is used to display the serial number
+        The <command>EPOCH</command> tag is used to display the epoch number
         of the package.
       </para>
       <para>
@@ -321,17 +321,17 @@
       </para>
     </sect2>
 
-    <sect2 id="s2-queryformat-tags-copyright">
-      <title>The <command>COPYRIGHT</command> Tag</title>
+    <sect2 id="s2-queryformat-tags-license">
+      <title>The <command>LICENSE</command> Tag</title>
       <indexterm>
         <primary><command>--queryformat</command> option</primary>
         <secondary>tags for</secondary>
-        <tertiary><command>COPYRIGHT</command></tertiary>
+        <tertiary><command>LICENSE</command></tertiary>
       </indexterm>
 
       <para>
-        The <command>COPYRIGHT</command> tag is used to display the copyright
-        terms of the package.
+        The <command>LICENSE</command> tag is used to display the distribution
+        license of the package.
       </para>
       <para>
         Array: No
@@ -1049,7 +1049,7 @@
 
       <para>
         The <command>REQUIREVERSION</command> tag is used to display the
-        version-related aspect of each capbility the package requires.
+        version-related aspect of each capability the package requires.
       </para>
       <para>
         Array: Yes (Size: One entry per <command>requireversion</command>)

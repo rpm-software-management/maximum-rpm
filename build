@@ -2,8 +2,8 @@
 set -x
 
 subdir=./html
-docbook_css="/usr/share/sgml/docbook/dsssl-stylesheets-1.59/test/docbook.css"
-images="/usr/share/sgml/docbook/dsssl-stylesheets-1.59/images"
+docbook_css="/usr/share/sgml/docbook/dsssl-stylesheets/test/docbook.css"
+images="/usr/share/sgml/docbook/dsssl-stylesheets/images"
 
 rm -rf $subdir
 mkdir -p $subdir/stylesheet-images

@@ -169,7 +169,7 @@ Summary: A CD player app that rocks!
 Name: cdplayer
 Version: 1.0
 Release: 1
-Copyright: GPL
+License: GPL
 Group: Applications/Sound
 Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
 URL: http://www.gnomovision.com/cdplayer/cdplayer.html
@@ -227,14 +227,14 @@ cannot be equaled with more mundane software...
           </para>
         </sect3>
 
-        <sect3 id="s3-rpm-build-preamble-copyright">
-          <title>Copyright</title>
+        <sect3 id="s3-rpm-build-preamble-license">
+          <title>License</title>
           <para>
-            The <command>copyright</command> line is used to hold the packaged
-            software's copyright information.  This makes it easy to determine
+            The <command>license</command> line is used to hold the packaged
+            software's license information.  This makes it easy to determine
             which packages can be freely redistributed, and which cannot.  In
-            our case, <application>cdplayer</application> is made available under the
-            terms of the GNU General Public License, so we've put
+            our case, <application>cdplayer</application> is made available
+            under the terms of the GNU General Public License, so we've put
             <userinput>GPL</userinput> on the line.
           </para>
         </sect3>
@@ -730,7 +730,7 @@ make install
 <computeroutput>
 * Package: cdplayer
 + umask 022
-+ echo Excuting: %prep
++ echo Executing: %prep
 Excuting: %prep
 + cd /usr/src/redhat/BUILD
 + cd /usr/src/redhat/BUILD
@@ -1013,7 +1013,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           through the build directory and make sure everything is proceeding
           properly.  If there are problems, stopping during the build process
           permits them to see exactly what is going wrong, and where.  Here is a
-          list of points RPM can be stoped at during the build:
+          list of points RPM can be stopped at during the build:
 
           <itemizedlist mark="bullet">
             <listitem>

@@ -975,7 +975,7 @@
   </sect1>
 
   <sect1 id="s1-rpm-commands-initialize-database-mode">
-    <title>Initalize Database Mode</title>
+    <title>Initialize Database Mode</title>
     <indexterm>
       <primary>RPM</primary>
       <secondary>command reference</secondary>
@@ -983,7 +983,7 @@
     </indexterm>
 
     <para>
-      RPM's initalize database mode is used to create a new RPM database:
+      RPM's initialize database mode is used to create a new RPM database:
     </para>
     <para>
       Format: <command>rpm --initdb
@@ -991,7 +991,7 @@
     </para>
 
     <sect2 id="s2-rpm-commands-initialize-database-options">
-      <title>Options to Initalize database Mode</title>
+      <title>Options to Initialize database Mode</title>
 
       <para>
         Only the global options may be used.

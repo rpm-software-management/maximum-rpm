@@ -96,23 +96,23 @@
   </indexterm>
 
   <indexterm>
-    <primary>serial numbers</primary>
-    <see>dependencies, serial numbers, using</see>
+    <primary>epoch numbers</primary>
+    <see>dependencies, epoch numbers, using</see>
   </indexterm>
 
   <indexterm>
-    <primary>numbers, serial</primary>
-    <see>dependencies, serial numbers, using</see>
+    <primary>numbers, epoch</primary>
+    <see>dependencies, epoch numbers, using</see>
   </indexterm>
 
   <indexterm>
-    <primary>serial numbers</primary>
-    <see>spec file, tags in, <command>serial</command></see>
+    <primary>epoch numbers</primary>
+    <see>spec file, tags in, <command>epoch</command></see>
   </indexterm>
 
   <indexterm>
-    <primary>numbers, serial</primary>
-    <see>spec file, tags in, <command>serial</command></see>
+    <primary>numbers, epoch</primary>
+    <see>spec file, tags in, <command>epoch</command></see>
   </indexterm>
 
   <indexterm>
@@ -333,12 +333,12 @@
   <indexterm>
     <primary>packages</primary>
     <secondary>building</secondary>
-    <see><command>rpm -b</command></see>
+    <see><command>rpmbuild -b</command></see>
   </indexterm>
 
   <indexterm>
     <primary>building packages</primary>
-    <see><command>rpm -b</command></see>
+    <see><command>rpmbuild -b</command></see>
   </indexterm>
 
   <indexterm>

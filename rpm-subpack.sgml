@@ -156,7 +156,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description
@@ -412,7 +412,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description
@@ -563,7 +563,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description
@@ -745,7 +745,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description
@@ -900,7 +900,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description
@@ -1007,7 +1007,7 @@ Name: foo
 Version: 2.7
 Release: 1
 Source: foo-2.7.tgz
-CopyRight: probably not
+License: probably not
 Summary: The foo app, and the baz library needed to build it
 Group: bogus/junque
 %description

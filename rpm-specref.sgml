@@ -229,33 +229,34 @@ Summary: A CD player app that rocks!
         </para>
       </sect3>
 
-      <sect3 id="s3-rpm-specref-copyright">
-        <title>The <command>Copyright:</command> Tag
+      <sect3 id="s3-rpm-specref-license">
+        <title>The <command>License:</command> Tag
 	</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>Copyright:</command></tertiary>
+          <tertiary><command>License:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>Copyright:</command> tag</primary>
+          <primary><command>License:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>Copyright:</command> tag is used to define the copyright
-          terms applicable to the software being packaged.
+          The <command>License:</command> tag is used to define the license
+          terms applicable to the software being packaged. This tag is also
+          known as the <command>Copyright:</command> tag.
 
           <screen width="60">
 <computeroutput>
-Copyright: GPL
+License: GPL
 </computeroutput>
           </screen>
         </para>
 
         <para>
-          See also: <xref linkend="s3-rpm-inside-copyright-tag">.
+          See also: <xref linkend="s3-rpm-inside-license-tag">.
         </para>
       </sect3>
 
@@ -517,7 +518,7 @@ Requires: playmidi &gt;= 2.3
 
         <para>
           If the <command>Requires:</command> tag needs to perform a comparison
-          against a serial numbered defined with the <command>Serial:</command>
+          against an epoch numbered defined with the <command>Epoch:</command>
           tag, then the proper format would be:
 
           <screen width="60">
@@ -532,33 +533,34 @@ Requires: playmidi =S 4
         </para>
       </sect3>
 
-      <sect3 id="s3-rpm-specref-serial">
-        <title>The <command>Serial:</command> Tag</title>
+      <sect3 id="s3-rpm-specref-epoch">
+        <title>The <command>Epoch:</command> Tag</title>
 
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
-          <tertiary><command>Serial:</command></tertiary>
+          <tertiary><command>Epoch:</command></tertiary>
         </indexterm>
 
         <indexterm>
-          <primary><command>Serial:</command> tag</primary>
+          <primary><command>Epoch:</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>Serial:</command> tag is used to define a serial number
-          for a package.  This is only necessary if RPM is unable to determine
-          the ordering of a package's version numbers.
+          The <command>Epoch:</command> tag is used to define an epoch number
+          for a package.  It is also known as the <command>Serial:</command>
+          tag.  This is only necessary if RPM is unable to determine the
+          ordering of a package's version numbers.
 
           <screen width="60">
 <computeroutput>
-Serial: 4
+Epoch: 4
 </computeroutput>
           </screen>
         </para>
 
         <para>
-          See also: <xref linkend="s3-rpm-inside-serial-tag">.
+          See also: <xref linkend="s3-rpm-inside-epoch-tag">.
         </para>
       </sect3>
 
@@ -608,7 +610,7 @@ Conflicts: playmidi &gt;= 2.3
 
         <para>
           If the <command>Conflicts:</command> tag needs to perform a comparison
-          against a serial numbered defined with the <command>Serial:</command>
+          against an epoch numbered defined with the <command>Epoch:</command>
           tag, then the proper format would be:
 
           <screen width="60">
@@ -1476,6 +1478,26 @@ The scriptlet can contain any valid <command>sh</command> commands.
         </para>
       </sect3>
 
+      <sect3 id="s3-rpm-specref-setup-q-option">
+        <title>The <option>-q</option> Option</title>
+
+        <para>
+          The <option>-q</option> option is used to direct
+          <command>%setup</command> to quiet its output.  Verbose file listings
+          won't be displayed when unpacking archives with this option.
+
+          <screen width="60">
+<computeroutput>
+%setup -c
+</computeroutput>
+          </screen>
+        </para>
+
+        <para>
+          See also: <xref linkend="s3-rpm-inside-setup-c-option">.
+        </para>
+      </sect3>
+
       <sect3 id="s3-rpm-specref-setup-c-option">
         <title>The <option>-c</option> Option</title>
 
@@ -1796,7 +1818,7 @@ The scriptlet can contain any valid <command>sh</command> commands.
     <title>Directives For the <command>%files</command> list</title>
 
     <para>
-      This section lists the various directived used in the
+      This section lists the various directives used in the
       <command>%files</command> lists.
     </para>
 

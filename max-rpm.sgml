@@ -20,6 +20,8 @@
 <!ENTITY rpmq "<command>rpmquery</command>">
 <!-- An rpmsign command... -->
 <!ENTITY rpmk "<command>rpmsign</command>">
+<!-- An rpmgraph command... -->
+<!ENTITY rpmg "<command>rpmgraph</command>">
 <!-- *************** Chapter entities... *************** -->
 <!ENTITY PREFACE SYSTEM "preface.sgml">
 <!ENTITY INTRO-TO-RPM SYSTEM "intro-to-rpm.sgml">
@@ -62,7 +64,7 @@
  <bookinfo>
     <title>Maximum RPM</title>
     <titleabbrev>Max. RPM</titleabbrev>
-    <subtitle>Taking the Red Hat Package Manager to the Limit</subtitle>
+    <subtitle>Taking the RPM Package Manager to the Limit</subtitle>
     <revhistory>
       <revision>
         <revnumber>
@@ -97,7 +99,18 @@
           Translated into DocBook
         </revremark>
       </revision>
-    </revhistory>
+       <revision>
+        <revnumber>
+          1.3
+        </revnumber>
+        <date>
+          05-March-2003
+        </date>
+        <revremark>
+          Start of the update process
+        </revremark>
+      </revision>
+   </revhistory>
     <edition>2</edition>
     <isbn>
       <remark>
@@ -111,6 +124,7 @@
       <para>Sams first edition printed ???, 1999</para>
       <para>Sams first edition reprinted ???, 1999</para>
     </printhistory>
+    <!--
     <publisher>
       <publishername>Red Hat, Inc.</publishername>
       <address>
@@ -124,6 +138,7 @@
        <city>Research Triangle Park</city>, <state>NC</state> <postcode>27713</postcode>
       </address>
     </publisher>
+    -->
     <authorgroup>
       <author>
         <firstname>Edward</firstname>
@@ -156,7 +171,7 @@
       </para>
   </legalnotice>
  </bookinfo>
-
+<!--
   <dedication>
     <blockquote>
       <para>
@@ -167,7 +182,7 @@
       </para>
     </blockquote>
   </dedication>
-
+-->
   <toc>
     <title>Table of Contents</title>
   </toc>

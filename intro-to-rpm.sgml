@@ -942,7 +942,7 @@
 
         <para>
           While these labels look like they have very little in common, in fact
-          they all follow RPM's package labelling convention.  There are three
+          they all follow RPM's package labeling convention.  There are three
           different components in every package label.  Let's look at each one
           in order:
         </para>

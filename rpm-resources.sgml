@@ -33,7 +33,7 @@
       <screen width="60">
 <prompt>% </prompt><userinput>rpm --version</userinput>
 <computeroutput>
-RPM version 2.3
+RPM version 4.2
 </computeroutput>
 <prompt>%</prompt>
       </screen>
@@ -50,92 +50,13 @@ RPM version 2.3
       <indexterm>
         <primary>RPM</primary>
         <secondary>obtaining</secondary>
-        <tertiary>FTP sites carrying</tertiary>
+        <tertiary>main download site</tertiary>
       </indexterm>
 
       <para>
         If you can't find RPM on your system, you'll have to grab a copy by FTP.
-        RPM can be found practically anywhere &RHL; is available.  While the
-        most obvious site, <filename>ftp.redhat.com</filename>, is certainly an
-        option, it might not be your best choice.  For one, it can be
-        <emphasis>very</emphasis> busy.  For another, unless your link to the
-        Internet is near Red Hat's sprawling development campus in Durham, North
-        Carolina, there's probably an FTP site that is closer to you.
-      </para>
-
-      <para>
-        Here is a list of sites that mirror &RHI;'s main FTP site.  Be aware
-        that this list changes frequently, so don't be surprised if a particular
-        site no longer mirrors Red Hat, or has moved it from the paths listed
-        below:
-        <footnote>
-          <para>
-            An up-to-date copy of the list of mirror sites is always available
-            on <filename>ftp.redhat.com</filename>, in the file
-            <filename>MIRRORS</filename>.
-          </para>
-        </footnote>
-
-        <screen width="60">
-<computeroutput>
-FTP Site                Directory
-========                =========
-sunsite.doc.ic.ac.uk    /packages/linux/redhat
-
-ftp.mpi-sb.mpg.de       /pub/linux/mirror/ftp.redhat.com
-ftp.jate.u-szeged.hu    /pub/linux/redhat
-ftp.ibp.fr              /pub/linux/distributions/redhat
-ftp.gwdg.de             /pub/linux/install/redhat
-ftp.msu.ru              /pub/Linux/RedHat
-ftp.sgg.ru              /mirror/redhat
-sunsite.mff.cuni.cz     /OS/Linux/Distributions/Redhat
-ftp.ton.tut.fi          /pub/Linux/RedHat
-ftp.funet.fi            /pub/Linux/images/RedHat
-sunsite.icm.edu.pl      /pub/Linux/redhat
-ftp.arch.pwr.proc.pl    /mirror/linux/redhat
-ftp.rhi.hi.is           /pub/linux/RedHat
-ftp.nvg.unit.no         /pub/linux/redhat
-ftp.pk.edu.pl           /pub/linux/redhat
-ftp.nluug.nl            /pub/os/Linux/distr/RedHat
-dutepp0.et.tudelft.nl   /pub/Unix/Linux/Distributions/redhat
-ftp.iol.ie              /pub/Unix/Linux/distributions/RedHat
-sunsite.auc.dk          /pub/os/linux/redhat
-ftp.tku.edu.tw          /Unix/Linux/RedHat
-ftp.cs.us.es            /pub/Linux/redhat
-
-ftp.is.co.za            /linux/distributions/redhat
-
-ftp.dstc.edu.au         /pub/linux-redhat
-
-ftp.lab.kdd.co.jp       /OS/Linux/packages/redhat
-sunsite.ust.hk          /pub/Linux/distributions/redhat
-
-ftp.sunsite.dcc.uchile.cl  /pub/OS/linux/redhat
-
-ftp.interpath.net       /pub/linux/redhat
-schlitz.cae.wisc.edu    /pub/Linux/RedHat
-ftp.wownet.net          /LINUX/redhat
-ftp.engr.uark.edu       /pub/linux/redhat
-ftp.infomagic.com       /pub/mirrors/linux/RedHat
-ftp.wgs.com             /pub/linux/redhat
-ftp.drcdrom.com         /pub/linux-redhat
-ftp.hkstar.com          /pub/Linux/redhat
-ftp.pht.com             /pub/linux/redhat
-linux.ucs.indiana.edu   /pub/linux/redhat
-ftp.uoknor.edu          /linux/redhat
-ftp.cc.gatech.edu       /pub/linux/distributions/redhat
-uiarchive.cso.uiuc.edu  /pub/systems/linux/distributions/redhat
-ftp.caldera.com         /pub/mirrors/redhat
-ftp.cms.uncwil.edu      /linux/redhat
-ftp.wilmington.net      /linux/redhat
-sunsite.unc.edu         /pub/Linux/distributions/redhat
-gatekeeper.dec.com      /pub/linux/redhat
-ftp.rge.com             /pub/systems/linux/redhat
-linuxwww.db.erau.edu    /pub/linux/distrib/redhat
-ftp.eit.com             /pub/mirrors/redhat
-ftp.real-time.com       /pub/redhat
-</computeroutput>
-        </screen>
+        RPM can be found at <filename>ftp.rpm.org</filename>.  It is no longer
+        available from <filename>ftp.redhat.com</filename> since version 2.5.1.
       </para>
     </sect2>
 
@@ -157,58 +78,56 @@ ftp.real-time.com       /pub/redhat
         <screen width="60">
 <prompt>ftp&gt; </prompt><userinput>ls</userinput>
 <computeroutput>
-200 PORT command successful.
-150 Opening ASCII mode data connection for /bin/ls.
-total 2689
-drwxr-xr-x  6 root  97    2048 Jul 18 10:04 .
-drwxr-xr-x  6 root  97    1024 Aug  2 10:09 ..
-lrwxrwxrwx  1 root  root    23 Jan 22  1996 RPM-HOWTO.ps -&gt;
-                                            ../../docs/RPM-HOWTO.ps
-lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt; 
-                                            ../../docs/RPM-HOWTO.txt
--rw-rw-r--  1 root  97   59239 Jan 20  1996 paper.ps.gz
--rw-r--r--  1 root  97  365319 Jul 18 06:05 rpm-2.2.2-1.axp.rpm
--rw-rw-r--  1 root  97  278620 Jul 18 06:05 rpm-2.2.2-1.i386.cpio.gz
--rw-r--r--  1 root  97  282015 Jul 18 06:05 rpm-2.2.2-1.i386.rpm
--rw-r--r--  1 root  97  279855 Jul 18 06:05 rpm-2.2.2-1.sparc.rpm
--rw-r--r--  1 root  97  359354 Jul 18 06:05 rpm-2.2.2-1.src.rpm
--rw-rw-r--  1 root  97  356943 Jul 18 06:05 rpm-2.2.2.tar.gz
--rw-r--r--  1 root  97  122157 Jul 18 06:05 rpm-devel-2.2.2-1.axp.rpm
--rw-r--r--  1 root  97   51132 Jul 18 06:05 rpm-devel-2.2.2-1.i386.rpm
--rw-r--r--  1 root  97   54470 Jul 18 06:05 rpm-devel-2.2.2-1.sparc.rpm
--rw-r--r--  1 root  97   35504 May  1 04:28 rpmbuild.ps.gz
-226 Transfer complete.
+227 Entering Passive Mode (66,187,233,245,39,44)
+150 Here comes the directory listing.
+-rw-r--r--    1 2369   300      79155 Sep 17 21:17 popt-1.7-8x.alpha.rpm
+-rw-r--r--    1 2369   300      69704 Sep 17 21:17 popt-1.7-8x.i386.rpm
+-rw-r--r--    1 2369   300      88284 Sep 17 21:17 popt-1.7-8x.ia64.rpm
+-rw-rw-r--    1 2369   300     574549 Sep 17 20:57 popt-1.7.tar.gz
+-rw-r--r--    1 2369   300    2647153 Sep 17 21:17 rpm-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300    2222224 Sep 17 21:17 rpm-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300    3390500 Sep 17 21:17 rpm-4.1-8x.ia64.rpm
+-rw-r--r--    1 2369   300    6469152 Sep 17 21:17 rpm-4.1-8x.src.rpm
+-rw-rw-r--    1 2369   300    5670825 Sep 17 20:55 rpm-4.1.i386.tar.gz
+-rw-rw-r--    1 2369   300    6494145 Sep 17 19:38 rpm-4.1.tar.gz
+-rw-r--r--    1 2369   300      83884 Sep 17 21:17 rpm-build-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300      79365 Sep 17 21:17 rpm-build-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300      95701 Sep 17 21:17 rpm-build-4.1-8x.ia64.rpm
+-rw-r--r--    1 2369   300    3798135 Sep 17 21:17 rpm-devel-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300    3259143 Sep 17 21:17 rpm-devel-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300    3978604 Sep 17 21:17 rpm-devel-4.1-8x.ia64.rpm
+-rw-r--r--    1 2369   300     104653 Sep 17 21:17 rpm-python-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300      97407 Sep 17 21:17 rpm-python-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300     132830 Sep 17 21:17 rpm-python-4.1-8x.ia64.rpm
+226 Directory send OK.
 </computeroutput>
 <prompt>ftp&gt;</prompt>
         </screen>
       </para>
-
+<!-- FIXME start -->
       <para>
         Although the version numbers may change, the types of files kept in this
-        directory will not.  The files <filename>RPM-HOWTO</filename>,
-        <filename>paper.ps.gz</filename>, and
-        <filename>rpmbuild.ps.gz</filename> contain a variety of information
-        concerning RPM.  As such they are valuable sources of supplemental
-        information.  The remaining files contain RPM, packaged for various
-        architectures, and in source form.  We'll look at them, grouped
-        according to their contents.  Here's the first group of files:
+        directory will not.  Here's the first group of files:
 
         <screen width="60">
 <computeroutput>
--rw-r--r--  1 root  97  365319 Jul 18 06:05 rpm-2.2.2-1.axp.rpm
--rw-r--r--  1 root  97  282015 Jul 18 06:05 rpm-2.2.2-1.i386.rpm
--rw-r--r--  1 root  97  279855 Jul 18 06:05 rpm-2.2.2-1.sparc.rpm
+-rw-r--r--    1 2369   300      79155 Sep 17 21:17 popt-1.7-8x.alpha.rpm
+-rw-r--r--    1 2369   300      69704 Sep 17 21:17 popt-1.7-8x.i386.rpm
+-rw-r--r--    1 2369   300      88284 Sep 17 21:17 popt-1.7-8x.ia64.rpm
+-rw-r--r--    1 2369   300    2647153 Sep 17 21:17 rpm-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300    2222224 Sep 17 21:17 rpm-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300    3390500 Sep 17 21:17 rpm-4.1-8x.ia64.rpm
 </computeroutput>
         </screen>
       </para>
 
       <para>
-        The files above are the binary package files for RPM version 2.2.2,
-        release 1, on the Digital Alpha, the Intel 386/486/Pentium, and the Sun
-        SPARC.  Note that the version number will change in time, but the other
-        parts of the file naming convention won't.  As binary package files,
-        they must be installed using RPM.  So if you don't have RPM yet, they
-        won't do you much good.
+        The files above are the binary package files for RPM version 4.1,
+        release 8x (intended for &RHL; 8.x), on the Digital Alpha, the Intel
+        x86, and the Intel IA-64.  Note that the version number will change in
+        time, but the other parts of the file naming convention won't.  As
+        binary package files, they must be installed using RPM.  So if you
+        don't have RPM yet, they won't do you much good.
         <footnote>
           <para>
             If your goal is to install RPM on one of these systems, it might be
@@ -225,22 +144,22 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
 
         <screen width="60">
 <computeroutput>
--rw-r--r--  1 root  97  359354 Jul 18 06:05 rpm-2.2.2-1.src.rpm
+-rw-r--r--    1 2369   300    6469152 Sep 17 21:17 rpm-4.1-8x.src.rpm
 </computeroutput>
         </screen>
       </para>
 
       <para>
-        This is the source package file for RPM version 2.2.2, release 1.  Like
+        This is the source package file for RPM version 4.1, release 8x.  Like
         the binary packages, the source package requires RPM to install &mdash;
         therefore, it cannot be used to perform an initial install of RPM.
         Let's see what else there is here:
 
         <screen width="60">
 <computeroutput>
--rw-r--r--  1 root  97  122157 Jul 18 06:05 rpm-devel-2.2.2-1.axp.rpm
--rw-r--r--  1 root  97   51132 Jul 18 06:05 rpm-devel-2.2.2-1.i386.rpm
--rw-r--r--  1 root  97   54470 Jul 18 06:05 rpm-devel-2.2.2-1.sparc.rpm
+-rw-r--r--    1 2369   300    3798135 Sep 17 21:17 rpm-devel-4.1-8x.alpha.rpm
+-rw-r--r--    1 2369   300    3259143 Sep 17 21:17 rpm-devel-4.1-8x.i386.rpm
+-rw-r--r--    1 2369   300    3978604 Sep 17 21:17 rpm-devel-4.1-8x.ia64.rpm
 </computeroutput>
         </screen>
       </para>
@@ -301,6 +220,8 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
       </para>
     </sect2>
   </sect1>
+
+<!-- FIXME end -->
 
   <sect1 id="s1-rpm-resources-where-to-talk">
     <title>Where to Talk About RPM</title>

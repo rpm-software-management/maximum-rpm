@@ -1,12 +1,12 @@
   <chapter id="ch-rpm-miscellania">
-    <title>Miscellania</title>
+    <title>Miscellanea</title>
     <!-- label: rpm-miscellania -->
 
     <para>
       As with any other large, complex subject, there are always some leftovers
       &mdash; things that just don't seem to fit in any one category.  RPM is no
       exception.  This chapter covers those aspects of RPM that can only be
-      called "miscellania"&hellip;
+      called "miscellanea"&hellip;
     </para>
 
     <sect1 id="s1-rpm-miscellania-other-options">

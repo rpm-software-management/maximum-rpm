@@ -445,7 +445,7 @@ Installing Amanda man pages:
                   <listitem>
                     <para>
                       Make <filename>/etc/dumpdates</filename> readable and
-                      writeable by the client.
+                      writable by the client.
                     </para>
                   </listitem>
 
@@ -716,7 +716,7 @@ Name: amanda
 Version: 2.3.08
 Release: 1
 Group: System/Backup
-Copyright: BSD-like, but see COPYRIGHT file for details
+License: BSD-like, but see COPYRIGHT file for details
 Packager: Edward C. Bailey &lt;bailey@rpm.org&gt;
 URL: http://www.cs.umd.edu/projects/amanda/
 Source: ftp://ftp.cs.umd.edu/pub/amanda/amanda-2.3.0.tar.gz
@@ -2059,7 +2059,7 @@ fi
 
           <para>
             Here, we've used the same approach to add an entry to
-            <filename>/etc/inetd.conf</filename>.  We then hup
+            <filename>/etc/inetd.conf</filename>.  We then HUP
             <command>inetd</command> so the change will take affect, and we're
             done!
           </para>
@@ -2317,7 +2317,7 @@ fi
             Here, we're using <command>grep</command>'s ability to return lines
             that <emphasis>don't</emphasis> match the search string, in order to
             remove every trace of amanda from
-            <filename>/etc/inetd.conf</filename>.  After issuing a hup on inetd,
+            <filename>/etc/inetd.conf</filename>.  After issuing a HUP on inetd,
             we're done.
           </para>
 
@@ -2397,7 +2397,7 @@ fi
             Simply directing the user to the standard amanda documentation
             wasn't the right solution, either.  Many of the steps outlined in
             the <filename>INSTALL</filename> document had already been done by
-            the post-install scripts.  No, an interim documente was required.
+            the post-install scripts.  No, an interim document was required.
             Two, actually: one for the client, and one for the server.
           </para>
 

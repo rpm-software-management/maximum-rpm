@@ -559,40 +559,40 @@ requires: bar &gt;= 2.7-4, baz = 2.1-1
             a solution; two, in fact&hellip;
           </para>
 
-          <sect4 id="s4-rpm-depend-version-serial">
-            <title>Solution Number 1: Serial numbers</title>
+          <sect4 id="s4-rpm-depend-version-epoch">
+            <title>Solution Number 1: Epoch numbers</title>
             <indexterm>
               <primary>dependencies</primary>
-              <secondary>serial numbers, using</secondary>
+              <secondary>epoch numbers, using</secondary>
             </indexterm>
 
             <para>
               When RPM can't decipher a package's version number, it's time to
-              pull out the <command>serial</command> tag.  This tag is used to
+              pull out the <command>epoch</command> tag.  This tag is used to
               help RPM determine version number ordering.  Here's a sample
-              <command>serial</command> tag line:
+              <command>epoch</command> tag line:
 
               <screen width="60">
 <computeroutput>
-Serial: 42
+Epoch: 42
 </computeroutput>
               </screen>
             </para>
 
             <para>
-              This line indicates that the package has a serial number of 42.
+              This line indicates that the package has an epoch number of 42.
               What does the 42 mean?  Only that this version of the package is
-              older than the same package with a serial number of 41, but
-              younger than the same package with a serial number of 43.  If you
-              think of serial numbers as being nothing more than very simple
+              older than the same package with an epoch number of 41, but
+              younger than the same package with an epoch number of 43.  If you
+              think of epoch numbers as being nothing more than very simple
               version numbers, you'll be on the mark.
             </para>
             <para>
-              In order to direct RPM to look at the serial number instead of the
+              In order to direct RPM to look at the epoch number instead of the
               version number when doing dependency checking, it's necessary to
               append an "<command>S</command>" to the end of the conditional
               operator in the <command>requires</command> tag line.  So if a
-              package requires package <filename>foo</filename> to have a serial
+              package requires package <filename>foo</filename> to have an epoch
               number equal to 42, the following tag line would be used:
 
               <screen width="60">
@@ -603,7 +603,7 @@ Requires: foo =S 42
             </para>
 
             <para>
-              If the <filename>foo</filename> package needs to have a serial
+              If the <filename>foo</filename> package needs to have an epoch
               number greater than or equal to 42, this line would work:
 
               <screen width="60">
@@ -613,7 +613,7 @@ Requires: foo &gt;=S 42
               </screen>
             </para>
             <para>
-              It might seem that using serial numbers is a lot of extra trouble,
+              It might seem that using epoch numbers is a lot of extra trouble,
               and you're right.  But there is an alternative:
             </para>
           </sect4>
@@ -623,12 +623,12 @@ Requires: foo &gt;=S 42
 
             <para>
               If you have the option between changing the software's
-              version-numbering scheme, or using serial numbers in RPM, please
+              version-numbering scheme, or using epoch numbers in RPM, please
               consider changing the version-numbering scheme.  Chances are, if
               RPM can't figure it out, most of the people using your software
               can't, either.  But in case you aren't the author of the software
               you're packaging, and its version numbering scheme is giving RPM
-              fits, the <command>serial</command> tag can help you out.
+              fits, the <command>epoch</command> tag can help you out.
             </para>
           </sect4>
         </sect3>
@@ -656,7 +656,7 @@ Requires: foo &gt;=S 42
           The <command>conflicts</command> tag has the same format as
           <command>requires</command>.  It accepts a real or virtual package
           name and can optionally include version and release specifications or
-          a serial number.
+          an epoch number.
         </para>
       </sect2>
 
@@ -801,7 +801,7 @@ provides: lda
 
           <listitem>
             <para>
-              The package's name (and optionally, version/serial number).
+              The package's name (and optionally, version/epoch number).
             </para>
           </listitem>
         </orderedlist>

@@ -1605,7 +1605,7 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
 
           <para>
             A function can be passed to
-            <function>rpmIstallSourcePackage</function> or
+            <function>rpmInstallSourcePackage</function> or
             <function>rpmInstallPackage</function> via the
             <parameter>notify</parameter> parameter.  The function will be
             called at regular intervals during the installation, and will have
@@ -2745,7 +2745,7 @@ int headerGetEntry(Header h,
           </para>
 
           <para>
-            This function returns <returnvalue>1</returnvalue> on sucess, and
+            This function returns <returnvalue>1</returnvalue> on success, and
             <returnvalue>0</returnvalue> on failure.
           </para>
         </sect3>

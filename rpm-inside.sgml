@@ -404,28 +404,29 @@ Summary: A CD player app that rocks!
           </para>
         </sect3>
 
-        <sect3 id="s3-rpm-inside-copyright-tag">
-          <title>The <command>copyright</command> Tag</title>
-          <!-- label: inside-copyright -->
+        <sect3 id="s3-rpm-inside-license-tag">
+          <title>The <command>license</command> Tag</title>
+          <!-- label: inside-license -->
           <indexterm>
             <primary>tags</primary>
-            <secondary><command>copyright</command></secondary>
+            <secondary><command>license</command></secondary>
           </indexterm>
 
           <indexterm>
-            <primary><command>copyright</command> tag</primary>
+            <primary><command>license</command> tag</primary>
           </indexterm>
 
           <para>
-            The <command>copyright</command> tag is used to define the copyright
-            terms applicable to the software being packaged.  In many cases,
+            The <command>license</command> tag is used to define the license
+            terms applicable to the software being packaged.  This tag is also
+            known as the <command>copyright</command> tag. In many cases,
             this might be nothing more than "<command>GPL</command>", for
             software distributed under the terms of the GNU General Public
             License, or something similar.  For example:
 
             <screen width="60">
 <computeroutput>
-Copyright: GPL
+License: GPL
 </computeroutput>
             </screen>
           </para>
@@ -652,7 +653,7 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           everything the package requires in order to operate properly.
           Likewise, when an installed package is erased RPM can make sure no
           other package relies on the package being erased.  This dependency
-          capability can be very helpful when endusers install and erase
+          capability can be very helpful when end users install and erase
           packages on their own.  It makes it more difficult for them to paint
           themselves into a corner, package-wise.
         </para>
@@ -734,7 +735,7 @@ Requires: playmidi = 2.3
           </para>
           <para>
             If the <command>Requires</command> tag needs to perform a comparison
-            against a serial number defined with the <command>serial</command>
+            against an epoch number defined with the <command>epoch</command>
             tag (described below), then the proper format would be:
 
             <screen width="60">
@@ -781,8 +782,8 @@ Conflicts: playmidi = 2.3-1
           </para>
           <para>
             If the <command>conflicts</command> tag needs to perform a
-            comparision against a serial number defined with the
-            <command>serial</command> tag (described below), then the proper
+            comparison against an epoch number defined with the
+            <command>epoch</command> tag (described below), then the proper
             format would be:
 
             <screen width="60">
@@ -793,21 +794,22 @@ Conflicts: playmidi =S 4
           </para>
         </sect3>
 
-        <sect3 id="s3-rpm-inside-serial-tag">
-          <title>The <command>serial</command> Tag</title>
-          <!-- label: inside-serial -->
+        <sect3 id="s3-rpm-inside-epoch-tag">
+          <title>The <command>epoch</command> Tag</title>
+          <!-- label: inside-epoch -->
           <indexterm>
             <primary>tags</primary>
-            <secondary><command>serial</command></secondary>
+            <secondary><command>epoch</command></secondary>
           </indexterm>
 
           <indexterm>
-            <primary><command>serial</command> tag</primary>
+            <primary><command>epoch</command> tag</primary>
           </indexterm>
 
           <para>
-            The <command>serial</command> tag is another part of RPM's
-            dependency and upgrade processing.  The need for it is somewhat
+            The <command>epoch</command> tag is another part of RPM's
+            dependency and upgrade processing.  It is also known as the
+            <command>serial</command> tag.  The need for it is somewhat
             obscure, but goes something like this:
 
             <orderedlist>
@@ -822,33 +824,33 @@ Conflicts: playmidi =S 4
 
               <listitem>
                 <para>
-                  Another package (package <replaceable>B</replaceable>) requires that
-                  package <replaceable>A</replaceable> be installed.  More
-                  specifically, it requires RPM to compare package
-                  <replaceable>A</replaceable>'s version against a specified minimum
-                  (or maximum) version.
+                  Another package (package <replaceable>B</replaceable>)
+                  requires that package <replaceable>A</replaceable> be
+                  installed.  More specifically, it requires RPM to compare
+                  package <replaceable>A</replaceable>'s version against a
+                  specified minimum (or maximum) version.
                 </para>
               </listitem>
             </orderedlist>
           </para>
 
           <para>
-            Since RPM is unable to compare package <replaceable>A</replaceable>'s
-            version against the version specified by package
-            <replaceable>B</replaceable>, there is no way to determine if package
-            <replaceable>B</replaceable>'s dependency requirements can be met.  What
-            to do?
+            Since RPM is unable to compare package
+            <replaceable>A</replaceable>'s version against the version specified
+            by package <replaceable>B</replaceable>, there is no way to
+            determine if package <replaceable>B</replaceable>'s dependency
+            requirements can be met.  What to do?
           </para>
           <para>
-            The <command>serial</command> tag provides a way to get around this
-            tricky problem.  By specifying a simple integer serial number for
+            The <command>epoch</command> tag provides a way to get around this
+            tricky problem.  By specifying a simple integer epoch number for
             each version, you are, in essence, directing how RPM interprets the
             relative age of the package.  The key point to keep in mind is that
-            in order for this to work, a unique serial number must be defined
+            in order for this to work, a unique epoch number must be defined
             for each version of the software being packaged.  In addition, the
-            serial number must increment along with the version.  Finally, the
-            package that requires the serialized software needs to specify
-            <emphasis>its</emphasis> version requirements in terms of the serial
+            epoch number must increment along with the version.  Finally, the
+            package that requires the epoched software needs to specify
+            <emphasis>its</emphasis> version requirements in terms of the epoch
             number.
           </para>
           <para>
@@ -856,20 +858,20 @@ Conflicts: playmidi =S 4
             yourself in the position of needing to use this tag, take a deep
             breath and seriously consider changing the way you assign version
             numbers.  If you're packaging someone else's software, perhaps you
-            can convince them to make the change. Chances are, if RPM can't
+            can convince them to make the change.  Chances are, if RPM can't
             figure out the version number, most people can't, either!  An
-            example <command>serial</command> tag would look something like
+            example <command>epoch</command> tag would look something like
             this:
 
             <screen width="60">
 <computeroutput>
-Serial: 4
+Epoch: 4
 </computeroutput>
             </screen>
           </para>
           <para>
-            Note that RPM considers a package with a serial number as newer than
-            a package without a serial number.
+            Note that RPM considers a package with an epoch number as newer than
+            a package without an epoch number.
           </para>
         </sect3>
 
@@ -2381,7 +2383,7 @@ chmod -R a+rX,g-w,o-w .
           then uses <command>gzip</command> to uncompress the original source
           (whose name was taken from the <command>source</command> tag), and
           pipes the result to <command>tar</command> for unpacking.  The return
-          status of the unpacking is tested.  If sucessful, the macro continues.
+          status of the unpacking is tested.  If successful, the macro continues.
         </para>
         <para>
           At this point, the original sources have been unpacked.  The
@@ -2395,7 +2397,7 @@ chmod -R a+rX,g-w,o-w .
         <para>
           But that's just the simplest way that <command>%setup</command> can be
           used.  There are a number of other options that can be added to
-          accomodate different situations.  Let's look at them.
+          accommodate different situations.  Let's look at them.
         </para>
 
         <sect3 id="s3-rpm-inside-setup-n-option">
@@ -3396,7 +3398,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
       <para>
         The <command>%files</command> list indicates to RPM which files on the
         build system are to be packaged.  The list consists of one file per
-        line.  The file may have one or more directives preceeding it.  These
+        line.  The file may have one or more directives preceding it.  These
         directives give RPM additional information about the file and are
         discussed more fully below.
       </para>
@@ -3624,7 +3626,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           </para>
           <para>
             The mode is specified in the traditional numeric format, while the
-            user and group are specifed as a string, such as
+            user and group are specified as a string, such as
             "<command>root</command>".  Here's a sample <command>%attr</command>
             directive:
 
@@ -3653,6 +3655,87 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             for doing this (and a more in-depth discussion of the
             <command>%attr</command> directive) can be found in <xref
             linkend="ch-rpm-anywhere">.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-inside-flist-ghost-directive">
+          <title>The <command>%ghost</command> Directive</title>
+          <!-- label: inside-ghost -->
+          <indexterm>
+            <primary><command>%ghost</command> directive</primary>
+          </indexterm>
+
+          <para>
+            As we mentioned in <xref linkend="s1-rpm-inside-files-list">, if a
+            file is specified in the <command>%files</command> list, that file
+            will automatically be included in the package.  There are times
+            when a file should be owned by the package but not installed - log
+            files and state files are good examples of cases you might desire
+            this to happen.
+          </para>
+          <para>
+            The way to achieve this, is to use the <command>%ghost</command>
+            directive.  By adding this directive to the line containing a file,
+            RPM will know about the ghosted file, but will not add it to the
+            package. However it still needs to be in the buildroot.  Here's an
+            example of <command>%ghost</command> in action.
+          </para>
+          <para>
+            The <application>blather-1.0</application> package logs to
+            <filename>/var/log/blather.log</filename> in it's default config.
+            In the spec file, the <filename>/var/log/blather.log</filename> 
+            file is included in the <command>%files</command> list.  We can
+	    see that blather.log belongs to the package, and it is removed
+	    when the package is.
+
+            <screen width="60">
+<computeroutput>
+%install
+touch $RPM_BUILD_ROOT%{_localstatedir}/log/blather.log
+&hellip;
+%files
+&hellip;
+%ghost %{_localstatedir}/log/blather.log
+&hellip;
+</computeroutput>
+<prompt># </prompt><command>rpm -qf /var/log/blather.log</command>
+<computeroutput>
+blather-1.0-1
+</computeroutput>
+<prompt># </prompt><command>rpm -ql blather | grep blather.log</command>
+<computeroutput>
+
+</computeroutput>
+<prompt># </prompt><command>rpm -e blather &amp;&amp; ls /var/log/blather.log</command>
+<computeroutput>
+ls: /var/log/blather.log: No such file or directory
+</computeroutput>
+            </screen>
+          </para>
+          <para>
+            There file touched in the <command>%install</command> stage will
+            not be installed to <filename>/var/log/blather.log</filename>
+            although it will be added to the rpm database, as we can see from
+            querying the file, however it is not visible from a package listing,
+            but as it is owned by the package it will be removed when the package
+            is removed.  In addition it is possible to use setperms to fix the
+            permissions on a <command>%ghost</command> file.
+	    <screen width="60">
+<prompt># </prompt><command>ls -al /var/log/blather.log</command>
+<computeroutput>
+-rw-r--r--    1 root     root         3448 Jun 18 17:00 /var/log/blather.log
+</computeroutput>
+<prompt>#</prompt><command>chmod 666 /var/log/blather.log</command>
+<prompt># </prompt><command>ls -al /var/log/blather.log</command>
+<computeroutput>
+-rw-rw-rw-    1 root     root         3448 Jun 18 17:00 /var/log/blather.log
+</computeroutput>
+<prompt>#</prompt><command>rpm --setperms blather</command>
+<prompt># </prompt><command>ls -al /var/log/blather.log</command>
+<computeroutput>
+-rw-r--r--    1 root     root         3448 Jun 18 17:00 /var/log/blather.log
+</computeroutput>
+            </screen>
           </para>
         </sect3>
 

@@ -159,7 +159,7 @@ vendor               : (not set)
 
     <para>
       The first three files are read in the order listed, such that if a given
-      <filename>rmprc</filename> entry is present in each file, the value of the
+      <filename>rpmrc</filename> entry is present in each file, the value of the
       entry read <emphasis>last</emphasis> is the one used by RPM.  This means,
       for example, that an entry in <filename>.rpmrc</filename> in the user's
       login directory will always override the same entry in
@@ -589,7 +589,7 @@ buildarchtranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <s
         defining the operating system RPM will use as the "build" operating
         system.  As the name implies, it is used to translate the raw
         information returned by <command>uname(2)</command> to the canonical
-        operating sysetm defined by <command>os_canon</command>.
+        operating system defined by <command>os_canon</command>.
       </para>
 
       <para>
