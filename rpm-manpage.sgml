@@ -51,6 +51,12 @@
       </member><member>
 	<cmdsynopsis>
 	&rpm;
+	<arg choice="req"><option>--import</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PUBKEY</replaceable></arg>
+	</cmdsynopsis>
+      </member><member>
+	<cmdsynopsis>
+	&rpm;
 	<arg choice="req"><option>-K|--checksig</option></arg>
 	<arg><option>--nogpg</option></arg>
 	<arg><option>--nopgp</option></arg>
@@ -664,6 +670,96 @@ systems of the binary package and host don't match.
     </para>
   </refsect2>
 
+  <refsect2><title>Erase Options</title>
+    <para>
+	The general form of an rpm erase command is 
+    </para>
+
+    <para>
+      <cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>-e|--erase</option></arg>
+	<arg><option>--allmatches</option></arg>
+	<arg><option>--nodeps</option></arg>
+	<arg><option>--noscripts</option></arg>
+	<arg><option>--notriggers</option></arg>
+	<arg><option>--repackage</option></arg>
+	<arg><option>--test</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
+      </cmdsynopsis>
+    </para>
+
+    <para>
+	The following options may also be used:
+    </para>
+    <variablelist>
+    <varlistentry>
+    <term><option>--allmatches</option></term>
+    <listitem><para>
+	Remove all versions of the package which match
+	<replaceable>PACKAGE_NAME</replaceable>. Normally an
+	error is issued if <replaceable>PACKAGE_NAME</replaceable>
+	matches multiple packages.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--nodeps</option></term>
+    <listitem><para>
+	Don't check dependencies before uninstalling the packages.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--noscripts</option></term>
+    <term><option>--nopreun</option></term>
+    <term><option>--nopostun</option></term>
+    <listitem><para>
+	Don't execute the scriptlet of the same name.
+	The <option>--noscripts</option> option during package erase is
+	equivalent to
+	</para><para>
+		<option>--nopreun</option>
+		<option>--nopostun</option>
+	</para><para>
+	and turns off the execution of the corresponding
+		<command>%preun</command>, and
+		<command>%postun</command>
+	scriptlet(s).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--notriggers</option></term>
+    <term><option>--notriggerun</option></term>
+    <term><option>--notriggerpostun</option></term>
+    <listitem><para>
+	Don't execute any trigger scriptlet of the named type.
+	The <option>--notriggers</option> option is equivalent to
+	</para><para>
+		<option>--notriggerun</option>
+		<option>--notriggerpostun</option>
+	</para><para>
+	and turns off execution of the corresponding
+		<command>%triggerun</command>, and
+		<command>%triggerpostun</command>
+	scriptlet(s).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--repackage</option></term>
+    <listitem><para>
+	Re-package the files before erasing. The previously installed
+	package will be named according to the macro
+		<command>%_repackage_name_fmt</command>
+	and will be created in the directory named by
+	the macro <command>%_repackage_dir</command> (default value
+	is <filename>/var/tmp</filename>).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--test</option></term>
+    <listitem><para>
+	Don't really uninstall anything, just go through the motions.
+	Useful in conjunction with the <option>-vv</option> option
+	for debugging.
+    </para></listitem>
+    </varlistentry>
+    </variablelist>
+  </refsect2>
+
   <refsect2><title>Query Options</title>
     <para>
 	The general form of an rpm query command is 
@@ -698,31 +794,84 @@ systems of the binary package and host don't match.
 	As &rpm; already knows the type to print, the
 	type specifier must be omitted however, and replaced by the name
 	of the header tag to be printed, enclosed by <command>{}</command>
-	characters. Tag names are case insesitive, and the
+	characters. Tag names are case insesitive, and the leading
 	<command>RPMTAG_</command> portion of the tag name may be omitted
 	as well.
-    </para>
-    <para>
+    </para><para>
 	Alternate output formats may be requested by following
 	the tag with <option>:<replaceable>typetag</replaceable></option>.
 	Currently, the following types are supported:
-		<command>octal</command>,
-		<command>date</command>,
-		<command>shescape</command>,
-		<command>perms</command>,
-		<command>fflags</command>, and
-		<command>depflags</command>.
+    </para><para>
+	<variablelist>
+	    <varlistentry>
+		<term><command>:armor</command></term>
+		<listitem><para>
+		Wrap a public key in ASCII armor.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:base64</command></term>
+		<listitem><para>
+		Encode binary data using base64.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:date</command></term>
+		<listitem><para>
+		Use strftime(3) "%c" format.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:day</command></term>
+		<listitem><para>
+		Use strftime(3) "%a %b %d %Y" format.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:depflags</command></term>
+		<listitem><para>
+		Format dependency flags.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:fflags</command></term>
+		<listitem><para>
+		Format file flags.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:hex</command></term>
+		<listitem><para>
+		Format in hexadecimal.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:octal</command></term>
+		<listitem><para>
+		Format in octal.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:perms</command></term>
+		<listitem><para>
+		Format file permissions.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:shescape</command></term>
+		<listitem><para>
+		Escape single quotes for use in a script.
+		</para></listitem>
+	    </varlistentry><varlistentry>
+		<term><command>:triggertype</command></term>
+		<listitem><para>
+		Display trigger suffix.
+		</para></listitem>
+	    </varlistentry>
+	</variablelist>
+    </para><para>
 	For example, to print only the names of the packages queried,
 	you could use <command>%{NAME}</command> as the format string.
 	To print the packages name and distribution information in
 	two columns, you could use <command>%-30{NAME}%{DISTRIBUTION}</command>.
 	&rpm; will print a list of all of the tags it knows about when it
 	is invoked with the <option>--querytags</option> argument.
-    </para>
-    <para>
+    </para><para>
 	There are two subsets of options for querying: package selection,
 	and information selection.
     </para>
+
   </refsect2>
   <refsect2><title>Package selection options:</title>
     <para>
@@ -1063,13 +1212,17 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     </para>
   </refsect2>
 
-  <refsect2><title>Signature Checking</title>
+  <refsect2><title>Digital Signature and Digest Verification</title>
     <para>
-	The general form of an rpm signature check command is 
+	The general forms of rpm digital signature commands are
     </para>
 
     <para>
       <cmdsynopsis>
+	&rpm;
+	<arg choice="req"><option>--import</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>PUBKEY</replaceable></arg>
+      </cmdsynopsis><cmdsynopsis>
 	&rpm;
 	<arg choice="plain"><option>--checksig</option></arg>
 	<arg><option>--nogpg</option></arg>
@@ -1080,102 +1233,40 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     </para>
 
     <para>
-	This checks the GPG signature of package
-	<replaceable>PACKAGE_FILE</replaceable> to ensure
-	its integrity and origin. GPG configuration information is
-	read from configuration files.  See the section on GPG SIGNATURES
-	for details.
-    </para>
-  </refsect2>
-
-  <refsect2><title>Erase Options</title>
-    <para>
-	The general form of an rpm erase command is 
+	The <option>--checksig</option> option checks all the digests and
+	signatures contained in <replaceable>PACKAGE_FILE</replaceable>
+	to ensure the integrity and origin of the package. Note that
+	signatures are now verified whenever a package is read, and
+	<option>--checksig</option> is useful to verify
+	all of the digests and signatures associated with a package.
     </para>
 
     <para>
-      <cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>-e|--erase</option></arg>
-	<arg><option>--allmatches</option></arg>
-	<arg><option>--nodeps</option></arg>
-	<arg><option>--noscripts</option></arg>
-	<arg><option>--notriggers</option></arg>
-	<arg><option>--repackage</option></arg>
-	<arg><option>--test</option></arg>
-	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
-      </cmdsynopsis>
+	Digital signatures cannot be verified without a public key.
+	An ascii armored public key can be added to the &rpm database
+	using <option>--import</option>. An imported public key is
+	carried in a header, and key ring management is performed
+	exactly like package management. For example, all currently imported
+	public keys can be displayed by:
+    </para><para>
+<computeroutput>
+<command>&rpm -qa gpg-pubkey*</command>
+</computeroutput>
+    </para><para>
+	Details about a specific public key, when imported, can be displayed
+	by querying.  Here's information about the Red Hat GPG/DSA key:
+    </para><para>
+<computeroutput>
+<command>&rpm -qi gpg-pubkey-db42a60e</command>
+</computeroutput>
+    </para><para>
+	Finally, public keys can be erased after importing just like
+	packages. Here's how to remove the Red Hat GPG/DSA key
+    </para><para>
+<computeroutput>
+<command>&rpm -e gpg-pubkey-db42a60e</command>
+</computeroutput>
     </para>
-
-    <para>
-	The following options may also be used:
-    </para>
-    <variablelist>
-    <varlistentry>
-    <term><option>--allmatches</option></term>
-    <listitem><para>
-	Remove all versions of the package which match
-	<replaceable>PACKAGE_NAME</replaceable>. Normally an
-	error is issued if <replaceable>PACKAGE_NAME</replaceable>
-	matches multiple packages.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--nodeps</option></term>
-    <listitem><para>
-	Don't check dependencies before uninstalling the packages.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--noscripts</option></term>
-    <term><option>--nopreun</option></term>
-    <term><option>--nopostun</option></term>
-    <listitem><para>
-	Don't execute the scriptlet of the same name.
-	The <option>--noscripts</option> option during package erase is
-	equivalent to
-	</para><para>
-		<option>--nopreun</option>
-		<option>--nopostun</option>
-	</para><para>
-	and turns off the execution of the corresponding
-		<command>%preun</command>, and
-		<command>%postun</command>
-	scriptlet(s).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--notriggers</option></term>
-    <term><option>--notriggerun</option></term>
-    <term><option>--notriggerpostun</option></term>
-    <listitem><para>
-	Don't execute any trigger scriptlet of the named type.
-	The <option>--notriggers</option> option is equivalent to
-	</para><para>
-		<option>--notriggerun</option>
-		<option>--notriggerpostun</option>
-	</para><para>
-	and turns off execution of the corresponding
-		<command>%triggerun</command>, and
-		<command>%triggerpostun</command>
-	scriptlet(s).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--repackage</option></term>
-    <listitem><para>
-	Re-package the files before erasing. The previously installed
-	package will be named according to the macro
-		<command>%_repackage_name_fmt</command>
-	and will be created in the directory named by
-	the macro <command>%_repackage_dir</command> (default value
-	is <filename>/var/tmp</filename>).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>--test</option></term>
-    <listitem><para>
-	Don't really uninstall anything, just go through the motions.
-	Useful in conjunction with the <option>-vv</option> option
-	for debugging.
-    </para></listitem>
-    </varlistentry>
-    </variablelist>
   </refsect2>
 
   <refsect2><title>Signing a Package</title>
@@ -1187,21 +1278,19 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
       </cmdsynopsis>
     </para>
     <para>
-	The <option>--addsign</option> option generates and inserts
-	new signatures for each package.  Any existing signatures will
-	be discarded.
-    </para>
-    <para>
-	The <option>--resign</option> option generates and appends signatures
-	for the listed packages while preserving the existing signatures.
+	Both of the <option>--addsign</option> and <option>--resign</option>
+	options generate and insert new signatures for each package
+	<replaceable>PACKAGE_FILE</replaceable> given, replacing any
+	existing signatures. There are two options for historical reasons,
+	there is no difference in behavior currently.
     </para>
   </refsect2>
 
-  <refsect2><title>GPG Signatures</title>
+  <refsect2><title>Using GPG to sign packages</title>
     <para>
-	In order to use the signature feature, &rpm;
-	must be configured to run GPG and be able to find a public key
-	ring with Red Hat (or other vendor) public keys. By default,
+	In order to sign packages using GPG, &rpm;
+	must be configured to run GPG and be able to find a key
+	ring with the appropriate keys. By default,
 	&rpm; uses the same conventions as GPG
 	to find key rings, namely the <envar>$GPGPATH</envar> environment
 	variable.  If your key rings are not located where GPG expects
@@ -1209,11 +1298,17 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 		<command>%_gpg_path</command>
 	to be the location of the GPG key rings to use.
     </para>
+    <para>
+	For compatibility with older versions of GPG, PGP, and rpm,
+	only V3 OpenPGP signature packets should be configured.
+	Either DSA or RSA verification algorithms can be used, but DSA
+	is preferred.
+    </para>
 
     <para>
 	If you want to be able to sign packages you create yourself, you
 	also need to create your own public and secret key pair (see the
-	GPG manual). You will also need to configure the macros
+	GPG manual). You will also need to configure the &rpm macros
     <variablelist>
     <varlistentry>
     <term><command>%_signature</command></term>
@@ -1230,23 +1325,18 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     </para>
 
     <para>
-	When building packages you then add <option>--sign</option> to
-	the command line. You will be prompted for your pass phrase, and
-	your package will be built and signed.  For example, to be able
-	to use GPG to sign packages as the user
+	For example, to be able to use GPG to sign packages as the user
 	<replaceable>"John Doe &lt;jdoe@foo.com&gt;"</replaceable>
 	from the key rings located in <filename>/etc/rpm/.gpg</filename>
 	using the executable <filename>/usr/bin/gpg</filename> you would include
-    </para>
-    <para>
+    </para><para>
 <computeroutput>
 %_signature gpg
 %_gpg_path /etc/rpm/.gpg
 %_gpg_name John Doe &lt;jdoe@foo.com&gt;
 %_gpgbin /usr/bin/gpg
 </computeroutput>
-    </para>
-    <para>
+    </para><para>
 	in a macro configuration file. Use <filename>/etc/rpm/macros</filename>
 	for per-system configuration and <filename>~/.rpmmacros</filename>
 	for per-user configuration. 
