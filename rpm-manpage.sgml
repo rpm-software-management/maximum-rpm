@@ -387,7 +387,7 @@
 	Only the first file in the list must exist, and tildes will be
 	expanded to the value of <envar>$HOME</envar>.
 	The default <replaceable>FILELIST</replaceable> is
-		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
+		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>~/.rpmrc</filename>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--pipe</option> <replaceable>CMD</replaceable></term>
@@ -403,12 +403,13 @@
     </varlistentry><varlistentry>
     <term><option>--root</option> <replaceable>DIRECTORY</replaceable></term>
       <listitem><para>
-	Use the system rooted at <replaceable>DIRECTORY</replaceable> for all operations.
-	Note that this means the database will be read or modified under
-	<replaceable>DIRECTORY</replaceable> and any
-		<command>%pre</command> or
-		<command>%post</command>
-	scriptlet(s) are run after a chroot(2) to
+	Use the file system tree rooted at <replaceable>DIRECTORY</replaceable> for all operations.
+	Note that this means the database within
+		<replaceable>DIRECTORY</replaceable>
+	will be used for dependency checks and any scriptlet(s) (e.g.
+		<command>%post</command> if installing, or
+		<command>%prep</command> if building, a package)
+	will be run after a chroot(2) to
 		<replaceable>DIRECTORY</replaceable>.
       </para></listitem>
     </varlistentry>
@@ -957,14 +958,26 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 
     <para>
 	The format of the output is a string of 8 characters, a possible
-	"<command>c</command>" denoting a configuration file, and then
-	the file name. Each of the 8 characters denotes the result of
-	a comparison of attribute(s) of the file to the value of those
-	attribute(s) recorded in the database.
-	A single
+	attribute marker:
+	<simplelist>
+	<member>
+		<command>c</command>
+		<command>%config</command> configuration file
+	</member><member>
+		<command>d</command>
+		<command>%doc</command> documentation file
+	</member><member>
+		<command>g</command>
+		<command>%ghost</command> file (i.e. the file contents were not included in the package)
+	</member>
+	</simplelist>
+	from the package header and then the file name.
+	Each of the 8 characters denotes the result of a comparison of
+	attribute(s) of the file to the value of those attribute(s) recorded
+	in the database.  A single
 		"<command>.</command>" (period)
 	means the test passed, while a single
-		"<command>?</command>"
+		"<command>?</command>" (question mark)
 	indicates the test could not be performed (e.g. file permissions
 	prevent reading). Otherwise, the (mnemonically
 		em<command>B</command>oldened) character denotes failure of
@@ -1461,9 +1474,11 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     <para>
     <simplelist>
 	<member><filename>/usr/lib/rpm/rpmrc</filename></member>
+	<member><filename>/usr/lib/rpm/redhat/rpmrc</filename></member>
 	<member><filename>/etc/rpmrc</filename></member>
 	<member><filename>~/.rpmrc</filename></member>
 	<member><filename>/usr/lib/rpm/macros</filename></member>
+	<member><filename>/usr/lib/rpm/redhat/macros</filename></member>
 	<member><filename>/etc/rpm/macros</filename></member>
 	<member><filename>~/.rpmmacros</filename></member>
 	<member><filename>/var/lib/rpm/Conflictname</filename></member>

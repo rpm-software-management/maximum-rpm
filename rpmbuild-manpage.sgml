@@ -159,7 +159,7 @@
 	Only the first file in the list must exist, and tildes will be
 	expanded to the value of <envar>$HOME</envar>.
 	The default <replaceable>FILELIST</replaceable> is
-		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
+		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>~/.rpmrc</filename>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--pipe</option> <replaceable>CMD</replaceable></term>
@@ -175,12 +175,13 @@
     </varlistentry><varlistentry>
     <term><option>--root</option> <replaceable>DIRECTORY</replaceable></term>
       <listitem><para>
-	Use the system rooted at <replaceable>DIRECTORY</replaceable> for all operations.
-	Note that this means the database will be read or modified under
-	<replaceable>DIRECTORY</replaceable> and any
-		<command>%pre</command> or
-		<command>%post</command>
-	scriptlet(s) are run after a chroot(2) to
+	Use the file system tree rooted at <replaceable>DIRECTORY</replaceable> for all operations.
+	Note that this means the database within
+		<replaceable>DIRECTORY</replaceable>
+	will be used for dependency checks and any scriptlet(s) (e.g.
+		<command>%post</command> if installing, or
+		<command>%prep</command> if building, a package)
+	will be run after a chroot(2) to
 		<replaceable>DIRECTORY</replaceable>.
       </para></listitem>
     </varlistentry>
@@ -301,7 +302,9 @@
     <listitem><para>
 	Embed a GPG signature in the package. This signature can be used
 	to verify the integrity and the origin of the package.  See the
-	section on GPG SIGNATURES for configuration details.
+	section on GPG SIGNATURES in
+		<command>rpm</command>(8)
+	for configuration details.
     </para></listitem>
   </varlistentry><varlistentry>
     <term><option>--target</option> <replaceable>PLATFORM</replaceable></term>
@@ -365,9 +368,11 @@
     <para>
     <simplelist>
 	<member><filename>/usr/lib/rpm/rpmrc</filename></member>
+	<member><filename>/usr/lib/rpm/redhat/rpmrc</filename></member>
 	<member><filename>/etc/rpmrc</filename></member>
 	<member><filename>~/.rpmrc</filename></member>
 	<member><filename>/usr/lib/rpm/macros</filename></member>
+	<member><filename>/usr/lib/rpm/redhat/macros</filename></member>
 	<member><filename>/etc/rpm/macros</filename></member>
 	<member><filename>~/.rpmmacros</filename></member>
 	<member><filename>/var/lib/rpm/Conflictname</filename></member>
