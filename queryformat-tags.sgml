@@ -1294,7 +1294,8 @@
     </sect2>
 
     <sect2 id="s2-queryformat-tags-autoreqprov">
-      <title>The <command>AUTOREQPROV</command> Tag</title>
+      <title>The <command>AUTOREQPROV</command>, <command>AUTOREQ</command>,
+        and <command>AUTOPROV</command> Tags</title>
       <indexterm>
         <primary><command>--queryformat</command> option</primary>
         <secondary>tags for</secondary>
@@ -1302,7 +1303,8 @@
       </indexterm>
 
       <para>
-        The <command>AUTOREQPROV</command> tag is not available for use with
+        The <command>AUTOREQPROV</command>, <command>AUTOREQ</command>, and
+        <command>AUTOPROV</command> tags are not available for use with
         <command>--queryformat</command>.
       </para>
     </sect2>

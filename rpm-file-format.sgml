@@ -1092,17 +1092,22 @@ rpm-2.2.1-1
 
         <para>
           The following list shows the tags available, along with their defined
-          values, for use in the header.  This list is current as of version 2.3
-          of RPM.  For the most up-to-date version, look in the file
+          values, for use in the header.  This list is current as of version
+          4.3 of RPM.  For the most up-to-date version, look in the file
           <filename>lib/rpmlib.h</filename> in the latest version of the RPM
           sources.
 
           <screen width="60">
 <computeroutput>
 #define RPMTAG_NAME                     1000
+#define RPMTAG_N        RPMTAG_NAME
 #define RPMTAG_VERSION                  1001
+#define RPMTAG_V        RPMTAG_VERSION
 #define RPMTAG_RELEASE                  1002
-#define RPMTAG_SERIAL                   1003
+#define RPMTAG_R        RPMTAG_RELEASE
+#define RPMTAG_EPOCH                    1003
+#define RPMTAG_E        RPMTAG_EPOCH
+#define RPMTAG_SERIAL   RPMTAG_EPOCH         /* backward compatibility */
 #define RPMTAG_SUMMARY                  1004
 #define RPMTAG_DESCRIPTION              1005
 #define RPMTAG_BUILDTIME                1006
@@ -1113,10 +1118,11 @@ rpm-2.2.1-1
 #define RPMTAG_VENDOR                   1011
 #define RPMTAG_GIF                      1012
 #define RPMTAG_XPM                      1013
-#define RPMTAG_COPYRIGHT                1014
+#define RPMTAG_LICENSE                  1014
+#define RPMTAG_COPYRIGHT RPMTAG_LICENSE      /* backward compatibility */
 #define RPMTAG_PACKAGER                 1015
 #define RPMTAG_GROUP                    1016
-#define RPMTAG_CHANGELOG                1017
+#define RPMTAG_CHANGELOG                1017 /* internal */
 #define RPMTAG_SOURCE                   1018
 #define RPMTAG_PATCH                    1019
 #define RPMTAG_URL                      1020
@@ -1126,43 +1132,44 @@ rpm-2.2.1-1
 #define RPMTAG_POSTIN                   1024
 #define RPMTAG_PREUN                    1025
 #define RPMTAG_POSTUN                   1026
-#define RPMTAG_FILENAMES                1027
+#define RPMTAG_OLDFILENAMES             1027 /* obsolete */
 #define RPMTAG_FILESIZES                1028
 #define RPMTAG_FILESTATES               1029
 #define RPMTAG_FILEMODES                1030
-#define RPMTAG_FILEUIDS                 1031
-#define RPMTAG_FILEGIDS                 1032
+#define RPMTAG_FILEUIDS                 1031 /* internal */
+#define RPMTAG_FILEGIDS                 1032 /* internal */
 #define RPMTAG_FILERDEVS                1033
 #define RPMTAG_FILEMTIMES               1034
 #define RPMTAG_FILEMD5S                 1035
 #define RPMTAG_FILELINKTOS              1036
 #define RPMTAG_FILEFLAGS                1037
-#define RPMTAG_ROOT                     1038
+#define RPMTAG_ROOT                     1038 /* internal, obsolete */
 #define RPMTAG_FILEUSERNAME             1039
 #define RPMTAG_FILEGROUPNAME            1040
-#define RPMTAG_EXCLUDE                  1041 /* not used */
-#define RPMTAG_EXCLUSIVE                1042 /* not used */
+#define RPMTAG_EXCLUDE                  1041 /* internal, obsolete */
+#define RPMTAG_EXCLUSIVE                1042 /* internal, obsolete */
 #define RPMTAG_ICON                     1043
 #define RPMTAG_SOURCERPM                1044
 #define RPMTAG_FILEVERIFYFLAGS          1045
 #define RPMTAG_ARCHIVESIZE              1046
-#define RPMTAG_PROVIDES                 1047
+#define RPMTAG_PROVIDENAME              1047
+#define RPMTAG_PROVIDES RPMTAG_PROVIDENAME   /* backward compatibility */
 #define RPMTAG_REQUIREFLAGS             1048
 #define RPMTAG_REQUIRENAME              1049
 #define RPMTAG_REQUIREVERSION           1050
-#define RPMTAG_NOSOURCE                 1051
-#define RPMTAG_NOPATCH                  1052
+#define RPMTAG_NOSOURCE                 1051 /* internal */
+#define RPMTAG_NOPATCH                  1052 /* internal */
 #define RPMTAG_CONFLICTFLAGS            1053
 #define RPMTAG_CONFLICTNAME             1054
 #define RPMTAG_CONFLICTVERSION          1055
-#define RPMTAG_DEFAULTPREFIX            1056
-#define RPMTAG_BUILDROOT                1057
-#define RPMTAG_INSTALLPREFIX            1058
+#define RPMTAG_DEFAULTPREFIX            1056 /* internal, deprecated */
+#define RPMTAG_BUILDROOT                1057 /* internal */
+#define RPMTAG_INSTALLPREFIX            1058 /* internal, deprecated */
 #define RPMTAG_EXCLUDEARCH              1059
 #define RPMTAG_EXCLUDEOS                1060
 #define RPMTAG_EXCLUSIVEARCH            1061
 #define RPMTAG_EXCLUSIVEOS              1062
-#define RPMTAG_AUTOREQPROV              1063 /* used internally by build */
+#define RPMTAG_AUTOREQPROV              1063 /* internal */
 #define RPMTAG_RPMVERSION               1064
 #define RPMTAG_TRIGGERSCRIPTS           1065
 #define RPMTAG_TRIGGERNAME              1066
@@ -1170,6 +1177,78 @@ rpm-2.2.1-1
 #define RPMTAG_TRIGGERFLAGS             1068
 #define RPMTAG_TRIGGERINDEX             1069
 #define RPMTAG_VERIFYSCRIPT             1079
+#define RPMTAG_CHANGELOGTIME            1080
+#define RPMTAG_CHANGELOGNAME            1081
+#define RPMTAG_CHANGELOGTEXT            1082
+#define RPMTAG_BROKENMD5                1083 /* internal, obsolete */
+#define RPMTAG_PREREQ                   1084 /* internal */
+#define RPMTAG_PREINPROG                1085
+#define RPMTAG_POSTINPROG               1086
+#define RPMTAG_PREUNPROG                1087
+#define RPMTAG_POSTUNPROG               1088
+#define RPMTAG_BUILDARCHS               1089
+#define RPMTAG_OBSOLETENAME             1090
+#define RPMTAG_OBSOLETES RPMTAG_OBSOLETENAME /* backward compatibility */
+#define RPMTAG_VERIFYSCRIPTPROG         1091
+#define RPMTAG_TRIGGERSCRIPTPROG        1092
+#define RPMTAG_DOCDIR                   1093 /* internal */
+#define RPMTAG_COOKIE                   1094
+#define RPMTAG_FILEDEVICES              1095
+#define RPMTAG_FILEINODES               1096
+#define RPMTAG_FILELANGS                1097
+#define RPMTAG_PREFIXES                 1098
+#define RPMTAG_INSTPREFIXES             1099
+#define RPMTAG_TRIGGERIN                1100 /* internal */
+#define RPMTAG_TRIGGERUN                1101 /* internal */
+#define RPMTAG_TRIGGERPOSTUN            1102 /* internal */
+#define RPMTAG_AUTOREQ                  1103 /* internal */
+#define RPMTAG_AUTOPROV                 1104 /* internal */
+#define RPMTAG_CAPABILITY               1105 /* internal, obsolete */
+#define RPMTAG_SOURCEPACKAGE            1106 /* src.rpm header marker */
+#define RPMTAG_OLDORIGFILENAMES         1107 /* internal, obsolete */
+#define RPMTAG_BUILDPREREQ              1108 /* internal */
+#define RPMTAG_BUILDREQUIRES            1109 /* internal */
+#define RPMTAG_BUILDCONFLICTS           1110 /* internal */
+#define RPMTAG_BUILDMACROS              1111 /* internal, unused */
+#define RPMTAG_PROVIDEFLAGS             1112
+#define RPMTAG_PROVIDEVERSION           1113
+#define RPMTAG_OBSOLETEFLAGS            1114
+#define RPMTAG_OBSOLETEVERSION          1115
+#define RPMTAG_DIRINDEXES               1116
+#define RPMTAG_BASENAMES                1117
+#define RPMTAG_DIRNAMES                 1118
+#define RPMTAG_ORIGDIRINDEXES           1119 /* internal */
+#define RPMTAG_ORIGBASENAMES            1120 /* internal */
+#define RPMTAG_ORIGDIRNAMES             1121 /* internal */
+#define RPMTAG_OPTFLAGS                 1122
+#define RPMTAG_DISTURL                  1123
+#define RPMTAG_PAYLOADFORMAT            1124
+#define RPMTAG_PAYLOADCOMPRESSOR        1125
+#define RPMTAG_PAYLOADFLAGS             1126
+#define RPMTAG_INSTALLCOLOR             1127 /* transaction color when installed */
+#define RPMTAG_INSTALLTID               1128
+#define RPMTAG_REMOVETID                1129
+#define RPMTAG_SHA1RHN                  1130 /* internal - obsolete */
+#define RPMTAG_RHNPLATFORM              1131
+#define RPMTAG_PLATFORM                 1132
+#define RPMTAG_PATCHESNAME              1133 /* placeholder (SuSE) */
+#define RPMTAG_PATCHESFLAGS             1134 /* placeholder (SuSE) */
+#define RPMTAG_PATCHESVERSION           1135 /* placeholder (SuSE) */
+#define RPMTAG_CACHECTIME               1136
+#define RPMTAG_CACHEPKGPATH             1137
+#define RPMTAG_CACHEPKGSIZE             1138
+#define RPMTAG_CACHEPKGMTIME            1139
+#define RPMTAG_FILECOLORS               1140
+#define RPMTAG_FILECLASS                1141
+#define RPMTAG_CLASSDICT                1142
+#define RPMTAG_FILEDEPENDSX             1143
+#define RPMTAG_FILEDEPENDSN             1144
+#define RPMTAG_DEPENDSDICT              1145
+#define RPMTAG_SOURCEPKGID              1146
+#define RPMTAG_FILECONTEXTS             1147
+#define RPMTAG_FSCONTEXTS               1148 /* extension */
+#define RPMTAG_RECONTEXTS               1149 /* extension */
+#define RPMTAG_POLICIES                 1150 /* selinux *.te policy file. */
 </computeroutput>
           </screen>
         </para>

@@ -360,7 +360,8 @@ libc.so.5
 
       <sect2 id="s2-rpm-depend-autoreqprov">
         <title>
-          The <command>autoreqprov</command> Tag &mdash; Disable Automatic
+          The <command>autoreqprov</command>, <command>autoreq</command>,
+          and <command>autoprov</command> Tags &mdash; Disable Automatic
           Dependency Processing
         </title>
         <indexterm>
@@ -374,7 +375,8 @@ libc.so.5
 
         <para>
           There may be times when RPM's automatic dependency processing is not
-          desired.  In these cases, the <command>autoreqprov</command> tag may
+          desired.  In these cases, the <command>autoreqprov</command>,
+          <command>autoreq</command>, and <command>autoprov</command> tags may
           be used to disable it.  This tag takes a <command>yes/no</command> or
           <command>0/1</command> value.  For example, to disable automatic
           dependency processing, the following line may be used:
@@ -384,6 +386,12 @@ libc.so.5
 AutoReqProv: no
 </computeroutput>
           </screen>
+        </para>
+
+        <para>
+          The <command>autoreq</command> and <command>autoprov</command> tags
+          can be used to disable automatic processing of requirements or
+          "provides" only, respectively.
         </para>
       </sect2>
     </sect1>

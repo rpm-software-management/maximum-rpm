@@ -876,7 +876,9 @@ Epoch: 4
         </sect3>
 
         <sect3 id="s3-rpm-inside-autoreqprov-tag">
-          <title>The <command>autoreqprov</command> Tag</title>
+          <title>The <command>autoreqprov</command>,
+            <command>autoreq</command>, and <command>autoprov</command>
+            Tags</title>
           <!-- label: inside-autoreqprov -->
           <indexterm>
             <primary>tags</primary>
@@ -888,7 +890,8 @@ Epoch: 4
           </indexterm>
 
           <para>
-            The <command>autoreqprov</command> tag is used to control the
+            The <command>autoreqprov</command>, <command>autoreq</command>,
+            and <command>autoprov</command> tags are used to control the
             automatic dependency processing performed when the package is being
             built.  Normally, as each package is built, the following steps are
             performed:
@@ -896,10 +899,10 @@ Epoch: 4
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  All executable programs being packaged are analyzed to
-                  determine their shared library requirements.  These
-                  requirements are automatically added to the package's
-                  requirements.
+                  All executable programs and libraries being packaged are
+                  analyzed to determine their shared library requirements as
+                  well as interpreters.  These requirements are automatically
+                  added to the package's requirements.
                 </para>
               </listitem>
 
@@ -910,6 +913,14 @@ Epoch: 4
                   information.
                 </para>
               </listitem>
+
+              <listitem>
+                <para>
+                  The required modules for all Perl scripts and modules being
+                  packaged are automatically added to the package's
+                  requirements.
+                </para>
+              </listitem>
             </itemizedlist>
           </para>
 
@@ -917,11 +928,16 @@ Epoch: 4
             By doing this, RPM reduces the need for package builders to manually
             add dependency information to their packages.  However, there are
             times when RPM's automatic dependency processing may not be
-            desirable.  In those cases the <command>autoreqprov</command> tag
-            can be used to disable automatic dependency processing.
+            desirable.  In those cases the <command>autoreqprov</command>,
+            <command>autoreq</command>, and <command>autoprov</command> tags
+            can be used to disable automatic dependency processing altogether
+            (<command>autoreqprov</command>), for requirements only
+            (<command>autoreq</command>), or for "provides" only
+            (<command>autoprov</command>).
           </para>
           <para>
-            To disable automatic dependency processing, add the following line:
+            To disable automatic dependency processing both for requirements
+            and "provides", add the following line:
 
             <screen width="60">
 <computeroutput>
@@ -930,11 +946,33 @@ AutoReqProv: no
             </screen>
           </para>
           <para>
+            To disable automatic processing of requirements, add the
+            following line:
+
+            <screen width="60">
+<computeroutput>
+AutoReq: no
+</computeroutput>
+            </screen>
+          </para>
+          <para>
+            To disable automatic processing of "provides", add the
+            following line:
+
+            <screen width="60">
+<computeroutput>
+AutoProv: no
+</computeroutput>
+            </screen>
+          </para>
+          <para>
             (The number zero may be used instead of <command>no</command>)
-            Although RPM defaults to performing automatic dependency processing,
-            the effect of the <command>autoreqprov</command> tag can be reversed
-            by changing <command>no</command> to <command>yes</command>.  (The
-            number one may be used instead of <command>yes</command>)
+            Although RPM defaults to performing automatic dependency
+            processing, the effect of the <command>autoreqprov</command>,
+            <command>autoreq</command>, and <command>autoprov</command> tags
+            can be reversed by changing <command>no</command> to
+            <command>yes</command>.  (The number one may be used instead of
+            <command>yes</command>)
           </para>
         </sect3>
       </sect2>

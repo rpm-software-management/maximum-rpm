@@ -626,7 +626,9 @@ Conflicts: playmidi =S 4
       </sect3>
 
       <sect3 id="s3-rpm-specref-autoreqprov">
-        <title>The <command>AutoReqProv:</command> Tag</title>
+        <title>The <command>AutoReqProv:</command>,
+          <command>AutoReq:</command>, and <command>AutoProv:</command>
+          Tags</title>
 
         <indexterm>
           <primary>spec file</primary>
@@ -658,6 +660,12 @@ AutoReqProv: no
           <command>AutoReqProv:</command> tag can be reversed by changing
           <literal>no</literal> to <literal>yes</literal>.  (The number
           <literal>1</literal> may be used instead of <literal>yes</literal>)
+        </para>
+
+        <para>
+          The <command>AutoReq:</command> and <command>AutoProv:</command>
+          tags can be used to disable automatic processing of requirements or
+          "provides" only, respectively.
         </para>
 
         <para>
