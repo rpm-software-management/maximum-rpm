@@ -398,7 +398,8 @@
           <footnote>
             <para>
               Are you interested in what exactly "the right thing" means?
-              Section <xref linkend="upgrade-magic"> has all the details.
+              Section <xref linkend="s2-rpm-upgrade-config-file-magic"> has all
+              the details.
             </para>
           </footnote>
         </para>
@@ -1043,7 +1044,8 @@ Installing cdp-0.33-2.i386.rpm
           <footnote>
             <para>
               We'll get more into this aspect of RPM in section <xref
-              linkend="rpm-V"> when we discuss <command>rpm -V</command>.
+              linkend="s1-rpm-verify-what-it-does"> when we discuss <command>rpm
+              -V</command>.
             </para>
           </footnote>
           By using these summaries, known as <emphasis>MD5 checksums</emphasis>,

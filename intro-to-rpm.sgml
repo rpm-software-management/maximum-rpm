@@ -1106,7 +1106,7 @@
                 <footnote>
                   <para>
                     We'll discuss MD5 checksums in greater detail in section
-                    <xref linkend="rpm-V">.
+                    <xref linkend="s3-rpm-verify-md5-checksum">.
                   </para>
                 </footnote>
               </para>

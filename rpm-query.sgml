@@ -1991,7 +1991,7 @@ verify script:
                   <footnote>
                     <para>
                       For more information on package verification, please see
-                      section <xref linkend="s1-rpm-verify-bogus-fixme">.
+                      section <xref linkend="s1-rpm-verify-what-it-does">.
                     </para>
                   </footnote>
                 </para>

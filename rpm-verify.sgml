@@ -38,7 +38,7 @@
               Verify named package(s)
             </entry>
             <entry>
-              <xref linkend="verify-pkg-name">
+              <xref linkend="s2-rpm-verify-package-label">
             </entry>
           </row>
           <row>
@@ -50,7 +50,7 @@
               <command><userinput>&lt;file&gt;</userinput></command>
             </entry>
             <entry>
-              <xref linkend="verify-p">
+              <xref linkend="s2-rpm-verify-p-option">
             </entry>
           </row>
           <row>
@@ -62,7 +62,7 @@
               <command><userinput>&lt;file&gt;</userinput></command>
             </entry>
             <entry>
-              <xref linkend="verify-f"> 
+              <xref linkend="s2-rpm-verify-f-option">
             </entry>
           </row>
           <row>
@@ -73,7 +73,7 @@
               Verify all installed packages
             </entry>
             <entry>
-              <xref linkend="verify-a">
+              <xref linkend="s2-rpm-verify-a-option">
             </entry>
           </row>
           <row>
@@ -85,7 +85,7 @@
               <command><userinput>&lt;group&gt;</userinput></command>
             </entry>
             <entry>
-              <xref linkend="verify-g">
+              <xref linkend="s2-rpm-verify-g-option">
             </entry>
           </row>
           <row>
@@ -104,7 +104,7 @@
               Do not execute verification script
             </entry>
             <entry>
-              <xref linkend="verify--noscripts">
+              <xref linkend="s2-rpm-verify-noscripts-option">
             </entry>
           </row>
           <row>
@@ -115,7 +115,7 @@
               Do not verify dependencies
             </entry>
             <entry>
-              <xref linkend="verify--nodeps">
+              <xref linkend="s2-rpm-verify-nodeps-option">
             </entry>
           </row>
           <row>
@@ -126,7 +126,7 @@
               Do not verify file attributes
             </entry>
             <entry>
-              <xref linkend="verify--nofiles">
+              <xref linkend="s2-rpm-verify-nofiles-option">
             </entry>
           </row>
           <row>
@@ -145,7 +145,7 @@
               Display additional information
             </entry>
             <entry>
-              <xref linkend="verify-v">
+              <xref linkend="s2-rpm-verify-v-option">
             </entry>
           </row>
           <row>
@@ -156,7 +156,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="verify-vv">
+              <xref linkend="s2-rpm-verify-vv-option">
             </entry>
           </row>
           <row>
@@ -168,7 +168,7 @@
               <command><userinput>&lt;path&gt;</userinput></command>
             </entry>
             <entry>
-              <xref linkend="verify--root">
+              <xref linkend="s2-rpm-verify-root-option">
             </entry>
           </row>
           <row>
@@ -180,7 +180,7 @@
               <command><userinput>&lt;rcfile&gt;</userinput></command>
             </entry>
             <entry>
-              <xref linkend="verify--rcfile">
+              <xref linkend="s2-rpm-verify-rcfile-option">
             </entry>
           </row>
           <row>
@@ -192,7 +192,7 @@
               the RPM database
             </entry>
             <entry>
-              <xref linkend="verify--dbpath">
+              <xref linkend="s2-rpm-verify-dbpath-option">
             </entry>
           </row>
         </tbody>
@@ -910,8 +910,8 @@ file /etc/blunder is not owned by any package
         </para>
         <para>
           (Note that the issue surrounding RPM and symbolic links mentioned in
-          "A Tricky Detail" (page <xref linkend="-f:tricky">) also applies to
-          <command>rpm -Vf</command>.  Watch those symlinks!)
+          "A Tricky Detail" (page <xref linkend="s4-rpm-query-tricky-detail">)
+          also applies to <command>rpm -Vf</command>.  Watch those symlinks!)
         </para>
       </sect2>
 
@@ -1207,7 +1207,7 @@ D: dependencies: looking for libtermcap.so.2
         </para>
       </sect2>
 
-      <sect2 id="s2-rpm-verify-">
+      <sect2 id="s2-rpm-verify-v-option">
         <title><command>-v</command> --- Display Additional Information</title>
         <!-- label: verify-v -->
         <indexterm>
