@@ -1,0 +1,1176 @@
+  <chapter id="ch-intro-to-rpm">
+    <title>An Introduction to Package Management</title>
+
+    <indexterm>
+      <primary>package!management of!introduction</primary>
+      <secondary></secondary>
+      <tertiary></tertiary>
+    </indexterm>
+
+    <sect1 id="s1-intro-to-rpm-what-are-packages">
+      <title>What are Packages, and Why Manage Them?</title>
+      <indexterm>
+        <primary>package!reasons for</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        To answer that question, let's go back to the basics for a moment.
+        Computers process information.  In order for this to happen, there are
+        some prerequisites:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              A computer (<emphasis>Obviously!</emphasis>).
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Some information to process (Also obvious!).
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              A program to do the processing (Still pretty obvious!).
+            </para>
+          </listitem>
+        </itemizedlist>
+
+        Unless these three things come together very little is going to happen,
+        information processing-wise.  But each of these items have their own
+        requirements that need to be satisfied before things can get exciting.
+      </para>
+      <para>
+        Take the computer, for example.  While it needs things like electricity
+        and a cool, dry place to operate, it also needs access to the other two
+        items --- information and programs --- in order to do its thing.  The
+        way to get information and programs into a computer is to place them in
+        the computer's mass storage.  These days, mass storage invariably means
+        a disk drive.  Putting information and programs on the disk drive means
+        that they are stored as files.  So much for the computer's part in this.
+      </para>
+      <para>
+        OK, let's look at the information.  Does information have any particular
+        needs?  Well, it needs sufficient space on the disk drive, but more
+        importantly, it needs to be in the proper format for the program that
+        will be processing it.  That's it for information.
+      </para>
+      <para>
+        Finally, we have the program.  What does it need?  Like the information,
+        it needs sufficient disk space on the disk drive.  But there are many
+        other things that it may need:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              It may need information to process, in the correct format, named
+              properly, and in the appropriate area on a disk drive somewhere.
+
+              <indexterm>
+                <primary>config files</primary>
+              </indexterm>
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              It may need one or more configuration files.  These are files that
+              control the program's behavior and permit some level of
+              customization.  Like the information, these files must be in the
+              proper format, named properly, and in the appropriate area on a
+              disk.  We'll be referring to them by their other name ---
+              <emphasis>config</emphasis> files --- throughout the book.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              It may need work areas on a disk, named properly, and located in
+              the appropriate area.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              It may even need other programs, each with their
+              <emphasis>own</emphasis> requirements.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Although not strictly required by the program itself, the program
+              may come with one or more files containing documentation.  These
+              files can be very handy for the humans trying to get the program
+              to do their bidding!
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        As you can imagine, this can get pretty complicated.  It's not so bad
+        once everything is set up properly, but how do things get set up
+        properly in the first place?  There are two possibilities:
+
+       <orderedlist>
+          <listitem>
+            <para>
+              After reading the documentation that comes with the program you'd
+              like to use, you copy the various programs, configuration files,
+              and information onto your computer, making sure they are all named
+              correctly, are located in the proper place, and that there is
+              sufficient disk space to hold them all.  You make the appropriate
+              changes to the configuration file(s).  Finally, you run any setup
+              programs that are necessary, giving them whatever information they
+              require to do their job.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              You let the computer do it.
+            </para>
+          </listitem>
+        </orderedlist>
+
+        If it seems like the first choice isn't so bad, consider how many files
+        you'll need to keep track of.  On a typical Linux system, it's not
+        unusual to have over 20,000 different files.  That's a
+        <emphasis>lot</emphasis> of documentation reading, file copying, and
+        configuring!  And what happens when you want a newer version of a
+        program?  More of the same!
+      </para>
+      <para>
+        Some people think the second alternative is easier.  RPM was made for
+        them.
+      </para>
+
+      <sect2 id="s2-intro-to-rpm-enter-the-package">
+        <title>Enter the Package</title>
+        <indexterm>
+          <primary>package!what is it</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          When you consider that computers are very good at keeping track of
+          large amounts of data, the idea of giving your computer the job of
+          riding herd over 20,000 files seems like a good one.  And that's
+          exactly what package management software does.  But what
+          <emphasis>is</emphasis> a "package"?
+        </para>
+        <para>
+          A package in the computer sense is very similar to a package in the
+          physical sense.  Both are methods of keeping related objects together
+          in the same place.  Both need to be opened before the contents can be
+          used.  Both can have a "packing slip" taped to the side, identifying
+          the contents.
+        </para>
+        <para>
+          Normally, package management systems take all the various files
+          containing programs, data, documentation, and configuration
+          information, and place them in one specially formatted file --- a
+          package file.  In the case of RPM, the package file is sometimes
+          called a "package", a ".rpm file", or even an "RPM".  All mean the
+          same thing --- a package containing software meant to be installed
+          using RPM.
+        </para>
+        <para>
+          What types of software are normally found in a package?  There are no
+          hard and fast rules, but normally a package's contents consist of one
+          of the following types of software:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                A collection of one or more programs that perform a single
+                well-defined task.  This is normally what people think of as an
+                "application".  Word processors and programming languages would
+                fit into this category.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                A specific part of an operating system.  Examples might be
+                system initialization scripts, a particular command shell, or
+                the software required to support a web server, for example.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+
+        <sect3 id="s3-intro-to-rpm-advantages-of-package">
+          <title>Advantages of a Package</title>
+          <indexterm>
+            <primary>package!advantages of</primary>
+            <secondary></secondary>
+          </indexterm>
+
+          <para>
+            One of the most obvious benefits to having a package is that the
+            package is one easily manageable chunk.  If you move it from one
+            place to another, there's no risk of any part getting left behind.
+            But although this is the most obvious advantage, it's not the
+            biggest one.
+          </para>
+          <para>
+            The biggest advantage is that the package can contain the
+            <emphasis>knowledge</emphasis> about what it takes to install itself
+            on your computer.  And if the package contains the steps required to
+            install itself, the package can also contain the steps required to
+            uninstall itself.  What used to be a painful manual process is now a
+            straightforward procedure.  What used to be a mass of 20,000 files
+            becomes a couple hundred packages.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-manage-your-packages">
+        <title>Manage Your Packages, or They Will Manage You</title>
+        <indexterm>
+          <primary>package!management of!reasons for</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          A couple <emphasis>hundred</emphasis>?  Even though the use of
+          packages has decreased the complexity of managing a system by an order
+          of magnitude, it hasn't yet gotten to the level of being a
+          "no-brainer".  It's still necessary to keep track of what packages are
+          installed on your system.  And if there are some packages that require
+          other packages in order to install or operate correctly, these should
+          be tracked as well.
+        </para>
+
+        <sect3 id="s3-intro-to-rpm-packages-lead-active-lives">
+          <title>Packages Lead Active Lives</title>
+
+          <para>
+            If you start looking at a computer system as a collection of
+            packages, you'll find that a distinct set of operations will take
+            place on those packages time and time again:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  New packages are installed.  Maybe it's a spreadsheet you'll
+                  use to keep track of expenses, or the latest shoot-em-up game,
+                  but in either case it's new and you want it.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Old packages are replaced with newer versions.  Whoever wrote
+                  the word processor you use daily, comes out with a new
+                  version.  You'll probably want to install the new version and
+                  remove the old one.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Packages are removed entirely.  Perhaps that over-hyped
+                  strategy game just didn't cut it.  You have better things to
+                  do with that disk space, so get rid of it!
+                </para>
+              </listitem>
+            </itemizedlist>
+
+            With this much activity going on, it's easy to lose track of things.
+            What types of package information should be available to keep you
+            informed?
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-keeping-track-of-packages">
+          <title>Keeping Track of Packages</title>
+          <para>
+            Just as there are certain operations that are performed on packages,
+            there are also certain types of information that will make it easier
+            to make sense of the packages installed on your system:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Certainly you'd like to be able to see what packages are
+                  installed.  It's easy to forget if that fax program you tried
+                  a few months ago is still installed or not.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It would be nice to be able to get more detailed information
+                  on a specific package.  This might consist of anything from
+                  the date the package was installed, to a list of files it
+                  installed on your system.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Being able to access this information in a variety of ways can
+                  be helpful, too.  Instead of simply finding out what files a
+                  package installed, it might be handy to be able to name a
+                  particular file and find out which package installed it.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  If this amount of detail is possible, then it should be
+                  possible to see if the way a package is presently installed
+                  varies from the way it was originally installed.  It's not at
+                  all unusual to make a mistake and delete one file --- or a
+                  hundred.  Being able to tell if one or more packages are
+                  missing files could greatly simplify the process of getting an
+                  ailing system back on its feet again.
+                  <indexterm>
+                    <primary>config files</primary>
+                  </indexterm>
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Files containing configuration information can be a real
+                  headache.  If it were possible to pay extra attention to these
+                  files and make sure any changes made to them weren't lost,
+                  life would certainly be a lot easier.
+                  <indexterm>
+                    <primary>package!management of!reasons for|)</primary>
+                    <secondary></secondary>
+                    <tertiary></tertiary>
+                  </indexterm>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+
+        </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-intro-to-rpm-package-management-how">
+      <title>Package Management: How to Do It?</title>
+      <indexterm>
+        <primary>package!management of!how to</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        Well, all that sounds great --- easy install, upgrade, and deletion of
+        packages; getting package information presented several different ways;
+        making sure packages are installed correctly; and even tracking changes
+        to config files.  But how do you do it?
+      </para>
+      <para>
+        As mentioned above, the obvious answer is to let the computer do it.
+        Many groups have tried to create package management software.  There are
+        two basic approaches:
+
+         <orderedlist>
+          <listitem>
+            <para>
+              Some package management systems concentrate on the specific steps
+              required to manipulate a package.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Other package management systems take a different approach,
+              keeping track of the files on the system and manipulating packages
+              by concentrating on the files involved.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+
+      <para>
+        Each approach has its good and bad points.  In the first method, it's
+        easy to install new packages, somewhat difficult to remove old ones, and
+        almost impossible to obtain any meaningful information about installed
+        packages.
+      </para>
+      <para>
+        The second method makes it easy to obtain information about installed
+        packages, and fairly easy to install and remove packages.  The main
+        problem using this method is that there may not be a well-defined way to
+        execute any commands required during the installation or removal
+        process.
+      </para>
+      <para>
+        In practice, no package management system uses one approach or the other
+        --- all are a mixture of the two.  The exact mix and design goals will
+        dictate how well a particular package management system meets the needs
+        of the people using it.  At the time &RHI; started work on their Linux
+        distribution, there were a number of package management systems in use,
+        each with a different approach to making package management easier.
+      </para>
+
+      <sect2 id="s2-intro-to-rpm-rpm-ancestors">
+        <title>Ancestors of RPM</title>
+        <indexterm>
+          <primary>RPM!ancestors of</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Since this is a book on the &RH; Package Manager, a good way to see
+          what RPM is all about is to look at the package management software
+          that preceded RPM.
+        </para>
+
+        <sect3 id="s3-intro-to-rpm-rpp">
+          <title>RPP</title>
+          <indexterm>
+            <primary>RPM!ancestors of!RPP</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            RPP was used in the first &RHL; distributions.  Many of RPP's
+            features would be recognizable to anyone who has worked with RPM.
+            Some of these innovative features are:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Simple, one command installation and uninstallation of
+                  packages.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Scripts that can run before and after installation and
+                  uninstallation of packages.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Package verification.  The files of individual packages can be
+                  checked to see that they haven't been modified since they were
+                  installed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Powerful querying.  The database of packages can be queried
+                  for information about installed packages, including file
+                  lists, descriptions and more.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            While RPP possessed several of the features that were important
+            enough to continue on as parts of RPM today, it had some weaknesses,
+            too:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  It didn't use "pristine sources".  Every program is made up of
+                  programming language statements stored in files.  This source
+                  code is later translated into a binary language that the
+                  computer can execute.  In the case of RPP, its packages were
+                  based on source code that had been modified specifically for
+                  RPP, hence the sources weren't pristine.  This is a bad idea
+                  for a number of fairly technical reasons.  Not using pristine
+                  sources made it difficult for package developers to keep
+                  things straight, particularly if they were building hundreds
+                  of different packages.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It couldn't guarantee executables were built from packaged
+                  sources.  The process of building a package for RPP was such
+                  that there was no way to ensure the executable programs were
+                  built from the source code contained in an RPP source package.
+                  Once again, this was a problem for the package builder,
+                  especially those who had large numbers of packages to build.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It had no support for multiple architectures.  As people
+                  started using RPP, it became obvious that the package managers
+                  that were unable to simplify the process of building packages
+                  for more than one architecture, or type of computer, were
+                  going to be at a disadvantage.  This was a problem,
+                  particularly for &RHI;, as they were starting to look at the
+                  possibility of creating Linux distributions for other
+                  architectures, such as the Digital Alpha.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            Even with these problems, RPP was one of the things that made the
+            first &RHL; distributions unique.  Its ability to simplify the
+            process of installing software was a real boon to many of &RH;'s
+            customers, particularly those with little experience in Linux.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-pms">
+          <title>PMS</title>
+          <indexterm>
+            <primary>RPM!ancestors of!PMS</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            While &RHI; was busy with RPP, another group of Linux devotees were
+            hard at work with their package management system.  Known as PMS,
+            its development, lead by
+            <indexterm>
+              <primary>Faith, Rik</primary>
+            </indexterm>
+            Rik Faith, attacked the problem of package management from a
+            slightly different viewpoint.
+          </para>
+          <para>
+            Like RPP, PMS was used to package a Linux distribution.  This
+            distribution was known as the BOGUS distribution, and all the
+            software in it was built from original unmodified sources.  Any
+            changes that were required were patched in during the processing of
+            building the software.  This is the concept of "pristine sources"
+            and is PMS's most important contribution to RPM.  The importance of
+            pristine sources can not be overstated.  It allows the packager to
+            quickly release new version of software, and to immediately see what
+            changes were made to the software.
+          </para>
+          <para>
+            The chief disadvantages of PMS were weak querying ability, no
+            package verification, no multiple architecture support, and poor
+            database design.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-pm">
+          <title>PM</title>
+          <indexterm>
+            <primary>RPM!ancestors of!PM</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Later, 
+            <indexterm>
+              <primary>Faith, Rik</primary>
+            </indexterm>
+            Rik Faith and 
+            <indexterm>
+              <primary>Hoffman, Doug</primary>
+            </indexterm>
+            Doug Hoffman, working under contract for &RHI;, produced PM.  The
+            design combined all the important features of RPP and PM, including
+            one command installation and uninstallation, scripts run before and
+            after installation and uninstallation, package verification,
+            advanced querying, and pristine sources.  However it retained RPP's
+            and PM's chief disadvantages: weak database design and no support
+            for multiple architectures.
+          </para>
+          <para>
+            PM was very close to a viable package management system, but it
+            wasn't quite ready for prime time.  It was never used in a
+            commercially available product.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-rpmv1">
+          <title>RPM Version 1</title>
+          <indexterm>
+            <primary>RPM!ancestors of!RPM version 1</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            With two major forays into package management behind them,
+            <indexterm>
+              <primary>Ewing, Marc</primary>
+            </indexterm>
+            Marc Ewing and
+            <indexterm>
+              <primary>Troan, Erik</primary>
+            </indexterm>
+            Erik Troan went to work on a third attempt.  This one would be
+            called the &RH; Package Manager, or RPM.
+          </para>
+          <para>
+            Although it built on the experiences of PM, PMS, and RPP, RPM was
+            quite different under the hood.  Written in the Perl programming
+            language for fast development, the creation of RPM version 1 focused
+            on addressing the flaws of its ancestors.  In some cases, the flaws
+            were eliminated, while in others, the problems remained.
+          </para>
+          <para>
+            Some of the successes of RPM version 1 were:
+
+            <itemizedlist mark="bullet">
+              <indexterm>
+                <primary>config files</primary>
+              </indexterm>
+
+              <listitem>
+                <para>
+                  Automatic handling of configuration files.  The contents of
+                  config files are often changed from what they were in the
+                  original package, making it hard for a package manager to know
+                  how a particular config file should be handled during
+                  installs, upgrades, and erasures.  PM made an attempt at
+                  config file handling, but in RPM it was improved further.  In
+                  many respects, this feature is the key to RPM's power and
+                  flexibility.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Ease of rebuilding large numbers of packages.  By making it
+                  easy for people who were trying to create a Linux distribution
+                  consisting of several hundred packages, RPM was a step in the
+                  right direction.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It was easy to use.  Many of the concepts used in RPP had
+                  withstood the test of time and were used in RPM.  For
+                  instance, the ability to verify the installation of a package
+                  was one of the features that set RPP apart.  It was adapted
+                  and expanded in RPM version 1.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+
+          <para>
+            But RPM version 1 wasn't perfect.  There were a number of flaws,
+            some of them major:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  It was slow.  While the use of Perl made RPM's development
+                  proceed more quickly, it also meant that RPM wouldn't run as
+                  quickly as it would have, had it been written in C.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Its database design was fragile.  Unfortunately, under RPM
+                  version 1 it was not unusual for there to be problems with the
+                  database.  While the approach of dedicating a database to
+                  package management was a good idea, the implementation used in
+                  RPM version 1 left a lot to be desired.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It was big.  This is another artifact of using Perl.
+                  Normally, RPM's size requirements were not an issue, except
+                  for one area.  When performing an initial system install, RPM
+                  was run from a small, floppy-based system environment.  The
+                  need to have Perl available meant space on the boot floppies
+                  was always a problem.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  It didn't support multiple architectures (types of computers)
+                  well.  The need to have a package manager support more than
+                  one <emphasis>type</emphasis> of computer hadn't been
+                  acknowledged before.  With RPM version 1, an initial stab was
+                  taken at the problem, but the implementation was incomplete.
+                  Nonetheless, RPM had been ported to a number of other computer
+                  systems. It was becoming obvious that the issue of
+                  multi-architecture support was not going away and had to be
+                  addressed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  The package file format wasn't extensible.  This made it very
+                  difficult to add functionality, since any change to the file
+                  format would cause older versions of RPM to break.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+
+          <para>
+            Even though their Linux distribution was a success, and RPM was much
+            of the reason for it,
+            <indexterm>
+              <primary>Ewing, Marc</primary>
+            </indexterm>
+            Marc and 
+            <indexterm>
+              <primary>Troan, Erik</primary>
+            </indexterm>
+            Erik knew that some changes were going to be necessary to carry RPM
+            to the next level.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-rpmv2">
+          <title>The RPM of Today: Version 2</title>
+          <indexterm>
+            <primary>RPM!ancestors of!RPM version 2</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Looking back on their experiences with RPM version 1, 
+            <indexterm>
+              <primary>Ewing, Marc</primary>
+            </indexterm>
+            Marc and 
+            <indexterm>
+              <primary>Troan, Erik</primary>
+            </indexterm>
+            Erik made a major change to RPM's design: They rewrote it entirely
+            in C.  This did wonderful things to RPM's speed and size.  Querying
+            the database was quicker now, and there was no need to have Perl
+            around just to do package management.
+          </para>
+          <para>
+            In addition, the database format was redesigned to improve both
+            performance and reliability.  Displaying package information can
+            take as little as a tenth of the time spent in RPM version 1, for
+            example.
+          </para>
+          <para>
+            Realizing RPM's potential in the non-Linux arena, they also created 
+            <indexterm>
+              <primary>rpmlib</primary>
+            </indexterm>
+            rpmlib, a library of RPM routines that allow the use of RPM
+            functionality in other programs.  RPM's ability to function on more
+            than one architecture was also enhanced.  Finally, the package file
+            format was made more extensible, clearing the way for future
+            enhancements to RPM.
+          </para>
+          <para>
+            So is RPM perfect?  No program can ever reach perfection, and RPM is
+            no exception. But as a package manager that can run on several
+            different types of systems, RPM has a lot to offer, and it will only
+            get better.  Let's take a look at the design criteria that drove the
+            development of RPM.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-intro-to-rpm-rpm-design-goals">
+      <title>RPM Design Goals</title>
+      <indexterm>
+        <primary>RPM!design goals of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        The design goals of RPM could best be summed up with the phrase
+        "something for everyone".  While the main reason for the existence of
+        RPM was to make it easier for &RHI; to build the several hundred
+        packages that comprised their Linux distribution, it was not the only
+        reason RPM was created.  Let's take a look at the various requirements
+        the &RH; team used in their design of RPM:
+      </para>
+
+      <sect2 id="s2-intro-to-rpm-packages-on-off">
+        <title>Make it easy to get packages on and off the system</title>
+        <para>
+          As we've seen earlier in this chapter, the act of installing a package
+          can involve many complex steps.  Entrusting these steps to a person
+          who may not have the necessary experience is a strategy for failure.
+          So the goal for RPM was to make it as easy as possible for
+          <emphasis>anyone</emphasis> to install packages.  The same holds true
+          for removing packages.  It is a complex and error-prone operation, and
+          one that RPM should handle for the user.
+        </para>
+        <para>
+          The other side of this issue is that RPM should give the package
+          builder almost total control in terms of <emphasis>how</emphasis> the
+          package is installed.  The reason for this is simple: if the package
+          builders do their homework, their package should install and uninstall
+          properly.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-verify">
+        <title>Make it easy to verify a package was installed correctly</title>
+        <para>
+          Because software problems are a fact of life, the ability to verify
+          the proper installation of a package is vital.  If done properly, it
+          should be possible to catch a variety of problems, including things
+          such as missing or modified files.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-package-builder">
+        <title>Make it easy for the package builder</title>
+        <para>
+          While we're dedicating an entire book to package management, in
+          reality it should be a small portion of the package builder's job.
+          Why?  They've got better things to do!  If they are the people that
+          are actually creating the software to be packaged,
+          <emphasis>that's</emphasis> where they should be spending the majority
+          of their time.
+        </para>
+        <para>
+          Even if the package builder isn't actually writing software, they
+          still have better things to do than worry about building packages.
+          For instance, they may be responsible for building many packages.  The
+          less time spent on building an individual package translates to more
+          packages that can be built.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-original-source">
+        <title>Make it start with the original source code</title>
+        <para>
+          Delving a bit more into the package builder's world, it was deemed
+          important that RPM start with the original, unmodified source code.
+          Why is this so important?
+        </para>
+        <para>
+          Using the original sources makes it possible to separate the changes
+          required to build the package from any changes implemented to fix
+          bugs, add new features, or anything else.  This is a good thing for
+          package builders, since many of them are <emphasis>not</emphasis> the
+          original authors of the programs they package.
+        </para>
+        <para>
+          This separation makes it easy, months down the road, to know exactly
+          what changes were made in order to get the package to build.  This is
+          important when a new version of the packaged software becomes
+          available.  Many times it's only necessary to apply the original
+          "package building" changes to the newer software.  At worst, the
+          changes provide a starting point to determine what sorts of things
+          might need to be changed in the new version.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-different-architectures">
+        <title>Make it work on different computer architectures</title>
+        <indexterm>
+          <primary>architectures, support for multiple</primary>
+        </indexterm>
+
+        <para>
+          One of the tougher things for a package builder to do is to take a
+          program, make it run on more than one type of computer, and distribute
+          packages for each.  Because RPM makes it easy to take a program's
+          original source code, add the changes necessary to get it to build,
+          and produce a package for each architecture in one step, it can be
+          pretty handy.
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-intro-to-rpm-whats-in-package">
+      <title>What's in a package?</title>
+      <indexterm>
+        <primary>package!contents of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        With all the magical things we've claimed that package management
+        software in general (and RPM in particular) can do, you'd think there
+        was a tiny computer guru bundled in every package.  However, the reality
+        is not that magical.  Here's a quick overview of the more important
+        parts of an RPM package
+        <footnote>
+          <para>
+            See Appendix <xref linkend="rpm-file-format"> for complete details
+            on the contents of a .rpm file.
+          </para>
+        </footnote>
+        .
+      </para>
+
+      <sect2 id="s2-intro-to-rpm-package-labels">
+        <title>RPM's Package Labels</title>
+        <indexterm>
+          <primary>package!labels</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Every package built for RPM has to have a specific set of information
+          that uniquely identifies it.  We call this information a package
+          label.  Here are two sample package labels:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                <filename>nls-1.0-1</filename>
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                <filename>perl-5.001m-4</filename>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+
+        <para>
+          While these labels look like they have very little in common, in fact
+          they all follow RPM's package labelling convention.  There are three
+          different components in every package label.  Let's look at each one
+          in order:
+        </para>
+
+        <sect3 id="s3-intro-to-rpm-software-name">
+          <title>Component #1: The Software's Name</title>
+          <para>
+            Every package label begins with the name of the software.  The name
+            may be derived from the name of the application packaged, or it may
+            be a name describing a group of related programs bundled together by
+            the package builder.  The software names in the packages listed
+            above are: <filename>nls</filename> and <filename>perl</filename>.
+            As you can see, the software name is separated from the rest of the
+            package label by a dash.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-software-version">
+          <title>Component #2: The Software's Version</title>
+          <para>
+            Next in the package label is an identifier that describes the
+            version of the software being packaged.  If the package builder
+            bundled a number of related programs together, the software version
+            is probably a number of their own choosing.  However, if the package
+            consists of one major application, the software version normally
+            comes directly from the application's developer.  The actual version
+            specification is quite flexible, as can be seen in the examples
+            above.  The versions shown are: <filename>1.0</filename> and
+            <filename>5.001m</filename>.  A dash separates the software version
+            from the remainder of the package label.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-intro-to-rpm-package-release">
+          <title>Component #3: The Package's Release</title>
+          <para>
+            The package release is the most unambiguous part of a package label.
+            It is a number chosen by the package builder.  It reflects the
+            number of times the package has been rebuilt using the same version
+            software.  Normally, the rebuilds are due to bugs uncovered after
+            the package has been in use for a while.  By tradition, the package
+            release starts at <filename>1</filename>.  The package releases in
+            the example above are: <filename>1</filename> and
+            <filename>4</filename>.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-labels-names">
+        <title>Labels And Names: Similar, But Distinct</title>
+        <indexterm>
+          <primary>package!labels vs. names</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Package labels are used internally by RPM.  For example, if you ask
+          RPM to list every installed package, it will respond with a list of
+          package labels.  When a package file is created, part of the filename
+          consists of the package label.  There is no technical requirement for
+          this, but it does make it easier to keep track of things.
+        </para>
+        <para>
+          However, a package file may be renamed, and the new filename won't
+          confuse RPM in the least.  That's because the package label is
+          contained within the file.  For a fairly technical view of the inside
+          of a package file, refer to Appendix <xref linkend="rpm-file-format">.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-package-wide-information">
+        <title>Package-wide Information</title>
+        <indexterm>
+          <primary>information!package-wide</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Some of the information contained in a package is general in nature.
+          This information includes such items as:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The date and time the package was built.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                A description of the package's contents.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The total size of all the files installed by the package.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Information that allows the package to be grouped with similar
+                packages.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                A digital "signature" that can be used to verify the
+                authenticity and integrity of the package.
+                <footnote>
+                  <para>
+                    For more information on RPM's signature checking capability,
+                    refer to section <xref linkend="rpm-K">.
+                  </para>
+                </footnote>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+
+      <sect2 id="s2-intro-to-rpm-per-file-information">
+        <title>Per-file Information</title>
+        <indexterm>
+          <primary>information!per-file</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Each package also contains information about every file contained in
+          the package.  The information includes:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The name of every file and where it is to be installed.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Each file's permissions.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Each file's owner and group specifications.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The MD5 checksum of each file.
+                <footnote>
+                  <para>
+                    We'll discuss MD5 checksums in greater detail in section
+                    <xref linkend="rpm-V">.
+                  </para>
+                </footnote>
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The file's contents.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-intro-to-rpm-lets-get-started">
+      <title>Let's Get Started</title>
+      <para>
+        To summarize, a package management system uses the computer to keep
+        track of all the various bits and pieces that comprise an application or
+        an entire operating system.  Most package management systems use a
+        specially formatted file to keep everything together in a single, easily
+        manageable entity, or package.  Additionally, package management systems
+        tend to provide one or more of the following functions:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Installing new packages.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Removing old packages.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Upgrading from an old package to a new one.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Obtaining information about installed packages.
+            </para>
+          </listitem>
+        </itemizedlist>
+
+        RPM has been designed with &RHI;'s past package management experiences
+        in mind.  PM and RPP provided most of these functions with varying
+        degrees of success.
+        <indexterm>
+          <primary>Ewing, Marc</primary>
+        </indexterm>
+        Marc Ewing and 
+        <indexterm>
+          <primary>Troan, Erik</primary>
+        </indexterm>
+        Erik Troan have worked hard to make RPM better than its predecessors in
+        every way.  Now it's time to see how they did, and learn how to use RPM!
+      </para>
+    </sect1>
+  </chapter>
+

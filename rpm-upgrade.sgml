@@ -1,0 +1,901 @@
+  <chapter id="ch-rpm-upgrade">
+    <title>Using RPM to Upgrade Packages</title>
+    <!-- label: rpm-U -->
+
+    <indexterm>
+      <primary><command>rpm -U</command></primary>
+    </indexterm>
+
+    <table id="tb-rpm-upgrade-syntax">
+      <title><command>rpm -U</command> Command Syntax</title>
+      <tgroup cols="3">
+        <colspec colnum="1" colname="option">
+        <colspec colnum="2" colname="description">
+        <colspec colnum="3" colname="pageref">
+        <spanspec namest="option" nameend="pageref" spanname="spanall">
+        <spanspec namest="option" nameend="description" spanname="span12">
+        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <tbody>
+          <row>
+            <entry spanname="spanall">
+              <command>rpm -U</command> (or
+              <command>--upgrade</command>)<emphasis>options</emphasis>
+              <filename>file1.rpm</filename> &hellip;
+              <filename>fileN.rpm</filename>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="spanall">
+              Parameters
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <filename>file1.rpm</filename> &hellip;
+              <filename>fileN.rpm</filename>
+            </entry>
+            <entry spanname="span23">
+              One or more RPM package files (URLs OK)
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              Upgrade---specific Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-h</command> (or <command>--hash</command>)
+            </entry>
+            <entry>
+              Print hash marks ("<computeroutput>#</computeroutput>") during
+              upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-install-h">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--oldpackage</command>
+            </entry>
+            <entry>
+              Permit "upgrading" to an older package
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-upgrade-oldpackage-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--test</command>
+            </entry>
+            <entry>
+              Perform upgrade tests only<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-test-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--excludedocs</command>
+            </entry>
+            <entry>
+              Do not install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-excludedocs-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--includedocs</command>
+            </entry>
+            <entry>
+              Install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-includedocs">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--replacepkgs</command>
+            </entry>
+            <entry>
+              Replace a package with a new copy of itself<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-replacepkgs">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--replacefiles</command>
+            </entry>
+            <entry>
+              Replace files owned by another package<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-replacefiles-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--force</command>
+            </entry>
+            <entry>
+              Ignore package and file conflicts
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-upgrade-force-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--percent</command>
+            </entry>
+            <entry>
+              Print percentages during upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-percent">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--noscripts</command>
+            </entry>
+            <entry>
+              Do not execute pre- and post-install scripts
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-upgrade-noscripts-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--prefix <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Relocate package to
+              <command><userinput>&lt;path&gt;</userinput></command> if
+              possible<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-prefix">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--ignorearch</command>
+            </entry>
+            <entry>
+              Do not verify package architecture<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-ignorearch">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--ignoreos</command>
+            </entry>
+            <entry>
+              Do not verify package operating system<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-ignoreos">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--nodeps</command>
+            </entry>
+            <entry>
+              Do not check dependencies<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-nodeps">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--ftpproxy <userinput>&lt;host&gt;</userinput></command>
+            </entry>
+            <entry>
+              Use <command><userinput>&lt;host&gt;</userinput></command> as the
+              FTP proxy<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-ftpproxy">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--ftpport <userinput>&lt;port&gt;</userinput></command>
+            </entry>
+            <entry>
+              Use <command><userinput>&lt;port&gt;</userinput></command> as the
+              FTP port<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-ftpport">
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12">
+              General Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-v</command>
+            </entry>
+            <entry>
+              Display additional information<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-more-feedback">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-vv</command>
+            </entry>
+            <entry>
+              Display debugging information<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-vv-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--root <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate root to
+              <command><userinput>&lt;path&gt;</userinput></command><footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-root">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate rpmrc file to
+              <command><userinput>&lt;rcfile&gt;</userinput></command><footnoteref linkend="fn-rpm-upgrade-tablefoot">
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-rcfile">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+            </entry>
+            <entry>
+              Use <command><userinput>&lt;path&gt;</userinput></command> to find
+              the RPM database<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              <footnote id="fn-rpm-upgrade-tablefoot">
+                <para>
+                  This option behaves identically to the same option used with
+                  <command>rpm -i</command>.  Please see Chapter <xref
+                  linkend="ch-rpm-install"> for more information on this
+                  option.
+                </para>
+              </footnote>
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-install-dbpath">
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+
+    <sect1 id="s1-rpm-upgrade-what-it-does">
+      <title><command>rpm -U</command> --- What Does it Do?</title>
+      <indexterm>
+        <primary><command>rpm -U</command>!what it does</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        If there was one RPM command that could win over friends, it would be
+        RPM's upgrade command.  After all, anyone who has ever tried to install
+        a newer version of <emphasis>any</emphasis> software knows what a
+        traumatic experience it can be.  With RPM, though, this process is
+        reduced to a single command: <command>rpm -U</command>. The <command>rpm
+        -U</command> command (<command>--upgrade</command> is equivalent)
+        performs two distinct operations:
+
+        <orderedlist>
+          <listitem>
+            <para>
+              Installs the desired package.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Erases all older versions of the package, if any exist.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+
+      <para>
+        If it sounds to you like <command>rpm -U</command> is nothing more than
+        an <command>rpm -i</command> command (see chapter <xref
+        linkend="ch-rpm-install">) followed by the appropriate number of <command>rpm
+        -e</command> commands, (see chapter <xref linkend="ch-rpm-erase">) you'd be
+        exactly right.  In fact, we'll be referring back to those chapters as we
+        discuss <command>rpm -U</command>, so if you haven't skimmed those
+        chapters yet, you might want to do that now.
+      </para>
+      <para>
+        While some people might think it's a "cheap shot" to claim that RPM
+        performs an upgrade when in fact it's just doing the equivalent of a
+        couple of other commands, in fact, it's a very smart thing to do.  By
+        carefully crafting RPM's package installation and erasure commands to do
+        the work required during an upgrade, it makes RPM more tolerant of
+        misuse by preserving important files even if an upgrade isn't being
+        done.
+      </para>
+      <para>
+        If RPM had been written with a very "smart" upgrade command, and the
+        install and erase commands couldn't handle upgrade situations at all,
+        installing a package could overwrite a modified configuration file.
+        <indexterm>
+          <primary>config files</primary>
+        </indexterm>
+        Likewise, erasing a package would also mean that config files could be
+        erased.  Not a good situation!  However, RPM's approach to upgrades
+        makes it possible to handle even the most tricky situation --- having
+        multiple versions of a package install simultaneously.
+      </para>
+
+      <sect2 id="s2-rpm-upgrade-config-file-magic">
+        <title>Config file magic</title>
+        <!-- label: upgrade-magic -->
+        <indexterm>
+          <primary><command>rpm -U</command>!config file handling</primary>
+          <secondary></secondary>
+        </indexterm>
+        <indexterm>
+          <primary>config files</primary>
+        </indexterm>
+
+        <para>
+          While the <command>rpm -i</command> and <command>rpm -e</command>
+          commands each do their part to keep config files straight, it is with
+          <command>rpm -U</command> that the full power of RPM's config file
+          handling shows through.  There are no less than
+          <emphasis>six</emphasis> different scenarios that RPM takes into
+          account when handling config files.
+        </para>
+        <para>
+          In order to make the appropriate decisions, RPM needs information.
+          The information used to decide how to handle config files is a set of
+          three large numbers known as <emphasis>MD5 checksums</emphasis>.  An
+          MD5 checksum is produced when a file is used as the input to a complex
+          series of mathematical operations.  The resulting checksum has a
+          unique property, in that <emphasis>any</emphasis> change to the file's
+          contents will result in a change to the checksum of that file.
+          <footnote>
+            <para>
+              Actually, there's a one in 2^128 chance a change will go
+              undetected, but for all practical purposes, it's as close to
+              perfect as we can get.
+            </para>
+          </footnote>
+          Therefore, MD5 checksums are a powerful tool for quickly determining
+          whether two different files have the same contents or not.
+        </para>
+        <para>
+          In the previous paragraph, we stated that RPM uses three different MD5
+          checksums to determine what should be done with a config file.  The
+          three checksums are:
+
+          <orderedlist>
+            <listitem>
+              <para>
+                The MD5 checksum of the file when it was originally installed.
+                We'll call this the <emphasis>original file</emphasis>.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The MD5 checksum of the file as it exists at upgrade time.
+                We'll call this the <emphasis>current file</emphasis>.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The MD5 checksum of the corresponding file in the new package.
+                We'll call this the <emphasis>new file</emphasis>.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          Let's take a look at the various combinations of checksums, see what
+          RPM will do because of them, and discuss why.  In the following
+          examples, we'll use the letters X, Y, and Z in place of lengthy MD5
+          checksums.
+        </para>
+
+        <sect3 id="s3-rpm-upgrade-xxx">
+          <title>Original file = X, Current file = X, New file = X</title>
+          <para>
+            In this case, the file originally installed was never modified.
+            <footnote>
+              <para>
+                Or, as some sticklers for detail may note, it may have been
+                modified, and subsequently those modifications were undone.
+              </para>
+            </footnote>
+            The file in the new version of the package is identical to the file
+            on disk.
+          </para>
+          <para>
+            In this case, RPM installs the new file, overwriting the original.
+            You may be wondering why go to the trouble of installing the new
+            file if it's just the same as the existing one.  The reason is that
+            aspects of the file <emphasis>other</emphasis> than its name and
+            contents might have changed.  The file's ownership, for example,
+            might be different in the new version.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-upgrade-xxy">
+          <title>Original file = X, Current file = X, New file = Y</title>
+          <para>
+            The original file has not been modified, but the file in the new
+            package <emphasis>is</emphasis> different.  Perhaps the difference
+            represents a bug-fix, or a new feature.  It makes no difference to
+            RPM.
+          </para>
+          <para>
+            In this case, RPM installs the new file, overwriting the original.
+            This makes sense.  If it didn't, RPM would never permit newer,
+            modified versions of software to be installed!  The original file is
+            not saved, since it had not been changed.  A lack of changes here
+            means that no site-specific modifications were made to the file.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-upgrade-xyx">
+          <title>Original file = X, Current file = Y, New file = X</title>
+          <para>
+            Here we have a file that <emphasis>was</emphasis> changed at some
+            point.  However, the new file is identical to the existing file
+            <emphasis>prior</emphasis> to the local modifications.
+          </para>
+          <para>
+            In this case, RPM takes the viewpoint that since the original file
+            and the new file are identical, the modifications made to the
+            original version must still be valid for the new version.  It leaves
+            the existing, modified file in place.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-upgrade-xyy">
+          <title>Original file = X, Current file = Y, New file = Y</title>
+          <para>
+            At some point the original file was modified, and those
+            modifications happen to make the file identical to the new file.
+            Perhaps the modification was made to fix a security problem, and the
+            new version of the file has the same fix applied to it.
+          </para>
+          <para>
+            In this case, RPM installs the new version, overwriting the modified
+            original.  The same philosophy used in the first scenario applies
+            here -- although the file has not changed, perhaps some other aspect
+            of the file has, so the new version is installed.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-upgrade-xyz">
+          <title>Original file = X, Current file = Y, New file = Z</title>
+          <para>
+            Here the original file was modified at some point.  The new file is
+            different from both the original <emphasis>and</emphasis> the
+            modified versions of the original file.
+          </para>
+          <para>
+            RPM is not able to analyze the contents of the files, and determine
+            what is going on.  In this instance, it takes the best possible
+            approach.  The new file is known to work properly with the rest of
+            the software in the new package --- at least the people building the
+            new package should have insured that it does.  The modified original
+            file is an unknown: it might work with the new package, it might
+            not.  So RPM installs the new file.
+          </para>
+          <para>
+            BUT&hellip; The existing file was definitely modified.  Someone made
+            an effort to change the file, for some reason.  Perhaps the
+            information contained in the file is still of use.  Therefore, RPM
+            saves the modified file, naming it
+            <command><userinput>&lt;file&gt;</userinput>.rpmsave</command>, and
+            prints a warning, so the user knows what happened:
+
+            <figure id="sc-rpm-upgrade-rpmsave-file">
+              <title>RPM Saving a Modified Config File</title>
+              <screen width="60">
+<computeroutput>
+warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
+</computeroutput>
+              </screen>
+            </figure>
+            These five scenarios cover just about every possible circumstance,
+            save one.  The missing scenario?
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-upgrade-none-huh-huh">
+          <title>
+            Original file = <emphasis>none</emphasis>, Current file = ??, New
+            file = ??
+          </title>
+          <para>
+            While RPM doesn't use checksums in this particular case, we'll
+            describe it in those terms, for the sake of consistency.  In this
+            instance, RPM had not installed the file originally, so there is no
+            original checksum.
+          </para>
+          <para>
+            Because the file had not originally been installed as part of a
+            package, there is no way for RPM to determine if the file currently
+            in place had been modified.  Therefore, the checksums for the
+            current file and the new file are irrelevant; they cannot be used to
+            clear up the mystery.
+          </para>
+          <para>
+            When this happens, RPM renames the file to
+            <command><userinput>&lt;file&gt;</userinput>.rpmorig</command>,
+            prints a warning, and installs the new file.  This way, any
+            modifications contained in the original file are saved.  The system
+            administrator can review the differences between the original and
+            the newly installed files and determine what action should be taken.
+          </para>
+          <para>
+            As you can see, in the majority of cases RPM will automatically take
+            the proper course of action when performing an upgrade.  It is only
+            when config files have been modified and are to be overwritten, that
+            RPM leaves any post-upgrade work for the system administrator.  Even
+            in those cases, many times the modified files are not worth saving
+            and can be deleted.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-upgrade-upgrading-a-package">
+      <title>Upgrading a Package</title>
+      <indexterm>
+        <primary><command>rpm -U</command>!basic command</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        The most basic version of the <command>rpm -U</command> command is
+        simply "<command>rpm -U</command>", followed by the name of a .rpm
+        package file:
+
+       <figure id="sc-rpm-upgrade-upgrade-example">
+          <title>Upgrading a Package with <command>rpm -U</command></title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -U eject-1.2-2.i386.rpm</userinput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Here, RPM performed all the steps necessary to upgrade the
+        <filename>eject-1.2-2</filename> package, faster than could have been
+        done by hand.  As in RPM's install command, Uniform Resource Locators,
+        or URLs, can also be used to specify the package file.
+        <footnote>
+          <para>
+            For more information on RPM's use of URLs, please see section <xref
+            linkend="s2-rpm-install-urls">.
+          </para>
+        </footnote>
+      </para>
+
+      <sect2 id="s2-rpm-upgrade-secret">
+        <title><command>rpm -U</command>'s Dirty Little Secret</title>
+        <indexterm>
+          <primary>
+            <command>rpm -U</command>!as replacement for <command>rpm
+            -i</command>
+          </primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          Well, in the example above, we didn't tell the whole story.  There was
+          no older version of the <filename>eject</filename> package installed.
+          Yes, it's true --- <command>rpm -U</command> works just fine as a
+          replacement for the normal install command <command>rpm -i</command>.
+        </para>
+        <para>
+          This is another, more concrete example of the strength of RPM's method
+          of performing upgrades.  Since RPM's install command is smart enough
+          to handle upgrades, RPM's upgrade command is really just another way
+          to specify an install.  Some people never even bother to use RPM's
+          install command; they always use <command>rpm -U</command>.  Maybe the
+          "<command>-U</command>" should stand for, "Uh, do the right
+          thing"&hellip;
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-upgrade-nearly-identical">
+      <title>They're Nearly Identical&hellip;</title>
+      <indexterm>
+        <primary><command>rpm -U</command>!options</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        Given the fact that <command>rpm -U</command> can be used as a
+        replacement to <command>rpm -i</command>, it follows that most of the
+        options available for <command>rpm -U</command> are identical to those
+        used with <command>rpm -i</command>.  Therefore, to keep the duplication
+        to a minimum, we'll discuss only those options that are unique to
+        <command>rpm -U</command>, or that behave differently from the same
+        option when used with <command>rpm -i</command>.  The table on page
+        <xref linkend="tb-rpm-upgrade-syntax"> at the start of this chapter
+        shows all valid options to RPM's upgrade command, and indicates which
+        are identical to those used with <command>rpm -i</command>.
+      </para>
+
+      <sect2 id="s2-rpm-upgrade-oldpackage-option">
+        <title>
+          <command>--oldpackage</command>: Upgrade To An Older Version
+        </title>
+        <!-- label: upgrade- -oldpackage -->
+        <indexterm>
+          <primary><command>--oldpackage</command> option</primary>
+        </indexterm>
+
+        <para>
+          This option might be used a bit more by people that like to stay on
+          the "bleeding edge" of new versions of software, but eventually,
+          everyone will probably need to use it.  Usually, the situation plays
+          out like this:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                You hear about some new software that sounds pretty nifty, so
+                you download the <filename>.rpm</filename> file and install it.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The software is <emphasis>great</emphasis>!  It does everything
+                you ask for, and more.  You end up using it every day for the
+                next few months.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                You hear that a new version of your favorite software is
+                available.  You waste no time in getting the package.  You
+                upgrade the software by using <command>rpm -U</command>.  No
+                problem!
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Fingers arched in anticipation, you launch the new version.
+                Your computer's screen goes blank!
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          Looks like a bug in the new version.  <emphasis>Now</emphasis> what do
+          you do?  Hmmm.  Maybe you can just "upgrade" to the older version.
+          Let's try to go back to release 2 of <filename>cdp-0.33</filename>
+          from release 3:
+
+          <figure id="sc-rpm-upgrade-oldpackage-setup">
+            <title>Attempting to "Upgrade" to an Older Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Uv cdp-0.33-2.i386.rpm</userinput>
+<computeroutput>
+Installing cdp-0.33-2.i386.rpm
+package cdp-0.33-3 (which is newer) is already installed
+error: cdp-0.33-2.i386.rpm cannot be installed
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          That didn't work very well.  At least it told us just what the problem
+          was --- we were trying to upgrade to an older version of a package
+          that is already installed.  Fortunately, there's a special option for
+          just this situation: <command>--oldpackage</command>.  Let's give it a
+          try:
+
+          <figure id="sc-rpm-upgrade-oldpackage-example">
+            <title>
+              "Upgrading" to an Older Package Using the
+              <command>--oldpackage</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Uv --oldpackage cdp-0.33-2.i386.rpm</userinput>
+<computeroutput>
+Installing cdp-0.33-2.i386.rpm
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          By using the <command>--oldpackage</command> option, release 3 of
+          <filename>cdp-0.33</filename> is history, and has been replaced by
+          release 2.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-upgrade-force-option">
+        <title><command>--force</command>: The Big Hammer</title>
+        <!-- label: upgrade- -force -->
+        <indexterm>
+          <primary><command>--force</command> option</primary>
+        </indexterm>
+        <indexterm>
+          <primary><command>--replacepkgs</command> option</primary>
+        </indexterm>
+        <indexterm>
+          <primary><command>--replacefiles</command> option</primary>
+        </indexterm>
+        <indexterm>
+          <primary><command>--replacepkgs</command> option</primary>
+        </indexterm>
+
+        <para>
+          Adding <command>--force</command> to an upgrade command is a way of
+          saying "Upgrade it anyway!"  In essence, it adds
+          <command>--replacepkgs</command>, <command>--replacefiles</command>,
+          <emphasis>and</emphasis> <command>--oldpackage</command> to the
+          command.  Like a big hammer, <command>--force</command> is an
+          irresistible force
+          <footnote>
+            <para>
+              Pun intended.
+            </para>
+          </footnote>
+          that makes things happen.  In fact, the only thing that will prevent a
+          <command>--force</command>'ed upgrade from proceeding is a dependency
+          conflict.
+        </para>
+        <para>
+          And like a big hammer, it pays to fully understand why you need to use
+          <command>--force</command> before actually using it.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-upgrade-noscripts-option">
+        <title>
+          <command>--noscripts</command>: Do Not Execute Install and Uninstall
+          Scripts
+        </title>
+        <!-- label: rpm-U- -noscripts --><!-- label: upgrade- -noscripts -->
+        <indexterm>
+          <primary><command>--noscripts</command> option</primary>
+        </indexterm>
+
+        <para>
+          The <command>--noscripts</command> option prevents a package's pre-
+          and post-install scripts from being executed.  This is no different
+          than the option's behavior when used with RPM's install command.
+          However, there is an additional point to consider when the option is
+          used during an upgrade.  The following example uses specially-built
+          packages that display messages when their scripts are executed by RPM:
+
+          <figure id="sc-rpm-upgrade-noscripts-setup">
+            <title>Watching A Packages Install-time Scripts Execute</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -i bother-2.7-1.i386.rpm</userinput>
+<computeroutput>
+This is the bother 2.7 preinstall script
+This is the bother 2.7 postinstall script
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this case, a package has been installed.  As expected, its scripts
+          are executed.  Next, let's upgrade this package:
+
+          <figure id="sc-rpm-upgrade-noscripts-setup2">
+            <title>Watching Scripts Execute During an Upgrade</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -U bother-3.5-1.i386.rpm</userinput>
+<computeroutput>
+This is the bother 3.5 preinstall script
+This is the bother 3.5 postinstall script
+This is the bother 2.7 preuninstall script
+This is the bother 2.7 postuninstall script
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          This is a textbook example of the sequence of events during an
+          upgrade.  The new version of the package is installed (as shown by the
+          pre- and post-install scripts being executed).  Finally, the previous
+          version of the package is removed (showing the pre- and
+          post-<emphasis>un</emphasis>install scripts being executed).
+        </para>
+        <para>
+          There are really no surprises there --- it worked just the way it was
+          meant to.  This time, let's use the <command>--noscripts</command>
+          option when the time comes to perform the upgrade:
+
+          <figure id="sc-rpm-upgrade-noscripts-setup3">
+            <title>Watching A Packages Install-time Scripts Execute</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -i bother-2.7-1.i386.rpm</userinput>
+<computeroutput>
+This is the bother 2.7 preinstall script
+This is the bother 2.7 postinstall script
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Again, the first package is installed, and its scripts are executed.
+          Now let's try the upgrade using the <command>--noscripts</command>
+          option:
+
+          <figure id="sc-rpm-upgrade-noscripts-payoff">
+            <title>
+              Upgrading a Package With the <command>--noscripts</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -U --noscripts bother-3.5-1.i386.rpm</userinput>
+<computeroutput>
+This is the bother 2.7 preuninstall script
+This is the bother 2.7 postuninstall script
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The difference here is that the <command>--noscripts</command> option
+          prevented the new package's scripts from executing.  The scripts from
+          the package being erased were still executed.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>

@@ -1,0 +1,273 @@
+<!DOCTYPE BOOK PUBLIC "-//Davenport//DTD DocBook V3.0//EN" [
+<!-- *************** Shorthand entities... *************** -->
+<!-- The generic term "Red Hat"... -->
+<!ENTITY RH "Red Hat">
+<!-- The name of the company... -->
+<!ENTITY RHI "&RH;">
+<!-- Formal version... -->
+<!ENTITY FORMAL-RHI "&RH;, Inc.">
+<!-- Shorthand version... -->
+<!ENTITY RHIS "RH">
+<!-- The basic operating system... -->
+<!ENTITY RHL "&RH; Linux">
+<!-- ...its version... -->
+<!ENTITY RHLVER "6.0">
+<!-- ...for the x86 architecture... -->
+<!ENTITY RHLINTEL "&RHL;/Intel">
+<!-- ...for the Alpha architecture... -->
+<!ENTITY RHLALPHA "&RHL;/Alpha">
+<!-- ...for the SPARC architecture... -->
+<!ENTITY RHLSPARC "&RHL;/SPARC">
+<!-- The status of our documentation... -->
+<!ENTITY STATUS "Official">
+<!-- The User's Guide... -->
+<!ENTITY RHLUG "&STATUS; &RHL; User's Guide">
+<!-- Shorthand version... -->
+<!ENTITY RHLUGS "User">
+<!-- The Getting Started Guide... -->
+<!ENTITY RHLGSG "&STATUS; &RHL; Getting Started Guide">
+<!-- Shorthand version... -->
+<!ENTITY RHLGSGS "GSG">
+<!-- The Installation Guide... -->
+<!ENTITY RHLIG "&STATUS; &RHL; Installation Guide">
+<!-- Shorthand version... -->
+<!ENTITY RHLIGS "Inst">
+<!-- The Alpha Installation Addendum... -->
+<!ENTITY RHLAIA "&STATUS; &RHL; Alpha Installation Addendum">
+<!-- Shorthand version... -->
+<!ENTITY RHLAIAS "AlphaInst">
+<!-- Document in HTML... -->
+<!ENTITY HTML "HTML">
+<!-- Document in print... -->
+<!ENTITY PRINT "Print">
+<!-- Date the document was produced... -->
+<!ENTITY BOOKDATE "05/99">
+<!-- ID string format for a book (Installation Guide in print, as an -->
+<!-- example)... -->
+<!ENTITY BOOKID "&RHLIGS;-&RHLVER;-&PRINT;-&RHI; (&BOOKDATE;)">
+<!-- Referring to the kernel version, semi-generically... -->
+<!ENTITY KERNVER "2.2.x">
+<!-- *************** Chapter entities... *************** -->
+<!ENTITY XREF SYSTEM "xref.sgml">
+<!ENTITY PREFACE SYSTEM "preface.sgml">
+<!ENTITY INTRO-TO-RPM SYSTEM "intro-to-rpm.sgml">
+<!ENTITY RPM-INSTALL SYSTEM "rpm-install.sgml">
+<!ENTITY RPM-ERASE SYSTEM "rpm-erase.sgml">
+<!ENTITY RPM-UPGRADE SYSTEM "rpm-upgrade.sgml">
+<!ENTITY RPM-QUERY SYSTEM "rpm-query.sgml">
+<!ENTITY RPM-VERIFY SYSTEM "rpm-verify.sgml">
+<!ENTITY RPM-CHECKSIG SYSTEM "rpm-checksig.sgml">
+<!ENTITY RPM-MISCELLANIA SYSTEM "rpm-miscellania.sgml">
+<!ENTITY RPM-PHILOSOPHY SYSTEM "rpm-philosophy.sgml">
+<!ENTITY RPM-BASICS SYSTEM "rpm-basics.sgml">
+<!ENTITY RPM-BUILD SYSTEM "rpm-build.sgml">
+<!ENTITY RPM-B-COMMAND SYSTEM "rpm-b-command.sgml">
+<!ENTITY RPM-INSIDE SYSTEM "rpm-inside.sgml">
+<!ENTITY RPM-DEPEND SYSTEM "rpm-depend.sgml">
+<!ENTITY RPM-RELOC SYSTEM "rpm-reloc.sgml">
+<!ENTITY RPM-ANYWHERE SYSTEM "rpm-anywhere.sgml">
+<!ENTITY RPM-PGP SYSTEM "rpm-pgp.sgml">
+<!ENTITY RPM-SUBPACK SYSTEM "rpm-subpack.sgml">
+<!ENTITY RPM-MULTI SYSTEM "rpm-multi.sgml">
+<!ENTITY RPM-RW-BUILD SYSTEM "rpm-rw-build.sgml">
+<!ENTITY RPM-RPMLIB SYSTEM "rpm-rpmlib.sgml">
+<!ENTITY RPM-FILE-FORMAT SYSTEM "rpm-file-format.sgml">
+<!ENTITY RPMRC-FILE SYSTEM "rpmrc-file.sgml">
+<!ENTITY RPM-COMMANDS SYSTEM "rpm-commands.sgml">
+<!ENTITY QUERYFORMAT-TAGS SYSTEM "queryformat-tags.sgml">
+<!ENTITY RPM-SPECREF SYSTEM "rpm-specref.sgml">
+<!ENTITY RPM-RESOURCES SYSTEM "rpm-resources.sgml">
+<!ENTITY PGP-INTRO SYSTEM "pgp-intro.sgml">
+]>
+
+
+<Book id="max-rpm" status="Prototype">
+ <bookinfo>
+    <title>Maximum RPM</title>
+    <titleabbrev>Max. RPM</titleabbrev>
+    <subtitle>Taking the Red Hat Package Manager to the Limit</subtitle>
+    <revhistory>
+      <revision>
+        <revnumber>
+          1.0
+        </revnumber>
+        <date>
+          17-February-1997
+        </date>
+        <revremark>
+          First edition (Produced/printed by Red Hat Software)
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>
+          1.1
+        </revnumber>
+        <date>
+          ??-???-1997
+        </date>
+        <revremark>
+          Revised for production by Sams Publishing
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>
+          2.0
+        </revnumber>
+        <date>
+          ??-???-1999
+        </date>
+        <revremark>
+          Second edition
+        </revremark>
+      </revision>
+    </revhistory>
+    <edition>2</edition>
+    <isbn>
+      <comment>
+        The current ISBN is for the first edition, and will need to be
+        changed...
+      </comment>
+       1-888172-78-9
+    </isbn>
+    <printhistory>
+      <para>First edition printed February, 1997</para>
+      <para>Sams first edition printed ???, 1999</para>
+      <para>Sams first edition reprinted ???, 1999</para>
+    </printhistory>
+    <publisher>
+      <publishername>Red Hat, Inc.</publishername>
+      <address>
+       <street>2600 Meridian Parkway</street>
+       <city>Durham</city>, <state>NC</state> <postcode>27709</postcode>
+       <country>US</country>
+       <phone>919-547-0012</phone>
+       <fax>919-547-0024</fax>
+       <email>docs@redhat.com</email>
+       <pob>13588</pob>
+       <city>Research Triangle Park</city>, <state>NC</state> <postcode>27713</postcode>
+      </address>
+    </publisher>
+    <authorgroup>
+      <author>
+        <firstname>Edward</firstname>
+        <othername>C.</othername>
+        <surname>Bailey</surname>
+        <affiliation>
+          <orgname>Red Hat, Inc.</orgname>
+        </affiliation>
+   <authorblurb>
+     <simpara><email>ed@redhat.com</email></simpara>
+    </authorblurb>
+   </author>
+  </authorgroup>
+  <copyright>
+   <year>1999</year>
+   <holder>Red Hat, Inc.</holder>
+  </copyright>
+  <legalnotice>
+   <para>
+    This document is subject to the terms of the Red Hat Documentation License.
+   </para>
+  </legalnotice>
+ </bookinfo>
+
+  <dedication>
+    <blockquote>
+      <para>
+        To Deb -- My lover, editor, indexer, and friend&hellip;
+      </para>
+      <para>
+        To Matt, who heard "Daddy can't play right now" far too often&hellip;
+      </para>
+    </blockquote>
+  </dedication>
+
+  <toc>
+    <title>Table of Contents</title>
+  </toc>
+
+<!-- The chapters start here... -->
+
+  &PREFACE;
+
+  <part>
+    <title>
+      RPM and Computer Users -- How to Use RPM to Effectively Manage Your
+      Computer
+    </title>
+
+    &INTRO-TO-RPM;
+
+    &RPM-INSTALL;
+
+    &RPM-ERASE;
+
+    &RPM-UPGRADE;
+
+    &RPM-QUERY;
+
+    &RPM-VERIFY;
+
+    &RPM-CHECKSIG;
+
+    &RPM-MISCELLANIA;
+
+  </part>
+
+  <part>
+    <title>
+      RPM and Developers -- How to Distribute Your Software More Easily With RPM
+    </title>
+
+    &RPM-PHILOSOPHY;
+
+    &RPM-BASICS;
+
+    &RPM-BUILD;
+
+    &RPM-B-COMMAND;
+
+    &RPM-INSIDE;
+
+    &RPM-DEPEND;
+
+    &RPM-RELOC;
+
+    &RPM-ANYWHERE;
+
+    &RPM-PGP;
+
+    &RPM-SUBPACK;
+
+    &RPM-MULTI;
+
+    &RPM-RW-BUILD;
+
+    &RPM-RPMLIB;
+
+  </part>
+
+  <part>
+    <title>
+      Appendixes
+    </title>
+
+    &RPM-FILE-FORMAT;
+
+    &RPMRC-FILE;
+
+    &RPM-COMMANDS;
+
+    &QUERYFORMAT-TAGS;
+
+    &RPM-SPECREF;
+
+    &RPM-RESOURCES;
+
+    &PGP-INTRO;
+
+    &XREF;
+
+  </part>
+
+</book>
