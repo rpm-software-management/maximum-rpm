@@ -1,619 +1,480 @@
-<chapter id="ch-rpm-basics">
-<title>The Basics of Developing With RPM</title>
-<!-- label: rpm-basics -->
-
-<indexterm>
-<primary>RPM!basics of developing with</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Now that we've seen the design philosophy of RPM, let's look at the nuts
-and bolts of RPM's build process.  Building a package is similar to
-compiling code -- there are inputs, an engine that does the dirty work, and
-outputs.
-
-<sect1 id="s1-rpm-basics-">
-<title>The Inputs</title>
-<indexterm>
-<primary>RPM!inputs to</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-There are three different kinds of inputs that are used to drive RPM's
-build process.  Two of the three inputs are required, and the third,
-strictly speaking, is optional.  But unless you're packaging your own code,
-chances are you'll need it.
-
-<sect2 id="s2-rpm-basics-">
-<title>The Sources</title>
-<indexterm>
-<primary>RPM!inputs to!sources</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-First and foremost, are the sources.  After all, without them, there
-wouldn't be much to build!  In the case of packaging someone else's
-software, the sources should be kept as the author distributed them, which
-usually means a compressed <tt?>tar</tt?> file.  RPM can handle other archive
-formats, but a bit more up-front effort is required.
-
-In any case, you should not modify the sources used in the package building
-process.  If you're a third-party package builder, that means the sources
-should be just the way you got them from the author's FTP site.  If it's
-your own software, the choice is up to you, but you should consider
-starting with your mainstream sources.
-
-<indexterm>
-<primary>RPM!inputs to!sources|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-<sect2 id="s2-rpm-basics-">
-<title>The Patches</title>
-<indexterm>
-<primary>RPM!inputs to!patches</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Why all the emphasis on unmodified sources?  Because RPM gives you the
-ability to automatically apply patches to them.  Usually, the nature of
-these patches falls into one of the following categories:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The patch addresses an issue specific to the target system.  This
-could include changing makefiles to install the application into the
-appropriate directories, or resolving cross-platform conflicts, such as
-replacing BSD system calls with their SYSV counterparts.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The patch creates files that are normally created during a
-configuration step in the installation process.  Many times, it's necessary
-to either edit configuration files or scripts in order to set things up for
-compilation.  In other cases, a configuration utility needs to be run
-before the sources are compiled.  In either instance, the patches create
-the environment required for proper compilation.
-
-</para>
-</listitem>
-
-</itemizedlist>
-<sect3 id="s3-rpm-basics-">
-<title>Creating the Patches</title>
-<indexterm>
-<primary>RPM!creating patches for</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-While it might sound a bit daunting to take into account the types of
-patches outlined above, it's really quite simple.  Here's how it's done:
-
-<orderedlist>
-<listitem>
-<para>
-Unpack the sources.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Rename the top-level directory.  Make it end with ".orig", for
-example.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Unpack the sources again, leaving the top-level directory name
-unchanged.
-
-</para>
-</listitem>
-
-</orderedlist>
-The source tree that you created the second time will be the one you'll use
-to get the software to build.
-
-If the software builds with no changes required, that's great -- you won't
-need a patch.  But if you had to make any changes, you'll have to create a
-set of patches.  To do so, simply clean the source directory of any
-binaries.  Then, issue a recursive <tt?>diff</tt?> command to compare the
-source tree you used for the build, against the original, unmodified source
-tree.  It's as easy as that!
-
-<indexterm>
-<primary>RPM!creating patches for|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>RPM!inputs to!patches|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-</sect2>
-
-<sect2 id="s2-rpm-basics-">
-<title>The Spec File</title>
-<indexterm>
-<primary>RPM!inputs to!spec file</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The spec file is at the heart of RPM's packaging building process.  Similar
-in concept to a makefile, it contains information required by RPM to build
-the package, as well as instructions telling RPM <emphasis>how</emphasis> to build it.
-The spec file also dictates exactly what files are a part of the package,
-and where they should be installed.
-
-As you might imagine, with this many responsibilities, the spec file format
-can be a bit complex.  However, it's broken into several sections, making
-it easier to handle.  All told, there are eight sections:
-
-<sect4 id="s4-rpm-basics-">
-<title>The Preamble</title>
-<indexterm>
-<primary>RPM!spec file!preamble</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The preamble contains information that will be displayed when users request
-information about the package.  This would include a description of the
-package's function, the version number of the software, and so on.  Also
-contained in the preamble are lines identifying sources, patches, and even
-an icon to be used if the package is manipulated by graphical interface.
-
-<indexterm>
-<primary>RPM!spec file!preamble|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The Prep Section</title>
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- prep</tt?> section of</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The prep section is where the actual work of building a package starts.  As
-the name implies, this section is where the necessary preparations are made
-prior to the actual building of the software.  In general, if anything
-needs to be done to the sources prior to building the software, it needs to
-happen in the prep section.  Usually, this boils down to unpacking the
-sources.
-
-The contents of this section are an ordinary shell script.  However, RPM
-does provide two macros to make life easier.  One macro can unpack a
-compressed <tt?>tar</tt?> file and <tt?>cd</tt?> into the source directory.
-The other macro easily applies patches to the unpacked sources.
-
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- prep</tt?> section of|)</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The Build Section</title>
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- build</tt?> section of</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Like the prep section, the build section consists of a shell script.  As
-you might guess, this section is used to perform whatever commands are
-required to actually compile the sources.  This section could consist of a
-single <tt?>make</tt?> command, or be more complex if the build process
-requires it.  Since most software is built today using <tt?>make</tt?>, there
-are no macros available in this section.
-
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- build</tt?> section of|)</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The Install Section</title>
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- install</tt?> section of</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Also containing a shell script, the install section is used to perform the
-commands required to actually install the software.  If the software's
-author added an install target in the makefile, this section might only
-consist of a <tt?>make install</tt?> command.  Otherwise, you'll need to add
-the usual assortment of <tt?>cp</tt?>, <tt?>mv</tt?>, or <tt?>install</tt?>
-commands to get the job done.
-
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- install</tt?> section of|)</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>Install and Uninstall Scripts</title>
-<indexterm>
-<primary>RPM!spec file!scripts</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-While the previous sections contained either information required by RPM to
-build the package, or the actual commands to do the deed, this section is
-different.  It consists of scripts that will be run, <emphasis>on the user's
-system</emphasis>, when the package is actually installed or removed.  RPM can
-execute a script:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Prior to the package being installed.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-After the package has been installed.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Prior to the package being erased.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-After the package has been erased.
-
-</para>
-</listitem>
-
-</itemizedlist>
-One example of when this capability would be required is when a package
-contains shared libraries.  In this case, <tt?>ldconfig</tt?> would need to
-be run after the package is installed or erased.  As another example, if a
-package contains a shell, the file <tt?>/etc/shells</tt?> would need to be
-updated appropriately when the package was installed or erased.
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The Verify Script</title>
-This is another script that is executed on the user's system.  It is
-executed when RPM verifies the package's proper installation.  While RPM
-does most of the work verifying packages, this script can be used to verify
-aspects of the package that are beyond RPM's capabilities.
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The Clean Section</title>
-Another script that can be present is a script that can clean things up
-after the build.  This script is rarely used, since RPM normally does a
-good job of clean-up in most build environments.
-
-<indexterm>
-<primary>RPM!spec file!scripts|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-<sect4 id="s4-rpm-basics-">
-<title>The File List</title>
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- files</tt?> list</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The last section consists of a list of files that will comprise the
-package.  Additionally, a number of macros can be used to control file
-attributes when installed, as well as to denote which files are
-documentation, and which contain configuration information.  The file list
-is very important --- if it is missing, no package will be built.
-
-<indexterm>
-<primary>RPM!spec file!<tt?>\<!-- files</tt?> list|)</primary> -->
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>RPM!inputs to!spec file|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>RPM!inputs to|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect4>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-basics-">
-<title>The Engine: RPM</title>
-<indexterm>
-<primary>RPM!what it does</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-At the center of the action is RPM.  It performs a number of steps during
-the build process:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Executes the commands and macros in the prep section of the spec
-file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Checks the contents of the file list.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Executes the commands and macros in the build section of the spec
-file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Executes the commands and macros in the install section of the spec
-file.  Any macros in the file list are executed at this time, too.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Creates the binary package file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Creates the source package file.
-
-</para>
-</listitem>
-
-</itemizedlist>
-By using different options on the RPM command line, the build process can
-be stopped at any of the steps above.  This makes the initial building of a
-package that much easier, as it is then possible to see whether each step
-completed successfully before continuing on to the next step.
-
-<indexterm>
-<primary>RPM!what it does|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect1>
-
-<sect1 id="s1-rpm-basics-">
-<title>The Outputs</title>
-<indexterm>
-<primary>RPM!outputs from</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The end product of this entire process is a source package file and a
-binary package file.
-
-<sect2 id="s2-rpm-basics-">
-<title>The Source Package File</title>
-<indexterm>
-<primary>RPM!outputs from!source package</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The source package file is a specially formatted archive that contains the
-following files:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The original compressed <tt?>tar</tt?> file(s).
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The spec file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The patches.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Since the source package contains everything needed to create the binary
-package, the source package, <emphasis>and</emphasis> provide the original sources, it's
-a great way to distribute source code.  As mentioned earlier, it's also a
-great way to archive all the information needed to rebuild a particular
-version of the package.
-
-<indexterm>
-<primary>RPM!outputs from!source package|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-<sect2 id="s2-rpm-basics-">
-<title>The Binary RPM</title>
-<indexterm>
-<primary>RPM!outputs from!binary package</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The binary package file is the one part of the entire RPM building process
-that is most visible to the user.  It contains the files that comprise the
-application, along with any additional information needed to install and
-erase it.  The binary package file is where the "rubber hits the road."
-
-<indexterm>
-<primary>RPM!outputs from!binary package|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>RPM!outputs from|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-basics-">
-<title>And Now&hellip;</title>
-Now that we've seen, in broad brush terms, the way RPM builds packages,
-let's take a look at an actual build.  The next chapter will do just that,
-showing how simple it can be to build a package.
-
-<indexterm>
-<primary>RPM!basics of developing with|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-</sect1>
-
-</chapter>
-
+  <chapter id="ch-rpm-basics">
+    <title>The Basics of Developing With RPM</title>
+    <!-- label: rpm-basics -->
+
+    <indexterm>
+      <primary>RPM!basics of developing with</primary>
+      <secondary></secondary>
+    </indexterm>
+
+    <para>
+      Now that we've seen the design philosophy of RPM, let's look at the nuts
+      and bolts of RPM's build process.  Building a package is similar to
+      compiling code --- there are inputs, an engine that does the dirty work,
+      and outputs.
+    </para>
+
+    <sect1 id="s1-rpm-basics-inputs">
+      <title>The Inputs</title>
+      <indexterm>
+        <primary>RPM!inputs to</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        There are three different kinds of inputs that are used to drive RPM's
+        build process.  Two of the three inputs are required, and the third,
+        strictly speaking, is optional.  But unless you're packaging your own
+        code, chances are you'll need it.
+      </para>
+
+      <sect2 id="s2-rpm-basics-sources">
+        <title>The Sources</title>
+        <indexterm>
+          <primary>RPM!inputs to!sources</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          First and foremost, are the sources.  After all, without them, there
+          wouldn't be much to build!  In the case of packaging someone else's
+          software, the sources should be kept as the author distributed them,
+          which usually means a compressed <command>tar</command> file.  RPM can handle
+          other archive formats, but a bit more up-front effort is required.
+        </para>
+        <para>
+          In any case, you should not modify the sources used in the package
+          building process.  If you're a third-party package builder, that means
+          the sources should be just the way you got them from the author's FTP
+          site.  If it's your own software, the choice is up to you, but you
+          should consider starting with your mainstream sources.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-basics-patches">
+        <title>The Patches</title>
+        <indexterm>
+          <primary>RPM!inputs to!patches</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          Why all the emphasis on unmodified sources?  Because RPM gives you the
+          ability to automatically apply patches to them.  Usually, the nature
+          of these patches falls into one of the following categories:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The patch addresses an issue specific to the target system.
+                This could include changing makefiles to install the application
+                into the appropriate directories, or resolving cross-platform
+                conflicts, such as replacing BSD system calls with their SYSV
+                counterparts.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The patch creates files that are normally created during a
+                configuration step in the installation process.  Many times,
+                it's necessary to either edit configuration files or scripts in
+                order to set things up for compilation.  In other cases, a
+                configuration utility needs to be run before the sources are
+                compiled.  In either instance, the patches create the
+                environment required for proper compilation.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+
+        <sect3 id="s3-rpm-basics-creating-patches">
+          <title>Creating the Patches</title>
+          <indexterm>
+            <primary>RPM!creating patches for</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            While it might sound a bit daunting to take into account the types of
+            patches outlined above, it's really quite simple.  Here's how it's done:
+
+            <orderedlist>
+              <listitem>
+                <para>
+                  Unpack the sources.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Rename the top-level directory.  Make it end with ".orig", for
+                  example.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Unpack the sources again, leaving the top-level directory name
+                  unchanged.
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
+          <para>
+            The source tree that you created the second time will be the one
+            you'll use to get the software to build.
+          </para>
+          <para>
+            If the software builds with no changes required, that's great --- you
+            won't need a patch.  But if you had to make any changes, you'll have
+            to create a set of patches.  To do so, simply clean the source
+            directory of any binaries.  Then, issue a recursive
+            <command>diff</command> command to compare the source tree you used
+            for the build, against the original, unmodified source tree.  It's
+            as easy as that!
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-basics-spec-file">
+        <title>The Spec File</title>
+        <indexterm>
+          <primary>RPM!inputs to!spec file</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The spec file is at the heart of RPM's packaging building process.
+          Similar in concept to a makefile, it contains information required by
+          RPM to build the package, as well as instructions telling RPM
+          <emphasis>how</emphasis> to build it.  The spec file also dictates
+          exactly what files are a part of the package, and where they should be
+          installed.
+        </para>
+        <para>
+          As you might imagine, with this many responsibilities, the spec file
+          format can be a bit complex.  However, it's broken into several
+          sections, making it easier to handle.  All told, there are eight
+          sections:
+        </para>
+
+          <sect3 id="s3-rpm-basics-spec-preamble">
+            <title>The Preamble</title>
+            <indexterm>
+              <primary>RPM!spec file!preamble</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              The preamble contains information that will be displayed when
+              users request information about the package.  This would include a
+              description of the package's function, the version number of the
+              software, and so on.  Also contained in the preamble are lines
+              identifying sources, patches, and even an icon to be used if the
+              package is manipulated by graphical interface.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-prep">
+            <title>The Prep Section</title>
+            <indexterm>
+              <primary>RPM!spec file!<command>%prep</command> section of</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              The prep section is where the actual work of building a package
+              starts.  As the name implies, this section is where the necessary
+              preparations are made prior to the actual building of the
+              software.  In general, if anything needs to be done to the sources
+              prior to building the software, it needs to happen in the prep
+              section.  Usually, this boils down to unpacking the sources.
+            </para>
+            <para>
+              The contents of this section are an ordinary shell script.
+              However, RPM does provide two macros to make life easier.  One
+              macro can unpack a compressed <command>tar</command> file and
+              <command>cd</command> into the source directory.  The other macro
+              easily applies patches to the unpacked sources.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-build">
+            <title>The Build Section</title>
+            <indexterm>
+              <primary>RPM!spec file!<command>%build</command> section of</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              Like the prep section, the build section consists of a shell
+              script.  As you might guess, this section is used to perform
+              whatever commands are required to actually compile the sources.
+              This section could consist of a single <command>make</command>
+              command, or be more complex if the build process requires it.
+              Since most software is built today using <command>make</command>,
+              there are no macros available in this section.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-install">
+            <title>The Install Section</title>
+            <indexterm>
+              <primary>RPM!spec file!<command>%install</command> section of</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              Also containing a shell script, the install section is used to
+              perform the commands required to actually install the software.
+              If the software's author added an install target in the makefile,
+              this section might only consist of a <command>make
+              install</command> command.  Otherwise, you'll need to add the
+              usual assortment of <command>cp</command>, <command>mv</command>,
+              or <command>install</command> commands to get the job done.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-scripts">
+            <title>Install and Uninstall Scripts</title>
+            <indexterm>
+              <primary>RPM!spec file!scripts</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              While the previous sections contained either information required
+              by RPM to build the package, or the actual commands to do the
+              deed, this section is different.  It consists of scripts that will
+              be run, <emphasis>on the user's system</emphasis>, when the
+              package is actually installed or removed.  RPM can execute a
+              script:
+
+              <itemizedlist mark="bullet">
+                <listitem>
+                  <para>
+                    Prior to the package being installed.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    After the package has been installed.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    Prior to the package being erased.
+                  </para>
+                </listitem>
+
+                <listitem>
+                  <para>
+                    After the package has been erased.
+                  </para>
+                </listitem>
+              </itemizedlist>
+            </para>
+            <para>
+              One example of when this capability would be required is when a
+              package contains shared libraries.  In this case,
+              <command>ldconfig</command> would need to be run after the package
+              is installed or erased.  As another example, if a package contains
+              a shell, the file <filename>/etc/shells</filename> would need to
+              be updated appropriately when the package was installed or erased.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-verify">
+            <title>The Verify Script</title>
+            <para>
+              This is another script that is executed on the user's system.  It
+              is executed when RPM verifies the package's proper installation.
+              While RPM does most of the work verifying packages, this script
+              can be used to verify aspects of the package that are beyond RPM's
+              capabilities.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-clean">
+            <title>The Clean Section</title>
+            <para>
+              Another script that can be present is a script that can clean
+              things up after the build.  This script is rarely used, since RPM
+              normally does a good job of clean-up in most build environments.
+            </para>
+          </sect3>
+
+          <sect3 id="s3-rpm-basics-spec-file-list">
+            <title>The File List</title>
+            <indexterm>
+              <primary>RPM!spec file!<command>%files</command> list</primary>
+              <secondary></secondary>
+              <tertiary></tertiary>
+            </indexterm>
+
+            <para>
+              The last section consists of a list of files that will comprise
+              the package.  Additionally, a number of macros can be used to
+              control file attributes when installed, as well as to denote which
+              files are documentation, and which contain configuration
+              information.  The file list is very important --- if it is
+              missing, no package will be built.
+            </para>
+          </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-basics-the-engine">
+      <title>The Engine: RPM</title>
+      <indexterm>
+        <primary>RPM!what it does</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        At the center of the action is RPM.  It performs a number of steps
+        during the build process:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Executes the commands and macros in the prep section of the spec
+              file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Checks the contents of the file list.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Executes the commands and macros in the build section of the spec
+              file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Executes the commands and macros in the install section of the
+              spec file.  Any macros in the file list are executed at this time,
+              too.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Creates the binary package file.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Creates the source package file.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        By using different options on the RPM command line, the build process
+        can be stopped at any of the steps above.  This makes the initial
+        building of a package that much easier, as it is then possible to see
+        whether each step completed successfully before continuing on to the
+        next step.
+      </para>
+    </sect1>
+
+    <sect1 id="s1-rpm-basics-outputs">
+      <title>The Outputs</title>
+      <indexterm>
+        <primary>RPM!outputs from</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        The end product of this entire process is a source package file and a
+        binary package file.
+      </para>
+
+      <sect2 id="s2-rpm-basics-source-package-file">
+        <title>The Source Package File</title>
+        <indexterm>
+          <primary>RPM!outputs from!source package</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The source package file is a specially formatted archive that contains
+          the following files:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The original compressed <command>tar</command> file(s).
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The spec file.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The patches.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          Since the source package contains everything needed to create the
+          binary package, the source package, <emphasis>and</emphasis> provide
+          the original sources, it's a great way to distribute source code.  As
+          mentioned earlier, it's also a great way to archive all the
+          information needed to rebuild a particular version of the package.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-basics-binary-package">
+        <title>The Binary RPM</title>
+        <indexterm>
+          <primary>RPM!outputs from!binary package</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The binary package file is the one part of the entire RPM building
+          process that is most visible to the user.  It contains the files that
+          comprise the application, along with any additional information needed
+          to install and erase it.  The binary package file is where the "rubber
+          hits the road."
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-basics-and-now">
+      <title>And Now&hellip;</title>
+      <para>
+        Now that we've seen, in broad brush terms, the way RPM builds packages,
+        let's take a look at an actual build.  The next chapter will do just
+        that, showing how simple it can be to build a package.
+      </para>
+    </sect1>
+  </chapter>

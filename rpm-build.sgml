@@ -1,0 +1,1182 @@
+  <chapter id="ch-rpm-build">
+    <title>Building Packages: A Simple Example</title>
+    <!-- label: rpm-build -->
+
+    <indexterm>
+      <primary>package building!simple example</primary>
+      <secondary></secondary>
+    </indexterm>
+
+    <para>
+      In the previous chapter, we looked at RPM's build process from a
+      conceptual level.  In this chapter, we will be performing an actual build
+      using RPM.  In order to keep things understandable for this first pass,
+      the build will be very simple.  Once we've covered the basics, we'll
+      present more real-world examples in later chapters.
+    </para>
+
+    <sect1 id="s1-rpm-build-creating-build-directories">
+      <title>Creating the Build Directory Structure</title>
+      <indexterm>
+        <primary>package building!simple example!build directory, creating</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        RPM requires a set of directories in which to perform the build.  While
+        the directories' locations and names can be changed, unless there's a
+        reason to do so, it's best to use the default layout.  Note that if
+        you've installed RPM, the build directories are most likely in place
+        already.
+      </para>
+      <para>
+        The normal directory layout consists of a single top-level directory
+        (The default name is <filename>/usr/src/redhat</filename>), with five
+        subdirectories.  The five subdirectories and their functions are:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              <filename>/usr/src/redhat/SOURCES</filename> --- Contains the
+              original sources, patches, and icon files.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <filename>/usr/src/redhat/SPECS</filename> --- Contains the spec
+              files used to control the build process.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <filename>/usr/src/redhat/BUILD</filename> --- The directory in
+              which the sources are unpacked, and the software is built.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <filename>/usr/src/redhat/RPMS</filename> --- Contains the binary
+              package files created by the build process.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              <filename>/usr/src/redhat/SRPMS</filename> --- Contains the source
+              package files created by the build process.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        In general, there are no special requirements that need to be met when
+        creating these directories.  In fact, the only important requirement is
+        that the <filename>BUILD</filename> directory be part of a filesystem
+        with sufficient free space to build the largest package expected.  Here
+        is a directory listing showing a typical build directory tree:
+
+        <figure id="sc-rpm-build-directory-tree">
+          <title>A Typical RPM Build Tree</title>
+          <screen width="60">
+<prompt># </prompt><userinput>ls -lF /usr/src/redhat</userinput>
+<computeroutput>
+total 5
+drwxr-xr-x   3 root     root         1024 Aug  5 13:12 BUILD/
+drwxr-xr-x   3 root     root         1024 Jul 17 17:51 RPMS/
+drwxr-xr-x   4 root     root         1024 Aug  4 22:31 SOURCES/
+drwxr-xr-x   2 root     root         1024 Aug  5 13:12 SPECS/
+drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Now that we have the directories ready to go, it's time to prepare for
+        the build.  For the remainder of this chapter, we'll be building a
+        fictional piece of software known as <filename>cdplayer</filename>.
+        <footnote>
+          <para>
+            In reality, this software is a mercilessly hacked version of
+            <filename>cdp</filename>, which was written by Sariel Har-Peled.
+            The software was hacked to provide a simple example package, and in
+            no way represents the fine work done by Sariel on
+            <filename>cdp</filename>.
+          </para>
+        </footnote>
+      </para>
+    </sect1>
+
+    <sect1 id="s1-rpm-build-getting-sources">
+      <title>Getting the Sources</title>
+      <indexterm>
+        <primary>package building!simple example!sources, obtaining</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        The first thing we need to do in order to build a package for
+        <filename>cdplayer</filename>, is to obtain the sources.  Being avid
+        <filename>cdplayer</filename> fans from way back, we know that the
+        latest source can be found at GnomoVision's FTP site, so we go get a
+        copy.
+      </para>
+      <para>
+        We now have a gzipped <command>tar</command> file of
+        <filename>cdplayer</filename> version 1.0 on our system.  After putting
+        a copy in the <filename>SOURCES</filename> directory, we're ready to
+        tell RPM what to do with it.
+      </para>
+    </sect1>
+
+    <sect1 id="s1-rpm-build-creating-spec-file">
+      <title>Creating the Spec File</title>
+      <indexterm>
+        <primary>package building!simple example!spec file, creating</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        The way we direct RPM in the build process is to create a spec file.  As
+        we saw in the previous chapter, the spec file contains eight different
+        sections, most of which are required.  Let's go through each section and
+        create <filename>cdplayer</filename>'s spec file as we go.
+      </para>
+
+      <sect2 id="s2-rpm-build-spec-file-preamble">
+        <title>The Preamble</title>
+        <indexterm>
+          <primary>package building!simple example!spec file, preamble</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The preamble contains a wealth of information about the package being
+          built, and the people that built it.  Here's
+          <filename>cdplayer</filename>'s preamble:
+
+          <figure id="sc-rpm-build-preamble-example">
+            <title>A Sample Spec File Preamble</title>
+            <screen width="60">
+<computeroutput>
+#
+# Example spec file for cdplayer app...
+#
+Summary: A CD player app that rocks!
+Name: cdplayer
+Version: 1.0
+Release: 1
+Copyright: GPL
+Group: Applications/Sound
+Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
+URL: http://www.gnomovision.com/cdplayer/cdplayer.html
+Distribution: WSS Linux
+Vendor: White Socks Software, Inc.
+Packager: Santa Claus &lt;sclaus@northpole.com&gt;
+
+%description
+It slices!  It dices!  It's a CD player app that
+can't be beat.  By using the resonant frequency
+of the CD itself, it is able to simulate 20X
+oversampling.  This leads to sound quality that
+cannot be equaled with more mundane software...
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In general, the preamble consists of entries, one per line, that start
+          with a <emphasis>tag</emphasis> followed by a colon, and then some
+          information.  For example, the line starting with
+          "<command>Summary:</command>" gives a short description of the
+          packaged software that can be displayed by RPM.  The order of the
+          lines is not important, as long as they appear in the preamble.
+        </para>
+        <para>
+          Let's take a look at each line and see what function it performs:
+        </para>
+
+        <sect3 id="s3-rpm-build-preamble-name">
+          <title>Name</title>
+          <para>
+            The <command>name</command> line defines what the package will
+            actually be called.  In general, it's a good idea to use the name of
+            the software.  The name will also be included in the package label,
+            and the package filename.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-version">
+          <title>Version</title>
+          <para>
+            The <command>version</command> line should be set to the version of
+            the software being packaged.  The version will also be included in
+            the package label, and the package filename.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-release">
+          <title>Release</title>
+          <para>
+            The <command>release</command> is a number that is used to represent
+            the number of times the software, at the present version, has been
+            packaged.  You can think of it as the package's version number.  The
+            release is also part of the package label and package filename.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-copyright">
+          <title>Copyright</title>
+          <para>
+            The <command>copyright</command> line is used to hold the packaged
+            software's copyright information.  This makes it easy to determine
+            which packages can be freely redistributed, and which cannot.  In
+            our case, <filename>cdplayer</filename> is made available under the
+            terms of the GNU General Public License, so we've put
+            <userinput>GPL</userinput> on the line.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-group">
+          <title>Group</title>
+          <para>
+            The <command>group</command> line is used to hold a string that
+            defines how the packaged software should be grouped with other
+            packages.  The string consists of a series of words separated by
+            slashes.  From left to right, the words describe the packaged
+            software more explicitly.  We grouped <filename>cdplayer</filename>
+            under <filename>Applications</filename>, because it is an
+            application, and then under <filename>Sound</filename>, since it is
+            an application that is sound-related.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-source">
+          <title>Source</title>
+          <para>
+            The <command>source</command> line serves two purposes:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  To document where the packaged software's sources can be found.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  To give the name of the source file as it exists in the
+                  <filename>SOURCES</filename> subdirectory.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            In our example, the <filename>cdplayer</filename> sources are
+            contained in the file <filename>cdplayer-1.0.tgz</filename>, which
+            is available from <filename>ftp.gnomovision.com</filename>, in the
+            directory <filename>/pub/cdplayer</filename>.  RPM actually ignores
+            everything prior to the last filename in the source line, so the
+            first part of the source string could be anything you'd like.
+            Traditionally, the <command>source</command> line usually contains a
+            Uniform Resource Locator, or URL.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-url">
+          <title>URL</title>
+          <para>
+            The <command>URL</command> line is used to contain a URL, like the
+            <command>source</command> line.  How are they different?  While the
+            <command>source</command> line is used to provide the source
+            filename to RPM, the <command>URL</command> line points to
+            <emphasis>documentation</emphasis> for the software being packaged.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-distribution">
+          <title>Distribution</title>
+          <para>
+            The <command>distribution</command> line contains the name of the
+            product which the packaged software is a part of.  In the Linux
+            world, the operating system is often packaged together into a
+            "distribution", hence the name.  Since we're using a fictional
+            application in this example, we've filled in the distribution line
+            with the name of a fictional distribution.  There's no requirement
+            that the spec file contain a <command>distribution</command> line,
+            so individuals will probably omit this.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-vendor">
+          <title>Vendor</title>
+          <para>
+            The <command>vendor</command> line identifies the organization that
+            distributes the software.  Maintaining our fictional motif, we've
+            invented fictional company, White Socks Software, to add to our spec
+            file.  Individuals will probably omit this as well.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-packager">
+          <title>Packager</title>
+          <para>
+            The <command>packager</command> line is used to identify the
+            organization that actually <emphasis>packaged</emphasis> the
+            software, as opposed to the author of the software.  In our example,
+            we've chosen the greatest packager of them all, Santa Claus, to work
+            at White Socks Software.  Note that we've included contact
+            information, in the form of an e-mail address.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-description">
+          <title>Description</title>
+          <para>
+            The <command>description</command> line is a bit different, in that
+            it starts with a percent sign.  It is also different because the
+            information can take up more than one line.  It is used to provide a
+            more detailed description of the packaged software than the
+            <command>summary</command> line.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-preamble-comments">
+          <title>A Comment on Comments</title>
+          <para>
+            At the top of the spec file, there are three lines, each starting
+            with a pound sign.  These are comments and can be sprinkled
+            throughout the spec file to make it more easily understood.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-build-prep-section">
+        <title>The <command>%prep</command> Section</title>
+        <indexterm>
+          <primary>package building!simple example!spec file, <command>%prep</command> section</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+        <para>
+          With the preamble, we provided a wealth of information.  The majority
+          of this information is meant for human consumption.  Only the
+          <command>name</command>, <command>version</command>,
+          <command>release</command>, and <command>source</command> lines have a
+          direct bearing on the package building process.  However, in the
+          <command>%prep</command> section, the focus is entirely on directing
+          RPM through the process of preparing the software for building.
+        </para>
+        <para>
+          It is in the <command>%prep</command> section that the build
+          environment for the software is created, starting with removing the
+          remnants of any previous builds.  Following this, the source archive
+          is expanded.  Here is what the <command>%prep</command> section looks
+          like in our example spec file:
+
+          <figure id="sc-rpm-build-prep-example">
+            <title>An Example <command>%prep</command> Section</title>
+            <screen width="60">
+<computeroutput>
+%prep
+rm -rf $RPM_BUILD_DIR/cdplayer-1.0
+zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          If the <command>%prep</command> section looks like a script, that's
+          because it is.  Any <command>sh</command> constructs can be used here,
+          including expansion of environment variables (Like the
+          <envar>$RPM_BUILD_DIR</envar> variable defined by RPM), and piping the
+          output of <command>zcat</command> through <command>tar</command>.
+          <footnote>
+            <para>
+              For more information on the environment variables used in the
+              build-time scripts, please refer to section <xref
+              linkend="inside-scripts">.
+            </para>
+          </footnote>
+        </para>
+        <para>
+          In this case, we perform a recursive delete in the build directory to
+          remove any old builds.  We then uncompress the gzipped
+          <command>tar</command> file, and extract its contents into the build
+          directory.
+        </para>
+        <para>
+          Quite often, the sources may require patching in order to build
+          properly.  The <command>%prep</command> section is the appropriate
+          place to patch the sources, but in this example, no patching is
+          required.  Fear not, however, as we'll explore patching in all its
+          glory in chapter <xref linkend="rpm-rw-build">, when we build a more
+          complex package.
+        </para>
+
+        <sect3 id="s3-rpm-build-macros">
+          <title>Making Life Easier With Macros</title>
+          <para>
+            While the <command>%prep</command> section as we've described it
+            isn't <emphasis>that</emphasis> difficult to understand, RPM
+            provides macros to make life even easier.  In this simple example,
+            there's precious little that can be made easier, but macros will
+            prevent a wealth of headaches when it's time to build more complex
+            packages.  The macro we'll introduce here is the
+            <command>%setup</command> macro.
+          </para>
+          <para>
+            The average gzipped <command>tar</command> file is
+            <command>%setup</command>'s stock in trade.  Like the hand-crafted
+            <command>%prep</command> section we described above, it cleans up
+            old build trees and then uncompresses and extracts the files from
+            the original source.  While <command>%setup</command> has a number
+            of options that we'll cover in later chapters, for now all we need
+            for a <command>%prep</command> section is:
+
+            <figure id="sc-rpm-build-prep-with-setup-macro">
+              <title>The <command>%setup</command> Macro In Action</title>
+              <screen width="60">
+<computeroutput>
+%prep
+%setup
+</computeroutput>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            That is simpler than our <command>%prep</command> section, so let's
+            use the <command>%setup</command> macro instead.  The
+            <command>%setup</command> macro has a number of options to handle
+            many different situations.  For more information on this and other
+            macros, please see section <xref linkend="rpm-macros">.
+          </para>
+          <para>
+            In our example here, the <command>%prep</command> section is
+            complete.  Next comes the actual build.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-build-build-section">
+        <title>The <command>\%build</command> Section</title>
+        <indexterm>
+          <primary>package building!simple example!spec file, <command>%build</command> section</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          Not surprisingly, the part of the spec file that is responsible for
+          performing the build, is the <command>%build</command> section.  Like
+          the <command>%prep</command> section, the <command>%build</command>
+          section is an ordinary <command>sh</command> script.  Unlike the
+          <command>%prep</command> section, there are no macros.  The reason for
+          this is that the process of building software is either going to be
+          very easy, or highly complicated. In either case, macros won't help
+          much.  In our example, the build process is simple:
+
+          <figure id="sc-rpm-build-build-section-example">
+            <title>An Example <command>%build</command> Section</title>
+            <screen width="60">
+<computeroutput>
+%build
+make 
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Thanks to the <command>make</command> utility, only one command is
+          necessary to build the <filename>cdplayer</filename> application.  In
+          the case of an application with more esoteric build requirements, the
+          <command>%build</command> section could get a bit more interesting.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-build-install-section">
+        <title>The <command>\%install</command> Section</title>
+        <indexterm>
+          <primary>package building!simple example!spec file, <command>%install</command> section</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The <command>%install</command> section is executed as a
+          <command>sh</command> script, just like <command>%prep</command> and
+          <command>%build</command>.  If the application is built with
+          <command>make</command> and has an "install" target, the
+          <command>%install</command> section will also be straightforward.  The
+          <filename>cdplayer</filename> application is a good example of this:
+
+          <figure id="sc-rpm-build-install-section-example">
+            <title>A Sample <command>%install</command> Section</title>
+            <screen width="60">
+<computeroutput>
+%install
+make install
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          If the application doesn't have a means of automatically installing
+          itself, it will be necessary to create a script to do so, and place it
+          in the <command>%install</command> section.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-build-files-section">
+        <title>The <command>\%files</command> Section</title>
+        <indexterm>
+          <primary>package building!simple example!spec file, <command>%files</command> list</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The <command>%files</command> section is different from the others, in
+          that it contains a list of the files that are part of the package.
+          Always remember --- if it isn't in the file list, it won't be put in
+          the package!
+
+          <figure id="sc-rpm-build-files-list-example">
+            <title>A <command>%files</command> List</title>
+            <screen width="60">
+<computeroutput>
+%files
+%doc README
+/usr/local/bin/cdp
+/usr/local/bin/cdplay
+/usr/local/man/man1/cdp.1
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The line starting with <command>%doc</command> is an example of RPM's
+          handling of different file types.  As you might guess,
+          <command>%doc</command> stands for documentation.  The
+          <command>%doc</command> directive is used to mark files as being
+          documentation.  In the example above, the <filename>README</filename>
+          file will be placed in a package-specific directory, located in
+          <filename>/usr/doc</filename>, and called
+          <filename>cdplayer-1.0-1</filename>.  It's also possible to mark files
+          as documentation and have them installed in other directories.  This
+          is covered in more detail in section <xref linkend="rpm-macros-doc">.
+        </para>
+        <para>
+          The rest of the files in the example are shown with complete paths.
+          This is necessary as the files will actually be installed in those
+          directories by the application's makefile.  Since RPM needs to be able
+          to find the files prior to packaging them, complete paths are
+          required.
+        </para>
+
+        <sect3 id="s3-rpm-build-creating-files-list">
+          <title>How Do You Create the File List?</title>
+          <indexterm>
+            <primary>package building!simple example!<command>%files</command> list, creating</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            Since RPM automates so many aspects of software installation, it's
+            easy to fall into the trap of assuming that RPM does
+            <emphasis>everything</emphasis> for you.  Not so!  One task that is
+            still a manual process is creating the file list.  While it may seem
+            at first glance, that it could be automated somehow, it's actually a
+            more difficult problem than it seems.
+          </para>
+          <para>
+            Since the majority of an application's files are installed by its
+            makefile, RPM has no control over that part of the build process,
+            and therefore, cannot automatically determine which files should be
+            part of the package.  Some people have attempted to use a modified
+            version of <command>install</command> that logs the name of every
+            file it installs.  But not every makefile uses
+            <command>install</command>, or if it does, uses it sporadically.
+          </para>
+          <para>
+            Another approach tried was to obtain a list of every file on the
+            build system, immediately before and after a build, and use the
+            differences as the file list.  While this approach will certainly
+            find every file that the application installed, it can also pick up
+            extraneous files, such as system logs, files in
+            <filename>/tmp</filename>, and the like.  The only way to begin to
+            make this approach workable would be to do nothing else on the build
+            system, which is highly inconvenient.  This approach also precludes
+            building more than one package on the system at any given time.
+          </para>
+          <para>
+            At present, the best way to create the file list is to read the
+            makefile to see what files it installs, verify this against the
+            files installed on the build system, and create the list.
+          </para>
+        </sect3>
+      </sect2>
+
+      <sect2 id="s2-rpm-build-missing-sections">
+        <title>The Missing Spec File Sections</title>
+        <para>
+          Since our example spec file is somewhat simplistic, it's missing two
+          sections that might be used in more complex situations.  We'll go over
+          each one briefly here.  More complete information on these sections
+          will be covered at various points in the book.
+        </para>
+
+        <sect3 id="s3-rpm-build-install-uninstall-scripts">
+          <title>The Install/Uninstall Scripts</title>
+          <indexterm>
+            <primary>package building!simple example!scripts, install/uninstall</primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            One missing section to our spec file is the section that would
+            define one or more of four possible scripts.  The scripts are
+            executed at various times when a package is installed or erased.
+          </para>
+          <para>
+            The scripts can be executed:
+
+            <itemizedlist mark="bullet">
+              <listitem>
+                <para>
+                  Before a package is installed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  After a package is installed.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  Before a package is erased.
+                </para>
+              </listitem>
+
+              <listitem>
+                <para>
+                  After a package is erased.
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+          <para>
+            We'll see how these scripts are used in chapter <xref
+            linkend="rpm-rw-build">.
+          </para>
+        </sect3>
+
+        <sect3 id="s3-rpm-build-clean-section">
+          <title>The <command>%clean</command> Section</title>
+          <indexterm>
+            <primary>package building!simple example!scripts, <command>%clean</command></primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
+
+          <para>
+            The other missing section has the rather descriptive title of
+            <command>%clean</command>.  This section can be used to clean up any
+            files that are not part of the application's normal build area.  For
+            example, if the application creates a directory structure in
+            <filename>/tmp</filename> as part of its build, it will not be
+            removed.  By adding a <command>sh</command> script to the
+            <command>%clean</command> section, such situations can be handled
+            gracefully, right after the binary package is created.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-build-starting-build">
+      <title>Starting the Build</title>
+      <indexterm>
+        <primary>package building!simple example!package, building</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        Now it's time to begin the build.  First, we change directory into the
+        directory holding <filename>cdplayer</filename>'s spec file:
+
+        <figure id="sc-rpm-build-cd-into-tree">
+          <title>Changing Directory Into the Build Tree</title>
+          <screen width="60">
+<prompt># </prompt><userinput>cd /usr/src/redhat/SPECS</userinput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Next, we start the build with an <command>rpm -b</command> command:
+
+        <figure id="sc-rpm-build-starting-build">
+          <title>Starting the Build</title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The <command>a</command> following the <command>-b</command> option
+        directs RPM to perform all phases of the build process.  Sometimes it is
+        necessary to stop at various phases during the initial build to resolve
+        problems that crop up while writing the spec file.  In these cases,
+        other letters can be used after the <command>-b</command> in order to
+        stop the build at the desired phase.  For this example however, we will
+        continue through the entire build process.
+      </para>
+      <para>
+        In this example, the only other argument to the build command is the
+        name of the package's spec file.  This can be wild-carded to build more
+        than one package, but in our example, we'll stick with one.
+      </para>
+      <para>
+        Let's look at RPM's output during the build:
+
+        <figure id="sc-rpm-build-build-output">
+          <title>Output From a Sample Build</title>
+          <screen width="60">
+<computeroutput>
+* Package: cdplayer
++ umask 022
++ echo Excuting: %prep
+Excuting: %prep
++ cd /usr/src/redhat/BUILD
++ cd /usr/src/redhat/BUILD
++ rm -rf cdplayer-1.0
++ gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz
++ tar -xvvf -
+drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
+-rw-r--r-- root/users    17982 Nov 10 01:10 1995 cdplayer-1.0/COPYING
+-rw-r--r-- root/users      627 Nov 10 01:10 1995 cdplayer-1.0/ChangeLog
+-rw-r--r-- root/users      482 Nov 10 01:11 1995 cdplayer-1.0/INSTALL
+&hellip;
+-rw-r--r-- root/users     2720 Nov 10 01:10 1995 cdplayer-1.0/struct.h
+-rw-r--r-- root/users      730 Nov 10 01:10 1995 cdplayer-1.0/vol.c
+-rw-r--r-- root/users     2806 Nov 10 01:10 1995 cdplayer-1.0/volume.c
+-rw-r--r-- root/users     1515 Nov 10 01:10 1995 cdplayer-1.0/volume.h
++ [ 0 -ne 0 ]
++ cd cdplayer-1.0
++ cd /usr/src/redhat/BUILD/cdplayer-1.0
++ chown -R root.root .
++ chmod -R a+rX,g-w,o-w .
++ exit 0
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The output continues, but let's stop here for a moment, and discuss what
+        has happened so far.
+      </para>
+      <para>
+        At the start of the output, RPM displays the package name
+        (<filename>cdplayer</filename>), sets the umask, and starts executing
+        the <command>%prep</command> section.  Thanks to the
+        <command>%setup</command> macro, RPM then changes directory into the
+        build area, removes any existing old sources, and extracts the sources
+        from the original compressed tar file.  Although each file is listed as
+        it is extracted, we've omitted most of the files listed, to save space.
+      </para>
+      <para>
+        The <command>%setup</command> macro continues by changing directory into
+        <filename>cdplayer</filename>'s top-level source directory and setting
+        the file ownership and permissions properly.  As you can see, it does
+        quite a bit of work for you.
+      </para>
+      <para>
+        Let's take a look at the output from the <command>%build</command>
+        section next:
+
+        <figure id="sc-rpm-build-build-section-output">
+          <title>Output From the <command>%build</command> Section</title>
+          <screen width="60">
+<computeroutput>
++ umask 022
++ echo Excuting: %build
+Excuting: %build
++ cd /usr/src/redhat/BUILD
++ cd cdplayer-1.0
++ make
+gcc -Wall -O2  -c -I/usr/include/ncurses  cdp.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  color.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  display.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  misc.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  volume.c 
+volume.c: In function `mix_set_volume':
+volume.c:67: warning: implicit declaration of function `ioctl'
+gcc -Wall -O2  -c -I/usr/include/ncurses  hardware.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  database.c 
+gcc -Wall -O2  -c -I/usr/include/ncurses  getline.c 
+gcc -o cdp cdp.o color.o display.o misc.o volume.o hardware.o database.o
+getline.o  -I/usr/include/ncurses  -L/usr/lib -lncurses
+groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
++ exit 0
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        There are no surprises here.  After setting the umask and changing
+        directory into <filename>cdplayer</filename>'s top-level directory, RPM
+        issues the <command>make</command> command we put into the spec file.
+        The rest of the output comes from <command>make</command> as it actually
+        builds the software.  Next comes the <command>%install</command>
+        section:
+
+        <figure id="sc-rpm-build-install-section-output">
+          <title><command>%install</command> Section Output</title>
+          <screen width="60">
+<computeroutput>
++ umask 022
++ echo Excuting: %install
+Excuting: %install
++ cd /usr/src/redhat/BUILD
++ cd cdplayer-1.0
++ make install
+chmod 755 cdp
+chmod 644 cdp.1.Z
+cp cdp /usr/local/bin
+ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
+cp cdp.1 /usr/local/man/man1
++ exit 0
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Just like the previous sections, RPM again sets the umask and changes
+        directory into the proper directory.  It then executes
+        <filename>cdplayer</filename>'s install target, installing the newly
+        built software on the build system.  Those of you that carefully studied
+        the spec file might have noticed that the <filename>README</filename>
+        file is not part of the install section.  It's not a problem, as we see
+        here:
+
+        <figure id="sc-rpm-build-documentation-handling">
+          <title>More Output From the Build</title>
+          <screen width="60">
+<computeroutput>
++ umask 022
++ echo Excuting: special doc
+Excuting: special doc
++ cd /usr/src/redhat/BUILD
++ cd cdplayer-1.0
++ DOCDIR=//usr/doc/cdplayer-1.0-1
++ rm -rf //usr/doc/cdplayer-1.0-1
++ mkdir -p //usr/doc/cdplayer-1.0-1
++ cp -ar README //usr/doc/cdplayer-1.0-1
++ exit 0
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        After the customary <command>umask</command> and <command>cd</command>
+        commands, RPM constructs the path that will be used for
+        <filename>cdplayer</filename>'s documentation directory.  It then cleans
+        out any preexisting directory and copies the <filename>README</filename>
+        file into it.  The <filename>cdplayer</filename> app is now installed on
+        the build system.  The only thing left to do is to create the actual
+        package files, and perform some housekeeping.  The binary package file
+        is created first:
+
+        <figure id="sc-rpm-build-binary-package-creation">
+          <title>Creating the Binary Package</title>
+          <screen width="60">
+<computeroutput>
+Binary Packaging: cdplayer-1.0-1
+Finding dependencies...
+Requires (2): libc.so.5 libncurses.so.2.0
+usr/doc/cdplayer-1.0-1
+usr/doc/cdplayer-1.0-1/README
+usr/local/bin/cdp
+usr/local/bin/cdplay
+usr/local/man/man1/cdp.1
+93 blocks
+Generating signature: 0
+Wrote: /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The first line says it all: RPM is creating the binary package for
+        <filename>cdplayer</filename> version 1.0, release 1.  Next, RPM
+        determines what packages are required by
+        <filename>cdplayer-1.0-1</filename>.  Part of this process entails
+        running <command>ldd</command> on each executable program in the
+        package.  In this example, the package requires the libraries
+        <filename>libc.so.5</filename>, and
+        <filename>libncurses.so.2.0</filename>.  Other dependency information
+        can be included in the spec file, but for our example we'll keep it
+        simple.
+      </para>
+      <para>
+        Following the dependency information, there is a list of every directory
+        and file included in the package.  The list displayed is actually the
+        output of <command>cpio</command>, which is the archiving software used
+        by RPM to bundle the package's files.  The "<computeroutput>93
+        blocks</computeroutput>" is also printed by <command>cpio</command>.
+      </para>
+      <para>
+        The line "<computeroutput>Generating signature: 0</computeroutput>"
+        means that RPM has not been directed to add a PGP signature to the
+        package file.  During this time, however, RPM still adds two signatures
+        that can be used to verify the size and the MD5 checksum of the package
+        file.  Finally, we see confirmation that RPM has created the binary
+        package file.
+      </para>
+      <para>
+        At this point, the application has been built, and the application's
+        files have been packaged.  There is no longer any need for any files
+        created during the build, so they may be removed.  In the case of the
+        sources extracted into RPM's build directory, we can see that, at worst,
+        they will be removed the next time the package is built.  But what if
+        there <emphasis>were</emphasis> files that we needed to remove?  Well,
+        they could be deleted here, in the <command>%clean</command> section:
+
+        <figure id="sc-rpm-build-clean-output">
+          <title>Output From the <command>%clean</command> Section</title>
+          <screen width="60">
+<computeroutput>
++ umask 022
++ echo Excuting: %clean
+Excuting: %clean
++ cd /usr/src/redhat/BUILD
++ cd cdplayer-1.0
++ exit 0
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        In our example, there are no other files outside of the build directory
+        that are created during <filename>cdplayer</filename>'s build, so we
+        don't need to expend any additional effort to clean things up.
+      </para>
+      <para>
+        The very last step performed by RPM is to create the source package
+        file:
+
+        <figure id="sc-rpm-build-source-package-creation">
+          <title>Creating the Source Package</title>
+          <screen width="60">
+<computeroutput>
+Source Packaging: cdplayer-1.0-1
+cdplayer-1.0.spec
+cdplayer-1.0.tgz
+80 blocks
+Generating signature: 0
+Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        This file includes everything needed to recreate a binary package file,
+        as well as a copy of itself.  In this example, the only files needed to
+        do that are the original sources and the spec file.  In cases where the
+        original sources needed to be modified, the source package includes one
+        or more patch files.  As when the binary package was created, we see
+        <command>cpio</command>'s output listing each file archived, along with
+        the archive's block size.
+      </para>
+      <para>
+        Just like a binary package, a source package file can have a PGP
+        signature attached to it.  In our case, we see that a PGP signature was
+        not attached.  The last message from RPM is to confirm the creation of
+        the source package.  Let's take a look at the end products.  First, the
+        binary package:
+
+        <figure id="sc-rpm-build-binary-listing">
+          <title>The Binary Package</title>
+          <screen width="60">
+<prompt># </prompt><userinput>ls -lF /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
+-rw-r--r--   1 root     root        24698 Aug  6 22:22 RPMS/i386/cdplayer-1.0-1.i386.rpm
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Note that we built <filename>cdplayer</filename> on an Intel-based
+        system, so RPM placed the binary package files in the
+        <filename>i386</filename> subdirectory.
+      </para>
+      <para>
+        Next, the source package file:
+
+        <figure id="sc-rpm-build-source-listing">
+          <title>The Source Package</title>
+          <screen width="60">
+<prompt># </prompt><userinput>ls -lF /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm</userinput>
+<computeroutput>
+-rw-r--r--   1 root     root        41380 Aug  6 22:22 SRPMS/cdplayer-1.0-1.src.rpm
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Everything went perfectly --- we now have binary and source package
+        files ready to use.  But sometimes things don't go so well.
+      </para>
+    </sect1>
+
+    <sect1 id="s1-rpm-build-when-things-go-wrong">
+      <title>When Things Go Wrong</title>
+      <indexterm>
+        <primary>package building!simple example!troubleshooting</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
+
+      <para>
+        This example is a bit of a fairy tale, in that it went perfectly the
+        first time.  In real life, it often takes several tries to get it right.
+      </para>
+
+      <sect2 id="s2-rpm-build-problems-during-build">
+        <title>Problems During the Build</title>
+        <para>
+          As we alluded to earlier in the chapter, RPM can stop at various
+          points in the build process.  This allows package builders to look
+          through the build directory and make sure everything is proceeding
+          properly.  If there are problems, stopping during the build process
+          permits them to see exactly what is going wrong, and where.  Here is a
+          list of points RPM can be stoped at during the build:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                After the <command>%prep</command> section.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                After doing some cursory checks on the <command>%files</command>
+                list.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                After the <command>%build</command> section.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                After the <command>%install</command> section.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                After the binary package has been created.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          In addition, there is also a method that permits the package builder
+          to "short circuit" the build process and direct RPM to skip over the
+          initial steps.  This is handy when the application is not yet ready
+          for packaging and needs some fine tuning.  This way, once the package
+          builds, installs, and operates properly, the required patches to the
+          original sources can be created, and plugged into the package's spec
+          file.
+        </para>
+      </sect2>
+
+<sect2 id="s2-rpm-build-testing-packages">
+        <title>Testing Newly Built Packages</title>
+        <!-- label: build-simple-test -->
+        <para>
+          Of course, the fact that an application has been packaged successfully
+          doesn't necessarily mean that it will operate correctly when the
+          package is actually installed.  Testing is required.  In the case of
+          our example, it's perfect and doesn't need such testing.
+          <footnote>
+            <para>
+              Like we said, it's a fairy tale!
+            </para>
+          </footnote>
+          But here is how testing would proceed:
+        </para>
+        <para>
+          The first step is to find a test system.  If you thought of simply
+          using the build system, <emphasis>bzzzzt</emphasis>, try again!  Think
+          about it --- in the course of building the package, the build system
+          actually had the application installed on it.  That is how RPM gets
+          the files that are to be packaged: by building the software,
+          installing it, and grabbing copies of the installed files, which are
+          found using the <command>%files</command> list.
+        </para>
+        <para>
+          Some of you dissenters that have read the first half of the book might
+          be thinking, "Why not just install the package on the build system
+          using the <command>--replacefiles</command> option?  That way, it'll
+          just blow away the files installed by the build process and replace
+          them with the packaged files."  Well, you folks get a
+          <emphasis>bzzzzt</emphasis>, too!  Here's why.
+        </para>
+        <para>
+          Say, for example, that the software you're packaging installs a bunch
+          of files --- maybe a hundred.  What does this mean?  Well for one
+          thing, it means that the package's <command>%files</command> list is
+          going to be quite large.  For another thing, the sheer number of files
+          makes it likely that you'll miss one or two.  What would happen then?
+        </para>
+        <para>
+          When RPM builds the software, there's no problem: the software builds,
+          and the application's makefile merrily installs all the files.  The
+          next step in RPM's build process is to collect the files by reading
+          the <command>%files</command> list, and to add each file listed to a
+          <command>cpio</command> archive.  What happens to the files you've
+          missed?  Nothing --- they aren't added to the package file, but they
+          <emphasis>are</emphasis> on your build system, installed just where
+          they should be.
+        </para>
+        <para>
+          Next, when the package is installed using
+          <command>--replacefiles</command>, RPM dutifully installs each of the
+          packaged files, replacing the ones originally installed on the build
+          system.  The missed files?  They aren't overwritten by RPM since they
+          weren't in the package.  But they're still on disk, right where the
+          application expects them to be!  If you go to test the application
+          then, it will find every file it needs.  But not every file came from
+          the package.  Bad news!  Using a different system on which the
+          application had never been built is one sure way to test for missing
+          files.
+        </para>
+        <para>
+          That wraps up our fictional build.  Now that we have some experience
+          with RPM's build process, we can take a more in-depth look at RPM's
+          build command.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>
