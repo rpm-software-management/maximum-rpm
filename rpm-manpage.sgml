@@ -249,6 +249,7 @@
 <!-- ================================ -->
   <synopfragment id="install-options">
   <group choice="plain">
+    <arg><option>--aid</option></arg>
     <arg><option>--allfiles</option></arg>
     <arg><option>--badreloc</option></arg>
     <arg><option>--excludepath</option> <replaceable>OLDPATH</replaceable></arg>
@@ -463,6 +464,11 @@
     <para>
     <variablelist>
     <varlistentry>
+    <term><option>--aid</option></term>
+    <listitem><para>
+	Add suggested packages to the transaction set when needed.
+    </para></listitem>
+    </varlistentry><varlistentry>
     <term><option>--allfiles</option></term>
     <listitem><para>
 	Installs or upgrades all the missingok files in the package,

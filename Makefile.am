@@ -15,6 +15,7 @@ EXTRA_DIST = \
 	rpm8.sgml \
 	rpmbuild8.sgml \
 	rpmcache8.sgml \
+	rpmdeps8.sgml \
 	rpmgraph8.sgml \
 	intro-to-rpm.sgml \
 	max-rpm.sgml \
@@ -35,6 +36,7 @@ EXTRA_DIST = \
 	rpm-manpage.sgml \
 	rpmbuild-manpage.sgml \
 	rpmcache-manpage.sgml \
+	rpmdeps-manpage.sgml \
 	rpmgraph-manpage.sgml \
 	rpm-miscellania.sgml \
 	rpm-multi.sgml \
@@ -112,6 +114,9 @@ rpmbuild.8: redhat-html.dsl rpmbuild8.sgml rpmbuild-manpage.sgml
 
 rpmcache.8: redhat-html.dsl rpmcache8.sgml rpmcache-manpage.sgml
 	docbook2man -d redhat-html.dsl rpmcache8.sgml
+
+rpmdeps.8: redhat-html.dsl rpmdeps8.sgml rpmdeps-manpage.sgml
+	docbook2man -d redhat-html.dsl rpmdeps8.sgml
 
 rpmgraph.8: redhat-html.dsl rpmgraph8.sgml rpmgraph-manpage.sgml
 	docbook2man -d redhat-html.dsl rpmgraph8.sgml

@@ -1,0 +1,50 @@
+<RefEntry id="rpmdeps.8">
+  <RefMeta>
+    <RefEntrytitle>rpmdeps</RefEntrytitle>
+    <ManVolNum>8</ManVolNum>
+    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
+  </RefMeta>
+
+<RefNameDiv>
+  <RefName>rpmdeps</RefName>
+  <RefPurpose>Generate RPM Package Dependencies</RefPurpose>
+</RefNameDiv>
+
+<RefSynopsisDiv>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	<command>rpmdeps</command>
+	<arg choice="req"><option>-P|--provides</option></arg>
+	<arg choice="req"><option>-R|--requires</option></arg>
+	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+</RefSynopsisDiv>
+
+<refsect1><title>Description</title>
+  <para> <command>rpmdeps</command> generates package dependencies
+	for the set of <replaceable>FILE</replaceable> arguments.
+	Each <replaceable>FILE</replaceable> argument is searched for
+	Elf32/Elf64, script interpreter, or per-script dependencies,
+	and the dependencies are printed to stdout.
+  </para>
+</refsect1>
+
+<refsect1><title>See Also</title>
+    <simplelist>
+      <member><command>rpm</command>(8),</member>
+      <member><command>rpmbuild</command>(8),</member>
+    </simplelist>
+</refsect1>
+
+<refsect1><title>Authors</title>
+      <simplelist>
+	<member>Jeff Johnson &lt;jbj@redhat.com&gt;</member>
+      </simplelist>
+</refsect1>
+
+</RefEntry>
