@@ -645,7 +645,7 @@ SM5DLUGT c <userinput>file</userinput>
 
           <listitem>
             <para>
-              <command><computeroutput>file</computeroutput></emphasis> is the
+              <command><computeroutput>file</computeroutput></command> is the
               file that failed verification.  The complete path is listed to
               make it easy to find.
             </para>
@@ -766,7 +766,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           <command>rpm -V packagename</command> are <emphasis>not</emphasis> the
           same.  Let's verify the <filename>initscripts</filename> package:
 
-          <figure id="sc-rpm-verify-example">
+          <figure id="sc-rpm-verify-example-the-sequel">
             <title>An <command>rpm -V</command> Example</title>
             <screen width="60">
 <prompt># </prompt><userinput>rpm -V initscripts</userinput>
@@ -825,10 +825,10 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           while, but when it's done, you'll know exactly what's been changed on
           your system:
 
-          <figure id="sc-rpm-verify-">
+          <figure id="sc-rpm-verify-all-packages">
             <title>Verifying All Installed Packages</title>
             <screen width="60">
-<prompt># <userinput>rpm -Va</userinput>
+<prompt># </prompt><userinput>rpm -Va</userinput>
 <computeroutput>
 .M5....T   /usr/X11R6/lib/X11/fonts/misc/fonts.dir
 missing    /var/spool/at/.lockfile
@@ -877,231 +877,242 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
           Simply direct RPM to verify the package owning the ailing program:
 
           <figure id="sc-rpm-verify-f-option-example">
-            <title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>rpm -Vf /sbin/cardmgr</userinput>
+            <title>
+              Package Verification Using the <command>-f</command> Option
+            </title>
+            <screen width="60">
+<prompt>% </prompt><userinput>rpm -Vf /sbin/cardmgr</userinput>
+<computeroutput>
 S.5....T c /etc/sysconfig/pcmcia
-</screen>
-</figure>
-Hmmmm.  Looks like a config file was recently changed.
+</computeroutput>
+<prompt>% </prompt>
+            </screen>
+          </figure>
 
-This isn't to say that using RPM to verify a package will always get you
-out of trouble, but it's such a quick step it should be one of the first
-things you try.  Here's an example of <command>rpm -Vf</command> not working out as
-well:
+          Hmmmm.  Looks like a config file was recently changed.
+        </para>
+        <para>
+          This isn't to say that using RPM to verify a package will always get
+          you out of trouble, but it's such a quick step it should be one of the
+          first things you try.  Here's an example of <command>rpm -Vf</command>
+          not working out as well:
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>rpm -Vf /etc/blunder</userinput>
+          <figure id="sc-rpm-verify-f-option-not-owned">
+            <title>Specifying a Filename Not Part of Any Package</title>
+            <screen width="60">
+<prompt>% </prompt><userinput>rpm -Vf /etc/blunder</userinput>
+<computeroutput>
 file /etc/blunder is not owned by any package
-</screen>
-</figure>
-(Note that the issue surrounding RPM and symbolic links mentioned in "A
-Tricky Detail" (page <xref linkend="-f:tricky">) also applies to <command>rpm
--Vf</command>.  Watch those symlinks!)
+</computeroutput>
+<prompt>% </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          (Note that the issue surrounding RPM and symbolic links mentioned in
+          "A Tricky Detail" (page <xref linkend="-f:tricky">) also applies to
+          <command>rpm -Vf</command>.  Watch those symlinks!)
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>f@<command>-f</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-p-option">
+        <title>
+          <command>-p <userinput>&lt;file&gt;</userinput></command> --- Verify
+          Against a Specific Package File
+        </title>
+        <!-- label: verify-p -->
+        <indexterm>
+          <primary><command>-p</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Unlike the previous options to <command>rpm -V</command>, each of
+          which verified one or more packages against RPM's database, the
+          <command>-p</command> option performs the same verification, but
+          against a package file.  Why on earth would you want to do this when
+          the RPM database is sitting there just waiting to be used?
+        </para>
+        <para>
+          Well, what if you didn't <emphasis>have</emphasis> an RPM database?
+          While it isn't a common occurrence, power failures, hardware problems,
+          and inadvertent deletions (along with non-existent backups) can leave
+          your system "sans database".  Then your system hiccups --- what do you
+          do now?
+        </para>
+        <para>
+          This is where a CD full of package files can be worth its weight in
+          gold.  Simply mount the CD and verify to your heart's content:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>-p <emphasis>&lt;file&gt;</command></emphasis> --- Verify Against a Specific Package File</title>
-<!-- label: verify-p -->
-<indexterm>
-<primary>p@<command>-p</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+          <figure id="sc-rpm-verify-package-based">
+            <title>
+              Verifying an Installed Package Against the Original
+              <filename>.rpm</filename> File
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vp /mnt/cdrom/RedHat/RPMS/i386/adduser-1.1-1.i386.rpm</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Whatever else might be wrong with this system, at least we can add new
+          users.  But what if you have <emphasis>many</emphasis> packages to
+          verify?  It would be a very slow process doing it one package at a
+          time.  That's where the next option comes in handy&hellip;
+        </para>
+      </sect2>
 
-Unlike the previous options to <command>rpm -V</command>, each of which verified one
-or more packages against RPM's database, the <command>-p</command> option performs
-the same verification, but against a package file.  Why on earth would you
-want to do this when the RPM database is sitting there just waiting to be
-used?
+      <sect2 id="s2-rpm-verify-g-option">
+        <title>
+          <command>-g <userinput>&lt;group&gt;</userinput></command> --- Verify
+          Packages Belonging To
+          <command><userinput>&lt;group&gt;</userinput></command>
+        </title>
+        <!-- label: verify-g -->
+        <indexterm>
+          <primary><command>-g</command> option</primary>
+        </indexterm>
 
-Well, what if you didn't <emphasis>have</emphasis> an RPM database?  While it isn't a
-common occurrence, power failures, hardware problems, and inadvertent
-deletions (along with non-existent backups) can leave your system "sans
-database".  Then your system hiccups --- what do you do now?
+        <para>
+          When a package is built, the package builder must classify the
+          package, grouping it with other packages that perform similar
+          functions.  RPM gives you the ability to verify installed packages
+          based on their groups.  For example, there is a group known as
+          <filename>Shells</filename>.  This group consists of packages that
+          contain, strangely enough, shells.  Let's verify the proper
+          installation of every shell-related package on the system:
 
-This is where a CD full of package files can be worth its weight in gold.
-Simply mount the CD and verify to your heart's content:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vp /mnt/cdrom/RedHat/RPMS/i386/adduser-1.1-1.i386.rpm</userinput>
-#
-</screen>
-</figure>
-Whatever else might be wrong with this system, at least we can add new
-users.  But what if you have <emphasis>many</emphasis> packages to verify?  It would be a
-very slow process doing it one package at a time.  That's where the next
-option comes in handy&hellip;
-
-<indexterm>
-<primary>p@<command>-p</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title><command>-g <emphasis>&lt;group&gt;</command></emphasis> --- Verify Packages Belonging To <command><emphasis>&lt;group&gt;</command></emphasis></title>
- <!-- label: verify-g -->
-<indexterm>
-<primary>g@<command>-g</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-When a package is built, the package builder must classify the package,
-grouping it with other packages that perform similar functions.  RPM gives
-you the ability to verify installed packages based on their groups.  For
-example, there is a group known as <filename>Shells</filename>.  This group consists of
-packages that contain, strangely enough, shells.  Let's verify the proper
-installation of every shell-related package on the system:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vg Shells</userinput>
+          <figure id="sc-rpm-verify-group-based">
+            <title>Verifying Packages Based on Group</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vg Shells</userinput>
+<computeroutput>
 missing    /etc/bashrc
-#
-</screen>
-</figure>
-One thing to keep in mind is that group specifications are case-sensitive.
-Issuing the command <command>rpm -Vg shells</command> wouldn't verify many packages:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          One thing to keep in mind is that group specifications are
+          case-sensitive.  Issuing the command <command>rpm -Vg shells</command>
+          wouldn't verify many packages:
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vg shells</userinput>
+          <figure id="sc-rpm-verify-group-oops">
+            <title>Group Specifications are Case-Sensitive</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vg shells</userinput>
+<computeroutput>
 group shells does not contain any packages
-#
-</screen>
-</figure>
-<indexterm>
-<primary>g@<command>-g</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
 
-</sect3>
+      <sect2 id="s2-rpm-verify-nodeps-option">
+        <title>
+          <command>--nodeps</command>: Do Not Check Dependencies During
+          Verification
+        </title>
+        <!-- label: verify- -nodeps -->
+        <indexterm>
+          <primary><command>--nodeps</command> option</primary>
+        </indexterm>
 
-<sect3 id="s3-rpm-verify-">
-<title><command>--nodeps</command>: Do Not Check Dependencies Before Erasing Package</title>
-<!-- label: verify--nodeps -->
-<indexterm>
-<primary>nodeps@<command>--nodeps</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          When the <command>--nodeps</command> option is added to a verify
+          command, RPM will bypass its dependency verification processing.  In
+          this example, we've added the <command>-vv</command> option to so we
+          can watch RPM at work:
 
-When the <command>--nodeps</command> option is added to a verify command, RPM will
-bypass its dependency verification processing.  In this example, we've
-added the <command>-vv</command> option to so we can watch RPM at work:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv rpm</userinput>
+          <figure id="sc-rpm-verify-nodeps-setup">
+            <title>A More In-Depth View of Package Verification </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv rpm</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 2341208
 D: dependencies: looking for libz.so.1
 D: dependencies: looking for libdb.so.2
 D: dependencies: looking for libc.so.5
-#
-</screen>
-</figure>
-As we can see, there are three different capabilities that the <command>rpm</command>
-package requires:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we can see, there are three different capabilities that the
+          <command>rpm</command> package requires:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-<filename>libz.so.1</filename>
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                <filename>libz.so.1</filename>
+              </para>
+            </listitem>
 
-</para>
-</listitem>
+            <listitem>
+              <para>
+                <filename>libdb.so.2</filename>
+              </para>
+            </listitem>
 
-<listitem>
-<para>
-<filename>libdb.so.2</filename>
+            <listitem>
+              <para>
+                <filename>libc.so.5</filename>
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          If we add the <command>--nodeps</command> option, the dependency
+          verification of the three capabilities is no longer performed:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-<filename>libc.so.5</filename>
-
-</para>
-</listitem>
-
-</itemizedlist>
-If we add the <command>--nodeps</command> option, the dependency verification of
-the three capabilities is no longer performed:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv --nodeps rpm</userinput>
+          <figure id="sc-rpm-verify-nodeps-payoff">
+            <title>
+              Package Verification Using the <command>--nodeps</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv --nodeps rpm</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 2341208
-#
-</screen>
-</figure>
-The line <computeroutput>D: verifying record number 2341208</computeroutput> indicates that RPM's
-normal file-based verification proceeded normally.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The line <computeroutput>D: verifying record number
+            2341208</computeroutput> indicates that RPM's normal file-based
+            verification proceeded normally.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>nodeps@<command>--nodeps</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-noscripts-option">
+        <title>
+          <command>--noscripts</command>: Do Not Execute Verification Script
+        </title>
+        <!-- label: verify- -noscripts -->
+        <indexterm>
+          <primary><command>--noscripts</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Adding the <command>--noscripts</command> option to a verify command
+          prevents execution of the verification scripts of each package being
+          verified.  In the following example, the package verification script
+          is executed:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>--noscripts</command>: Do Not Execute Verification Script</title>
-<!-- label: verify--noscripts -->
-<indexterm>
-<primary>noscripts@<command>--noscripts</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Adding the <command>--noscripts</command> option to a verify command prevents
-execution of the verification scripts of each package being verified.  In
-the following example, the package verification script is executed:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv bother</userinput>
+          <figure id="sc-rpm-verify-noscripts-setup">
+            <title>
+              Package Verification Showing Verification Script Being Run
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv bother</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 616728
 D: verify script found - running from file /var/tmp/rpm-321.vscript
@@ -1109,412 +1120,556 @@ D: verify script found - running from file /var/tmp/rpm-321.vscript
 + export PATH
 + echo This is the bother 3.5 verification script
 This is the bother 3.5 verification script
-#
-</screen>
-</figure>
-While the actual script is not very interesting, it did execute when the
-package was being verified.  In the next example, we'll use the
-<command>--noscripts</command> option to prevent its execution:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          While the actual script is not very interesting, it did execute when
+          the package was being verified.  In the next example, we'll use the
+          <command>--noscripts</command> option to prevent its execution:
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv --noscripts bother</userinput>
+          <figure id="sc-rpm-verify-noscripts-payoff">
+            <title>
+              Package Verification Using the <command>--noscripts</command>
+              Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv --noscripts bother</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 616728
-#
-</screen>
-</figure>
-As expected, the output is identical to the prior example --- minus the
-lines dealing with the verification script, of course.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As expected, the output is identical to the prior example --- minus
+          the lines dealing with the verification script, of course.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>noscripts@<command>--noscripts</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-nofiles-option">
+        <title>
+          <command>--nofiles</command>: Do Not Verify File
+          Attributes
+        </title>
+        <!-- label: verify- -nofiles -->
+        <indexterm>
+          <primary><command>--nofiles</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The <command>--nofiles</command> option disables RPM's file-related
+          verification processing.  When this option is used, only the
+          verification script and dependency verification processing are
+          performed.  In this example, the package has a file-related
+          verification problem:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>--nofiles</command>: Do Not Verify File Attributes</title>
-<!-- label: verify--nofiles -->
-<indexterm>
-<primary>nofiles@<command>--nofiles</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The <command>--nofiles</command> option disables RPM's file-related verification
-processing.  When this option is used, only the verification script and
-dependency verification processing are performed.  In this example, the
-package has a file-related verification problem:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv bash</userinput>
+          <figure id="sc-rpm-verify-nofiles-setup">
+            <title>A Package With a File-Related Verification Problem</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv bash</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 279448
 D: dependencies: looking for libc.so.5
 D: dependencies: looking for libtermcap.so.2
 missing    /etc/bashrc
-#
-</screen>
-</figure>
-When the <command>--nofiles</command> option is added, the missing file doesn't
-cause a message any more:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          When the <command>--nofiles</command> option is added, the missing
+          file doesn't cause a message any more:
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv --nofiles bash</userinput>
+          <figure id="sc-rpm-verify-nofiles-payoff">
+            <title>Using the <command>--nofiles</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv --nofiles bash</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 279448
 D: dependencies: looking for libc.so.5
 D: dependencies: looking for libtermcap.so.2
-#
-</screen>
-</figure>
-This is not to say that the missing file problem is solved, just that no
-file verification was performed.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          This is not to say that the missing file problem is solved, just that
+          no file verification was performed.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>nofiles@<command>--nofiles</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-">
+        <title><command>-v</command> --- Display Additional Information</title>
+        <!-- label: verify-v -->
+        <indexterm>
+          <primary><command>-v</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Although RPM won't report an error with the command syntax if you
+          include the <command>-v</command> option, you won't see much in the
+          way of additional output:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>-v</command> --- Display Additional Information</title>
-<!-- label: verify-v -->
-<indexterm>
-<primary>v@<command>-v</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+          <figure id="sc-rpm-verify-v-example">
+            <title>
+              Using the <command>-v</command> Option During Package Verification
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vv bash</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Even if there are verification errors, adding <command>-v</command>
+          won't change the output:
 
-Although RPM won't report an error with the command syntax if you include
-the <command>-v</command> option, you won't see much in the way of additional output:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vv bash</userinput>
-#
-</screen>
-</figure>
-Even if there are verification errors, adding <command>-v</command> won't change the
-output:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vv apmd</userinput>
+          <figure id="sc-rpm-verify-v-example2">
+            <title>
+              Lack of Additional Output From <command>-v</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vv apmd</userinput>
+<computeroutput>
 S.5....T   /etc/rc.d/init.d/apm
 S.5....T   /usr/X11R6/bin/xapm
-#
-</screen>
-</figure>
-The only time that the <command>-v</command> option <emphasis>will</emphasis> produce output is
-when the package being verified has a verification script.  Any normal
-output from the script won't be displayed by RPM, when run without
-<command>-v</command>:
-<footnote>
-<para>
-Failure messages will always be displayed.
-</para>
-</footnote>
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The only time that the <command>-v</command> option
+          <emphasis>will</emphasis> produce output is when the package being
+          verified has a verification script.  Any normal output from the script
+          won't be displayed by RPM, when run without <command>-v</command>:
+          <footnote>
+            <para>
+              Failure messages will always be displayed.
+            </para>
+          </footnote>
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -V bother</userinput>
-#
-</screen>
-</figure>
-But when <command>-v</command> is added, the script's non-error-related output is
-displayed:
+          <figure id="sc-rpm-verify-v-option-setup">
+            <title>Verifying a Package Containing a Verification Script</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -V bother</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          But when <command>-v</command> is added, the script's
+          non-error-related output is displayed:
 
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vv bother</userinput>
+          <figure id="sc-rpm-verify-v-option-payoff">
+            <title>
+              Verification Script Output Displayed Using
+              <command>-v</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vv bother</userinput>
+<computeroutput>
 This is the bother 3.5 verification script
-#
-</screen>
-</figure>
-If you're looking for more insight into RPM's inner workings, you'll have
-to try the next option:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          If you're looking for more insight into RPM's inner workings, you'll
+          have to try the next option:
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>v@<command>-v</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-vv-option">
+        <title><command>-vv</command> --- Display Debugging Information</title>
+        <!-- label: verify-vv -->
+        <indexterm>
+          <primary><command>-vv</command> option</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          Sometimes it's necessary to have even <emphasis>more</emphasis>
+          information than we can get with <command>-v</command>.  By adding
+          another <command>v</command>, that's just what we'll get:
 
-<sect3 id="s3-rpm-verify-">
-<title><command>-vv</command> --- Display Debugging Information</title>
-<!-- label: verify-vv -->
-<indexterm>
-<primary>vv@<command>-vv</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Sometimes it's necessary to have even <emphasis>more</emphasis> information than we can
-get with <command>-v</command>.  By adding another <command>v</command>, that's just what we'll
-get:
-
-<figure id="sc-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Vvv rpm</userinput>
+          <figure id="sc-rpm-verify-vv-option-example">
+            <title>Using the <command>-vv</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Vvv rpm</userinput>
+<computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 2341208
 D: dependencies: looking for libz.so.1
 D: dependencies: looking for libdb.so.2
 D: dependencies: looking for libc.so.5
-#
-</screen>
-</figure>
-The lines starting with <computeroutput>D:</computeroutput> have been added by using <command>-vv</command>.
-We can see where the RPM database is located and what record number
-contains information on the <filename>rpm-2.3-1</filename> package.  Following that is
-the list of dependencies that the <filename>rpm</filename> package requires.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The lines starting with <computeroutput>D:</computeroutput> have been
+          added by using <command>-vv</command>.  We can see where the RPM
+          database is located and what record number contains information on the
+          <filename>rpm-2.3-1</filename> package.  Following that is the list of
+          dependencies that the <filename>rpm</filename> package requires.
+        </para>
+        <para>
+          In the vast majority of cases, it will not be necessary to use
+          <command>-vv</command>.  It is normally used by software engineers
+          working on RPM itself, and the output can change without notice.
+          However, it's a handy way to gain insights into RPM.
+        </para>
+      </sect2>
 
-In the vast majority of cases, it will not be necessary to use
-<command>-vv</command>.  It is normally used by software engineers working on RPM
-itself, and the output can change without notice.  However, it's a handy
-way to gain insights into RPM.
+      <sect2 id="s2-rpm-verify-dbpath-option">
+        <title>
+          <command>--dbpath <userinput>&lt;path&gt;</userinput></command>: Use
+          <command><userinput>&lt;path&gt;</userinput></command> To Find RPM
+          Database
+        </title>
+        <!-- label: verify- -dbpath -->
+        <indexterm>
+          <primary><command>--dbpath</command> option</primary>
+        </indexterm>
 
-<indexterm>
-<primary>vv@<command>-vv</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          In order for RPM to do its handiwork, it needs access to an RPM
+          database.  Normally, this database exists in the directory specified
+          by the <filename>rpmrc</filename> file entry,
+          <command>dbpath</command>.  By default, <command>dbpath</command> is
+          set to <filename>/var/lib/rpm</filename>.
+        </para>
+        <para>
+          Although the <command>dbpath</command> entry can be modified in the
+          appropriate <filename>rpmrc</filename> file, the
+          <command>--dbpath</command> option is probably a better choice when
+          the database path needs to be changed temporarily.  An example of a
+          time the <command>--dbpath</command> option would come in handy is
+          when it's necessary to examine an RPM database copied from another
+          system.  Granted, it's not a common occurrence, but it's difficult to
+          handle any other way.
+        </para>
+      </sect2>
 
-</sect3>
+      <sect2 id="s2-rpm-verify-root-option">
+        <title>
+          <command>--root <userinput>&lt;path&gt;</userinput></command>: Set
+          Alternate Root to
+          <command><userinput>&lt;path&gt;</userinput></command>
+        </title>
+        <!-- label: verify- -root -->
+        <indexterm>
+          <primary><command>--root</command> option</primary>
+        </indexterm>
 
-<sect3 id="s3-rpm-verify-">
-<title><command>--dbpath <emphasis>&lt;path&gt;</command></emphasis>: Use <command><emphasis>&lt;path&gt;</command></emphasis> To Find RPM Database</title>
-<!-- label: verify--dbpath -->
-<indexterm>
-<primary>dbpath@<command>--dbpath</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          Adding <command>--root <userinput>&lt;path&gt;</userinput></command>
+          to a verify command forces RPM to assume that the directory specified
+          by <command><userinput>&lt;path&gt;</userinput></command> is actually
+          the "root" directory.  In addition, RPM expects its database to reside
+          in the directory specified by the <command>dbpath</command>
+          <filename>rpmrc</filename> file entry, relative to
+          <command><userinput>&lt;path&gt;</userinput></command>.
+          <footnote>
+            <para>
+              For more information on <filename>rpmrc</filename> file entries,
+              see Appendix <xref linkend="rpmrc-file">.
+            </para>
+          </footnote>
+        </para>
+        <para>
+          Normally this option is only used during an initial system install, or
+          when a system has been booted off a "rescue disk", and some packages
+          need to be re-installed in order to restore normal operation.
+        </para>
+      </sect2>
 
-In order for RPM to do its handiwork, it needs access to an RPM database.
-Normally, this database exists in the directory specified by the
-<filename>rpmrc</filename> file entry, <command>dbpath</command>.  By default, <command>dbpath</command> is
-set to <filename>/var/lib/rpm</filename>.
+      <sect2 id="s2-rpm-verify-rcfile-option">
+        <title><command>--rcfile
+        <userinput>&lt;rcfile&gt;</userinput></command>: Set Alternate
+        <filename>rpmrc</filename> file to
+        <command><userinput>&lt;rcfile&gt;</userinput></command>
+        </title>
+        <!-- label: verify- -rcfile -->
+        <indexterm>
+          <primary><command>--rcfile</command> option</primary>
+        </indexterm>
 
-Although the <command>dbpath</command> entry can be modified in the appropriate
-<filename>rpmrc</filename> file, the <command>--dbpath</command> option is probably a better
-choice when the database path needs to be changed temporarily.  An example
-of a time the <command>--dbpath</command> option would come in handy is when it's
-necessary to examine an RPM database copied from another system.  Granted,
-it's not a common occurrence, but it's difficult to handle any other way.
+        <para>
+          The <command>--rcfile</command> option is used to specify a file
+          containing default settings for RPM.  Normally, this option is not
+          needed.  By default, RPM uses <filename>/etc/rpmrc</filename> and a
+          file named <filename>.rpmrc</filename>, located in your login
+          directory.
+        </para>
+        <para>
+          This option would be used if there was a need to switch between
+          several sets of RPM options.  Software developer and package builders
+          will be the people using <command>--rcfile</command>.  For more
+          information on <filename>rpmrc</filename> files, see Appendix <xref
+          linkend="rpmrc-file">.
+        </para>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary>dbpath@<command>--dbpath</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+    <sect1 id="s1-rpm-verify-we-lied">
+      <title>We've Lied to You&hellip;</title>
+      <indexterm>
+        <primary><command>rpm -V</command>!verification, control of</primary>
+        <secondary></secondary>
+      </indexterm>
 
-</sect3>
+      <para>
+        Not really; we just omitted a few details until you've had a chance to
+        see <command>rpm -V</command> in action.  Here are the details:
+      </para>
 
-<sect3 id="s3-rpm-verify-">
-<title><command>--root <emphasis>&lt;path&gt;</command></emphasis>: Set Alternate Root to <command><emphasis>&lt;path&gt;</command></emphasis></title>
-<!-- label: verify--root -->
-<indexterm>
-<primary>root@<command>--root</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-verify-verification-control">
+        <title>RPM Controls What Gets Verified</title>
+        <para>
+          Depending on the type of file being verified, RPM will not verify
+          every possible attribute.  Here is a table showing the attributes
+          checked for each of the different file types:
 
-Adding <command>--root <emphasis>&lt;path&gt;</command></emphasis> to a verify command forces RPM to
-assume that the directory specified by <command><emphasis>&lt;path&gt;</command></emphasis> is actually
-the "root" directory.  In addition, RPM expects its database to reside in
-the directory specified by the <command>dbpath</command> <filename>rpmrc</filename> file entry,
-relative to <command><emphasis>&lt;path&gt;</command></emphasis>.
-<footnote>
-<para>
-For more information on
-<filename>rpmrc</filename> file entries, see Appendix <xref linkend="rpmrc-file">.
-</para>
-</footnote>
+          <table id="tb-rpm-verify-verification-control">
+            <title>Verification Versus File Types</title>
+            <tgroup cols="10">
+              <tbody>
+                <row>
+                  <entry>
+                    File Type
+                  </entry>
+                  <entry>
+                    File Size
+                  </entry>
+                  <entry>
+                    Mode
+                  </entry>
+                  <entry>
+                    MD5 Checksum
+                  </entry>
+                  <entry>
+                    Major Number
+                  </entry>
+                  <entry>
+                    Minor Number
+                  </entry>
+                  <entry>
+                    Symlink String
+                  </entry>
+                  <entry>
+                    Owner
+                  </entry>
+                  <entry>
+                    Group
+                  </entry>
+                  <entry>
+                    Modification Time
+                  </entry>
+                </row>
+                <row>
+                  <entry>
+                    Directory File
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                </row>
+                <row>
+                  <entry>
+                    Symbolic Links
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                </row>
+                <row>
+                  <entry>
+                    FIFO
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                </row>
+                <row>
+                  <entry>
+                    Devices
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                </row>
+                <row>
+                  <entry>
+                    Regular Files
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    -
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                  <entry>
+                    X
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        </para>
 
-Normally this option is only used during an initial system install, or when
-a system has been booted off a "rescue disk", and some packages need to
-be re-installed in order to restore normal operation.
-
-<indexterm>
-<primary>root@<command>--root</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-<sect3 id="s3-rpm-verify-">
-<title><command>--rcfile <emphasis>&lt;rcfile&gt;</command></emphasis>: Set Alternate <filename>rpmrc</filename> file to <command><emphasis>&lt;rcfile&gt;</command></emphasis></title>
-<!-- label: verify--rcfile -->
-<indexterm>
-<primary>rcfile@<command>--rcfile</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The <command>--rcfile</command> option is used to specify a file containing default
-settings for RPM.  Normally, this option is not needed.  By default, RPM
-uses <filename>/etc/rpmrc</filename> and a file named <filename>.rpmrc</filename>, located in your
-login directory.
-
-This option would be used if there was a need to switch between several
-sets of RPM options.  Software developer and package builders will be the
-people using <command>--rcfile</command>.  For more information on <filename>rpmrc</filename>
-files, see Appendix <xref linkend="rpmrc-file">.
-
-<indexterm>
-<primary>rcfile@<command>--rcfile</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!options|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect3>
-
-</sect1>
-
-<sect1 id="s1-rpm-verify-">
-<title>We've Lied to You&hellip;</title>
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!verification, control of</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Not really; we just omitted a few details until you've had a chance to see
-<command>rpm -V</command> in action.  Here are the details:
-
-<sect4 id="s4-rpm-verify-">
-<title>RPM Controls What Gets Verified</title>
-Depending on the type of file being verified, RPM will not verify every
-possible attribute.  Here is a table showing the attributes checked for
-each of the different file types:
-
-\vspace{10mm}
-
-<table id="tb-rpm-verify-">
-<title>*** Enter New Title Here ***</title>
-\rule{0pt}{15mm}% vertical placement
-File Type &
-\begin{rotate}{45}File Size\end{rotate}&
-\begin{rotate}{45}Mode\end{rotate}&
-\begin{rotate}{45}MD5 Checksum\end{rotate}&
-\begin{rotate}{45}Major Number\end{rotate}&
-\begin{rotate}{45}Minor Number\end{rotate}&
-\begin{rotate}{45}Symlink String\end{rotate}&
-\begin{rotate}{45}Owner\end{rotate}&
-\begin{rotate}{45}Group\end{rotate}&
-\begin{rotate}{45}Modification Time\end{rotate}
-
-
-
-Directory File &  & X &  &  &  &  & X & X & 
-
-Symbolic Links &  & X &  &  &  & X & X & X & 
-
-FIFO &  & X &  &  &  &  & X & X & 
-
-Devices &  & X &  & X & X &  & X & X & 
-
-Regular Files & X & X & X &  &  &  & X & X & X
-</table>
-</sect4>
-
-<sect4 id="s4-rpm-verify-">
-<title>The Package Builder Can Also Control What Gets Verified</title>
-When a package builder creates a new package, they can control what
-attributes are to be verified on a file-by-file basis.  The reasons for
-excluding specific attributes from verification can be quite involved, but
-here's an example just to give you the flavor:
-
-When a person logs into a system, there are device files associated with
-that user's terminal session.  In order for the terminal device (called
-<filename>tty</filename>) to function properly, the owner and group of the device must
-change to that of the person logging in.  Therefore, if RPM were to verify
-the package that created the <filename>tty</filename> device files, any ttys that were
-in use at the time would fail to verify.  However, by using the
-<command>\<!-- verify</command> -->
-<footnote>
-<para>
-See page <xref linkend="spec-verify"> for details on
-<command>\<!-- verify</command> -->
-</para>
-</footnote>
- directive, a package builder can save you from trivial
-verification failures.
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>!verification, control of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -V@<command>rpm -V</command>|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-</sect4>
-
-</sect1>
-
-</chapter>
-
+        <sect3 id="s3-rpm-verify-package-builder-control">
+          <title>The Package Builder Can Also Control What Gets Verified</title>
+          <para>
+            When a package builder creates a new package, they can control what
+            attributes are to be verified on a file-by-file basis.  The reasons
+            for excluding specific attributes from verification can be quite
+            involved, but here's an example just to give you the flavor:
+          </para>
+          <para>
+            When a person logs into a system, there are device files associated
+            with that user's terminal session.  In order for the terminal device
+            (called <filename>tty</filename>) to function properly, the owner
+            and group of the device must change to that of the person logging
+            in.  Therefore, if RPM were to verify the package that created the
+            <filename>tty</filename> device files, any ttys that were in use at
+            the time would fail to verify.  However, by using the
+            <command>%verify</command>
+            <footnote>
+              <para>
+                See page <xref linkend="spec-verify"> for details on
+                <command>%verify</command>
+              </para>
+            </footnote>
+            directive, a package builder can save you from trivial
+            verification failures.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
+  </chapter>
