@@ -1,0 +1,2237 @@
+<chapter id="ch-rpm-specref">
+<title>Concise Spec File Reference</title>
+
+<indexterm>
+<primary>spec file!contents of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<sect1 id="s1-rpm-specref-">
+<title>Comments</title>
+<indexterm>
+<primary>spec file!comments in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Comments are a way to make RPM ignore a line in the spec file.  To create a
+comment, enter an octothorp (<tt?>#</tt?>) at the start of the line.  Any
+text following the comment character will be ignored by RPM:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# This is the spec file for playmidi 2.3...
+</screen>
+</figure>
+Comments can be placed in any section of the spec file.
+
+See also: Section <xref linkend="inside-comments">.
+
+<indexterm>
+<primary>spec file!comments in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>The Preamble</title>
+<sect2 id="s2-rpm-specref-">
+<title>Package Naming Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>name</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>name</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>name@<tt?>name</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>name</tt?> tag is used to define the name of the software being
+packaged.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Name: cdplayer
+</screen>
+</figure>
+See also: Section <xref linkend="inside-name">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>version</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>version</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>version@<tt?>version</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>version</tt?> tag defines the version of the software being
+packaged.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Version: 1.2
+</screen>
+</figure>
+See also: Section <xref linkend="inside-version">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>release</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>release</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>release@<tt?>release</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>release</tt?> tag can be thought of as the <emphasis>package's</emphasis>
+version.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Release: 5
+</screen>
+</figure>
+See also: Section <xref linkend="inside-release">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Descriptive Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%description</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>%description</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>description@<tt?>%description</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%description</tt?> tag is used to define an in-depth description of
+the packaged software.  In the descriptive text, a space in the first
+column indicates that that line of text should be presented to user as-is,
+with no formatting done by RPM.  Blank lines in the descriptive text denote
+paragraphs.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%description
+ It slices!
+ It dices!
+ It's a CD player app that can't be beat.
+
+By using the resonant frequency of the CD itself, it is able to simulate
+20X oversampling.  This leads to sound quality that cannot be equaled with
+more mundane software...
+</screen>
+</figure>
+The <tt?>%description</tt?> tag can be made specific to a particular
+subpackage by adding the subpackage name, and optionally, the <tt?>-n</tt?>
+option:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%description bar
+
+%description -n bar
+</screen>
+</figure>
+The subpackage name and usage of the <tt?>-n</tt?> option must match those
+defined with the <tt?>%package</tt?> directive.
+
+See also: Section <xref linkend="inside-description">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>summary</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>summary</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>summary@<tt?>summary</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>summary</tt?> tag is used to define a one-line description of the
+packaged software.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Summary: A CD player app that rocks!
+</screen>
+</figure>
+See also: Section <xref linkend="inside-summary">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>copyright</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>copyright</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>copyright@<tt?>copyright</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>copyright</tt?> tag is used to define the copyright terms applicable
+to the software being packaged.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Copyright: GPL
+</screen>
+</figure>
+See also: Section <xref linkend="inside-copyright">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>distribution</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>distribution</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>distribution@<tt?>distribution</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>distribution</tt?> tag is used to define a group of packages, of
+which this package is a part.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Distribution: Doors '95
+</screen>
+</figure>
+See also: Section <xref linkend="inside-distribution">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>icon</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>icon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>icon@<tt?>icon</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>icon</tt?> tag is used to name a file containing an icon
+representing the packaged software.  The file may be in either GIF or XPM
+format, although XPM is preferred.  In either case, the background of the
+icon should be transparent.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Icon: foo.xpm
+</screen>
+</figure>
+See also: Section <xref linkend="inside-icon">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>vendor</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>vendor</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>vendor@<tt?>vendor</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>vendor</tt?> tag is used to define the name of the entity that is
+responsible for packaging the software.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Vendor: White Socks Software, Inc.
+</screen>
+</figure>
+See also: Section <xref linkend="inside-vendor">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>url</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>url</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>url@<tt?>url</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>url</tt?> tag is used to define a Uniform Resource Locator that can
+be used to obtain additional information about the packaged software.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+URL: http://www.gnomovision.com/cdplayer.html
+</screen>
+</figure>
+See also: Section <xref linkend="inside-url">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>group</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>group</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>group@<tt?>group</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>group</tt?> tag is used to group packages together by the types of
+functionality they provide.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Group: Applications/Editors
+</screen>
+</figure>
+See also: Section <xref linkend="inside-group">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>packager</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>packager</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>packager@<tt?>packager</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>packager</tt?> tag is used to hold the name and contact information
+for the person or persons who built the package.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
+</screen>
+</figure>
+See also: Section <xref linkend="inside-packager">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Dependency Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>provides</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>provides</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>provides@<tt?>provides</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>provides</tt?> tag is used to specify a "virtual package" that the
+packaged software makes available when it is installed.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Provides: module-info
+</screen>
+</figure>
+See also: Section <xref linkend="inside-provides">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>requires</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>requires</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>requires@<tt?>requires</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>requires</tt?> tag is used to alert RPM to the fact that the package
+needs to have certain capabilities available in order to operate properly.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Requires: playmidi
+</screen>
+</figure>
+A version may be specified, following the package specification.  The
+following comparison operators may be placed between the package and
+version:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;, &gt;, =, &gt;=, or &lt;=
+</screen>
+</figure>
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Requires: playmidi &gt;= 2.3
+</screen>
+</figure>
+If the <tt?>Requires</tt?> tag needs to perform a comparison against a serial
+numbered defined with the <tt?>serial</tt?> tag, then the proper format would
+be:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Requires: playmidi =S 4
+</screen>
+</figure>
+See also: Section <xref linkend="inside-requires">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>serial</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>serial</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>serial@<tt?>serial</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>serial</tt?> tag is used to define a serial number for a package.
+This is only necessary if RPM is unable to determine the ordering of
+a package's version numbers.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Serial: 4
+</screen>
+</figure>
+See also: Section <xref linkend="inside-serial">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>conflicts</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>conflicts</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>conflicts@<tt?>conflicts</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>conflicts</tt?> tag is used to alert RPM to the fact that the
+package is not compatible with other packages.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Conflicts: playmidi
+</screen>
+</figure>
+A version may be specified, following the package specification.  The
+following comparison operators may be placed between the package and
+version:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+&lt;, &gt;, =, &gt;=, or &lt;=
+</screen>
+</figure>
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Conflicts: playmidi &gt;= 2.3
+</screen>
+</figure>
+If the <tt?>conflicts</tt?> tag needs to perform a comparison against a
+serial numbered defined with the <tt?>serial</tt?> tag, then the proper
+format would be:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Conflicts: playmidi =S 4
+</screen>
+</figure>
+See also: Section <xref linkend="inside-conflicts">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>autoreqprov</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>autoreqprov</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>autoreqprov@<tt?>autoreqprov</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>autoreqprov</tt?> tag is used to control the automatic dependency
+processing performed when the package is being built.  To disable automatic
+dependency processing, add the following line:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+AutoReqProv: no
+</screen>
+</figure>
+(The number <tt?>0</tt?> may be used instead of <tt?>no</tt?>)  Although RPM
+defaults to performing automatic dependency processing, the effect of the
+<tt?>autoreqprov</tt?> tag can be reversed by changing <tt?>no</tt?> to
+<tt?>yes</tt?>.  (The number <tt?>1</tt?> may be used instead of <tt?>yes</tt?>)
+
+See also: Section <xref linkend="inside-autoreqprov">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Architecture- and Operating System-Specific Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>excludearch</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>excludearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludearch@<tt?>excludearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>excludearch</tt?> tag is used to direct RPM to ensure that the
+package does <emphasis>not</emphasis> attempt to build on the excluded architecture(s).
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExcludeArch: sparc alpha
+</screen>
+</figure>
+See also: Section <xref linkend="inside-excludearch">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>exclusivearch</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>exclusivearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusivearch@<tt?>exclusivearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclusivearch</tt?> tag is used to direct RPM to ensure the package
+is <emphasis>only</emphasis> built on the specified architecture(s).
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExclusiveArch: sparc alpha
+</screen>
+</figure>
+See also: Section <xref linkend="inside-exclusivearch">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>excludeos</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>excludeos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludeos@<tt?>excludeos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>excludeos</tt?> tag is used to direct RPM to ensure that the package
+does <emphasis>not</emphasis> attempt to build on the excluded operating system(s).
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExcludeOS: linux irix
+</screen>
+</figure>
+See also: Section <xref linkend="inside-excludeos">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>exclusiveos</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>exclusiveos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusiveos@<tt?>exclusiveos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclusiveos</tt?> tag is used to denote which operating system(s)
+should <emphasis>only</emphasis> be be permitted to build the package.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExclusiveOS: linux
+</screen>
+</figure>
+See also: Section <xref linkend="inside-exclusiveos">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Directory-related Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>prefix</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>prefix</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>prefix@<tt?>prefix</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>prefix</tt?> tag is used to define part of the path RPM will use
+when installing the package's files.  The prefix can be redefined by the
+user when the package is installed, thereby changing where the package is
+installed.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Prefix: /opt
+</screen>
+</figure>
+See also: Section <xref linkend="inside-prefix">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>buildroot</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>buildroot</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>buildroot@<tt?>buildroot</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>buildroot</tt?> tag is used to define an alternate build root, where
+the software will be installed during the build process.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+BuildRoot: /tmp/cdplayer
+</screen>
+</figure>
+See also: Section <xref linkend="inside-buildroot">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Source and Patch Tags</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>source</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>source</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>source@<tt?>source</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>source</tt?> tag is used to define the filename of the sources to be
+packaged.  When there is more than one <tt?>source</tt?> tag in a spec file,
+each one must be numbered so they are unique, starting with the number
+<tt?>0</tt?>.  When there is only one tag, it does not need to be numbered.
+
+By convention, the source filename is usually preceded by a URL pointing to
+the location of the original sources, but RPM does not require this.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Source0: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
+Source1: foo.tgz
+</screen>
+</figure>
+See also: Section <xref linkend="inside-source">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>nosource</tt?> Tag</title>
+<indexterm>
+<primary>spec file!tags in!<tt?>nosource</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>nosource@<tt?>nosource</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>nosource</tt?> tag is used to alert RPM to the fact that one or more
+source files should be excluded from the source package file.  The tag is
+followed by one or more numbers.  The numbers correspond to the numbers
+following the <tt?>source</tt?> tags that are to be excluded from packaging.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+NoSource: 0, 3
+</screen>
+</figure>
+See also: Section <xref linkend="inside-nosource">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>patch</tt?> Tag</title>
+<indexterm>
+<primary>patch@<tt?>patch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>patch</tt?> tag is used to define the name of a patch file to be
+applied to the package's sources.  When there is more than one
+<tt?>patch</tt?> tag in a spec file, each one must be numbered so they are
+unique, starting with the number <tt?>0</tt?>.  When there is only one tag,
+it does not need to be numbered.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Patch: cdp-0.33-fsstnd.patch
+</screen>
+</figure>
+See also: Section <xref linkend="inside-patch">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>nopatch</tt?> Tag</title>
+<indexterm>
+<primary>nopatch@<tt?>nopatch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>nopatch</tt?> tag is used to alert RPM to the fact that one or more
+patch files should be excluded from the source package file.  The tag is
+followed by one or more numbers.  The numbers correspond to the numbers
+following the <tt?>patch</tt?> tags that are to be excluded from packaging.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+NoPatch: 2 3
+</screen>
+</figure>
+See also: Section <xref linkend="inside-nopatch">.
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>Scripts</title>
+<sect2 id="s2-rpm-specref-">
+<title>Build-time Scripts</title>
+Every build-time script has the following environment variables defined:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<tt?>RPM_SOURCE_DIR</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_BUILD_DIR</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_DOC_DIR</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_OPT_FLAGS</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_ARCH</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_OS</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_ROOT_DIR</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_BUILD_ROOT</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_NAME</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_VERSION</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>RPM_PACKAGE_RELEASE</tt?>
+
+</para>
+</listitem>
+
+</itemizedlist>
+For more information on these environment variables, and build-time scripts
+in general, please see section <xref linkend="inside-scripts">.
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%prep</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%prep</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>prep@<tt?>%prep</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%prep</tt?> script is the first script RPM executes during a
+build.  As the name implies, it is normally used to prepare the sources for
+building.  The commands in the script can be any valid <tt?>sh</tt?>
+commands.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%prep
+</screen>
+</figure>
+See also: Section <xref linkend="inside-prep">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%build</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%build</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>build@<tt?>%build</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%build</tt?> script is the second script RPM executes during a
+build.  As the name implies, it is normally used to build the software.
+The commands in the script can be any valid <tt?>sh</tt?> commands.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%build
+</screen>
+</figure>
+See also: Section <xref linkend="inside-build">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%install</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%install</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>install@<tt?>%install</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%install</tt?> script is the third script RPM executes during a
+build.  As the name implies, it is normally used to install the software.
+The commands in the script can be any valid <tt?>sh</tt?> commands.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%install
+</screen>
+</figure>
+See also: Section <xref linkend="inside-install">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%clean</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%clean</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>clean@<tt?>%clean</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%clean</tt?> script, as the name implies, is used to clean up the
+software's build directory tree.  RPM will normally do this for you, but in
+certain cases (most notably in those packages that use a build root) you'll
+need to include a <tt?>%clean</tt?> script.  The commands in the script can
+be any valid <tt?>sh</tt?> commands.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%clean
+</screen>
+</figure>
+See also: Section <xref linkend="inside-clean">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Install-/Erase-time Scripts</title>
+These scripts are executed whenever the package is installed or erased.
+Each script can consist of any valid <tt?>sh</tt?> commands.
+
+Note: Each of the following scripts can be made specific to a particular
+subpackage by adding the subpackage name, and optionally, the <tt?>-n</tt?>
+option:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%post bar
+
+%preun -n bar
+</screen>
+</figure>
+The subpackage name and usage of the <tt?>-n</tt?> option must match those
+defined with the <tt?>%package</tt?> directive.
+
+Each script has the following environment variable defined:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<tt?>RPM_INSTALL_PREFIX</tt?>
+
+</para>
+</listitem>
+
+</itemizedlist>
+For more information on this environment variable please see section
+<xref linkend="inside-install/erase"> on page <xref linkend="inside-install/erase">.
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%pre</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%pre</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>pre@<tt?>%pre</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%pre</tt?> script executes just before the package is to be
+installed.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%pre
+</screen>
+</figure>
+See also: Section <xref linkend="inside-pre">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%post</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%post</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>post@<tt?>%post</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%post</tt?> script executes just after the package is to be
+installed.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%post
+</screen>
+</figure>
+See also: Section <xref linkend="inside-post">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%preun</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%preun</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>preun@<tt?>%preun</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%preun</tt?> script executes just before the package is to be
+erased.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%preun
+</screen>
+</figure>
+See also: Section <xref linkend="inside-preun">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%postun</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%postun</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>postun@<tt?>%postun</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%postun</tt?> script executes just after the package is to be
+erased.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%postun
+</screen>
+</figure>
+See also: Section <xref linkend="inside-postun">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Verification Script</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%verifyscript</tt?> Script</title>
+<indexterm>
+<primary>spec file!scripts in!<tt?>%verifyscript</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>verifyscript@<tt?>%verifyscript</tt?> script</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%verifyscript</tt?> script executes whenever the package is
+verified using RPM's <tt?>-V</tt?> option.  The script can consist of any
+valid <tt?>sh</tt?> commands.
+
+See also: Section <xref linkend="inside-verifyscript">.
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>Macros</title>
+<sect2 id="s2-rpm-specref-">
+<title>The <tt?>\%setup</tt?> Macro</title>
+<indexterm>
+<primary>spec file!macros in!<tt?>%setup</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%setup</tt?> macro is used to unpack the original sources in
+preparation for the build.  It is used in the <tt?>%prep</tt?> script:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%prep
+%setup
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup">.
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-n <emphasis>&lt;name&gt;</tt?></emphasis> Option</title>
+<indexterm>
+<primary>spec file!macros in!<tt?>%setup</tt?>, options to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!options to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-n</tt?> option is used to set the name of the software's build
+directory.  This is necessary only when the source archive unpacks into a
+directory named other than <tt?>&lt;name&gt;-&lt;version&gt;</tt?>.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -n cd-player
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-n">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-c</tt?> Option</title>
+The <tt?>-c</tt?> option is used to direct <tt?>%setup</tt?> to create the
+top-level build directory before unpacking the sources.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -c
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-c">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-D</tt?> Option</title>
+The <tt?>-D</tt?> option is used to direct <tt?>%setup</tt?> to not delete the
+build directory prior to unpacking the sources.  This option is used when
+more than one source archive is to be unpacked into the build directory,
+normally with the <tt?>-b</tt?> or <tt?>-a</tt?> options.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -D -T -b 3
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-D">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-T</tt?> Option</title>
+The <tt?>-T</tt?> option is used to direct <tt?>%setup</tt?> to not perform
+the default unpacking of the source archive specified by the first
+<tt?>source</tt?> tag.  It is used with the <tt?>-a</tt?> or <tt?>-b</tt?>
+options.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -D -T -a 1
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-T">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-b &lt;<emphasis>n</tt?>&gt;</emphasis> Option</title>
+The <tt?>-b</tt?> option is used to direct <tt?>%setup</tt?> to unpack the
+source archive specified on the <emphasis>n</emphasis>th <tt?>source</tt?> tag line before
+changing directory into the build directory.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -D -T -b 2
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-b">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-a &lt;<emphasis>n</tt?>&gt;</emphasis> Option</title>
+The <tt?>-a</tt?> option is used to direct <tt?>%setup</tt?> to unpack the
+source archive specified on the <emphasis>n</emphasis>th <tt?>source</tt?> tag line after
+changing directory into the build directory.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%setup -D -T -a 5
+</screen>
+</figure>
+See also: Section <xref linkend="inside-setup-a">.
+
+<indexterm>
+<primary>spec file!macros in!<tt?>%setup</tt?>, options to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>setup@<tt?>%setup</tt?> macro!options to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>The <tt?>\%patch</tt?> Macro</title>
+<indexterm>
+<primary>spec file!macros in!<tt?>%patch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%patch</tt?> macro, as its name implies, is used to apply patches
+to the unpacked sources.  With no additional options specified, it will
+apply the patch file specified by the <tt?>patch</tt?> (or <tt?>patch0</tt?>)
+tag.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch
+</screen>
+</figure>
+When there is more than one <tt?>patch</tt?> tag line in a spec file, they
+can be specified by appending the number of the <tt?>patch</tt?> tag to the
+<tt?>%patch</tt?> macro name itself.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch2
+</screen>
+</figure>
+See also: Section <xref linkend="inside-patch-macro">.
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-P &lt;<emphasis>n</tt?>&gt;</emphasis> Option</title>
+<indexterm>
+<primary>spec file!macros in!<tt?>%patch</tt?>, options to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!options to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-P</tt?> option is another method of applying a specific patch.  The
+number from the <tt?>patch</tt?> tag follows the <tt?>-P</tt?> option.  The
+following <tt?>%patch</tt?> macros both apply the patch specified on the
+<tt?>patch2</tt?> tag line:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -P 2
+
+%patch2
+</screen>
+</figure>
+See also: Section <xref linkend="inside-patch-P">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-p&lt;<emphasis>#</tt?>&gt;</emphasis> Option</title>
+The <tt?>-p</tt?> option is sent directly to the <tt?>patch</tt?> command.  It
+is followed by a number which specifies the number of leading slashes (and
+the directories in between) to strip from any filenames present in the
+patch file.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -p2
+</screen>
+</figure>
+See also: Section <xref linkend="inside-patch-p">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>-b <emphasis>&lt;name&gt;</tt?></emphasis> Option</title>
+When the <tt?>patch</tt?> command is used to apply a patch, unmodified copies
+of the files patched are renamed to end with the extension <tt?>.orig</tt?>.
+The <tt?>-b</tt?> option is used to change the extension used by
+<tt?>patch</tt?>.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%patch -b .fsstnd
+</screen>
+</figure>
+See also: Section <xref linkend="inside-patch-b">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%patch -E</tt?> Option</title>
+The <tt?>-E</tt?> option is sent directly to the <tt?>patch</tt?> command.  It
+is used to direct <tt?>patch</tt?> to remove any empty files after the
+patches have been applied.
+
+See also: Section <xref linkend="inside-patch-E">.
+
+<indexterm>
+<primary>spec file!macros in!<tt?>%patch</tt?>, options to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>patch@<tt?>%patch</tt?> macro!options to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>The <tt?>\%files</tt?> List</title>
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%files</tt?> list indicates which files on the build system are to
+be packaged.  The list consists of one file per line.  If a directory is
+specified, by default all files and subdirectories will be packaged.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%files
+/etc/foo.conf
+/sbin/foo
+/usr/bin/foocmd
+</screen>
+</figure>
+The <tt?>%files</tt?> list can be made specific to a particular subpackage
+by adding the subpackage name, and optionally, the <tt?>-n</tt?> option:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%files bar
+
+%files -n bar
+</screen>
+</figure>
+The subpackage name and usage of the <tt?>-n</tt?> option must match those
+defined with the <tt?>%package</tt?> directive.
+
+The <tt?>%files</tt?> list can also use the contents of a file as the list
+of files to be packaged.  This is done by using the <tt?>-f</tt?> option,
+which is then followed by a filename:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%files -f files.list
+</screen>
+</figure>
+See also: Section <xref linkend="inside-files">.
+
+<indexterm>
+<primary>spec file!<tt?>%files</tt?> list in|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>Directives For the <tt?>\%files</tt?> list</title>
+<sect2 id="s2-rpm-specref-">
+<title>File-related Directives</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%doc</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%doc</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>doc@<tt?>%doc</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%doc</tt?> directive flags the filename(s) that follow as being
+documentation.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%doc README
+</screen>
+</figure>
+See also: Section <xref linkend="inside-doc">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%config</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%config</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>config@<tt?>%config</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%config</tt?> directive is used to flag the specified file as being
+a configuration file.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%config /etc/fstab
+</screen>
+</figure>
+See also: Section <xref linkend="inside-config">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%attr</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%attr</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>attr@<tt?>%attr</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%attr</tt?> directive is used to permit RPM to directly control a
+file's permissions and ownership.  It is normally used when non-root users
+build packages.  The <tt?>%attr</tt?> directive has the following format:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <emphasis>file</emphasis>
+</screen>
+</figure>
+The user and group identifiers must be non-numeric.  Attributes that do not
+need to be set by <tt?>%attr</tt?> may be replaced with a dash:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%attr(755, root, -) foo.bar
+</screen>
+</figure>
+See also: Section <xref linkend="inside-attr">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%verify</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%verify</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>verify@<tt?>%verify</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%verify</tt?> directive is used to control which of nine different
+file attributes are to be verified by RPM.  The attributes are:
+
+<orderedlist>
+<listitem>
+<para>
+<tt?>owner</tt?> --- The file's owner.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>group</tt?> --- The file's group.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>mode</tt?> --- The file's mode.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>md5</tt?> --- The file's MD5 checksum.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>size</tt?> --- The file's size.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>maj</tt?> --- The file's major number.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>min</tt?> --- The file's minor number.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>symlink</tt?> --- The file's symbolic link string.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>mtime</tt?> --- The file's modification time.
+
+</para>
+</listitem>
+
+</orderedlist>
+If the keyword <tt?>not</tt?> precedes the list, every attribute
+<emphasis>except</emphasis> those listed will be verified.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%verify(mode md5 size maj min symlink mtime) /dev/ttyS0
+</screen>
+</figure>
+See also: Section <xref linkend="inside-verify">.
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-specref-">
+<title>Directory-related Directives</title>
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%docdir</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%docdir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>docdir@<tt?>%docdir</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%docdir</tt?> directive is used to add the specified directory to
+RPM's internal list of directories containing documentation.  When a
+directory is added to this list, every file packaged in this directory (and
+any subdirectories) will automatically be marked as documentation.
+
+See also: Section <xref linkend="inside-docdir">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%dir</tt?> Directive</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%dir</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>dir@<tt?>%dir</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%dir</tt?> directive is used to direct RPM to package only the
+directory itself, regardless of what files may reside in the directory at
+the time the package is created.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%dir /usr/blather
+</screen>
+</figure>
+See also: Section <xref linkend="inside-dir">.
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>The <tt?>\%package</tt?> Directive</title>
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%package</tt?> directive is used to control the creation of
+subpackages.  The subpackage name is derived from the first <tt?>name</tt?>
+tag in the spec file, followed by the name specified after the
+<tt?>%package</tt?> directive.  Therefore, if the first <tt?>name</tt?> tag
+is:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+Name: foo
+</screen>
+</figure>
+and a subpackage is defined with the following <tt?>%package</tt?>
+directive:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%package bar
+</screen>
+</figure>
+the subpackage name will be <tt?>foo-bar</tt?>.
+
+See also: Section <xref linkend="inside-package">.
+
+<sect2 id="s2-rpm-specref-">
+<title>The <tt?>\%package -n</tt?> Option</title>
+<indexterm>
+<primary>spec file!directives in!<tt?>%package</tt?>, options to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>-n</tt?> option is used to change how RPM derives the subpackage
+name.  When the <tt?>-n</tt?> option is used, the name following the
+<tt?>%package</tt?> directive becomes the complete subpackage name.
+Therefore, if a subpackage is defined with the following <tt?>%package</tt?>
+directive:
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%package -n bar
+</screen>
+</figure>
+the subpackage name will be <tt?>bar</tt?>.
+
+See also: Section <xref linkend="inside-package-n">.
+
+<indexterm>
+<primary>spec file!directives in!<tt?>%package</tt?>, options to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>package@<tt?>%package</tt?> directive!<tt?>-n</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-specref-">
+<title>Conditionals</title>
+The <tt?>%if<emphasis>xxx</tt?></emphasis> conditionals are used to begin a section of the
+spec file that is specific to a particular architecture or operating
+system.  They are followed by one or more architecture or operating system
+specifiers, each separated by commas or whitespace.
+
+Conditionals may be nested within other conditionals, provided that the
+inner conditional is completely enclosed by the outer conditional.
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%ifarch</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%ifarch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifarch@<tt?>%ifarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If the build system's architecture is specified, the part of the spec file
+following the <tt?>%ifarch</tt?>, but before a <tt?>%else</tt?> or
+<tt?>%endif</tt?> will be used during the build.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386 sparc
+</screen>
+</figure>
+See also: Section <xref linkend="inside-ifarch">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%ifnarch</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%ifnarch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifnarch@<tt?>%ifnarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If the build system's architecture is specified, the part of the spec file
+following the <tt?>%ifarch</tt?> but before a <tt?>%else</tt?> or
+<tt?>%endif</tt?> will <emphasis>not</emphasis> be used during the build.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifnarch i386 sparc
+</screen>
+</figure>
+See also: Section <xref linkend="inside-ifnarch">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%ifos</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%ifos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifos@<tt?>%ifos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If the build system is running one of the specified operating systems, the
+part of the spec file following the <tt?>%ifos</tt?> but before a
+<tt?>%else</tt?> or <tt?>%endif</tt?> will be used during the build.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifos linux
+</screen>
+</figure>
+See also: Section <xref linkend="inside-ifos">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%ifnos</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%ifnos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifnos@<tt?>%ifnos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+If the build system is running one of the specified operating systems, the
+part of the spec file following the <tt?>%ifnos</tt?> but before a
+<tt?>%else</tt?> or <tt?>%endif</tt?> will <emphasis>not</emphasis> be used during the
+build.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifnos linux
+</screen>
+</figure>
+See also: Section <xref linkend="inside-ifnos">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%else</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%else</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>else@<tt?>%else</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%else</tt?> conditional is placed between a <tt?>%if</tt?>
+conditional of some persuasion, and an <tt?>%endif</tt?>.  It is used to
+create two blocks of spec file statements, only one of which will be used
+in any given case.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch alpha
+make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
+%else
+make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
+%endif
+</screen>
+</figure>
+See also: Section <xref linkend="inside-else">.
+
+</sect3>
+
+<sect3 id="s3-rpm-specref-">
+<title>The <tt?>\%endif</tt?> Conditional</title>
+<indexterm>
+<primary>spec file!conditionals in!<tt?>%endif</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>endif@<tt?>%endif</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+An <tt?>%endif</tt?> is used to end a conditional block of spec file
+statements.  The <tt?>%endif</tt?> is always needed after a conditional,
+otherwise, the build will fail.
+
+<figure id="sc-rpm-specref-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386
+make INTELFLAG=-DINTEL
+%endif
+</screen>
+</figure>
+See also: Section <xref linkend="inside-endif">.
+
+<indexterm>
+<primary>spec file!contents of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect1>
+
+</chapter>
+
