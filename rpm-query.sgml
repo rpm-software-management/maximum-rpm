@@ -2952,7 +2952,7 @@ setup-1.5-1 Tue Oct 15 17:23:21 1996
           so you can get back as much disk space as possible:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -qa --queryformat '%{name-%{version}-%{release} %{size}\n' | sort -nr +1</userinput>
+<prompt># </prompt><userinput>rpm -qa --queryformat '%{name}-%{version}-%{release} %{size}\n' | sort -nr +1</userinput>
 <computeroutput>
 kernel-source-2.0.18-5  20608472
 tetex-0.3.4-3  19757371
