@@ -9,6 +9,7 @@ ChangeLog
 Makefile
 Makefile.in
 autom4te*
+aclocal.m4
 config.cache
 config.guess
 config.h
