@@ -16,12 +16,14 @@
         <spanspec namest="option" nameend="description" spanname="span12">
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
+
           <row>
             <entry spanname="spanall" align="center">
               <command>rpm -V</command> or (<command>--verify</command>, or
               <command>-y</command>) <emphasis>options</emphasis>
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               Package Selection Options
@@ -30,6 +32,7 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <filename>pkg1</filename> &hellip; <filename>pkgN</filename>
@@ -41,30 +44,33 @@
               <xref linkend="s2-rpm-verify-package-label">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-p <userinput>&lt;file&gt;</userinput></command>
+              <command>-p <replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               Verify against package file
-              <command><userinput>&lt;file&gt;</userinput></command>
+              <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-verify-p-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-f <userinput>&lt;file&gt;</userinput></command>
+              <command>-f <replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               Verify package owning
-              <command><userinput>&lt;file&gt;</userinput></command>
+              <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-verify-f-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-a</command>
@@ -76,18 +82,20 @@
               <xref linkend="s2-rpm-verify-a-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-g <userinput>&lt;group&gt;</userinput></command>
+              <command>-g <replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
               Verify packages belonging to group
-              <command><userinput>&lt;group&gt;</userinput></command>
+              <command><replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-verify-g-option">
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               Verify---specific Options
@@ -96,6 +104,7 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--noscripts</command>
@@ -107,6 +116,7 @@
               <xref linkend="s2-rpm-verify-noscripts-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--nodeps</command>
@@ -118,6 +128,7 @@
               <xref linkend="s2-rpm-verify-nodeps-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--nofiles</command>
@@ -129,6 +140,7 @@
               <xref linkend="s2-rpm-verify-nofiles-option">
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               General Options
@@ -137,6 +149,7 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-v</command>
@@ -148,6 +161,7 @@
               <xref linkend="s2-rpm-verify-v-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-vv</command>
@@ -159,36 +173,39 @@
               <xref linkend="s2-rpm-verify-vv-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--root <userinput>&lt;path&gt;</userinput></command>
+              <command>--root <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate root to
-              <command><userinput>&lt;path&gt;</userinput></command>
+              <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-verify-root-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+              <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate rpmrc file to
-              <command><userinput>&lt;rcfile&gt;</userinput></command>
+              <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-verify-rcfile-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+              <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;path&gt;</userinput></command> to find
+              Use <command><replaceable>&lt;path&gt;</replaceable></command> to find
               the RPM database
             </entry>
             <entry>
@@ -202,6 +219,7 @@
     <sect1 id="s1-rpm-verify-what-it-does">
       <title><command>rpm -V</command> --- What Does it Do?</title>
       <!-- label: rpm-V -->
+
       <indexterm>
         <primary><command>rpm -V</command></primary>
         <secondary>what it does</secondary>
@@ -214,17 +232,20 @@
         know about?  Did you mistakenly start a recursive delete in
         <filename>/usr</filename> and now have to assess the damage?
       </para>
+
       <para>
         RPM can help.  It can alert you to changes made to any of the files
         installed by RPM.  Also, if a package requires capabilities provided by
         another package, it can make sure the other package is installed, too.
       </para>
+
       <para>
         The command <command>rpm -V</command> (The options <command>-y</command>
         and <command>--verify</command> are equivalent) verifies an installed
         package.  Before we see how this is done, let's take a step back and
         look at the big picture.
       </para>
+
       <para>
         Every time a package is installed, upgraded, or erased, the changes are
         logged in RPM's database.  It's necessary for RPM to keep track of this
@@ -240,17 +261,20 @@
           </para>
         </footnote>
       </para>
+
       <para>
         The RPM database reflects the configuration of the system on which it
         resides.  When RPM accesses the database to see how files should be
         manipulated during an install, upgrade, or erase, it is using the
         database as a mirror of the system's configuration.
       </para>
+
       <para>
         However, we can also use the system configuration as a mirror of the RPM
         database.  What does this "backward" view give us?  What purpose would
         be served?
       </para>
+
       <para>
         The purpose would be to see if the system configuration accurately
         reflects the contents of the RPM database.  If the system configuration
@@ -272,6 +296,7 @@
           </listitem>
         </orderedlist>
       </para>
+
       <para>
         While it would be foolish to state that an RPM database has
         <emphasis>never</emphasis> become corrupt, it is a sufficiently rare
@@ -281,6 +306,7 @@
 
       <sect2 id="s2-rpm-verify-what-does-it-verify">
         <title>What Does it Verify?</title>
+
         <indexterm>
           <primary><command>rpm -V</command></primary>
           <secondary>what it verifies</secondary>
@@ -295,6 +321,7 @@
           run a special verification script that can verify aspects of the
           package's installation that RPM cannot.
         </para>
+
         <para>
           Finally, every file installed by RPM is examined.  No less than
           <emphasis>nine</emphasis> different attributes of each file can be
@@ -356,6 +383,7 @@
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           Let's take a look at each of these attributes and why they are good
           things to check:
@@ -363,6 +391,7 @@
 
         <sect3 id="s3-rpm-verify-file-ownership">
           <title>File Ownership</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -387,6 +416,7 @@
 
         <sect3 id="s3-rpm-verify-file-group">
           <title>File Group</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -405,6 +435,7 @@
 
         <sect3 id="s3-rpm-verify-file-mode">
           <title>File Mode</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -425,6 +456,7 @@
 
         <sect3 id="s3-rpm-verify-md5-checksum">
           <title>MD5 Checksum</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -439,6 +471,7 @@
             <emphasis>Message Digest</emphasis>, which is a pretty accurate
             description of what it does.
           </para>
+
           <para>
             Unlike literary digests, an MD5 checksum conveys no information
             about the contents of the original file.  However, it possesses one
@@ -461,6 +494,7 @@
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             RPM creates MD5 checksums of all files it manipulates, and stores
             them in its database.  For all intents and purposes, if one of these
@@ -471,6 +505,7 @@
 
         <sect3 id="s3-rpm-verify-file-size">
           <title>File Size</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -486,6 +521,7 @@
 
         <sect3 id="s3-rpm-verify-major-number">
           <title>Major Number</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -505,6 +541,7 @@
 
         <sect3 id="s3-rpm-verify-minor-number">
           <title>Minor Number</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -521,6 +558,7 @@
 
         <sect3 id="s3-rpm-verify-symbolic-link">
           <title>Symbolic Link</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -535,6 +573,7 @@
 
         <sect3 id="s3-rpm-verify-modification-time">
           <title>Modification Time</title>
+
           <indexterm>
             <primary><command>rpm -V</command></primary>
             <secondary>attributes verified</secondary>
@@ -552,6 +591,7 @@
 
     <sect1 id="s1-rpm-verify-output">
       <title>When Verification Fails - <command>rpm -V</command> Output</title>
+
       <indexterm>
         <primary><command>rpm -V</command></primary>
         <secondary>output of</secondary>
@@ -565,10 +605,11 @@
 
         <screen width="60">
 <computeroutput>
-SM5DLUGT c <userinput>file</userinput>
+SM5DLUGT c <replaceable>&lt;file&gt;</replaceable>
 </computeroutput>
         </screen>
       </para>
+
       <para>
         Where:
 
@@ -640,13 +681,14 @@ SM5DLUGT c <userinput>file</userinput>
 
           <listitem>
             <para>
-              <command><computeroutput>file</computeroutput></command> is the
-              file that failed verification.  The complete path is listed to
-              make it easy to find.
+              <computeroutput><replaceable>&lt;file&gt;</replaceable></computeroutput>
+              is the file that failed verification.  The complete path is listed
+              to make it easy to find.
             </para>
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         It's unlikely that <emphasis>every</emphasis> file attribute will fail
         to verify, so each of the eight attribute flags will only appear if
@@ -659,6 +701,7 @@ SM5DLUGT c <userinput>file</userinput>
 </computeroutput>
         </screen>
       </para>
+
       <para>
         In this case, the mode, MD5 checksum, and modification time for the
         specified file have failed to verify.  The file is not a config file
@@ -671,6 +714,7 @@ S.5....T c /etc/passwd
 </computeroutput>
         </screen>
       </para>
+
       <para>
         Here, the size, checksum, and modification time of the system password
         file have all changed.  The "<computeroutput>c</computeroutput>"
@@ -682,12 +726,15 @@ missing    /var/spool/at/spool
 </computeroutput>
         </screen>
       </para>
+
       <para>
         This last example illustrates what RPM does when a file, that should be
         there, is missing entirely.
       </para>
+
       <sect2 id="s2-rpm-verify-verification-failure-messages">
         <title>Other Verification Failure Messages</title>
+
         <para>
           When <command>rpm -V</command> finds other problems, the output is a
           bit easier to understand:
@@ -700,11 +747,13 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           It's pretty easy to see that the <filename>blather</filename> package
           requires at least version 3.1 of the <filename>bother</filename>
           package.
         </para>
+
         <para>
           The output from a package's verification script is a bit harder to
           categorize, as the script's contents, as well as its messages, are
@@ -715,6 +764,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
 
     <sect1 id="s1-rpm-verify-what-to-verify">
       <title>Selecting What to Verify, and How</title>
+
       <indexterm>
         <primary><command>rpm -V</command></primary>
         <secondary>options</secondary>
@@ -733,6 +783,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           Database
         </title>
         <!-- label: verify-pkg-name -->
+
         <indexterm>
           <primary>package label</primary>
         </indexterm>
@@ -751,6 +802,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           While it looks like RPM didn't do anything, the following steps were
           performed:
@@ -779,6 +831,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           In our example, each of these steps was performed without error ---
           the package verified successfully.  Remember, with <command>rpm
@@ -792,6 +845,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           RPM Database
         </title>
         <!-- label: verify-a -->
+
         <indexterm>
           <primary><command>-a</command> option</primary>
         </indexterm>
@@ -815,6 +869,7 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Don't be too surprised if <command>rpm -Va</command> turns up a
           surprising number of files that failed verification.  RPM's
@@ -830,12 +885,13 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
 
       <sect2 id="s2-rpm-verify-f-option">
         <title>
-          <command>-f <userinput>&lt;file&gt;</userinput></command> --- Verify
-          the Package Owning
-          <command><userinput>&lt;file&gt;</userinput></command> Against the RPM
-          Database
+          <command>-f <replaceable>&lt;file&gt;</replaceable></command> ---
+          Verify the Package Owning
+          <command><replaceable>&lt;file&gt;</replaceable></command> Against the
+          RPM Database
         </title>
         <!-- label: verify-f -->
+
         <indexterm>
           <primary><command>-f</command> option</primary>
         </indexterm>
@@ -846,6 +902,7 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
           using RPM, you probably tried to find other files associated with that
           program and see if they had changed recently.
         </para>
+
         <para>
           Now you can let RPM do at least part of that sleuthing for you.
           Simply direct RPM to verify the package owning the ailing program:
@@ -860,6 +917,7 @@ S.5....T c /etc/sysconfig/pcmcia
 
           Hmmmm.  Looks like a config file was recently changed.
         </para>
+
         <para>
           This isn't to say that using RPM to verify a package will always get
           you out of trouble, but it's such a quick step it should be one of the
@@ -874,19 +932,21 @@ file /etc/blunder is not owned by any package
 <prompt>% </prompt>
           </screen>
         </para>
+
         <para>
           (Note that the issue surrounding RPM and symbolic links mentioned in
-          "A Tricky Detail" (<xref linkend="s4-rpm-query-tricky-detail">) also
-          applies to <command>rpm -Vf</command>.  Watch those symlinks!)
+          <xref linkend="s4-rpm-query-tricky-detail"> also applies to
+          <command>rpm -Vf</command>.  Watch those symlinks!)
         </para>
       </sect2>
 
       <sect2 id="s2-rpm-verify-p-option">
         <title>
-          <command>-p <userinput>&lt;file&gt;</userinput></command> --- Verify
+          <command>-p <replaceable>&lt;file&gt;</replaceable></command> --- Verify
           Against a Specific Package File
         </title>
         <!-- label: verify-p -->
+
         <indexterm>
           <primary><command>-p</command> option</primary>
         </indexterm>
@@ -898,6 +958,7 @@ file /etc/blunder is not owned by any package
           against a package file.  Why on earth would you want to do this when
           the RPM database is sitting there just waiting to be used?
         </para>
+
         <para>
           Well, what if you didn't <emphasis>have</emphasis> an RPM database?
           While it isn't a common occurrence, power failures, hardware problems,
@@ -905,6 +966,7 @@ file /etc/blunder is not owned by any package
           your system "sans database".  Then your system hiccups --- what do you
           do now?
         </para>
+
         <para>
           This is where a CD full of package files can be worth its weight in
           gold.  Simply mount the CD and verify to your heart's content:
@@ -914,6 +976,7 @@ file /etc/blunder is not owned by any package
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Whatever else might be wrong with this system, at least we can add new
           users.  But what if you have <emphasis>many</emphasis> packages to
@@ -924,11 +987,12 @@ file /etc/blunder is not owned by any package
 
       <sect2 id="s2-rpm-verify-g-option">
         <title>
-          <command>-g <userinput>&lt;group&gt;</userinput></command> --- Verify
-          Packages Belonging To
-          <command><userinput>&lt;group&gt;</userinput></command>
+          <command>-g <replaceable>&lt;group&gt;</replaceable></command> ---
+          Verify Packages Belonging To
+          <command><replaceable>&lt;group&gt;</replaceable></command>
         </title>
         <!-- label: verify-g -->
+
         <indexterm>
           <primary><command>-g</command> option</primary>
         </indexterm>
@@ -950,6 +1014,7 @@ missing    /etc/bashrc
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           One thing to keep in mind is that group specifications are
           case-sensitive.  Issuing the command <command>rpm -Vg shells</command>
@@ -971,6 +1036,7 @@ group shells does not contain any packages
           Verification
         </title>
         <!-- label: verify- -nodeps -->
+
         <indexterm>
           <primary><command>--nodeps</command> option</primary>
         </indexterm>
@@ -993,6 +1059,7 @@ D: dependencies: looking for libc.so.5
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As we can see, there are three different capabilities that the
           <command>rpm</command> package requires:
@@ -1017,6 +1084,7 @@ D: dependencies: looking for libc.so.5
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           If we add the <command>--nodeps</command> option, the dependency
           verification of the three capabilities is no longer performed:
@@ -1030,10 +1098,11 @@ D: verifying record number 2341208
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The line <computeroutput>D: verifying record number
-            2341208</computeroutput> indicates that RPM's normal file-based
-            verification proceeded normally.
+          2341208</computeroutput> indicates that RPM's normal file-based
+          verification proceeded normally.
         </para>
       </sect2>
 
@@ -1042,6 +1111,7 @@ D: verifying record number 2341208
           <command>--noscripts</command>: Do Not Execute Verification Script
         </title>
         <!-- label: verify- -noscripts -->
+
         <indexterm>
           <primary><command>--noscripts</command> option</primary>
         </indexterm>
@@ -1066,6 +1136,7 @@ This is the bother 3.5 verification script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           While the actual script is not very interesting, it did execute when
           the package was being verified.  In the next example, we'll use the
@@ -1080,6 +1151,7 @@ D: verifying record number 616728
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As expected, the output is identical to the prior example --- minus
           the lines dealing with the verification script, of course.
@@ -1092,6 +1164,7 @@ D: verifying record number 616728
           Attributes
         </title>
         <!-- label: verify- -nofiles -->
+
         <indexterm>
           <primary><command>--nofiles</command> option</primary>
         </indexterm>
@@ -1115,6 +1188,7 @@ missing    /etc/bashrc
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           When the <command>--nofiles</command> option is added, the missing
           file doesn't cause a message any more:
@@ -1130,6 +1204,7 @@ D: dependencies: looking for libtermcap.so.2
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           This is not to say that the missing file problem is solved, just that
           no file verification was performed.
@@ -1139,6 +1214,7 @@ D: dependencies: looking for libtermcap.so.2
       <sect2 id="s2-rpm-verify-v-option">
         <title><command>-v</command> --- Display Additional Information</title>
         <!-- label: verify-v -->
+
         <indexterm>
           <primary><command>-v</command> option</primary>
         </indexterm>
@@ -1153,6 +1229,7 @@ D: dependencies: looking for libtermcap.so.2
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Even if there are verification errors, adding <command>-v</command>
           won't change the output:
@@ -1166,6 +1243,7 @@ S.5....T   /usr/X11R6/bin/xapm
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The only time that the <command>-v</command> option
           <emphasis>will</emphasis> produce output is when the package being
@@ -1182,6 +1260,7 @@ S.5....T   /usr/X11R6/bin/xapm
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           But when <command>-v</command> is added, the script's
           non-error-related output is displayed:
@@ -1194,6 +1273,7 @@ This is the bother 3.5 verification script
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           If you're looking for more insight into RPM's inner workings, you'll
           have to try the next option:
@@ -1203,6 +1283,7 @@ This is the bother 3.5 verification script
       <sect2 id="s2-rpm-verify-vv-option">
         <title><command>-vv</command> --- Display Debugging Information</title>
         <!-- label: verify-vv -->
+
         <indexterm>
           <primary><command>-vv</command> option</primary>
         </indexterm>
@@ -1224,6 +1305,7 @@ D: dependencies: looking for libc.so.5
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The lines starting with <computeroutput>D:</computeroutput> have been
           added by using <command>-vv</command>.  We can see where the RPM
@@ -1231,6 +1313,7 @@ D: dependencies: looking for libc.so.5
           <filename>rpm-2.3-1</filename> package.  Following that is the list of
           dependencies that the <filename>rpm</filename> package requires.
         </para>
+
         <para>
           In the vast majority of cases, it will not be necessary to use
           <command>-vv</command>.  It is normally used by software engineers
@@ -1241,11 +1324,12 @@ D: dependencies: looking for libc.so.5
 
       <sect2 id="s2-rpm-verify-dbpath-option">
         <title>
-          <command>--dbpath <userinput>&lt;path&gt;</userinput></command>: Use
-          <command><userinput>&lt;path&gt;</userinput></command> To Find RPM
-          Database
+          <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>:
+          Use <command><replaceable>&lt;path&gt;</replaceable></command> To Find
+          RPM Database
         </title>
         <!-- label: verify- -dbpath -->
+
         <indexterm>
           <primary><command>--dbpath</command> option</primary>
         </indexterm>
@@ -1257,6 +1341,7 @@ D: dependencies: looking for libc.so.5
           <command>dbpath</command>.  By default, <command>dbpath</command> is
           set to <filename>/var/lib/rpm</filename>.
         </para>
+
         <para>
           Although the <command>dbpath</command> entry can be modified in the
           appropriate <filename>rpmrc</filename> file, the
@@ -1271,23 +1356,25 @@ D: dependencies: looking for libc.so.5
 
       <sect2 id="s2-rpm-verify-root-option">
         <title>
-          <command>--root <userinput>&lt;path&gt;</userinput></command>: Set
+          <command>--root <replaceable>&lt;path&gt;</replaceable></command>: Set
           Alternate Root to
-          <command><userinput>&lt;path&gt;</userinput></command>
+          <command><replaceable>&lt;path&gt;</replaceable></command>
         </title>
         <!-- label: verify- -root -->
+
         <indexterm>
           <primary><command>--root</command> option</primary>
         </indexterm>
 
         <para>
-          Adding <command>--root <userinput>&lt;path&gt;</userinput></command>
-          to a verify command forces RPM to assume that the directory specified
-          by <command><userinput>&lt;path&gt;</userinput></command> is actually
+          Adding <command>--root
+          <replaceable>&lt;path&gt;</replaceable></command> to a verify command
+          forces RPM to assume that the directory specified by
+          <command><replaceable>&lt;path&gt;</replaceable></command> is actually
           the "root" directory.  In addition, RPM expects its database to reside
           in the directory specified by the <command>dbpath</command>
           <filename>rpmrc</filename> file entry, relative to
-          <command><userinput>&lt;path&gt;</userinput></command>.
+          <command><replaceable>&lt;path&gt;</replaceable></command>.
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
@@ -1295,6 +1382,7 @@ D: dependencies: looking for libc.so.5
             </para>
           </footnote>
         </para>
+
         <para>
           Normally this option is only used during an initial system install, or
           when a system has been booted off a "rescue disk", and some packages
@@ -1303,12 +1391,13 @@ D: dependencies: looking for libc.so.5
       </sect2>
 
       <sect2 id="s2-rpm-verify-rcfile-option">
-        <title><command>--rcfile
-        <userinput>&lt;rcfile&gt;</userinput></command>: Set Alternate
-        <filename>rpmrc</filename> file to
-        <command><userinput>&lt;rcfile&gt;</userinput></command>
+        <title>
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>:
+          Set Alternate <filename>rpmrc</filename> file to
+          <command><replaceable>&lt;rcfile&gt;</replaceable></command>
         </title>
         <!-- label: verify- -rcfile -->
+
         <indexterm>
           <primary><command>--rcfile</command> option</primary>
         </indexterm>
@@ -1320,6 +1409,7 @@ D: dependencies: looking for libc.so.5
           file named <filename>.rpmrc</filename>, located in your login
           directory.
         </para>
+
         <para>
           This option would be used if there was a need to switch between
           several sets of RPM options.  Software developer and package builders
@@ -1332,6 +1422,7 @@ D: dependencies: looking for libc.so.5
 
     <sect1 id="s1-rpm-verify-we-lied">
       <title>We've Lied to You&hellip;</title>
+
       <indexterm>
         <primary><command>rpm -V</command></primary>
         <secondary>verification, control of</secondary>
@@ -1344,6 +1435,7 @@ D: dependencies: looking for libc.so.5
 
       <sect2 id="s2-rpm-verify-verification-control">
         <title>RPM Controls What Gets Verified</title>
+
         <para>
           Depending on the type of file being verified, RPM will not verify
           every possible attribute.  Here is a table showing the attributes
@@ -1385,6 +1477,7 @@ D: dependencies: looking for libc.so.5
                     Modification Time
                   </entry>
                 </row>
+
                 <row>
                   <entry>
                     Directory File
@@ -1417,6 +1510,7 @@ D: dependencies: looking for libc.so.5
                     -
                   </entry>
                 </row>
+
                 <row>
                   <entry>
                     Symbolic Links
@@ -1449,6 +1543,7 @@ D: dependencies: looking for libc.so.5
                     -
                   </entry>
                 </row>
+
                 <row>
                   <entry>
                     FIFO
@@ -1481,6 +1576,7 @@ D: dependencies: looking for libc.so.5
                     -
                   </entry>
                 </row>
+
                 <row>
                   <entry>
                     Devices
@@ -1513,6 +1609,7 @@ D: dependencies: looking for libc.so.5
                     -
                   </entry>
                 </row>
+
                 <row>
                   <entry>
                     Regular Files
@@ -1552,12 +1649,14 @@ D: dependencies: looking for libc.so.5
 
         <sect3 id="s3-rpm-verify-package-builder-control">
           <title>The Package Builder Can Also Control What Gets Verified</title>
+
           <para>
             When a package builder creates a new package, they can control what
             attributes are to be verified on a file-by-file basis.  The reasons
             for excluding specific attributes from verification can be quite
             involved, but here's an example just to give you the flavor:
           </para>
+
           <para>
             When a person logs into a system, there are device files associated
             with that user's terminal session.  In order for the terminal device

@@ -1,448 +1,449 @@
-
-<indexterm>
-<primary>options, command</primary>
-<see>the option itself</see>
-</indexterm>
-
-<indexterm>
-<primary>command options</primary>
-<see>the option itself</see>
-</indexterm>
-
-<indexterm>
-<primary>architecture</primary>
-<see>RPM, philosophy behind, multi-architecture</see>
-</indexterm>
-
-<indexterm>
-<primary>architecture</primary>
-<see>multi-platform package building</see>
-</indexterm>
-
-<indexterm>
-<primary>directives</primary>
-<see>the directive itself</see>
-</indexterm>
-
-<indexterm>
-<primary>directives</primary>
-<see>spec file</see>
-</indexterm>
-
-<indexterm>
-<primary>tags, <command>--queryformat</command></primary>
-<see><command>--queryformat</command> option, tags for</see>
-</indexterm>
-
-<indexterm>
-<primary>tags, dependency-related</primary>
-<see>dependencies</see>
-</indexterm>
-
-<indexterm>
-<primary>scripts</primary>
-<see>RPM, spec file, scripts</see>
-</indexterm>
-
-<indexterm>
-<primary>scripts</primary>
-<see>the script itself</see>
-</indexterm>
-
-<indexterm>
-<primary>area, build</primary>
-<see>build area</see>
-</indexterm>
-
-<indexterm>
-<primary>root, build</primary>
-<see>build roots</see>
-</indexterm>
-
-<indexterm>
-<primary>configuration files</primary>
-<see>config files</see>
-</indexterm>
-
-<indexterm>
-<primary>files, configuration</primary>
-<see>config files</see>
-</indexterm>
-
-<indexterm>
-<primary>adding dependencies</primary>
-<see>dependencies, adding</see>
-</indexterm>
-
-<indexterm>
-<primary>automatic dependencies</primary>
-<see>dependencies, automatic</see>
-</indexterm>
-
-<indexterm>
-<primary>conditionals</primary>
-<see>the conditional itself</see>
-</indexterm>
-
-<indexterm>
-<primary>conditionals</primary>
-<see>platform-dependent, conditionals</see>
-</indexterm>
-
-<indexterm>
-<primary>conditionals</primary>
-<see>spec file, conditionals in</see>
-</indexterm>
-
-<indexterm>
-<primary>serial numbers</primary>
-<see>dependencies, serial numbers, using</see>
-</indexterm>
-
-<indexterm>
-<primary>numbers, serial</primary>
-<see>dependencies, serial numbers, using</see>
-</indexterm>
-
-<indexterm>
-<primary>serial numbers</primary>
-<see>spec file, tags in, <command>serial</command></see>
-</indexterm>
-
-<indexterm>
-<primary>numbers, serial</primary>
-<see>spec file, tags in, <command>serial</command></see>
-</indexterm>
-
-<indexterm>
-<primary>package</primary>
-<secondary>virtual</secondary>
-<see>dependencies, virtual packages</see>
-</indexterm>
-
-<indexterm>
-<primary>virtual packages</primary>
-<see>dependencies, virtual packages</see>
-</indexterm>
-
-<indexterm>
-<primary>Marc Ewing</primary>
-<see>Ewing, Marc</see>
-</indexterm>
-
-<indexterm>
-<primary>Rik Faith</primary>
-<see>Faith Rik</see>
-</indexterm>
-
-<indexterm>
-<primary>file attributes verified</primary>
-<see><command>rpm -V</command>, attributes verified</see>
-</indexterm>
-
-<indexterm>
-<primary>attributes, file</primary>
-<see>file attributes, specifying</see>
-</indexterm>
-
-<indexterm>
-<primary>attributes, file</primary>
-<see>file attributes verified</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM file format</primary>
-<see>format, RPM file</see>
-</indexterm>
-
-<indexterm>
-<primary>package file format</primary>
-<see>format, RPM file</see>
-</indexterm>
-
-<indexterm>
-<primary>format, package file</primary>
-<see>format, RPM file</see>
-</indexterm>
-
-<indexterm>
-<primary>archive</primary>
-<see>format, RPM file, parts of, archive</see>
-</indexterm>
-
-<indexterm>
-<primary>recursion</primary>
-<see>recursion</see>
-</indexterm>
-
-<indexterm>
-<primary>header</primary>
-<see>format, RPM file, parts of, header</see>
-</indexterm>
-
-<indexterm>
-<primary>lead</primary>
-<see>format, RPM file, parts of, lead</see>
-</indexterm>
-
-<indexterm>
-<primary>signature</primary>
-<see>format, RPM file, parts of, signature</see>
-</indexterm>
-
-<indexterm>
-<primary>signature</primary>
-<see>PGP, signatures</see>
-</indexterm>
-
-<indexterm>
-<primary>signature</primary>
-<see>RPM, command reference, add signature mode</see>
-</indexterm>
-
-<indexterm>
-<primary>signature</primary>
-<see>RPM, command reference, check signature mode</see>
-</indexterm>
-
-<indexterm>
-<primary>GNU General Public License</primary>
-<see>GPL</see>
-</indexterm>
-
-<indexterm>
-<primary>General Public License</primary>
-<see>GPL</see>
-</indexterm>
-
-<indexterm>
-<primary>Doug Hoffman</primary>
-<see>Hoffman, Doug</see>
-</indexterm>
-
-<indexterm>
-<primary>package-wide information</primary>
-<see>information, package-wide</see>
-</indexterm>
-
-<indexterm>
-<primary>per-file information</primary>
-<see>information, per-file</see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>installing</secondary>
-<see><command>rpm -i</command></see>
-</indexterm>
-
-<indexterm>
-<primary>installing packages</primary>
-<see><command>rpm -i</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>erasing</secondary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>erasing packages</primary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>uninstalling</secondary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>uninstalling packages</primary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>removing</secondary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>removing packages</primary>
-<see><command>rpm -e</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>upgrading</secondary>
-<see><command>rpm -U</command></see>
-</indexterm>
-
-<indexterm>
-<primary>upgrading packages</primary>
-<see><command>rpm -U</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>querying</secondary>
-<see><command>rpm -q</command></see>
-</indexterm>
-
-<indexterm>
-<primary>querying packages</primary>
-<see><command>rpm -q</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>getting information about</secondary>
-<see><command>rpm -q</command></see>
-</indexterm>
-
-<indexterm>
-<primary>querying packages</primary>
-<see><command>rpm -q</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>verifying installed</secondary>
-<see><command>rpm -V</command></see>
-</indexterm>
-
-<indexterm>
-<primary>verifying installed packages</primary>
-<see><command>rpm -V</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>files, verifying</secondary>
-<see><command>rpm -K</command></see>
-</indexterm>
-
-<indexterm>
-<primary>verifying package files</primary>
-<see><command>rpm -K</command></see>
-</indexterm>
-
-<indexterm>
-<primary>packages</primary>
-<secondary>building</secondary>
-<see><command>rpm -b</command></see>
-</indexterm>
-
-<indexterm>
-<primary>building packages</primary>
-<see><command>rpm -b</command></see>
-</indexterm>
-
-<indexterm>
-<primary>examples building packages</primary>
-<see>package building</see>
-</indexterm>
-
-<indexterm>
-<primary>label, package</primary>
-<see>package label</see>
-</indexterm>
-
-<indexterm>
-<primary>Pretty Good Privacy</primary>
-<see>PGP</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM database, rebuilding</primary>
-<see>RPM, command reference, rebuild database mode</see>
-</indexterm>
-
-<indexterm>
-<primary>database, rebuilding RPM</primary>
-<see>RPM, command reference, rebuild database mode</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM database, rebuilding</primary>
-<see><command>--rebuilddb</command> option</see>
-</indexterm>
-
-<indexterm>
-<primary>database, rebuilding RPM</primary>
-<see><command>--rebuilddb</command> option</see>
-</indexterm>
-
-<indexterm>
-<primary>package</primary>
-<secondary>relocatable</secondary>
-<see>relocatable packages</see>
-</indexterm>
-
-<indexterm>
-<primary>PM</primary>
-<see>RPM, ancestors of, PM</see>
-</indexterm>
-
-<indexterm>
-<primary>PMS</primary>
-<see>RPM, ancestors of, PMS</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM version 1</primary>
-<see>RPM, ancestors of, RPM version 1</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM version 2</primary>
-<see>RPM, ancestors of, RPM version 2</see>
-</indexterm>
-
-<indexterm>
-<primary>RPP</primary>
-<see>RPM, ancestors of, RPP</see>
-</indexterm>
-
-<indexterm>
-<primary>RPM</primary>
-<secondary>library functions</secondary>
-<see>rpmlib</see>
-</indexterm>
-
-<indexterm>
-<primary>library functions, RPM</primary>
-<see>rpmlib</see>
-</indexterm>
-
-<indexterm>
-<primary>environment variables</primary>
-<see>scripts, build-time, environment variables in</see>
-</indexterm>
-
-<indexterm>
-<primary>variables, environment</primary>
-<see>scripts, build-time, environment variables in</see>
-</indexterm>
-
-<indexterm>
-<primary>environment variables</primary>
-<see>scripts, install/erase-time, environment variables in</see>
-</indexterm>
-
-<indexterm>
-<primary>variables, environment</primary>
-<see>scripts, install/erase-time, environment variables in</see>
-</indexterm>
-
-<indexterm>
-<primary>arguments</primary>
-<see>scripts, install/erase-time, arguments in</see>
-</indexterm>
-
-<indexterm>
-<primary>file, spec</primary>
-<see>spec file</see>
-</indexterm>
+<!-- This file contains cross-reference information used to flesh out the index -->
+
+  <indexterm>
+    <primary>options, command</primary>
+    <see>the option itself</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>command options</primary>
+    <see>the option itself</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>architecture</primary>
+    <see>RPM, philosophy behind, multi-architecture</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>architecture</primary>
+    <see>multi-platform package building</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>directives</primary>
+    <see>the directive itself</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>directives</primary>
+    <see>spec file</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>tags, <command>--queryformat</command></primary>
+    <see><command>--queryformat</command> option, tags for</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>tags, dependency-related</primary>
+    <see>dependencies</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>scripts</primary>
+    <see>RPM, spec file, scripts</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>scripts</primary>
+    <see>the script itself</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>area, build</primary>
+    <see>build area</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>root, build</primary>
+    <see>build roots</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>configuration files</primary>
+    <see>config files</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>files, configuration</primary>
+    <see>config files</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>adding dependencies</primary>
+    <see>dependencies, adding</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>automatic dependencies</primary>
+    <see>dependencies, automatic</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>conditionals</primary>
+    <see>the conditional itself</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>conditionals</primary>
+    <see>platform-dependent, conditionals</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>conditionals</primary>
+    <see>spec file, conditionals in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>serial numbers</primary>
+    <see>dependencies, serial numbers, using</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>numbers, serial</primary>
+    <see>dependencies, serial numbers, using</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>serial numbers</primary>
+    <see>spec file, tags in, <command>serial</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>numbers, serial</primary>
+    <see>spec file, tags in, <command>serial</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>package</primary>
+    <secondary>virtual</secondary>
+    <see>dependencies, virtual packages</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>virtual packages</primary>
+    <see>dependencies, virtual packages</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>Marc Ewing</primary>
+    <see>Ewing, Marc</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>Rik Faith</primary>
+    <see>Faith Rik</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>file attributes verified</primary>
+    <see><command>rpm -V</command>, attributes verified</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>attributes, file</primary>
+    <see>file attributes, specifying</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>attributes, file</primary>
+    <see>file attributes verified</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM file format</primary>
+    <see>format, RPM file</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>package file format</primary>
+    <see>format, RPM file</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>format, package file</primary>
+    <see>format, RPM file</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>archive</primary>
+    <see>format, RPM file, parts of, archive</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>recursion</primary>
+    <see>recursion</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>header</primary>
+    <see>format, RPM file, parts of, header</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>lead</primary>
+    <see>format, RPM file, parts of, lead</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>signature</primary>
+    <see>format, RPM file, parts of, signature</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>signature</primary>
+    <see>PGP, signatures</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>signature</primary>
+    <see>RPM, command reference, add signature mode</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>signature</primary>
+    <see>RPM, command reference, check signature mode</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>GNU General Public License</primary>
+    <see>GPL</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>General Public License</primary>
+    <see>GPL</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>Doug Hoffman</primary>
+    <see>Hoffman, Doug</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>package-wide information</primary>
+    <see>information, package-wide</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>per-file information</primary>
+    <see>information, per-file</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>installing</secondary>
+    <see><command>rpm -i</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>installing packages</primary>
+    <see><command>rpm -i</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>erasing</secondary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>erasing packages</primary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>uninstalling</secondary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>uninstalling packages</primary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>removing</secondary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>removing packages</primary>
+    <see><command>rpm -e</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>upgrading</secondary>
+    <see><command>rpm -U</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>upgrading packages</primary>
+    <see><command>rpm -U</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>querying</secondary>
+    <see><command>rpm -q</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>querying packages</primary>
+    <see><command>rpm -q</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>getting information about</secondary>
+    <see><command>rpm -q</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>querying packages</primary>
+    <see><command>rpm -q</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>verifying installed</secondary>
+    <see><command>rpm -V</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>verifying installed packages</primary>
+    <see><command>rpm -V</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>files, verifying</secondary>
+    <see><command>rpm -K</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>verifying package files</primary>
+    <see><command>rpm -K</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>packages</primary>
+    <secondary>building</secondary>
+    <see><command>rpm -b</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>building packages</primary>
+    <see><command>rpm -b</command></see>
+  </indexterm>
+
+  <indexterm>
+    <primary>examples building packages</primary>
+    <see>package building</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>label, package</primary>
+    <see>package label</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>Pretty Good Privacy</primary>
+    <see>PGP</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM database, rebuilding</primary>
+    <see>RPM, command reference, rebuild database mode</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>database, rebuilding RPM</primary>
+    <see>RPM, command reference, rebuild database mode</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM database, rebuilding</primary>
+    <see><command>--rebuilddb</command> option</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>database, rebuilding RPM</primary>
+    <see><command>--rebuilddb</command> option</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>package</primary>
+    <secondary>relocatable</secondary>
+    <see>relocatable packages</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>PM</primary>
+    <see>RPM, ancestors of, PM</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>PMS</primary>
+    <see>RPM, ancestors of, PMS</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM version 1</primary>
+    <see>RPM, ancestors of, RPM version 1</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM version 2</primary>
+    <see>RPM, ancestors of, RPM version 2</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPP</primary>
+    <see>RPM, ancestors of, RPP</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>RPM</primary>
+    <secondary>library functions</secondary>
+    <see>rpmlib</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>library functions, RPM</primary>
+    <see>rpmlib</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>environment variables</primary>
+    <see>scripts, build-time, environment variables in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>variables, environment</primary>
+    <see>scripts, build-time, environment variables in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>environment variables</primary>
+    <see>scripts, install/erase-time, environment variables in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>variables, environment</primary>
+    <see>scripts, install/erase-time, environment variables in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>arguments</primary>
+    <see>scripts, install/erase-time, arguments in</see>
+  </indexterm>
+
+  <indexterm>
+    <primary>file, spec</primary>
+    <see>spec file</see>
+  </indexterm>
