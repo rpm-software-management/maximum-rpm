@@ -127,8 +127,8 @@ BuildRoot: <replaceable>&lt;root&gt;</replaceable>
           <para>
             Keep in mind that the build root can be overridden at build-time
             using the <command>--buildroot</command> option or the
-            <command>buildroot</command> <filename>rpmrc</filename> file entry.
-            See <xref linkend="ch-rpm-b-command"> for more details.
+            <command>buildroot</command> <filename>rpmmacros</filename> file
+            entry.  See <xref linkend="ch-rpm-b-command"> for more details.
           </para>
         </footnote>
         If, for example, you specify a build root of
@@ -367,7 +367,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
             <listitem>
               <para>
                 The value of <command>buildroot</command> in an
-                <filename>rpmrc</filename> file.
+                <filename>rpmmacros</filename> file.
               </para>
             </listitem>
 
@@ -551,13 +551,13 @@ rm -rf $RPM_BUILD_ROOT
         <para>
           All that's required to get RPM to start using the new build area is to
           define an alternate value for <command>topdir</command> in an
-          <filename>rpmrc</filename> file.  For the non-root user, this means
-          putting the following line in a file called
-          <filename>.rpmrc</filename>, located in your home directory:
+          <filename>rpmmacros</filename> file.  For the non-root user, this
+          means putting the following line in a file called
+          <filename>.rpmmacros</filename>, located in your home directory:
 
           <screen width="60">
 <computeroutput>
-topdir: <replaceable>&lt;path&gt;</replaceable>
+%_topdir <replaceable>&lt;path&gt;</replaceable>
 </computeroutput>
           </screen>
         </para>
@@ -570,7 +570,7 @@ topdir: <replaceable>&lt;path&gt;</replaceable>
 
           <screen width="60">
 <computeroutput>
-topdir: /home/ed/mybuild
+%_topdir /home/ed/mybuild
 </computeroutput>
           </screen>
         </para>
