@@ -452,7 +452,7 @@ Summary: The baz library
             warning:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba foo-2.7.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba foo-2.7.spec</userinput>
 <computeroutput>
 * Package: foo
 * Package: foo-server
@@ -1095,7 +1095,7 @@ echo "This is the bazlib subpackage preinstall script"
         not that much different from a single-package spec file:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba foo-2.7.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba foo-2.7.spec</userinput>
 <computeroutput>
 * Package: foo
 * Package: foo-server

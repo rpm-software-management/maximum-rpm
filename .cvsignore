@@ -18,6 +18,7 @@ config.sub
 configure
 manpage.*
 rpm.8
+rpmbuild.8
 stamp-h
 stamp-h.in
 maximum-rpm.spec

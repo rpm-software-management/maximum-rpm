@@ -269,7 +269,7 @@ Prefix: /opt
           will fail:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -493,7 +493,7 @@ Name: cdplayer
         try a build:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -537,7 +537,7 @@ Build failed.
         list and try again:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 + umask 022

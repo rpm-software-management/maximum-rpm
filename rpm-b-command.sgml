@@ -1,13 +1,13 @@
   <chapter id="ch-rpm-b-command">
-    <title><command>rpm -b</command> Command Reference</title>
+    <title>&rpmb; Command Reference</title>
     <!-- label: rpm-b-command -->
 
     <indexterm>
-      <primary><command>rpm -b</command></primary>
+      <primary>&rpmb;</primary>
     </indexterm>
 
     <table id="tb-rpm-b-command-">
-      <title><command>rpm -b</command> Command Syntax</title>
+      <title>&rpmb; Command Syntax</title>
       <tgroup cols="3">
         <colspec colnum="1" colname="option">
         <colspec colnum="2" colname="description">
@@ -18,7 +18,7 @@
         <tbody>
           <row>
             <entry spanname="spanall" align="center">
-              <command>rpm -b<replaceable>&lt;stage&gt;</replaceable>
+              &rpmb; <command>-b<replaceable>&lt;stage&gt;</replaceable>
                 <replaceable>options</replaceable> <filename>file1.spec</filename>
               &hellip; <filename>fileN.spec</filename></command>
             </entry>
@@ -265,9 +265,9 @@
 
 
     <sect1 id="s1-rpm-b-command-what-it-does">
-      <title><command>rpm -b</command> &mdash; What Does it Do?</title>
+      <title>&rpmb; &mdash; What Does it Do?</title>
       <indexterm>
-        <primary><command>rpm -b</command></primary>
+        <primary>&rpmb;</primary>
         <secondary>what it does</secondary>
       </indexterm>
 
@@ -280,7 +280,7 @@
       </para>
       <para>
         An RPM build command must have two additional pieces of information,
-        over and above "<command>rpm -b</command>":
+        over and above "&rpmb;":
 
         <orderedlist>
           <listitem>
@@ -305,7 +305,7 @@
 
       <para>
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
         </indexterm>
         There are a number of stages that RPM goes through during a build.  By
@@ -317,17 +317,17 @@
 
       <sect2 id="s2-rpm-b-command-bp-option">
         <title>
-          <command>rpm -bp</command> &mdash; Execute <command>%prep</command>
+          &rpmb; <command>-bp</command> &mdash; Execute <command>%prep</command>
           </title>
         <!-- label: build-bp -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>p</command></tertiary>
         </indexterm>
 
         <para>
-          The command <command>rpm -bp</command> directs RPM to execute the very
+          The command &rpmb; <command>-bp</command> directs RPM to execute the very
           first step in the build process.  In the spec file, this step is
           labeled <command>%prep</command>.  Every command in the
           <command>%prep</command> section will be executed when the
@@ -351,7 +351,7 @@
           <command>%setup</command> does:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bp cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bp cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -447,12 +447,12 @@ total 216
 
       <sect2 id="s2-rpm-b-command-bc-option">
         <title>
-          <command>rpm -bc</command> &mdash; Execute <command>%prep</command>,
+          &rpmb; <command>-bc</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>
         </title>
         <!-- label: build-bc -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>c</command></tertiary>
         </indexterm>
@@ -466,7 +466,7 @@ total 216
           but keep in mind that it is executed nonetheless:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bc cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bc cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -526,12 +526,12 @@ make
 
       <sect2 id="s2-rpm-b-command-bi-option">
         <title>
-          <command>rpm -bi</command> &mdash; Execute <command>%prep</command>,
+          &rpmb; <command>-bi</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>
         </title>
         <!-- label: build-bi -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>i</command></tertiary>
         </indexterm>
@@ -543,7 +543,7 @@ make
           <command>-bi</command> option looks like:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bi cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bi cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -629,19 +629,19 @@ make install
 
       <sect2 id="s2-rpm-b-command-bb-option">
         <title>
-          <command>rpm -bb</command> &mdash; Execute <command>%prep</command>,
+          &rpmb; <command>-bb</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>, package
           (bin)
         </title>
         <!-- label: build-bb -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>b</command></tertiary>
         </indexterm>
 
         <screen width="60">
-<prompt># </prompt><command>rpm -bb cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bb cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -700,13 +700,13 @@ Executing: %clean
 
       <sect2 id="s2-rpm-b-command-ba-option">
         <title>
-          <command>rpm -ba</command> &mdash; Execute <command>%prep</command>,
+          &rpmb; <command>-ba</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>, package
           (bin, src)
         </title>
         <!-- label: build-ba -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>a</command></tertiary>
         </indexterm>
@@ -758,7 +758,7 @@ Executing: %clean
           That's quite a bit of work for one command!  Here it is, in action:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -811,11 +811,11 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 
       <sect2 id="s2-rpm-b-command-bl-option">
         <title>
-          <command>rpm -bl</command> &mdash; Check <command>%files</command> list
+          &rpmb; <command>-bl</command> &mdash; Check <command>%files</command> list
         </title>
         <!-- label: build-bl -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>build stages of</secondary>
           <tertiary><command>l</command></tertiary>
         </indexterm>
@@ -825,7 +825,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           -b</command>, but unlike the others, which indicate the stage at which
           the build process is to stop, this option performs a variety of checks
           on the <command>%files</command> list in the named spec file.  When
-          <command>l</command> is added to <command>rpm -b</command>, the
+          <command>l</command> is added to &rpmb;, the
           following checks are performed:
 
           <itemizedlist mark="bullet">
@@ -890,7 +890,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           Here's an example of the <command>-bl</command> option in action:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bl cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 File List Check: cdplayer-1.0-1
@@ -905,7 +905,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
           add <command>-vv</command>, we can get a bit more information:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bl -vv cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl -vv cdplayer-1.0.spec</command>
 <computeroutput>
 D: Switched to BASE package
 D: Source(0) = sunsite.unc.edu:/pub/Linux/apps/sound/cds/cdplayer-1.0.tgz
@@ -982,7 +982,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
           file to the package's <command>%files</command> list:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bl cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 File List Check: cdplayer-1.0-1
@@ -1002,7 +1002,7 @@ Build failed.
           <command>%files</command> list and try again:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bl cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 File List Check: cdplayer-1.0-1
@@ -1019,7 +1019,7 @@ Build failed.
           again:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bi cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bi cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -1038,7 +1038,7 @@ Executing: special doc
 + exit 0
 </computeroutput>
 <prompt># </prompt>
-<prompt># </prompt><command>rpm -bl cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 File List Check: cdplayer-1.0-1
@@ -1063,7 +1063,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
         </title>
         <!-- label: build- -short-circuit -->
         <indexterm>
-          <primary><command>rpm -b</command></primary>
+          <primary>&rpmb;</primary>
           <secondary>options</secondary>
         </indexterm>
         <indexterm>
@@ -1100,7 +1100,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
 
             <listitem>
               <para>
-                Start a build with something like <command>rpm -bc</command>.
+                Start a build with something like &rpmb; <command>-bc</command>.
               </para>
             </listitem>
 
@@ -1153,7 +1153,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
 
             <listitem>
               <para>
-                Issue an <command>rpm -bp</command> to properly create the build
+                Issue an &rpmb; <command>-bp</command> to properly create the build
                 environment.
               </para>
             </listitem>
@@ -1164,7 +1164,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
           Here's an example:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bc --short-circuit cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bc --short-circuit cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -1214,8 +1214,8 @@ groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
           <command>-bi</command>.  Nothing else will do.
         </para>
         <para>
-          What exactly does an <command>rpm -bi --short-circuit</command> do,
-          anyway?  Like an <command>rpm -bc --short-circuit</command>, it starts
+          What exactly does an &rpmb; <command>-bi --short-circuit</command> do,
+          anyway?  Like an &rpmb; <command>-bc --short-circuit</command>, it starts
           executing at the named stage, which in this case is
           <command>%install</command>.  Note that the build environment must be
           ready to perform an install before attempting to
@@ -1229,7 +1229,7 @@ groff -Tascii -man cdp.1 | compress &gt;cdp.1.Z
           <command>--short-circuit</command> is attempted?  Let's see:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bi --short-circuit cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bi --short-circuit cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 + umask 022
@@ -1248,7 +1248,7 @@ Bad exit status
           but came to an abrupt halt when it attempted to change directory into
           <filename>cdplayer-1.0</filename>, which didn't exist.  After giving a
           descriptive error message, RPM exited with a failure status.  Except
-          for some minor differences, <command>rpm -bc</command> would have
+          for some minor differences, &rpmb; <command>-bc</command> would have
           failed in the same way.
         </para>
       </sect2>
@@ -1271,7 +1271,7 @@ Bad exit status
           architecture name.  Here's an example:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --buildarch i486 cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --buildarch i486 cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 &hellip;
@@ -1296,7 +1296,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           architecture:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -qp --queryformat '%{arch}\n' /usr/src/redhat/RPMS/i486/cdplayer-1.0-1.i486.rpm</command>
+<prompt># </prompt>&rpmq; <command>-qp --queryformat '%{arch}\n' /usr/src/redhat/RPMS/i486/cdplayer-1.0-1.i486.rpm</command>
 <computeroutput>
 i486
 </computeroutput>
@@ -1327,7 +1327,7 @@ i486
           desired operating system name.  Here's an example:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --buildos osf1 cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --buildos osf1 cdplayer-1.0.spec</command>
 <computeroutput>
 &hellip;
 Binary Packaging: cdplayer-1.0-1
@@ -1346,7 +1346,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           <command>--queryformat</command> will tell us:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -qp --queryformat '%{os}\n' /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</command>
+<prompt># </prompt>&rpmq; <command>-qp --queryformat '%{os}\n' /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</command>
 <computeroutput>
 osf1
 </computeroutput>
@@ -1376,7 +1376,7 @@ osf1
           PGP.  Here's an example of <command>--sign</command> in action:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --sign cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --sign cdplayer-1.0.spec</command>
 <computeroutput>
 Enter pass phrase: <userinput>passphrase</userinput> (not echoed)
 Pass phrase is good.
@@ -1408,11 +1408,11 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           if they are, in fact, signed:
 
           <screen width="60">
-<prompt># </prompt><command>rpm --checksig /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm</command>
+<prompt># </prompt>&rpmk; <command>--checksig /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm</command>
 <computeroutput>
 /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm: size pgp md5 OK
 </computeroutput>
-<prompt># </prompt><command>rpm --checksig /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</command>
+<prompt># </prompt>&rpmk; <command>--checksig /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm</command>
 <computeroutput>
 /usr/src/redhat/RPMS/i386/cdplayer-1.0-1.i386.rpm: size pgp md5 OK
 </computeroutput>
@@ -1450,7 +1450,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           works:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --test cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --test cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 </computeroutput>
@@ -1538,7 +1538,7 @@ chmod -R a+rX,g-w,o-w .
           example, if the above command was changed to:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bp --test cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bp --test cdplayer-1.0.spec</command>
 <prompt>#</prompt>
           </screen>
         </para>
@@ -1564,7 +1564,7 @@ chmod -R a+rX,g-w,o-w .
           much sense to do so:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bp --clean cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bp --clean cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -1676,7 +1676,7 @@ Executing: sweep
           see:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --buildroot /tmp/foo cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --buildroot /tmp/foo cdplayer-1.0.spec</command>
 <computeroutput>
 Package can not do build prefixes
 Build failed.
@@ -1692,7 +1692,7 @@ Build failed.
           been made, here is what the build would look like:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --buildroot /tmp/foonly cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --buildroot /tmp/foonly cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -1818,7 +1818,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
                 <para>
                   You decide to build the software so that it installs relative
                   to your system's root directory, so you enter the following
-                  command: "<command>rpm -ba --buildroot / foo.spec</command>".
+                  command: "&rpmb; <command>-ba --buildroot / foo.spec</command>".
                 </para>
               </listitem>
             </itemizedlist>
@@ -1860,7 +1860,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 
         <para>
           While it's possible to detect many errors in the
-          <command>%files</command> list using <command>rpm -bl</command>, there
+          <command>%files</command> list using &rpmb; <command>-bl</command>, there
           is another type of problem that can't be detected.  Consider the
           following scenario:
 
@@ -1909,7 +1909,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           options.  Here's an example using <command>-bl</command>:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bl --timecheck 3600 cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bl --timecheck 3600 cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 File List Check: cdplayer-1.0-1
@@ -1975,12 +1975,12 @@ timecheck: 3600
 
         <para>
           Unlike most other RPM commands, there is no <command>-v</command>
-          option for <command>rpm -b</command>.  That's because the command's
+          option for &rpmb;.  That's because the command's
           default is to be verbose.  However, even more information can be
           obtained by adding <command>-vv</command>.  Here's an example:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -bp -vv cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-bp -vv cdplayer-1.0.spec</command>
 <computeroutput>
 D: Switched to BASE package
 D: Source(0) = sunsite.unc.edu:/pub/Linux/apps/sound/cds/cdplayer-1.0.tgz
@@ -2045,7 +2045,7 @@ drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
           command's output:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba --quiet cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba --quiet cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 volume.c: In function `mix_set_volume':
@@ -2094,27 +2094,27 @@ volume.c:67: warning: implicit declaration of function `ioctl'
     <sect1 id="s1-rpm-b-command-other-build-commands">
       <title>Other Build-related Commands</title>
       <indexterm>
-        <primary><command>rpm -b</command></primary>
+        <primary>&rpmb;</primary>
         <secondary>related commands</secondary>
       </indexterm>
 
       <para>
         There are two other commands that also perform build-related functions.
-        However, they do not use the <command>rpm -b</command> command syntax
+        However, they do not use the &rpmb; command syntax
         that we've been studying so far.  Instead of specifying the name of the
-        spec file, as with <command>rpm -b</command>, it's necessary to specify
+        spec file, as with &rpmb;, it's necessary to specify
         the name of the source package file.
       </para>
       <para>
         Why the difference in syntax?  The reason has to do with the differing
-        functions of these commands.  Unlike <command>rpm -b</command>, where
+        functions of these commands.  Unlike &rpmb;, where
         the name of the game is to get software packaged into binary and source
         package files, these commands use an already-existing source package
         file as input.  Let's take a look at them:
       </para>
 
       <sect2 id="s2-rpm-b-command-recompile-option">
-        <title><command>rpm --recompile</command> &mdash; What Does it
+        <title>&rpmb; <command>--recompile</command> &mdash; What Does it
         Do?</title>
         <indexterm>
           <primary><command>--recompile</command> option</primary>
@@ -2158,7 +2158,7 @@ volume.c:67: warning: implicit declaration of function `ioctl'
         </para>
         <para>
           While you might think this sounds a great deal like an install of the
-          source package file, followed by an <command>rpm -bi</command>, this
+          source package file, followed by an &rpmb; <command>-bi</command>, this
           is not entirely the case.  Using <command>--recompile</command>, the
           only file required is the source package file.  After the software is
           built and installed, the only thing left, other than the newly
@@ -2174,7 +2174,7 @@ volume.c:67: warning: implicit declaration of function `ioctl'
           Here's what RPM displays during a <command>--recompile</command>:
 
           <screen width="60">
-<prompt># </prompt><command>rpm --recompile cdplayer-1.0-1.src.rpm</command>
+<prompt># </prompt>&rpmb; <command>--recompile cdplayer-1.0-1.src.rpm</command>
 <computeroutput>
 Installing cdplayer-1.0-1.src.rpm
 * Package: cdplayer
@@ -2206,7 +2206,7 @@ Executing: sweep
           specified.
         </para>
         <para>
-          Since <command>rpm -i</command> or <command>rpm -U</command> are not
+          Since &rpm; <command>-i</command> or &rpm; <command>-U</command> are not
           being used to install the software, the RPM database is not updated
           during a <command>--recompile</command>.  This means that doing a
           <command>--recompile</command> on an already-installed package may
@@ -2216,7 +2216,7 @@ Executing: sweep
       </sect2>
 
       <sect2 id="s2-rpm-b-command-rebuild-option">
-        <title><command>rpm --rebuild</command> &mdash; What Does it Do?</title>
+        <title>&rpmb; <command>--rebuild</command> &mdash; What Does it Do?</title>
         <indexterm>
           <primary><command>--rebuild</command> option</primary>
         </indexterm>
@@ -2302,7 +2302,7 @@ Executing: sweep
           action:
 
           <screen width="60">
-<prompt># </prompt><command>rpm --rebuild cdplayer-1.0-1.src.rpm</command>
+<prompt># </prompt>&rpmb; <command>--rebuild cdplayer-1.0-1.src.rpm</command>
 <computeroutput>
 Installing cdplayer-1.0-1.src.rpm
 * Package: cdplayer

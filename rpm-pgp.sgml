@@ -373,7 +373,7 @@ pgp_path: /root/.pgp
           Here's an example of <command>--sign</command> in action:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba --sign blather-7.9.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba --sign blather-7.9.spec</userinput>
             <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
@@ -452,7 +452,7 @@ blather-7.9-1.i386.rpm: size pgp md5 OK
             command.  Here's an example:
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba --sign b*.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba --sign b*.spec</userinput>
               <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 

@@ -686,7 +686,7 @@
       RPM's build mode is used to build packages:
     </para>
     <para>
-      Format: <command>rpm -b<replaceable>&lt;stage&gt;</replaceable>
+      Format: &rpmb; <command>-b<replaceable>&lt;stage&gt;</replaceable>
       <replaceable>&lt;options&gt;</replaceable>
       <replaceable>&lt;specfile&gt;</replaceable></command>
     </para>

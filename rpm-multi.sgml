@@ -692,7 +692,7 @@ ExcludeOS: Irix
           fail:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 Arch mismatch!
 cdplayer-1.0.spec doesn't build on this architecture

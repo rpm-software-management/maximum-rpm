@@ -703,10 +703,10 @@ make install
         </screen>
       </para>
       <para>
-        Next, we start the build with an <command>rpm -b</command> command:
+        Next, we start the build with an &rpmb; command:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
         </screen>
       </para>
       <para>

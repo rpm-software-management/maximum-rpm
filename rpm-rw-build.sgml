@@ -926,7 +926,7 @@ make install
           how things look:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-bp amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client
@@ -1040,7 +1040,7 @@ Patch: amanda-2.3.0-linux.patch
           option another try:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-bp amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client
@@ -1125,7 +1125,7 @@ total 58
           <command>%build</command> script completes:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -bc amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-bc amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client
@@ -1178,7 +1178,7 @@ make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
           install</command> command, so let's give it a shot:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -bi amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-bi amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client
@@ -1270,7 +1270,7 @@ Executing: special doc
         creation of the binary and source packages:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client
@@ -1662,7 +1662,7 @@ example
             lists for each subpackage.  Why don't we try that build again?
 
             <screen width="60">
-<prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
 * Package: amanda-client

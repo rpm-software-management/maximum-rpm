@@ -14,6 +14,7 @@ EXTRA_DIST = \
 	fix-index \
 	redhat-html.dsl \
 	rpm8.sgml \
+	rpmbuild8.sgml \
 	intro-to-rpm.sgml \
 	max-rpm.sgml \
 	pgp-intro.sgml \
@@ -31,6 +32,7 @@ EXTRA_DIST = \
 	rpm-inside.sgml \
 	rpm-install.sgml \
 	rpm-manpage.sgml \
+	rpmbuild-manpage.sgml \
 	rpm-miscellania.sgml \
 	rpm-multi.sgml \
 	rpm-pgp.sgml \
@@ -97,8 +99,11 @@ install-data-local:
 ChangeLog: stamp-h.in
 	rcs2log > $@
 
+rpm.texi: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
+	docbook2texi -d redhat-html.dsl rpm8.sgml > rpm.texi
+
 rpm.8: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
 	docbook2man -d redhat-html.dsl rpm8.sgml
 
-rpm.texi: redhat-html.dsl rpm8.sgml rpm-manpage.sgml
-	docbook2texi -d redhat-html.dsl rpm8.sgml > rpm.texi
+rpmbuild.8: redhat-html.dsl rpmbuild8.sgml rpmbuild-manpage.sgml
+	docbook2man -d redhat-html.dsl rpmbuild8.sgml

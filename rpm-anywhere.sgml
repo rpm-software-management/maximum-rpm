@@ -244,7 +244,7 @@ install: cdp cdp.1.Z
         Let's see how it works:
 
         <screen width="60">
-<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 Executing: %prep
@@ -425,7 +425,7 @@ rm -rf $RPM_BUILD_ROOT
           option to specify a dangerous build root, too:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba --buildroot / cdplayer-1.0.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba --buildroot / cdplayer-1.0.spec</userinput>
           </screen>
         </para>
         <para>
@@ -597,7 +597,7 @@ topdir: /home/ed/mybuild
 
           <screen width="60">
 <prompt>% </prompt><userinput>cd /home/ed/mybuild/SPECS</userinput>
-<prompt>% </prompt><userinput>rpm -ba --buildroot /home/ed/mybuildroot cdplayer-1.0.spec</userinput>
+<prompt>% </prompt>&rpmb; <userinput>-ba --buildroot /home/ed/mybuildroot cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
 + umask 022

@@ -215,7 +215,7 @@ total 3559
           <command>--quiet</command> option, this is all you'll see:
 
           <screen width="60">
-<prompt># </prompt><userinput>rpm -ba --quiet bother-3.5.spec</userinput>
+<prompt># </prompt>&rpmb; <userinput>-ba --quiet bother-3.5.spec</userinput>
 <computeroutput>
 * Package: bother
 1 block

@@ -221,7 +221,7 @@ Name: cdplayer
             RPM will remind you:
 
             <screen width="60">
-<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 <computeroutput>
 * Package: cdplayer
 Illegal '-' char in version: 1.0-a
@@ -1045,7 +1045,7 @@ ExcludeArch: sparc alpha
             be displayed, and the build will fail:
 
             <screen width="60">
-<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 <computeroutput>
 Arch mismatch!
 cdplayer-1.0.spec doesn't build on this architecture
@@ -1432,7 +1432,7 @@ Source1: bother-1.2.tar.gz
             then go about legally obtaining the PGP sources themselves, place
             them in RPM's <filename>SOURCES</filename> directory, and create a
             binary package.  They wouldn't even need to change the
-            <command>nosource</command> tag.  One <command>rpm -ba</command>
+            <command>nosource</command> tag.  One &rpmb; <command>-ba</command>
             command later, and the user would have a perfectly usable PGP binary
             package file.
           </para>
@@ -1685,7 +1685,7 @@ NoPatch: 2 3
           </footnote>
           , we can see the common portion of each script.  In the following
           example, we've taken the <application>cdplayer</application> package, issued
-          an <command>rpm -ba --test cdplayer-1.0-1.spec</command>, and viewed
+          an &rpmb; <command>-ba --test cdplayer-1.0-1.spec</command>, and viewed
           the script files left in RPM's temporary directory.  This section
           (with the appropriate package-specific values) is present in every
           script RPM executes during a build:
@@ -2634,7 +2634,7 @@ chmod -R a+rX,g-w,o-w .
             argument is not provided, the build will fail:
 
             <screen width="60">
-<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 * Package: cdplayer
 Need arg to %setup -b
 Build failed.
@@ -4268,7 +4268,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           was attempted:
 
           <screen width="60">
-<prompt># </prompt><command>rpm -ba cdplayer-1.0.spec</command>
+<prompt># </prompt>&rpmb; <command>-ba cdplayer-1.0.spec</command>
 <computeroutput>
 Unclosed %if
 Build failed.
