@@ -4625,7 +4625,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         </para>
         <para>
           For more information on building subpackages, please see chapter <xref
-          linkend="rpm-subpack">.
+          linkend="ch-rpm-subpack">.
         </para>
       </sect2>
     </sect1>

@@ -1,0 +1,1268 @@
+<chapter id="ch-rpm-multi">
+<title>Building Packages for Multiple Architectures and Operating Systems</title>
+<!-- label: rpm-multi -->
+
+<indexterm>
+<primary>multi-platform package building</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+While RPM certainly makes packaging software as easy as possible, it
+doesn't end there.  RPM gives you the tools you need to build a package on
+different types of computers.  More importantly, RPM makes it possible to
+build packages on different types of computers <emphasis>using a single spec
+file</emphasis>.  Those of you that have developed software for different computers
+know the importance of maintaining a single set of sources.  RPM lets you
+continue that practice through the package building phase.
+
+Before we get into RPM's capabilities, let's do a quick review of what is
+involved in developing software for different types of computer systems.
+
+<sect1 id="s1-rpm-multi-">
+<title>Architectures and Operating Systems: A Primer</title>
+<indexterm>
+<primary>multi-platform package building!reasons for</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+From a software engineering standpoint, there are only two major
+differences between any two computer systems:
+
+<orderedlist>
+<listitem>
+<para>
+The architecture implemented by the computer's hardware.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The system software running on the computer.
+
+</para>
+</listitem>
+
+</orderedlist>
+The first difference is built into the computer.  The architecture is the
+manner in which the computer system was designed.  It includes the number
+and type of registers present in the processor, the number of machine
+instructions, what operations they perform, and so on.  For example,
+every "PC" today, no matter who built it, is based on the Intel x86
+architecture.
+
+The second difference is more under our control.  The operating system is
+software that controls how the system operates.  Different operating
+systems have different methods of storing information on disk, different
+ways of implementing functions used by programs, and different hardware
+requirements.
+
+As far as package building is concerned, two systems with the same
+architecture running two different operating systems, are as different as
+two systems with different architectures running the same operating
+system.  In the first case, the software being packaged for different
+operating systems will differ due to the differences between the operating
+systems.  In the second case, the software being packaged for different
+architectures will differ due to the underlying differences in
+hardware.
+<footnote>
+<para>
+This is a somewhat simplistic view of the matter, as
+it's common for incompatibilities to crop up between two different
+implementations of the same operating system on different architectures.
+</para>
+</footnote>
+
+RPM supports differences in architecture and operating system equally.
+If there is a tag, <tt?>rpmrc</tt?> file entry, or conditional that is used
+to support architectural differences, there is a corresponding tag, entry,
+or conditional that supports operating system differences.
+
+<sect2 id="s2-rpm-multi-">
+<title>Let's Just Call Them Platforms</title>
+In order to keep the duplication in this chapter to a minimum, we'll refer
+to a computer of a given architecture running a given operating system as
+a "platform".  If another system differs in either aspect, it is
+considered a different platform.
+
+OK, now that we've gotten through the preliminaries, let's look at RPM's
+multi-platform capabilities.
+
+<indexterm>
+<primary>multi-platform package building!reasons for|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title>What Does RPM Do To Make Multi-Platform Packaging Easier?</title>
+<indexterm>
+<primary>multi-platform package building!features supporting</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned above, RPM supports multi-platform package building through
+a set of tags, <tt?>rpmrc</tt?> file entries, and conditionals.  None of
+these tools are difficult to use.  In fact, the hardest part of
+multi-platform package building is figuring out how the software needs to
+be changed to support different platforms.
+
+Let's take a look at each multi-platform tool RPM provides.
+
+<sect2 id="s2-rpm-multi-">
+<title>Automatic Detection of Build Platform</title>
+The first thing necessary for easy multi-platform package building is to
+identify which platform the package is to be built for.  Except in the
+fairly esoteric case of cross-compilation, the build platform is the
+platform on which the package is built.  RPM does this for you
+automatically, although it can be overridden at build-time.
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>Automatic Detection of Install Platform</title>
+The other important platform in package building is the platform on which
+the package is to be installed.  Here again, RPM does this for you, though
+it's possible to override this when the package is installed.
+
+But there is more to multi-platform package building than simply being able
+to determine the platform during package building and installation.  The
+next component in multi-platform package building is a set of
+platform-dependent tags.
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>Platform-Dependent Tags</title>
+RPM uses a number of tags that control which platforms can build a package.
+These tags make it easier for the package builder to build multiple
+packages automatically, since the tags will keep RPM from attempting to
+build packages that are incompatible with the build platform.
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>Platform-Dependent Conditionals</title>
+While the platform-dependent tags provide a crude level of multi-platform
+control (i.e., the package will be built or not, depending on the tags and
+the build platform), RPM's platform-dependent conditionals provide a much
+finer level of control.  By using these conditionals, it's possible to
+excise those parts of the spec file that are specific to another platform
+and replace them with one or more lines that are compatible with the build
+platform.
+
+Now that we have a basic idea of RPM's multi-platform support features,
+let's take a more in-depth look at each one.
+
+<indexterm>
+<primary>multi-platform package building!features supporting|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title>Build and Install Platform Detection</title>
+<indexterm>
+<primary>multi-platform package building!platform detection</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned above, the first step to multi-platform package building is
+to identify the build platform.  This is done by matching information from
+the build system's <tt?>uname</tt?> output against a number of <tt?>rpmrc</tt?>
+file entries.
+
+Normally, it's not necessary to worry too much about the following
+<tt?>rpmrc</tt?> file entries, as RPM comes with a set of entries that
+support all platforms that currently run RPM.  However, when adding
+support for new platforms, it will be necessary to use the following
+entries to add support for the new build platform.
+
+<sect2 id="s2-rpm-multi-">
+<title>Platform-Specific <tt?>rpmrc</tt?> Entries</title>
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Normally, the file <tt?>/usr/lib/rpmrc</tt?> contains the following
+<tt?>rpmrc</tt?> file entries.  They can be overridden by entries in
+<tt?>/etc/rpmrc</tt?> or <tt?>~/.rpmrc</tt?>.  This is discussed more
+completely in Appendix <xref linkend="rpmrc-file">.
+
+Because each entry type is available in both architecture and operating
+system flavors, we'll just use <tt?><emphasis>xxx</tt?></emphasis> in place of
+<tt?>arch</tt?> and <tt?>os</tt?> in the following descriptions.
+
+<sect3 id="s3-rpm-multi-">
+<title><tt?><emphasis>xxx</tt?>_canon</emphasis> -- Define Canonical Platform Name and Number</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>arch_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>os_canon</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?><emphasis>xxx</tt?>_canon</emphasis> entry is used to convert information
+obtained from the system running RPM into a canonical name and number that
+RPM will use internally.  Here's the format:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+<emphasis>xxx</emphasis>_canon:&lt;label&gt;: &lt;string&gt; &lt;value&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?>.  If a match is found, then <tt?>&lt;string&gt;</tt?> is used by
+RPM as the canonical name, and <tt?>&lt;value&gt;</tt?> is used as a unique numeric
+value.  Here are two examples:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+arch_canon: sun4:  sparc  3
+os_canon:  Linux:  Linux  1
+</screen>
+</figure>
+The <tt?>arch_canon</tt?> tag above is used to define the canonical
+architecture information for Sun Microsystems' SPARC architecture.  In this
+case, the output from <tt?>uname</tt?> is compared against <tt?>sun4</tt?>.  If
+there's a match, the canonical architecture name is set to <tt?>sparc</tt?>
+and the architecture number is set to <tt?>3</tt?>.
+
+The <tt?>os_canon</tt?> tag above is used to define the canonical operating
+system information for the Linux operating system.  In this case, the
+output from <tt?>uname</tt?> is compared against <tt?>Linux</tt?>.  If there's
+a match, the canonical operating system name is set to <tt?>Linux</tt?>, and
+the operating system number is set to <tt?>1</tt?>.
+
+The description above is not 100% complete --- There is an additional step
+performed during the time RPM gets the system information from
+<tt?>uname</tt?>, and compares it against a canonical name.  Next, let's look
+at the <tt?>rpmrc</tt?> file entry that comes into play during this
+intermediate step.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_canon</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_canon</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>arch_canon</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>os_canon</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-multi-">
+<title><tt?>build<emphasis>xxx</tt?>translate</emphasis> -- Define Build Platform</title>
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildarch_translate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildos_translate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>buildarch_translate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>buildos_translate</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>build<emphasis>xxx</tt?>translate</emphasis> entry is used to define the build
+platform information.  Specifically, these entries are used to create a
+table that maps information from <tt?>uname</tt?> to the appropriate
+architecture/operating system name.
+
+The <tt?>build<emphasis>xxx</tt?>translate</emphasis> entry looks like this:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+build<emphasis>xxx</emphasis>translate:&lt;label&gt;: &lt;string&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is compared against information from
+<tt?>uname(2)</tt?>.  If a match is found, then <tt?>&lt;string&gt;</tt?> is used by
+RPM as the build platform information, after it has been canonicalized by
+<tt?><emphasis>xxx</tt?>_canon</emphasis>.  Here are two examples:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+buildarchtranslate: i586: i386
+buildostranslate: Linux: Linux
+</screen>
+</figure>
+The <tt?>buildarchtranslate</tt?> tag shown above is used to define the build
+architecture for an Intel Pentium (or <tt?>i586</tt?> as it's shown here)
+processor.  Any Pentium-based system will, by default, build packages for
+the Intel 80386 (or <tt?>i386</tt?>) architecture.
+
+The <tt?>buildostranslate</tt?> tag shown above is used to define the build
+operating system for systems running the Linux operating system.  In this
+case, the build operating system remains unchanged.
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildarch_translate</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>buildos_translate</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>buildarch_translate</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>buildos_translate</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-multi-">
+<title><tt?><emphasis>xxx</tt?>_compat</emphasis> -- Define Compatible Architectures</title>
+<!-- label: multi-xxx_compat -->
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>arch_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>os_compat</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?><emphasis>xxx</tt?>_compat</emphasis> entry is used to define which architectures
+and operating systems are compatible with one another.  It is used at
+install-time only.  The format of the entry is:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+<emphasis>xxx</emphasis>_compat:&lt;label&gt;: &lt;list&gt;
+</screen>
+</figure>
+The <tt?>&lt;label&gt;</tt?> is a name string as defined by an
+<tt?><emphasis>xxx</tt?>_canon</emphasis> entry.  The <tt?>&lt;list&gt;</tt?> following it
+consists of one or more names, also defined by <tt?>arch_canon</tt?>.  If
+there  is more than one name in the list, they should be separated by a
+space.
+
+The names in the list are considered compatible to the name specified in
+the label.
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+arch_compat: i586: i486
+arch_compat: i486: i386
+os_compat: Linux: AIX
+</screen>
+</figure>
+The <tt?>arch_compat</tt?> lines shown above illustrate how a family of
+upwardly compatible architectures may be represented.  For example, if the
+build architecture was defined as an <tt?>i586</tt?>, the compatible
+architectures would be <tt?>i486</tt?>, and <tt?>i386</tt?>.  However, if the
+build system was an <tt?>i486</tt?>, the only compatible architecture would
+be an <tt?>i386</tt?>.
+
+While the <tt?>os_compat</tt?> line shown above is entirely fictional, its
+purpose would be to declare <tt?>AIX</tt?> compatible with <tt?>Linux</tt?>.
+If it were only that simple&hellip;
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>arch_compat</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>rpmrc@<tt?>rpmrc</tt?> file!entries!<tt?>os_compat</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>arch_compat</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>os_compat</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>Overriding Platform Information At Build-Time</title>
+<indexterm>
+<primary>platform information, overriding at build-time</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+By using the <tt?>rpmrc</tt?> file entries discussed above, RPM usually makes
+the right decisions in selecting the build and install platforms.  However,
+there might be times when RPM's selections aren't the best.  Normally the
+circumstances are unusual, as in the case of cross-compiling software.  In
+these cases, it is nice to have an easy way of overriding the build-time
+architecture and operating system.
+
+The <tt?>--buildarch</tt?> and <tt?>--buildos</tt?> options can be used to
+set the build-time architecture and operating system rather than relying
+on RPM's automatic detection capabilities.  These options are added to a
+normal RPM build command.  One important point to remember is that,
+although RPM does try to find the specified architecture name, it does no
+checking as to the sanity of the entered architecture or operating system.
+For example, if you enter an entirely fictional operating system, RPM will
+issue a warning message, and then happily build a package for it.
+
+Why?  Wouldn't it make more sense for RPM to perform some sort of sanity
+check?  In a word, no.  One of RPM's main design goals was to never get in
+the way of the package builder.  If someone has a need to override their
+build platform information, they should know what they're doing, and what
+the full implications of their actions are.
+
+Bottom line: Unless you <emphasis>know</emphasis> why you need to use
+<tt?>--buildarch</tt?> or <tt?>--buildos</tt?>, you probably don't need to
+use them.
+
+<indexterm>
+<primary>platform information, overriding at build-time|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>Overriding Platform Information At Install-Time</title>
+<indexterm>
+<primary>platform information, overriding at install-time</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+It's also possible to direct RPM to ignore platform information while a
+package is being installed.  The <tt?>--ignorearch</tt?> and
+<tt?>--ignoreos</tt?> options, when added to any install or upgrade
+command, will direct RPM to proceed with the install or upgrade, even if
+the package's platform doesn't match the install platform.
+
+Dangerous?  Yes.  But it can be indispensable in certain circumstances.
+Like the ability to override platform information at build-time, unless you
+know why you need to use <tt?>--ignorearch</tt?> or <tt?>--ignoreos</tt?>,
+you probably don't need to use them.
+
+<indexterm>
+<primary>platform information, overriding at install-time|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>multi-platform package building!platform detection|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title><tt?>optflags</tt?> -- The Other <tt?>rpmrc</tt?> File Entry</title>
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>optflags</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+While the <tt?>optflags</tt?> entry doesn't play a part in determining the
+build or install platform, it <emphasis>does</emphasis> play a role in multi-platform
+package building.  The <tt?>optflags</tt?> entry is used to define a standard
+set of options that can be used during the build process, specifically
+during compilation.
+
+The <tt?>optflags</tt?> entry looks like this:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+optflags:&lt;architecture&gt; &lt;value&gt;
+</screen>
+</figure>
+For example, assume the following <tt?>optflags</tt?> entries were placed in
+an <tt?>rpmrc</tt?> file:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+optflags: i386 -O2 -m486 -fno-strength-reduce
+optflags: sparc -O2
+</screen>
+</figure>
+If RPM was running on an Intel 80386-compatible architecture, the
+<tt?>optflags</tt?> value would be set to <tt?>-O2 -m486
+-fno-strength-reduce</tt?>.  If, however, RPM was running on a Sun SPARC-based
+system, <tt?>optflags</tt?> would be set to <tt?>-O2</tt?>.
+
+This entry sets the <tt?>RPM_OPT_FLAGS</tt?> environment variable, which
+can be used in the <tt?>%prep</tt?>, <tt?>%build</tt?>, and
+<tt?>%install</tt?> scripts.
+
+<indexterm>
+<primary>platform-dependent!<tt?>rpmrc</tt?> file entries!<tt?>optflags</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title>Platform-Dependent Tags</title>
+<indexterm>
+<primary>platform-dependent!tags</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Once RPM has determined the build platform's information, that information
+can be used in the build process.  The first way this information can be
+used is to determine whether a given package should be built on a given
+platform.  This is done through the use of four tags that can be added to a
+spec file.
+
+There can be many reasons to do this.  For example, the software may not
+build correctly on a given platform.  Or the software may be
+platform-specific, such that packaging the software on any other platform,
+while technologically possible, would really make no sense.
+
+The real world is not always so clear-cut, so there might even be cases
+where a package should be built on, say,  three different platforms, but no
+others.  By carefully using the following tags, any conceivable situation
+can be covered.
+
+Like the <tt?>rpmrc</tt?> file entries we've already discussed, there are
+identical tags for architecture and operating system, so we'll discuss them
+together.
+
+<sect2 id="s2-rpm-multi-">
+<title>The <tt?>exclude<emphasis>xxx</tt?></emphasis> Tag</title>
+<indexterm>
+<primary>excludearch@<tt?>excludearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludeos@<tt?>excludeos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>excludearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>excludeos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclude<emphasis>xxx</tt?></emphasis> tags are used to direct RPM to insure that
+the package does <emphasis>not</emphasis> attempt to build on the excluded platforms.
+One or more platforms may be specified after the <tt?>exclude<emphasis>xxx</tt?></emphasis>
+tags, separated by either spaces or commas.  Here are two examples:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExcludeArch: sparc alpha
+ExcludeOS: Irix
+</screen>
+</figure>
+The first line prevents systems based on the Sun SPARC and Digital
+Alpha/AXP architectures from attempting to build the package.  The second
+line insures that the package will not be built for the Silicon Graphics
+operating system, Irix.
+
+If a build is attempted on an excluded architecture or operating system,
+the following message will be displayed, and the build will fail:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+Arch mismatch!
+cdplayer-1.0.spec doesn't build on this architecture
+# 
+</screen>
+</figure>
+The <tt?>exclude<emphasis>xxx</tt?></emphasis> tags are meant to explicitly prevent a
+finite set of architectures or operating systems from building a package.
+If your goal is to insure that a package will only build on <emphasis>one</emphasis>
+architecture, then you should use the <tt?>exclusive<emphasis>xxx</tt?></emphasis> tags.
+
+<indexterm>
+<primary>excludearch@<tt?>excludearch</tt?> tag|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>excludeos@<tt?>excludeos</tt?> tag|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>excludearch</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>excludeos</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>The <tt?>exclusive<emphasis>xxx</tt?></emphasis> Tag</title>
+<indexterm>
+<primary>exclusivearch@<tt?>exclusivearch</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusiveos@<tt?>exclusiveos</tt?> tag</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>exclusivearch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>exclusiveos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>exclusive<emphasis>xxx</tt?></emphasis> tags are used to direct RPM to only build
+the package on the specified platforms.  These tags insure that, in the
+future, no brand-new platform will mistakenly attempt to build the package.
+RPM will build the package on the specified platforms only.
+
+The syntax of the <tt?>exclusive<emphasis>xxx</tt?></emphasis> tags is identical to 
+<tt?>exclude<emphasis>xxx</tt?></emphasis>:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+ExclusiveArch: sparc alpha
+ExclusiveOS: Irix
+</screen>
+</figure>
+In the first line, the package will only build on a Sun SPARC or Digital
+Alpha/AXP system.  In the second, the package will only be built on the
+Irix operating system.
+
+The <tt?>exclusive<emphasis>xxx</tt?></emphasis> tags are meant to explicitly allow a
+finite set of architectures or operating systems to build a package.  If
+your goal is to insure that a package will <emphasis>not</emphasis> build on a specific
+platform, then you should use the <tt?>exclude<emphasis>xxx</tt?></emphasis> tag. 
+
+<indexterm>
+<primary>exclusivearch@<tt?>exclusivearch</tt?> tag|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>exclusiveos@<tt?>exclusiveos</tt?> tag|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>exclusivearch</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags!<tt?>exclusiveos</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!tags|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title>Platform-Dependent Conditionals</title>
+<indexterm>
+<primary>platform-dependent!conditionals</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Of course, the control exerted by the <tt?>exclude<emphasis>xxx</tt?></emphasis> and
+<tt?>exclusive<emphasis>xxx</tt?></emphasis> tags over package building is often too
+coarse.  There may be packages, for example, that would build just fine on
+another platform, if only you could substitute a platform-specific patch
+file or change some paths in the <tt?>%files</tt?> list.
+
+The key to exerting this kind of platform-specific control in the spec file
+is to use RPM's conditionals.  The conditionals provide a general-purpose
+means of constructing a platform-specific version of the spec file during
+the actual build process.
+
+<sect2 id="s2-rpm-multi-">
+<title>Common Features of All Conditionals</title>
+<indexterm>
+<primary>platform-dependent!conditionals!features of</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There are a few things that are common to each conditional, so let's
+discuss them first.  The first thing is that conditionals are
+block-structured.  The second is that conditionals can be nested.  Finally,
+conditionals can span any part of the spec file.
+
+<sect3 id="s3-rpm-multi-">
+<title>Conditionals Are Block Structured</title>
+Every conditional is block-structured -- in other words, the conditional
+begins at a certain point within the spec file and continues some number
+of lines until it is ended.  This forms a block that will be used or
+ignored, depending on the platform the conditional is checking for, as well
+as the build platform itself.
+
+Every conditional starts with a line beginning with the characters
+<tt?>%if</tt?> and is followed by one of four platform-related conditions.
+Every conditional ends with a line containing the characters
+<tt?>%endif</tt?>.
+
+Ignoring the platform-related conditions for a moment, here's an example
+of a conditional block:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifos Linux
+Summary: This is a package for the Linux operating system
+%endif
+</screen>
+</figure>
+It's a one-line block, but a block nonetheless.
+
+There's also another style of conditional block.  As before, it starts with
+a <tt?>%if</tt?>, and ends with a <tt?>%endif</tt?>.  But there's something
+new in the middle:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifos Linux
+Summary: This is a package for the Linux operating system
+%else
+Summary: This is a package for some other operating system
+%endif
+</screen>
+</figure>
+Here we've replaced one <tt?>summary</tt?> tag with another.
+
+</sect3>
+
+<sect3 id="s3-rpm-multi-">
+<title>Conditionals Can Be Nested</title>
+<indexterm>
+<primary>platform-dependent!conditionals!nesting</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Conditionals can be nested --- That is, the block formed by one conditional
+can enclose another conditional.  Here's an example:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386
+
+echo "This is an i386"
+
+%ifos Linux
+echo "This is a Linux system"
+%else
+echo "This is not a Linux system"
+%endif
+
+%else
+
+echo "This is not an i386"
+
+%endif
+</screen>
+</figure>
+In this example, the first conditional block formed by the <tt?>%ifarch
+i386</tt?> line contains a complete <tt?>%ifos --- %else --- %endif</tt?>
+conditional.  Therefore, if the build system was Intel-based, the
+<tt?>%ifos</tt?> conditional would be tested.  If the build system was
+<emphasis>not</emphasis> Intel-based, the <tt?>%ifos</tt?> conditional would not be
+tested.
+
+<indexterm>
+<primary>platform-dependent!conditionals!nesting|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+<sect3 id="s3-rpm-multi-">
+<title>Conditionals Can Cross Spec File Sections</title>
+The next thing each conditional has in common is that there is no limit to
+the number of lines a conditional block can contain.  You could enclose the
+entire spec file within a conditional, if you like.  But it's much better
+to use conditionals to insert only the appropriate platform-specific
+contents.
+
+Now that we have the basics out of the way, let's take a look at each of
+the conditionals and see how they work.
+
+<indexterm>
+<primary>platform-dependent!conditionals!features of|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>\%if<emphasis>xxx</emphasis></title>
+<indexterm>
+<primary>ifarch@<tt?>%ifarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifos@<tt?>%ifos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifarch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%if<emphasis>xxx</tt?></emphasis> conditionals are used to control the inclusion
+of a block, as long as the platform-dependent information is true.  Here
+are two examples:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifarch i386 alpha
+</screen>
+</figure>
+In this case, the block following the conditional would be included only if
+the build architecture was <tt?>i386</tt?> or <tt?>alpha</tt?>.
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifos Linux
+</screen>
+</figure>
+This example would include the block following the conditional only if the
+operating system was <tt?>Linux</tt?>.
+
+<indexterm>
+<primary>ifarch@<tt?>%ifarch</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifos@<tt?>%ifos</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifarch</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifos</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpm-multi-">
+<title>\%ifn<emphasis>xxx</emphasis></title>
+<indexterm>
+<primary>ifnarch@<tt?>%ifnarch</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifnos@<tt?>%ifnos</tt?> conditional</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifnarch</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifnos</tt?></primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>%ifn<emphasis>xxx</tt?></emphasis> conditionals are used to control the inclusion
+of a block, as long as the platform-dependent information is <emphasis>not</emphasis>
+true.  Here are two examples:
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifnarch i386 alpha
+</screen>
+</figure>
+In this case, the block following the conditional would be included only if
+the build architecture was <emphasis>not</emphasis> <tt?>i386</tt?> or <tt?>alpha</tt?>.
+
+<figure id="sc-rpm-multi-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+%ifnos Linux
+</screen>
+</figure>
+This example would include the block following the conditional only if the
+operating system was <emphasis>not</emphasis> <tt?>Linux</tt?>.
+
+<indexterm>
+<primary>ifnarch@<tt?>%ifnarch</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>ifnos@<tt?>%ifnos</tt?> conditional|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifnarch</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals!<tt?>%ifnos</tt?>|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>platform-dependent!conditionals|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-multi-">
+<title>Hints and Kinks</title>
+<indexterm>
+<primary>multi-platform package building!hints</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There isn't much in the way of hard and fast rules when it comes to
+multi-platform package building.  But in general, the following uses of
+RPM's multi-platform capabilities seem to work the best:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+The <tt?>exclude<emphasis>xxx</tt?>/exclusive\emph{xxx</emphasis>} tags are best used
+when it's known there's no reason for the package to be built on specific
+architectures.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+The <tt?>%if<emphasis>xxx</tt?></emphasis> and <tt?>%ifn<emphasis>xxx</tt?></emphasis> conditionals
+are most likely to be used in the following areas:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+Controlling the inclusion of <tt?>%patch</tt?> macros for
+platform-specific patches.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Setting up platform-specific initialization prior to building the
+software.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Tailoring the <tt?>%files</tt?> list when the software creates
+platform-specific files.
+
+</para>
+</listitem>
+
+</itemizedlist>
+</para>
+</listitem>
+
+</itemizedlist>
+Given that some software is more easily ported to different platforms than
+others, this list is far from complete.  If there's one thing to remember
+about multi-platform package building, it's don't be afraid to experiment!
+
+<indexterm>
+<primary>multi-platform package building!hints|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>multi-platform package building|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+</chapter>
+
