@@ -10,43 +10,6 @@
 <!ENTITY RHIS "RH">
 <!-- The basic operating system... -->
 <!ENTITY RHL "&RH; Linux">
-<!-- ...its version... -->
-<!ENTITY RHLVER "6.0">
-<!-- ...for the x86 architecture... -->
-<!ENTITY RHLINTEL "&RHL;/Intel">
-<!-- ...for the Alpha architecture... -->
-<!ENTITY RHLALPHA "&RHL;/Alpha">
-<!-- ...for the SPARC architecture... -->
-<!ENTITY RHLSPARC "&RHL;/SPARC">
-<!-- The status of our documentation... -->
-<!ENTITY STATUS "Official">
-<!-- The User's Guide... -->
-<!ENTITY RHLUG "&STATUS; &RHL; User's Guide">
-<!-- Shorthand version... -->
-<!ENTITY RHLUGS "User">
-<!-- The Getting Started Guide... -->
-<!ENTITY RHLGSG "&STATUS; &RHL; Getting Started Guide">
-<!-- Shorthand version... -->
-<!ENTITY RHLGSGS "GSG">
-<!-- The Installation Guide... -->
-<!ENTITY RHLIG "&STATUS; &RHL; Installation Guide">
-<!-- Shorthand version... -->
-<!ENTITY RHLIGS "Inst">
-<!-- The Alpha Installation Addendum... -->
-<!ENTITY RHLAIA "&STATUS; &RHL; Alpha Installation Addendum">
-<!-- Shorthand version... -->
-<!ENTITY RHLAIAS "AlphaInst">
-<!-- Document in HTML... -->
-<!ENTITY HTML "HTML">
-<!-- Document in print... -->
-<!ENTITY PRINT "Print">
-<!-- Date the document was produced... -->
-<!ENTITY BOOKDATE "05/99">
-<!-- ID string format for a book (Installation Guide in print, as an -->
-<!-- example)... -->
-<!ENTITY BOOKID "&RHLIGS;-&RHLVER;-&PRINT;-&RHI; (&BOOKDATE;)">
-<!-- Referring to the kernel version, semi-generically... -->
-<!ENTITY KERNVER "2.2.x">
 <!-- *************** Chapter entities... *************** -->
 <!ENTITY PREFACE SYSTEM "preface.sgml">
 <!ENTITY INTRO-TO-RPM SYSTEM "intro-to-rpm.sgml">
@@ -82,7 +45,7 @@
 ]>
 
 
-<Book id="max-rpm" status="Prototype">
+<Book id="index">
  <bookinfo>
     <title>Maximum RPM</title>
     <titleabbrev>Max. RPM</titleabbrev>
@@ -112,13 +75,13 @@
       </revision>
       <revision>
         <revnumber>
-          2.0
+          1.2
         </revnumber>
         <date>
-          ??-???-1999
+          29-February-2000
         </date>
         <revremark>
-          Second edition
+          Translated into DocBook
         </revremark>
       </revision>
     </revhistory>
@@ -162,7 +125,7 @@
    </author>
   </authorgroup>
   <copyright>
-   <year>1999</year>
+   <year>2000</year>
    <holder>Red Hat, Inc.</holder>
   </copyright>
   <legalnotice>

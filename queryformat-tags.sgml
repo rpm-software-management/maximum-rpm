@@ -13,9 +13,7 @@
     command:
 
     <screen width="60">
-<computeroutput>
-rpm --querytags
-</computeroutput>
+<command>rpm --querytags</command>
     </screen>
   </para>
   <para>
@@ -410,7 +408,7 @@ rpm --querytags
         contained in the source package file.
       </para>
       <para>
-        Array: Yes (Size: One entry per source)
+        Array: Yes (Size: One entry per <command>source</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -430,7 +428,7 @@ rpm --querytags
         contained in the source package file.
       </para>
       <para>
-        Array: Yes (Size: One entry per patch)
+        Array: Yes (Size: One entry per <command>patch</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -590,7 +588,7 @@ rpm --querytags
         files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filenames</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -610,7 +608,7 @@ rpm --querytags
         bytes, of each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filesizes</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -630,7 +628,7 @@ rpm --querytags
         each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filestates</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -641,7 +639,7 @@ rpm --querytags
             flag values, based on the
             <command>RPMFILE_STATE_<replaceable>xxx</replaceable></command>
             <command>#define</command>s contained in
-            <command>rpmlib.h</command>.  This file is part of the
+            <filename>rpmlib.h</filename>.  This file is part of the
             <command>rpm-devel</command> package and is also present in the RPM
             source package.
           </para>
@@ -662,7 +660,7 @@ rpm --querytags
         of each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filemodes</command>)
       </para>
       <para>
         Used with modifiers: <command>:perms</command>
@@ -682,7 +680,7 @@ rpm --querytags
         numeric form, of each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>fileuids</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -702,7 +700,7 @@ rpm --querytags
         numeric form, of each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filegids</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -723,7 +721,7 @@ rpm --querytags
         only be non-zero for device special files.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filerdevs</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -744,7 +742,7 @@ rpm --querytags
         package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filemtimes</command>)
       </para>
       <para>
         Used with modifiers: <command>:date</command>
@@ -764,7 +762,7 @@ rpm --querytags
         for each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filemd5s</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -784,7 +782,7 @@ rpm --querytags
         string for symlinks.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filelinktos</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -805,7 +803,7 @@ rpm --querytags
         or configuration.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>fileflags</command>)
       </para>
       <para>
         Used with modifiers: <command>:fflags</command>
@@ -859,7 +857,7 @@ rpm --querytags
         in alphanumeric form, of each of the files that comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>filegroupname</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -942,7 +940,7 @@ rpm --querytags
         comprise the package.
       </para>
       <para>
-        Array: Yes (Size: One entry per file)
+        Array: Yes (Size: One entry per <command>fileverifyflags</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -953,7 +951,7 @@ rpm --querytags
             flag values, based on the
             <command>RPMVERIFY_<replaceable>xxx</replaceable></command>
             <command>#define</command>s contained in
-            <command>rpmlib.h</command>.  This file is part of the
+            <filename>rpmlib.h</filename>.  This file is part of the
             <command>rpm-devel</command> package and is also present in the RPM
             source package.
           </para>
@@ -994,7 +992,7 @@ rpm --querytags
         the package provides.
       </para>
       <para>
-        Array: Yes (Size: One entry per provide)
+        Array: Yes (Size: One entry per <command>provides</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1014,7 +1012,7 @@ rpm --querytags
         requirement flags for each capability the package requires.
       </para>
       <para>
-        Array: Yes (Size: One entry per require)
+        Array: Yes (Size: One entry per <command>requireflags</command>)
       </para>
       <para>
         Used with modifiers: <command>:depflags</command>
@@ -1034,7 +1032,7 @@ rpm --querytags
         capabilities the package requires.
       </para>
       <para>
-        Array: Yes (Size: One entry per require)
+        Array: Yes (Size: One entry per <command>requirename</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1054,7 +1052,7 @@ rpm --querytags
         version-related aspect of each capbility the package requires.
       </para>
       <para>
-        Array: Yes (Size: One entry per require)
+        Array: Yes (Size: One entry per <command>requireversion</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1074,7 +1072,7 @@ rpm --querytags
         archives that are not contained in the source package file.
       </para>
       <para>
-        Array: Yes (Size: One entry per nosource)
+        Array: Yes (Size: One entry per <command>nosource</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1094,7 +1092,7 @@ rpm --querytags
         that are not contained in the source package file.
       </para>
       <para>
-        Array: Yes (Size: One entry per nopatch)
+        Array: Yes (Size: One entry per <command>nopatch</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1114,7 +1112,7 @@ rpm --querytags
         flags for each capability the package conflicts with.
       </para>
       <para>
-        Array: Yes (Size: One entry per conflict)
+        Array: Yes (Size: One entry per <command>conflictflags</command>)
       </para>
       <para>
         Used with modifiers: <command>:depflags</command>
@@ -1134,7 +1132,7 @@ rpm --querytags
         capabilities that the package conflicts with.
       </para>
       <para>
-        Array: Yes (Size: One entry per conflict)
+        Array: Yes (Size: One entry per <command>conflictname</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1154,7 +1152,7 @@ rpm --querytags
         version-related aspect of each capability the package conflicts with.
       </para>
       <para>
-        Array: Yes (Size: One entry per conflict)
+        Array: Yes (Size: One entry per <command>conflictversion</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1228,7 +1226,7 @@ rpm --querytags
         architectures that should not install this package.
       </para>
       <para>
-        Array: Yes (Size: One entry per excludearch)
+        Array: Yes (Size: One entry per <command>excludearch</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1248,7 +1246,7 @@ rpm --querytags
         systems that should not install this package.
       </para>
       <para>
-        Array: Yes (Size: One entry per excludeos)
+        Array: Yes (Size: One entry per <command>excludeos</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1268,7 +1266,7 @@ rpm --querytags
         architectures that are the only ones that should install this package.
       </para>
       <para>
-        Array: Yes (Size: One entry per exclusivearch)
+        Array: Yes (Size: One entry per <command>exclusivearch</command>)
       </para>
       <para>
         Used with modifiers: N/A
@@ -1288,7 +1286,7 @@ rpm --querytags
         systems that are the only one that should install this package.
       </para>
       <para>
-        Array: Yes (Size: One entry per exclusiveos)
+        Array: Yes (Size: One entry per <command>exclusiveos</command>)
       </para>
       <para>
         Used with modifiers: N/A

@@ -23,7 +23,7 @@
     <para>
       PGP, or "Pretty Good Privacy", is a program that is intended to help
       make electronic mail more secure.  It does this by using sophisticated
-      techniques known as <emphasis>public key encryption</emphasis>.
+      techniques known as <firstterm>public key encryption</firstterm>.
     </para>
     <para>
       If you find yourself wondering what electronic mail and making
@@ -150,7 +150,7 @@ HZR2wSWSBteKezB5uK47A6uhwtvPokV0Owk9xPmBV+LPXkW4
 
       <para>
         In a word, no.  Rather than being encrypted, RPM package files possess
-        a <emphasis>digital signature</emphasis>.  This is a way of using
+        a <firstterm>digital signature</firstterm>.  This is a way of using
         encryption to attach a signature (again, basically a large number) to
         some information, such that:
 
@@ -219,9 +219,9 @@ rML3TxQSwdA=
       <para>
         PGP has a wealth of features, 99% of which we will not cover in this
         book.  For more information on the basics of encryption,
-        <emphasis>Applied Cryptography</emphasis>, by Bruce Schneier, contains
+        <citetitle>Applied Cryptography</citetitle>, by Bruce Schneier, contains
         a wealth of information on the subject.  For more details on PGP
-        specifically, O'Reilly's <emphasis>PGP: Pretty Good Privacy</emphasis>
+        specifically, O'Reilly's <citetitle>PGP: Pretty Good Privacy</citetitle>
         by Simson Garfinkel is an excellent reference.
       </para>
       <para>
@@ -375,7 +375,7 @@ rML3TxQSwdA=
 
           <screen width="60">
 <computeroutput>
-http://web.mit.edu/network/pgp.html
+<ulink url="http://web.mit.edu/network/pgp.html">http://web.mit.edu/network/pgp.html</ulink>
 </computeroutput>
           </screen>
         </para>
@@ -393,7 +393,7 @@ http://web.mit.edu/network/pgp.html
 
           <screen width="60">
 <computeroutput>
-net-dist.mit.edu
+<ulink url="ftp://net-dist.mit.edu">ftp://net-dist.mit.edu</ulink>
 </computeroutput>
           </screen>
         </para>
@@ -402,7 +402,7 @@ net-dist.mit.edu
 
           <screen width="60">
 <computeroutput>
-/pub/PGP
+<filename>/pub/PGP</filename>
 </computeroutput>
           </screen>
         </para>

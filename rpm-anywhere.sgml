@@ -90,8 +90,8 @@
       <para>
         Whatever the reason, RPM provides the ability to direct a given package
         to install into an alternate root.  This alternate root is known as a
-        "build root".  Several requirements must be met in order for a build
-        root to be utilized:
+        <firstterm>build root</firstterm>.  Several requirements must be met in
+        order for a build root to be utilized:
 
         <itemizedlist mark="bullet">
           <listitem>
@@ -115,13 +115,14 @@
 
         <screen width="60">
 <computeroutput>
-BuildRoot: &lt;root&gt;
+BuildRoot: <replaceable>&lt;root&gt;</replaceable>
 </computeroutput>
         </screen>
       </para>
       <para>
-        Of course, you would replace "<command>&lt;root&gt;</command>" with the
-        name of the directory in which you'd like the software to install.
+        Of course, you would replace <replaceable>&lt;root&gt;</replaceable>
+        with the name of the directory in which you'd like the software to
+        install.
         <footnote>
           <para>
             Keep in mind that the build root can be overridden at build-time
@@ -549,22 +550,22 @@ rm -rf $RPM_BUILD_ROOT
 
         <para>
           All that's required to get RPM to start using the new build area is to
-          define an alternate value for <command>topdir</command> in an rpmrc
-          file.  For the non-root user, this means putting the following line in
-          a file called <filename>.rpmrc</filename>, located in your home
-          directory:
+          define an alternate value for <command>topdir</command> in an
+          <filename>rpmrc</filename> file.  For the non-root user, this means
+          putting the following line in a file called
+          <filename>.rpmrc</filename>, located in your home directory:
 
           <screen width="60">
 <computeroutput>
-topdir: &lt;path&gt;
+topdir: <replaceable>&lt;path&gt;</replaceable>
 </computeroutput>
           </screen>
         </para>
         <para>
-          By replacing "<command>&lt;path&gt;</command>" with the path to the
-          new build area's top-level directory, RPM will attempt to use it the
-          next time a build is performed.  Using our newly created build area as
-          an example, we'll set <command>topdir</command> to
+          By replacing <replaceable>&lt;path&gt;</replaceable> with the path to
+          the new build area's top-level directory, RPM will attempt to use it
+          the next time a build is performed.  Using our newly created build
+          area as an example, we'll set <command>topdir</command> to
           <filename>/home/ed/mybuild</filename>:
 
           <screen width="60">
@@ -731,39 +732,40 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
 
           <screen width="60">
 <computeroutput>
-%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>&lt;file&gt;</userinput>
+%attr(<replaceable>&lt;mode&gt;</replaceable>, <replaceable>&lt;user&gt;</replaceable>, <replaceable>&lt;group&gt;</replaceable>) <replaceable>&lt;file&gt;</replaceable>
 </computeroutput>
           </screen>
 
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                The <command>&lt;mode&gt;</command> is represented in
+                The <replaceable>&lt;mode&gt;</replaceable> is represented in
                 traditional numeric fashion.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                The <command>&lt;user&gt;</command> is specified by the login
-                name of the user.  Numeric UIDs are <emphasis>not</emphasis>
-                used, for reasons we'll explore in a moment.
+                The <replaceable>&lt;user&gt;</replaceable> is specified by the
+                login name of the user.  Numeric UIDs are
+                <emphasis>not</emphasis> used, for reasons we'll explore in a
+                moment.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                The <command>&lt;group&gt;</command> is specified by the group's
-                name, as entered in <filename>/etc/group</filename>.  Numeric
-                GIDs are <emphasis>not</emphasis> used, either.  Yes, we'll be
-                discussing that, too!
+                The <replaceable>&lt;group&gt;</replaceable> is specified by the
+                group's name, as entered in <filename>/etc/group</filename>.
+                Numeric GIDs are <emphasis>not</emphasis> used, either.  Yes,
+                we'll be discussing that, too!
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command><userinput>&lt;file&gt;</userinput></command>
-                represents the file.  Shell-style globbing is supported.
+                <replaceable>&lt;file&gt;</replaceable> represents the file.
+                Shell-style globbing is supported.
               </para>
             </listitem>
           </itemizedlist>
@@ -853,8 +855,8 @@ group rot does not exist - using root
           </screen>
         </para>
         <para>
-          What's this about group "<filename>rot</filename>"?  Looking back at
-          the <command>rpm -qlvp</command> output, it looks like
+          What's this about group "rot"?  Looking back at the <command>rpm
+          -qlvp</command> output, it looks like
           <filename>/usr/local/man/man1/cdp.1</filename> has a bogus group.
           Looking back even further, it's there in the <command>%attr</command>
           for that file.  Must have been a typo.  We could pretend that RPM used
