@@ -1,0 +1,737 @@
+<chapter id="ch-rpm-pgp">
+<title>Adding PGP Signatures to a Package</title>
+<!-- label: rpm-pgp -->
+
+<indexterm>
+<primary>PGP!signatures!adding</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+In this chapter, we'll explore the steps required to add a digital
+signature to a package, using the software known as Pretty Good Privacy, or
+PGP.  If you've used PGP before, you probably know everything you'll need
+to start signing packages in short order.
+
+On the other hand, if you feel you need a bit more information on PGP
+before starting, please refer to Appendix <xref linkend="pgp-intro"> for a brief
+introduction.  Once you feel comfortable with PGP, come on back and learn
+how easy signing packages is&hellip;
+
+<sect1 id="s1-rpm-pgp-">
+<title>Why Sign a Package?</title>
+<indexterm>
+<primary>PGP!signatures!reasons for</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The reason for signing a package is to provide authentication.  With a
+signed package, it's possible for your user community to verify that the
+package they have was in your possession at some time and has not been
+changed since then.  That "not changed" part is also a good reason to
+sign your packages, as digital signatures are a very robust way to guard
+against any modifications to the package.
+
+Of course, as with anything else in life, adding a digital signature to a
+package isn't an ironclad guarantee that everything is right with the
+package, but it's about as sure a thing as humans can make it.
+
+<indexterm>
+<primary>PGP!signatures!reasons for|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect1>
+
+<sect1 id="s1-rpm-pgp-">
+<title>Getting Ready to Sign</title>
+OK, we've convinced you that signing packages is a good idea.  Now we've
+got to make sure PGP and RPM are up to the task.  As you might imagine,
+there are two parts to this process: one for PGP, and one for RPM.  Let's
+get PGP ready first.
+
+<sect2 id="s2-rpm-pgp-">
+<title>Preparing PGP: Creating a Key Pair</title>
+<indexterm>
+<primary>PGP!signatures!key pair generation</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There is really very little to be done to PGP, assuming it's been installed
+properly.  The only thing required is to generate a key pair.  As mentioned
+in our mini-primer on PGP, the key pair consists of a secret key and a
+public key.  In terms of signing packages, you will use your secret key to
+do the actual signing.  Anyone interested in checking your signature will
+need your public key.
+
+Creating a key pair is quite simple.  All that's required is to issue a
+<tt?>pgp -kg</tt?> command, enter some information, and create some random
+bits.  Here's an example key generating session:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>pgp -kg</userinput>
+Pretty Good Privacy(tm) 2.6.3a - Public-key encryption for the masses.
+(c) 1990-96 Philip Zimmermann, Phil's Pretty Good Software. 1996-03-04
+Uses the RSAREF(tm) Toolkit, which is copyright RSA Data Security, Inc.
+Distributed by the Massachusetts Institute of Technology.
+Export of this software may be restricted by the U.S. government.
+Current time: 1996/10/31 00:42 GMT
+
+Pick your RSA key size:
+    1)   512 bits- Low commercial grade, fast but less secure
+    2)   768 bits- High commercial grade, medium speed, good security
+    3)  1024 bits- "Military" grade, slow, highest security
+
+Choose 1, 2, or 3, or enter desired number of bits: <userinput>3</userinput>
+Generating an RSA key with a 1024-bit modulus.
+
+You need a user ID for your public key.  The desired form for this
+user ID is your name, followed by your E-mail address enclosed in
+&lt;angle brackets&gt;, if you have an E-mail address.
+For example:  John Q. Smith &lt;12345.6789@compuserve.com&gt;
+Enter a user ID for your public key: 
+
+<userinput>Example Key for RPM Book</userinput>
+You need a pass phrase to protect your RSA secret key.
+Your pass phrase can be any sentence or phrase and may have many
+words, spaces, punctuation, or any other printable characters.
+
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+Enter same pass phrase again: <userinput>&lt;passphrase&gt;</userinput> (Still not echoed)
+
+Note that key generation is a lengthy process.
+
+We need to generate 952 random bits.  This is done by measuring the
+time intervals between your keystrokes.  Please enter some random text
+on your keyboard until you hear the beep:
+</screen>
+</figure>
+(Many random characters were entered)
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+   0 * -Enough, thank you.
+............................................
+................................**** ...**** 
+Pass phrase is good.  Just a moment....
+Key signature certificate added.
+Key generation completed.
+# 
+</screen>
+</figure>
+Let's review each of the times PGP required information.  The first thing
+PGP needed to know was the key size we wanted.  Depending on your level of
+paranoia, simply choose an appropriate key size.  In our example, we chose
+the "They're out to get me" key size of 1024 bits.
+
+Next, we needed to choose a user ID for the key.  The user ID should be
+descriptive and should also include sufficient information for someone to
+contact you.  We entered <tt?>Example Key for RPM Book</tt?>, which goes
+against our suggestion, but is sufficient for the purposes of our example.
+
+After entering a user ID, we needed to add a pass phrase.  The pass phrase
+is used to protect your secret key, so it should be something difficult for
+someone else to guess.  It should also be memorable for you, because if you
+forget your pass phrase, you won't be able to use your secret key!  I
+entered a couple of words and numbers, put together in such a way that no
+one could ever guess I typed <tt?>rpm2kool4words</tt?>
+
+Oops&hellip;
+
+The pass phrase is entered twice, to ensure that no typing mistakes were
+made.  PGP also performs some cursory checks on the pass phrase, ensuring
+that the phrase is at least somewhat secure.
+
+Finally comes the strangest part of the key-generation process, creating
+random bits.  This is done by measuring the time between keystrokes.  The
+secret here is to <emphasis>not</emphasis> hold down a key so that it auto-repeats and
+to <emphasis>not</emphasis> wait several seconds between keystrokes.  Simply start typing
+anything (even nonsense text) until PGP tells you you've typed enough.
+
+After generating enough random bits, PGP takes a minute or so to create the
+key pair.  Assuming everything completed successfully, you'll see an ending
+message similar to the one above.  You'll also find, in a subdirectory of
+your login directory called <tt?>.pgp</tt?>, the following files:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>ls -al ~/.pgp</userinput>
+total 6
+drwxr-xr-x   2 root     root         1024 Oct 30 19:44 .
+drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
+-rw-------   1 root     root          176 Oct 30 19:44 pubring.bak
+-rw-------   1 root     root          331 Oct 30 19:44 pubring.pgp
+-rw-------   1 root     root          408 Oct 30 19:44 randseed.bin
+-rw-------   1 root     root          509 Oct 30 19:44 secring.pgp
+# 
+</screen>
+</figure>
+For those interested in learning exactly what each file is, feel free to
+consult any of the fine books on PGP.  For the purposes of signing
+packages, all we need to know is where these files are located.
+
+That's it!  Now it's time to configure RPM to use your newly generated key.
+
+<indexterm>
+<primary>PGP!signatures!key pair generation|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect2>
+
+<sect2 id="s2-rpm-pgp-">
+<title>Preparing RPM</title>
+<indexterm>
+<primary>PGP!signatures!configuring RPM for</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+RPM's configuration process is quite straightforward.  It consists of
+adding a few <tt?>rpmrc</tt?> entries in a file of your choice.  For more
+information on rpmrc files in general, please see Appendix
+<xref linkend="rpmrc-file">.
+
+The entries that need to be added to an rpmrc file are:
+
+<itemizedlist mark="bullet">
+<listitem>
+<para>
+<tt?>signature</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>pgp_name</tt?>
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+<tt?>pgp_path</tt?>
+
+</para>
+</listitem>
+
+</itemizedlist>
+Let's check out the entries.
+
+<sect4 id="s4-rpm-pgp-">
+<title><tt?>signature</tt?></title>
+The <tt?>signature</tt?> entry is used to select the type of signature that
+RPM is to use.  At the time this book was written, the only legal value is
+<tt?>pgp</tt?>.  So you would enter:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+signature: pgp
+</screen>
+</figure>
+</sect4>
+
+<sect4 id="s4-rpm-pgp-">
+<title><tt?>pgp_name</tt?></title>
+The <tt?>pgp_name</tt?> entry gives RPM the user ID of the key it is to sign
+packages with.  In our key generation example, the user ID of the key we
+created was <tt?>Example Key for RPM Book</tt?>, so this is what our entry
+should look like:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+pgp_name: Example Key for RPM Book
+</screen>
+</figure>
+</sect4>
+
+<sect4 id="s4-rpm-pgp-">
+<title><tt?>pgp_path</tt?></title>
+The <tt?>pgp_path</tt?> entry is used to define the path to the directory
+where the keys are kept.  This entry is not needed if the environment
+variable <tt?>PGPPATH</tt?> has been defined.  In our example, we didn't move
+them from PGP's default location, which is in the subdirectory
+<tt?>.pgp</tt?>, off the user's login directory.  Since we generated the key
+as <tt?>root</tt?>, our path is <tt?>/root/.pgp</tt?>.  Therefore, our entry
+would look like this:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+pgp_path: /root/.pgp
+</screen>
+</figure>
+And that's it.  Now it's time to sign some packages.
+
+<indexterm>
+<primary>PGP!signatures!configuring RPM for|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect4>
+
+</sect2>
+
+</sect1>
+
+<sect1 id="s1-rpm-pgp-">
+<title>Signing Packages</title>
+<indexterm>
+<primary>PGP!signatures!signing packages</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+There are three different ways to sign a package:
+
+<orderedlist>
+<listitem>
+<para>
+Signing a package at build-time.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Replacing the signature on an already-existing package.
+
+</para>
+</listitem>
+
+<listitem>
+<para>
+Adding a signature to an already-existing package.
+
+</para>
+</listitem>
+
+</orderedlist>
+Lets take a look at each one, starting with build-time signing.
+
+<sect2 id="s2-rpm-pgp-">
+<title><tt?>--sign</tt?> --- Sign a Package At Build-Time</title>
+<indexterm>
+<primary>sign@<tt?>--sign</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>--sign</tt?> option is used to sign a package as it is being
+built.  When this option is added to an RPM build command, RPM will ask for
+your PGP pass phrase.  If the pass phrase is correct, the build will
+proceed.  If not, the build stops immediately.
+
+Here's an example of <tt?>--sign</tt?> in action:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba --sign blather-7.9.spec</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+* Package: blather
+&hellip;
+Binary Packaging: blather-7.9-1
+Finding dependencies...
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/RPMS/i386/blather-7.9-1.i386.rpm
+&hellip;
+Source Packaging: blather-7.9-1
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
+# 
+</screen>
+</figure>
+Once the pass phrase is entered, there's very little that is different from
+a normal build.  The only obvious difference is the <tt?>Generating
+signature</tt?> message in both the binary and source packaging sections.  The
+number following the message indicates that the signature added was created
+using PGP.
+<footnote>
+<para>
+The list of possible signature types can be found in
+the RPM sources, specifically <tt?>signature.h</tt?> in RPM's <tt?>lib</tt?>
+subdirectory.
+</para>
+</footnote>
+
+Notice, that since RPM only signs the source and binary package files, only
+the <tt?>-bb</tt?>, and <tt?>-ba</tt?> options make any sense when used with
+<tt?>--sign</tt?>.  This is due to the fact that only the <tt?>-bb</tt?> and
+<tt?>-ba</tt?> options create package files.
+
+If we issue a quick signature check using RPM's <tt?>--checksig</tt?>
+option, we can see that there is, in fact, a PGP signature present:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --checksig blather-7.9-1.i386.rpm</userinput>
+blather-7.9-1.i386.rpm: size pgp md5 OK
+#
+</screen>
+</figure>
+It's clear to see that, in addition to the usual size and MD5 signatures,
+the package has a PGP signature.
+
+<sect3 id="s3-rpm-pgp-">
+<title>Multiple Builds?  No Problem!</title>
+<indexterm>
+<primary>sign@<tt?>--sign</tt?> option!using with multiple builds</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+You might be wondering how the <tt?>--sign</tt?> option would work if more
+than one package is to be built.  Do you have to enter the pass phrase for
+every single package you build?  The answer is no, as long as you build the
+packages with a single RPM command.  Here's an example:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm -ba --sign b*.spec</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+* Package: blather
+&hellip;
+Binary Packaging: blather-7.9-1
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/RPMS/i386/blather-7.9-1.i386.rpm
+&hellip;
+Source Packaging: blather-7.9-1
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
+&hellip;
+* Package: bother
+&hellip;
+Binary Packaging: bother-3.5-1
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/RPMS/i386/bother-3.5-1.i386.rpm
+&hellip;
+Source Packaging: bother-3.5-1
+&hellip;
+Generating signature: 1002
+Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
+# 
+</screen>
+</figure>
+Using the <tt?>--sign</tt?> option makes it as easy to sign one package as
+it is to sign one hundred.  But what happens if you need to change your
+public key?  Will you need to rebuild every single one of your packages
+just to update the signature?
+
+<indexterm>
+<primary>sign@<tt?>--sign</tt?> option!using with multiple builds|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>sign@<tt?>--sign</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-pgp-">
+<title><tt?>--resign</tt?> -- Replace a Package's Signature(s)</title>
+<indexterm>
+<primary>resign@<tt?>--resign</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As we mentioned at the end of the previous section, from time to time it
+may be necessary to change your public key.  Certainly this would be
+necessary if your key's security was compromised, but other, more mundane
+situations might require this.
+
+Fortunately, RPM has an option that permits you to replace the signature on
+an already-built package, with a new one.  The option is called
+<tt?>--resign</tt?>, and here's an example of its use:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --resign blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+#
+</screen>
+</figure>
+While the output is not as exciting as a package build, the
+<tt?>--resign</tt?> option can be a life-saver if you need to change a
+package's signature, and you don't want to rebuild.
+
+As you might have guessed, the <tt?>--resign</tt?> option works properly on
+multiple package files:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --resign b*.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+bother-3.5-1.i386.rpm:
+#
+</screen>
+</figure>
+<sect3 id="s3-rpm-pgp-">
+<title>There Are Limits, However&hellip;</title>
+<indexterm>
+<primary>resign@<tt?>--resign</tt?> option!limitations to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+Unfortunately, older package files cannot be re-signed.  The package file
+must be in version 3 format, at least.  If you attempt to resign a package
+that is too old, here's what you'll see:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --resign blah.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blah.rpm:
+blah.rpm: Can't re-sign v2.0 RPM
+#
+</screen>
+</figure>
+Not sure what version your package files are at?  Just use the
+<tt?>file</tt?> command to check:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>file blather-7.9-1.i386.rpm</userinput>
+blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
+#
+</screen>
+</figure>
+The "<tt?>v3</tt?>" in <tt?>file</tt?>'s output indicates the package file
+format.
+
+<indexterm>
+<primary>resign@<tt?>--resign</tt?> option!limitations to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>resign@<tt?>--resign</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+<sect2 id="s2-rpm-pgp-">
+<title><tt?>--addsign</tt?> -- Add a Signature To a Package</title>
+<indexterm>
+<primary>addsign@<tt?>--addsign</tt?> option</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+The <tt?>--addsign</tt?> option, as the name suggests, is used to add
+another signature to the package.  It's pretty easy to see why someone
+would want to have a package that had been signed by the package builders.
+But what reason would there be for <emphasis>adding</emphasis> a signature to a package?
+
+One reason to have more than one signature on a package would be to provide
+a means of documenting the path of ownership from the package builder to
+the end-user.
+
+As an example, the division of a company creates a package and signs it
+with the division's key.  The company's headquarters then checks the
+package's signature and adds the corporate signature to the package, in
+essence stating that the signed package received by them is authentic.
+
+Continuing the example, the doubly-signed package makes its way to a
+retailer.  The retailer checks the package's signatures and, when they
+check out, adds their signature to the package.
+
+The package now makes its way to a company that wishes to deploy the
+package.  After checking every signature on the package, they know that it
+is an authentic copy, unchanged since it was first created.  Depending on
+the deploying company's internal controls, they may choose to add their own
+signature, thereby reassuring their employees that the package has received
+their corporate "blessing".
+
+After this lengthy example, the actual output from the <tt?>--addsign</tt?>
+option is a bit anti-climactic:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --addsign blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+#
+</screen>
+</figure>
+If we check the signatures of this package, we'll be able to see the
+multiple signatures:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --checksig blather-7.9-1.i386.rpm</userinput>
+blather-7.9-1.i386.rpm: size pgp pgp md5 OK
+#
+</screen>
+</figure>
+The two <tt?>pgp</tt?>'s in <tt?>--checksig</tt?>'s output clearly shows that
+the package has been signed twice.
+
+<sect3 id="s3-rpm-pgp-">
+<title>A Few Caveats</title>
+<indexterm>
+<primary>addsign@<tt?>--addsign</tt?> option!limitations to</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+As with the <tt?>--resign</tt?> option, the <tt?>--addsign</tt?> option
+cannot do its magic on pre-V3 package files:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --addsign blah.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blah.rpm:
+blah.rpm: Can't re-sign v2.0 RPM
+#
+</screen>
+</figure>
+OK, the error message may not be 100% accurate, but you get the idea.
+
+Another thing to be aware of is that the <tt?>--addsign</tt?> option does
+not check for multiple identical signatures.  Although it doesn't make much
+sense to do so, RPM will happily let you add the same signature as many
+times as you'd like:
+
+<figure id="sc-rpm-pgp-">
+<title>*** Enter New Title Here ***</title>
+<screen width="60">
+# <userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+# <userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+# <userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+# <userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
+Enter pass phrase: <userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+
+Pass phrase is good.
+blather-7.9-1.i386.rpm:
+# <userinput>rpm --checksig blather-7.9-1.i386.rpm</userinput>
+blather-7.9-1.i386.rpm: size pgp pgp pgp pgp md5 OK
+#
+</screen>
+</figure>
+As we can see from <tt?>--checksig</tt?>'s output, the package now has four
+identical signatures.  Maybe this is the digital equivalent of pressing
+down extra hard while writing your name&hellip;
+
+<indexterm>
+<primary>addsign@<tt?>--addsign</tt?> option!limitations to|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>addsign@<tt?>--addsign</tt?> option|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>PGP!signatures!signing packages|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+<indexterm>
+<primary>PGP!signatures!adding|)</primary>
+<secondary></secondary>
+<tertiary></tertiary>
+<see></see>
+</indexterm>
+
+</sect3>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+

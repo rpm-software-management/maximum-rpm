@@ -1,208 +1,228 @@
-<chapter id="ch-rpm-anywhere">
-<title>Making a Package That Can Build Anywhere</title>
-<!-- label: rpm-anywhere -->
+  <chapter id="ch-rpm-anywhere">
+    <title>Making a Package That Can Build Anywhere</title>
+    <!-- label: rpm-anywhere -->
 
-<indexterm>
-<primary>package!building anywhere</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <indexterm>
+      <primary>package!building anywhere</primary>
+      <secondary></secondary>
+    </indexterm>
 
-While RPM makes building packages as easy as possible, some of the default
-design decisions might not work well in a particular situation.  Here are
-two situations where RPM's method of package building may cause problems:
+    <para>
+      While RPM makes building packages as easy as possible, some of the default
+      design decisions might not work well in a particular situation.  Here are
+      two situations where RPM's method of package building may cause problems:
 
-<orderedlist>
-<listitem>
-<para>
-You are unable to dedicate a system to RPM package building, or the
-software you're packaging would disrupt the build system's operation if it
-were installed.
+      <orderedlist>
+        <listitem>
+          <para>
+            You are unable to dedicate a system to RPM package building, or the
+            software you're packaging would disrupt the build system's operation
+            if it were installed.
+          </para>
+        </listitem>
 
-</para>
-</listitem>
+        <listitem>
+          <para>
+            You would like to package software, but you don't have root access
+            to an appropriate build system.
+          </para>
+        </listitem>
+      </orderedlist>
+    </para>
 
-<listitem>
-<para>
-You would like to package software, but you don't have root access to
-an appropriate build system.
+    <para>
+      Either of these situations can be resolved by directing RPM to build,
+      install, and package the software in a different area on your build
+      system. It requires a bit of additional effort to accomplish this, but
+      taken a step at a time, it is not difficult.  Basically, the process can
+      be summed up by addressing the following steps:
 
-</para>
-</listitem>
+      <itemizedlist mark="bullet">
+        <listitem>
+          <para>
+            Writing the package's spec file to support a build root.
+          </para>
+        </listitem>
 
-</orderedlist>
-Either of these situations can be resolved by directing RPM to build,
-install, and package the software in a different area on your build
-system. It requires a bit of additional effort to accomplish this, but
-taken a step at a time, it is not difficult.  Basically, the process can be
-summed up by addressing the following steps:
+        <listitem>
+          <para>
+            Directing RPM to build software in a user-specified build area.
+          </para>
+        </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Writing the package's spec file to support a build root.
+        <listitem>
+          <para>
+            Specifying file attributes that RPM needs to set on installation.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
 
-</para>
-</listitem>
+    <para>
+      The methods discussed here are not required in every situation.  For
+      example, a system administrator developing a package on a production
+      system may only need to add support for a build root.  On the other hand,
+      a student wishing to build a package on a university system will need to
+      get around the lack of root access by implementing every method described
+      here.
+    </para>
 
-<listitem>
-<para>
-Directing RPM to build software in a user-specified build area.
+    <sect1 id="s1-rpm-anywhere-using-build-roots">
+      <title>Using Build Roots in a Package</title>
+      <!-- label: rpm-anywhere-buildroot -->
+      <indexterm>
+        <primary>build roots!defining</primary>
+        <secondary></secondary>
+      </indexterm>
 
-</para>
-</listitem>
+      <para>
+        Part of the process of packaging software with RPM is to actually build
+        the software and install it on the build system.  The installation of
+        software can only be accomplished by someone with root access, so a
+        non-privileged user will certainly need to handle RPM's installation
+        phase differently.  There are times, however, when even a person with
+        root access will not want RPM to copy new files into the system's
+        directories.  As mentioned above, the reasons might be due to the fact
+        that the software being packaged is already in use on the build system.
+        Another reason might be as mundane as not having enough free space
+        available to perform the install into the default directories.
+      </para>
+      <para>
+        Whatever the reason, RPM provides the ability to direct a given package
+        to install into an alternate root.  This alternate root is known as a
+        "build root".  Several requirements must be met in order for a build
+        root to be utilized:
 
-<listitem>
-<para>
-Specifying file attributes that RPM needs to set on installation.
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              A default build root must be defined in the package's spec file.
+            </para>
+          </listitem>
 
-</para>
-</listitem>
+          <listitem>
+            <para>
+              The installation method used by the software being packaged must
+              be able to support installation in an alternate root.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
 
-</itemizedlist>
-The methods discussed here are not required in every situation.  For
-example, a system administrator developing a package on a production system
-may only need to add support for a build root.  On the other hand, a
-student wishing to build a package on a university system will need to get
-around the lack of root access by implementing every method described here.
+      <para>
+        The first part is easy.  It entails adding the following line to the
+        spec file:
 
-<sect1 id="s1-rpm-anywhere-">
-<title>Using Build Roots in a Package</title>
-<!-- label: rpm-anywhere-buildroot -->
-<indexterm>
-<primary>build roots!defining</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Part of the process of packaging software with RPM is to actually build
-the software and install it on the build system.  The installation of
-software can only be accomplished by someone with root access, so a
-non-privileged user will certainly need to handle RPM's installation phase
-differently.  There are times, however, when even a person with root access
-will not want RPM to copy new files into the system's directories.  As
-mentioned above, the reasons might be due to the fact that the software
-being packaged is already in use on the build system.  Another reason
-might be as mundane as not having enough free space available to perform
-the install into the default directories.
-
-Whatever the reason, RPM provides the ability to direct a given package to
-install into an alternate root.  This alternate root is known as a "build
-root".  Several requirements must be met in order for a build root to be
-utilized:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-A default build root must be defined in the package's spec file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The installation method used by the software being packaged must be
-able to support installation in an alternate root.
-
-</para>
-</listitem>
-
-</itemizedlist>
-The first part is easy.  It entails adding the following line to the spec
-file:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-anywhere-buildroot-format">
+          <title>Format for the <command>buildroot</command> Tag Line</title>
+          <screen width="60">
+<computeroutput>
 BuildRoot: &lt;root&gt;
-</screen>
-</figure>
-Of course, you would replace "<tt?>&lt;root&gt;</tt?>" with the name of the
-directory in which you'd like the software to install.
-<footnote>
-<para>
-Keep in
-mind that the build root can be overridden at build-time using the
-<tt?>--buildroot</tt?> option or the <tt?>buildroot</tt?> <tt?>rpmrc</tt?> file
-entry.  See chapter <xref linkend="rpm-b-command"> for more details.
-</para>
-</footnote>
-  If, for
-example, you specify a build root of <tt?>/tmp/foo</tt?>, and the software
-you're packaging installs a file <tt?>bar</tt?> in <tt?>/usr/bin</tt?>, you'll
-find <tt?>bar</tt?> residing in <tt?>/tmp/foo/usr/bin</tt?> after the build.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Of course, you would replace "<command>&lt;root&gt;</command>" with the
+        name of the directory in which you'd like the software to install.
+        <footnote>
+          <para>
+            Keep in mind that the build root can be overridden at build-time
+            using the <command>--buildroot</command> option or the
+            <command>buildroot</command> <filename>rpmrc</filename> file entry.
+            See chapter <xref linkend="ch-rpm-b-command"> for more details.
+          </para>
+        </footnote>
+        If, for example, you specify a build root of
+        <filename>/tmp/foo</filename>, and the software you're packaging
+        installs a file <filename>bar</filename> in
+        <filename>/usr/bin</filename>, you'll find <filename>bar</filename>
+        residing in <filename>/tmp/foo/usr/bin</filename> after the build.
+      </para>
+      <para>
+        A note for you non-root package builders: make sure you can actually
+        write to the build root you specify!  Those of you with root access
+        should also make sure you choose your build root carefully.  For an
+        assortment of reasons, it's <emphasis>not</emphasis> a good idea to
+        declare a build root of "<filename>/</filename>"!  We'll get into the
+        reasons why shortly.
+      </para>
+      <para>
+        The final requirement for adding build root support is to make sure the
+        software's installation method can support installing into an alternate
+        root.  The difficulty in meeting this requirement can range from dead
+        simple to nearly impossible.  There are probably as many different ways
+        of approaching this as there are packages to build.  But in general,
+        some variant of the following approach is used:
 
-A note for you non-root package builders: make sure you can actually write
-to the build root you specify!  Those of you with root access should also
-make sure you choose your build root carefully.  For an assortment of
-reasons, it's <emphasis>not</emphasis> a good idea to declare a build root of
-"<tt?>/</tt?>"!  We'll get into the reasons why shortly.
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              The environment variable <envar>RPM_BUILD_ROOT</envar> is set by
+              RPM and contains the value of the build root to be used when the
+              software is built and installed.
+            </para>
+          </listitem>
 
-The final requirement for adding build root support is to make sure the
-software's installation method can support installing into an alternate
-root.  The difficulty in meeting this requirement can range from dead
-simple to nearly impossible.  There are probably as many different ways of
-approaching this as there are packages to build.  But in general, some
-variant of the following approach is used:
+          <listitem>
+            <para>
+              The <command>%install</command> section of the spec file is
+              modified to use <envar>RPM_BUILD_ROOT</envar> as part of the
+              installation process.
+            </para>
+          </listitem>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The environment variable <tt?>RPM_BUILD_ROOT</tt?> is set by RPM
-and contains the value of the build root to be used when the software
-is built and installed.
+          <listitem>
+            <para>
+              If the software is installed using <command>make</command>, the
+              makefile is modified to use <envar>RPM_BUILD_ROOT</envar> and to
+              create any directories that may not exist at installation time.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
 
-</para>
-</listitem>
+      <para>
+        Here's an example of how these components work together to utilize a
+        build root.  First, there's the definition of the build root in the spec
+        file:
 
-<listitem>
-<para>
-The <tt?>%install</tt?> section of the spec file is modified to use
-<tt?>RPM_BUILD_ROOT</tt?> as part of the installation process.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-If the software is installed using <tt?>make</tt?>, the makefile is
-modified to use <tt?>RPM_BUILD_ROOT</tt?> and to create any directories
-that may not exist at installation time.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Here's an example of how these components work together to utilize a build
-root.  First, there's the definition of the build root in the spec file:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-anywhere-buildroot-example">
+          <title>A Sample <command>buildroot</command> Tag Line</title>
+          <screen width="60">
+<computeroutput>
 BuildRoot: /tmp/cdplayer
-</screen>
-</figure>
-This line defines the build root as being <tt?>/tmp/cdplayer</tt?>.  All the
-files installed by this software will be placed under the <tt?>cdplayer</tt?>
-directory.  Next is the spec file's <tt?>%install</tt?> section:
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        This line defines the build root as being
+        <filename>/tmp/cdplayer</filename>.  All the files installed by this
+        software will be placed under the <filename>cdplayer</filename>
+        directory.  Next is the spec file's <command>%install</command> section:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-anywhere-install-section">
+          <title>The <command>%install</command> Section</title>
+          <screen width="60">
+<computeroutput>
 %install
 make ROOT="$RPM_BUILD_ROOT" install
-</screen>
-</figure>
-Since the software we're packaging uses <tt?>make</tt?> to perform the actual
-install, we simply define the environment variable <tt?>ROOT</tt?> to be the
-path defined by <tt?>RPM_BUILD_ROOT</tt?>.  So far, so good.  Things really
-start to get interesting in the software's <tt?>Makefile</tt?>, though:
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Since the software we're packaging uses <command>make</command> to
+        perform the actual install, we simply define the environment variable
+        <envar>ROOT</envar> to be the path defined by
+        <envar>RPM_BUILD_ROOT</envar>.  So far, so good.  Things really start to
+        get interesting in the software's <filename>Makefile</filename>, though:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-anywhere-makefile">
+          <title>The <filename>Makefile</filename></title>
+          <screen width="60">
+<computeroutput>
 install: cdp cdp.1.Z
 #       chmod 755 cdp
 #       cp cdp /usr/local/bin
@@ -213,25 +233,32 @@ install: cdp cdp.1.Z
 #       cp cdp.1 /usr/local/man/man1
         install -m 755 -o 0 -g 0 -d $(ROOT)/usr/local/man/man1/
         install -m 755 -o 0 -g 0 cdp.1 $(ROOT)/usr/local/man/man1/cdp.1
-</screen>
-</figure>
-In the example above, the commented lines were the original ones.  The
-uncommented lines perform the same function, but also support installation
-in the root specified by the environment variable <tt?>ROOT</tt?>.
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        In the example above, the commented lines were the original ones.  The
+        uncommented lines perform the same function, but also support
+        installation in the root specified by the environment variable
+        <envar>ROOT</envar>.
+      </para>
+      <para>
+        One point worth noting is that the <filename>Makefile</filename> now
+        takes extra pains to make sure the proper directory structure exists
+        before installing any files.  This is often necessary, as build roots
+        are deleted, in most cases, after the software has been packaged.  This
+        is why <command>install</command> is used with the <command>-d</command>
+        option --- to make sure the necessary directories have been created.
+      </para>
+      <para>
+        Let's see how it works:
 
-One point worth noting is that the <tt?>Makefile</tt?> now takes extra pains
-to make sure the proper directory structure exists before installing any
-files.  This is often necessary, as build roots are deleted, in most cases,
-after the software has been packaged.  This is why <tt?>install</tt?> is used
-with the <tt?>-d</tt?> option --- to make sure the necessary directories have
-been created.
-
-Let's see how it works:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ba cdplayer-1.0.spec</userinput>
+        <figure id="sc-rpm-anywhere-build-output">
+          <title>Output From a Build</title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<computeroutput>
 * Package: cdplayer
 Executing: %prep
 + cd /usr/src/redhat/BUILD
@@ -284,330 +311,332 @@ cdplayer-1.0.tgz
 82 blocks
 Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
-# 
-</screen>
-</figure>
-Looking over the output from the <tt?>%install</tt?> section, we first see
-that the <tt?>RPM_BUILD_ROOT</tt?> environment variable in the <tt?>make
-install</tt?> command, has been replaced with the path specified earlier in the
-spec file on the <tt?>BuildRoot:</tt?> line.  The <tt?>ROOT</tt?> environment
-variable used in the makefile now has the appropriate value, as can be seen
-in the various <tt?>install</tt?> commands that follow.
+</computeroutput>
+<prompt># </prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Looking over the output from the <command>%install</command> section, we
+        first see that the <envar>RPM_BUILD_ROOT</envar> environment variable in
+        the <command>make install</command> command, has been replaced with the
+        path specified earlier in the spec file on the
+        <command>BuildRoot:</command> line.  The <envar>ROOT</envar> environment
+        variable used in the makefile now has the appropriate value, as can be
+        seen in the various <command>install</command> commands that follow.
+      </para>
+      <para>
+        Note, also, that we use <command>install</command>'s
+        <command>-d</command> option to ensure that every directory in the path
+        exists before we actually install the software.  Unfortunately, we can't
+        do this and install the file in one command.
+      </para>
+      <para>
+        Looking at the section labeled <computeroutput>Executing:\ special
+        doc</computeroutput>, we find that RPM is doing something similar for
+        us.  It starts by making sure there is no pre-existing documentation
+        directory.  Next, RPM creates the documentation directory and copies
+        files into it.
+      </para>
+      <para>
+        The remainder of this example is identical to that of a package being
+        built without a build root being specified.  However, although the
+        output is identical, there is one crucial difference.  When the binary
+        package is created, instead of simply using each line in the
+        <command>%files</command> list verbatim, RPM prepends the build root
+        path first.  If this wasn't done, RPM would attempt to find the files,
+        relative to the system's root directory, and would, of course, fail.
+        Because of the automatic prepending of the build root, it's important to
+        <emphasis>not</emphasis> include the build root path in any
+        <command>%files</command> list entry.  Otherwise, the files would not be
+        found by RPM, and the build would fail.
+      </para>
+      <para>
+        Although RPM has to go through a bit of extra effort to locate the files
+        to be packaged, the resulting binary package is indistinguishable from
+        the same package created without using a build root.
+      </para>
 
-Note, also, that we use <tt?>install</tt?>'s <tt?>-d</tt?> option to ensure
-that every directory in the path exists before we actually install the
-software.  Unfortunately, we can't do this and install the file in one
-command.
+      <sect2 id="s2-rpm-anywhere-things-to-consider">
+        <title>Some Things to Consider</title>
+        <indexterm>
+          <primary>build roots!issues surrounding</primary>
+          <secondary></secondary>
+        </indexterm>
 
-Looking at the section labeled <tt?>Executing:\ special doc</tt?>, we find
-that RPM is doing something similar for us.  It starts by making sure there
-is no pre-existing documentation directory.  Next, RPM creates the
-documentation directory and copies files into it.
+        <para>
+          Once the necessary modifications have been made to support a build
+          root, it's necessary for the package builder to keep some issues in
+          mind.  The first is that the build root specified in the spec file can
+          be overridden.  RPM will set the build root (and therefore, the value
+          of <envar>$RPM_BUILD_ROOT</envar>) to one of the following values:
 
-The remainder of this example is identical to that of a package being
-built without a build root being specified.  However, although the output
-is identical, there is one crucial difference.  When the binary package is
-created, instead of simply using each line in the <tt?>%files</tt?> list
-verbatim, RPM prepends the build root path first.  If this wasn't done, RPM
-would attempt to find the files, relative to the system's root directory,
-and would, of course, fail.  Because of the automatic prepending of the
-build root, it's important to <tt?>not</tt?> include the build root path in
-any <tt?>%files</tt?> list entry.  Otherwise, the files would not be found
-by RPM, and the build would fail.
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The value of <command>buildroot</command> in the spec file.
+              </para>
+            </listitem>
 
-Although RPM has to go through a bit of extra effort to locate the files to
-be packaged, the resulting binary package is indistinguishable from the
-same package created without using a build root.
+            <listitem>
+              <para>
+                The value of <command>buildroot</command> in an
+                <filename>rpmrc</filename> file.
+              </para>
+            </listitem>
 
-<sect2 id="s2-rpm-anywhere-">
-<title>Some Things to Consider</title>
-<indexterm>
-<primary>build roots!issues surrounding</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <listitem>
+              <para>
+                The value following the <command>--buildroot</command> option on
+                the command line.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
 
-Once the necessary modifications have been made to support a build root,
-it's necessary for the package builder to keep some issues in mind.  The
-first is that the build root specified in the spec file can be overridden.
-RPM will set the build root (and therefore, the value of
-<tt?>\$RPM_BUILD_ROOT</tt?>) to one of the following values:
+        <para>
+          Because of this, it's important that the spec file and the makefile be
+          written in such a way that no assumptions about the build root are
+          made.  The main issue is that the build root must not be hard-coded
+          anywhere.  Always use the <envar>RPM_BUILD_ROOT</envar> environment
+          variable!
+        </para>
+        <para>
+          Another issue to keep in mind is cleaning up after the build.  Once
+          software builds and is packaged successfully, it's probably no longer
+          necessary to leave the build root in place.  Therefore, it's a good
+          idea to include the necessary commands in the spec file's
+          <command>%clean</command> section.  Here's an example:
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The value of <tt?>buildroot</tt?> in the spec file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The value of <tt?>buildroot</tt?> in an <tt?>rpmrc</tt?> file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The value following the <tt?>--buildroot</tt?> option on the command
-line.
-
-</para>
-</listitem>
-
-</itemizedlist>
-Because of this, it's important that the spec file and the makefile be
-written in such a way that no assumptions about the build root are made.
-The main issue is that the build root must not be hard-coded anywhere.
-Always use the <tt?>RPM_BUILD_ROOT</tt?> environment variable!
-
-Another issue to keep in mind is cleaning up after the build.  Once
-software builds and is packaged successfully, it's probably no longer
-necessary to leave the build root in place.  Therefore, it's a good idea to
-include the necessary commands in the spec file's <tt?>%clean</tt?> section.
-Here's an example:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-clean-section">
+            <title>The <command>%clean</command> Section</title>
+            <screen width="60">
+<computeroutput>
 %clean
 rm -rf $RPM_BUILD_ROOT
-</screen>
-</figure>
-Since RPM executes the <tt?>%clean</tt?> section after the binary package
-has been created, it's the perfect place to delete the build root tree.  In
-the example above, that's exactly what we're doing.  We're also doing the
-right thing by using the <tt?>RPM_BUILD_ROOT</tt?>, instead of a hard-coded
-path.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Since RPM executes the <command>%clean</command> section after the
+          binary package has been created, it's the perfect place to delete the
+          build root tree.  In the example above, that's exactly what we're
+          doing.  We're also doing the right thing by using the
+          <envar>RPM_BUILD_ROOT</envar>, instead of a hard-coded path.
+          <indexterm>
+            <primary>build roots!danger using</primary>
+            <secondary></secondary>
+          </indexterm>
+        </para>
+        <para>
+          The last issue to keep in mind revolves around the
+          <command>%clean</command> section we just created.  At the start of
+          the chapter, we mentioned that it's not a good idea to define a build
+          root of "<filename>/</filename>".  The <command>%clean</command>
+          section is why: If the build root was set to "<filename>/</filename>",
+          the <command>%clean</command> section would blow away your root
+          filesystem!  Keep in mind that this can bite you, even if the
+          package's spec file doesn't specify "<filename>/</filename>" as a
+          build root.  It's possible to use the <command>--buildroot</command>
+          option to specify a dangerous build root, too:
 
-<indexterm>
-<primary>build roots!danger using</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <figure id="sc-rpm-anywhere-buildroot-danger">
+            <title>
+              A Dangerous Use of the <command>--buildroot</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ba --buildroot / cdplayer-1.0.spec</userinput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          But for all the possible hazards using build roots can pose for the
+          careless, it's the only way to prevent a build from disrupting the
+          operation of certain packages on the build system.  And for the person
+          wanting to build packages without root access, it's the first of three
+          steps necessary to accomplish the task.  The next step is to direct
+          RPM to build the software in a directory other than RPM's default one.
+        </para>
+      </sect2>
+    </sect1>
 
-The last issue to keep in mind revolves around the <tt?>%clean</tt?>
-section we just created.  At the start of the chapter, we mentioned that
-it's not a good idea to define a build root of "<tt?>/</tt?>".  The
-<tt?>%clean</tt?> section is why: If the build root was set to
-"<tt?>/</tt?>", the <tt?>%clean</tt?> section would blow away your root
-filesystem!  Keep in mind that this can bite you, even if the package's
-spec file doesn't specify "<tt?>/</tt?>" as a build root.  It's possible to
-use the <tt?>--buildroot</tt?> option to specify a dangerous build root,
-too:
+    <sect1 id="s1-rpm-anywhere-different-build-area">
+      <title>Having RPM Use a Different Build Area</title>
+      <indexterm>
+        <primary>build area!alternate</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# rpm -ba --buildroot / cdplayer-1.0.spec
-</screen>
-</figure>
-But for all the possible hazards using build roots can pose for the
-careless, it's the only way to prevent a build from disrupting the
-operation of certain packages on the build system.  And for the person
-wanting to build packages without root access, it's the first of three
-steps necessary to accomplish the task.  The next step is to direct RPM to
-build the software in a directory other than RPM's default one.
+      <para>
+        While RPM's build root requires a certain amount of spec file and make
+        file tweaking in order to get it working properly, directing RPM to
+        perform the build in a different directory is a snap.  The hardest part
+        is to create the directories RPM will use during the build process.
+      </para>
 
-<indexterm>
-<primary>build roots!danger using|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-anywhere-creating-build-area">
+        <title>Setting up a Build Area</title>
+        <indexterm>
+          <primary>build area!alternate!creating</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-<indexterm>
-<primary>build roots!issues surrounding|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          RPM's build area consists of five directories in the top-level:
 
-<indexterm>
-<primary>build roots!defining|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <orderedlist>
+            <listitem>
+              <para>
+                The <filename>BUILD</filename> directory is where the software
+                is unpacked and built.
+              </para>
+            </listitem>
 
-</sect2>
+            <listitem>
+              <para>
+                The <filename>RPMS</filename> directory is where the newly
+                created binary package files are written.
+              </para>
+            </listitem>
 
-</sect1>
+            <listitem>
+              <para>
+                The <filename>SOURCES</filename> directory contains the original
+                sources, patches, and icon files.
+              </para>
+            </listitem>
 
-<sect1 id="s1-rpm-anywhere-">
-<title>Having RPM Use a Different Build Area</title>
-<indexterm>
-<primary>build area!alternate</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <listitem>
+              <para>
+                The <filename>SPECS</filename> directory contains the spec files
+                for each package to be built.
+              </para>
+            </listitem>
 
-While RPM's build root requires a certain amount of spec file and make file
-tweaking in order to get it working properly, directing RPM to perform the
-build in a different directory is a snap.  The hardest part is to create
-the directories RPM will use during the build process.
+            <listitem>
+              <para>
+                The <filename>SRPMS</filename> directory is where the newly
+                created source package files are written.
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
 
-<sect2 id="s2-rpm-anywhere-">
-<title>Setting up a Build Area</title>
-<indexterm>
-<primary>build area!alternate!creating</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          The description of the <filename>RPMS</filename> directory above, is
+          missing one key point.  Since the binary package files are specific to
+          an architecture, the directory actually contains one or more
+          subdirectories, one for each architecture.  It is in these
+          subdirectories that RPM will write the binary package files.
+        </para>
+        <para>
+          Let's start by creating the directories.  We can even do it with one
+          command:
 
-RPM's build area consists of five directories in the top-level:
-
-<orderedlist>
-<listitem>
-<para>
-The <tt?>BUILD</tt?> directory is where the software is unpacked and
-built.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <tt?>RPMS</tt?> directory is where the newly created binary package
-files are written.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <tt?>SOURCES</tt?> directory contains the original sources,
-patches, and icon files.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <tt?>SPECS</tt?> directory contains the spec files for each package
-to be built.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <tt?>SRPMS</tt?> directory is where the newly created source
-package files are written.
-
-</para>
-</listitem>
-
-</orderedlist>
-The description of the <tt?>RPMS</tt?> directory above, is missing one key
-point.  Since the binary package files are specific to an architecture,
-the directory actually contains one or more subdirectories, one for each
-architecture.  It is in these subdirectories that RPM will write the binary
-package files.
-
-Let's start by creating the directories.  We can even do it with one
-command:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>pwd</userinput>
+          <figure id="sc-rpm-anywhere-creating-build-area">
+            <title>Creating the Build Directories</title>
+            <screen width="60">
+<prompt>% </prompt><userinput>pwd</userinput>
 /home/ed
 % <userinput>mkdir mybuild</userinput>\
-?  <userinput>mybuild/BUILD</userinput>\
-?  <userinput>mybuild/RPMS</userinput>\
-?  <userinput>mybuild/RPMS/i386</userinput>\
-?  <userinput>mybuild/SOURCES</userinput>\
-?  <userinput>mybuild/SPECS</userinput>\
-?  <userinput>mybuild/SRPMS</userinput>
-%
-</screen>
-</figure>
-That's all there is to it.  You may have noticed that we created a
-subdirectory to <tt?>RPMS</tt?> called <tt?>i386</tt?> --- This is the
-architecture-specific subdirectory for Intel x86-based systems, which is
-our example build system.
+<prompt>?  </prompt><userinput>mybuild/BUILD</userinput>\
+<prompt>?  </prompt><userinput>mybuild/RPMS</userinput>\
+<prompt>?  </prompt><userinput>mybuild/RPMS/i386</userinput>\
+<prompt>?  </prompt><userinput>mybuild/SOURCES</userinput>\
+<prompt>?  </prompt><userinput>mybuild/SPECS</userinput>\
+<prompt>?  </prompt><userinput>mybuild/SRPMS</userinput>
+<prompt>%</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          That's all there is to it.  You may have noticed that we created a
+          subdirectory to <filename>RPMS</filename> called
+          <filename>i386</filename> --- This is the architecture-specific
+          subdirectory for Intel x86-based systems, which is our example build
+          system.
+        </para>
+        <para>
+          The next step in getting RPM to use a different build area is telling
+          RPM where the new build area is.  And it's almost as easy as creating
+          the build area itself.
+        </para>
+      </sect2>
 
-The next step in getting RPM to use a different build area is telling RPM
-where the new build area is.  And it's almost as easy as creating the build
-area itself.
+      <sect2 id="s2-rpm-anywhere-using-new-build-area">
+        <title>Directing RPM to Use the New Build Area</title>
+        <indexterm>
+          <primary>build area!alternate!using</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-<indexterm>
-<primary>build area!alternate!creating|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <para>
+          All that's required to get RPM to start using the new build area is to
+          define an alternate value for <command>topdir</command> in an rpmrc
+          file.  For the non-root user, this means putting the following line in
+          a file called <filename>.rpmrc</filename>, located in your home
+          directory:
 
-</sect2>
-
-<sect2 id="s2-rpm-anywhere-">
-<title>Directing RPM to Use the New Build Area</title>
-<indexterm>
-<primary>build area!alternate!using</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-All that's required to get RPM to start using the new build area is to
-define  an alternate value for <tt?>topdir</tt?> in an rpmrc file.  For the
-non-root user, this means putting the following line in a file called
-<tt?>.rpmrc</tt?>, located in your home directory:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-rpmrc-entry">
+            <title>Format of the <command>topdir</command> Tag Line</title>
+            <screen width="60">
+<computeroutput>
 topdir: &lt;path&gt;
-</screen>
-</figure>
-By replacing "<tt?>&lt;path&gt;</tt?>" with the path to the new build area's
-top-level directory, RPM will attempt to use it the next time a build is
-performed.  Using our newly created build area as an example, we'll set
-<tt?>topdir</tt?> to <tt?>/home/ed/mybuild</tt?>:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          By replacing "<command>&lt;path&gt;</command>" with the path to the
+          new build area's top-level directory, RPM will attempt to use it the
+          next time a build is performed.  Using our newly created build area as
+          an example, we'll set <command>topdir</command> to
+          <filename>/home/ed/mybuild</filename>:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-">
+            <title>
+              Adding the <command>topdir</command> Tag to
+              <filename>~/.rpmrc</filename>
+            </title>
+            <screen width="60">
+<computeroutput>
 topdir: /home/ed/mybuild
-</screen>
-</figure>
-That's all there is to it.  Now it's time to try a build.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          That's all there is to it.  Now it's time to try a build.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>build area!alternate!using|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-anywhere-performing-build">
+        <title>Performing a Build in a New Build Area</title>
+        <indexterm>
+          <primary>build area!alternate!building in</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
 
-</sect2>
+        <para>
+          In the following example, a non-root user attempts to build the
+          <filename>cdplayer</filename> package in a personal build area.  If
+          the user has modified <filename>rpmrc</filename> file entries to
+          change the default build area, the command used to start the build is
+          just like the one used by a root user.  Otherwise, the
+          <command>--buildroot</command> option will need to be used:
 
-<sect2 id="s2-rpm-anywhere-">
-<title>Performing a Build in a New Build Area</title>
-<indexterm>
-<primary>build area!alternate!building in</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-In the following example, a non-root user attempts to build the
-<tt?>cdplayer</tt?> package in a personal build area.  If the user has
-modified <tt?>rpmrc</tt?> file entries to change the default build area, the
-command used to start the build is just like the one used by a root user.
-Otherwise, the <tt?>--buildroot</tt?> option will need to be used:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>cd /home/ed/mybuild/SPECS</userinput>
-% <userinput>rpm -ba --buildroot /home/ed/mybuildroot cdplayer-1.0.spec</userinput>
+          <figure id="sc-rpm-anywhere-build-in-new-area">
+            <title>
+              Output From a Build in <filename>/home/ed/mybuildroot</filename>
+            </title>
+            <screen width="60">
+<prompt>% </prompt><userinput>cd /home/ed/mybuild/SPECS</userinput>
+<prompt>% </prompt><userinput>rpm -ba --buildroot /home/ed/mybuildroot cdplayer-1.0.spec</userinput>
+<computeroutput>
 * Package: cdplayer
 + umask 022
 Executing: %prep
@@ -641,28 +670,37 @@ install: /home/ed/mybuildroot/cdplayer/usr/local/bin/: Operation not
 permitted
 make: *** [install] Error 1
 Bad exit status
-% 
-</screen>
-</figure>
-Things started off pretty well --- The <tt?>%prep</tt?> section of the spec
-file unpacked the sources into the new build area, as did the
-<tt?>%build</tt?> section.  The build was proceeding normally in the
-user-specified build area, and root access was not required.  In the
-<tt?>%install</tt?> section, however, things started to fall apart.  What
-happened?
+</computeroutput>
+<prompt>% </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Things started off pretty well --- The <command>%prep</command>
+          section of the spec file unpacked the sources into the new build area,
+          as did the <command>%build</command> section.  The build was
+          proceeding normally in the user-specified build area, and root access
+          was not required.  In the <command>%install</command> section,
+          however, things started to fall apart.  What happened?
+        </para>
+        <para>
+          Take a look at that <command>install</command> command.  The two
+          options, "<command>-o 0</command>" and "<command>-g 0</command>",
+          dictate that the directories to be created in the build root are to be
+          owned by the root account.  Since the user performing this build did
+          not have root access, the <command>install</command> failed, and
+          rightly so.
+        </para>
+        <para>
+          OK, let's remove the offending options and see where that gets us.
+          Here's the install section of the make file after our modifications:
 
-Take a look at that <tt?>install</tt?> command.  The two options,
-"<tt?>-o 0</tt?>" and "<tt?>-g 0</tt?>", dictate that the directories to be
-created in the build root are to be owned by the root account.  Since the
-user performing this build did not have root access, the <tt?>install</tt?>
-failed, and rightly so.
-
-OK, let's remove the offending options and see where that gets us.  Here's
-the install section of the make file after our modifications:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-build-in-new-area2">
+            <title>
+              A Second Build in <filename>/home/ed/mybuildroot</filename>
+            </title>
+            <screen width="60">
+<computeroutput>
 install: cdp cdp.1.Z
 	install -m 755 -d $(ROOT)/usr/local/bin/
 	install -m 755 cdp $(ROOT)/usr/local/bin/cdp
@@ -670,246 +708,278 @@ install: cdp cdp.1.Z
 	ln -s ./cdp $(ROOT)/usr/local/bin/cdplay
 	install -m 755 -d $(ROOT)/usr/local/man/man1/
 	install -m 755 cdp.1 $(ROOT)/usr/local/man/man1/cdp.1
-</screen>
-</figure>
-We'll spare you from having to read through another build, but this time it
-completed successfully.  Now, let's put our sysadmin hat on and install the
-newly built package:
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          We'll spare you from having to read through another build, but this
+          time it completed successfully.  Now, let's put our sysadmin hat on
+          and install the newly built package:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-anywhere-installing-package">
+            <title>
+              Installing the <command>--buildroot</command>'ed Package
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer       ##################################################
-#
-</screen>
-</figure>
-Well, that was easy enough.  Let's take a look at some of the files and
-make sure everything looks OK.  We know there are some files installed in
-<tt?>/usr/local/bin</tt?>, so let's check those:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Well, that was easy enough.  Let's take a look at some of the files
+          and make sure everything looks OK.  We know there are some files
+          installed in <filename>/usr/local/bin</filename>, so let's check
+          those:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>ls -al /usr/local/bin</userinput>
+          <figure id="sc-rpm-anywhere-file-listing">
+            <title>
+              Listing of Files Installed From
+              <command>--buildroot</command>'ed Package
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al /usr/local/bin</userinput>
+<computeroutput>
 -rwxr-xr-x   1 ed       ed          40739 Sep 13 20:16 cdp*
 lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
-#
-</screen>
-</figure>
-Looks pretty good&hellip;\ Wait a minute!  What's up with the owner and
-group?  The answer is simple: User <tt?>ed</tt?> ran the build, which
-executed the make file, which ran <tt?>install</tt?>, which created the
-files.  Since <tt?>ed</tt?> created the files, they are owned by him.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Looks pretty good&hellip; Wait a minute!  What's up with the owner and
+          group?  The answer is simple: User <filename>ed</filename> ran the
+          build, which executed the make file, which ran
+          <command>install</command>, which created the files.  Since
+          <filename>ed</filename> created the files, they are owned by him.
+        </para>
+        <para>
+          This brings up an interesting point.  Software must be installed with
+          very specific file ownership and permissions.  But a non-root user
+          can't create files that are owned by anyone other than his or herself.
+          What is a non-root user to do?
+        </para>
+      </sect2>
+    </sect1>
 
-This brings up an interesting point.  Software must be installed with very
-specific file ownership and permissions.  But a non-root user can't create
-files that are owned by anyone other than his or herself.  What is a
-non-root user to do?
+    <sect1 id="s1-rpm-anywhere-specifying-file-attributes">
+      <title>Specifying File Attributes</title>
+      <indexterm>
+        <primary>file attributes, specifying</primary>
+      </indexterm>
 
-<indexterm>
-<primary>build area!alternate!building in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        In cases where the package builder cannot create the files to be
+        packaged with the proper ownership and permissions, the
+        <command>%attr</command> macro can be used to make things right.
+      </para>
 
-<indexterm>
-<primary>build area!alternate|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-anywhere-attr-macro">
+        <title><command>%attr</command> --- How Does It Work?</title>
 
-</sect2>
+        <para>
+          The <command>%attr</command> macro has the following format:
 
-</sect1>
+          <figure id="sc-rpm-anywhere-attr-format">
+            <title>Format of the <command>%attr</command> Macro</title>
+            <screen width="60">
+<computeroutput>
+%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>&lt;file&gt;</userinput>
+</computeroutput>
+            </screen>
+          </figure>
 
-<sect1 id="s1-rpm-anywhere-">
-<title>Specifying File Attributes</title>
-<indexterm>
-<primary>file attributes, specifying</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                The <command>&lt;mode&gt;</command> is represented in
+                traditional numeric fashion.
+              </para>
+            </listitem>
 
-In cases where the package builder cannot create the files to be packaged
-with the proper ownership and permissions, the <tt?>%attr</tt?> macro can be
-used to make things right.
+            <listitem>
+              <para>
+                The <command>&lt;user&gt;</command> is specified by the login
+                name of the user.  Numeric UIDs are <emphasis>not</emphasis>
+                used, for reasons we'll explore in a moment.
+              </para>
+            </listitem>
 
-<sect2 id="s2-rpm-anywhere-">
-<title><tt?>\%attr</tt?> --- How Does It Work?</title>
-The <tt?>%attr</tt?> macro has the following format:
+            <listitem>
+              <para>
+                The <command>&lt;group&gt;</command> is specified by the group's
+                name, as entered in <filename>/etc/group</filename>.  Numeric
+                GIDs are <emphasis>not</emphasis> used, either.  Yes, we'll be
+                discussing that, too!
+              </para>
+            </listitem>
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <emphasis>&lt;file&gt;</emphasis>
-</screen>
-</figure>
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-The <tt?>&lt;mode&gt;</tt?> is represented in traditional numeric fashion.
+            <listitem>
+              <para>
+                <command><userinput>&lt;file&gt;</userinput></command>
+                represents the file.  Shell-style globbing is supported.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
 
-</para>
-</listitem>
+        <para>
+          There are a couple other wrinkles to using the
+          <command>%attr</command> macro.  If a particular file attribute
+          doesn't need to be specified, that attribute can be replaced with a
+          dash "<command>-</command>" and <command>%attr</command> will not
+          change it.  Say, for instance, that a package's files are installed
+          with the permissions correctly set, as they almost always are.
+          Instead of having to go to the trouble of entering the permissions for
+          each and every file, each file can have the same
+          <command>%attr</command>:
 
-<listitem>
-<para>
-The <tt?>&lt;user&gt;</tt?> is specified by the login name of the user.  Numeric
-UIDs are <emphasis>not</emphasis> used, for reasons we'll explore in a moment.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <tt?>&lt;group&gt;</tt?> is specified by the group's name, as entered in
-<tt?>/etc/group</tt?>.  Numeric GIDs are <emphasis>not</emphasis> used, either.  Yes, we'll
-be discussing that, too!
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-<tt?><emphasis>&lt;file&gt;</tt?></emphasis> represents the file.  Shell-style globbing is
-supported.
-
-</para>
-</listitem>
-
-</itemizedlist>
-There are a couple other wrinkles to using the <tt?>%attr</tt?> macro.  If a
-particular file attribute doesn't need to be specified, that attribute can
-be replaced with a dash "<tt?>-</tt?>" and <tt?>%attr</tt?> will not change
-it.  Say, for instance, that a package's files are installed with the
-permissions correctly set, as they almost always are.  Instead of having to
-go to the trouble of entering the permissions for each and every file, each
-file can have the same <tt?>%attr</tt?>:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-attr-dash-usage">
+            <title>Using a Deash With the <command>%attr</command> Macro</title>
+            <screen width="60">
+<computeroutput>
 %attr(-, root, root)
-</screen>
-</figure>
-This works for user and group specifications, as well.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          This works for user and group specifications, as well.
+        </para>
+        <para>
+          The other wrinkle is that, although we've been showing the three file
+          attributes separated by commas, in reality they could be separated by
+          spaces as well.  Whichever delimiter you choose, it pays to be
+          consistent throughout a spec file.
+        </para>
+        <para>
+          Let's fix up <filename>cdplayer</filename> with a liberal sprinkling
+          of <command>%attr</command>s.  Here's what the
+          <command>%files</command> list looks like after we've had our way with
+          it:
 
-The other wrinkle is that, although we've been showing the three file
-attributes separated by commas, in reality they could be separated by
-spaces as well.  Whichever delimiter you choose, it pays to be consistent
-throughout a spec file.
-
-Let's fix up <tt?>cdplayer</tt?> with a liberal sprinkling of
-<tt?>%attr</tt?>s.  Here's what the <tt?>%files</tt?> list looks like after
-we've had our way with it:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-anywhere-attr-in-file-list">
+            <title>
+              <command>%attr</command> Macros in the <command>%files</command>
+              List
+            </title>
+            <screen width="60">
+<computeroutput>
 %files
 %attr(-, root, root) %doc README
 %attr(4755, root, root) /usr/local/bin/cdp
 %attr(-, root, root) /usr/local/bin/cdplay
 %attr(-, root, rot) /usr/local/man/man1/cdp.1
-</screen>
-</figure>
-A couple points are worth noting here.  The line for <tt?>README</tt?> shows
-that multiple macros can be used on a line --- in this case, one to set
-file attributes, and one to mark the file as being documentation.  The
-<tt?>%attr</tt?> for <tt?>/usr/local/bin/cdp</tt?> declares the file to be
-setuid root.  If it sends a shiver down your spine to know that anybody can
-create a package that will run setuid root when installed on your system
---- Good!  Just because RPM makes it easy to install software doesn't mean
-that you should blindly install every package you find.
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          A couple points are worth noting here.  The line for
+          <filename>README</filename> shows that multiple macros can be used on
+          a line --- in this case, one to set file attributes, and one to mark
+          the file as being documentation.  The <command>%attr</command> for
+          <filename>/usr/local/bin/cdp</filename> declares the file to be setuid
+          root.  If it sends a shiver down your spine to know that anybody can
+          create a package that will run setuid root when installed on your
+          system --- Good!  Just because RPM makes it easy to install software
+          doesn't mean that you should blindly install every package you find.
+        </para>
+        <para>
+          A single RPM command can quickly point out areas of potential problems
+          and should be issued on any package file whose creators you don't
+          trust:
 
-A single RPM command can quickly point out areas of potential problems and
-should be issued on any package file whose creators you don't trust:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>rpm -qlvp ../RPMS/i386/cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-anywhere-setuid-file">
+            <title>
+              Finding a File That is
+              <command>setuid</command> <filename>root</filename>
+            </title>
+            <screen width="60">
+<prompt>% </prompt><userinput>rpm -qlvp ../RPMS/i386/cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 drwxr-xr-x-  root  root   1024 Sep 13 20:16 /usr/doc/cdplayer-1.0-1
 -rw-r--r---  root  root   1085 Nov 10 01:10 /usr/doc/cdplayer-1.0-1/README
 -rwsr-xr-x-  root  root  40739 Sep 13 21:32 /usr/local/bin/cdp
 lrwxrwxrwx-  root  root     47 Sep 13 21:32 /usr/local/bin/cdplay -&gt; ./cdp
 -rwxr-xr-x-  root   rot   4550 Sep 13 21:32 /usr/local/man/man1/cdp.1
-% 
-</screen>
-</figure>
-Sure enough --- there's that setuid root file.  In this case we trust the
-package builder, so let's install it:
+</computeroutput>
+<prompt>% </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Sure enough --- there's that setuid root file.  In this case we trust
+          the package builder, so let's install it:
 
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
+          <figure id="sc-rpm-anywhere-installing-rot-package">
+            <title>Installing the Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
+<computeroutput>
 cdplayer       ##################################################
 group rot does not exist - using root
-#
-</screen>
-</figure>
-What's this about group "<tt?>rot</tt?>"?  Looking back at the <tt?>rpm
--qlvp</tt?> output, it looks like <tt?>/usr/local/man/man1/cdp.1</tt?> has a bogus
-group.  Looking back even further, it's there in the <tt?>%attr</tt?> for
-that file.  Must have been a typo.  We could pretend that RPM used advanced
-artificial intelligence technology to come to the same conclusion as we
-did and made the appropriate change, but in reality, RPM simply used the
-only group identifier it could count on --- root.  RPM will do the same
-thing if it can't resolve a user specification.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          What's this about group "<filename>rot</filename>"?  Looking back at
+          the <command>rpm -qlvp</command> output, it looks like
+          <filename>/usr/local/man/man1/cdp.1</filename> has a bogus group.
+          Looking back even further, it's there in the <command>%attr</command>
+          for that file.  Must have been a typo.  We could pretend that RPM used
+          advanced artificial intelligence technology to come to the same
+          conclusion as we did and made the appropriate change, but in reality,
+          RPM simply used the only group identifier it could count on --- root.
+          RPM will do the same thing if it can't resolve a user specification.
+        </para>
+        <para>
+          Let's look at some of the files the package installed, including that
+          worrisome setuid root file:
 
-Let's look at some of the files the package installed, including that
-worrisome setuid root file:
-
-<figure id="sc-rpm-anywhere-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>ls /usr/local/bin</userinput>
+          <figure id="sc-rpm-anywhere-setuid-file-listing">
+            <title>Listing of Files Installed</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls /usr/local/bin</userinput>
+<computeroutput>
 total 558
 -rwsr-xr-x   1 root     root        40739 Sep 13 21:32 cdp*
 lrwxrwxrwx   1 root     root           47 Sep 13 21:36 cdplay -&gt; ./cdp*
-# 
-</screen>
-</figure>
-RPM did just what it was supposed to --- It gave the files the attributes
-specified by the <tt?>%attr</tt?> macros.
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          RPM did just what it was supposed to --- It gave the files the
+          attributes specified by the <command>%attr</command> macros.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>file attributes, specifying|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-anywhere-betcha">
+        <title>Betcha Thought We Forgot&hellip;</title>
 
-</sect2>
-
-<sect2 id="s2-rpm-anywhere-">
-<title>Betcha Thought We Forgot&hellip;</title>
-At the start of this section, we mentioned that the <tt?>%attr</tt?> macro
-wouldn't accept numeric uids or gids, and we promised to explain why.  The
-reason is simply that, even if a package requires a certain user or group
-to own the package's files, the user may not have the same uid/gid from
-system to system.  There --- wasn't that simple?
-
-In the next chapter, we'll discuss how to make your packaged software safe
-against modification by unscrupulous people.  The name of the game is
-Pretty Good Privacy, and you'll see how signing packages with PGP is easier
-than you think!
-
-<indexterm>
-<primary>package!building anywhere|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect2>
-
-</sect1>
-
-</chapter>
-
+        <para>
+          At the start of this section, we mentioned that the
+          <command>%attr</command> macro wouldn't accept numeric uids or gids,
+          and we promised to explain why.  The reason is simply that, even if a
+          package requires a certain user or group to own the package's files,
+          the user may not have the same uid/gid from system to system.  There
+          --- wasn't that simple?
+        </para>
+        <para>
+          In the next chapter, we'll discuss how to make your packaged software
+          safe against modification by unscrupulous people.  The name of the
+          game is Pretty Good Privacy, and you'll see how signing packages with
+          PGP is easier than you think!
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>

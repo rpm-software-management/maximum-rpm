@@ -1790,8 +1790,8 @@ Build failed.
           </figure>
         </para>
         <para>
-          Chapter <xref linkend="rpm-anywhere"> has complete instructions on the
-          modifications necessary to configure a package to use an alternate
+          Chapter <xref linkend="ch-rpm-anywhere"> has complete instructions on
+          the modifications necessary to configure a package to use an alternate
           build root, as well as methods to permit users to build packages
           without root access.  Assuming that the necessary modifications have
           been made, here is what the build would look like:

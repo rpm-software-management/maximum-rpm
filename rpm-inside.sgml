@@ -1366,8 +1366,9 @@ Prefix: /opt
             actually used when the software is <emphasis>installed</emphasis>
             during the build process.  In order for a build root to be defined
             and actually used, a number of issues must be taken into account.
-            These issues are covered in chapter <xref linkend="rpm-anywhere">.
-            This is what a <command>buildroot</command> tag would look like:
+            These issues are covered in chapter <xref
+            linkend="ch-rpm-anywhere">.  This is what a
+            <command>buildroot</command> tag would look like:
 
             <figure id="sc-rpm-inside-buildroot-example">
               <title>The <command>buildroot</command> Tag</title>
@@ -4015,7 +4016,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             permit users without root access to build packages.  The techniques
             for doing this (and a more in-depth discussion of the
             <command>%attr</command> directive) can be found in chapter <xref
-            linkend="rpm-anywhere">.
+            linkend="ch-rpm-anywhere">.
           </para>
         </sect3>
 
