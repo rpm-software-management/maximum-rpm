@@ -17,14 +17,14 @@
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
           <row>
-              <entry spanname="spanall">
+              <entry spanname="spanall" align="center">
                 <command>rpm -i</command> (or <command>--install</command>)
                 <emphasis>options</emphasis> <filename>file1.rpm</filename>
                 &hellip; <filename>fileN.rpm</filename>
               </entry>
             </row>
             <row>
-              <entry spanname="spanall">
+              <entry spanname="spanall" align="center">
                 Parameters
               </entry>
             </row>
@@ -33,12 +33,12 @@
                 <filename>file1.rpm</filename> &hellip;
                 <filename>fileN.rpm</filename>
               </entry>
-              <entry spanname="span23">
+              <entry spanname="span23" align="center">
                 One or more RPM package files (URLs OK)
               </entry>
             </row>
             <row>
-              <entry spanname="span12">
+              <entry spanname="span12" align="center">
                 Install-specific Options
               </entry>
               <entry>
@@ -215,7 +215,7 @@
               </entry>
             </row>
             <row>
-              <entry spanname="span12">
+              <entry spanname="span12" align="center">
                 General Options
               </entry>
               <entry>

@@ -17,14 +17,14 @@
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
           <row>
-              <entry spanname="spanall">
+              <entry spanname="spanall" align="center">
                 <command>rpm -e</command> (or <command>--erase</command>)
                 <emphasis>options</emphasis> <filename>pkg1</filename> &hellip;
                 <filename>pkgN</filename>
               </entry>
           </row>
           <row>
-            <entry spanname="spanall">
+            <entry spanname="spanall" align="center">
               Parameters
             </entry>
           </row>
@@ -32,12 +32,12 @@
             <entry>
               <filename>pkg1</filename> &hellip; <filename>pkgN</filename>
             </entry>
-            <entry spanname="span23">
+            <entry spanname="span23" align="center">
               One or more installed packages
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               Erase---specific Options
             </entry>
             <entry>
@@ -78,7 +78,7 @@
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               General Options
             </entry>
             <entry>

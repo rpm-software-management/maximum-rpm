@@ -1061,7 +1061,8 @@
                 <footnote>
                   <para>
                     For more information on RPM's signature checking capability,
-                    refer to section <xref linkend="rpm-K">.
+                    refer to section <xref
+                    linkend="s1-rpm-checksig-what-it-does">.
                   </para>
                 </footnote>
               </para>

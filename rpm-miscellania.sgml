@@ -1,0 +1,915 @@
+  <chapter id="ch-rpm-miscellania">
+    <title>Miscellania</title>
+    <!-- label: rpm-miscellania -->
+
+    <para>
+      As with any other large, complex subject, there are always some leftovers
+      --- things that just don't seem to fit in any one category.  RPM is no
+      exception.  This chapter covers those aspects of RPM that can only be
+      called "miscellania"&hellip;
+    </para>
+
+    <sect1 id="s1-rpm-miscellania-other-options">
+      <title>Other RPM Options</title>
+      <para>
+        The following options are not normally used on a day to day basis.
+        However, some of them can be quite important when the need arises.  One
+        such option is <command>--rebuilddb</command>.
+      </para>
+
+      <sect2 id="s2-rpm-miscellania-rebuilddb">
+        <title><command>--rebuilddb</command> --- Rebuild RPM database</title>
+        <indexterm>
+          <primary><command>--rebuilddb</command> option</primary>
+        </indexterm>
+
+        <para>
+          We all hope the day never comes, and for many of us, it never does.
+          But still, there is a chance that one day, while you're busy using RPM
+          to install or upgrade a package, you'll see this message:
+
+          <figure id="sc-rpm-miscellania-free-list-corrupt">
+            <title>A First Hint of Possible Problems</title>
+            <screen width="60">
+<computeroutput>
+free list corrupt (42)- contact rpm-list@redhat.com
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Once this happens, you'll find there's very little that you can do,
+          RPM-wise.  However, before you fire off an e-mail to the RPM mailing
+          list, you might try the <command>--rebuilddb</command> option.  The
+          format of the command is simple:
+
+          <figure id="sc-rpm-miscellania-rebuilddb-syntax">
+            <title>
+              Command Syntax For the <command>--rebuilddb</command> Option
+            </title>
+            <screen width="60">
+<command>
+rpm --rebuilddb
+</command>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The command produces no output, either.  After a few minutes, it
+          completes with nary a peep.  Here's an example of
+          <command>--rebuilddb</command> being used on an RPM database that
+          wasn't corrupt.  First, let's look at the files that comprise the
+          database:
+
+          <figure id="sc-rpm-miscellania-rebuilddb-setup">
+            <title>Listing of RPM Database Files</title>
+            <screen width="60">
+<prompt># </prompt><userinput>cd /var/lib/rpm</userinput>
+<prompt># </prompt><userinput>ls</userinput>
+<computeroutput>
+total 3534
+-rw-r--r--   1 root     root      1351680 Oct 17 10:35 fileindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 10:35 groupindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 10:35 nameindex.rpm
+-rw-r--r--   1 root     root      2342536 Oct 17 10:35 packages.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 10:35 providesindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 10:35 requiredby.rpm
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Then, we issue the command:
+
+          <figure id="sc-rpm-miscellania-rebuilddb-example">
+            <title>
+              Rebuilding an RPM Database With the <command>--rebuilddb</command>
+              Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm --rebuilddb</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          After a few minutes, the command completes, and we take a look at the
+          files again:
+
+          <figure id="sc-rpm-miscellania-rebuilddb-payoff">
+            <title>RPM Database Files After a Rebuild</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls</userinput>
+<computeroutput>
+total 3531
+-rw-r--r--   1 root     root      1351680 Oct 17 20:50 fileindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 20:50 groupindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 20:50 nameindex.rpm
+-rw-r--r--   1 root     root      2339080 Oct 17 20:50 packages.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 20:50 providesindex.rpm
+-rw-r--r--   1 root     root        16384 Oct 17 20:50 requiredby.rpm
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          You'll note that <filename>packages.rpm</filename> decreased in size.
+          This is due to a side-effect of the <command>--rebuilddb</command>
+          option -- While it is going through the database, it is getting rid of
+          unused portions of the database.  Our example was performed on a newly
+          installed system where only one or two packages had been upgraded, so
+          the reduction in size was small.  For a system that has been through a
+          complete upgrade, the difference would be more dramatic.
+        </para>
+        <para>
+          Does this mean that you should rebuild the database every once in a
+          while?  Not really.  Since RPM eventually will make use of the holes,
+          there's no major advantage to regular rebuilds.  However, when an
+          RPM-based system has undergone a major upgrade, it certainly wouldn't
+          hurt to spend a few minutes using <command>--rebuilddb</command> to
+          clean things up.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-initdb-option">
+        <title>
+          <command>--initdb</command> --- Create a New RPM Database
+        </title>
+        <indexterm>
+          <primary><command>--initdb</command> option</primary>
+        </indexterm>
+
+        <para>
+          If you are already using RPM, the <command>--initdb</command> option
+          is one you'll probably never have to use.  The
+          <command>--initdb</command> option is used to create a new RPM
+          database.  That's why you'll probably not need it if you're already
+          using RPM --- you already have an RPM database.
+        </para>
+        <para>
+          It might seem that the <command>--initdb</command> option would be
+          dangerous.  After all, won't it trash your current database if you
+          mistakenly use it?  Fortunately, the answer is no.  If there is an RPM
+          database in place already, it's still perfectly safe to use the
+          option, even though it won't accomplish much.  As an example, here's a
+          listing of the files that make up the RPM database on a &RHL;
+          system:
+
+          <figure id="sc-rpm-miscellania-rpm-database-files">
+            <title>File That Comprise a Typical RPM Database</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls /var/lib/rpm</userinput>
+<computeroutput>
+total 3559
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 conflictsindex.rpm
+-rw-r--r--   1 root     root      1351680 Jan  8 22:10 fileindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 groupindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 nameindex.rpm
+-rw-r--r--   1 root     root      2349640 Jan  8 22:10 packages.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 providesindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 requiredby.rpm
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Next, let's use the <command>--initdb</command> option, just to see
+          what it does to this database:
+
+          <figure id="sc-rpm-miscellania-initdb-on-existing-db">
+            <title>
+              Using the <command>--initdb</command> Option on an Existing RPM
+              Database
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm --initdb</userinput>
+<prompt># </prompt><userinput>ls /var/lib/rpm</userinput>
+<computeroutput>
+total 3559
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 conflictsindex.rpm
+-rw-r--r--   1 root     root      1351680 Jan  8 22:10 fileindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 groupindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 nameindex.rpm
+-rw-r--r--   1 root     root      2349640 Jan  8 22:10 packages.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 providesindex.rpm
+-rw-r--r--   1 root     root        16384 Jan  8 22:10 requiredby.rpm
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Since an RPM database existed already, the <command>--initdb</command>
+          option did no harm to it --- there was no change to the database
+          files.
+        </para>
+        <para>
+          The only other option that can be used with
+          <command>--initdb</command> is <command>--dbpath</command>.  This
+          permits the easy creation of a new RPM database in the directory
+          specified with the <command>--dbpath</command> option.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-quiet-option">
+        <title>
+          <command>--quiet</command> --- Produce as little output as possible
+        </title>
+        <indexterm>
+          <primary><command>--quiet</command> option</primary>
+        </indexterm>
+
+        <para>
+          Adding the <command>--quiet</command> option to any RPM command
+          directs RPM to produce as little output as possible.  For example,
+          RPM's build command (the subject of the second half of this book)
+          normally produces reams of output; by adding the
+          <command>--quiet</command> option, this is all you'll see:
+
+          <figure id="sc-rpm-miscellania-quiet-example">
+            <title>The <command>--quiet</command> Option in Action</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ba --quiet bother-3.5.spec</userinput>
+<computeroutput>
+* Package: bother
+1 block
+3 blocks
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>--quiet</command> option can silence even the mighty
+          <command>-vv</command> option:
+
+          <figure id="sc-rpm-miscellania-quiet-example2">
+            <title>
+              The <command>-quiet</command> Option and the
+              <command>-vv</command> Option: Who Wins?
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Uvv --quiet eject-1.2-2.i386.rpm</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-help-option">
+        <title><command>--help</command> --- Display a help message</title>
+        <indexterm>
+          <primary><command>--help</command> option</primary>
+        </indexterm>
+
+        <para>
+          RPM includes a concise built-in help message for those times when you
+          need a reminder about a particular command.  Normally you'll want to
+          use the <command>--help</command> option by itself, though you might
+          want to pipe the output through a pager such as
+          <command>less</command>, since the output is more than one screen
+          long:
+
+          <figure id="sc-rpm-miscellania-help-example">
+            <title>Using the <command>--help</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm --help|less</userinput>
+<computeroutput>
+RPM version 2.3
+Copyright (C) 1995 - Red Hat Software
+This may be freely redistributed under the terms of the GNU Public License
+
+usage:
+   --help               - print this message
+   --version    - print the version of rpm being used
+   all modes support the following arguments:
+      --rcfile &lt;file&gt;   - use &lt;file&gt; instead of /etc/rpmrc and $HOME/.rpmrc
+       -v                     - be a little more verbose
+       -vv                    - be incredibly verbose (for debugging)
+   -q                   - query mode
+      --root &lt;dir&gt;        - use &lt;dir&gt; as the top level directory
+      --dbpath &lt;dir&gt;      - use &lt;dir&gt; as the directory for the database
+      --queryformat &lt;s&gt;   - use s as the header format (implies -i)
+   install, upgrade and query (with -p) allow ftp URL's to be used in place
+   of file names as well as the following options:
+
+      --ftpproxy &lt;host&gt;   - hostname or IP of ftp proxy
+
+      --ftpport &lt;port&gt;    - port number of ftp server (or proxy)
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          This is just the first screen of RPM's help command.  To see the rest,
+          give the command a try.  Practically everything there is to know about
+          RPM is present in the <command>--help</command> output.  It's a bit
+          too concise to learn RPM from, but it's enough to refresh your memory
+          when the syntax of a particular option escapes you.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-version-option">
+        <title>
+          <command>--version</command> --- Display the current RPM version
+        </title>
+        <indexterm>
+          <primary><command>--version</command> option</primary>
+        </indexterm>
+
+        <para>
+          If you're not sure what version of RPM is presently installed on your
+          system, the easiest way to find out is to ask RPM itself using the
+          <command>--version</command> option:
+
+          <figure id="sc-rpm-miscellania-version-example">
+            <title>Using the <command>--version</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm --version</userinput>
+<computeroutput>
+RPM version 2.3
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-miscellania-rpm2cpio">
+      <title>Using <command>rpm2cpio</command></title>
+      <indexterm>
+        <primary><command>rpm2cpio</command>!use of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        From time to time, you might find it necessary to extract one or more
+        files from a package file.  One way to do this would be to:
+
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Install the package
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Make a copy of the file(s) you need
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Erase the package
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        An easier way would be to use <command>rpm2cpio</command>.
+      </para>
+
+      <sect2 id="s2-rpm-miscellania-rpm2cpio-what-it-does">
+        <title><command>rpm2cpio</command> --- What does it do?</title>
+        <indexterm>
+          <primary><command>rpm2cpio</command>!what it does</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          As the name implies, <command>rpm2cpio</command> takes an RPM package
+          file and converts it to a <command>cpio</command> archive.  Because
+          it's written to be used primarily as a filter, there's not much to be
+          specified.  <command>rpm2cpio</command> takes only only one argument,
+          and even <emphasis>that's</emphasis> optional!
+        </para>
+        <para>
+          The optional argument is the name of the package file to be converted.
+          If there is no filename specified on the command line,
+          <command>rpm2cpio</command> will simply read from standard input and
+          convert <emphasis>that</emphasis> to a <command>cpio</command>
+          archive.  Let's give it a try:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-output">
+            <title>Sample Output From <command>rpm2cpio</command></title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm</userinput>
+<computeroutput>
+0707020001a86a000081a4000000000000000000000001313118bb000002c200000008000
+000030000000000000000000000190000e73eusr/man/man8/logrotate.8." logrotate
+ - log fi
+le rotator
+.TH rpm 8 "28 November 1995" "Red Hat Software" "Red Hat Linux"
+.SH NAME
+</computeroutput>
+            </screen>
+          </figure>
+
+          (We've just shown the first few lines of output.)
+        </para>
+        <para>
+          What on earth is all that stuff?  Remember,
+          <command>rpm2cpio</command> is written as a filter.  It writes the
+          <command>cpio</command> archive contained in the package file to
+          standard output, which, if you've not redirected it somehow, is your
+          screen.  Here's a more reasonable example:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-example">
+            <title>
+              Using <command>rpm2cpio</command> to Convert a Package File to a
+              <command>cpio</command> Archive
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm &gt; blah.cpio</userinput>
+<prompt># </prompt><userinput>file blah.cpio</userinput>
+<computeroutput>
+blah.cpio: ASCII cpio archive (SVR4 with CRC)
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Here we've directed <command>rpm2cpio</command> to convert the
+          <filename>logrotate</filename> package file.  We've also redirected
+          <command>rpm2cpio</command>'s output to a file called
+          <filename>blah.cpio</filename>.  Next, using the
+          <command>file</command> command, we find that the resulting file is
+          indeed a true-blue <command>cpio</command> archive file.  The
+          following command is entirely equivalent to the one above and shows
+          <command>rpm2cpio</command>'s ability to read the package file from
+          its standard input:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-example2">
+            <title>Another Way to Use <command>rpm2cpio</command></title>
+            <screen width="60">
+<prompt># </prompt><userinput>cat logrotate-1.0-1.i386.rpm | rpm2cpio &gt; blah.cpio</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-rpm2cpio-listing-files">
+        <title>
+          A more real-world example --- Listing the files in a package file
+        </title>
+        <indexterm>
+          <primary><command>rpm2cpio</command>!use of!listing files in package</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          While there's nothing wrong with using <command>rpm2cpio</command> to
+          actually create a <command>cpio</command> archive file, it's takes a
+          few more steps and uses a bit more disk space than is strictly
+          necessary.  A somewhat cleaner approach would be to pipe
+          <command>rpm2cpio</command>'s output directly into
+          <command>cpio</command>:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-example3">
+            <title>Yet Another Way to Use <command>rpm2cpio</command></title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm  | cpio -t</userinput>
+<computeroutput>
+usr/man/man8/logrotate.8
+usr/sbin/logrotate
+14 blocks
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this example, we used the <command>-t</command> option to direct
+          <command>cpio</command> to produce a "table of contents" of the
+          archive created by <command>rpm2cpio</command>.  This can make it much
+          easier to get the right filename and path when you want to extract a
+          file.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-rpm2cpio-extract">
+        <title>Extracting one or more files from a package file</title>
+        <indexterm>
+          <primary><command>rpm2cpio</command>!use of!extracting files in package</primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          Continuing the example above, let's extract the man page from the
+          <filename>logrotate</filename> package.  In the table of contents, we
+          see that the full path is
+          <filename>usr/man/man8/logrotate.8</filename>.  All we need to do is
+          to use the filename and path as shown below:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-extracting-file">
+            <title>
+              Extracting Files From a Package Using <command>rpm2cpio</command>
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm2cpio logrotate-1.0-1.i386.rpm |cpio -ivd usr/man/man8/logrotate.8</userinput>
+<computeroutput>
+usr/man/man8/logrotate.8
+14 blocks
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this case, the <command>cpio</command> options
+          <command>-i</command>, <command>-v</command>, and
+          <command>-d</command> direct <command>cpio</command> to:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                Extract one or more files from an archive.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Display the names of any files processed, along with the size of
+                the archive file, in 512-byte blocks.
+                <footnote>
+                  <para>
+                    Note that the size displayed by <command>cpio</command> is
+                    the size of the <command>cpio</command> archive and not the
+                    package file.
+                  </para>
+                </footnote>
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Create any directories that precede the filename specified in
+                the <command>cpio</command> command.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          So where did the file end up?  The last option (<command>-d</command>)
+          to <command>cpio</command> provides a hint.  Let's take a look:
+
+          <figure id="sc-rpm-miscellania-rpm2cpio-files">
+            <title>Finding the File</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
+total 5
+-rw-rw-r--   1 root     root         3918 May 30 11:02 logrotate-1.0-1.i386.rpm
+drwx------   3 root     root         1024 Jul 14 12:42 usr
+</computeroutput>
+<prompt># </prompt><userinput>cd usr</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
+total 1
+drwx------   3 root     root         1024 Jul 14 12:42 man
+</computeroutput>
+<prompt># </prompt><userinput>cd man</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
+total 1
+drwx------   2 root     root         1024 Jul 14 12:42 man8
+</computeroutput>
+<prompt># </prompt><userinput>cd man8</userinput>
+<prompt># </prompt><userinput>ls -al</userinput>
+<computeroutput>
+total 1
+-rw-r--r--   1 root     root          706 Jul 14 12:42 logrotate.8
+</computeroutput>
+<prompt># </prompt><userinput>cat logrotate.8</userinput>
+<computeroutput>
+.\" logrotate - log file rotator
+.TH rpm 8 "28 November 1995" "Red Hat Software" "Red Hat Linux"
+.SH NAME
+logrotate \- log file rotator
+.SH SYNOPSIS
+\fBlogrotate\fP [configfiles] 
+.SH DESCRIPTION
+\fBlogrotate\fP is a tool to prevent log files from growing without
+&hellip;
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Since the current directory didn't have a
+          <filename>usr/man/man8/</filename> path in it, the
+          <command>-d</command> option caused <command>cpio</command> to create
+          all the directories leading up to the <filename>logrotate.8</filename>
+          file in the current directory.  Based on this, it's probably safest to
+          use <command>cpio</command> <emphasis>outside</emphasis> the normal
+          system directories unless you're comfortable with
+          <command>cpio</command>, and you know what you're doing!
+        </para>
+      </sect2>
+    </sect1>
+
+    <sect1 id="s1-rpm-miscellania-srpms">
+      <title>Source Package Files and How To Use Them</title>
+      <indexterm>
+        <primary>source package files!use of</primary>
+        <secondary></secondary>
+      </indexterm>
+
+      <para>
+        One day, you may run across a package file with a name similar to the
+        following:
+
+        <figure id="sc-rpm-miscellania-srpms-sample">
+          <title>A Strange New Package File?</title>
+          <screen width="60">
+<command>etcskel-1.0-3.<userinput>src</userinput>.rpm</command>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Notice the <filename>src</filename>.  Is that a new kind of computer?
+        If you use RPM on an Intel-based computer, you'd normally expect to find
+        <filename>i386</filename> there.  Maybe someone messed up the name of
+        the file.  Well, we know that the <command>file</command> command can
+        display information about a package file, even if the filename has been
+        changed.  We've used it before to figure out what package a file
+        contains:
+
+        <figure id="sc-rpm-miscellania-srpms-identifying-setup">
+          <title>Package Files and the <command>file</command> Command</title>
+          <screen width="60">
+<prompt># </prompt><userinput>file foo.bar</userinput>
+<computeroutput>
+foo.bar: RPM v2 bin i386 eject-1.2-2
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        In this example, <filename>foo.bar</filename> is an RPM version 2 file,
+        containing an executable package -- hence, the
+        "<filename>bin</filename>" -- built for Intel processors -- the
+        "<filename>i386</filename>".  The package is eject version 1.2, release
+        2.
+      </para>
+      <para>
+        Let's try the <command>file</command> command on this mystery file and
+        see what we can find out about it:
+
+        <figure id="sc-rpm-miscellania-srpms-payoff">
+          <title>
+            Using the <command>file</command> to Identify a Package File
+          </title>
+          <screen width="60">
+<prompt># </prompt><userinput>file etcskel-1.0-3.src.rpm</userinput>
+<computeroutput>
+etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Well, it's a package file all right --- for version 1.0, release 3 of
+        the etcskel package.  It's in RPM version 2 format, and built for
+        Intel-based systems.  But what does the "<filename>src</filename>" mean?
+      </para>
+
+      <sect2 id="s2-rpm-miscellania-srpms-source-code">
+        <title>A gentle introduction to source code</title>
+        <para>
+          This package file contains not the executable, or "binary", files that
+          a normal package contains, but rather the "source" files required to
+          create those binaries.  When programmers create a new program, they
+          write the instructions, often called "code", in one or more files.
+          The source code is then compiled into a binary that can be executed by
+          the computer.
+        </para>
+        <para>
+          As part of the process of building package files (a process we cover
+          in great detail in the second half of this book), two types of package
+          files are created:
+
+          <orderedlist>
+            <listitem>
+              <para>
+                The binary, or executable, package file
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                The source package file
+              </para>
+            </listitem>
+          </orderedlist>
+        </para>
+        <para>
+          The source package contains everything needed to recreate not only the
+          programs and associated files that are contained in the binary package
+          file, but the binary and source package files themselves.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-srpms-info-needed">
+        <title>
+          Do you <emphasis>really</emphasis> need more information than this?
+        </title>
+        <para>
+          The following discussion is going to get rather technical.  Unless
+          you're the type of person who likes to take other people's code and
+          modify it, chances are you won't need much more information than this.
+          But if you're still interested, let's explore further.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-srpms-what-can-i-do">
+        <title>So what can I do with it?</title>
+        <indexterm>
+          <primary>source package files!installing</primary>
+          <secondary></secondary>
+        </indexterm>
+
+        <para>
+          In the case of source package files, one of the things that can be
+          done with them is that they can be installed.  Let's try an install of
+          a source package:
+
+          <figure id="sc-rpm-miscellania-srpms-installing">
+            <title>Installing a Source Package File</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -i cdp-0.33-3.src.rpm</userinput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Well that doesn't tell us very much and, take our word for it, adding
+          <command>-v</command> doesn't improve the situation appreciably.
+          Let's haul out the big guns and try <command>-vv</command>:
+
+          <figure id="sc-rpm-miscellania-srpms-installing-vv">
+            <title>Using the <command>-vv</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -ivv cdp-0.33-3.src.rpm</userinput>
+<computeroutput>
+D: installing cdp-0.33-3.src.rpm
+Installing cdp-0.33-3.src.rpm
+D: package is a source package major = 2
+D: installing a source package
+D: sources in: ///usr/src/redhat/SOURCES
+D: spec file in: ///usr/src/redhat/SPECS
+D: file "cdp-0.33-cdplay.patch" complete
+D: file "cdp-0.33-fsstnd.patch" complete
+D: file "cdp-0.33.spec" complete
+D: file "cdp-0.33.tgz" complete
+D: renaming ///usr/src/redhat/SOURCES/cdp-0.33.spec to ///usr/src/redhat/SPECS/cdp-0.33.spec
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          What does this output tell us?  Well, RPM recognizes that the file is
+          a source package.  It mentions that sources (we know what
+          <emphasis>they</emphasis> are) are in
+          <filename>/usr/src/redhat/SOURCES</filename>.  Let's take a look:
+
+          <figure id="sc-rpm-miscellania-srpms-looking-around">
+            <title>Files Created by Installing a Source Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al /usr/src/redhat/SOURCES/</userinput>
+<computeroutput>
+-rw-rw-r--   1 root     root          364 Apr 24 22:35 cdp-0.33-cdplay.patch
+-rw-r--r--   1 root     root          916 Jan  8 12:07 cdp-0.33-fsstnd.patch
+-rw-r--r--   1 root     root       148916 Nov 10  1995 cdp-0.33.tgz
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          There are some files that seem to be related to
+          <filename>cdp</filename> there.  The two files ending with
+          "<filename>.patch</filename>" are patches to the source.  RPM permits
+          patches to be processed when building binary packages.  The patches
+          are bundled along with the original, unmodified sources in the source
+          package.
+        </para>
+        <para>
+          The last file is a gzipped tar file.  If you've gotten software off
+          the Internet, you're probably familiar with <command>tar</command>
+          files, gzipped or not.  If we look inside the file, we should see all
+          the usual kinds of things: README files, a Makefile or two, and some
+          source code:
+
+          <figure id="sc-rpm-miscellania-srpms-untarring">
+            <title>Inside the <command>tar</command> File</title>
+            <screen width="60">
+<prompt># </prompt><userinput>tar ztf cdp-0.33.tgz</userinput>
+<computeroutput>
+cdp-0.33/COPYING
+cdp-0.33/ChangeLog
+cdp-0.33/INSTALL
+cdp-0.33/Makefile
+cdp-0.33/README
+cdp-0.33/cdp
+cdp-0.33/cdp-0.33.lsm
+cdp-0.33/cdp.1
+cdp-0.33/cdp.1.Z
+cdp-0.33/cdp.c
+cdp-0.33/cdp.h
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          There's more, but you get the idea.  OK, so there are the sources.
+          But what is that "spec" file mentioned in the output?  It mentions
+          something about "<filename>/usr/src/redhat/SPECS</filename>", so let's
+          see what we have in that directory:
+
+          <figure id="sc-rpm-miscellania-srpms-spec-file">
+            <title>Finding the spec File</title>
+            <screen width="60">
+<prompt># </prompt><userinput>ls -al /usr/src/redhat/SPECS</userinput>
+<computeroutput>
+-rw-r--r--   1 root     root          397 Apr 24 22:36 cdp-0.33.spec
+</computeroutput>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Without making a long story too short, a spec file contains
+          information used by RPM to create the binary and source packages.
+          Using the spec file, RPM:
+
+          <itemizedlist mark="bullet">
+            <listitem>
+              <para>
+                Unpacks the sources.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Applies patches (if any exist).
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Builds the software.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Creates the binary package file.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Creates the source package file.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Cleans up after itself.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </para>
+        <para>
+          The neatest part of this is that RPM does this all automatically,
+          under the control of the spec file.  That's about all we're going to
+          say about how RPM builds packages.  For more information, please refer
+          to the second half of this book.
+        </para>
+      </sect2>
+
+      <sect2 id="s2-rpm-miscellania-stick-with-us">
+        <title>Stick with us!</title>
+        <para>
+          As we've noted several times, we'll be covering the entire subject of
+          building packages with RPM, in the second half of the book.  Be
+          forewarned, however: Package building, while straightforward, is not a
+          task for people new to programming.  But if you've written a program
+          or two, you'll probably find RPM's package building a piece of cake.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>

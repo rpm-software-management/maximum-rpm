@@ -18,13 +18,13 @@
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
           <row>
-            <entry spanname="spanall">
+            <entry spanname="spanall" align="center">
               <command>rpm -q</command> (or <command>--query</command>)
               <emphasis>options</emphasis>
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               Package Selection Options
             </entry>
             <entry>
@@ -115,7 +115,7 @@
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               Information Selection Options
             </entry>
             <entry>
@@ -244,7 +244,7 @@
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               General Options
             </entry>
             <entry>

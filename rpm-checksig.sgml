@@ -17,201 +17,226 @@
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
           <row>
-            <entry spanname="spanall">
-              {<command>rpm -K</command> \small{(\textrm{or}
-<command>--checksig)</command>} \normalsize{<emphasis>options</emphasis>
-file1.rpm &hellip;\ fileN.rpm}}}
+            <entry spanname="spanall" align="center">
+              <command>rpm -K</command> (or
+              <command>--checksig</command>) <emphasis>options</emphasis>
+              <filename>file1.rpm</filename> &hellip;
+              <filename>fileN.rpm</filename>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="spanall" align="center">
+              Parameters
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <filename>file1.rpm</filename> &hellip;
+              <filename>fileN.rpm</filename>
+              </entry>
+            <entry spanname="span23" align="center">
+              One or more RPM package files (URLs OK)
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12" align="center">
+              Checksig---specific Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--nopgp</command>
+            </entry>
+            <entry>
+              Do not verify PGP signatures
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-checksig-nopgp-option">
+            </entry>
+          </row>
+          <row>
+            <entry spanname="span12" align="center">
+              General Options
+            </entry>
+            <entry>
+              Page
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-v</command>
+            </entry>
+            <entry>
+              Display additional information
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-checksig-v-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>-vv</command>
+            </entry>
+            <entry>
+              Display debugging information
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-checksig-vv-option">
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              Set alternate rpmrc file to
+              <command><userinput>&lt;rcfile&gt;</userinput></command>
+            </entry>
+            <entry>
+              <xref linkend="s2-rpm-checksig-rcfile-option">
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
+    <sect1 id="s1-rpm-checksig-what-it-does">
+      <title><command>rpm -K</command> --- What Does it Do?</title>
+      <!-- label: rpm-K -->
+      <indexterm>
+        <primary><command>rpm -K</command>!what it does</primary>
+        <secondary></secondary>
+      </indexterm>
 
-\multicolumn{3}{|c|}{Parameters}
+      <para>
+        One aspect of RPM is that you can get a package from the Internet, and
+        easily install it.  But what do you know about that package file?  Is
+        the organization listed as being the "vendor" of the package
+        <emphasis>really</emphasis> the organization that built it?  Did someone
+        make unauthorized changes to it?  Can you trust that, if installed, it
+        won't mail a copy of your password file to a system cracker?
+      </para>
+      <para>
+        Features built into RPM allow you to make sure that the package file
+        you've just gotten won't cause you problems once it's installed, whether
+        the package was corrupted by line noise when you downloaded it, or
+        something more sinister happened to it.
+      </para>
+      <para>
+        The command <command>rpm -K</command> (The option
+        <command>--checksig</command> is equivalent) verifies a package file.
+        Using this command, it is easy to make sure the file has not been
+        changed in any way.  <command>rpm -K</command> can also be used to make
+        sure that the package was actually built by the organization listed as
+        being the package's vendor.  That's all very impressive, but how does it
+        do that?  Well, it just needs help from some "Pretty Good" software.
+      </para>
 
+      <sect2 id="s2-rpm-checksig-pgp-rpms-assistant">
+        <title>Pretty Good Privacy: RPM's Assistant</title>
+        <indexterm>
+          <primary><command>rpm -K</command>!additional software used by</primary>
+          <secondary></secondary>
+        </indexterm>
 
-file1.rpm &hellip;\ fileN.rpm &
-\multicolumn{2}{|l|}{One or more RPM package files (URLs OK)}
+        <para>
+          The "Pretty Good" software we're referring to is known as "Pretty Good
+          Privacy", or PGP.  While all the information on PGP could fill a book
+          (or several), we've provided a quick introduction to help you get
+          started.
+        </para>
+        <para>
+          If PGP is new to you, a quick glance through Appendix <xref
+          linkend="pgp-intro"> should get you well on your way to understanding,
+          building, and installing PGP.  If, on the other hand, you've got PGP
+          already installed and have sent an encrypted message or two, you're
+          probably more than ready to continue with this chapter.
+        </para>
+      </sect2>
+    </sect1>
 
+    <sect1 id="s1-rpm-checksig-configuring-pgp">
+      <title>Configuring PGP for <command>rpm -K</command></title>
+      <!-- label: config-pgp-for-rpm -->
+      <indexterm>
+        <primary><command>rpm -K</command>!configuring PGP for use by</primary>
+        <secondary></secondary>
+      </indexterm>
 
+      <para>
+        Once PGP is properly built and installed, the actual configuration for
+        RPM is trivial.  Here's what needs to be done:
 
-\multicolumn{2}{|c|}{Checksig---specific Options} & Page
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              PGP must be in your path.  If PGP's usage message doesn't come up
+              when you enter <userinput>pgp</userinput> at your shell prompt,
+              you'll need to add PGP's directory to your path.
+            </para>
+          </listitem>
 
+          <listitem>
+            <para>
+              PGP must be able to find the public keyring file that you want to
+              use when checking package file signatures.  You can use two
+              methods to direct PGP to the public keyring:
 
-<command>--nopgp</command> & Do not verify PGP signatures & <xref linkend="checksig--nopgp">
+              <orderedlist>
+                <listitem>
+                  <para>
+                    Set the <command>PGPPATH</command> environment variable to
+                    point to the directory containing the public keyring file.
+                  </para>
+                </listitem>
 
+                <listitem>
+                  <para>
+                    Set the <command>pgp_path</command>
+                    <filename>rpmrc</filename> file entry to point to the
+                    directory containing the public keyring file.
+                    <footnote>
+                      <para>
+                        For more information on <filename>rpmrc</filename>
+                        files, <filename>rpmrc</filename> file entries, and how
+                        to use them, please see Appendix <xref
+                        linkend="rpmrc-file">.
+                      </para>
+                    </footnote>
+                  </para>
+                </listitem>
+              </orderedlist>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+      <para>
+        Now we're ready.
+      </para>
+    </sect1>
 
+    <sect1 id="s1-rpm-checksig-using-rpm-k">
+      <title>Using <command>rpm -K</command></title>
+      <indexterm>
+        <primary><command>rpm -K</command>!basic use</primary>
+        <secondary></secondary>
+      </indexterm>
 
-\multicolumn{2}{|c|}{General Options} & Page
+      <para>
+        After all the preliminaries with PGP, it's time to get down to business.
+        First, we need to get the package builder's public key and add it to the
+        public keyring file used by RPM.  You'll need to do this once for each
+        package builder whose packages you'll want to check.  This is what
+        you'll need to do:
 
-
-<command>-v</command> & Display additional information & <xref linkend="checksig-v">
-
-<command>-vv</command> & Display debugging information & <xref linkend="checksig-vv">
-
-<command>--rcfile <emphasis>&lt;rcfile&gt;</command></emphasis> & Set alternate rpmrc file to
-<command><emphasis>&lt;rcfile&gt;</command></emphasis> & <xref linkend="checksig--rcfile">
-
-
-</table>
-<sect1 id="s1-rpm-checksig-">
-<title><command>rpm -K</command> --- What Does it Do?</title>
-<!-- label: rpm-K -->
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!what it does</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-One aspect of RPM is that you can get a package from the Internet, and
-easily install it.  But what do you know about that package file?  Is the
-organization listed as being the "vendor" of the package <emphasis>really</emphasis>
-the organization that built it?  Did someone make unauthorized changes to
-it?  Can you trust that, if installed, it won't mail a copy of your
-password file to a system cracker?
-
-Features built into RPM allow you to make sure that the package file you've
-just gotten won't cause you problems once it's installed, whether the
-package was corrupted by line noise when you downloaded it, or something
-more sinister happened to it.
-
-The command <command>rpm -K</command> (The option <command>--checksig</command> is
-equivalent) verifies a package file.  Using this command, it is easy to
-make sure the file has not been changed in any way.  <command>rpm -K</command> can
-also be used to make sure that the package was actually built by the
-organization listed as being the package's vendor.  That's all very
-impressive, but how does it do that?  Well, it just needs help from some
-"Pretty Good" software.
-
-<sect2 id="s2-rpm-checksig-">
-<title>Pretty Good Privacy: RPM's Assistant</title>
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!additional software used by</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The "Pretty Good" software we're referring to is known as "Pretty Good
-Privacy", or PGP.  While all the information on PGP could fill a book (or
-several), we've provided a quick introduction to help you get started.
-
-If PGP is new to you, a quick glance through Appendix <xref linkend="pgp-intro">
-should get you well on your way to understanding, building, and installing
-PGP.  If, on the other hand, you've got PGP already installed and have
-sent an encrypted message or two, you're probably more than ready to
-continue with this chapter.
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!additional software used by|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!what it does|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-checksig-">
-<title>Configuring PGP for <command>rpm -K</command></title>
-<!-- label: config-pgp-for-rpm -->
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!configuring PGP for use by</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Once PGP is properly built and installed, the actual configuration for RPM
-is trivial.  Here's what needs to be done:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-PGP must be in your path.  If PGP's usage message doesn't come up
-when you enter <userinput>pgp</userinput> at your shell prompt, you'll need to add PGP's
-directory to your path.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-PGP must be able to find the public keyring file that you want to use
-when checking package file signatures.  You can use two methods to direct
-PGP to the public keyring:
-
-<orderedlist>
-<listitem>
-<para>
-Set the <command>PGPPATH</command> environment variable to point to the
-directory containing the public keyring file.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Set the <command>pgp_path</command> <filename>rpmrc</filename> file entry to point to the
-directory containing the public keyring file.
-<footnote>
-<para>
-For more information
-on <filename>rpmrc</filename> files, <filename>rpmrc</filename> file  entries, and how to use them,
-please see Appendix <xref linkend="rpmrc-file">.
-</para>
-</footnote>
-
-</para>
-</listitem>
-
-</orderedlist>
-</para>
-</listitem>
-
-</itemizedlist>
-Now we're ready.
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!configuring PGP for use by|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect1>
-
-<sect1 id="s1-rpm-checksig-">
-<title>Using <command>rpm -K</command></title>
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!basic use</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-After all the preliminaries with PGP, it's time to get down to business.
-First, we need to get the package builder's public key and add it to the
-public keyring file used by RPM.  You'll need to do this once for each
-package builder whose packages you'll want to check.  This is what you'll
-need to do:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>pgp -ka RPM-PGP-KEY ./pubring.pgp</userinput>
+        <figure id="sc-rpm-checksig-adding-key">
+          <title>Adding a New Key to PGP's Public Keyring File</title>
+          <screen width="60">
+<prompt># </prompt><userinput>pgp -ka RPM-PGP-KEY ./pubring.pgp</userinput>
+<computeroutput>
 Pretty Good Privacy(tm) 2.6.3a - Public-key encryption for the masses.
 (c) 1990-96 Philip Zimmermann, Phil's Pretty Good Software. 1996-03-04
 Uses the RSAREF(tm) Toolkit, which is copyright RSA Data Security, Inc.
@@ -220,7 +245,7 @@ Export of this software may be restricted by the U.S. government.
 Current time: 1996/06/01 22:50 GMT
 
 Looking for new keys...
-pub  1024/CBA29BF9 1996/02/20  Red Hat <!-- *** RED HAT *** -->Software, Inc. &lt;redhat@redhat.com&gt;
+pub  1024/CBA29BF9 1996/02/20  Red Hat Software, Inc. &lt;redhat@redhat.com&gt;
 
 Checking signatures...
 
@@ -228,115 +253,112 @@ Keyfile contains:
    1 new key(s)
 
 One or more of the new keys are not fully certified.
-Do you want to certify any of these keys yourself (y/N)? <userinput>n</userinput>
-</screen>
-</figure>
-Here we've added Red Hat <!-- *** RED HAT *** -->Software's public key, since we're going to check
-some package files produced by them.  The file <filename>RPM-PGP-KEY</filename>
-contains the key.  At the end, PGP asks us if we want to certify the new
-key.  We've answered "no" since it isn't necessary to certify keys to
-verify package files.
+</computeroutput>
+<prompt>Do you want to certify any of these keys yourself (y/N)? </prompt><userinput>n</userinput>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Here we've added &RHI;'s public key, since we're going to check some
+        package files produced by them.  The file
+        <filename>RPM-PGP-KEY</filename> contains the key.  At the end, PGP asks
+        us if we want to certify the new key.  We've answered "no" since it
+        isn't necessary to certify keys to verify package files.
+      </para>
+      <para>
+        Next, we'll verify a package file:
 
-Next, we'll verify a package file:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+        <figure id="sc-rpm-checksig-verifying-package">
+          <title>Verifying a Package Using <command>rpm -K</command></title>
+          <screen width="60">
+<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386.rpm: size pgp md5 OK
-#
-</screen>
-</figure>
-While the output might seem somewhat anti-climactic, we can now be nearly
-100\<!-- certain this package: -->
+</computeroutput>
+<prompt>#</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        While the output might seem somewhat anti-climactic, we can now be nearly
+        100% certain this package:
 
-<orderedlist>
-<listitem>
-<para>
-was produced by Red Hat <!-- *** RED HAT *** -->Software, Inc.
+        <orderedlist>
+          <listitem>
+            <para>
+              was produced by &RHI;.
+            </para>
+          </listitem>
 
-</para>
-</listitem>
+          <listitem>
+            <para>
+              is unchanged from their original copy.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+      <para>
+        The output from this command shows that there are actually three
+        distinct features of the package file that are checked by the
+        <command>-K</command> option:
 
-<listitem>
-<para>
-is unchanged from their original copy.
+        <orderedlist>
+          <listitem>
+            <para>
+              The <computeroutput>size</computeroutput> message indicates that
+              the size of the packaged files has not changed.
+            </para>
+          </listitem>
 
-</para>
-</listitem>
+          <listitem>
+            <para>
+              The <computeroutput>pgp</computeroutput> message indicates that
+              the digital signature contained in the package file is a valid
+              signature of the package file contents, and was produced by the
+              organization that originally signed the package.
+            </para>
+          </listitem>
 
-</orderedlist>
-The output from this command shows that there are actually three distinct
-features of the package file that are checked by the <command>-K</command> option:
+          <listitem>
+            <para>
+              The <computeroutput>md5</computeroutput> message indicates that a
+              checksum contained in the package file and calculated when the
+              package was built, matches a checksum calculated by RPM during
+              verification.  Because the two checksums match, it is unlikely
+              that the package has been modified.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+      <para>
+        The <computeroutput>OK</computeroutput> means that each of these tests
+        were successful.  If any had failed, the name would have been printed in
+        parentheses.  A bit later in the chapter, we'll see what happens when
+        there are verification problems.
+      </para>
 
-<orderedlist>
-<listitem>
-<para>
-The <computeroutput>size</computeroutput> message indicates that the size of the packaged
-files has not changed.
+      <sect2 id="s2-rpm-checksig-v-option">
+        <title><command>-v</command> --- Display Additional Information</title>
+        <!-- label: checksig-v -->
+        <indexterm>
+          <primary><command>rpm -K</command>!options</primary>
+          <secondary></secondary>
+        </indexterm>
+        <indexterm>
+          <primary><command>-v</command> option</primary>
+        </indexterm>
 
-</para>
-</listitem>
+        <para>
+          Adding <command>v</command> to a verification command will produce
+          more interesting output:
 
-<listitem>
-<para>
-The <computeroutput>pgp</computeroutput> message indicates that the digital signature
-contained in the package file is a valid signature of the package file
-contents, and was produced by the organization that originally signed the
-package.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <computeroutput>md5</computeroutput> message indicates that a checksum contained in the
-package file and calculated when the package was built, matches a checksum
-calculated by RPM during verification.  Because the two checksums match, it
-is unlikely that the package has been modified.
-
-</para>
-</listitem>
-
-</orderedlist>
-The <computeroutput>OK</computeroutput> means that each of these tests were successful.  If any had
-failed, the name would have been printed in parentheses.  A bit later in
-the chapter, we'll see what happens when there are verification problems.
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!basic use|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<sect2 id="s2-rpm-checksig-">
-<title><command>-v</command> --- Display Additional Information</title>
-<!-- label: checksig-v -->
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!options</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>v@<command>-v</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Adding <command>v</command> to a verification command will produce more interesting
-output:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Kv rpm-2.3-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-v-example">
+            <title>
+              Example of Additional Output from the <command>-v</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Kv rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386.rpm:
 Header+Archive size OK: 278686 bytes
 Good signature from user "Red Hat Software, Inc. &lt;redhat@redhat.com&gt;".
@@ -346,332 +368,341 @@ WARNING:  Because this public key is not certified with a trusted
 signature, it is not known with high confidence that this public key
 actually belongs to: "Red Hat Software, Inc. &lt;redhat@redhat.com&gt;".
 MD5 sum OK: 8873682c5e036a307dee87d990e75349
-#
-</screen>
-</figure>
-With a bit of digging, we can see that each of the three tests was
-performed, and each passed.  The reason for that dire-sounding warning is
-that PGP is meant to operate without a central authority managing key
-distribution.  PGP certifies keys based on <emphasis>webs of trust</emphasis>.  For
-example, if an acquaintance of yours creates a public key, you can certify
-it by attaching your digital signature to it.  Then anyone that knows and
-trusts you can also trust your acquaintance's public key.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          With a bit of digging, we can see that each of the three tests was
+          performed, and each passed.  The reason for that dire-sounding warning
+          is that PGP is meant to operate without a central authority managing
+          key distribution.  PGP certifies keys based on <emphasis>webs of
+          trust</emphasis>.  For example, if an acquaintance of yours creates a
+          public key, you can certify it by attaching your digital signature to
+          it.  Then anyone that knows and trusts you can also trust your
+          acquaintance's public key.
+        </para>
+        <para>
+          In this case, the key came directly from a mass-produced &RHL; CDROM.
+          If someone was trying to masquerade as &RHI; then they have certainly
+          gone through a lot of trouble to do so.  In this case, the lack of a
+          certified public key is not a major problem, given the fact that the
+          CDROM came directly from the &RHI; offices.
+          <footnote>
+            <para>
+              Red Hat Software's public key is also available from their
+              website, at
+              <ulink url="http://www.redhat.com/redhat/contact.html">
+                http://www.redhat.com/redhat/contact.html </ulink>.  The RPM
+              sources also contain the key, and are available from their FTP
+              site at
+              <ulink url="ftp://ftp.redhat.com/pub/redhat/code/rpm">
+                ftp://ftp.redhat.com/pub/redhat/code/rpm</ulink>.
+            </para>
+          </footnote>
+        </para>
+      </sect2>
 
-In this case, the key came directly from a mass-produced Red Hat <!-- *** RED HAT *** -->Linux
-CDROM.  If someone was trying to masquerade as Red Hat <!-- *** RED HAT *** -->Software, Inc. then
-they have certainly gone through a lot of trouble to do so.  In this case,
-the lack of a certified public key is not a major problem, given the fact
-that the CDROM came directly from the Red Hat <!-- *** RED HAT *** -->Software
-offices.
-<footnote>
-<para>
-Red Hat Software's public key is also available from
-            their website, at <ulink url="http://www.redhat.com/redhat/contact.html">http://www.redhat.com/redhat/contact.html</ulink>.  The
-RPM sources also contain the key, and are available from their FTP site at
-<ulink url="ftp://ftp.redhat.com/pub/redhat/code/rpm">ftp://ftp.redhat.com/pub/redhat/code/rpm</ulink>.
-</para>
-</footnote>
+      <sect2 id="s2-rpm-checksig-when-not-signed">
+        <title>When the Package is Not Signed</title>
+        <indexterm>
+          <primary><command>rpm -K</command>!output when package unsigned</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!options|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          As mentioned earlier, not every package you'll run across is going to
+          be signed.  If this is the case, here's what you'll see from RPM:
 
-<indexterm>
-<primary>v@<command>-v</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-<sect2 id="s2-rpm-checksig-">
-<title>When the Package is Not Signed</title>
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!output when package unsigned</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-As mentioned earlier, not every package you'll run across is going to be
-signed.  If this is the case, here's what you'll see from RPM:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K bother-3.5-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-unsigned-example">
+            <title>Verification Output From an Unsigned Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K bother-3.5-1.i386.rpm</userinput>
+<computeroutput>
 bother-3.5-1.i386.rpm: size md5 OK
-#
-</screen>
-</figure>
-Note the lack of a <computeroutput>pgp</computeroutput> message.  The <computeroutput>size</computeroutput> and
-<computeroutput>md5</computeroutput> messages indicate that the package still has size and checksum
-information that verified properly.  In fact, all recently-produced package
-files will have these verification measures built in automatically.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Note the lack of a <computeroutput>pgp</computeroutput> message.  The
+          <computeroutput>size</computeroutput> and
+          <computeroutput>md5</computeroutput> messages indicate that the
+          package still has size and checksum information that verified
+          properly.  In fact, all recently-produced package files will have
+          these verification measures built in automatically.
+        </para>
+        <para>
+          If you happen to run across an older unsigned package, you'll know it
+          right away:
 
-If you happen to run across an older unsigned package, you'll know it right
-away:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K apmd-2.4-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-older-package">
+            <title>Attempting to Verify an Older Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K apmd-2.4-1.i386.rpm</userinput>
+<computeroutput>
 apmd-2.4-1.i386.rpm: No signature available
-#
-</screen>
-</figure>
-Older package files had only a PGP-based signature; if that was missing,
-there was nothing left to verify.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Older package files had only a PGP-based signature; if that was missing,
+          there was nothing left to verify.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!output when package unsigned|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-checksig-missing-public-key">
+        <title>When You Are Missing the Correct Public Key</title>
+        <!-- label: missing-keys -->
+        <indexterm>
+          <primary>
+            <command>rpm -K</command>!output when missing public key
+          </primary>
+          <secondary>
+          </secondary>
+        </indexterm>
 
-</sect2>
+        <para>
+          If you happen to forget to add the right public key to RPM's keyring,
+          you'll see the following response:
 
-<sect2 id="s2-rpm-checksig-">
-<title>When You Are Missing the Correct Public Key</title>
-<!-- label: missing-keys -->
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!output when missing public key</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-If you happen to forget to add the right public key to RPM's keyring,
-you'll see the following response:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-missing-public-key">
+            <title>
+              Attempting to Verify a Package When Missing the Required
+              Public Key
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
-#
-</screen>
-</figure>
-Here the <computeroutput>PGP</computeroutput> in parentheses indicates that there's a problem with
-the signature, and the message at the end of the line <computeroutput>(MISSING
-KEYS)</computeroutput> shows what the problem is.  Basically, RPM asked PGP to verify the
-package against a key that PGP didn't have, and PGP complained.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Here the <computeroutput>PGP</computeroutput> in parentheses indicates
+          that there's a problem with the signature, and the message at the end
+          of the line <computeroutput>(MISSING KEYS)</computeroutput> shows what
+          the problem is.  Basically, RPM asked PGP to verify the package
+          against a key that PGP didn't have, and PGP complained.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!output when missing public key|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+      <sect2 id="s2-rpm-checksig-verification-failures">
+        <title>When a Package Just Doesn't Verify</title>
+        <indexterm>
+          <primary>
+            <command>rpm -K</command>!example of failed verification
+          </primary>
+          <secondary></secondary>
+        </indexterm>
 
-</sect2>
+        <para>
+          Eventually it's going to happen --- you go to verify a package, and it
+          fails.  We'll look at an example of a package that fails verification
+          a bit later.  Before we do that, let's <emphasis>make</emphasis> a
+          package that won't verify, to demonstrate how sensitive RPM's
+          verification is.
+        </para>
+        <para>
+          First, we made a copy of a signed package,
+          <filename>rpm-2.3-1.i386.rpm</filename>, to be specific.  We called
+          the copy <filename>rpm-2.3-1.i386-bogus.rpm</filename>.  Next, using
+          Emacs (in hexl-mode, for all you Emacs buffs), we changed the first
+          letter of the name of the system that built the original package.  The
+          file <filename>rpm-2.3-1.i386-bogus.rpm</filename> is now truly bogus:
+          it has been changed from the original file.
+        </para>
+        <para>
+          Although the change was a small one, it still showed up when the
+          package file was queried.  Here's a listing from the original package:
 
-<sect2 id="s2-rpm-checksig-">
-<title>When a Package Just Doesn't Verify</title>
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!example of failed verification</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Eventually it's going to happen --- you go to verify a package, and it
-fails.  We'll look at an example of a package that fails verification a bit
-later.  Before we do that, let's <emphasis>make</emphasis> a package that won't verify,
-to demonstrate how sensitive RPM's verification is.
-
-First, we made a copy of a signed package, <filename>rpm-2.3-1.i386.rpm</filename>, to
-be specific.  We called the copy <filename>rpm-2.3-1.i386-bogus.rpm</filename>.  Next,
-using Emacs (in hexl-mode, for all you Emacs buffs), we changed the first
-letter of the name of the system that built the original package.  The file
-<filename>rpm-2.3-1.i386-bogus.rpm</filename> is now truly bogus: it has been changed
-from the original file.
-
-Although the change was a small one, it still showed up when the package
-file was queried.  Here's a listing from the original package:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -qip rpm-2.3-1.i386.rpm</userinput>
-Name        : rpm                   Distribution: Red Hat <!-- *** RED HAT *** -->Linux Vanderbilt
-Version     : 2.3                         Vendor: Red Hat <!-- *** RED HAT *** -->Software
+          <figure id="sc-rpm-checksig-original-package">
+            <title>Query Output From Original Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
+Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
+Version     : 2.3                         Vendor: Red Hat Software
 Release     : 1                       Build Date: Tue Dec 24 09:07:59 1996
 Install date: (none)                  Build Host: porky.redhat.com
 Group       : Utilities/System        Source RPM: rpm-2.3-1.src.rpm
 Size        : 631157
-Summary     : Red Hat <!-- *** RED HAT *** -->Package Manager
+Summary     : Red Hat Package Manager
 Description :
 RPM is a powerful package manager, which can be used to build, install,
 query, verify, update, and uninstall individual software packages. A
 package consists of an archive of files, and package information,
 including name, version, and description.
-# 
-</screen>
-</figure>
-And here's the same listing from the bogus package file:
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          And here's the same listing from the bogus package file:
 
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -qip rpm-2.3-1.i386-bogus.rpm</userinput>
-Name        : rpm                   Distribution: Red Hat <!-- *** RED HAT *** -->Linux Vanderbilt
-Version     : 2.3                         Vendor: Red Hat <!-- *** RED HAT *** -->Software
+          <figure id="sc-rpm-checksig-bogus-package">
+<title>Query Output From Bogus Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -qip rpm-2.3-1.i386-bogus.rpm</userinput>
+<computeroutput>
+Name        : rpm                   Distribution: Red Hat Linux Vanderbilt
+Version     : 2.3                         Vendor: Red Hat Software
 Release     : 1                       Build Date: Tue Dec 24 09:07:59 1996
 Install date: (none)                  Build Host: qorky.redhat.com
 Group       : Utilities/System        Source RPM: rpm-2.3-1.src.rpm
 Size        : 631157
-Summary     : Red Hat <!-- *** RED HAT *** -->Package Manager
+Summary     : Red Hat Package Manager
 Description :
 RPM is a powerful package manager, which can be used to build, install,
 query, verify, update, and uninstall individual software packages. A
 package consists of an archive of files, and package information,
 including name, version, and description.
-# 
-</screen>
-</figure>
-Notice that the build host name changed from <filename>porky.redhat.com</filename> to
-<filename>qorky.redhat.com</filename>.  Using the <command>cmp</command> utility to compare the
-two files, we find that the difference occurs at byte 1201, which changed
-from "p" (octal 160), to "q" (octal 161):
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Notice that the build host name changed from
+          <filename>porky.redhat.com</filename> to
+          <filename>qorky.redhat.com</filename>.  Using the
+          <command>cmp</command> utility to compare the two files, we find that
+          the difference occurs at byte 1201, which changed from "p" (octal
+          160), to "q" (octal 161):
 
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>cmp -cl rpm-2.3-1.i386.rpm rpm-2.3-1.i386-bogus.rpm</userinput>
+          <figure id="sc-rpm-checksig-binary-diff-output">
+            <title>
+              Differences Between the Originan and Bogus Packages
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>cmp -cl rpm-2.3-1.i386.rpm rpm-2.3-1.i386-bogus.rpm</userinput>
+<computeroutput>
   1201 160 p    161 q
-#
-</screen>
-</figure>
-People versed in octal numbers will note that only <emphasis>one bit</emphasis> has
-been changed in the entire file.  That's the smallest possible change you
-can make!  Let's see how our bogus friend fares:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          People versed in octal numbers will note that only <emphasis>one
+          bit</emphasis> has been changed in the entire file.  That's the
+          smallest possible change you can make!  Let's see how our bogus friend
+          fares:
 
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K rpm-2.3-1.i386-bogus.rpm</userinput>
+          <figure id="sc-rpm-checksig-bogus-example">
+            <title>Attempting to Verify Bogus Package</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386-bogus.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
-#
-</screen>
-</figure>
-Given that the command's output ends with <computeroutput>NOT OK</computeroutput> in big capital
-letters, it's obvious there's a problem.  Since the word <computeroutput>size</computeroutput> was
-printed in lowercase, the bogus package's size was OK, which makes sense
---- we only changed the value of one bit without adding or subtracting
-anything else.
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          Given that the command's output ends with <computeroutput>NOT
+          OK</computeroutput> in big capital letters, it's obvious there's a
+          problem.  Since the word <computeroutput>size</computeroutput> was
+          printed in lowercase, the bogus package's size was OK, which makes
+          sense --- we only changed the value of one bit without adding or
+          subtracting anything else.
+        </para>
+        <para>
+          However, the PGP signature, printed in uppercase, didn't verify.
+          Again, this makes sense, too. The package that was signed by &RHI; has
+          been changed.  The fact that the package's MD5 checksum also failed to
+          verify provides further evidence that the bogus package is just that:
+          bogus.
+        </para>
+      </sect2>
 
-However, the PGP signature, printed in uppercase,  didn't verify.  Again,
-this makes sense, too. The package that was signed by Red Hat <!-- *** RED HAT *** -->Software has
-been changed.  The fact that the package's MD5 checksum also failed to
-verify provides further evidence that the bogus package is just that:
-bogus.
+      <sect2 id="s2-rpm-checksig-nopgp-option">
+        <title>
+          <command>--nopgp</command> --- Do Not Verify Any PGP Signatures
+        </title>
+        <!-- label: checksig- -nopgp -->
+        <indexterm>
+          <primary><command>rpm -K</command>!options</primary>
+          <secondary></secondary>
+        </indexterm>
+        <indexterm>
+          <primary><command>--nopgp</command> option</primary>
+        </indexterm>
 
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!example of failed verification|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          Perhaps you want to be able to verify packages but, for one reason or
+          another, you cannot use PGP.  Maybe you don't have a trustworthy
+          source of the necessary public keys, or maybe it's illegal to possess
+          encryption (like PGP) software in your country.  Is it still possible
+          to verify packages?
+        </para>
+        <para>
+          Certainly --- in fact, we've already done it, in section <xref
+          linkend="s2-rpm-checksig-missing-public-key">.  You lose the ability
+          to verify the package's origins, as well as some level of confidence
+          in the package's integrity, but the size and MD5 checksums still give
+          some measure of assurance as to the package's state.
+        </para>
+        <para>
+          Of course, when PGP can't be used, the output from a verification
+          always looks like something's wrong:
 
-</sect2>
-
-<sect2 id="s2-rpm-checksig-">
-<title><command>--nopgp</command> --- Do Not Verify Any PGP Signatures</title>
-<!-- label: checksig--nopgp -->
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!options</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>nopgp@<command>--nopgp</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-Perhaps you want to be able to verify packages but, for one reason or
-another, you cannot use PGP.  Maybe you don't have a trustworthy source of
-the necessary public keys, or maybe it's illegal to possess encryption
-(like PGP) software in your country.  Is it still possible to verify
-packages?
-
-Certainly --- in fact, we've already done it, in section
-<xref linkend="missing-keys">.  You lose the ability to verify the package's
-origins, as well as some level of confidence in the package's integrity,
-but the size and MD5 checksums still give some measure of assurance as to
-the package's state.
-
-Of course, when PGP can't be used, the output from a verification always
-looks like something's wrong:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-pgp-missing">
+            <title>Verification Output When PGP is Unavailable</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
-#
-</screen>
-</figure>
-The <command>--nopgp</command> option directs RPM to ignore PGP entirely.  If we
-use the <command>--nopgp</command> option on our example above, we find that things
-look a whole lot better:
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>--nopgp</command> option directs RPM to ignore PGP
+          entirely.  If we use the <command>--nopgp</command> option on our
+          example above, we find that things look a whole lot better:
 
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -K --nopgp rpm-2.3-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-nopgp-example">
+            <title>Using the <command>--nopgp</command> Option</title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -K --nopgp rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 rpm-2.3-1.i386.rpm: size md5 OK
-#
-</screen>
-</figure>
-<indexterm>
-<primary>nopgp@<command>--nopgp</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+</computeroutput>
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+      </sect2>
 
-</sect2>
+      <sect2 id="s2-rpm-checksig-vv-option">
+        <title><command>-vv</command> --- Display Debugging Information</title>
+        <!-- label: checksig-vv -->
+        <indexterm>
+          <primary><command>-vv</command> option</primary>
+        </indexterm>
 
-<sect2 id="s2-rpm-checksig-">
-<title><command>-vv</command> --- Display Debugging Information</title>
-<!-- label: checksig-vv -->
-<indexterm>
-<primary>vv@<command>-vv</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
+        <para>
+          Nine times out of ten, you'll probably never have to use it, but if
+          you're the curious type, the <command>-vv</command> option will give
+          you insights into how RPM verifies packages.  Here's an example:
 
-Nine times out of ten, you'll probably never have to use it, but if you're
-the curious type, the <command>-vv</command> option will give you insights into how
-RPM verifies packages.  Here's an example:
-
-<figure id="sc-rpm-checksig-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-# <userinput>rpm -Kvv rpm-2.3-1.i386.rpm</userinput>
+          <figure id="sc-rpm-checksig-vv-example">
+            <title>
+              Verifying a Package With the <command>-vv</command> Option
+            </title>
+            <screen width="60">
+<prompt># </prompt><userinput>rpm -Kvv rpm-2.3-1.i386.rpm</userinput>
+<computeroutput>
 D: New Header signature
 D: magic: 8e ad e8 01
 D: got  : 8e ad e8 01
@@ -689,76 +720,53 @@ WARNING:  Because this public key is not certified with a trusted
 signature, it is not known with high confidence that this public key
 actually belongs to: "Red Hat Software, Inc. &lt;redhat@redhat.com&gt;".
 MD5 sum OK: 8873682c5e036a307dee87d990e75349
-# 
-</screen>
-</figure>
-The lines starting with <computeroutput>D:</computeroutput> represent extra output produced by the
-<command>-vv</command> option.  This output is normally used by software developers
-in the course of adding new features to RPM and is subject to change, but
-there's no law against looking at it.
+</computeroutput>
+<prompt># </prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The lines starting with <computeroutput>D:</computeroutput> represent
+          extra output produced by the <command>-vv</command> option.  This
+          output is normally used by software developers in the course of adding
+          new features to RPM and is subject to change, but there's no law
+          against looking at it.
+        </para>
+        <para>
+          Briefly, the output shows that RPM has detected a new-style signature
+          block, containing size, MD5 checksum, and PGP signature information.
+          The size of the signature, the size of the package file's header and
+          archive sections, and the expected size of those sections are all
+          displayed.
+        </para>
+      </sect2>
 
-Briefly, the output shows that RPM has detected a new-style signature
-block, containing size, MD5 checksum, and PGP signature information.  The
-size of the signature, the size of the package file's header and archive
-sections, and the expected size of those sections are all displayed.
+      <sect2 id="s2-rpm-checksig-rcfile-option">
+        <title>
+          <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>: Use
+          <command><userinput>&lt;rcfile&gt;</userinput></command> As An
+          Alternate <filename>rpmrc</filename> File
+        </title> 
+        <!-- label: checksig- -rcfile -->
+        <indexterm>
+          <primary><command>--rcfile</command> option</primary>
+        </indexterm>
 
-<indexterm>
-<primary>vv@<command>-vv</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-</sect2>
-
-<sect2 id="s2-rpm-checksig-">
-<title><command>--rcfile <emphasis>&lt;rcfile&gt;</command></emphasis>: Use <command><emphasis>&lt;rcfile&gt;</command></emphasis> As An Alternate <filename>rpmrc</filename> File</title>
-<!-- label: checksig--rcfile -->
-<indexterm>
-<primary>rcfile@<command>--rcfile</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-The <command>--rcfile</command> option is used to specify a file containing default
-settings for RPM.  Normally, this option is not needed.  By default, RPM
-uses <filename>/etc/rpmrc</filename> and a file named <filename>.rpmrc</filename> located in your
-login directory.
-
-This option would be used if there was a need to switch between several
-sets of RPM defaults.  Software developers and package builders will
-normally be the only people using the <command>--rcfile</command> option.  For more
-information on <filename>rpmrc</filename> files, see Appendix <xref linkend="rpmrc-file">.
-
-<indexterm>
-<primary>rcfile@<command>--rcfile</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>!options|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-
-<indexterm>
-<primary>rpm -K@<command>rpm -K</command>|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-<!--  -->
-</sect2>
-
-</sect1>
-
-</chapter>
-
+        <para>
+          The <command>--rcfile</command> option is used to specify a file
+          containing default settings for RPM.  Normally, this option is not
+          needed.  By default, RPM uses <filename>/etc/rpmrc</filename> and a
+          file named <filename>.rpmrc</filename> located in your login
+          directory.
+        </para>
+        <para>
+          This option would be used if there was a need to switch between
+          several sets of RPM defaults.  Software developers and package
+          builders will normally be the only people using the
+          <command>--rcfile</command> option.  For more information on
+          <filename>rpmrc</filename> files, see Appendix <xref
+          linkend="rpmrc-file">.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>

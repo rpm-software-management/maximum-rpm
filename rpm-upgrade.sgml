@@ -17,7 +17,7 @@
         <spanspec namest="description" nameend="pageref" spanname="span23">
         <tbody>
           <row>
-            <entry spanname="spanall">
+            <entry spanname="spanall" align="center">
               <command>rpm -U</command> (or
               <command>--upgrade</command>)<emphasis>options</emphasis>
               <filename>file1.rpm</filename> &hellip;
@@ -25,7 +25,7 @@
             </entry>
           </row>
           <row>
-            <entry spanname="spanall">
+            <entry spanname="spanall" align="center">
               Parameters
             </entry>
           </row>
@@ -34,12 +34,12 @@
               <filename>file1.rpm</filename> &hellip;
               <filename>fileN.rpm</filename>
             </entry>
-            <entry spanname="span23">
+            <entry spanname="span23" align="center">
               One or more RPM package files (URLs OK)
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               Upgrade---specific Options
             </entry>
             <entry>
@@ -228,7 +228,7 @@
             </entry>
           </row>
           <row>
-            <entry spanname="span12">
+            <entry spanname="span12" align="center">
               General Options
             </entry>
             <entry>
@@ -397,9 +397,9 @@
           contents will result in a change to the checksum of that file.
           <footnote>
             <para>
-              Actually, there's a one in 2^128 chance a change will go
-              undetected, but for all practical purposes, it's as close to
-              perfect as we can get.
+              Actually, there's a one in 2<superscript>128</superscript> chance
+              a change will go undetected, but for all practical purposes, it's
+              as close to perfect as we can get.
             </para>
           </footnote>
           Therefore, MD5 checksums are a powerful tool for quickly determining
