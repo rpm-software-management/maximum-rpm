@@ -136,12 +136,6 @@
 	<arg choice="req"><option>--rebuild|--recompile</option></arg>
 	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
 	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="plain"><option>--tarbuild</option></arg>
-	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
-	</cmdsynopsis>
       </member>
     </simplelist>
   </para>
