@@ -608,7 +608,7 @@ Group: Applications/Spreadsheets
             the RPM sources as well.  Check out the file
             <filename>groups</filename> in RPM's documentation directory
             (normally
-            <filename>/usr/doc/rpm-<replaceable>&lt;version&gt;</replaceable></filename>),
+            <filename>/usr/share/doc/rpm-<replaceable>&lt;version&gt;</replaceable></filename>),
             or in the top-level source directory.
           </para>
         </sect3>

@@ -71,6 +71,15 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
             <para>
               Bottom line: There's no way 150MB of new software is going to fit
               on the root filesystem.
+              <footnote>
+                <para>
+                  Of course, it would be possible to get around this lack of
+                  space by symlinking <filename>/opt</filename> to, for
+                  instance, <filename>/usr/opt</filename>.  However, since the
+                  point of this chapter is to explore RPM's relocatability
+                  features, we won't explore this approach here.
+                </para>
+              </footnote>
             </para>
           </listitem>
 
