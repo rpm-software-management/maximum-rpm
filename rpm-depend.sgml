@@ -408,18 +408,18 @@ AutoReqProv: no
         "provides" to describe the dependency relationships between packages.
         As it turns out, these are the exact words used in spec files to
         manually add dependency information.  Let's look at the first tag:
-        <command>requires</command>.
+        <command>Requires</command>.
       </para>
 
       <sect2 id="s2-rpm-depend-requires-tag">
-        <title>The <command>requires</command> Tag</title>
+        <title>The <command>Requires</command> Tag</title>
         <indexterm>
           <primary>dependencies</primary>
-          <secondary><command>requires</command> tag</secondary>
+          <secondary><command>Requires</command> tag</secondary>
         </indexterm>
 
         <indexterm>
-          <primary><command>requires</command> tag</primary>
+          <primary><command>Requires</command> tag</primary>
         </indexterm>
 
         <para>
@@ -433,7 +433,7 @@ AutoReqProv: no
 
           <screen width="60">
 <computeroutput>
-requires: bar
+Requires: bar
 </computeroutput>
           </screen>
         </para>
@@ -456,14 +456,14 @@ requires: bar
 
         <para>
           If more than one package is required, they can be added to the
-          <command>requires</command> tag, one after another, separated by
+          <command>Requires</command> tag, one after another, separated by
           commas and/or spaces.  So if package <filename>foo</filename> requires
           packages <filename>bar</filename> <emphasis>and</emphasis>
           <filename>baz</filename>, the following line will do the trick:
 
           <screen width="60">
 <computeroutput>
-requires: bar, baz
+Requires: bar, baz
 </computeroutput>
           </screen>
         </para>
@@ -529,11 +529,11 @@ requires: bar, baz
             of package <filename>bar</filename> actually needs to be at least
             2.7, and that the <filename>baz</filename> package must be version
             2.1 &mdash; no other version will do.  Here's what the
-            <command>requires</command> tag line would look like:
+            <command>Requires</command> tag line would look like:
 
             <screen width="60">
 <computeroutput>
-requires: bar &gt;= 2.7, baz = 2.1
+Requires: bar &gt;= 2.7, baz = 2.1
 </computeroutput>
             </screen>
           </para>
@@ -543,7 +543,7 @@ requires: bar &gt;= 2.7, baz = 2.1
 
             <screen width="60">
 <computeroutput>
-requires: bar &gt;= 2.7-4, baz = 2.1-1
+Requires: bar &gt;= 2.7-4, baz = 2.1-1
 </computeroutput>
             </screen>
           </para>
@@ -599,7 +599,7 @@ Epoch: 42
               In order to direct RPM to look at the epoch number instead of the
               version number when doing dependency checking, it's necessary to
               append an "<command>S</command>" to the end of the conditional
-              operator in the <command>requires</command> tag line.  So if a
+              operator in the <command>Requires</command> tag line.  So if a
               package requires package <filename>foo</filename> to have an epoch
               number equal to 42, the following tag line would be used:
 
@@ -640,55 +640,176 @@ Requires: foo &gt;=S 42
             </para>
           </sect4>
         </sect3>
+
+        <sect3 id="s3-rpm-depend-fine-grained">
+          <title>Fine Grained Dependencies</title>
+
+          <para>
+            For the vast majority of dependencies, using the normal
+            <command>Requires</command> is enough.  However, there are some
+            special situations where one might want more fine grained control
+            over them.  When multiple packages are being installed in a
+            transaction, installation order and dependency loops are such
+            cases.
+          </para>
+
+          <para>
+            A very trivial example of a dependency loop is when package
+            <filename>foo</filename> requires <filename>bar</filename>, and
+            <filename>bar</filename> requires <filename>foo</filename>.
+            However, when the number of packages involved in a loop grows, the
+            loops get more and more complex.  The special dependency types in
+            this chapter are at best <emphasis>hints</emphasis> for RPM; as a
+            rule of thumb, it is best to try to avoid dependency loops
+            altogether.  However, in some rare cases, they may be desired.
+          </para>
+
+          <para>
+            Note that as of writing this, erasure ordering is not implemented
+            in RPM.  In other words, when multiple packages are being erased
+            in the same transaction, the order in which they are erased is
+            undefined.  This is something that one should take into account
+            when writing preuninstall and postuninstall scriptlets.  So for
+            now, the following applies only to <emphasis>install time
+            ordering</emphasis> only.
+          </para>
+
+          <sect4 id="s3-rpm-depend-prereq">
+            <title>The <command>PreReq</command> Tag</title>
+            <indexterm>
+              <primary>dependencies</primary>
+              <secondary><command>PreReq</command> tag</secondary>
+            </indexterm>
+            <indexterm>
+              <primary><command>PreReq</command> tag</primary>
+            </indexterm>
+
+            <para>
+              The <command>PreReq</command> tag is the same as
+              <command>Requires</command>, with one additional property.
+              Using it tells RPM that the package marked as
+              <command>PreReq</command> should be installed before the package
+              containing the dependency.
+            </para>
+
+            <!-- TODO: since which version of RPM does the following apply? -->
+            <para>
+              In recent versions of RPM, a plain <command>Requires</command>
+              is enough to ensure proper installation order <emphasis>if there
+              are no dependency loops</emphasis> present in the transaction.
+              However, one may want to use <command>PreReq</command> to ensure
+              that older versions of RPM also get the intended installation
+              order right, if it matters.
+            </para>
+
+            <para>
+              When dependency loops are present, the <command>PreReq</command>
+              "wins" over the conventional <command>Requires</command> when
+              RPM determines the installation order in a transaction.
+            </para>
+
+          </sect4>
+
+          <sect4 id="s3-rpm-depend-context-depends">
+            <title>Context Marked Dependencies</title>
+            <indexterm>
+              <primary>dependencies</primary>
+              <secondary>Context Marked Dependencies</secondary>
+            </indexterm>
+
+            <!-- TODO: since which version of RPM do context markers exist? -->
+            <para>
+              Recent versions of RPM support context marked dependencies.
+              This is a special type of a dependency that applies only in a
+              specified <emphasis>context</emphasis>.  Using this feature,
+              one can specify dependencies for pre- and post(un)install
+              scriptlets, ie. the context of a dependency is the execution
+              time of the specified scriptlet.
+            </para>
+
+            <para>
+              The syntax for specifying these dependencies is:
+
+              <screen width="60">
+<computeroutput>
+Requires(<replaceable>X</replaceable>): foo
+</computeroutput>
+              </screen>
+            </para>
+
+            <para>
+              Here, <replaceable>X</replaceable> can be one of
+              <command>pre</command>, <command>post</command>,
+              <command>preun</command>, or <command>postun</command>, which
+              tells RPM that the package depends on package
+              <filename>foo</filename> for running the corresponding
+              <command>%pre</command>, <command>%post</command>,
+              <command>%preun</command>, or <command>%postun</command> script.
+            </para>
+
+            <para>
+              In practice, RPM enforces the above dependencies
+              <emphasis>until</emphasis> the specified script has been run,
+              not <emphasis>at</emphasis> that time.  In other words,
+              it will allow erasing a dependency that was marked for eg. the
+              <command>%post</command> script for an already installed package,
+              but will not allow erasing one that is required for a
+              <command>%postun</command> script for such a package.
+              This is to reduce confusion; it would be somewhat odd if RPM
+              told one to install a package in order to get another one erased.
+            </para>
+          </sect4>
+
+        </sect3>
       </sect2>
 
       <sect2 id="s2-rpm-depend-conflicts-tag">
-        <title>The <command>conflicts</command> Tag</title>
+        <title>The <command>Conflicts</command> Tag</title>
         <indexterm>
           <primary>dependencies</primary>
-          <secondary><command>conflicts</command> tag</secondary>
+          <secondary><command>Conflicts</command> tag</secondary>
         </indexterm>
 
         <indexterm>
-          <primary><command>conflicts</command> tag</primary>
+          <primary><command>Conflicts</command> tag</primary>
         </indexterm>
 
         <para>
-          The <command>conflicts</command> tag is the logical complement to the
-          <command>requires</command> tag.  It is used to specify which packages
+          The <command>Conflicts</command> tag is the logical complement to the
+          <command>Requires</command> tag.  It is used to specify which packages
           conflict with the current package.  RPM will not permit conflicting
           packages to be installed unless overridden with the
           <command>--nodeps</command> option.
         </para>
         <para>
-          The <command>conflicts</command> tag has the same format as
-          <command>requires</command>.  It accepts a real or virtual package
+          The <command>Conflicts</command> tag has the same format as
+          <command>Requires</command>.  It accepts a real or virtual package
           name and can optionally include version and release specifications or
           an epoch number.
         </para>
       </sect2>
 
       <sect2 id="s2-rpm-depend-provides-tag">
-        <title>The <command>provides</command> Tag</title>
+        <title>The <command>Provides</command> Tag</title>
         <indexterm>
           <primary>dependencies</primary>
-          <secondary><command>provides</command> tag</secondary>
+          <secondary><command>Provides</command> tag</secondary>
         </indexterm>
 
         <indexterm>
-          <primary><command>provides</command> tag</primary>
+          <primary><command>Provides</command> tag</primary>
         </indexterm>
 
         <para>
           Now that you've seen how it's possible to require a package using the
-          <command>requires</command> tag, you're probably expecting that you'll
-          need to use the <command>provides</command> tag in every single
+          <command>Requires</command> tag, you're probably expecting that you'll
+          need to use the <command>Provides</command> tag in every single
           package.  After all, RPM has to get those package names from
           <emphasis>somewhere</emphasis>, right?
         </para>
         <para>
           While it is true that RPM needs to have the package names available,
-          the <command>provides</command> tag is normally not required.  It
+          the <command>Provides</command> tag is normally not required.  It
           would actually be redundant, because the RPM database already contains
           the name of every package installed.  There's no need to duplicate
           that information.
@@ -697,8 +818,8 @@ Requires: foo &gt;=S 42
           But wait &mdash; We said earlier that manual dependency requirements
           are <emphasis>always</emphasis> represented in terms of packages.  If
           RPM doesn't require the package builder to use the
-          <command>provides</command> tag to provide the package name, then what
-          is the <command>provides</command> tag used for?
+          <command>Provides</command> tag to provide the package name, then what
+          is the <command>Provides</command> tag used for?
         </para>
 
         <sect3 id="s3-rpm-depend-virtual-packages">
@@ -710,7 +831,7 @@ Requires: foo &gt;=S 42
 
           <para>
             Enter the virtual package.  A virtual package is nothing more than a
-            name specified with the <command>provides</command> tag.  Virtual
+            name specified with the <command>Provides</command> tag.  Virtual
             packages are handy when a package requires a certain capability, and
             that capability can be provided by any one of several packages.
             Here's an example:
@@ -730,7 +851,7 @@ Requires: foo &gt;=S 42
 
             <screen width="60">
 <computeroutput>
-requires: lda
+Requires: lda
 </computeroutput>
             </screen>
           </para>
@@ -745,7 +866,7 @@ requires: lda
 
             <screen width="60">
 <computeroutput>
-provides: lda
+Provides: lda
 </computeroutput>
             </screen>
           </para>
@@ -777,7 +898,7 @@ provides: lda
 
           <listitem>
             <para>
-              The <command>requires</command> tag line, manually added to the
+              The <command>Requires</command> tag line, manually added to the
               package's spec file.
             </para>
           </listitem>
@@ -802,7 +923,7 @@ provides: lda
 
           <listitem>
             <para>
-              The <command>provides</command> tag line, manually added to the
+              The <command>Provides</command> tag line, manually added to the
               package's spec file.
             </para>
           </listitem>
