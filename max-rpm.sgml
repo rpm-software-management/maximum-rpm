@@ -49,6 +49,7 @@
 <!ENTITY QUERYFORMAT-TAGS SYSTEM "queryformat-tags.sgml">
 <!ENTITY RPM-MANPAGE SYSTEM "rpm-manpage.sgml">
 <!ENTITY RPMBUILD-MANPAGE SYSTEM "rpmbuild-manpage.sgml">
+<!ENTITY RPMGRAPH-MANPAGE SYSTEM "rpmgraph-manpage.sgml">
 <!ENTITY RPM-SPECREF SYSTEM "rpm-specref.sgml">
 <!ENTITY RPM-RESOURCES SYSTEM "rpm-resources.sgml">
 <!ENTITY PGP-INTRO SYSTEM "pgp-intro.sgml">
@@ -262,6 +263,8 @@
     &RPM-MANPAGE;
 
     &RPMBUILD-MANPAGE;
+
+    &RPMGRAPH-MANPAGE;
 
   </part>
 

@@ -8,6 +8,7 @@ temp-index.sgml
 ChangeLog
 Makefile
 Makefile.in
+autom4te-*
 config.cache
 config.guess
 config.h
@@ -19,6 +20,8 @@ configure
 manpage.*
 rpm.8
 rpmbuild.8
+rpmcache.8
+rpmgraph.8
 stamp-h
 stamp-h.in
 maximum-rpm.spec

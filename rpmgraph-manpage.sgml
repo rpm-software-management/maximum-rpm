@@ -1,0 +1,66 @@
+<RefEntry id="rpmgraph.8">
+  <RefMeta>
+    <RefEntrytitle>rpmgraph</RefEntrytitle>
+    <ManVolNum>8</ManVolNum>
+    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
+  </RefMeta>
+
+<RefNameDiv>
+  <RefName>rpmgraph</RefName>
+  <RefPurpose>Display RPM Package Dependency Graph</RefPurpose>
+</RefNameDiv>
+
+<RefSynopsisDiv>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	&rpmg;
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_FILE</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+</RefSynopsisDiv>
+
+<refsect1><title>Description</title>
+  <para> &rpmg; uses <replaceable>PACKAGE_FILE</replaceable> arguments
+	to generate a package dependency graph. Each
+	<replaceable>PACKAGE_FILE</replaceable> argument is read and
+	added to an rpm transaction set. The elements of the transaction
+	set are partially ordered using a topological sort. The partially
+	ordered elements are then printed to standard output.
+  </para><para>
+	Nodes in the dependency graph are package names, and edges in the
+	directed graph point to the parent of each node. The parent node
+	is defined as the last predecessor of a package when partially ordered
+	using the package depndencies as a relation. That means that the
+	parent of a given package is the package's last prerequisite.
+  </para><para>
+	The output is in <command>dot</command>(1) directed graph format,
+	and can be displayed or printed using the <command>dotty</command>
+	graph editor from the <command>graphviz</command> package.
+	There are no &rpmg; specific options, only common &rpm; options.
+	See the &rpmg; usage message for what is currently implemented.
+  </para>
+</refsect1>
+
+<refsect1><title>See Also</title>
+    <simplelist>
+      <member><command>dot</command>(1),</member>
+      <member><command>dotty</command>(1),</member>
+      <member>
+	<command>
+	<ulink URL="http://www.graphviz.org/">http://www.graphviz.org/</ulink>
+	</command>
+      </member>
+    </simplelist>
+</refsect1>
+
+<refsect1><title>Authors</title>
+      <simplelist>
+	<member>Jeff Johnson &lt;jbj@redhat.com&gt;</member>
+      </simplelist>
+</refsect1>
+
+</RefEntry>

@@ -1,0 +1,36 @@
+<!DOCTYPE BOOK PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+<!-- *************** Shorthand entities... *************** -->
+<!-- The generic term "Red Hat"... -->
+<!ENTITY RH "Red Hat">
+<!-- The name of the company... -->
+<!ENTITY RHI "&RH;">
+<!-- Formal version... -->
+<!ENTITY FORMAL-RHI "&RH;, Inc.">
+<!-- Shorthand version... -->
+<!ENTITY RHIS "RH">
+<!-- The basic operating system... -->
+<!ENTITY RHL "&RH; Linux">
+<!-- An rpm command... -->
+<!ENTITY rpm "<command>rpm</command>">
+<!-- An rpmbuild command... -->
+<!ENTITY rpmb "<command>rpmbuild</command>">
+<!-- An rpmcache command... -->
+<!ENTITY rpmc "<command>rpmcache</command>">
+<!-- An rpmdb command... -->
+<!ENTITY rpmd "<command>rpmdb</command>">
+<!-- An rpmgraph command... -->
+<!ENTITY rpmg "<command>rpmgraph</command>">
+<!-- An rpmquery command... -->
+<!ENTITY rpmq "<command>rpmquery</command>">
+<!-- An rpmsign command... -->
+<!ENTITY rpmk "<command>rpmsign</command>">
+<!-- *************** Chapter entities... *************** -->
+<!ENTITY RPMGRAPH-MANPAGE SYSTEM "rpmgraph-manpage.sgml">
+]>
+
+<book id="rpmgraph8">
+  <reference id="ch-rpmgraph-manpage">
+    <title>&RHL;</title>
+    &RPMGRAPH-MANPAGE;
+  </reference>
+</book>

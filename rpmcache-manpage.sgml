@@ -1,0 +1,59 @@
+<RefEntry id="rpmcache.8">
+  <RefMeta>
+    <RefEntrytitle>rpmcache</RefEntrytitle>
+    <ManVolNum>8</ManVolNum>
+    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
+  </RefMeta>
+
+<RefNameDiv>
+  <RefName>rpmcache</RefName>
+  <RefPurpose>Cache RPM Package Headers for Solving Dependencies</RefPurpose>
+</RefNameDiv>
+
+<RefSynopsisDiv>
+  <para>
+    <simplelist>
+      <member>
+	<cmdsynopsis>
+	&rpmc;
+	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
+	</cmdsynopsis>
+      </member>
+    </simplelist>
+  </para>
+</RefSynopsisDiv>
+
+<refsect1><title>Description</title>
+  <para> &rpmc; walks a file tree, possibly remotely using
+	<command>FTP</command>, filtering paths using
+	<command>glob</command>(7) expressions, reading
+	package headers. The <replaceable>PACKAGE_NAME</replaceable>
+	arguments are used to construct a <command>glob</command>(7)
+	expression that will match any of specific package names within
+	the &RH; build system, and are almost certainly not of use to
+	anyone outside of &RH;.
+  </para><para>
+	There are no &rpmc; specific options, only common &rpm; options.
+	See the &rpmc; usage message for what is currently implemented.
+  </para>
+</refsect1>
+
+<refsect1><title>See Also</title>
+    <simplelist>
+      <member>&rpm;(8),</member>
+      <member><command>glob</command>(7),</member>
+      <member>
+	<command>
+	<ulink URL="http://www.rpm.org/">http://www.rpm.org/</ulink>
+	</command>
+      </member>
+    </simplelist>
+</refsect1>
+
+<refsect1><title>Authors</title>
+      <simplelist>
+	<member>Jeff Johnson &lt;jbj@redhat.com&gt;</member>
+      </simplelist>
+</refsect1>
+
+</RefEntry>
