@@ -1462,7 +1462,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     executable. Although legacy compatibility provided by the popt aliases
     below has been adequate, the compatibility is not perfect; hence build
     mode compatibility through popt aliases is being removed from rpm.
-    Install the <command>rpmbuild</command> package, and see
+    Install the <command>rpm-build</command> package, and see
 	<command>rpmbuild</command>(8) for documentation of all the
     <command>rpm</command> build modes previously documented here in
 	<command>rpm</command>(8).
