@@ -299,13 +299,13 @@
   <group choice="plain">
     <arg><option>--buildroot</option> <replaceable>DIRECTORY</replaceable></arg>
     <arg><option>--clean</option></arg>
+    <arg><option>--nobuild</option></arg>
     <arg><option>--rmsource</option></arg>
     <arg><option>--rmspec</option></arg>
 	<sbr>
     <arg><option>--short-circuit</option></arg>
     <arg><option>--sign</option></arg>
     <arg><option>--target</option>=<replaceable>PLATFORM</replaceable></arg>
-    <arg><option>--test</option></arg>
   </group>
   </synopfragment>
 <!-- ================================ -->
@@ -649,7 +649,7 @@ systems of the binary package and host don't match.
 	on this system.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--test</option></term>
+    <term><option>--nobuild</option></term>
     <listitem><para>
 	Do not install the package, simply check for and report
 	potential conflicts.
@@ -1195,6 +1195,11 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	Remove the build tree after the packages are made.
     </para></listitem>
   </varlistentry><varlistentry>
+    <term><option>--nobuild</option></term>
+    <listitem><para>
+	Do not execute any build stages. Useful for testing out spec files.
+    </para></listitem>
+  </varlistentry><varlistentry>
     <term><option>--rmsource</option></term>
     <listitem><para>
 	Remove the sources after the build (may also be
@@ -1229,11 +1234,6 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 		<command>%_target_arch</command>, and
 		<command>%_target_os</command>
 	accordingly.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--test</option></term>
-    <listitem><para>
-	Do not execute any build stages. Useful for testing out spec files.
     </para></listitem>
   </varlistentry>
   </variablelist>
