@@ -16,6 +16,7 @@
         <spanspec namest="option" nameend="pageref" spanname="spanall">
         <spanspec namest="option" nameend="description" spanname="span12">
         <spanspec namest="description" nameend="pageref" spanname="span23">
+
         <tbody>
           <row>
             <entry spanname="spanall" align="center">
@@ -23,6 +24,7 @@
               <emphasis>options</emphasis>
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               Package Selection Options
@@ -31,9 +33,11 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
-              <filename>pkg1</filename> &hellip; <filename>pkgN</filename>
+              <filename>pkg1</filename> &hellip;
+              <filename>pkg<replaceable>N</replaceable></filename>
             </entry>
             <entry>
               Query installed package(s)
@@ -42,31 +46,35 @@
               <xref linkend="s3-rpm-query-package-label">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-p <userinput>&lt;file&gt;</userinput></command>(or
+              <command>-p <replaceable>&lt;file&gt;</replaceable></command>(or
               "<command><userinput>-</userinput></command>")
             </entry>
             <entry>
               Query package file
-              <command><userinput>&lt;file&gt;</userinput></command> (URLs OK)
+              <command><replaceable>&lt;file&gt;</replaceable></command> (URLs
+              OK)
             </entry>
             <entry>
               <xref linkend="s3-rpm-query-p-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-f <userinput>&lt;file&gt;</userinput></command>
+              <command>-f <replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               Query package owning
-              <command><userinput>&lt;file&gt;</userinput></command>
+              <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s3-rpm-query-by-file">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-a</command>
@@ -78,42 +86,46 @@
               <xref linkend="s3-rpm-query-a-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--whatprovides <userinput>&lt;x&gt;</userinput></command>
+              <command>--whatprovides <replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
               Query packages providing capability
-              <command><userinput>&lt;x&gt;</userinput></command>
+              <command><replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s3-rpm-query-whatprovides-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>-g <userinput>&lt;group&gt;</userinput></command>
+              <command>-g <replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
               Query packages belonging to group
-              <command><userinput>&lt;group&gt;</userinput></command>
+              <command><replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s3-rpm-query-g-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--whatrequires <userinput>&lt;x&gt;</userinput></command>
+              <command>--whatrequires <replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
               Query packages requiring capability
-              <command><userinput>&lt;x&gt;</userinput></command>
+              <command><replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s3-rpm-query-whatrequires">
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               Information Selection Options
@@ -122,9 +134,10 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
-              <command><userinput>&lt;null&gt;</userinput></command>
+              <command><replaceable>&lt;null&gt;</replaceable></command>
             </entry>
             <entry>
               Display full package label
@@ -133,6 +146,7 @@
               <xref linkend="s3-rpm-query-package-label">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-i</command>
@@ -144,6 +158,7 @@
               <xref linkend="s3-rpm-query-i-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-l</command>
@@ -155,6 +170,7 @@
               <xref linkend="s3-rpm-query-l-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-c</command>
@@ -166,6 +182,7 @@
               <xref linkend="s3-rpm-query-c-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-d</command>
@@ -177,6 +194,7 @@
               <xref linkend="s3-rpm-query-d-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-s</command>
@@ -188,6 +206,7 @@
               <xref linkend="s3-rpm-query-s-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--scripts</command>
@@ -199,6 +218,7 @@
               <xref linkend="s3-rpm-query-scripts-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--queryformat</command> (or <command>--qf</command>)
@@ -210,6 +230,7 @@
               <xref linkend="s3-rpm-query-queryformat-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--dump</command>
@@ -221,6 +242,7 @@
               <xref linkend="s3-rpm-query-dump-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--provides</command>
@@ -232,6 +254,7 @@
               <xref linkend="s3-rpm-query-provides-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>--requires</command> (or <command>-R</command>)
@@ -243,6 +266,7 @@
               <xref linkend="s3-rpm-query-requires-option">
             </entry>
           </row>
+
           <row>
             <entry spanname="span12" align="center">
               General Options
@@ -251,6 +275,7 @@
               Page
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-v</command>
@@ -262,6 +287,7 @@
               <xref linkend="s4-rpm-query-v-option">
             </entry>
           </row>
+
           <row>
             <entry>
               <command>-vv</command>
@@ -273,37 +299,40 @@
               <xref linkend="s2-rpm-query-vv-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--root <userinput>&lt;path&gt;</userinput></command>
+              <command>--root <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate root to
-              <command><userinput>&lt;path&gt;</userinput></command>
+              <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-query-root-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>
+              <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               Set alternate <filename>rpmrc</filename> file to
-              <command><userinput>&lt;rcfile&gt;</userinput></command>
+              <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
               <xref linkend="s2-rpm-query-rcfile-option">
             </entry>
           </row>
+
           <row>
             <entry>
-              <command>--dbpath <userinput>&lt;path&gt;</userinput></command>
+              <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              Use <command><userinput>&lt;path&gt;</userinput></command> to find
-              the RPM database
+              Use <command><replaceable>&lt;path&gt;</replaceable></command> to
+              find the RPM database
             </entry>
             <entry>
               <xref linkend="s2-rpm-query-dbpath-option">
@@ -352,6 +381,7 @@
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         The list could go on, but you get the idea.  The <command>rpm
         -q</command> command is what you need.  If you're the kind of person
@@ -364,6 +394,7 @@
 
     <sect1 id="s1-rpm-query-parts">
       <title>The Parts of an RPM Query</title>
+
       <para>
         It becomes easy to construct a query command once you understand the
         individual parts.  First is the <command>-q</command> (You can also use
@@ -424,6 +455,7 @@
               </listitem>
             </orderedlist>
           </para>
+
           <para>
             When issuing a query command using package labels, you must always
             include the package name.  You can also include the version and even
@@ -434,6 +466,7 @@
             saying that if you specify the release, you must also specify the
             version as well.  Let's look at a few examples.
           </para>
+
           <para>
             Say, for instance, you've recently installed a new version of the C
             libraries, but you can't remember the version number:
@@ -446,12 +479,14 @@ libc-5.2.18-1
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             In this type of query, RPM returns the complete package label for
             all installed packages that match the given information.  In the
             example above, if version 5.2.17 of the C libraries was also
             installed, its package label would have been displayed, too.
           </para>
+
           <para>
             In this example, we've included the version as well as the package
             name:
@@ -464,6 +499,7 @@ rpm-2.3-1
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             Note, however, that RPM is a bit picky about specifying package
             names.  Here are some queries for the C library that
@@ -497,6 +533,7 @@ package libc-5.2.1 is not installed
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             As you can see, RPM is case sensitive about package names and cannot
             match partial names, version numbers, or release numbers.  Nor can
@@ -507,6 +544,7 @@ package libc-5.2.1 is not installed
             libc-5.2.18-1</command> would have found the package,
             <filename>libc-5.2.18-1</filename>.
           </para>
+
           <para>
             Querying based on package labels may seem a bit restrictive.  After
             all, you need to know the exact name of a package in order to
@@ -542,6 +580,7 @@ lout-3.06-4
             (On a system installed using RPM, the number of packages can easily
             number 200 or more; we've deleted most of the output.)
           </para>
+
           <para>
             The <command>-a</command> option can produce mountains of output,
             which makes it a prime candidate for piping through the many
@@ -549,6 +588,7 @@ lout-3.06-4
             a pager such as <command>more</command>, so that the list of
             installed packages could be viewed a screenful at a time.
           </para>
+
           <para>
             Another handy command to pipe <command>rpm -qa</command>'s output
             through is <command>grep</command>.  In fact, using
@@ -571,9 +611,9 @@ SysVinit-2.64-2
 
         <sect3 id="s3-rpm-query-by-file">
           <title>
-            <command>-f <userinput>&lt;file&gt;</userinput></command> --- Query
+            <command>-f <replaceable>&lt;file&gt;</replaceable></command> --- Query
             the Package Owning
-            <command><userinput>&lt;file&gt;</userinput></command>
+            <command><replaceable>&lt;file&gt;</replaceable></command>
           </title>
           <!-- label: query-f -->
           <indexterm>
@@ -597,6 +637,7 @@ fileutils-3.12-3
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             If you happen to point RPM at a file it didn't install, you'll get a
             message similar to the following:
@@ -630,6 +671,7 @@ file /usr/X11/bin/xterm is not owned by any package
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               As you can see, we're trying to find out what package the
               <filename>xterm</filename> program is part of.  The first example
@@ -637,6 +679,7 @@ file /usr/X11/bin/xterm is not owned by any package
               <filename>xterm</filename> really <emphasis>isn't</emphasis> owned
               by any package.
             </para>
+
             <para>
               However, let's look at a directory listing:
 
@@ -654,6 +697,7 @@ drwxrwxr-x   7 root     root         1024 Mar 21 00:21 X11R6/
               (We've truncated the list; normally <filename>/usr</filename> is
               quite a bit more crowded than this.)
             </para>
+
             <para>
               The key here is the line ending with "<computeroutput>X11 -&gt;
               X11R6/</computeroutput>".  This is known as a "symbolic link".
@@ -668,6 +712,7 @@ drwxrwxr-x   7 root     root         1024 Mar 21 00:21 X11R6/
               keep track of all the symlinks on a system and try every possible
               path to a file during a query.
             </para>
+
             <para>
               What to do?  There are two options:
 
@@ -692,6 +737,7 @@ f: /usr/X11/bin/xterm
 <prompt>#</prompt>
                     </screen>
                   </para>
+
                   <para>
                     It's pretty easy to see the <filename>X11</filename> to
                     <filename>X11R6</filename> symlink.  Using this approach you
@@ -734,7 +780,7 @@ XFree86-3.1.2-5
 
         <sect3 id="s3-rpm-query-p-option">
           <title>
-            <command>-p <userinput>&lt;file&gt;</userinput></command> --- Query
+            <command>-p <replaceable>&lt;file&gt;</replaceable></command> --- Query
             a Specific RPM Package File
           </title>
           <!-- label: query-p -->
@@ -750,6 +796,7 @@ XFree86-3.1.2-5
             haven't yet been installed?  The <command>-p</command> option can do
             that for you.
           </para>
+
           <para>
             One situation where this capability would help, occurs when the name
             of a package file has been changed.  Since the name of the file
@@ -776,15 +823,17 @@ rpm-2.3-1
               </para>
             </footnote>
           </para>
+
           <para>
-            The <command>-p</command> option can also use Uniform Resource
-            Locators
+            The <command>-p</command> option can also use <firstterm>Uniform
+            Resource Locators</firstterm>
             <indexterm>
               <primary>URL</primary>
             </indexterm>
             to specify package files.  See <xref linkend="s2-rpm-install-urls">
             for more information on using URLs.
           </para>
+
           <para>
             There's one last trick up <command>-p</command>'s sleeve --- it can
             also perform a query by reading a package from standard input.
@@ -806,9 +855,9 @@ bother-3.5-1
 
         <sect3 id="s3-rpm-query-g-option">
           <title>
-            <command>-g <userinput>&lt;group&gt;</userinput></command>: Query
+            <command>-g <replaceable>&lt;group&gt;</replaceable></command>: Query
             Packages Belonging To Group
-            <command><userinput>&lt;group&gt;</userinput></command>
+            <command><replaceable>&lt;group&gt;</replaceable></command>
           </title>
           <!-- label: query-g -->
           <indexterm>
@@ -852,9 +901,9 @@ termcap-9.12.6-5
 
         <sect3 id="s3-rpm-query-whatprovides-option">
           <title>
-            <command>--whatprovides <userinput>&lt;x&gt;</userinput></command>:
+            <command>--whatprovides <replaceable>&lt;x&gt;</replaceable></command>:
             Query the Packages That Provide Capability
-            <command><userinput>&lt;x&gt;</userinput></command>
+            <command><replaceable>&lt;x&gt;</replaceable></command>
           </title>
           <!-- label: query- -whatprovides -->
           <indexterm>
@@ -871,6 +920,7 @@ termcap-9.12.6-5
             important to be able to display which packages provide a given
             capability.
           </para>
+
           <para>
             This is just what the <command>--whatprovides</command> option does.
             When the option, followed by a capability, is added to a query
@@ -893,9 +943,9 @@ kernel-2.0.18-5
 
         <sect3 id="s3-rpm-query-whatrequires">
           <title>
-            <command>--whatrequires <userinput>&lt;x&gt;</userinput></command>:
+            <command>--whatrequires <replaceable>&lt;x&gt;</replaceable></command>:
             Query the Packages That Require Capability
-            <command><userinput>&lt;x&gt;</userinput></command>
+            <command><replaceable>&lt;x&gt;</replaceable></command>
           </title>
           <!-- label: query- -whatrequires -->
           <indexterm>
@@ -973,6 +1023,7 @@ name, version, and description.
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             There's quite a bit of information here, so let's go through it
             entry by entry:
@@ -1004,6 +1055,7 @@ name, version, and description.
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             As you've probably noticed, these three pieces of information
             comprise the package label we've come to know and love.  Continuing,
@@ -1024,6 +1076,7 @@ name, version, and description.
                   madly for a directory tree by that name, you'd come up dry ---
                   it isn't a set of directories at all.
                 </para>
+
                 <para>
                   When a package builder starts to create a new package, they
                   enter a list of words that describe the software.  The list,
@@ -1147,6 +1200,7 @@ name, version, and description.
             package or packages.  If you've used <command>ls</command> before,
             you won't be surprised by RPM's file list.
           </para>
+
           <para>
             Here's a look at one of the smaller packages on &RHL; ---
             <filename>adduser</filename>: 
@@ -1239,6 +1293,7 @@ name, version, and description.
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             These are the files you'd want to look at first if you were looking
             to customize XFree86 for your particular needs.  Just like
@@ -1301,6 +1356,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             Let's take that alphabet soup set of options, one letter at a time:
 
@@ -1441,6 +1497,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
               </listitem>
             </orderedlist>
           </para>
+
           <para>
             Here's an example showing how file states appear:
 
@@ -1455,10 +1512,12 @@ normal        /usr/sbin/adduser
             (That <computeroutput>normal</computeroutput> at the start of the
             line is the state, followed by the file name)
           </para>
+
           <para>
             The file state is one of the tools RPM uses to determine the most
             appropriate action to take when packages are installed or erased.
           </para>
+
           <para>
             Now would the average person need to check the states of files?  Not
             really.  But if there should be problems, this kind of information
@@ -1499,6 +1558,7 @@ index
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             It's important to remember that capabilities are
             <emphasis>not</emphasis> filenames.  In the above example, the
@@ -1543,6 +1603,7 @@ libc.so.5
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             In cases where there <emphasis>are</emphasis> requirements, they are
             displayed as follows:
@@ -1557,6 +1618,7 @@ libc.so.5
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             It's also possible that you'll come across something like this:
 
@@ -1574,6 +1636,7 @@ bother &gt;= 3.1
               <filename>blather</filename>; specifically, a version of
               <filename>bother</filename> greater than or equal to 3.1.
           </para>
+
           <para>
             Here's something worth understanding.  Let's say we decide to track
             down the <filename>bother</filename> that
@@ -1590,6 +1653,7 @@ no package provides bother
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             No dice.  This might lead you to believe that the
             <filename>blather</filename> package has a problem.  The moral of
@@ -1607,6 +1671,7 @@ bother-3.5-1
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             Bingo!  However, if we see what capabilities the
             <filename>bother</filename> package provides, we come up dry:
@@ -1616,6 +1681,7 @@ bother-3.5-1
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             The reason for the lack of output is that all packages, by default,
             "provide" their package name (and version).
@@ -1650,6 +1716,7 @@ root root 0 0 0 X
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             What does all this stuff mean?  Let's go through it, item-by-item:
 
@@ -1738,6 +1805,7 @@ root root 0 0 0 X
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             Normally, the <command>--dump</command> option is used by people
             that want to extract the file-related information from RPM and
@@ -1786,6 +1854,7 @@ verify script:
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             In this particular case, the <filename>XFree86</filename> package
             has two scripts: one labeled <filename>postinstall</filename>, and
@@ -1794,6 +1863,7 @@ verify script:
             files have been installed; the postuninstall script is executed just
             after the package's files have been erased.
           </para>
+
           <para>
             Based on the labels in this example, you'd probably imagine that a
             package can have as many as five different scripts.  You'd be right:
@@ -1845,6 +1915,7 @@ verify script:
               </listitem>
             </orderedlist>
           </para>
+
           <para>
             Is this something you'll need very often?  As in the case of
             displaying file states, not really.  But when you need it, you
@@ -1871,11 +1942,13 @@ verify script:
             at the output of the <command>-i</command> option, RPM was using
             <command>--queryformat</command> internally.  Here's how it works:
           </para>
+
           <para>
             On the RPM command line, include <command>--queryformat</command>.
             Right after that, enter a format string, enclosed in single quotes
             "<userinput>'</userinput>".
           </para>
+
           <para>
             The format string can consist of a number of different components:
 
@@ -1900,6 +1973,7 @@ verify script:
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             Let's look at each of these components.
           </para>
@@ -1927,6 +2001,7 @@ verify script:
 This is a test!</computeroutput><prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               The RPM command might look a little unusual, but if you take out
               the <command>--queryformat</command> option, along with its format
@@ -1939,6 +2014,7 @@ This is a test!</computeroutput><prompt>#</prompt>
               it's likely your shell will complain about some of the characters
               contained in the average format string.
             </para>
+
             <para>
               The output of this command appears on the second line.  As we can
               see, the literal text from the format string was printed exactly
@@ -1960,6 +2036,7 @@ This is a test!</computeroutput><prompt>#</prompt>
               producing the output, so the shell prompt ended up being tacked to
               the end of our output.
             </para>
+
             <para>
               Is there a way to fix that?  Yes, there is.  We need to use an
               escape sequence.  An escape sequence is a sequence of characters
@@ -2017,6 +2094,7 @@ This is a test!</computeroutput><prompt>#</prompt>
                 </listitem>
               </itemizedlist>
             </para>
+
             <para>
               Based on this list, it seems that a <command>\n</command> escape
               sequence at the end of the format string will put our shell prompt
@@ -2059,6 +2137,7 @@ This is a test!
               three --- the tags that print the package name, version, and
               release.
             </para>
+
             <para>
               Strangely enough, these tags are called <command>NAME</command>,
               <command>VERSION</command>, and <command>RELEASE</command>.  In
@@ -2074,6 +2153,7 @@ rpm2.31
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               Let's add a dash between the tags and see if that makes the output
               a little easier to read:
@@ -2114,6 +2194,7 @@ rpm-                 2.3-1
                 The result is a field of 20 characters: 17 spaces, followed by
                 the three characters that make up the version.
               </para>
+
               <para>
                 In this case, the version field is right justified; that is, the
                 data is printed at the far right of the output field.  We can
@@ -2128,6 +2209,7 @@ rpm-2.3                 -1
 <prompt>#</prompt>
                 </screen>
               </para>
+
               <para>
                 Now the version is printed at the far left of the output field.
                 You might be wondering what would happen if the field width
@@ -2168,6 +2250,7 @@ pgp was installed on 846027549
 <prompt>#</prompt>
                 </screen>
               </para>
+
               <para>
                 Well, that's a <emphasis>lot</emphasis> of output, but not very
                 useful.  What <emphasis>are</emphasis> those numbers?  RPM
@@ -2176,6 +2259,7 @@ pgp was installed on 846027549
                 used internally by the operating system, and humans like to see
                 the day, month, year, and so on.
               </para>
+
               <para>
                 Fortunately, there's a modifier for just this situation.  The
                 name of the modifier is <command>:date</command>, and it follows
@@ -2197,6 +2281,7 @@ pgp was installed on Tue Oct 22 19:39:09 1996
 
                 That sure is a lot easier to understand, isn't it?
               </para>
+
               <para>
                 Here's a list of the available modifiers:
 
@@ -2263,6 +2348,7 @@ pgp was installed on Tue Oct 22 19:39:09 1996
               <command>FILENAMES</command>, which can be used to display the
               names of every file contained in a package.
             </para>
+
             <para>
               Let's put together a format string that will display the package
               name, followed by the name of every file that package contains.
@@ -2277,6 +2363,7 @@ adduser: /usr/sbin/adduser
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               Hey, not bad --- got it on the first try.  Now let's try it on a
               package with more than one file:
@@ -2289,6 +2376,7 @@ etcskel: (array)
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               Hmmm.  What went wrong?  It worked before&hellip; Well, it worked
               before because the <filename>adduser</filename> package contained
@@ -2296,6 +2384,7 @@ etcskel: (array)
               array of names, so when there is more than one file in a package,
               there's a problem.
             </para>
+
             <para>
               But there is a solution.  It's called an
               <emphasis>iterator</emphasis>.  An iterator can step through each
@@ -2313,6 +2402,7 @@ etcskel: /etc/skel/etc/skel/.Xclients/etc/skel/.Xdefaults/etc/skel/.ba
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               There was more output --- it went right off the screen in one long
               line.  The problem?  We didn't include a newline escape sequence
@@ -2332,6 +2422,7 @@ etcskel: /etc/skel
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               That's more like it.  If we wanted, we could put another
               file-related tag inside the iterator.  If we included the
@@ -2352,6 +2443,7 @@ etcskel: /etc/skel (1024 bytes)
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               That's pretty nice.  But it would be even nicer if the package
               name appeared on each line, along with the filename and size.
@@ -2435,6 +2527,7 @@ RPMTAG_VERIFYSCRIPT
 <prompt>#</prompt>
               </screen>
             </para>
+
             <para>
               Be forewarned: the full list is quite lengthy.  At the time this
               book was written, there were over 70 tags!  You'll notice that
@@ -2459,6 +2552,7 @@ RPMTAG_VERIFYSCRIPT
 </command>
               </screen>
             </para>
+
             <para>
               The only hard-and-fast rule regarding tags is that if you include
               the <command>RPMTAG_</command> prefix, it
@@ -2466,6 +2560,7 @@ RPMTAG_VERIFYSCRIPT
               above shows the traditional way of specifying a tag --- prefix
               omitted, all uppercase.  The choice, however, is yours.
             </para>
+
             <para>
               One other thing to keep in mind is that not every package will
               have every type of tagged information available.  In cases where
@@ -2506,6 +2601,7 @@ rpm-2.3-1
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The lines starting with <computeroutput>D:</computeroutput> have been
           added by using <command>-vv</command>.  We can see where the RPM
@@ -2513,6 +2609,7 @@ rpm-2.3-1
           <filename>rpm-2.3-1</filename> package.  Following that is the usual
           output.
         </para>
+
         <para>
           In the vast majority of cases, it will not be necessary to use
           <command>-vv</command>.  It is normally used by software engineers
@@ -2523,9 +2620,9 @@ rpm-2.3-1
 
       <sect2 id="s2-rpm-query-root-option">
         <title>
-          <command>--root <userinput>&lt;path&gt;</userinput></command>: Use
-          <command><userinput>&lt;path&gt;</userinput></command> As An Alternate
-          Root
+          <command>--root <replaceable>&lt;path&gt;</replaceable></command>: Use
+          <command><replaceable>&lt;path&gt;</replaceable></command> As An
+          Alternate Root
         </title>
         <!-- label: query- -root -->
         <indexterm>
@@ -2533,13 +2630,13 @@ rpm-2.3-1
         </indexterm>
 
         <para>
-          Adding <command>--root <userinput>&lt;path&gt;</userinput></command>
+          Adding <command>--root <replaceable>&lt;path&gt;</replaceable></command>
           to a query command forces RPM to assume that the directory specified
-          by <command><userinput>&lt;path&gt;</userinput></command> is actually
+          by <command><replaceable>&lt;path&gt;</replaceable></command> is actually
           the "root" directory.  In addition, RPM expects its database to reside
           in the directory specified by the <command>dbpath</command>
           <filename>rpmrc</filename> file entry, relative to
-          <command><userinput>&lt;path&gt;</userinput></command>.
+          <command><replaceable>&lt;path&gt;</replaceable></command>.
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
@@ -2547,6 +2644,7 @@ rpm-2.3-1
             </para>
           </footnote>
         </para>
+
         <para>
           Normally this option is only used during an initial system install, or
           when a system has been booted off a "rescue disk", and some packages
@@ -2556,8 +2654,8 @@ rpm-2.3-1
 
       <sect2 id="s2-rpm-query-rcfile-option">
         <title>
-          <command>--rcfile <userinput>&lt;rcfile&gt;</userinput></command>: Use
-          <command><userinput>&lt;rcfile&gt;</userinput></command> As An
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>: Use
+          <command><replaceable>&lt;rcfile&gt;</replaceable></command> As An
           Alternate <filename>rpmrc</filename> File
         </title>
         <!-- label: query- -rcfile -->
@@ -2572,6 +2670,7 @@ rpm-2.3-1
           file named <filename>.rpmrc</filename>, located in your login
           directory.
         </para>
+
         <para>
           This option would be used if there was a need to switch between
           several sets of RPM options.  Software developer and package builders
@@ -2583,8 +2682,8 @@ rpm-2.3-1
 
       <sect2 id="s2-rpm-query-dbpath-option">
         <title>
-          <command>--dbpath <userinput>&lt;path&gt;</userinput></command>: Use
-          <command><userinput>&lt;path&gt;</userinput></command> To Find RPM
+          <command>--dbpath <replaceable>&lt;path&gt;</replaceable></command>: Use
+          <command><replaceable>&lt;path&gt;</replaceable></command> To Find RPM
           Database
         </title>
         <!-- label: query- -dbpath -->
@@ -2599,6 +2698,7 @@ rpm-2.3-1
           <command>dbpath</command>.  By default, <command>dbpath</command> is
           set to <filename>/var/lib/rpm</filename>.
         </para>
+
         <para>
           Although the <command>dbpath</command> entry can be modified in the
           appropriate <filename>rpmrc</filename> file, the
@@ -2696,6 +2796,7 @@ including name, version, and description.
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           By displaying the package information, we know that we have a package
           file containing RPM version 2.3.  We can then peruse the file list,
@@ -2807,6 +2908,7 @@ rpm-2.3-1
 
       <sect2 id="s2-rpm-query-recently-installed-packages2">
         <title>Finding Recently Installed Packages, Part II</title>
+
         <para>
           Another way to see which packages were recently installed is to use
           the <command>--queryformat</command> option:

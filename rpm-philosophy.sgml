@@ -10,6 +10,7 @@
       for the user.  With automated installs, upgrades, and erasures, RPM can
       take a lot of the guesswork out of keeping a computer system up-to-date.
     </para>
+
     <para>
       But what about people that sling code for a living?  Does RPM have
       anything to offer them?  The answer is <emphasis>yes</emphasis>!  One of
@@ -35,6 +36,7 @@
         that are geared toward "third-party" package builders.  One such aspect
         is RPM's use of "pristine" sources.
       </para>
+
       <para>
         When a third-party package builder decides to package someone else's
         software, they often get the software from the Net, normally as a
@@ -86,11 +88,13 @@
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         We could go on, but you probably get the idea.  It's a rare application
         that comes off the Net ready to package, and the changes required vary
         widely.  What to do?
       </para>
+
       <para>
         This is where the concept of pristine sources comes in.  RPM has been
         designed to use the sources as they come from the application's
@@ -99,6 +103,7 @@
         remain separate from the original sources, in a distinct collection of
         patches.
       </para>
+
       <para>
         This may not sound like much of an advantage, but consider how this
         would work if a new version of the application came out.  If the new
@@ -108,11 +113,13 @@
         at least give an indication as to what might need to be done to get the
         new version built and packaged.
       </para>
+
       <para>
         If your users sometimes customize packages, having pristine sources
         makes it easier for them, too.  They can see what patches you've created
         and can easily add their own.
       </para>
+
       <para>
         Another benefit to using pristine sources is that it makes keeping track
         of multiple versions of a package simple.  Instead of keeping patched
@@ -139,12 +146,14 @@
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         With these three items, it's possible to easily build the package at any
         time.  Keeping track of multiple versions only entails keeping track of
         each version of these three components, rather than hundreds or
         thousands of patched source files.
       </para>
+
       <para>
         In fact, it gets better than that.  RPM can also build a source package
         containing these three components.  The source package, named using
@@ -176,12 +185,14 @@
 
       <sect2 id="s2-rpm-philosophy-reproducible-builds">
         <title>Reproducible Builds</title>
+
         <para>
           One of the biggest problems facing developers is reproducing a
           particular build.  This single problem is the main reason so much
           effort is put into creating and deploying version control systems to
           manage sources.
         </para>
+
         <para>
           While RPM cannot compete with a full-blown revision control system, it
           does an excellent job of keeping in one place everything required to
@@ -197,6 +208,7 @@
 
       <sect2 id="s2-rpm-philosophy-unattended-builds">
         <title>Unattended Builds</title>
+
         <para>
           As we mentioned above, completely building a package takes only one
           RPM command.  This makes it easy to set up automated build procedures
@@ -227,6 +239,7 @@
         also becoming more common that a particular operating system might run
         on several different platforms, or architectures.
       </para>
+
       <para>
         RPM's ability to support multiple architectures and operating systems
         makes it easy to build the same package for many OS/platform
@@ -253,6 +266,7 @@
 
       <sect2 id="s2-rpm-philosophy-easy-upgrades">
         <title>Easy Upgrades</title>
+
         <para>
           Probably the biggest headache for user and developer alike is the
           upgrade of an application, or worse yet, an entire operating system!
@@ -312,6 +326,7 @@
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           These are just a few examples of the many ways RPM can provide
           information about one or more packages on a user's system.
@@ -320,6 +335,7 @@
 
       <sect2 id="s2-rpm-philosophy-easy-verification">
         <title>Easy Package Verification</title>
+
         <para>
           Another way that RPM leverages the information stored in its database,
           is by providing an easy way to verify that a package is properly
@@ -334,6 +350,7 @@
 
     <sect1 id="s1-rpm-philosophy-summary">
       <title>To Summarize&hellip;</title>
+
       <para>
         RPM was written <emphasis>by</emphasis> developers
         <emphasis>for</emphasis> developers.  It makes building packages as easy
@@ -341,6 +358,7 @@
         in-house.  In addition, RPM presents some significant advantages to
         users, thereby reducing support needs.
       </para>
+
       <para>
         In the next chapter, we'll introduce the basic concepts of package
         building with RPM.

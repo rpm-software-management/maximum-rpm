@@ -14,6 +14,7 @@
       or PGP.  If you've used PGP before, you probably know everything you'll
       need to start signing packages in short order.
     </para>
+
     <para>
       On the other hand, if you feel you need a bit more information on PGP
       before starting, please refer to <xref linkend="ch-pgp-intro"> for a brief
@@ -37,6 +38,7 @@
         sign your packages, as digital signatures are a very robust way to guard
         against any modifications to the package.
       </para>
+
       <para>
         Of course, as with anything else in life, adding a digital signature to
         a package isn't an ironclad guarantee that everything is right with the
@@ -70,6 +72,7 @@
           will use your secret key to do the actual signing.  Anyone interested
           in checking your signature will need your public key.
         </para>
+
         <para>
           Creating a key pair is quite simple.  All that's required is to issue
           a <command>pgp -kg</command> command, enter some information, and
@@ -109,8 +112,8 @@ Your pass phrase can be any sentence or phrase and may have many
 words, spaces, punctuation, or any other printable characters.
 
 </computeroutput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
-<prompt>Enter same pass phrase again: </prompt><userinput>&lt;passphrase&gt;</userinput> (Still not echoed)
+            <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
+            <prompt>Enter same pass phrase again: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Still not echoed)
 
 <computeroutput>
 Note that key generation is a lengthy process.
@@ -132,12 +135,14 @@ Key generation completed.
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Let's review each of the times PGP required information.  The first
           thing PGP needed to know was the key size we wanted.  Depending on
           your level of paranoia, simply choose an appropriate key size.  In our
           example, we chose the "They're out to get me" key size of 1024 bits.
         </para>
+
         <para>
           Next, we needed to choose a user ID for the key.  The user ID should
           be descriptive and should also include sufficient information for
@@ -145,6 +150,7 @@ Key generation completed.
           Book</userinput>, which goes against our suggestion, but is sufficient
           for the purposes of our example.
         </para>
+
         <para>
           After entering a user ID, we needed to add a pass phrase.  The pass
           phrase is used to protect your secret key, so it should be something
@@ -154,14 +160,17 @@ Key generation completed.
           together in such a way that no one could ever guess I typed
           <userinput>rpm2kool4words</userinput>
         </para>
+
         <para>
           Oops&hellip;
         </para>
+
         <para>
           The pass phrase is entered twice, to ensure that no typing mistakes
           were made.  PGP also performs some cursory checks on the pass phrase,
           ensuring that the phrase is at least somewhat secure.
         </para>
+
         <para>
           Finally comes the strangest part of the key-generation process,
           creating random bits.  This is done by measuring the time between
@@ -170,6 +179,7 @@ Key generation completed.
           several seconds between keystrokes.  Simply start typing anything
           (even nonsense text) until PGP tells you you've typed enough.
         </para>
+
         <para>
           After generating enough random bits, PGP takes a minute or so to
           create the key pair.  Assuming everything completed successfully,
@@ -191,11 +201,13 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           For those interested in learning exactly what each file is, feel free
           to consult any of the fine books on PGP.  For the purposes of signing
           packages, all we need to know is where these files are located.
         </para>
+
         <para>
           That's it!  Now it's time to configure RPM to use your newly generated
           key.
@@ -216,6 +228,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
           choice.  For more information on rpmrc files in general, please see
           <xref linkend="ch-rpmrc-file">.
         </para>
+
         <para>
           The entries that need to be added to an rpmrc file are:
 
@@ -239,6 +252,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           Let's check out the entries.
         </para>
@@ -296,6 +310,7 @@ pgp_path: /root/.pgp
 </computeroutput>
             </screen>
           </para>
+
           <para>
             And that's it.  Now it's time to sign some packages.
           </para>
@@ -353,12 +368,13 @@ pgp_path: /root/.pgp
           RPM will ask for your PGP pass phrase.  If the pass phrase is correct,
           the build will proceed.  If not, the build stops immediately.
         </para>
+
         <para>
           Here's an example of <command>--sign</command> in action:
 
           <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --sign blather-7.9.spec</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+            <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -378,6 +394,7 @@ Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Once the pass phrase is entered, there's very little that is different
           from a normal build.  The only obvious difference is the
@@ -392,6 +409,7 @@ Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
             </para>
           </footnote>
         </para>
+
         <para>
           Notice, that since RPM only signs the source and binary package files,
           only the <command>-bb</command>, and <command>-ba</command> options
@@ -399,6 +417,7 @@ Wrote: /usr/src/redhat/SRPMS/blather-7.9-1.src.rpm
           to the fact that only the <command>-bb</command> and
           <command>-ba</command> options create package files.
         </para>
+
         <para>
           If we issue a quick signature check using RPM's
           <command>--checksig</command> option, we can see that there is, in
@@ -412,6 +431,7 @@ blather-7.9-1.i386.rpm: size pgp md5 OK
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           It's clear to see that, in addition to the usual size and MD5
           signatures, the package has a PGP signature.
@@ -433,7 +453,7 @@ blather-7.9-1.i386.rpm: size pgp md5 OK
 
             <screen width="60">
 <prompt># </prompt><userinput>rpm -ba --sign b*.spec</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -487,6 +507,7 @@ Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
           be necessary if your key's security was compromised, but other, more
           mundane situations might require this.
         </para>
+
         <para>
           Fortunately, RPM has an option that permits you to replace the
           signature on an already-built package, with a new one.  The option is
@@ -494,7 +515,7 @@ Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
 
           <screen width="60">
 <prompt># </prompt><userinput>rpm --resign blather-7.9-1.i386.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+            <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -503,18 +524,20 @@ blather-7.9-1.i386.rpm:
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           While the output is not as exciting as a package build, the
           <command>--resign</command> option can be a life-saver if you need to
           change a package's signature, and you don't want to rebuild.
         </para>
+
         <para>
           As you might have guessed, the <command>--resign</command> option
           works properly on multiple package files:
 
           <screen width="60">
 <prompt># </prompt><userinput>rpm --resign b*.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+            <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -539,7 +562,7 @@ bother-3.5-1.i386.rpm:
 
             <screen width="60">
 <prompt># </prompt><userinput>rpm --resign blah.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -549,6 +572,7 @@ blah.rpm: Can't re-sign v2.0 RPM
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             Not sure what version your package files are at?  Just use the
             <command>file</command> command to check:
@@ -583,11 +607,13 @@ blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
           package builders.  But what reason would there be for
           <emphasis>adding</emphasis> a signature to a package?
         </para>
+
         <para>
           One reason to have more than one signature on a package would be to
           provide a means of documenting the path of ownership from the package
           builder to the end-user.
         </para>
+
         <para>
           As an example, the division of a company creates a package and signs
           it with the division's key.  The company's headquarters then checks
@@ -595,11 +621,13 @@ blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
           package, in essence stating that the signed package received by them
           is authentic.
         </para>
+
         <para>
           Continuing the example, the doubly-signed package makes its way to a
           retailer.  The retailer checks the package's signatures and, when they
           check out, adds their signature to the package.
         </para>
+
         <para>
           The package now makes its way to a company that wishes to deploy the
           package.  After checking every signature on the package, they know
@@ -608,13 +636,14 @@ blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
           choose to add their own signature, thereby reassuring their employees
           that the package has received their corporate "blessing".
         </para>
+
         <para>
           After this lengthy example, the actual output from the
           <command>--addsign</command> option is a bit anti-climactic:
 
           <screen width="60">
 <prompt># </prompt><userinput>rpm --addsign blather-7.9-1.i386.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+            <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -623,6 +652,7 @@ blather-7.9-1.i386.rpm:
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           If we check the signatures of this package, we'll be able to see the
           multiple signatures:
@@ -635,6 +665,7 @@ blather-7.9-1.i386.rpm: size pgp pgp md5 OK
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The two <computeroutput>pgp</computeroutput>'s in
           <command>--checksig</command>'s output clearly shows that the package
@@ -655,7 +686,7 @@ blather-7.9-1.i386.rpm: size pgp pgp md5 OK
 
             <screen width="60">
 <prompt># </prompt><userinput>rpm --addsign blah.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -665,10 +696,12 @@ blah.rpm: Can't re-sign v2.0 RPM
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             OK, the error message may not be 100% accurate, but you get the
             idea.
           </para>
+
           <para>
             Another thing to be aware of is that the
             <command>--addsign</command> option does not check for multiple
@@ -678,21 +711,21 @@ blah.rpm: Can't re-sign v2.0 RPM
 
             <screen width="60">
 <prompt># </prompt><userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
 blather-7.9-1.i386.rpm:
 </computeroutput>
 <prompt># </prompt><userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
 blather-7.9-1.i386.rpm:
 </computeroutput>
 <prompt># </prompt><userinput>rpm --addsig blather-7.9-1.i386.rpm</userinput>
-<prompt>Enter pass phrase: </prompt><userinput>&lt;passphrase&gt;</userinput> (Not echoed)
+              <prompt>Enter pass phrase: </prompt><userinput><replaceable>&lt;passphrase&gt;</replaceable></userinput> (Not echoed)
 <computeroutput>
 
 Pass phrase is good.
@@ -705,6 +738,7 @@ blather-7.9-1.i386.rpm: size pgp pgp pgp pgp md5 OK
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             As we can see from <command>--checksig</command>'s output, the
             package now has four identical signatures.  Maybe this is the
