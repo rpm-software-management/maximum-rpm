@@ -148,7 +148,7 @@
 	Only the first file in the list must exist, and tildes will be
 	expanded to the value of <envar>$HOME</envar>.
 	The default <replaceable>FILELIST</replaceable> is
-		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>~/.rpmrc</filename>.
+		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--pipe</option> <replaceable>CMD</replaceable></term>

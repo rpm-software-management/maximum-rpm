@@ -366,7 +366,7 @@
 	Only the first file in the list must exist, and tildes will be
 	expanded to the value of <envar>$HOME</envar>.
 	The default <replaceable>FILELIST</replaceable> is
-		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>~/.rpmrc</filename>.
+		<filename>/usr/lib/rpm/rpmrc</filename>:<filename>/usr/lib/rpm/redhat/rpmrc</filename>:<filename>/etc/rpmrc</filename>:<filename>~/.rpmrc</filename>.
       </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--pipe</option> <replaceable>CMD</replaceable></term>
@@ -1416,7 +1416,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	by configuring the macro <command>%_ftpproxy</command>.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--ftpport</option> <replaceable>HOST</replaceable></term>
+    <term><option>--ftpport</option> <replaceable>PORT</replaceable></term>
     <listitem><para>
 	The TCP <replaceable>PORT</replaceable> number to use for
 	the ftp connection on the proxy ftp server instead of the default
