@@ -82,7 +82,7 @@
               customization.  Like the information, these files must be in the
               proper format, named properly, and in the appropriate area on a
               disk.  We'll be referring to them by their other name ---
-              <emphasis>config</emphasis> files --- throughout the book.
+              <firstterm>config</firstterm> files --- throughout the book.
             </para>
           </listitem>
 
