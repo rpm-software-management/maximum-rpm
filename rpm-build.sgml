@@ -402,7 +402,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
             <para>
               For more information on the environment variables used in the
               build-time scripts, please refer to section <xref
-              linkend="inside-scripts">.
+              linkend="s2-rpm-inside-build-time-scripts">.
             </para>
           </footnote>
         </para>
@@ -456,7 +456,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
             use the <command>%setup</command> macro instead.  The
             <command>%setup</command> macro has a number of options to handle
             many different situations.  For more information on this and other
-            macros, please see section <xref linkend="rpm-macros">.
+            macros, please see section <xref linkend="s1-rpm-inside-macros">.
           </para>
           <para>
             In our example here, the <command>%prep</command> section is
@@ -571,7 +571,8 @@ make install
           <filename>/usr/doc</filename>, and called
           <filename>cdplayer-1.0-1</filename>.  It's also possible to mark files
           as documentation and have them installed in other directories.  This
-          is covered in more detail in section <xref linkend="rpm-macros-doc">.
+          is covered in more detail in section <xref
+          linkend="s3-rpm-inside-flist-doc-directive">.
         </para>
         <para>
           The rest of the files in the example are shown with complete paths.

@@ -1662,8 +1662,8 @@ D: dependencies: looking for libc.so.5
             <command>%verify</command>
             <footnote>
               <para>
-                See page <xref linkend="spec-verify"> for details on
-                <command>%verify</command>
+                See page <xref linkend="s3-rpm-inside-flist-verify-directive">
+                for details on <command>%verify</command>
               </para>
             </footnote>
             directive, a package builder can save you from trivial

@@ -1831,7 +1831,8 @@ NoPatch: 2 3
           <command>--test</command> option
           <footnote>
             <para>
-              Described in section <xref linkend="build--test">.
+              Described in section <xref
+              linkend="s2-rpm-b-command-test-option">.
             </para>
           </footnote>
           , we can see the common portion of each script.  In the following
@@ -1907,7 +1908,7 @@ umask 022
                 <command>%doc</command> directive can be installed in a
                 subdirectory of <command>defaultdocdir</command>.  For more
                 information on the <command>%doc</command> directive, refer to
-                section <xref linkend="rpm-macros-doc">.
+                section <xref linkend="s3-rpm-inside-flist-doc-directive">.
               </para>
             </listitem>
 
@@ -2041,7 +2042,7 @@ umask 022
             of all software being packaged.  Because of this, RPM has two macros
             that greatly simplify these routine functions.  More information on
             RPM's <command>%setup</command> and <command>%patch</command> macros
-            can be found in section <xref linkend="rpm-macros">.
+            can be found in section <xref linkend="s1-rpm-inside-macros">.
           </para>
           <para>
             The last item on the list can include creating directories or
@@ -2141,7 +2142,8 @@ rm -rf $RPM_BUILD_ROOT
               <para>
                 Keep in mind that this command in a <command>%clean</command>
                 script can wreak havoc if used with a build root of, say,
-                <filename>/</filename>.  Section <xref linkend="buildroot-bite">
+                <filename>/</filename>.  Section <xref
+                linkend="s3-rpm-b-command-buildroot-warning">
                 discusses this in more detail.
               </para>
             </footnote>
@@ -2644,8 +2646,9 @@ chmod -R a+rX,g-w,o-w .
             into the directory specified by the <command>-n</command> option.
             This makes <command>-n</command> unsuitable as a means of unpacking
             sources in directories other than the top-level build directory.  In
-            the upcoming example on page <xref linkend="multi-source-spec">,
-            we'll show a way around this restriction.
+            the upcoming example on page <xref
+            linkend="s3-rpm-inside-setup-multi-source">, we'll show a way around
+            this restriction.
           </para>
           <para>
             A quick word of warning: If the name specified with the
@@ -3721,826 +3724,886 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
       </sect2>
     </sect1>
 
-    <sect1 id="s1-rpm-inside-">
-<title>The <command>%files</command> List</title>
-<!-- label: rpm-files-list --><!-- label: inside-files -->
-<indexterm>
-<primary>spec file!<command>%files</command> list in</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-inside-files-list">
+      <title>The <command>%files</command> List</title>
+      <!-- label: rpm-files-list -->
+      <!-- label: inside-files -->
+      <indexterm>
+        <primary>spec file!<command>%files</command> list in</primary>
+        <secondary></secondary>
+      </indexterm>
 
-The <command>%files</command> list indicates to RPM which files on the build system
-are to be packaged.  The list consists of one file per line.  The file may
-have one or more directives preceeding it.  These directives give RPM
-additional information about the file and are discussed more fully below.
+      <para>
+        The <command>%files</command> list indicates to RPM which files on the
+        build system are to be packaged.  The list consists of one file per
+        line.  The file may have one or more directives preceeding it.  These
+        directives give RPM additional information about the file and are
+        discussed more fully below.
+      </para>
+      <para>
+        Normally, each file includes its full path.  The path performs two
+        functions.  First, it specifies the file's location on the build system.
+        Second, it denotes where the file should be placed when the package is
+        to be installed.
+        <footnote>
+          <para>
+            This is not entirely the case when a relocatable package is being
+            built.  For more information on relocatable packages, see chapter
+            <xref linkend="rpm-reloc">.
+          </para>
+        </footnote>
+      </para>
+      <para>
+        For packages that create directories containing hundreds of files, it
+        can be quite cumbersome creating a list that contains every file.  To
+        make this situation a bit easier, if the <command>%files</command> list
+        contains a path to a directory, RPM will automatically package every
+        file in that directory, as well as every file in each subdirectory.
+        Shell-style globbing can also be used in the <command>%files</command>
+        list.
+      </para>
+    </sect1>
 
-Normally, each file includes its full path.  The path performs two
-functions.  First, it specifies the file's location on the build system.
-Second, it denotes where the file should be placed when the package is to
-be installed.
-<footnote>
-<para>
-This is not entirely the case when a relocatable
-package is being built.  For more information on relocatable packages, see
-chapter <xref linkend="rpm-reloc">.
-</para>
-</footnote>
+    <sect1 id="s1-rpm-inside-files-list-directives">
+      <title>Directives For the <command>%files</command> list</title>
+      <indexterm>
+        <primary>spec file!<command>%files</command> list directives</primary>
+        <secondary></secondary>
+      </indexterm>
 
-For packages that create directories containing hundreds of files, it can
-be quite cumbersome creating a list that contains every file.  To make this
-situation a bit easier, if the <command>%files</command> list contains a path to a
-directory, RPM will automatically package every file in that directory, as
-well as every file in each subdirectory.  Shell-style globbing can also be
-used in the <command>%files</command> list.
+      <para>
+        The <command>%files</command> list may contain a number of different
+        directives.  They are used to:
 
-<indexterm>
-<primary>spec file!<command>%files</command> list in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              Identify documentation and configuration files.
+            </para>
+          </listitem>
 
-</sect1>
+          <listitem>
+            <para>
+              Ensure that a file has the correct permissions and ownership set.
+            </para>
+          </listitem>
 
-<sect1 id="s1-rpm-inside-">
-<title>Directives For the <command>%files</command> list</title>
-<indexterm>
-<primary>spec file!<command>%files</command> list directives</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <listitem>
+            <para>
+              Control which aspects of a file are to be checked during package
+              verification.
+            </para>
+          </listitem>
 
-The <command>%files</command> list may contain a number of different directives.
-They are used to:
+          <listitem>
+            <para>
+              Eliminate some of the tedium in creating the
+              <command>%files</command> list.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
 
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-Identify documentation and configuration files.
+      <para>
+        In the <command>%files</command> list, one or more directives may be
+        placed on a line, separated by spaces, before one or more filenames.
+        Therefore, if <command>%foo</command> and <command>%bar</command> are
+        two <command>%files</command> list directives, they may be applied to a
+        file <filename>baz</filename> in the following manner:
 
-</para>
-</listitem>
-
-<listitem>
-<para>
-Ensure that a file has the correct permissions and ownership set.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Control which aspects of a file are to be checked during package
-verification.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Eliminate some of the tedium in creating the <command>%files</command> list.
-
-</para>
-</listitem>
-
-</itemizedlist>
-In the <command>%files</command> list, one or more directives may be placed on a line,
-separated by spaces, before one or more filenames.  Therefore, if
-<command>%foo</command> and <command>%bar</command> are two <command>%files</command> list directives,
-they may be applied to a file <filename>baz</filename> in the following manner:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-inside-flist-directives-example">
+          <title>
+            Use of Multiple <command>%files</command> List Directives on One
+            LIne
+          </title>
+          <screen width="60">
 <computeroutput>
 %foo %bar baz
 </computeroutput>
-</screen>
-</figure>
-Now it's time to take a look at the directives that inhabit the
-<command>%files</command> list.
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Now it's time to take a look at the directives that inhabit the
+        <command>%files</command> list.
+      </para>
 
-<sect2 id="s2-rpm-inside-">
-<title>File-related Directives</title>
-RPM processes files differently according to their type.  However, RPM does
-not have a method of automatically determining file types.  Therefore, it
-is up to the package builder to appropriately mark files in the
-<command>%files</command> list.  This is done using one of the directives below.
+      <sect2 id="s2-rpm-inside-flist-file-directives">
+        <title>File-related Directives</title>
 
-Keep in mind that not every file will need to be marked.  As you read the
-following sections, you'll see that directives are only used in special
-circumstances.  In most packages, the majority of files in the
-<command>%files</command> list will not need to be marked.
+        <para>
+          RPM processes files differently according to their type.  However, RPM
+          does not have a method of automatically determining file types.
+          Therefore, it is up to the package builder to appropriately mark files
+          in the <command>%files</command> list.  This is done using one of the
+          directives below.
+        </para>
+        <para>
+          Keep in mind that not every file will need to be marked.  As you read
+          the following sections, you'll see that directives are only used in
+          special circumstances.  In most packages, the majority of files in the
+          <command>%files</command> list will not need to be marked.
+        </para>
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%doc</command> Directive</title>
-<!-- label: rpm-macros-doc --><!-- label: inside-doc -->
-<indexterm>
-<primary><command>%doc</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-flist-doc-directive">
+          <title>The <command>%doc</command> Directive</title>
+          <!-- label: rpm-macros-doc -->
+          <!-- label: inside-doc -->
+          <indexterm>
+            <primary><command>%doc</command> directive</primary>
+          </indexterm>
 
-The <command>%doc</command> directive flags the filename(s) that follow, as being
-documentation.  RPM keeps track of documentation files in its database, so
-that a user can easily find information about an installed package.  In
-addition, RPM can create a package-specific documentation directory during
-installation and copy documentation into it.  Whether or not this
-additional step is taken, is dependent on how a file is specified.  Here is
-an example:
+          <para>
+            The <command>%doc</command> directive flags the filename(s) that
+            follow, as being documentation.  RPM keeps track of documentation
+            files in its database, so that a user can easily find information
+            about an installed package.  In addition, RPM can create a
+            package-specific documentation directory during installation and
+            copy documentation into it.  Whether or not this additional step is
+            taken, is dependent on how a file is specified.  Here is an example:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-flist-doc-example">
+            <title>The <command>%doc</command> Directive in Action</title>
+            <screen width="60">
 <computeroutput>
 %doc README
 %doc /usr/local/foonly/README
 </computeroutput>
-</screen>
-</figure>
-The file <filename>README</filename> exists in the software's top-level directory
-during the build, and is included in the package file.  When the package is
-installed, RPM creates a directory in the documentation directory named the
-same as the package (ie, <filename>&lt;software&gt;-&lt;version&gt;-&lt;release&gt;</filename>), and
-copies the <filename>README</filename> file there.  The newly created directory and the
-<filename>README</filename> file are marked in the RPM database as being documentation.
-The default documentation directory is <filename>/usr/doc</filename>, and can be
-changed by setting the <command>defaultdocdir</command> <filename>rpmrc</filename> file
-entry.  For more information on <filename>rpmrc</filename> files, please see chapter
-<xref linkend="rpmrc-file">.
+            </screen>
+          </figure>
+          </para>
+          <para>
+            The file <filename>README</filename> exists in the software's
+            top-level directory during the build, and is included in the package
+            file.  When the package is installed, RPM creates a directory in the
+            documentation directory named the same as the package (ie,
+            <filename>&lt;software&gt;-&lt;version&gt;-&lt;release&gt;</filename>),
+            and copies the <filename>README</filename> file there.  The newly
+            created directory and the <filename>README</filename> file are
+            marked in the RPM database as being documentation.  The default
+            documentation directory is <filename>/usr/doc</filename>, and can be
+            changed by setting the <command>defaultdocdir</command>
+            <filename>rpmrc</filename> file entry.  For more information on
+            <filename>rpmrc</filename> files, please see chapter <xref
+            linkend="rpmrc-file">.
+          </para>
+          <para>
+            The file <filename>/usr/local/foonly/README</filename> was installed
+            into that directory during the build and is included in the package
+            file.  When the package is installed, the
+            <filename>README</filename> file is copied into
+            <filename>/usr/local/foonly</filename> and marked in the RPM
+            database as being documentation.
+          </para>
+        </sect3>
 
-The file <filename>/usr/local/foonly/README</filename> was installed into that
-directory during the build and is included in the package file.  When the
-package is installed, the <filename>README</filename> file is copied into
-<filename>/usr/local/foonly</filename> and marked in the RPM database as being
-documentation.
+        <sect3 id="s3-rpm-inside-flist-config-directive">
+          <title>The <command>%config</command> Directive</title>
+          <!-- label: inside-config -->
+          <indexterm>
+            <primary><command>%config</command> directive</primary>
+          </indexterm>
 
-<indexterm>
-<primary><command>%doc</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <command>%config</command> directive is used to flag the
+            specified file as being a configuration file.  RPM performs
+            additional processing for config files when packages are erased, and
+            during installations and upgrades.  This is due to the nature of
+            config files: They are often changed by the system administrator,
+            and those changes should not be lost.
+          </para>
+          <para>
+            There is a restriction to the <command>%config</command> directive,
+            and that restriction is that no more than one filename may follow
+            the <command>%config</command>.  This means that the following
+            example is the only allowable way to specify config files:
 
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%config</command> Directive</title>
-<!-- label: inside-config -->
-<indexterm>
-<primary><command>%config</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%config</command> directive is used to flag the specified file as being
-a configuration file.  RPM performs additional processing for config files
-when packages are erased, and during installations and upgrades.  This is
-due to the nature of config files: They are often changed by the system
-administrator, and those changes should not be lost.
-
-There is a restriction to the <command>%config</command> directive, and that restriction
-is that no more than one filename may follow the <command>%config</command>.  This
-means that the following example is the only allowable way to specify
-config files:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-config-example">
+              <title>The <command>%config</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %config /etc/foonly
 </computeroutput>
-</screen>
-</figure>
-Note that the full path to the file, as it is installed at build time, is
-required.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Note that the full path to the file, as it is installed at build
+            time, is required.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%config</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-flist-attr-directive">
+          <title>The <command>%attr</command> Directive</title>
+          <!-- label: inside-attr -->
+          <indexterm>
+            <primary><command>%attr</command> directive</primary>
+          </indexterm>
 
-</sect3>
+          <para>
+            The <command>%attr</command> directive permits finer control over
+            three key file attributes:
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%attr</command> Directive</title>
-<!-- label: inside-attr -->
-<indexterm>
-<primary><command>%attr</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <orderedlist>
+              <listitem>
+                <para>
+                  The file's permissions, or "mode".
+                </para>
+              </listitem>
 
-The <command>%attr</command> directive permits finer control over three key file
-attributes:
+              <listitem>
+                <para>
+                  The file's user ID.
+                </para>
+              </listitem>
 
-<orderedlist>
-<listitem>
-<para>
-The file's permissions, or "mode".
+              <listitem>
+                <para>
+                  The file's group ID.
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
 
-</para>
-</listitem>
+          <para>
+            The <command>%attr</command> directive has the following format:
 
-<listitem>
-<para>
-The file's user ID.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The file's group ID.
-
-</para>
-</listitem>
-
-</orderedlist>
-The <command>%attr</command> directive has the following format:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-attr-example">
+              <title>The <command>%attr</command> Directive</title>
+              <screen width="60">
 <computeroutput>
-%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <emphasis>file</emphasis>
+%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>file</userinput>
 </computeroutput>
-</screen>
-</figure>
-The mode is specified in the traditional numeric format, while the user and
-group are specifed as a string, such as "<command>root</command>".  Here's a sample
-<command>%attr</command> directive:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The mode is specified in the traditional numeric format, while the
+            user and group are specifed as a string, such as
+            "<command>root</command>".  Here's a sample <command>%attr</command>
+            directive:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-attr-example2">
+              <title>A Sample <command>%attr</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %attr(755, root, root) foo.bar
 </computeroutput>
-</screen>
-</figure>
-This would set <filename>foo.bar</filename>'s permissions to 755.  The file would be
-owned by user root, group root.  If a particular attribute does not need to
-be specified (usually because the file is installed with that attribute set
-properly), then that attribute may be replaced with a dash:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            This would set <filename>foo.bar</filename>'s permissions to 755.
+            The file would be owned by user root, group root.  If a particular
+            attribute does not need to be specified (usually because the file is
+            installed with that attribute set properly), then that attribute may
+            be replaced with a dash:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-attr-example3">
+              <title>
+                An <command>%attr</command> Directive With Unspecified Attribute
+              </title>
+              <screen width="60">
 <computeroutput>
 %attr(755, -, root) foo.bar
 </computeroutput>
-</screen>
-</figure>
-The main reason to use the <command>%attr</command> directive is to permit users without
-root access to build packages.  The techniques for doing this (and a more
-in-depth discussion of the <command>%attr</command> directive) can be found in
-chapter <xref linkend="rpm-anywhere">.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The main reason to use the <command>%attr</command> directive is to
+            permit users without root access to build packages.  The techniques
+            for doing this (and a more in-depth discussion of the
+            <command>%attr</command> directive) can be found in chapter <xref
+            linkend="rpm-anywhere">.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%attr</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-flist-verify-directive">
+          <title>The <command>%verify</command> Directive</title>
+          <!-- label: spec-verify -->
+          <!-- label: inside-verify -->
+          <indexterm>
+            <primary><command>%verify</command> directive</primary>
+          </indexterm>
 
-</sect3>
+          <para>
+            RPM's ability to verify the integrity of the software it has
+            installed is impressive.  But sometimes it's a bit
+            <emphasis>too</emphasis> impressive.  After all, RPM can verify as
+            many as nine different aspects of every file.  The
+            <command>%verify</command> directive can control which of these file
+            attributes are to be checked when an RPM verification is done.  Here
+            are the attributes, along with the names used by the
+            <command>%verify</command> directive:
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%verify</command> Directive</title>
-<!-- label: spec-verify --><!-- label: inside-verify -->
-<indexterm>
-<primary><command>%verify</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+            <orderedlist>
+              <listitem>
+                <para>
+                  Owner (<command>owner</command>)
+                </para>
+              </listitem>
 
-RPM's ability to verify the integrity of the software it has installed is
-impressive.  But sometimes it's a bit <emphasis>too</emphasis> impressive.  After all,
-RPM can verify as many as nine different aspects of every file.  The
-<command>%verify</command> directive can control which of these file attributes are
-to be checked when an RPM verification is done.  Here are the attributes,
-along with the names used by the <command>%verify</command> directive:
+              <listitem>
+                <para>
+                  Group (<command>group</command>)
+                </para>
+              </listitem>
 
-<orderedlist>
-<listitem>
-<para>
-Owner (<command>owner</command>)
+              <listitem>
+                <para>
+                  Mode (<command>mode</command>)
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  MD5 Checksum (<command>md5</command>)
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-Group (<command>group</command>)
+              <listitem>
+                <para>
+                  Size (<command>size</command>)
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  Major Number (<command>maj</command>)
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-Mode (<command>mode</command>)
+              <listitem>
+                <para>
+                  Minor Number (<command>min</command>)
+                </para>
+              </listitem>
 
-</para>
-</listitem>
+              <listitem>
+                <para>
+                  Symbolic Link String (<command>symlink</command>)
+                </para>
+              </listitem>
 
-<listitem>
-<para>
-MD5 Checksum (<command>md5</command>)
+              <listitem>
+                <para>
+                  Modification Time (<command>mtime</command>)
+                </para>
+              </listitem>
+            </orderedlist>
+          </para>
 
-</para>
-</listitem>
+          <para>
+            How is <command>%verify</command> used?  Say, for instance, that a
+            package installs device files.  Since the owner of a device will
+            change, it doesn't make sense to have RPM verify the device file's
+            owner/group and give out a false alarm.  Instead, the following
+            <command>%verify</command> directive could be used:
 
-<listitem>
-<para>
-Size (<command>size</command>)
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Major Number (<command>maj</command>)
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Minor Number (<command>min</command>)
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Symbolic Link String (<command>symlink</command>)
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-Modification Time (<command>mtime</command>)
-
-</para>
-</listitem>
-
-</orderedlist>
-How is <command>%verify</command> used?  Say, for instance, that a package installs
-device files.  Since the owner of a device will change, it doesn't make
-sense to have RPM verify the device file's owner/group and give out a false
-alarm.  Instead, the following <command>%verify</command> directive could be used:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-verify-example">
+              <title>An Example <command>%verify</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %verify(mode md5 size maj min symlink mtime) /dev/ttyS0
 </computeroutput>
-</screen>
-</figure>
-We've left out <command>owner</command> and <command>group</command>, since we'd rather RPM
-not verify those.
-<footnote>
-<para>
-RPM will automatically exclude file attributes
-from verification if it doesn't make sense for the type of file.  In our
-example, getting the MD5 checksum of a device file is an example of such a
-situation.
-</para>
-</footnote>
-  However, if all you want to do is prevent RPM from verifying
-one or two attributes, you can use <command>%verify</command>'s alternate syntax:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            We've left out <command>owner</command> and
+            <command>group</command>, since we'd rather RPM not verify those.
+            <footnote>
+              <para>
+                RPM will automatically exclude file attributes from verification
+                if it doesn't make sense for the type of file.  In our example,
+                getting the MD5 checksum of a device file is an example of such
+                a situation.
+              </para>
+            </footnote>
+          </para>
+          <para>
+            However, if all you want to do is prevent RPM from verifying one or
+            two attributes, you can use <command>%verify</command>'s alternate
+            syntax:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-verify-example2">
+              <title>
+                The <command>%verify</command> Directive's
+                <command>not</command> Clause
+              </title>
+              <screen width="60">
 <computeroutput>
 %verify(not owner group) /dev/ttyS0
 </computeroutput>
-</screen>
-</figure>
-This use of <command>%verify</command> produces identical results to the previous
-example.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            This use of <command>%verify</command> produces identical results to
+            the previous example.
+          </para>
+        </sect3>
+      </sect2>
 
-<indexterm>
-<primary><command>%verify</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-flist-directory-directives">
+        <title>Directory-related Directives</title>
 
-</sect3>
+        <para>
+          While the two directives in this section perform different functions,
+          each is related to directories in some way.  Let's see what they do:
+        </para>
 
-</sect2>
+        <sect3 id="s3-rpm-inside-docdir-directive">
+          <title>The <command>%docdir</command> Directive</title>
+          <!-- label: inside-docdir -->
+          <indexterm>
+            <primary><command>%docdir</command> directive</primary>
+          </indexterm>
 
-<sect2 id="s2-rpm-inside-">
-<title>Directory-related Directives</title>
-While the two directives in this section perform different functions, each
-is related to directories in some way.  Let's see what they do:
+          <para>
+            The <command>%docdir</command> directive is used to add a directory
+            to the list of directories that will contain documentation.  RPM
+            includes the directories <filename>/usr/doc</filename>,
+            <filename>/usr/info</filename>, and <filename>/usr/man</filename> in
+            the <command>%docdir</command> list by default.
+          </para>
+          <para>
+            For example, if the following line is part of the
+            <command>%files</command> list:
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%docdir</command> Directive</title>
-<!-- label: inside-docdir -->
-<indexterm>
-<primary><command>%docdir</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%docdir</command> directive is used to add a directory to the list of
-directories that will contain documentation.  RPM includes the directories
-<filename>/usr/doc</filename>, <filename>/usr/info</filename>, and <filename>/usr/man</filename> in the
-<command>%docdir</command> list by default.
-
-For example, if the following
-line is part of the <command>%files</command> list:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-docdir-example">
+              <title>Using the <command>%docdir</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 </computeroutput>
-</screen>
-</figure>
-any files in the <command>%files</command> list that RPM packages from
-<filename>/usr/blather</filename> will be included in the package as usual, but will
-also be automatically flagged as documentation.  This directive is handy
-when a package creates its own documentation directory and contains a large
-number of files.  Let's give it a try by adding the following line to our
-spec file:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            any files in the <command>%files</command> list that RPM packages
+            from <filename>/usr/blather</filename> will be included in the
+            package as usual, but will also be automatically flagged as
+            documentation.  This directive is handy when a package creates its
+            own documentation directory and contains a large number of files.
+            Let's give it a try by adding the following line to our spec file:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-docdir-example2">
+              <title>A Sample <command>%docdir</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 </computeroutput>
-</screen>
-</figure>
-Our <command>%files</command> list contains no references to the several files the
-package installs in the <filename>/usr/blather</filename> directory.  After building
-the package, looking at the package's file list shows:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Our <command>%files</command> list contains no references to the
+            several files the package installs in the
+            <filename>/usr/blather</filename> directory.  After building the
+            package, looking at the package's file list shows:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-docdir-setup">
+              <title>
+                Querying a Package Built With the
+                <command>%docdir</command> Directive
+              </title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 &hellip;
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-Wait a minute:  There's nothing there, not even <filename>/usr/blather</filename>!
-What happened?
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Wait a minute: There's nothing there, not even
+            <filename>/usr/blather</filename>!  What happened?
+          </para>
+          <para>
+            The problem is that <command>%docdir</command> only directs RPM to
+            mark the specified directory as holding documentation.  It
+            <emphasis>doesn't</emphasis> direct RPM to package any files in the
+            directory.  To do that, we need to clue RPM in to the fact that
+            there are files in the directory that must be packaged.
+          </para>
+          <para>
+            One way to do this is to simply add the files to the
+            <command>%files</command> list:
 
-The problem is that <command>%docdir</command> only directs RPM to mark the
-specified directory as holding documentation.  It <emphasis>doesn't</emphasis> direct RPM
-to package any files in the directory.  To do that, we need to clue RPM in
-to the fact that there are files in the directory that must be packaged.
-
-One way to do this is to simply add the files to the <command>%files</command>
-list:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-docdir-payoff">
+              <title>
+                Proper Usage of the <command>%docdir</command> Directive
+              </title>
+              <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 /usr/blather/INSTALL
 </computeroutput>
-</screen>
-</figure>
-Looking at the package, we see that <filename>INSTALL</filename> was packaged:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Looking at the package, we see that <filename>INSTALL</filename> was
+            packaged:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-docdir-payoff2">
+              <title>
+                File Packaged Using the <command>%docdir</command> Directive
+              </title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 &hellip;
 /usr/blather/INSTALL
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-Directing RPM to only show the documentation files, we see that
-<filename>INSTALL</filename> has indeed been marked as documentation, even though the
-<command>%doc</command> directive had not been used:
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Directing RPM to only show the documentation files, we see that
+            <filename>INSTALL</filename> has indeed been marked as
+            documentation, even though the <command>%doc</command> directive had
+            not been used:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-docdir-payoff3">
+              <title>
+                File Marked as Documentation Using the
+                <command>%docdir</command> Directive
+              </title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 &hellip;
 /usr/blather/INSTALL
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-Of course, if you go to the trouble of adding each file to the
-<command>%files</command> list, it wouldn't be that much more work to add
-<command>%doc</command> to each one.  So the way to get the most benefit from
-<command>%docdir</command> is to add another line to the <command>%files</command> list:
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Of course, if you go to the trouble of adding each file to the
+            <command>%files</command> list, it wouldn't be that much more work
+            to add <command>%doc</command> to each one.  So the way to get the
+            most benefit from <command>%docdir</command> is to add another line
+            to the <command>%files</command> list:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-docdir-directory-example">
+              <title>
+                Making the Most of the <command>%docdir</command> Directive
+              </title>
+              <screen width="60">
 <computeroutput>
 %docdir /usr/blather
 /usr/blather
 </computeroutput>
-</screen>
-</figure>
-Since the first line directs RPM to flag any file in <filename>/usr/blather</filename>
-as being documentation, and the second line tells RPM to automatically
-package any files found in <filename>/usr/blather</filename>, every single file in
-there will be packaged <emphasis>and</emphasis> marked as documentation:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Since the first line directs RPM to flag any file in
+            <filename>/usr/blather</filename> as being documentation, and the
+            second line tells RPM to automatically package any files found in
+            <filename>/usr/blather</filename>, every single file in there will
+            be packaged <emphasis>and</emphasis> marked as documentation:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-docdir-directory-example2">
+              <title>
+                A Package Query Showing <command>%docdir</command>-Included
+                Files
+              </title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qdp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 /usr/blather
 /usr/blather/COPYING
 /usr/blather/INSTALL
 /usr/blather/README
 &hellip;
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-The <command>%docdir</command> directive can save quite a bit of effort in
-creating the <command>%files</command> list.  The only caveat is that you must be
-sure the directory will only contain files you want marked as
-documentation.  Keep in mind, also, that all subdirectories of the
-<command>%docdir</command>'ed directory will be marked as documentation directories,
-too.
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The <command>%docdir</command> directive can save quite a bit of
+            effort in creating the <command>%files</command> list.  The only
+            caveat is that you must be sure the directory will only contain
+            files you want marked as documentation.  Keep in mind, also, that
+            all subdirectories of the <command>%docdir</command>'ed directory
+            will be marked as documentation directories, too.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%docdir</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-dir-directive">
+          <title>The <command>%dir</command> Directive</title>
+          <!-- label: inside-dir -->
+          <indexterm>
+            <primary><command>%dir</command> directive</primary>
+          </indexterm>
 
-</sect3>
+          <para>
+            As we mentioned in section <xref
+            linkend="s1-rpm-inside-files-list">, if a directory is specified in
+            the <command>%files</command> list, the contents of that directory,
+            and the contents of every directory under it, will automatically be
+            included in the package.  While this feature can be handy (assuming
+            you are <emphasis>sure</emphasis> that every file under the
+            directory should be packaged) there are times when this could be a
+            problem.
+          </para>
+          <para>
+            The way to get around this, is to use the <command>%dir</command>
+            directive.  By adding this directive to the line containing the
+            directory, RPM will package only the directory itself, regardless of
+            what files are in the directory at the time the package is created.
+            Here's an example of <command>%dir</command> in action.
+          </para>
+          <para>
+            The <filename>blather-1.0</filename> package creates the directory
+            <filename>/usr/blather</filename> as part of its build.  It also
+            puts several files in that directory.  In the spec file, the
+            <filename>/usr/blather</filename> directory is included in the
+            <command>%files</command> list:
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%dir</command> Directive</title>
-<!-- label: inside-dir -->
-<indexterm>
-<primary><command>%dir</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-As we mentioned in section <xref linkend="rpm-files-list">, if a directory is
-specified in the <command>%files</command> list, the contents of that directory, and
-the contents of every directory under it, will automatically be included in
-the package.  While this feature can be handy (assuming you are <emphasis>sure</emphasis>
-that every file under the directory should be packaged) there are times
-when this could be a problem.
-
-The way to get around this, is to use the <command>%dir</command> directive.  By
-adding this directive to the line containing the directory, RPM will
-package only the directory itself, regardless of what files are in the
-directory at the time the package is created.  Here's an example of
-<command>%dir</command> in action.
-
-The <filename>blather-1.0</filename> package creates the directory
-<filename>/usr/blather</filename> as part of its build.  It also puts several files in
-that directory.  In the spec file, the <filename>/usr/blather</filename> directory is
-included in the <command>%files</command> list:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-dir-example-setup">
+              <title>
+                A Directory Specified in the <command>%files</command> List
+              </title>
+              <screen width="60">
 <computeroutput>
 %files
 &hellip;
 /usr/blather
 &hellip;
 </computeroutput>
-</screen>
-</figure>
-There are no other entries in the <command>%files</command> list that have
-<filename>/usr/blather</filename> as part of their path.  After building the package,
-we use RPM to look at the files in the package:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            There are no other entries in the <command>%files</command> list
+            that have <filename>/usr/blather</filename> as part of their path.
+            After building the package, we use RPM to look at the files in the
+            package:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-dir-example-payoff">
+              <title>Files Packaged by Including a Directory</title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 &hellip;
 /usr/blather
 /usr/blather/COPYING
 /usr/blather/INSTALL
 /usr/blather/README
 &hellip;
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-The files present in <filename>/usr/blather</filename> at the time the package was
-built were included in the package automatically, without entering their
-names in the <command>%files</command> list.
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The files present in <filename>/usr/blather</filename> at the time
+            the package was built were included in the package automatically,
+            without entering their names in the <command>%files</command> list.
+          </para>
+          <para>
+            However, after changing the <filename>/usr/blather</filename> line
+            in the <command>%files</command> list to:
 
-However, after changing the <filename>/usr/blather</filename> line in the
-<command>%files</command> list to:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-dir-directive-example2">
+              <title>Using the <command>%dir</command> Directive</title>
+              <screen width="60">
 <computeroutput>
 %dir /usr/blather
 </computeroutput>
-</screen>
-</figure>
-and rebuilding the package, a listing of the package's files now includes
-only the <filename>/usr/blather</filename> directory:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            and rebuilding the package, a listing of the package's files now
+            includes only the <filename>/usr/blather</filename> directory:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-dir-directive-payoff">
+              <title>
+                A Directory Included Using the <command>%dir</command> Directive
+              </title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -qlp ../RPMS/i386/blather-1.0-1.i386.rpm</userinput>
+<computeroutput>
 &hellip;
 /usr/blather
 &hellip;
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-<indexterm>
-<primary><command>%dir</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+<prompt>#</prompt>
+              </screen>
+            </figure>
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-inside-flist-f-option">
+          <title>
+            <command>-f <userinput>&lt;file&gt;</userinput></command> --- Read
+            the <command>%files</command> List From
+            <command><userinput>&lt;file&gt;</userinput></command>
+          </title>
+          <indexterm>
+            <primary>
+              spec file!<command>%files</command> list in!<command>-f</command>
+              option
+            </primary>
+            <secondary></secondary>
+            <tertiary></tertiary>
+          </indexterm>
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-f <emphasis>&lt;file&gt;</command></emphasis> --- Read the <command>%files</command> List From <command><emphasis>&lt;file&gt;</command></emphasis></title>
-<indexterm>
-<primary>spec file!<command>%files</command> list in!<command>-f</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <command>-f</command> option is used to direct RPM to read the
+            <command>%files</command> list from the named file.  Like the
+            <command>%files</command> list in a spec file, the file named using
+            the <command>-f</command> option should contain one filename per
+            line and also include any of the directives named in this section.
+          </para>
+          <para>
+            Why is it necessary to read filenames from a file rather than have
+            the filenames in the spec file?  Here's a possible reason:
+          </para>
+          <para>
+            The filenames' paths may contain a directory name that can only be
+            determined at build-time, such as an architecture specification.
+            The list of files, minus the variable part of the path, can be
+            created, and <command>sed</command> can be used at build-time to
+            update the path appropriately.
+          </para>
+          <para>
+            It's not necessary that every filename to be packaged reside in the
+            file.  If there are any filenames present in the spec file, they
+            will be packaged as well:
 
-The <command>-f</command> option is used to direct RPM to read the <command>%files</command>
-list from the named file.  Like the <command>%files</command> list in a spec file,
-the file named using the <command>-f</command> option should contain one filename per
-line and also include any of the directives named in this section.
-
-Why is it necessary to read filenames from a file rather than have the
-filenames in the spec file?  Here's a possible reason:
-
-The filenames' paths may contain a directory name that can only be
-determined at build-time, such as an architecture specification.  The list
-of files, minus the variable part of the path, can be created, and
-<command>sed</command> can be used at build-time to update the path appropriately.
-
-It's not necessary that every filename to be packaged reside in the file.
-If there are any filenames present in the spec file, they will be packaged
-as well:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-flist-f-option-example">
+              <title>
+                The <command>%files</command> List's <command>-f</command>
+                Option
+              </title>
+              <screen width="60">
 <computeroutput>
 %files latex -f tetex-latex-skel
 /usr/bin/latex
 /usr/bin/pslatex
 &hellip;
 </computeroutput>
-</screen>
-</figure>
-Here, the filenames present in the file <filename>tetex-latex-skel</filename> would be
-packaged, followed by every filename following the <command>%files</command> line.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Here, the filenames present in the file
+            <filename>tetex-latex-skel</filename> would be packaged, followed by
+            every filename following the <command>%files</command> line.
+          </para>
+        </sect3>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary>spec file!<command>%files</command> list in!<command>-f</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-inside-package-directive">
+      <title>The Lone Directive: <command>%package</command></title>
+      <!-- label: inside-package -->
+      <indexterm>
+        <primary><command>%package</command> directive</primary>
+      </indexterm>
 
-<indexterm>
-<primary>spec file!<command>%files</command> list directives|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        While every directive we've seen so far is used in the
+        <command>%files</command> list, the <command>%package</command>
+        directive is different.  It is used to permit the creation of more than
+        one package per spec file and can appear at any point in the spec file.
+        These additional packages are known as subpackages.  Subpackages are
+        named according to the contents of the line containing the
+        <command>%package</command> directive.  The format of the package
+        directive is:
 
-</sect3>
-
-</sect2>
-
-</sect1>
-
-<sect1 id="s1-rpm-inside-">
-<title>The Lone Directive: <command>%package</command></title>
-<!-- label: inside-package -->
-<indexterm>
-<primary><command>%package</command> directive</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-While every directive we've seen so far is used in the <command>%files</command>
-list, the <command>%package</command> directive is different.  It is used to permit
-the creation of more than one package per spec file and can appear at any
-point in the spec file.  These additional packages are known as
-subpackages.  Subpackages are named according to the contents of the line
-containing the <command>%package</command> directive.  The format of the package
-directive is:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-inside-package-directive-format">
+          <title><command>%package</command> Directive Format</title>
+          <screen width="60">
 <computeroutput>
 %package: &lt;string&gt;
 </computeroutput>
-</screen>
-</figure>
-The <command>&lt;string&gt;</command> should be a name that describes the subpackage.  This
-string is appended to the base package name to produce the subpackage's
-name.  For example, if a spec file contains a <command>name</command> tag value of
-"<command>foonly</command>", and a "<command>%package doc</command>" line, then the
-subpackage name will be <filename>foonly-doc</filename>.
+          </screen>
+        </figure>
+      </para>
+      <para>
+        The <command>&lt;string&gt;</command> should be a name that describes
+        the subpackage.  This string is appended to the base package name to
+        produce the subpackage's name.  For example, if a spec file contains a
+        <command>name</command> tag value of "<command>foonly</command>", and a
+        "<command>%package doc</command>" line, then the subpackage name will be
+        <filename>foonly-doc</filename>.
+      </para>
 
-<sect2 id="s2-rpm-inside-">
-<title><command>-n <emphasis>&lt;string&gt;</command></emphasis> --- Use <command><emphasis>&lt;string&gt;</command></emphasis> As the Entire Subpackage Name</title>
-<!-- label: inside-package-n -->
-<indexterm>
-<primary><command>%package</command> directive!<command>-n</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-package-n-option">
+        <title>
+          <command>-n <userinput>&lt;string&gt;</userinput></command> --- Use
+          <command><userinput>&lt;string&gt;</userinput></command> As the Entire
+          Subpackage Name
+        </title>
+        <!-- label: inside-package-n -->
+        <indexterm>
+          <primary><command>%package</command> directive!<command>-n</command> option</primary>
+          <secondary></secondary>
+        </indexterm>
 
-As we mentioned above, the name of a subpackage normally includes the main
-package name.  When the <command>-n</command> option is added to the
-<command>%package</command> directive, it directs RPM to use the name specified on
-the <command>%package</command> line as the entire package name.  In the example
-above, the following <command>%package</command> line would create a subpackage
-named <filename>foonly-doc</filename>:
+        <para>
+          As we mentioned above, the name of a subpackage normally includes the
+          main package name.  When the <command>-n</command> option is added to
+          the <command>%package</command> directive, it directs RPM to use the
+          name specified on the <command>%package</command> line as the entire
+          package name.  In the example above, the following
+          <command>%package</command> line would create a subpackage named
+          <filename>foonly-doc</filename>:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-package-n-option-setup">
+            <title>An Example <command>%package</command> Directive</title>
+            <screen width="60">
 <computeroutput>
 %package doc
 </computeroutput>
-</screen>
-</figure>
-The following <command>%package</command> line would create a subpackage named
-<filename>doc</filename>:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The following <command>%package</command> line would create a
+          subpackage named <filename>doc</filename>:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-package-n-option-payoff">
+            <title>
+              Using the <command>-n</command> Option to Control Subpackage Names
+            </title>
+            <screen width="60">
 <computeroutput>
 %package -n doc
 </computeroutput>
-</screen>
-</figure>
-The <command>%package</command> directive plays another role in subpackage
-building.  That role is to act as a place to collect tags that are specific
-to a given subpackage.  Any tag placed after a <command>%package</command>
-directive will only apply to that subpackage.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The <command>%package</command> directive plays another role in
+          subpackage building.  That role is to act as a place to collect tags
+          that are specific to a given subpackage.  Any tag placed after a
+          <command>%package</command> directive will only apply to that
+          subpackage.
+        </para>
+        <para>
+          Finally, the name string specified by the <command>%package</command>
+          directive is also used to denote which parts of the spec file are a
+          part of that subpackage. This is done by including the string (along
+          with the <command>-n</command> option, if present on the
+          <command>%package</command> line) on the starting line of the section
+          that is to be subpackage-specific.  Here's an example:
 
-Finally, the name string specified by the <command>%package</command> directive is
-also used to denote which parts of the spec file are a part of that
-subpackage. This is done by including the string (along with the
-<command>-n</command> option, if present on the <command>%package</command> line) on the
-starting line of the section that is to be subpackage-specific.  Here's an
-example:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-package-n-option-example2">
+            <title>The <command>-n</command> Option in Action</title>
+            <screen width="60">
 <computeroutput>
 &hellip;
 %package -n bar
@@ -4548,250 +4611,226 @@ example:
 %post -n bar
 &hellip;
 </computeroutput>
-</screen>
-</figure>
-In this heavily edited spec file segment, a subpackage called <filename>bar</filename>
-has been defined.  Later in the file is a post-install script.  Because it
-has subpackage <filename>bar</filename>'s name on the <command>%post</command> line, the
-post-install script will be part of the <filename>bar</filename> subpackage only.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this heavily edited spec file segment, a subpackage called
+          <filename>bar</filename> has been defined.  Later in the file is a
+          post-install script.  Because it has subpackage
+          <filename>bar</filename>'s name on the <command>%post</command> line,
+          the post-install script will be part of the <filename>bar</filename>
+          subpackage only.
+        </para>
+        <para>
+          For more information on building subpackages, please see chapter <xref
+          linkend="rpm-subpack">.
+        </para>
+      </sect2>
+    </sect1>
 
-For more information on building subpackages, please see chapter
-<xref linkend="rpm-subpack">.
+    <sect1 id="s1-rpm-inside-conditionals">
+      <title>Conditionals</title>
+      <indexterm>
+        <primary>spec file!conditionals in</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<indexterm>
-<primary><command>%package</command> directive!<command>-n</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        While the "exclude" and "exclusive" tags
+        (<command>excludearch</command>, <command>exclusivearch</command>,
+        <command>excludeos</command>, and <command>exclusiveos</command>)
+        provide some control over whether a package will be built on a given
+        architecture and/or operating system, that control is still rather
+        coarse.
+      </para>
+      <para>
+        For example, what should be done if a package will build under multiple
+        architectures, but requires slightly different <command>%build</command>
+        scripts?  Or what if a package requires a certain set of files under one
+        operating system, and an entirely different set under another operating
+        system?  The architecture and operating system-specific tags we've
+        discussed earlier in the chapter do nothing to help in such situations.
+        What can be done?
+      </para>
+      <para>
+        One approach would be to simply create different spec files for each
+        architecture or operating system.  While it would certainly work, this
+        approach has some problems:
 
-<indexterm>
-<primary><command>%package</command> directive|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>
+              More work.  The existence of multiple spec files for a given
+              package means that the effort required to make any changes to the
+              package is multiplied by however many different spec files there
+              are.
+            </para>
+          </listitem>
 
-</sect2>
+          <listitem>
+            <para>
+              More chance for mistakes.  If any work needs to be done to the
+              spec files, the fact they are separate means it is that much
+              easier to forget to make the necessary changes to each one.  There
+              is also the chance of introducing mistakes each time changes are
+              made.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
 
-</sect1>
+      <para>
+        The other approach is to somehow permit the conditional inclusion of
+        architecture- or operating system-specific sections of the spec file.
+        Fortunately, the RPM designers chose this approach, and it makes
+        multi-platform package building easier and less prone to mistakes.
+      </para>
+      <para>
+        We discuss multi-platform package building in depth in chapter <xref
+        linkend="rpm-multi">.  For now, let's take a quick look at RPM's
+        conditionals.
+      </para>
 
-<sect1 id="s1-rpm-inside-">
-<title>Conditionals</title>
-<indexterm>
-<primary>spec file!conditionals in</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-ifarch-conditional">
+        <title>The <command>%ifarch</command> Conditional</title>
+        <!-- label: inside-ifarch -->
+        <indexterm>
+          <primary><command>%ifarch</command> conditional</primary>
+        </indexterm>
 
-While the "exclude" and "exclusive" tags (<command>excludearch</command>,
-<command>exclusivearch</command>, <command>excludeos</command>, and <command>exclusiveos</command>)
-provide some control over whether a package will be built on a given
-architecture and/or operating system, that control is still rather coarse.
+        <para>
+          The <command>%ifarch</command> conditional is used to begin a section
+          of the spec file that is architecture-specific.  It is followed by one
+          or more architecture specifiers, each separated by commas or
+          whitespace.  Here is an example:
 
-For example, what should be done if a package will build under multiple
-architectures, but requires slightly different <command>%build</command> scripts?
-Or what if a package requires a certain set of files under one operating
-system, and an entirely different set under another operating system?  The
-architecture and operating system-specific tags we've discussed earlier in
-the chapter do nothing to help in such situations.  What can be done?
-
-One approach would be to simply create different spec files for each
-architecture or operating system.  While it would certainly work, this
-approach has some problems:
-
-<itemizedlist mark="bullet">
-<listitem>
-<para>
-More work.  The existence of multiple spec files for a given package
-means that the effort required to make any changes to the package is
-multiplied by however many different spec files there are.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-More chance for mistakes.  If any work needs to be done to the spec
-files, the fact they are separate means it is that much easier to forget to
-make the necessary changes to each one.  There is also the chance of
-introducing mistakes each time changes are made.
-
-</para>
-</listitem>
-
-</itemizedlist>
-The other approach is to somehow permit the conditional inclusion of
-architecture- or operating system-specific sections of the spec file.
-Fortunately, the RPM designers chose this approach, and it makes
-multi-platform package building easier and less prone to mistakes.
-
-We discuss multi-platform package building in depth in chapter
-<xref linkend="rpm-multi">.  For now, let's take a quick look at RPM's
-conditionals.
-
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%ifarch</command> Conditional</title>
-<!-- label: inside-ifarch -->
-<indexterm>
-<primary><command>%ifarch</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%ifarch</command> conditional is used to begin a section of the spec
-file that is architecture-specific.  It is followed by one or more
-architecture specifiers, each separated by commas or whitespace.  Here is
-an example:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-ifarch-example">
+            <title>The <command>%ifarch</command> Conditional</title>
+            <screen width="60">
 <computeroutput>
 %ifarch i386 sparc
 </computeroutput>
-</screen>
-</figure>
-The contents of the spec file following this line would be processed only
-by Intel x86 or Sun SPARC-based systems.  However, if only this line were
-placed in a spec file, this is what would happen if a build was attempted:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The contents of the spec file following this line would be processed
+          only by Intel x86 or Sun SPARC-based systems.  However, if only this
+          line were placed in a spec file, this is what would happen if a build
+          was attempted:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+          <figure id="sc-rpm-inside-ifarch-build">
+            <title>
+              Attempting to Use the <command>%ifarch</command> Conditional
+            </title>
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
+<computeroutput>
 Unclosed %if
 Build failed.
-<prompt>#</prompt>
 </computeroutput>
-</screen>
-</figure>
-The problem that surfaced here is that any conditional must be "closed"
-by using either <command>%else</command> or <command>%endif</command>.  We'll be covering
-them a bit later in the chapter.
+<prompt>#</prompt>
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The problem that surfaced here is that any conditional must be
+          "closed" by using either <command>%else</command> or
+          <command>%endif</command>.  We'll be covering them a bit later in the
+          chapter.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary><command>%ifarch</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-ifnarch-conditional">
+        <title>The <command>%ifnarch</command> Conditional</title>
+        <!-- label: inside-ifnarch -->
+        <indexterm>
+          <primary><command>%ifnarch</command> conditional</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The <command>%ifnarch</command> conditional is used in a similar
+          fashion to <command>%ifarch</command>, except that the logic is
+          reversed.  If a spec file contains a conditional block starting with
+          <command>%ifarch alpha</command>, that block would be processed only
+          if the build was being done on a Digital Alpha/AXP-based system.
+          However, if the conditional block started with <command>%ifnarch
+          alpha</command>, then that block would be processed only if the build
+          were <emphasis>not</emphasis> being done on an Alpha.
+        </para>
+        <para>
+          Like <command>%ifarch</command>, <command>%ifnarch</command> can be
+          followed by one or more architectures and must be closed by a
+          <command>%else</command> or <command>%endif</command>.
+        </para>
+      </sect2>
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%ifnarch</command> Conditional</title>
-<!-- label: inside-ifnarch -->
-<indexterm>
-<primary><command>%ifnarch</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+<sect2 id="s2-rpm-inside-ifos-conditional">
+        <title>The <command>%ifos</command> Conditional</title>
+        <!-- label: inside-ifos -->
+        <indexterm>
+          <primary><command>%ifos</command> conditional</primary>
+        </indexterm>
 
-The <command>%ifnarch</command> conditional is used in a similar fashion to
-<command>%ifarch</command>, except that the logic is reversed.  If a spec file
-contains a conditional block starting with <command>%ifarch alpha</command>, that
-block would be processed only if the build was being done on a Digital
-Alpha/AXP-based system.  However, if the conditional block started with
-<command>%ifnarch alpha</command>, then that block would be processed only if the
-build were <emphasis>not</emphasis> being done on an Alpha.
+        <para>
+          The <command>%ifos</command> conditional is used to control RPM's spec
+          file processing based on the build system's operating system.  It is
+          followed by one or more operating system names.  A conditional block
+          started with <command>%ifos</command> must be closed by a
+          <command>%else</command> or <command>%endif</command>.  Here's an
+          example:
 
-Like <command>%ifarch</command>, <command>%ifnarch</command> can be followed by one or more
-architectures and must be closed by a <command>%else</command> or <command>%endif</command>.
-
-<indexterm>
-<primary><command>%ifnarch</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%ifos</command> Conditional</title>
-<!-- label: inside-ifos -->
-<indexterm>
-<primary><command>%ifos</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%ifos</command> conditional is used to control RPM's spec file
-processing based on the build system's operating system.  It is followed by
-one or more operating system names.  A conditional block started with
-<command>%ifos</command> must be closed by a <command>%else</command> or <command>%endif</command>.
-Here's an example:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-ifos-example">
+            <title>The <command>%ifos</command> Conditional</title>
+            <screen width="60">
 <computeroutput>
 %ifos linux
 </computeroutput>
-</screen>
-</figure>
-The contents of the spec file following this line would be processed only
-if the build was done on a linux system.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          The contents of the spec file following this line would be processed
+          only if the build was done on a linux system.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary><command>%ifos</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-ifnos-conditional">
+        <title>The <command>%ifnos</command> Conditional</title>
+        <!-- label: inside-ifnos -->
+        <indexterm>
+          <primary><command>%ifnos</command> conditional</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The <command>%ifnos</command> conditional is the logical complement to
+          <command>%ifos</command>: that is, if a conditional starting with the
+          line <command>%ifnos irix</command> is present in a spec file, then
+          the file contents after the <command>%ifnos</command> will not be
+          processed if the build system is running Irix.  As always, a
+          conditional block starting with <command>%ifnos</command> must be
+          closed by a <command>%else</command> or <command>%endif</command>.
+        </para>
+      </sect2>
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%ifnos</command> Conditional</title>
-<!-- label: inside-ifnos -->
-<indexterm>
-<primary><command>%ifnos</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-else-conditional">
+        <title>The <command>%else</command> Conditional</title>
+        <!-- label: inside-else -->
+        <indexterm>
+          <primary><command>%else</command> conditional</primary>
+        </indexterm>
 
-The <command>%ifnos</command> conditional is the logical complement to
-<command>%ifos</command>: that is, if a conditional starting with the line
-<command>%ifnos irix</command> is present in a spec file, then the file contents
-after the <command>%ifnos</command> will not be processed if the build system is
-running Irix.  As always, a conditional block starting with
-<command>%ifnos</command> must be closed by a <command>%else</command> or <command>%endif</command>.
+        <para>
+          The <command>%else</command> conditional is placed between a
+          <command>%if</command> conditional of some persuasion, and a
+          <command>%endif</command>.  It is used to create two blocks of spec
+          file statements, only one of which will be used in any given
+          case. Here's an example:
 
-<indexterm>
-<primary><command>%ifnos</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%else</command> Conditional</title>
-<!-- label: inside-else -->
-<indexterm>
-<primary><command>%else</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%else</command> conditional is placed between a <command>%if</command>
-conditional of some persuasion, and a <command>%endif</command>.  It is used to
-create two blocks of spec file statements, only one of which will be used
-in any given case. Here's an example:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-else-example">
+            <title>The <command>%else</command> Conditional</title>
+            <screen width="60">
 <computeroutput>
 %ifarch alpha
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
@@ -4799,78 +4838,52 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 %endif
 </computeroutput>
-</screen>
-</figure>
-When a build is performed on a Digital Alpha/AXP, some additional flags are
-added to the <command>make</command> command.  On all other systems, these flags are
-not added.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          When a build is performed on a Digital Alpha/AXP, some additional
+          flags are added to the <command>make</command> command.  On all other
+          systems, these flags are not added.
+        </para>
+      </sect2>
 
-<indexterm>
-<primary><command>%else</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <sect2 id="s2-rpm-inside-endif-conditional">
+        <title>The <command>%endif</command> Conditional</title>
+        <!-- label: inside-endif -->
+        <indexterm>
+          <primary><command>%endif</command> conditional</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          A <command>%endif</command> is used to end a conditional block of spec
+          file statements.  It can follow one of the <command>%if</command>
+          conditionals, or the <command>%else</command>.  The
+          <command>%endif</command> is always needed after a conditional,
+          otherwise the build will fail.  Here's short conditional block, ending
+          with a <command>%endif</command>:
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%endif</command> Conditional</title>
-<!-- label: inside-endif -->
-<indexterm>
-<primary><command>%endif</command> conditional</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-A <command>%endif</command> is used to end a conditional block of spec file
-statements.  It can follow one of the <command>%if</command> conditionals,
-or the <command>%else</command>.  The <command>%endif</command> is always needed after a
-conditional, otherwise the build will fail.  Here's short conditional
-block, ending with a <command>%endif</command>:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-endif-example">
+            <title>The <command>%endif</command> Conditional</title>
+            <screen width="60">
 <computeroutput>
 %ifarch i386
 make INTELFLAG=-DINTEL
 %endif
 </computeroutput>
-</screen>
-</figure>
-In this example, we see the conditional block started with a
-<command>%ifarch</command> and ended with a <command>%endif</command>.
-
-<indexterm>
-<primary><command>%endif</command> conditional|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary>spec file!conditionals in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-Now that we have some more in-depth knowledge of the spec file, let's take
-a look at some of RPM's additional features.  In the next chapter, we'll
-explore how to add dependency information to a package.
-
-<indexterm>
-<primary>spec file!contents of|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect1>
-
-</chapter>
-
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this example, we see the conditional block started with a
+          <command>%ifarch</command> and ended with a
+          <command>%endif</command>.
+        </para>
+        <para>
+          Now that we have some more in-depth knowledge of the spec file, let's
+          take a look at some of RPM's additional features.  In the next
+          chapter, we'll explore how to add dependency information to a package.
+        </para>
+      </sect2>
+    </sect1>
+  </chapter>
