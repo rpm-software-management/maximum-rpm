@@ -365,27 +365,54 @@
 </refsect1>
 
 <refsect1><title>Files</title>
+  <refsect2><title>rpmrc Configuration</title>
     <para>
     <simplelist>
 	<member><filename>/usr/lib/rpm/rpmrc</filename></member>
 	<member><filename>/usr/lib/rpm/redhat/rpmrc</filename></member>
 	<member><filename>/etc/rpmrc</filename></member>
 	<member><filename>~/.rpmrc</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Macro Configuration</title>
+    <para>
+    <simplelist>
 	<member><filename>/usr/lib/rpm/macros</filename></member>
 	<member><filename>/usr/lib/rpm/redhat/macros</filename></member>
 	<member><filename>/etc/rpm/macros</filename></member>
 	<member><filename>~/.rpmmacros</filename></member>
-	<member><filename>/var/lib/rpm/Conflictname</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Database</title>
+    <para>
+    <simplelist>
 	<member><filename>/var/lib/rpm/Basenames</filename></member>
+	<member><filename>/var/lib/rpm/Conflictname</filename></member>
+	<member><filename>/var/lib/rpm/Dirnames</filename></member>
+	<member><filename>/var/lib/rpm/Filemd5s</filename></member>
 	<member><filename>/var/lib/rpm/Group</filename></member>
+	<member><filename>/var/lib/rpm/Installtid</filename></member>
 	<member><filename>/var/lib/rpm/Name</filename></member>
 	<member><filename>/var/lib/rpm/Packages</filename></member>
 	<member><filename>/var/lib/rpm/Providename</filename></member>
+	<member><filename>/var/lib/rpm/Provideversion</filename></member>
 	<member><filename>/var/lib/rpm/Requirename</filename></member>
+	<member><filename>/var/lib/rpm/Requireversion</filename></member>
+	<member><filename>/var/lib/rpm/Sha1header</filename></member>
+	<member><filename>/var/lib/rpm/Sigmd5</filename></member>
 	<member><filename>/var/lib/rpm/Triggername</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Temporary</title>
+    <para>
+    <simplelist>
 	<member><filename>/var/tmp/rpm*</filename></member>
     </simplelist>
     </para>
+  </refsect2>
 </refsect1>
 
 <refsect1><title>See Also</title>

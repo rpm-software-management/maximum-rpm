@@ -109,37 +109,6 @@
     </simplelist>
   </para>
   </refsect2><refsect2>
-  <title>Building Packages:</title>
-  <para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>-ba|-bb|-bp|-bc|-bi|-bl|-bs</option></arg>
-	<arg><synopfragmentref linkend="build-options">
-	    build-options
-	  </synopfragmentref></arg>
-	<arg rep="repeat" choice="plain"><replaceable>SPECFILE</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>-ta|-tb|-tp|-tc|-ti|-tl|-ts</option></arg>
-	<arg><synopfragmentref linkend="build-options">
-	    build-options
-	  </synopfragmentref></arg>
-	<arg rep="repeat" choice="plain"><replaceable>TARBALL</replaceable></arg>
-	</cmdsynopsis>
-      </member><member>
-	<cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>--rebuild|--recompile</option></arg>
-	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para>
-  </refsect2><refsect2>
   <title>Miscellaneous:</title>
   <para>
     <simplelist>
@@ -280,34 +249,6 @@
       </member>
     </simplelist>
   </para>
-  </refsect2><refsect2>
-  <title>build-options</title>
-  <para>
-    <simplelist>
-      <member>
-	<cmdsynopsis>
-	<command></command>
-
-<!-- ================================ -->
-  <synopfragment id="build-options">
-  <group choice="plain">
-    <arg><option>--buildroot</option> <replaceable>DIRECTORY</replaceable></arg>
-    <arg><option>--clean</option></arg>
-    <arg><option>--nobuild</option></arg>
-    <arg><option>--rmsource</option></arg>
-    <arg><option>--rmspec</option></arg>
-	<sbr>
-    <arg><option>--short-circuit</option></arg>
-    <arg><option>--sign</option></arg>
-    <arg><option>--target</option> <replaceable>PLATFORM</replaceable></arg>
-  </group>
-  </synopfragment>
-<!-- ================================ -->
-
-	</cmdsynopsis>
-      </member>
-    </simplelist>
-  </para>
   </refsect2>
 </RefSynopsisDiv>
 
@@ -333,8 +274,6 @@
 	<emphasis>Signature Check</emphasis>,
 	<emphasis>Install/Upgrade/Freshen</emphasis>,
 	<emphasis>Uninstall</emphasis>,
-	<emphasis>Build Package</emphasis>,
-	<emphasis>Build Package from Tarball</emphasis>,
 	<emphasis>Recompile Package</emphasis>,
 	<emphasis>Initialize Database</emphasis>,
 	<emphasis>Rebuild Database</emphasis>,
@@ -656,7 +595,7 @@ systems of the binary package and host don't match.
 	on this system.
     </para></listitem>
     </varlistentry><varlistentry>
-    <term><option>--nobuild</option></term>
+    <term><option>--test</option></term>
     <listitem><para>
 	Do not install the package, simply check for and report
 	potential conflicts.
@@ -971,7 +910,9 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 		<command>%ghost</command> file (i.e. the file contents were not included in the package)
 	</member>
 	</simplelist>
+    </para><para>
 	from the package header and then the file name.
+    </para><para>
 	Each of the 8 characters denotes the result of a comparison of
 	attribute(s) of the file to the value of those attribute(s) recorded
 	in the database.  A single
@@ -1126,157 +1067,6 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     </para></listitem>
     </varlistentry>
     </variablelist>
-  </refsect2>
-
-  <refsect2><title>Build Options</title>
-    <para>
-	The general form of an rpm build command is 
-    </para>
-    <para>
-      <cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>-b<replaceable>STAGE</replaceable>|-t<replaceable>STAGE</replaceable></option></arg>
-	<arg><synopfragmentref linkend="build-options">
-	    build-options
-	  </synopfragmentref></arg>
-	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
-      </cmdsynopsis>
-    </para>
-
-    <para>
-	The argument used is <option>-b</option> if a spec file is being
-	used to build the package and <option>-t</option> if &rpm;
-	should look inside of a (possibly compressed) tar file for
-	the spec file to use. After the first argument, the next
-	character (<replaceable>STAGE</replaceable>) specifies the stages
-	of building and packaging to be done and is one of:
-    <variablelist>
-    <varlistentry>
-    <term><option>-ba</option></term>
-    <listitem><para>
-	Build binary and source packages (after doing the %prep, %build, and
-	%install stages).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bb</option></term>
-    <listitem><para>
-	Build a binary package (after doing the %prep, %build, and %install
-	stages).
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bp</option></term>
-    <listitem><para>
-	Executes the "%prep" stage from the spec file. Normally this
-	involves unpacking the sources and applying any patches.
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bc</option></term>
-    <listitem><para>
-	Do the "%build" stage from the spec file (after doing the %prep stage).
-	This generally involves the equivalent of a "make".
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bi</option></term>
-    <listitem><para>
-	Do the "%install" stage from the spec file (after doing the %prep and
-	%build stages).  This generally involves the equivalent of a
-	"make install".
-    </para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bl</option></term>
-    <listitem><para>
-	Do a "list check".  The "%files" section from the spec file is
-	macro expanded, and checks are made to verify that each file
-	exists.
-	</para></listitem>
-    </varlistentry><varlistentry>
-    <term><option>-bs</option></term>
-    <listitem><para>
-	Build just the source package.
-    </para></ListItem>
-    </varlistentry>
-    </variablelist>
-    </para>
-
-    <para>
-	The following options may also be used:
-    </para>
-  <variablelist>
-  <varlistentry>
-    <term><option>--buildroot</option> <replaceable>DIRECTORY</replaceable></term>
-    <listitem><para>
-	When building a package, override the BuildRoot tag with directory
-	<replaceable>DIRECTORY</replaceable>.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--clean</option></term>
-    <listitem><para>
-	Remove the build tree after the packages are made.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--nobuild</option></term>
-    <listitem><para>
-	Do not execute any build stages. Useful for testing out spec files.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--rmsource</option></term>
-    <listitem><para>
-	Remove the sources after the build (may also be
-	used standalone, e.g. "&rpm; <option>--rmsource foo.spec</option>").
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--rmspec</option></term>
-    <listitem><para>
-	Remove the spec file after the build (may also be
-	used standalone, eg. "&rpm; <option>--rmspec foo.spec</option>").
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--short-circuit</option></term>
-    <listitem><para>
-	Skip straight to specified stage (i.e., skip all stages leading
-	up to the specified stage).  Only valid with <option>-bc</option>
-	and <option>-bi</option>.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--sign</option></term>
-    <listitem><para>
-	Embed a GPG signature in the package. This signature can be used
-	to verify the integrity and the origin of the package.  See the
-	section on GPG SIGNATURES for configuration details.
-    </para></listitem>
-  </varlistentry><varlistentry>
-    <term><option>--target</option> <replaceable>PLATFORM</replaceable></term>
-    <listitem><para>
-	When building the package, interpret <replaceable>PLATFORM</replaceable>
-	as <option>arch-vendor-os</option> and set the macros
-		<command>%_target</command>,
-		<command>%_target_arch</command>, and
-		<command>%_target_os</command>
-	accordingly.
-    </para></listitem>
-  </varlistentry>
-  </variablelist>
-  </refsect2>
-
-  <refsect2><title>Rebuild and Recompile Options</title>
-    <para>
-	There are two other ways to invoke building with rpm:
-    </para>
-    <para>
-      <cmdsynopsis>
-	&rpm;
-	<arg choice="req"><option>--rebuild|--recompile</option></arg>
-	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
-      </cmdsynopsis>
-    </para>
-    <para>
-	When invoked this way, &rpm; installs the named source
-	package, and does a prep, compile and install.  In addition,
-	<option>--rebuild</option> builds a new binary package. When the build
-	has completed, the build directory is removed (as in
-	<option>--clean</option>) and the the sources and spec file for
-	the package are removed.
-    </para>
   </refsect2>
 
   <refsect2><title>Signing a Package</title>
@@ -1470,28 +1260,99 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 
 </refsect1>
 
+<refsect1><title>Legacy Issues</title>
+  <refsect2><title>Executing rpmbuild</title>
+    <para>
+    The build modes of rpm are now resident in the
+	<filename>/usr/bin/rpmbuild</filename>
+    executable. Although legacy compatibility provided by the popt aliases
+    below has been adequate, the compatibility is not perfect; hence build
+    mode compatibility through popt aliases is being removed from rpm.
+    Install the <command>rpmbuild</command> package, and see
+	<command>rpmbuild</command>(8) for documentation of all the
+    <command>rpm</command> build modes previously documented here in
+	<command>rpm</command>(8).
+    </para><para>
+    Add the following lines to <filename>/etc/popt</filename>
+    if you wish to continue invoking <command>rpmbuild</command> from
+    the <command>rpm</command> command line:
+    </para><para>
+<computeroutput>
+rpm     exec --bp               rpmb -bp
+rpm     exec --bc               rpmb -bc
+rpm     exec --bi               rpmb -bi
+rpm     exec --bl               rpmb -bl
+rpm     exec --ba               rpmb -ba
+rpm     exec --bb               rpmb -bb
+rpm     exec --bs               rpmb -bs 
+rpm     exec --tp               rpmb -tp 
+rpm     exec --tc               rpmb -tc 
+rpm     exec --ti               rpmb -ti 
+rpm     exec --tl               rpmb -tl 
+rpm     exec --ta               rpmb -ta
+rpm     exec --tb               rpmb -tb
+rpm     exec --ts               rpmb -ts 
+rpm     exec --rebuild          rpmb --rebuild
+rpm     exec --recompile        rpmb --recompile
+rpm     exec --clean            rpmb --clean
+rpm     exec --rmsource         rpmb --rmsource
+rpm     exec --rmspec           rpmb --rmspec
+rpm     exec --target           rpmb --target
+rpm     exec --short-circuit    rpmb --short-circuit
+</computeroutput>
+    </para>
+  </refsect2>
+</refsect1>
+
 <refsect1><title>Files</title>
+  <refsect2><title>rpmrc Configuration</title>
     <para>
     <simplelist>
 	<member><filename>/usr/lib/rpm/rpmrc</filename></member>
 	<member><filename>/usr/lib/rpm/redhat/rpmrc</filename></member>
 	<member><filename>/etc/rpmrc</filename></member>
 	<member><filename>~/.rpmrc</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Macro Configuration</title>
+    <para>
+    <simplelist>
 	<member><filename>/usr/lib/rpm/macros</filename></member>
 	<member><filename>/usr/lib/rpm/redhat/macros</filename></member>
 	<member><filename>/etc/rpm/macros</filename></member>
 	<member><filename>~/.rpmmacros</filename></member>
-	<member><filename>/var/lib/rpm/Conflictname</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Database</title>
+    <para>
+    <simplelist>
 	<member><filename>/var/lib/rpm/Basenames</filename></member>
+	<member><filename>/var/lib/rpm/Conflictname</filename></member>
+	<member><filename>/var/lib/rpm/Dirnames</filename></member>
+	<member><filename>/var/lib/rpm/Filemd5s</filename></member>
 	<member><filename>/var/lib/rpm/Group</filename></member>
+	<member><filename>/var/lib/rpm/Installtid</filename></member>
 	<member><filename>/var/lib/rpm/Name</filename></member>
 	<member><filename>/var/lib/rpm/Packages</filename></member>
 	<member><filename>/var/lib/rpm/Providename</filename></member>
+	<member><filename>/var/lib/rpm/Provideversion</filename></member>
 	<member><filename>/var/lib/rpm/Requirename</filename></member>
+	<member><filename>/var/lib/rpm/Requireversion</filename></member>
+	<member><filename>/var/lib/rpm/Sha1header</filename></member>
+	<member><filename>/var/lib/rpm/Sigmd5</filename></member>
 	<member><filename>/var/lib/rpm/Triggername</filename></member>
+    </simplelist>
+    </para>
+  </refsect2>
+  <refsect2><title>Temporary</title>
+    <para>
+    <simplelist>
 	<member><filename>/var/tmp/rpm*</filename></member>
     </simplelist>
     </para>
+  </refsect2>
 </refsect1>
 
 <refsect1><title>See Also</title>
