@@ -78,6 +78,7 @@
 <!ENTITY RPM-RESOURCES SYSTEM "rpm-resources.sgml">
 <!ENTITY PGP-INTRO SYSTEM "pgp-intro.sgml">
 <!ENTITY XREF SYSTEM "xref.sgml">
+<!ENTITY GENERATED-INDEX SYSTEM "generated-index.sgml">
 ]>
 
 
@@ -270,7 +271,6 @@
 
   </part>
 
-  <index>
-  </index>
+  &GENERATED-INDEX;
 
 </book>
