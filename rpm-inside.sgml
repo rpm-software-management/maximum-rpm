@@ -2341,80 +2341,71 @@ rm -rf $RPM_BUILD_ROOT
               removed.
             </para>
           </sect4>
+        </sect3>
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%preun</command> Script</title>
-<!-- label: inside-preun -->
-<indexterm>
-<primary><command>%preun</command> script</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-preun-script">
+          <title>The <command>%preun</command> Script</title>
+          <!-- label: inside-preun -->
+          <indexterm>
+            <primary><command>%preun</command> script</primary>
+          </indexterm>
 
-If there's a time when your package needs to have one last look around
-before the user erases it, the place to do it is in the <command>%preun</command>
-script.  Anything that a package needs to do immediately prior to RPM
-taking any action to erase the package, can be done here.
+          <para>
+            If there's a time when your package needs to have one last look
+            around before the user erases it, the place to do it is in the
+            <command>%preun</command> script.  Anything that a package needs to
+            do immediately prior to RPM taking any action to erase the package,
+            can be done here.
+          </para>
+        </sect3>
 
-</sect3>
+        <sect3 id="s3-rpm-inside-postun-script">
+          <title>The <command>%postun</command> Script</title>
+          <!-- label: inside-postun -->
+          <indexterm>
+            <primary><command>%postun</command> script</primary>
+          </indexterm>
 
-<sect3 id="s3-rpm-inside-">
-<title>The <command>%postun</command> Script</title>
-<!-- label: inside-postun -->
-<indexterm>
-<primary><command>%postun</command> script</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+          <para>
+            The <command>%postun</command> script executes after the package has
+            been removed.  It is the last chance for a package to clean up after
+            itself.  Quite often, <command>%postun</command> scripts are used to
+            run <command>ldconfig</command> to remove newly erased shared
+            libraries from <filename>ld.so.cache</filename>.
+          </para>
+        </sect3>
+      </sect2>
 
-The <command>%postun</command> script executes after the package has been removed.
-It is the last chance for a package to clean up after itself.  Quite often,
-<command>%postun</command> scripts are used to run <command>ldconfig</command> to remove newly
-erased shared libraries from <filename>ld.so.cache</filename>.
+      <sect2 id="s2-rpm-inside-verifyscript-script">
+        <title>
+          Verification-Time Script --- The <command>%verifyscript</command>
+          Script
+        </title>
+        <!-- label: inside-verifyscript -->
+        <indexterm>
+          <primary>scripts!verification-time</primary>
+          <secondary></secondary>
+        </indexterm>
 
-<indexterm>
-<primary>scripts!install/erase-time|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <indexterm>
+          <primary><command>%verifyscript</command> script</primary>
+        </indexterm>
 
-</sect3>
+        <para>
+          The <command>%verifyscript</command> executes whenever the installed
+          package is verified by RPM's verification command.  The contents of
+          this script is entirely up to the package builder, but in general the
+          script should do whatever is necessary to verify the package's proper
+          installation.  Since RPM automatically verifies the existence of a
+          package's files, along with other file attributes, the
+          <command>%verifyscript</command> should concentrate on different
+          aspects of the package's installation.  For example, the script may
+          ensure that certain configuration files contain the proper information
+          for the package being verified:
 
-</sect2>
-
-<sect2 id="s2-rpm-inside-">
-<title>Verification-Time Script --- The <command>%verifyscript</command> Script</title>
-<!-- label: inside-verifyscript -->
-<indexterm>
-<primary>scripts!verification-time</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary><command>%verifyscript</command> script</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>%verifyscript</command> executes whenever the installed package is
-verified by RPM's verification command.  The contents of this script is
-entirely up to the package builder, but in general the script should do
-whatever is necessary to verify the package's proper installation.  Since
-RPM automatically verifies the existence of a package's files, along with
-other file attributes, the <command>%verifyscript</command> should concentrate on
-different aspects of the package's installation.  For example, the script
-may ensure that certain configuration files contain the proper information
-for the package being verified:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-verifyscript-example">
+            <title>A Sample Verification Script</title>
+            <screen width="60">
 <computeroutput>
 for n in ash bsh; do
     echo -n "Looking for $n in /etc/shells... "
@@ -2426,119 +2417,114 @@ for n in ash bsh; do
     fi
 done
 </computeroutput>
-</screen>
-</figure>
-In this script, the config file <filename>/etc/shells</filename>, is checked to ensure
-that it has entries for the shells provided by this package.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this script, the config file <filename>/etc/shells</filename>, is
+          checked to ensure that it has entries for the shells provided by this
+          package.
+        </para>
+        <para>
+          It is worth noting that the script sends informational and error
+          messages to stdout, and error messages only to stderr.  Normally RPM
+          will only display error output from a verification script; the output
+          sent to stdout is only displayed when the verification is run in
+          verbose mode.
 
-It is worth noting that the script sends informational and error messages
-to stdout, and error messages only to stderr.  Normally RPM will only
-display error output from a verification script; the output sent to stdout
-is only displayed when the verification is run in verbose mode.
+        </para>
+      </sect2>
+    </sect1>
 
-<indexterm>
-<primary>scripts!verification-time|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect1 id="s1-rpm-inside-macros">
+      <title>Macros: Helpful Shorthand for Package Builders</title>
+      <!-- label: rpm-macros -->
+      <indexterm>
+        <primary>spec file!macros in</primary>
+        <secondary></secondary>
+      </indexterm>
 
-<indexterm>
-<primary>spec file!scripts in|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        RPM does not support macros in the sense of ad-hoc sequences of commands
+        being defined as a macro and executed by simply referring to the macro
+        name.
+      </para>
+      <para>
+        However, there are two parts of RPM's build process that are fairly
+        constant from one package to another, and they are the unpacking and
+        patching of sources.  Because of this, RPM makes two macros available to
+        simplify these tasks:
 
-</sect2>
+        <orderedlist>
+          <listitem>
+            <para>
+              The <command>%setup</command> macro, which is used to unpack the
+              original sources.
+            </para>
+          </listitem>
 
-</sect1>
+          <listitem>
+            <para>
+              The <command>%patch</command> macro, which is used to apply
+              patches to the original sources.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
 
-<sect1 id="s1-rpm-inside-">
-<title>Macros: Helpful Shorthand for Package Builders</title>
-<!-- label: rpm-macros -->
-<indexterm>
-<primary>spec file!macros in</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        These macros are used exclusively in the <command>%prep</command>
+        script; it wouldn't make sense to use them anywhere else.  The use of
+        these macros is not mandatory --- It is certainly possible to write a
+        <command>%prep</command> script without them.  But in the vast majority
+        of cases they make life easier for the package builder.
+      </para>
 
-RPM does not support macros in the sense of ad-hoc sequences of commands
-being defined as a macro and executed by simply referring to the macro
-name.
+      <sect2 id="s2-rpm-inside-setup-macro">
+        <title>The <command>%setup</command> Macro</title>
+        <!-- label: inside-setup -->
+        <indexterm>
+          <primary><command>%setup</command> macro</primary>
+        </indexterm>
 
-However, there are two parts of RPM's build process that are fairly
-constant from one package to another, and they are the unpacking and
-patching of sources.  Because of this, RPM makes two macros available to
-simplify these tasks:
+        <para>
+          As we mentioned above, the <command>%setup</command> macro is used to
+          unpack the original sources, in preparation for the build.  In its
+          simplest form, the macro is used with no options and gets the name of
+          the source archive from the <command>source</command> tag specified
+          earlier in the spec file.  Let's look at an example.  The
+          <filename>cdplayer</filename> package has the following
+          <command>source</command> tag:
 
-<orderedlist>
-<listitem>
-<para>
-The <command>%setup</command> macro, which is used to unpack the original
-sources.
-
-</para>
-</listitem>
-
-<listitem>
-<para>
-The <command>%patch</command> macro, which is used to apply patches to the
-original sources.
-
-</para>
-</listitem>
-
-</orderedlist>
-These macros are used exclusively in the <command>%prep</command> script; it
-wouldn't make sense to use them anywhere else.  The use of these macros is
-not mandatory --- It is certainly possible to write a <command>%prep</command>
-script without them.  But in the vast majority of cases they make life
-easier for the package builder.
-
-<sect2 id="s2-rpm-inside-">
-<title>The <command>%setup</command> Macro</title>
-<!-- label: inside-setup -->
-<indexterm>
-<primary><command>%setup</command> macro</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-As we mentioned above, the <command>%setup</command> macro is used to unpack the
-original sources, in preparation for the build.  In its simplest form, the
-macro is used with no options and gets the name of the source archive from
-the <command>source</command> tag specified earlier in the spec file.  Let's look at
-an example.  The <filename>cdplayer</filename> package has the following
-<command>source</command> tag:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-setup-setup">
+            <title>A Typical <command>source</command> Tag</title>
+            <screen width="60">
 <computeroutput>
 Source: ftp://ftp.gnomovision.com/pub/cdplayer/cdplayer-1.0.tgz
 </computeroutput>
-</screen>
-</figure>
-and the following <command>%prep</command> script:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          and the following <command>%prep</command> script:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-setup-setup2">
+            <title>A Typical <command>%prep</command> Script</title>
+            <screen width="60">
 <computeroutput>
 %prep
 %setup
 </computeroutput>
-</screen>
-</figure>
-In this simple case, the <command>%setup</command> macro expands into the following
-commands:
+            </screen>
+          </figure>
+        </para>
+        <para>
+          In this simple case, the <command>%setup</command> macro expands into
+          the following commands:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+          <figure id="sc-rpm-inside-setup-payoff">
+            <title><command>%setup</command> Macro Exapansion</title>
+            <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2551,67 +2537,85 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-As we can see, the <command>%setup</command> macro starts by changing directory into
-RPM's build area and removing any <filename>cdplayer</filename> build trees from
-previous builds.  It then uses <command>gzip</command> to uncompress the original
-source (whose name was taken from the <command>source</command> tag), and pipes the
-result to <command>tar</command> for unpacking.  The return status of the unpacking
-is tested.  If sucessful, the macro continues.
+            </screen>
+          </figure>
+        </para>
+        <para>
+          As we can see, the <command>%setup</command> macro starts by changing
+          directory into RPM's build area and removing any
+          <filename>cdplayer</filename> build trees from previous builds.  It
+          then uses <command>gzip</command> to uncompress the original source
+          (whose name was taken from the <command>source</command> tag), and
+          pipes the result to <command>tar</command> for unpacking.  The return
+          status of the unpacking is tested.  If sucessful, the macro continues.
+        </para>
+        <para>
+          At this point, the original sources have been unpacked.  The
+          <command>%setup</command> macro continues by changing directory into
+          <filename>cdplayer</filename>'s top-level directory.  The two
+          <command>cd</command> commands are an artifact of
+          <command>%setup</command>'s macro expansion.  Finally,
+          <command>%setup</command> makes sure every file in the build tree is
+          owned by root and has appropriate permissions set.
+        </para>
+        <para>
+          But that's just the simplest way that <command>%setup</command> can be
+          used.  There are a number of other options that can be added to
+          accomodate different situations.  Let's look at them.
+        </para>
 
-At this point, the original sources have been unpacked.  The
-<command>%setup</command> macro continues by changing directory into
-<filename>cdplayer</filename>'s top-level directory.  The two <command>cd</command> commands are
-an artifact of <command>%setup</command>'s macro expansion.  Finally,
-<command>%setup</command> makes sure every file in the build tree is owned by root
-and has appropriate permissions set.
+        <sect3 id="s3-rpm-inside-setup-n-option">
+          <title>
+            <command>-n <userinput>&lt;name&gt;</userinput></command> --- Set
+            Name of Build Directory
+          </title>
+          <!-- label: inside-setup-n -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-n</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-But that's just the simplest way that <command>%setup</command> can be used.  There
-are a number of other options that can be added to accomodate different
-situations.  Let's look at them.
+          <para>
+            In our example above, the <command>%setup</command> macro simply
+            uncompressed and unpacked the sources.  In this case, the
+            <command>tar</command> file containing the original sources was
+            created such that the top-level directory was included in the tar
+            file.  The name of the top-level directory was also identical to
+            that of the <command>tar</command> file, which was in
+            <command><userinput>&lt;name&gt;-&lt;version&gt;</userinput></command>
+            format.
+          </para>
+          <para>
+            However, this is not always the case.  Quite often, the original
+            sources unpack into a directory whose name is different than the
+            original <command>tar</command> file.  Since RPM assumes the
+            directory will be called
+            <command><userinput>&lt;name&gt;-&lt;version&gt;</userinput></command>,
+            when the directory is called something else, it's necessary to use
+            <command>%setup</command>'s <command>-n</command> option.  Here's an
+            example:
+          </para>
+          <para>
+            Assume, for a moment, that the <filename>cdplayer</filename>
+            sources, when unpacked, create a top-level directory named
+            <filename>cd-player</filename>.  In this case, our
+            <command>%setup</command> line would look like this:
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-n <emphasis>&lt;name&gt;</command></emphasis> -- Set Name of Build Directory</title>
-<!-- label: inside-setup-n -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-n</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-In our example above, the <command>%setup</command> macro simply uncompressed and
-unpacked the sources.  In this case, the <command>tar</command> file containing the
-original sources was created such that the top-level directory was included
-in the tar file.  The name of the top-level directory was also identical to
-that of the <command>tar</command> file, which was in
-<command><emphasis>&lt;name&gt;-&lt;version&gt;</command></emphasis> format.
-
-However, this is not always the case.  Quite often, the original sources
-unpack into a directory whose name is different than the original
-<command>tar</command> file.  Since RPM assumes the directory will be called
-<command><emphasis>&lt;name&gt;-&lt;version&gt;</command></emphasis>, when the directory is called something
-else, it's necessary to use <command>%setup</command>'s <command>-n</command> option.  Here's
-an example:
-
-Assume, for a moment, that the <filename>cdplayer</filename> sources, when unpacked,
-create a top-level directory named <filename>cd-player</filename>.  In this case, our
-<command>%setup</command> line would look like this:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-n-setup">
+              <title>The <command>-n</command> Option in Action</title>
+              <screen width="60">
 <computeroutput>
 %setup -n cd-player
 </computeroutput>
-</screen>
-</figure>
-and the resulting commands would look like this:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            and the resulting commands would look like this:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-n-payoff">
+              <title>Affect of the <command>-n</command> Option</title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cd-player
@@ -2624,58 +2628,65 @@ cd /usr/src/redhat/BUILD/cd-player
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-The results are identical to using <command>%setup</command> with no options, except
-for the fact that <command>%setup</command> now does a recursive delete on the
-directory <filename>cd-player</filename> (instead of <filename>cdplayer-1.0</filename>), and
-changes directory into <filename>cd-player</filename> (instead of
-<filename>cdplayer-1.0</filename>).
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The results are identical to using <command>%setup</command> with no
+            options, except for the fact that <command>%setup</command> now does
+            a recursive delete on the directory <filename>cd-player</filename>
+            (instead of <filename>cdplayer-1.0</filename>), and changes
+            directory into <filename>cd-player</filename> (instead of
+            <filename>cdplayer-1.0</filename>).
+          </para>
+          <para>
+            Note that all subsequent build-time scripts will change directory
+            into the directory specified by the <command>-n</command> option.
+            This makes <command>-n</command> unsuitable as a means of unpacking
+            sources in directories other than the top-level build directory.  In
+            the upcoming example on page <xref linkend="multi-source-spec">,
+            we'll show a way around this restriction.
+          </para>
+          <para>
+            A quick word of warning: If the name specified with the
+            <command>-n</command> option doesn't match the name of the directory
+            created when the sources are unpacked, the build will stop pretty
+            quickly, so it pays to be careful when using this option.
+          </para>
+        </sect3>
 
-Note that all subsequent build-time scripts will change directory into the
-directory specified by the <command>-n</command> option.  This makes <command>-n</command>
-unsuitable as a means of unpacking sources in directories other than the
-top-level build directory.  In the upcoming example on page
-<xref linkend="multi-source-spec">, we'll show a way around this restriction.
+        <sect3 id="s3-rpm-inside-setup-c-option">
+          <title>
+            <command>-c</command> -- Create Directory (and change to it) Before
+            Unpacking
+          </title>
+          <!-- label: inside-setup-c -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-c</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-A quick word of warning: If the name specified with the <command>-n</command> option
-doesn't match the name of the directory created when the sources are
-unpacked, the build will stop pretty quickly, so it pays to be careful when
-using this option.
+          <para>
+            How many times have you grabbed a <command>tar</command> file and
+            unpacked it, only to find that it splattered files all over your
+            current directory?  Sometimes source archives are created without a
+            top-level directory.
+          </para>
+          <para>
+            As you can see from the examples so far, <command>%setup</command>
+            expects the archive to create its own top-level directory.  If this
+            isn't the case, you'll need to use the <command>-c</command> option.
+          </para>
+          <para>
+            This option simply creates the directory and changes directory into
+            it before unpacking the sources.  Here's what it looks like:
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-n</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-<sect3 id="s3-rpm-inside-">
-<title><command>-c</command> -- Create Directory (and change to it) Before Unpacking</title>
-<!-- label: inside-setup-c -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-c</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-How many times have you grabbed a <command>tar</command> file and unpacked it, only
-to find that it splattered files all over your current directory?
-Sometimes source archives are created without a top-level directory.
-
-As you can see from the examples so far, <command>%setup</command> expects the
-archive to create its own top-level directory.  If this isn't the case,
-you'll need to use the <command>-c</command> option.
-
-This option simply creates the directory and changes directory into it
-before unpacking the sources.  Here's what it looks like:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-c-example">
+              <title>
+                Macro Expansion Using the <command>-c</command>
+                Option
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2689,42 +2700,44 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-The only changes from using <command>%setup</command> with no options, are the
-<command>mkdir</command> and <command>cd</command> commands, prior to the commands that unpack
-the sources.  Note that you can use the <command>-n</command> option along with
-<command>-c</command>, so something like <command>%setup -c -n blather</command> works as
-expected.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The only changes from using <command>%setup</command> with no
+            options, are the <command>mkdir</command> and <command>cd</command>
+            commands, prior to the commands that unpack the sources.  Note that
+            you can use the <command>-n</command> option along with
+            <command>-c</command>, so something like <command>%setup -c -n
+            blather</command> works as expected.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-c</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-setup-d-option">
+          <title>
+            <command>-D</command> -- Do Not Delete Directory Before Unpacking
+            Sources
+          </title>
+          <!-- label: inside-setup-D -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-D</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
+          <para>
+            The <command>-D</command> option keeps the <command>%setup</command>
+            macro from deleting the software's top-level directory.  This option
+            is handy when the sources being unpacked are to be added to an
+            already-existing directory tree.  This would be the case when more
+            than one <command>%setup</command> macro is used.  Here's what
+            <command>%setup</command> does when the <command>-D</command> option
+            is employed:
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-D</command> -- Do Not Delete Directory Before Unpacking Sources</title>
-<!-- label: inside-setup-D -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-D</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>-D</command> option keeps the <command>%setup</command> macro from deleting the
-software's top-level directory.  This option is handy when the sources
-being unpacked are to be added to an already-existing directory tree.  This
-would be the case when more than one <command>%setup</command> macro is used.
-Here's what <command>%setup</command> does when the <command>-D</command> option is employed:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-d-example">
+              <title>
+                Macro Expansion Using the <command>-D</command> Option
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 gzip -dc /usr/src/redhat/SOURCES/cdplayer-1.0.tgz | tar -xvvf -
@@ -2736,36 +2749,36 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-As advertised, the <command>rm</command> prior to the <command>tar</command> command is gone.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            As advertised, the <command>rm</command> prior to the
+            <command>tar</command> command is gone.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-D</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-setup-t-option">
+          <title>
+            <command>-T</command> -- Do Not Perform Default Archive Unpacking
+          </title>
+          <!-- label: inside-setup-T -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-T</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
+          <para>
+            The <command>-T</command> option disables
+            <command>%setup</command>'s normal unpacking of the archive file
+            specified on the <command>source0</command> line.  Here's what the
+            resulting commands look like:
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-T</command> -- Do Not Perform Default Archive Unpacking</title>
-<!-- label: inside-setup-T -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-T</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>-T</command> option disables <command>%setup</command>'s normal unpacking of the
-archive file specified on the <command>source0</command> line.  Here's what the
-resulting commands look like:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-t-option">
+              <title>
+                Macro Expansion Using the <command>-T</command> Option
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2774,57 +2787,59 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-Doesn't make much sense, does it?  There's a method to this madness.  We'll
-see the <command>-T</command> in action in the next section.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Doesn't make much sense, does it?  There's a method to this madness.
+            We'll see the <command>-T</command> in action in the next section.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-T</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-setup-b-option">
+          <title>
+            <command>-b <userinput>&lt;n&gt;</userinput></command> --- Unpack
+            The <emphasis>n</emphasis>th Sources Before Changing Directory
+          </title>
+          <!-- label: inside-setup-b -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-b</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
+          <para>
+            The <command>-b</command> option is used in conjunction with the
+            <command>source</command> tag.  Specifically, it is used to identify
+            which of the numbered <command>source</command> tags in the spec
+            file are to be unpacked.
+          </para>
+          <para>
+            The <command>-b</command> option requires a numeric argument
+            matching an existing <command>source</command> tag.  If a numeric
+            argument is not provided, the build will fail:
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-b <emphasis>&lt;n&gt;</command></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources Before Changing Directory</title>
-<!-- label: inside-setup-b -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-b</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>-b</command> option is used in conjunction with the <command>source</command>
-tag.  Specifically, it is used to identify which of the numbered
-<command>source</command> tags in the spec file are to be unpacked.
-
-The <command>-b</command> option requires a numeric argument matching an existing
-<command>source</command> tag.  If a numeric argument is not provided, the build will
-fail:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-<computeroutput>
+            <figure id="sc-rpm-inside-setup-b-failure">
+              <title>Build Failure Caused by Missing Argument</title>
+              <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 * Package: cdplayer
 Need arg to %setup -b
 Build failed.
 <prompt>#</prompt>
-</computeroutput>
-</screen>
-</figure>
-Remembering that the first <command>source</command> tag is implicitly numbered 0,
-let's see what happens when the <command>%setup</command> line is changed to
-<command>%setup -b 0</command>:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Remembering that the first <command>source</command> tag is
+            implicitly numbered 0, let's see what happens when the
+            <command>%setup</command> line is changed to <command>%setup -b
+            0</command>:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-b-example">
+              <title>
+                Macro Expansion Using the <command>-b</command> Option
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2841,27 +2856,38 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-That's strange.  The sources were unpacked twice.  It doesn't make sense,
-until you realize that this is why there is a <command>-T</command> option.  Since
-<command>-T</command> disables the default source file unpacking, and <command>-b</command>
-selects a particular source file to be unpacked, the two are meant to go
-together, like this:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            That's strange.  The sources were unpacked twice.  It doesn't make
+            sense, until you realize that this is why there is a
+            <command>-T</command> option.  Since <command>-T</command> disables
+            the default source file unpacking, and <command>-b</command> selects
+            a particular source file to be unpacked, the two are meant to go
+            together, like this:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-t-and-b">
+              <title>
+                Proper Usage of the <command>-T</command> and
+                <command>-b</command> Options
+              </title>
+              <screen width="60">
 <computeroutput>
 %setup -T -b 0
 </computeroutput>
-</screen>
-</figure>
-Looking at the resulting commands, we find:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Looking at the resulting commands, we find:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-t-and-b-example">
+              <title>
+                Macro Expansion Using <command>-T</command> and
+                <command>-b</command> Together
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2874,38 +2900,39 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-That's more like it!  Let's go on to the next option.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            That's more like it!  Let's go on to the next option.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-b</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-setup-a-option">
+          <title>
+            <command>-a <userinput>&lt;n&gt;</userinput></command> --- Unpack
+            The <emphasis>n</emphasis>th Sources After Changing Directory
+          </title>
+          <!-- label: inside-setup-a -->
+          <indexterm>
+            <primary><command>%setup</command> macro!<command>-a</command> option</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
+          <para>
+            The <command>-a</command> option works similarly to the
+            <command>-b</command> option, except that the sources are unpacked
+            <emphasis>after</emphasis> changing directory into the top-level
+            build directory.  Like the <command>-b</command> option,
+            <command>-a</command> requires <command>-T</command> in order to
+            prevent two sets of unpacking commands.  Here are the commands that
+            a <command>%setup -T -a 0</command> line would produce:
 
-<sect3 id="s3-rpm-inside-">
-<title><command>-a <emphasis>&lt;n&gt;</command></emphasis> --- Unpack The <emphasis>n</emphasis>th Sources After Changing Directory</title>
-<!-- label: inside-setup-a -->
-<indexterm>
-<primary><command>%setup</command> macro!<command>-a</command> option</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-The <command>-a</command> option works similarly to the <command>-b</command> option, except
-that the sources are unpacked <emphasis>after</emphasis> changing directory into the
-top-level build directory.  Like the <command>-b</command> option, <command>-a</command>
-requires <command>-T</command> in order to prevent two sets of unpacking commands.
-Here are the commands that a <command>%setup -T -a 0</command> line would produce:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-t-a-example">
+              <title>
+                Macro Expansion of <command>%setup -T -a 0</command>
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2918,15 +2945,20 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-Note that there is no <command>mkdir</command> command to create the top-level
-directory prior to issuing a <command>cd</command> into it.  In our example, adding
-the <command>-c</command> option will make things right:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Note that there is no <command>mkdir</command> command to create the
+            top-level directory prior to issuing a <command>cd</command> into
+            it.  In our example, adding the <command>-c</command> option will
+            make things right:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-t-a-c-example">
+              <title>
+                Macro Expansion of <command>%setup -T -c -a 0</command>
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -2940,70 +2972,72 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-The result is the proper sequence of commands for unpacking a <command>tar</command>
-file with no top-level directory.
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The result is the proper sequence of commands for unpacking a
+            <command>tar</command> file with no top-level directory.
+          </para>
+        </sect3>
 
-<indexterm>
-<primary><command>%setup</command> macro!<command>-a</command> option|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+        <sect3 id="s3-rpm-inside-setup-multi-source">
+          <title>
+            Using <command>%setup</command> in a Multi-source Spec File
+          </title>
+          <!-- label: multi-source-spec -->
+          <indexterm>
+            <primary><command>%setup</command> macro!use in multi-source spec files</primary>
+            <secondary></secondary>
+          </indexterm>
 
-</sect3>
+          <para>
+            If all these interrelated options seem like overkill for unpacking a
+            single source file, you're right.  The real reason for the various
+            options is to make it easier to combine several separate source
+            archives into a single, build-able entity.  Let's see how they work
+            in that type of environment.
+          </para>
+          <para>
+            For the purposes of this example, our spec file will have the
+            following three <command>source</command> tags:
+            <footnote>
+              <para>
+                Yes, the <command>source</command> tags should include a URL
+                pointing to the sources.
+              </para>
+            </footnote>
 
-<sect3 id="s3-rpm-inside-">
-<title>Using <command>%setup</command> in a Multi-source Spec File</title>
-<!-- label: multi-source-spec -->
-<indexterm>
-<primary><command>%setup</command> macro!use in multi-source spec files</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-If all these interrelated options seem like overkill for unpacking a single
-source file, you're right.  The real reason for the various options is to
-make it easier to combine several separate source archives into a single,
-build-able entity.  Let's see how they work in that type of environment.
-
-For the purposes of this example, our spec file will have the following
-three <command>source</command> tags:
-<footnote>
-<para>
-Yes, the <command>source</command> tags should
-include a URL pointing to the sources.
-</para>
-</footnote>
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-example">
+              <title>Sample <command>source</command> Tags</title>
+              <screen width="60">
 <computeroutput>
 source: source-zero.tar.gz
 source1: source-one.tar.gz
 source2: source-two.tar.gz
 </computeroutput>
-</screen>
-</figure>
-To unpack the first source is not hard; all that's required is to use
-<command>%setup</command> with no options:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            To unpack the first source is not hard; all that's required is to
+            use <command>%setup</command> with no options:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-example2">
+              <title>Unpacking the First Source Archive</title>
+              <screen width="60">
 <computeroutput>
 %setup
 </computeroutput>
-</screen>
-</figure>
-This produces the following set of commands:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            This produces the following set of commands:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-expansion">
+              <title>Macro Expansion For the First Source Archive</title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3016,24 +3050,31 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-If <filename>source-zero.tar.gz</filename> didn't include a top-level directory, we
-could have made one by adding the <command>-c</command> option:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            If <filename>source-zero.tar.gz</filename> didn't include a
+            top-level directory, we could have made one by adding the
+            <command>-c</command> option:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-c-example">
+              <title>An Alternative <command>%setup</command> Macro</title>
+              <screen width="60">
 <computeroutput>
 %setup -c
 </computeroutput>
-</screen>
-</figure>
-which would result in:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            which would result in:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-c-expansion">
+              <title>
+                Macro Expansion Using the <command>-c</command> Option
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3047,24 +3088,32 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-Of course, if the top-level directory did not match the package name, the
-<command>-n</command> option could have been added:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Of course, if the top-level directory did not match the package
+            name, the <command>-n</command> option could have been added:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-n-example">
+              <title>
+                Yet Another Alternative <command>%setup</command> Macro
+              </title>
+              <screen width="60">
 <computeroutput>
 %setup -n blather
 </computeroutput>
-</screen>
-</figure>
-which results in:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            which results in:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-n-expansion">
+              <title>
+                Macro Expansion of <command>%setup -n blather</command>
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf blather
@@ -3077,23 +3126,32 @@ cd /usr/src/redhat/BUILD/blather
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-or
+              </screen>
+            </figure>
+          </para>
+          <para>
+            or
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-cn-example">
+              <title>
+                Combining the <command>-c</command>, <command>-n</command>
+                Options
+              </title>
+              <screen width="60">
 <computeroutput>
 %setup -c -n blather
 </computeroutput>
-</screen>
-</figure>
-This results in:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            This results in:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw-cn-expansion">
+              <title>
+                Macro Expansion of <command>%setup -c -n blather</command>
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf blather
@@ -3107,56 +3165,71 @@ cd /usr/src/redhat/BUILD/blather
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-Now let's add the second source file.  Things get a bit more interesting
-here.  First, we need to identify which <command>source</command> tag (and therefore,
-which source file) we're talking about.  So we need to use either the
-<command>-a</command> or <command>-b</command> option, depending on the characteristics of the
-source archive.  For this example, let's say that <command>-a</command> is the option
-we want.  Adding that option, plus a "1" to point to the source file
-specified in the <command>source1</command> tag, we have:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Now let's add the second source file.  Things get a bit more
+            interesting here.  First, we need to identify which
+            <command>source</command> tag (and therefore, which source file)
+            we're talking about.  So we need to use either the
+            <command>-a</command> or <command>-b</command> option, depending on
+            the characteristics of the source archive.  For this example, let's
+            say that <command>-a</command> is the option we want.  Adding that
+            option, plus a "1" to point to the source file specified in the
+            <command>source1</command> tag, we have:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-example">
+              <title>Unpacking the Second Source Archive</title>
+              <screen width="60">
 <computeroutput>
 %setup -a 1
 </computeroutput>
-</screen>
-</figure>
-Since we've already seen that using the <command>-a</command> or <command>-b</command> option
-results in duplicate unpacking, we need to disable the default unpacking by
-adding the <command>-T</command> option:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Since we've already seen that using the <command>-a</command> or
+            <command>-b</command> option results in duplicate unpacking, we need
+            to disable the default unpacking by adding the <command>-T</command>
+            option:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-example2">
+              <title>
+                Disabling Default Unpacking With the <command>-T</command>
+                Option
+              </title>
+              <screen width="60">
 <computeroutput>
 %setup -T -a 1
 </computeroutput>
-</screen>
-</figure>
-Next, we need to make sure that the top-level directory isn't deleted.
-Otherwise, the first source file we just unpacked would be gone.  That
-means we need to include the <command>-D</command> option to prevent that from
-happening.  Adding this final option, and including the now complete macro
-in our <command>%prep</command> script, we now have:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Next, we need to make sure that the top-level directory isn't
+            deleted.  Otherwise, the first source file we just unpacked would be
+            gone.  That means we need to include the <command>-D</command>
+            option to prevent that from happening.  Adding this final option,
+            and including the now complete macro in our <command>%prep</command>
+            script, we now have:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-example3">
+              <title>Our <command>%setup</command> Macros So Far</title>
+              <screen width="60">
 <computeroutput>
 %setup
 %setup -T -D -a 1
 </computeroutput>
-</screen>
-</figure>
-This will result in the following commands:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            This will result in the following commands:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-expansion">
+              <title>Macro Expansion</title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3178,22 +3251,28 @@ cd /usr/src/redhat/BUILD/cdplayer-1.0
 chown -R root.root .
 chmod -R a+rX,g-w,o-w .
 </computeroutput>
-</screen>
-</figure>
-So far, so good.  Let's include the last source file, but with this one,
-we'll say that it needs to be unpacked in a subdirectory of
-<filename>cdplayer-1.0</filename> called <filename>database</filename>.  Can we use
-<command>%setup</command> in this case?
+              </screen>
+            </figure>
+          </para>
+          <para>
+            So far, so good.  Let's include the last source file, but with this
+            one, we'll say that it needs to be unpacked in a subdirectory of
+            <filename>cdplayer-1.0</filename> called
+            <filename>database</filename>.  Can we use <command>%setup</command>
+            in this case?
+          </para>
+          <para>
+            We could, if <filename>source-two.tgz</filename> created the
+            <filename>database</filename> subdirectory.  If not, then it'll be
+            necessary to do it by hand.  For the purposes of our example, let's
+            say that <filename>source-two.tgz</filename> wasn't created to
+            include the <filename>database</filename> subdirectory, so we'll
+            have to do it ourselves.  Here's our <command>%prep</command> script
+            now:
 
-We could, if <filename>source-two.tgz</filename> created the <filename>database</filename>
-subdirectory.  If not, then it'll be necessary to do it by hand.  For the
-purposes of our example, let's say that <filename>source-two.tgz</filename> wasn't
-created to include the <filename>database</filename> subdirectory, so we'll have to do
-it ourselves.  Here's our <command>%prep</command> script now:
-
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-prep-script">
+              <title>Our Final <command>%prep</command> Script</title>
+              <screen width="60">
 <computeroutput>
 %setup
 %setup -T -D -a 1
@@ -3201,13 +3280,17 @@ mkdir database
 cd database
 gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
 </computeroutput>
-</screen>
-</figure>
-Here's the resulting script:
+              </screen>
+            </figure>
+          </para>
+          <para>
+            Here's the resulting script:
 
-<figure id="sc-rpm-inside-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+            <figure id="sc-rpm-inside-setup-rw2-final-expansion">
+              <title>
+                Complete <command>%prep</command> Script Macro Expansion
+              </title>
+              <screen width="60">
 <computeroutput>
 cd /usr/src/redhat/BUILD
 rm -rf cdplayer-1.0
@@ -3229,37 +3312,27 @@ mkdir database
 cd database
 gzip -dc /usr/src/redhat/SOURCES/source-two.tar.gz | tar -xvvf -
 </computeroutput>
-</screen>
-</figure>
-The three commands we added to unpack the last set of sources were added to
-the end of the <command>%prep</command> script.
-
-The bottom line to using the <command>%setup</command> macro is that you can
-probably get it to do what you want, but don't be afraid to tinker.  And
-even if <command>%setup</command> can't be used, it's easy enough to add the
-necessary commands to do the work manually.  Above all, make sure you use
-the <command>--test</command> option when testing your <command>%setup</command> macros, so
-you can see what commands they're translating to.
-
-Next, let's look at RPM's second macro, <command>%patch</command>.
-
-<indexterm>
-<primary><command>%setup</command> macro!use in multi-source spec files|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-<indexterm>
-<primary><command>%setup</command> macro|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
-
-</sect3>
-
-</sect2>
+              </screen>
+            </figure>
+          </para>
+          <para>
+            The three commands we added to unpack the last set of sources were
+            added to the end of the <command>%prep</command> script.
+          </para>
+          <para>
+            The bottom line to using the <command>%setup</command> macro is that
+            you can probably get it to do what you want, but don't be afraid to
+            tinker.  And even if <command>%setup</command> can't be used, it's
+            easy enough to add the necessary commands to do the work manually.
+            Above all, make sure you use the <command>--test</command> option
+            when testing your <command>%setup</command> macros, so you can see
+            what commands they're translating to.
+          </para>
+          <para>
+            Next, let's look at RPM's second macro, <command>%patch</command>.
+          </para>
+        </sect3>
+      </sect2>
 
 <sect2 id="s2-rpm-inside-">
 <title>The <command>%patch</command> Macro</title>
