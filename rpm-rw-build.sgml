@@ -102,9 +102,7 @@
           unpack them into RPM's <filename>SOURCES</filename> directory, so that
           we can keep all our work in one place:
 
-          <figure id="sc-rpm-rw-build-first-untar">
-            <title>Untarring the Amanda Sources</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>tar zxvf amanda-2.3.0.tar.gz</userinput>
 <computeroutput>
 amanda-2.3.0/
@@ -117,17 +115,14 @@ amanda-2.3.0/tools/
 amanda-2.3.0/tools/munge
 &hellip;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we saw, the sources unpacked into a directory called
           <filename>amanda-2.3.0</filename>.  Let's rename that directory to
           <filename>amanda-2.3.0-orig</filename>, and unpack the sources again:
 
-          <figure id="sc-rpm-rw-build-second-untar">
-            <title>Untarring the Amanda Sources (Again)</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls</userinput>
 <computeroutput>
 total 177
@@ -154,8 +149,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
 -rw-r--r--   1 root     root       178646 Nov 20 10:42 amanda-2.3.0.tar.gz
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Now why did we do that?  The reason lies in the fact that we will
@@ -199,9 +193,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
           unheard of.  In <filename>munge</filename>, we find the following
           section:
 
-          <figure id="sc-rpm-rw-build-munge-listing">
-            <title>Part of <filename>munge</filename></title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 # Customize CPP to point to your system's C preprocessor.
 
@@ -213,16 +205,13 @@ CPP=cpp
 # CPP=/usr/lib/cpp              # also traditional
 # CPP=/usr/ccs/lib/cpp          # Solaris 2.x
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Since <command>cpp</command> exists in <filename>/lib</filename> on
           &RHL;, we need to change this part of <filename>munge</filename> to:
 
-          <figure id="sc-rpm-rw-build-munge-listing2">
-            <title>Revised Version of <filename>munge</filename></title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 # Customize CPP to point to your system's C preprocessor.
 
@@ -234,8 +223,7 @@ CPP=/lib/cpp                    # traditional
 # CPP=/usr/lib/cpp              # also traditional
 # CPP=/usr/ccs/lib/cpp          # Solaris 2.x
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Next, we need to take a look in <filename>config/</filename> and
@@ -315,9 +303,7 @@ CPP=/lib/cpp                    # traditional
           our <filename>config.h</filename> and <filename>options.h</filename>
           files are perfect.  Amanda builds:
 
-          <figure id="sc-rpm-rw-build-amanda-builds">
-            <title>Amanda Builds!</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>make</userinput>
 <computeroutput>
 Making all in common-src
@@ -326,8 +312,7 @@ make[1]: Entering directory `/usr/src/redhat/SOURCES/amanda-2.3.0/common-src'
 make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we noted, amanda is constructed so that most of the time changes
@@ -353,9 +338,7 @@ make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
           target, so let's use that to get started.  We'll also get a copy of
           the output, because we'll need that later:
 
-          <figure id="sc-rpm-rw-build-make-install">
-            <title>Issuing a <command>make install</command> Command</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>make install</userinput>
 <computeroutput>
 Making install in common-src
@@ -412,8 +395,7 @@ Installing Amanda man pages:
 &hellip;
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           OK, no major problems there.  Amanda does require a bit of additional
@@ -556,9 +538,7 @@ Installing Amanda man pages:
             Looking over amanda's makefiles, there is a <command>clean</command>
             target that should take care of most of the junk:
 
-            <figure id="sc-rpm-rw-build-make-clean-listing">
-              <title>Issuing a <command>make clean</command></title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>make clean</userinput>
 <computeroutput>
 Making clean in common-src
@@ -586,8 +566,7 @@ rm -f *~ Makefile.out
 &hellip;
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Looking in the <filename>tools</filename> and
@@ -600,9 +579,7 @@ rm -f *~ Makefile.out
             something.  However, in our case, we're sure we won't need the save
             files, so out they go:
 
-            <figure id="sc-rpm-rw-build-delete-save-files">
-              <title>Removing Emacs Save Files</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/SOURCES/amanda-2.3.0</userinput>
 <prompt># </prompt><userinput>find . -name "*~" -exec rm -vf \;</userinput>
 <computeroutput>
@@ -611,8 +588,7 @@ rm -f *~ Makefile.out
 ./tools/munge~
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We let <command>find</command> take a look at the whole directory
@@ -636,13 +612,10 @@ rm -f *~ Makefile.out
           <para>
             This step is actually pretty anticlimactic:
 
-            <figure id="sc-rpm-rw-build-patch-command">
-              <title>Generating Patches</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>diff -uNr amanda-2.3.0-orig/ amanda-2.3.0/ &gt; amanda-2.3.0-linux.patch</userinput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             With that one command, we've compared each file in the untouched
@@ -652,9 +625,7 @@ rm -f *~ Makefile.out
             the only things in the patch file should be related to the files
             we've changed.  Let's take a look through it to make sure:
 
-            <figure id="sc-rpm-rw-build-patch-listing">
-              <title>Looking at the Patch File</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/SOURCES</userinput>
 <prompt># </prompt><userinput>cat amanda-2.3.0-linux.patch</userinput>
 <computeroutput>
@@ -685,8 +656,7 @@ diff -uNr amanda-2.3.0-orig/tools/munge amanda-2.3.0/tools/munge
  # CPP=/usr/ccs/lib/cpp         # Solaris 2.x
 #
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The patch file contains complete copies of our
@@ -713,9 +683,7 @@ diff -uNr amanda-2.3.0-orig/tools/munge amanda-2.3.0/tools/munge
           of tags that are easily filled in, let's sit down and fill in the
           blanks, tag-wise:
 
-          <figure id="sc-rpm-rw-build-first-cut-spec-listing">
-            <title>Our First-Cut Spec File</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Summary: Amanda Network Backup System
 Name: amanda
@@ -732,8 +700,7 @@ Amanda is a client/server backup system.  It uses standard tape
 devices and networking, so all you need is any working tape drive
 and a network.  You can use it for local backups as well.
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That part was pretty easy.  We set the package's release number to 1.
@@ -754,9 +721,7 @@ and a network.  You can use it for local backups as well.
           on the <command>Patch</command> tag line.  Next, let's take a look at
           the tags for our two subpackages.  Let's start with the client:
 
-          <figure id="sc-rpm-rw-build-client-spec">
-            <title>The Client Portion of Our Spec File</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %package client
 Summary: Client-side Amanda package
@@ -773,8 +738,7 @@ filesystems backed up by a system running the Amanda server.
 NOTE: In order for a system to perform backups of itself, install both
 the client and server packages!
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>%package</command> directive names the package.  Since we
@@ -797,9 +761,7 @@ the client and server packages!
         <para>
           Next, let's take a look at the tags for the server subpackage:
 
-          <figure id="sc-rpm-rw-build-server-spec-file">
-            <title>The Server Portion of Our Spec File</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %package server
 Summary: Server-side Amanda package
@@ -817,8 +779,7 @@ the server system requires a tape drive.
 NOTE: In order for a system to perform backups of itself, install both
 the client and server packages!
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           No surprises here, really.  You'll note that the server subpackage has
@@ -849,9 +810,7 @@ the client and server packages!
             Next we need to add the build-time scripts.  There's really not much
             to them:
 
-            <figure id="sc-rpm-rw-build-build-time-scripts">
-              <title>Build-Time Script Listings</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %prep
 %setup
@@ -862,8 +821,7 @@ make
 %install
 make install
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The <command>%prep</command> script consists of one line containing
@@ -899,16 +857,13 @@ make install
             we'll just add the <command>%files</command> lines --- we'll be
             adding the actual filenames later:
 
-            <figure id="sc-rpm-rw-build-dummy-files-lists">
-              <title>Placeholder <command>%files</command> Lists</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files client
 
 %file server
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             There's certainly more to come, but this is enough to get us
@@ -932,9 +887,7 @@ make install
           has run.  Let's give the <command>-bp</command> option a try, and see
           how things look:
 
-          <figure id="sc-rpm-rw-build-build-prep">
-            <title>Issuing an <command>rpm -bp</command> Command</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -964,8 +917,7 @@ drwxr-xr-x 3/20              0 May 19 22:11 1996 amanda-2.3.0/tools/
 + exit 0
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           By looking at the output, it would be pretty hard to miss the fact
@@ -973,9 +925,7 @@ drwxr-xr-x 3/20              0 May 19 22:11 1996 amanda-2.3.0/tools/
           area (<filename>/usr/src/redhat/BUILD</filename>), we'll see an amanda
           directory tree:
 
-          <figure id="sc-rpm-rw-build-directory-tree-listing">
-            <title>Looking at the RPM-Unpacked Source Tree</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/BUILD/</userinput>
 <prompt># </prompt><userinput>ls -l</userinput>
 <computeroutput>
@@ -983,8 +933,7 @@ total 3
 drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           After a quick look around, it seems like the sources were unpacked
@@ -1026,36 +975,28 @@ drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
           Easy enough.  At the top of the spec file, along with the other tags,
           let's add:
 
-          <figure id="sc-rpm-rw-build-patch-tag-line">
-            <title>The <command>patch</command> Tag Line</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Patch: amanda-2.3.0-linux.patch
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Then we'll make our <command>%prep</command> script look like this:
 
-          <figure id="sc-rpm-rw-build-prep-with-patch">
-            <title>Revised <command>%prep</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %prep
 %setup
 %patch -p 1
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           There, that should do it.  Let's give that <command>-bp</command>
           option another try:
 
-          <figure id="sc-rpm-rw-build-rpm-bp-try2">
-            <title>Trying <command>rpm -bp</command> Again</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -bp amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -1088,17 +1029,14 @@ Patch #0:
 + exit 0
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Not much difference, until the very end, where we see the patch being
           applied.  Let's take a look into the build area and see if our
           configuration files are there:
 
-          <figure id="sc-rpm-rw-build-config-file-check">
-            <title>Looking For Patched Configuration Files</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/BUILD/amanda-2.3.0/config</userinput>
 <prompt># </prompt><userinput>ls -l</userinput>
 <computeroutput>
@@ -1115,8 +1053,7 @@ total 58
 -rw-r--r--   1 root     root            0 Nov 20 20:46 options.h.orig
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Much better.  Those zero-length <filename>.orig</filename> files are a
@@ -1142,9 +1079,7 @@ total 58
           <command>-bc</command> option to stop things after the
           <command>%build</command> script completes:
 
-          <figure id="sc-rpm-rw-build-rpm-bc-listing">
-            <title>Using the <command>rpm -bc</command> Command</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -bc amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -1173,8 +1108,7 @@ make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
 + exit 0
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we thought, no surprises.  A quick look through the build area
@@ -1197,9 +1131,7 @@ make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
           <command>%install</command> script has the necessary <command>make
           install</command> command, so let's give it a shot:
 
-          <figure id="sc-rpm-rw-build-rpm-bi-listing">
-            <title>Issuing an <command>rpm -bi</command> Command</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -bi amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -1243,8 +1175,7 @@ Executing: special doc
 + exit 0
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Everything looks pretty good.  At this point, the amanda software,
@@ -1291,9 +1222,7 @@ Executing: special doc
         OK, let's go for broke and tell RPM to do the works, including the
         creation of the binary and source packages:
 
-        <figure id="sc-rpm-rw-build-rpm-ba-listing">
-          <title>Building Packages With <command>rpm -ba</command></title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -1343,15 +1272,12 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Great!  Let's take a look at our handiwork:
 
-        <figure id="sc-rpm-rw-build-package-files">
-          <title>Listing of Package Files</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
 <prompt># </prompt><userinput>ls -l</userinput>
 <computeroutput>
@@ -1360,18 +1286,13 @@ total 2
 -rw-r--r-- 1 root  root   1308 Nov 20 21:19 amanda-server-2.3.0-1.i386.rpm
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Hmmm, those binary packages look sort of small.  We'd better see what's
         in there:
 
-        <figure id="sc-rpm-rw-build-querying-packages">
-          <title>
-            Querying the Packages With <command>rpm -qilp</command>
-          </title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -qilp amanda-*-1.i386.rpm</userinput>
 <computeroutput>
 Name        : amanda-client         Distribution: (none)
@@ -1415,8 +1336,7 @@ the client and server packages!
 (contains no files)
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         What do they mean, <computeroutput>(contains no files)</computeroutput>?
@@ -1465,12 +1385,7 @@ the client and server packages!
             packages.  Here's the <command>%files</command> list we came up with
             for the client subpackage:
 
-            <figure id="sc-rpm-rw-build-client-files-list">
-              <title>
-                The <command>%files</command> List For
-                <filename>amanda-client</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files client
 /usr/lib/amanda/amandad
@@ -1486,8 +1401,7 @@ docs/INSTALL
 docs/SYSTEM.NOTES
 docs/WHATS.NEW
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The files in <filename>/usr/lib/amanda</filename> are all the
@@ -1500,12 +1414,7 @@ docs/WHATS.NEW
             let's leave the client <command>%files</command> list for a moment,
             and check out the list for the server subpackage:
 
-            <figure id="sc-rpm-rw-build-server-files-list">
-              <title>
-                The <command>%files</command> List For
-                <filename>amanda-server</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files server
 /usr/sbin/amadmin
@@ -1543,8 +1452,7 @@ docs/WHATS.NEW
 docs/MULTITAPE
 example
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The files in <filename>/usr/sbin</filename> are programs that will
@@ -1619,12 +1527,7 @@ example
             After these changes, here's what the client
             <command>%files</command> list looks like now:
 
-            <figure id="sc-rpm-rw-build-client-files-list2">
-              <title>
-                The <command>%files</command> List For
-                <filename>amanda-client</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files client
 %dir /usr/lib/amanda/
@@ -1641,19 +1544,13 @@ example
 %doc docs/SYSTEM.NOTES
 %doc docs/WHATS.NEW
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We've also applied the same directives to the server
             <command>%files</command> list:
 
-            <figure id="sc-rpm-rw-build-server-files-list2">
-              <title>
-                The <command>%files</command> List For
-                <filename>amanda-server</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %files server
 /usr/sbin/amadmin
@@ -1692,8 +1589,7 @@ example
 %doc docs/MULTITAPE
 %doc example
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             You'll note that we neglected to use the <command>%doc</command>
@@ -1704,9 +1600,7 @@ example
             build-time scripts that work, and now, <command>%files</command>
             lists for each subpackage.  Why don't we try that build again?
 
-            <figure id="sc-rpm-rw-build-build-again-listing">
-              <title>Trying Another Build</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba amanda-2.3.0.spec</userinput>
 <computeroutput>
 * Package: amanda
@@ -1765,16 +1659,13 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-6.src.rpm
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             If we take a quick look at the client and server subpackages, we
             find that, sure enough, this time they contain files:
 
-            <figure id="sc-rpm-rw-build-package-listing">
-              <title>Checking Out the New Packages</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386/</userinput>
 <prompt># </prompt><userinput>ls -l amanda-*</userinput>
 <computeroutput>
@@ -1836,8 +1727,7 @@ the client and server packages!
 /usr/sbin/amtape
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We're finally ready to test these packages!
@@ -1858,9 +1748,7 @@ the client and server packages!
           This is due to the build process itself.  However, we can install the
           new packages on top of the already-existing files:
 
-          <figure id="sc-rpm-rw-build-installing-first-packages">
-            <title>Installing the First Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/src/redhat/RPMS/i386</userinput>
 <prompt># </prompt><userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
 <computeroutput>
@@ -1868,8 +1756,7 @@ amanda-client       ##################################################
 amanda-server       ##################################################
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Running some tests, it looks like everything is running well.  But
@@ -1889,17 +1776,14 @@ amanda-server       ##################################################
             another system that had not previously run amanda, and test it
             there:
 
-            <figure id="sc-rpm-rw-build-installing-different">
-              <title>Installing the Packages on Another System</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ivh amanda-*-1.i386.rpm</userinput>
 <computeroutput>
 amanda-client       ##################################################
 amanda-server       ##################################################
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The install went smoothly enough.  However, testing did not.  Why?
@@ -1955,11 +1839,7 @@ amanda-server       ##################################################
             certainly is no slouch!  We'll work on the client first.  Let's look
             at a section of the script we wrote, comment on it, and move on:
 
-            <figure id="sc-rpm-rw-build-client-install-script">
-              <title>
-                Part of <filename>amanda-client</filename>'s Install Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %post client
 
@@ -1969,8 +1849,7 @@ amanda-server       ##################################################
 if [ "$1" = 1 ];
 then
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             First, we start the script with a <command>%post</command>
@@ -1987,11 +1866,7 @@ then
             the client subpackage are presently installed, and that this one is
             the first.  Let's continue:
 
-            <figure id="sc-rpm-rw-build-client-install-script2">
-              <title>
-                More of <filename>amanda-client</filename>'s Install Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Set disk devices so that bin can read them
 # (This is actually done on Red Hat Linux; only need to add bin to
@@ -2012,8 +1887,7 @@ sed -e 's/\(^disk::[0-9]\{1,\}:$\)/\1bin/' /etc/group.tmp &gt; /etc/group
  rm -f /etc/group.tmp
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             One of amanda's requirements is that the user ID running the dumps
@@ -2030,20 +1904,14 @@ fi
             sure <filename>bin</filename> can access everything it needs while
             doing backups:
 
-            <figure id="sc-rpm-rw-build-client-install-script3">
-              <title>
-                Even More of <filename>amanda-clients</filename>'s Install
-                Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Also set /etc/dumpdates to be writable by group disk
 
 chgrp disk /etc/dumpdates
 chmod g+w /etc/dumpdates
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Since amanda uses <command>dump</command> to obtain the backups, and
@@ -2060,11 +1928,7 @@ chmod g+w /etc/dumpdates
             that amanda clients can communicate with amanda servers, and vice
             versa:
 
-            <figure id="sc-rpm-rw-build-client-install-script4">
-              <title>
-                Revenge of the <filename>amanda-client</filename> Install Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Add amanda line to /etc/services
 
@@ -2076,8 +1940,7 @@ else
 /etc/services
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             By using <command>grep</command> to look for lines that begin with
@@ -2094,12 +1957,7 @@ fi
           <para>
             Let's look at the rest of the network-related part of this script:
 
-            <figure id="sc-rpm-rw-build-client-install-script5">
-              <title>
-                The Never-Ending <filename>amanda-client</filename> Install
-                Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Add amanda line to /etc/inetd.conf
 
@@ -2119,8 +1977,7 @@ fi
 fi
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here, we've used the same approach to add an entry to
@@ -2133,11 +1990,7 @@ fi
               the <command>if [ "$1" = 1 ]</command> at the start of the
               script.  Now let's look at the server's post-install script:
 
-            <figure id="sc-rpm-rw-build-server-install-script">
-              <title>
-                <filename>amanda-server</filename>'s Install Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %post server
 
@@ -2158,8 +2011,7 @@ fi
 
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             That was short!  And this huge difference brings up a good point
@@ -2237,12 +2089,7 @@ fi
             Following this practice, we have an uninstall script for the client
             package, and one for the server.  Let's take the client first:
 
-            <figure id="sc-rpm-rw-build-client-uninstall-script">
-              <title>
-                The Start of <filename>amanda-client</filename>'s Uninstall
-                Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %postun client
 
@@ -2252,8 +2099,7 @@ fi
 if [ "$1" = 0 ];
 then
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As before, we start out with a declaration of the type of script
@@ -2269,11 +2115,7 @@ then
             Next, we remove <filename>bin</filename> from the
             <filename>disk</filename> group:
 
-            <figure id="sc-rpm-rw-build-client-uninstall-script2">
-              <title>
-                More of <filename>amanda-client</filename>'s Uninstall Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # First, get rid of bin from the disk group...
 
@@ -2296,19 +2138,13 @@ then
         rm -f /etc/group.tmp /etc/group1.tmp /etc/group2.tmp
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             No surprises there.  Continuing our uninstall, we start on the
             network-related tasks:
 
-            <figure id="sc-rpm-rw-build-client-uninstall-script3">
-              <title>
-                Even More of <filename>amanda-client</filename>'s Uninstall
-                Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Next, lose the amanda line in /etc/services...
 # We only want to do this if the server package isn't installed
@@ -2324,8 +2160,7 @@ then
         fi
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             That's odd.  Why are we looking for a file from the server package?
@@ -2364,12 +2199,7 @@ fi
           <para>
             Continuing the network-related uninstall tasks:
 
-            <figure id="sc-rpm-rw-build-client-uninstall-script4">
-              <title>
-                Revenge of the Flaming <filename>amanda-client</filename>
-                Uninstall Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 # Finally, the amanda entry in /etc/inetd.conf
 
@@ -2388,8 +2218,7 @@ fi
 
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Here, we're using <command>grep</command>'s ability to return lines
@@ -2402,11 +2231,7 @@ fi
             On to the server.  If you've been noticing a pattern between the
             various scripts, you won't be disappointed here:
 
-            <figure id="sc-rpm-rw-build-server-uninstall-script">
-              <title>
-                <filename>amanda-server</filename>'s Uninstall Script
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %postun server
 
@@ -2432,8 +2257,7 @@ fi
 
 fi
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             By now the opening <command>if</command> statement is an old friend.
@@ -2512,33 +2336,21 @@ fi
             we chose.  It required an additional <command>source</command> tag
             in the spec file:
 
-            <figure id="sc-rpm-rw-build-instruction-source-line">
-              <title>
-                <command>source</command> Line For RPM-Related Installation
-                Instructions
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Source1: amanda-rpm-instructions.tar.gz
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Also required was an additional <command>%setup</command> macro in
             the <command>%prep</command> script:
 
-            <figure id="sc-rpm-rw-build-instruction-setup-macro">
-              <title>
-                <command>%setup</command> Macro to Unpack RPM-Related
-                Installation Instructions
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %setup -T -D -a 1
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             While the <command>%setup</command> macro might look intimidating,
@@ -2571,30 +2383,20 @@ Source1: amanda-rpm-instructions.tar.gz
             Finally, two additions to the <command>%files</command> lists were
             required.  One for the client:
 
-            <figure id="sc-rpm-rw-build-client-file-addition">
-              <title>
-                Additional File for <filename>amanda-client</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %doc amanda-client.README
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             And one for the server:
 
-            <figure id="sc-rpm-rw-build-server-file-addition">
-              <title>
-                Additional File for <filename>amanda-server</filename>
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %doc amanda-server.README
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             At this point, the packages were complete.  Certainly there is

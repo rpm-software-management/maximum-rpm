@@ -534,14 +534,11 @@
             <command><userinput>&lt;file&gt;</userinput>.rpmsave</command>, and
             prints a warning, so the user knows what happened:
 
-            <figure id="sc-rpm-upgrade-rpmsave-file">
-              <title>RPM Saving a Modified Config File</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
             These five scenarios cover just about every possible circumstance,
             save one.  The missing scenario?
           </para>
@@ -597,13 +594,10 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         simply "<command>rpm -U</command>", followed by the name of a .rpm
         package file:
 
-       <figure id="sc-rpm-upgrade-upgrade-example">
-          <title>Upgrading a Package with <command>rpm -U</command></title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -U eject-1.2-2.i386.rpm</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Here, RPM performed all the steps necessary to upgrade the
@@ -717,9 +711,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
           Let's try to go back to release 2 of <filename>cdp-0.33</filename>
           from release 3:
 
-          <figure id="sc-rpm-upgrade-oldpackage-setup">
-            <title>Attempting to "Upgrade" to an Older Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Uv cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
@@ -727,8 +719,7 @@ package cdp-0.33-3 (which is newer) is already installed
 error: cdp-0.33-2.i386.rpm cannot be installed
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That didn't work very well.  At least it told us just what the problem
@@ -737,19 +728,13 @@ error: cdp-0.33-2.i386.rpm cannot be installed
           just this situation: <command>--oldpackage</command>.  Let's give it a
           try:
 
-          <figure id="sc-rpm-upgrade-oldpackage-example">
-            <title>
-              "Upgrading" to an Older Package Using the
-              <command>--oldpackage</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Uv --oldpackage cdp-0.33-2.i386.rpm</userinput>
 <computeroutput>
 Installing cdp-0.33-2.i386.rpm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           By using the <command>--oldpackage</command> option, release 3 of
@@ -814,25 +799,20 @@ Installing cdp-0.33-2.i386.rpm
           used during an upgrade.  The following example uses specially-built
           packages that display messages when their scripts are executed by RPM:
 
-          <figure id="sc-rpm-upgrade-noscripts-setup">
-            <title>Watching A Packages Install-time Scripts Execute</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i bother-2.7-1.i386.rpm</userinput>
 <computeroutput>
 This is the bother 2.7 preinstall script
 This is the bother 2.7 postinstall script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this case, a package has been installed.  As expected, its scripts
           are executed.  Next, let's upgrade this package:
 
-          <figure id="sc-rpm-upgrade-noscripts-setup2">
-            <title>Watching Scripts Execute During an Upgrade</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -U bother-3.5-1.i386.rpm</userinput>
 <computeroutput>
 This is the bother 3.5 preinstall script
@@ -841,8 +821,7 @@ This is the bother 2.7 preuninstall script
 This is the bother 2.7 postuninstall script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This is a textbook example of the sequence of events during an
@@ -856,36 +835,28 @@ This is the bother 2.7 postuninstall script
           meant to.  This time, let's use the <command>--noscripts</command>
           option when the time comes to perform the upgrade:
 
-          <figure id="sc-rpm-upgrade-noscripts-setup3">
-            <title>Watching A Packages Install-time Scripts Execute</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -i bother-2.7-1.i386.rpm</userinput>
 <computeroutput>
 This is the bother 2.7 preinstall script
 This is the bother 2.7 postinstall script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Again, the first package is installed, and its scripts are executed.
           Now let's try the upgrade using the <command>--noscripts</command>
           option:
 
-          <figure id="sc-rpm-upgrade-noscripts-payoff">
-            <title>
-              Upgrading a Package With the <command>--noscripts</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -U --noscripts bother-3.5-1.i386.rpm</userinput>
 <computeroutput>
 This is the bother 2.7 preuninstall script
 This is the bother 2.7 postuninstall script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The difference here is that the <command>--noscripts</command> option

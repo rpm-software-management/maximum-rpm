@@ -29,16 +29,13 @@
     <para>
       Here's a quick way to see if RPM is installed on your system:
 
-      <figure id="sc-rpm-resources-install-check">
-        <title>An Easy Way to See If RPM Is Installed</title>
-        <screen width="60">
+      <screen width="60">
 <prompt>% </prompt><userinput>rpm --version</userinput>
 <computeroutput>
 RPM version 2.3
 </computeroutput>
 <prompt>%</prompt>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       If this command doesn't work, it might be that your path doesn't include
@@ -76,9 +73,7 @@ RPM version 2.3
           </para>
         </footnote>
 
-        <figure id="sc-rpm-resources-ftp-sites">
-          <title>FTP Sites Mirroring RPM Sources</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 FTP Site                Directory
 ========                =========
@@ -137,8 +132,7 @@ linuxwww.db.erau.edu    /pub/linux/distrib/redhat
 ftp.eit.com             /pub/mirrors/redhat
 ftp.real-time.com       /pub/redhat
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
     </sect2>
 
@@ -157,9 +151,7 @@ ftp.real-time.com       /pub/redhat
         Here's a representative list, along with the ways in which each file
         would be used:
 
-        <figure id="sc-rpm-resources-directory-listing">
-          <title>A Typical RPM Directory Listing</title>
-          <screen width="60">
+        <screen width="60">
 <prompt>ftp&gt; </prompt><userinput>ls</userinput>
 <computeroutput>
 200 PORT command successful.
@@ -185,8 +177,7 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
 226 Transfer complete.
 </computeroutput>
 <prompt>ftp&gt;</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Although the version numbers may change, the types of files kept in this
@@ -198,16 +189,13 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         architectures, and in source form.  We'll look at them, grouped
         according to their contents.  Here's the first group of files:
 
-        <figure id="sc-rpm-resources-directory-listing2">
-          <title>First Set of RPM Files</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -rw-r--r--  1 root  97  365319 Jul 18 06:05 rpm-2.2.2-1.axp.rpm
 -rw-r--r--  1 root  97  282015 Jul 18 06:05 rpm-2.2.2-1.i386.rpm
 -rw-r--r--  1 root  97  279855 Jul 18 06:05 rpm-2.2.2-1.sparc.rpm
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The files above are the binary package files for RPM version 2.2.2,
@@ -229,14 +217,11 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
       <para>
         Let's look at the next file:
 
-        <figure id="sc-rpm-resources-directory-listing3">
-          <title>Second Set of RPM Files</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -rw-r--r--  1 root  97  359354 Jul 18 06:05 rpm-2.2.2-1.src.rpm
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         This is the source package file for RPM version 2.2.2, release 1.  Like
@@ -244,16 +229,13 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         therefore, it cannot be used to perform an initial install of RPM.
         Let's see what else there is here:
 
-        <figure id="sc-rpm-resources-directory-listing4">
-          <title>Third Set of RPM Files</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -rw-r--r--  1 root  97  122157 Jul 18 06:05 rpm-devel-2.2.2-1.axp.rpm
 -rw-r--r--  1 root  97   51132 Jul 18 06:05 rpm-devel-2.2.2-1.i386.rpm
 -rw-r--r--  1 root  97   54470 Jul 18 06:05 rpm-devel-2.2.2-1.sparc.rpm
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The files above are binary package files that contain the
@@ -263,15 +245,12 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         RPM-related functions.  These files cannot be used to get RPM running.
         That leaves two files left:
 
-        <figure id="sc-rpm-resources-directory-listing5">
-          <title>Last Set of RPM Files</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 -rw-rw-r--  1 root  97  278620 Jul 18 06:05 rpm-2.2.2-1.i386.cpio.gz
 -rw-rw-r--  1 root  97  356943 Jul 18 06:05 rpm-2.2.2.tar.gz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The first file is a gzipped <command>cpio</command> archive of the files
@@ -280,13 +259,10 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         however, that there is a <command>cpio</command> archive for the i386
         architecture only.  To extract the files, issue the following command:
 
-        <figure id="sc-rpm-resources-cpio-unpack">
-          <title>Unpacking the RPM <command>cpio</command> Archive</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>zcat <replaceable>file.cpio.gz</replaceable> | (cd / ; cpio --extract)</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         (When actually issuing the command,
@@ -298,13 +274,10 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         <command>cpio</command> version 2.4.1 or greater.  It may also be
         necessary to issue the following command prior to using RPM:
 
-        <figure id="sc-rpm-resources-mkdir-rpm-directory">
-          <title>Creating the RPM Database Directory</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>mkdir /var/lib/rpm</userinput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The last file, <filename>rpm-2.2.2.tar.gz</filename>, contains the
@@ -343,16 +316,11 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
         &RHI; maintains a mailing list specifically for RPM.  In order to
         subscribe to the list, it's necessary to send a mail message to:
 
-        <figure id="sc-rpm-resources-rpm-list-address">
-          <title>
-            The <filename>rpm-list</filename> Subscription Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 rpm-list-request@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         On the message's subject line, place the word
@@ -362,16 +330,11 @@ rpm-list-request@redhat.com
       <para>
         To send messages to the list, address them to:
 
-        <figure id="sc-rpm-resources-rpm-list-address2">
-          <title>
-            The <filename>rpm-list</filename> Discussion Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 rpm-list@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         As with other on-line forums, it's advisable to "lurk" for a while
@@ -406,16 +369,11 @@ rpm-list@redhat.com
         <filename>redhat-list</filename> is a good place to start.  To
         subscribe, send a message to:
 
-        <figure id="sc-rpm-resources-redhat-list-address">
-          <title>
-            The <filename>redhat-list</filename> Subscription Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 redhat-list-request@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         On the message's subject line, place the word
@@ -427,16 +385,11 @@ redhat-list-request@redhat.com
       <para>
         To send messages to the list, address them to:
 
-        <figure id="sc-rpm-resources-redhat-list-address2">
-          <title>
-            The <filename>redhat-list</filename> Discussion Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 redhat-list@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
     </sect2>
 
@@ -461,16 +414,11 @@ redhat-list@redhat.com
       <para>
         To subscribe to <filename>redhat-digest</filename>, send a message to:
 
-        <figure id="sc-rpm-resources-redhat-digest-address">
-          <title>
-            The <filename>redhat-digest</filename> Subscription Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 redhat-digest-request@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         On the message's subject line, place the word
@@ -480,16 +428,11 @@ redhat-digest-request@redhat.com
       <para>
         To send messages to the list, address them to:
 
-        <figure id="sc-rpm-resources-redhat-digest-address2">
-          <title>
-            The <filename>redhat-digest</filename> Discussion Email Address
-          </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 redhat-list@redhat.com
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         As always, observe proper "netiquette" --- lurk before you leap!
@@ -507,14 +450,11 @@ redhat-list@redhat.com
     <para>
       Up-to-date information on RPM can always be found at &RHI;'s web site:
 
-      <figure id="sc-rpm-resources-redhat-website">
-        <title>The &RHI; Website</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 http://www.redhat.com/
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       The site's content changes frequently, so it's impossible to specify an
@@ -986,9 +926,7 @@ http://www.redhat.com/
         the exclusion of warranty; and each file should have at least the
         "copyright" line and a pointer to where the full notice is found.
 
-        <figure id="sc-rpm-resources-source-statements">
-          <title>License Notice Text</title>
-          <screen width="60">
+        <screen width="60">
 &lt;one line to give the program name and a brief idea of what it does.&gt;
 
 Copyright &copy; 19yy &lt;name of author&gt;
@@ -1006,8 +944,7 @@ General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Also add information on how to contact you by electronic and paper mail.
@@ -1016,17 +953,14 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
         If the program is interactive, make it output a short notice like this
         when it starts in an interactive mode:
 
-        <figure id="sc-rpm-resources-interactive-notice">
-          <title>License Notice</title>
-          <screen width="60">
+        <screen width="60">
 Gnomovision version 69, Copyright &copy; 19yy name of author
 
 Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type
 "show w".  This is free software, and you are welcome to
 redistribute it under certain conditions; type "show c" for
 details.
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The hypothetical commands "show w" and "show c" should show the

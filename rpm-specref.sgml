@@ -18,14 +18,11 @@
       a comment, enter an octothorp (<literal>#</literal>) at the start of the
       line.  Any text following the comment character will be ignored by RPM:
 
-      <figure id="sc-rpm-specref-comment-example">
-        <title>A Sample Comment</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 # This is the spec file for playmidi 2.3...
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       Comments can be placed in any section of the spec file.
@@ -65,14 +62,11 @@
           The <command>name</command> tag is used to define the name of the
           software being packaged.
 
-          <figure id="sc-rpm-specref-name-example">
-            <title>Example of the <command>name</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Name: cdplayer
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-name-tag">.
@@ -95,14 +89,11 @@ Name: cdplayer
           The <command>version</command> tag defines the version of the software
           being packaged.
 
-          <figure id="sc-rpm-specref-version">
-            <title>Example of the <command>version</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Version: 1.2
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-version-tag">.
@@ -125,14 +116,11 @@ Version: 1.2
           The <command>release</command> tag can be thought of as the
           <emphasis>package's</emphasis> version.
 
-          <figure id="sc-rpm-specref-release">
-            <title>Example of the <command>release</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Release: 5
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-release-tag">.
@@ -161,9 +149,7 @@ Release: 5
           presented to user as-is, with no formatting done by RPM.  Blank lines
           in the descriptive text denote paragraphs.
 
-          <figure id="sc-rpm-specref-description">
-            <title>Example of the <command>%description</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %description
  It slices!
@@ -174,26 +160,20 @@ By using the resonant frequency of the CD itself, it is able to simulate
 20X oversampling.  This leads to sound quality that cannot be equaled with
 more mundane software...
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>%description</command> tag can be made specific to a
           particular subpackage by adding the subpackage name, and optionally,
           the <command>-n</command> option:
 
-          <figure id="sc-rpm-specref-description2">
-            <title>
-              Examples of Package-Specific <command>%description</command> Tags
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %description bar
 
 %description -n bar
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The subpackage name and usage of the <command>-n</command> option must
@@ -220,14 +200,11 @@ more mundane software...
           The <command>summary</command> tag is used to define a one-line
           description of the packaged software.
 
-          <figure id="sc-rpm-specref-summary">
-            <title>Example of the <command>summary</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Summary: A CD player app that rocks!
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-summary-tag">.
@@ -250,14 +227,11 @@ Summary: A CD player app that rocks!
           The <command>copyright</command> tag is used to define the copyright
           terms applicable to the software being packaged.
 
-          <figure id="sc-rpm-specref-copyright">
-            <title>Example of the <command>copyright</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Copyright: GPL
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-copyright-tag">.
@@ -280,14 +254,11 @@ Copyright: GPL
           The <command>distribution</command> tag is used to define a group of
           packages, of which this package is a part.
 
-          <figure id="sc-rpm-specref-distribution">
-            <title>Example of the <command>distribution</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Distribution: Doors '95
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-distribution-tag">.
@@ -312,14 +283,11 @@ Distribution: Doors '95
           GIF or XPM format, although XPM is preferred.  In either case, the
           background of the icon should be transparent.
 
-          <figure id="sc-rpm-specref-icon">
-            <title>Example of the <command>icon</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Icon: foo.xpm
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-icon-tag">.
@@ -342,14 +310,11 @@ Icon: foo.xpm
           The <command>vendor</command> tag is used to define the name of the
           entity that is responsible for packaging the software.
 
-          <figure id="sc-rpm-specref-vendor">
-            <title>Example of the <command>vendor</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Vendor: White Socks Software, Inc.
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-vendor-tag">.
@@ -373,14 +338,11 @@ Vendor: White Socks Software, Inc.
           Locator that can be used to obtain additional information about the
           packaged software.
 
-          <figure id="sc-rpm-specref-url">
-            <title>Example of the <command>url</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 URL: http://www.gnomovision.com/cdplayer.html
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-url-tag">.
@@ -403,14 +365,11 @@ URL: http://www.gnomovision.com/cdplayer.html
           The <command>group</command> tag is used to group packages together by
           the types of functionality they provide.
 
-          <figure id="sc-rpm-specref-group">
-            <title>Example of the <command>group</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Group: Applications/Editors
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-group-tag">.
@@ -433,14 +392,11 @@ Group: Applications/Editors
           The <command>packager</command> tag is used to hold the name and
           contact information for the person or persons who built the package.
 
-          <figure id="sc-rpm-specref-packager">
-            <title>Example of the <command>packager</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-packager-tag">.
@@ -467,14 +423,11 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           package" that the packaged software makes available when it is
           installed.
 
-          <figure id="sc-rpm-specref-provides">
-            <title>Example of the <command>provides</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Provides: module-info
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-provides-tag">.
@@ -498,54 +451,40 @@ Provides: module-info
           that the package needs to have certain capabilities available in order
           to operate properly.
 
-          <figure id="sc-rpm-specref-requires">
-            <title>Example of the <command>requires</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Requires: playmidi
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           A version may be specified, following the package specification.  The
           following comparison operators may be placed between the package and
           version:
 
-          <figure id="sc-rpm-specref-requires-comparison">
-            <title>
-              Example of the <command>requires</command> Comparison Operators
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 &lt;, &gt;, =, &gt;=, or &lt;=
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
-          <figure id="sc-rpm-specref-requires2">
-            <title>Example of the <command>requires</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Requires: playmidi &gt;= 2.3
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If the <command>Requires</command> tag needs to perform a comparison
           against a serial numbered defined with the <command>serial</command>
           tag, then the proper format would be:
 
-          <figure id="sc-rpm-specref-requires3">
-            <title>Example of the <command>requires</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Requires: playmidi =S 4
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-requires-tag">.
@@ -569,14 +508,11 @@ Requires: playmidi =S 4
           for a package.  This is only necessary if RPM is unable to determine
           the ordering of a package's version numbers.
 
-          <figure id="sc-rpm-specref-serial">
-            <title>Example of the <command>serial</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Serial: 4
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-serial-tag">.
@@ -599,54 +535,40 @@ Serial: 4
           The <command>conflicts</command> tag is used to alert RPM to the fact
           that the package is not compatible with other packages.
 
-          <figure id="sc-rpm-specref-conflicts">
-            <title>Example of the <command>conflicts</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Conflicts: playmidi
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           A version may be specified, following the package specification.  The
           following comparison operators may be placed between the package and
           version:
 
-          <figure id="sc-rpm-specref-conflicts-comparison">
-            <title>
-              Example of the <command>conflicts</command> Comparison Operators
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 &lt;, &gt;, =, &gt;=, or &lt;=
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
-          <figure id="sc-rpm-specref-conflicts2">
-            <title>Example of the <command>conflicts</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Conflicts: playmidi &gt;= 2.3
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If the <command>conflicts</command> tag needs to perform a comparison
           against a serial numbered defined with the <command>serial</command>
           tag, then the proper format would be:
 
-          <figure id="sc-rpm-specref-conflicts3">
-            <title>Example of the <command>conflicts</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Conflicts: playmidi =S 4
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-conflicts-tag">.
@@ -671,14 +593,11 @@ Conflicts: playmidi =S 4
           built.  To disable automatic dependency processing, add the following
           line:
 
-          <figure id="sc-rpm-specref-autoreqprov">
-            <title>Example of the <command>autoreqprov</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 AutoReqProv: no
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           (The number <literal>0</literal> may be used instead of
@@ -713,14 +632,11 @@ AutoReqProv: no
           that the package does <emphasis>not</emphasis> attempt to build on the
           excluded architecture(s).
 
-          <figure id="sc-rpm-specref-excludearch">
-            <title>Example of the <command>excludearch</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExcludeArch: sparc alpha
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-excludearch-tag">.
@@ -744,14 +660,11 @@ ExcludeArch: sparc alpha
           ensure the package is <emphasis>only</emphasis> built on the specified
           architecture(s).
 
-          <figure id="sc-rpm-specref-exclusivearch">
-            <title>Example of the <command>exclusivearch</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExclusiveArch: sparc alpha
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-exclusivearch-tag">.
@@ -775,14 +688,11 @@ ExclusiveArch: sparc alpha
           that the package does <emphasis>not</emphasis> attempt to build on the
           excluded operating system(s).
 
-          <figure id="sc-rpm-specref-excludeos">
-            <title>Example of the <command>excludeos</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExcludeOS: linux irix
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-excludeos">.
@@ -806,14 +716,11 @@ ExcludeOS: linux irix
           operating system(s) should <emphasis>only</emphasis> be be permitted
           to build the package.
 
-          <figure id="sc-rpm-specref-exclusiveos">
-            <title>Example of the <command>exclusiveos</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ExclusiveOS: linux
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-exclusiveos-tag">.
@@ -841,14 +748,11 @@ ExclusiveOS: linux
           redefined by the user when the package is installed, thereby changing
           where the package is installed.
 
-          <figure id="sc-rpm-specref-prefix">
-            <title>Example of the <command>prefix</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Prefix: /opt
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-prefix-tag">.
@@ -872,14 +776,11 @@ Prefix: /opt
           build root, where the software will be installed during the build
           process.
 
-          <figure id="sc-rpm-specref-buildroot">
-            <title>Example of the <command>buildroot</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 BuildRoot: /tmp/cdplayer
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-buildroot-tag">.
@@ -914,15 +815,12 @@ BuildRoot: /tmp/cdplayer
           pointing to the location of the original sources, but RPM does not
           require this.
 
-          <figure id="sc-rpm-specref-source">
-            <title>Example of the <command>source</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Source0: ftp://ftp.gnomovision.com/pub/cdplayer-1.0.tgz
 Source1: foo.tgz
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-source-tag">.
@@ -948,14 +846,11 @@ Source1: foo.tgz
           numbers correspond to the numbers following the
           <command>source</command> tags that are to be excluded from packaging.
 
-          <figure id="sc-rpm-specref-nosource">
-            <title>Example of the <command>nosource</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 NoSource: 0, 3
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-nosource-tag">.
@@ -978,14 +873,11 @@ NoSource: 0, 3
           <literal>0</literal>.  When there is only one tag, it does not need to
           be numbered.
 
-          <figure id="sc-rpm-specref-patch">
-            <title>Example of the <command>patch</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Patch: cdp-0.33-fsstnd.patch
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-patch-tag">.
@@ -1005,14 +897,11 @@ Patch: cdp-0.33-fsstnd.patch
           numbers correspond to the numbers following the
           <command>patch</command> tags that are to be excluded from packaging.
 
-          <figure id="sc-rpm-specref-nopatch">
-            <title>Example of the <command>nopatch</command> Tag</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 NoPatch: 2 3
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-nopatch-tag">.
@@ -1126,14 +1015,11 @@ NoPatch: 2 3
           the sources for building.  The commands in the script can be any valid
           <command>sh</command> commands.
 
-          <figure id="sc-rpm-specref-prep">
-            <title>Example of the <command>%prep</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %prep
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-prep-script">.
@@ -1158,14 +1044,11 @@ NoPatch: 2 3
           software.  The commands in the script can be any valid
           <command>sh</command> commands.
 
-          <figure id="sc-rpm-specref-build">
-            <title>Example of the <command>%build</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %build
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-build-script">.
@@ -1190,14 +1073,11 @@ NoPatch: 2 3
           install the software.  The commands in the script can be any valid
           <command>sh</command> commands.
 
-          <figure id="sc-rpm-specref-install">
-            <title>Example of the <command>%install</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %install
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-install-script">.
@@ -1224,14 +1104,11 @@ NoPatch: 2 3
           <command>%clean</command> script.  The commands in the script can be
           any valid <command>sh</command> commands.
 
-          <figure id="sc-rpm-specref-clean">
-            <title>Example of the <command>%clean</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %clean
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-clean-script">.
@@ -1251,19 +1128,13 @@ NoPatch: 2 3
         subpackage by adding the subpackage name, and optionally, the
         <command>-n</command> option:
 
-        <figure id="sc-rpm-specref-install-erase-examples">
-          <title>
-            Examples of the <command>%post</command> and
-            <command>%preun</command> Scripts
-        </title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %post bar
 
 %preun -n bar
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The subpackage name and usage of the <command>-n</command> option must
@@ -1301,14 +1172,11 @@ NoPatch: 2 3
           The <command>%pre</command> script executes just before the package is
           to be installed.
 
-          <figure id="sc-rpm-specref-pre">
-            <title>Example of the <command>%pre</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %pre
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-pre-script">.
@@ -1331,14 +1199,11 @@ NoPatch: 2 3
           The <command>%post</command> script executes just after the package is
           to be installed.
 
-          <figure id="sc-rpm-specref-post">
-            <title>Example of the <command>%post</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %post
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s4-rpm-inside-post-script">.
@@ -1361,14 +1226,11 @@ NoPatch: 2 3
           The <command>%preun</command> script executes just before the package
           is to be erased.
 
-          <figure id="sc-rpm-specref-preun">
-            <title>Example of the <command>%preun</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %preun
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-preun-script">.
@@ -1391,14 +1253,11 @@ NoPatch: 2 3
           The <command>%postun</command> script executes just after the package
           is to be erased.
 
-          <figure id="sc-rpm-specref-postun">
-            <title>Example of the <command>%postun</command> Script</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %postun
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-postun-script">.
@@ -1461,15 +1320,12 @@ NoPatch: 2 3
         sources in preparation for the build.  It is used in the
         <command>%prep</command> script:
 
-        <figure id="sc-rpm-specref-setup">
-          <title>Example of the <command>%setup</command> Macro</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %prep
 %setup
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-setup-macro">.
@@ -1501,14 +1357,11 @@ NoPatch: 2 3
             <replaceable>&lt;version&gt;</replaceable>
           </command>.
 
-          <figure id="sc-rpm-specref-setup-n-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -n cd-player
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-n-option">.
@@ -1523,14 +1376,11 @@ NoPatch: 2 3
           <command>%setup</command> to create the top-level build directory
           before unpacking the sources.
 
-          <figure id="sc-rpm-specref-setup-c-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -c
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-c-option">.
@@ -1547,14 +1397,11 @@ NoPatch: 2 3
           archive is to be unpacked into the build directory, normally with the
           <command>-b</command> or <command>-a</command> options.
 
-          <figure id="sc-rpm-specref-setup-d-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -D -T -b 3
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-d-option">.
@@ -1571,14 +1418,11 @@ NoPatch: 2 3
           It is used with the <command>-a</command> or <command>-b</command>
           options.
 
-          <figure id="sc-rpm-specref-setup-t-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -D -T -a 1
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-t-option">.
@@ -1596,14 +1440,11 @@ NoPatch: 2 3
           the <emphasis>n</emphasis>th <command>source</command> tag line before
           changing directory into the build directory.
 
-          <figure id="sc-rpm-specref-setup-b-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -D -T -b 2
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-b-option">.
@@ -1621,14 +1462,11 @@ NoPatch: 2 3
           the <emphasis>n</emphasis>th <command>source</command> tag line after
           changing directory into the build directory.
 
-          <figure id="sc-rpm-specref-setup-a-option">
-            <title>Example of the <command>%setup</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %setup -D -T -a 5
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-a-option">.
@@ -1654,14 +1492,11 @@ NoPatch: 2 3
         specified, it will apply the patch file specified by the
         <command>patch</command> (or <command>patch0</command>) tag.
 
-        <figure id="sc-rpm-specref-patch-macro">
-          <title>Example of the <command>%patch</command> Macro</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %patch
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         When there is more than one <command>patch</command> tag line in a spec
@@ -1669,14 +1504,11 @@ NoPatch: 2 3
         <command>patch</command> tag to the <command>%patch</command> macro name
         itself.
 
-        <figure id="sc-rpm-specref-patch-macro2">
-          <title>Example of the <command>%patch</command> Macro</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %patch2
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-patch-macro">.
@@ -1704,16 +1536,13 @@ NoPatch: 2 3
           <command>%patch</command> macros both apply the patch specified on the
           <command>patch2</command> tag line:
 
-          <figure id="sc-rpm-specref-patch-p-option">
-            <title>Example of the <command>%patch</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %patch -P 2
 
 %patch2
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-which-patch-tag">.
@@ -1731,14 +1560,11 @@ NoPatch: 2 3
           specifies the number of leading slashes (and the directories in
           between) to strip from any filenames present in the patch file.
 
-          <figure id="sc-rpm-specref-patch-p-option2">
-            <title>Example of the <command>%patch</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %patch -p2
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-patch-p-option">.
@@ -1758,14 +1584,11 @@ NoPatch: 2 3
           option is used to change the extension used by
           <command>patch</command>.
 
-          <figure id="sc-rpm-specref-patch-b-option">
-            <title>Example of the <command>%patch</command> Macro</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %patch -b .fsstnd
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-b-option">.
@@ -1801,33 +1624,27 @@ NoPatch: 2 3
       directory is specified, by default all files and subdirectories will be
       packaged.
 
-      <figure id="sc-rpm-specref-files-list">
-        <title>Example of the <command>%files</command> List</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 %files
 /etc/foo.conf
 /sbin/foo
 /usr/bin/foocmd
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       The <command>%files</command> list can be made specific to a particular
       subpackage by adding the subpackage name, and optionally, the
       <command>-n</command> option:
 
-      <figure id="sc-rpm-specref-files-list2">
-        <title>Example of Package-Specific <command>%files</command> Lists</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 %files bar
 
 %files -n bar
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       The subpackage name and usage of the <command>-n</command> option must
@@ -1838,14 +1655,11 @@ NoPatch: 2 3
       the list of files to be packaged.  This is done by using the
       <command>-f</command> option, which is then followed by a filename:
 
-      <figure id="sc-rpm-specref-files-list3">
-        <title>Example of the <command>%files</command> List</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 %files -f files.list
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       See also: <xref linkend="s1-rpm-inside-files-list">.
@@ -1883,14 +1697,11 @@ NoPatch: 2 3
           The <command>%doc</command> directive flags the filename(s) that
           follow as being documentation.
 
-          <figure id="sc-rpm-specref-doc">
-            <title>Example of the <command>%doc</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %doc README
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-doc-directive">.
@@ -1913,14 +1724,11 @@ NoPatch: 2 3
           The <command>%config</command> directive is used to flag the specified
           file as being a configuration file.
 
-          <figure id="sc-rpm-specref-config">
-            <title>Example of the <command>%config</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %config /etc/fstab
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-config-directive">.
@@ -1945,28 +1753,22 @@ NoPatch: 2 3
           used when non-root users build packages.  The <command>%attr</command>
           directive has the following format:
 
-          <figure id="sc-rpm-specref-attr">
-            <title>Example of the <command>%attr</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %attr(<replaceable>&lt;mode&gt;</replaceable>, <replaceable>&lt;user&gt;</replaceable>, <replaceable>&lt;group&gt;</replaceable>) <replaceable>file</replaceable>
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The user and group identifiers must be non-numeric.  Attributes that
           do not need to be set by <command>%attr</command> may be replaced with
           a dash:
 
-          <figure id="sc-rpm-specref-attr2">
-            <title>Example of the <command>%attr</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %attr(755, root, -) foo.bar
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-attr-directive">.
@@ -2050,14 +1852,11 @@ NoPatch: 2 3
           If the keyword <command>not</command> precedes the list, every
           attribute <emphasis>except</emphasis> those listed will be verified.
 
-          <figure id="sc-rpm-specref-verify">
-            <title>Example of the <command>%verify</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %verify(mode md5 size maj min symlink mtime) /dev/ttyS0
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-verify-directive">.
@@ -2108,14 +1907,11 @@ NoPatch: 2 3
           only the directory itself, regardless of what files may reside in the
           directory at the time the package is created.
 
-          <figure id="sc-rpm-specref-dir">
-            <title>Example of the <command>%dir</command> Directive</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %dir /usr/blather
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           See also: <xref linkend="s3-rpm-inside-dir-directive">.
@@ -2139,27 +1935,21 @@ NoPatch: 2 3
       specified after the <command>%package</command> directive.  Therefore, if
       the first <command>name</command> tag is:
 
-      <figure id="sc-rpm-specref-package-name">
-        <title>Example of the <command>name</command> Tag</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 Name: foo
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       and a subpackage is defined with the following <command>%package</command>
       directive:
 
-      <figure id="sc-rpm-specref-package">
-        <title>Example of the <command>%package</command> Directive</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 %package bar
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       the subpackage name will be <filename>foo-bar</filename>.
@@ -2188,14 +1978,11 @@ Name: foo
         complete subpackage name.  Therefore, if a subpackage is defined with
         the following <command>%package</command> directive:
 
-        <figure id="sc-rpm-specref-package-n-option">
-          <title>Example of the <command>%package</command> Directive</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %package -n bar
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         the subpackage name will be <filename>bar</filename>.
@@ -2239,14 +2026,11 @@ Name: foo
         <command>%else</command> or <command>%endif</command> will be used
         during the build.
 
-        <figure id="sc-rpm-specref-ifarch">
-          <title>Example of the <command>%ifarch</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifarch i386 sparc
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-ifarch-conditional">.
@@ -2271,14 +2055,11 @@ Name: foo
         <command>%else</command> or <command>%endif</command> will
         <emphasis>not</emphasis> be used during the build.
 
-        <figure id="sc-rpm-specref-ifnarch">
-          <title>Example of the <command>%ifnarch</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifnarch i386 sparc
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-ifnarch-conditional">.
@@ -2303,14 +2084,11 @@ Name: foo
         before a <command>%else</command> or <command>%endif</command> will be
         used during the build.
 
-        <figure id="sc-rpm-specref-ifos">
-          <title>Example of the <command>%ifos</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifos linux
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-ifos-conditional">.
@@ -2335,14 +2113,11 @@ Name: foo
         before a <command>%else</command> or <command>%endif</command> will
         <emphasis>not</emphasis> be used during the build.
 
-        <figure id="sc-rpm-specref-ifnos">
-          <title>Example of the <command>%ifnos</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifnos linux
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-ifnos-conditional">.
@@ -2367,9 +2142,7 @@ Name: foo
         <command>%endif</command>.  It is used to create two blocks of spec file
         statements, only one of which will be used in any given case.
 
-        <figure id="sc-rpm-specref-else">
-          <title>Example of the <command>%ifarch</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifarch alpha
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
@@ -2377,8 +2150,7 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS -I ."
 make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 %endif
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-else-conditional">.
@@ -2402,16 +2174,13 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
         file statements.  The <command>%endif</command> is always needed after a
         conditional, otherwise, the build will fail.
 
-        <figure id="sc-rpm-specref-endif">
-          <title>Example of the <command>%endif</command> Conditional</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 %ifarch i386
 make INTELFLAG=-DINTEL
 %endif
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         See also: <xref linkend="s2-rpm-inside-endif-conditional">.

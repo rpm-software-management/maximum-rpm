@@ -142,9 +142,7 @@
         Every spec file starts with a preamble, and this one is no different.
         In this case, the preamble will contain the following tags:
 
-        <figure id="sc-rpm-subpack-spec-preamble">
-          <title>The Spec File's Preamble</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -157,8 +155,7 @@ Group: bogus/junque
 This is the long description of the foo app, and the baz library needed to
 build it...
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         As we can see, there's nothing different here: this is an ordinary spec
@@ -235,32 +232,21 @@ build it...
             subpackage's name.  As an example, let's say the main preamble
             contains the following <command>name</command> tag:
 
-            <figure id="sc-rpm-subpack-main-preamble-name">
-              <title>
-                The <command>name</command> Tag in the Main Preamble
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 name: foo
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Later in the spec file, there is a <command>%package</command>
             directive:
 
-            <figure id="sc-rpm-subpack-package-directive-example">
-              <title>
-                <command>%package</command> Directive for
-                <filename>foo-bar</filename> Subpackage
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %package bar
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This would result in the name of the subpackage being
@@ -297,17 +283,11 @@ name: foo
             <filename>subpackage</filename>.  Let's modify the
             <command>%package</command> directive in our example above to be:
 
-            <figure id="sc-rpm-subpack-package-directive-with-n">
-              <title>
-                Using the <command>%package</command> Directive's
-                <command>-n</command> Option
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %package -n bar
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             The result is that the subpackage name would then be
@@ -353,19 +333,12 @@ name: foo
             directives for the <filename>foo-server</filename> and
             <filename>foo-client</filename> subpackages would be written as:
 
-            <figure id="sc-rpm-subpack-subpackage-package-lines">
-              <title>
-                <command>%package</command> Lines for the
-                <filename>foo-server</filename> and
-                <filename>foo-client</filename> Subpackages
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %package server
 %package client
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Since the <filename>baz</filename> library's package name is
@@ -373,17 +346,11 @@ name: foo
             need to use the <command>-n</command> option on its
             <command>%package</command> directive:
 
-            <figure id="sc-rpm-subpack-bazlib-package-line">
-              <title>
-                <command>%package</command> Line for the
-                <filename>bazlib</filename> Subpackage
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %package -n bazlib
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Our requirements further state that <filename>foo-server</filename>
@@ -411,9 +378,7 @@ name: foo
           <para>
             So based on these requirements, our spec file now looks like this:
 
-            <figure id="sc-rpm-subpack-subpackage-spec-file">
-              <title>The Spec File So Far</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -436,8 +401,7 @@ Summary: The foo client
 Version: 5.6
 Summary: The baz library
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             We can see the subpackage structure starting to appear now.
@@ -457,11 +421,7 @@ Summary: The baz library
             <emphasis>not</emphasis> present, RPM will issue a most impressive
             warning:
 
-            <figure id="sc-rpm-subpack-warning-example">
-              <title>
-                Warning Messages From an Incorrectly-Written Spec File
-              </title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -ba foo-2.7.spec</userinput>
 <computeroutput>
 * Package: foo
@@ -479,8 +439,7 @@ Spec file check failed!!
 Tell rpm-list@redhat.com if this is incorrect.
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Our spec file is incomplete.  The bottom line is that each
@@ -530,33 +489,24 @@ Tell rpm-list@redhat.com if this is incorrect.
             appending the subpackage name to the <command>%description</command>
             tag itself.  So given these <command>%package</command> directives:
 
-            <figure id="sc-rpm-subpack-description-setup">
-              <title><command>%package</command> Tags&hellip;</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %package server
 %package client
 %package -n bazlib
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             our <command>%description</command> tags would start with:
 
-            <figure id="sc-rpm-subpack-description-payoff">
-              <title>
-                &hellip;and Their Corresponding <command>%description</command>
-                Tags
-              </title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 %description server
 %description client
 %description -n bazlib
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Notice that we've included the <command>-n</command> option in the
@@ -573,9 +523,7 @@ Tell rpm-list@redhat.com if this is incorrect.
             appropriate <command>%description</command>s, along with
             <command>group</command> tags for each subpackage:
 
-            <figure id="sc-rpm-subpack-so-far-listing">
-          <title>Our Spec File So Far&hellip;</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -607,8 +555,7 @@ Group: bogus/junque
 %description -n bazlib
 This is the long description for the bazlib...
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             Let's take a look at what we've done.  We've created a main preamble
@@ -655,45 +602,34 @@ This is the long description for the bazlib...
           specified by each <command>%package</command> directive. Going back to
           our example, our <command>%package</command> lines were:
 
-          <figure id="sc-rpm-subpack-files-list-setup">
-            <title><command>%package</command> Tags&hellip;</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %package server
 %package client
 %package -n bazlib
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Therefore, our <command>%files</command> lists should start with:
 
-          <figure id="sc-rpm-subpack-files-list-payoff">
-            <title>
-              &hellip;and Their Corresponding <command>%files</command> Tags
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %files server
 %files client
 %files -n bazlib
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In addition, we need the main package's <command>%files</command>
           list, which remains unnamed:
 
-          <figure id="sc-rpm-subpack-files-list-payoff2">
-            <title>The Main Package's <command>%files</command> List</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 %files
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The contents of each <command>%files</command> list is dictated
@@ -757,9 +693,7 @@ This is the long description for the bazlib...
             after adding each of the subpackages' <command>%files</command>
             lists:
 
-            <figure id="sc-rpm-subpack-spec-file-listing">
-              <title>Spec File (With <command>%files</command> Lists)</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -798,8 +732,7 @@ Group: bogus/junque
 %files -n bazlib
 /usr/local/bazlib-file
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As you can see we've added <command>%files</command> lists for:
@@ -912,9 +845,7 @@ Group: bogus/junque
             doesn't get too complex, we've just added preinstall scripts for
             each package:
 
-            <figure id="sc-rpm-subpack-spec-file-listing-scripts">
-              <title>Spec File Listing (With Preinstall Scripts)</title>
-              <screen width="60">
+            <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -971,8 +902,7 @@ echo "This is the bazlib subpackage preinstall script"
 %files -n bazlib
 /usr/local/bazlib-file
 </computeroutput>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As pre-install scripts go, these don't do very much.  But they will
@@ -1018,9 +948,7 @@ echo "This is the bazlib subpackage preinstall script"
           Let's add some build-time scripts and take a final look at the spec
           file:
 
-          <figure id="sc-rpm-subpack-one-last-look">
-            <title>The Spec File (For the Last Time!)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 Name: foo
 Version: 2.7
@@ -1085,8 +1013,7 @@ echo "This is the bazlib subpackage preinstall script"
 %files -n bazlib
 /usr/local/bazlib-file
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As you can see, the build-time scripts are about as simple as they can
@@ -1112,9 +1039,7 @@ echo "This is the bazlib subpackage preinstall script"
         Now it's time to give our example spec file a try.  The build process is
         not that much different from a single-package spec file:
 
-        <figure id="sc-rpm-subpack-build-output">
-          <title>Output From a Build</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba foo-2.7.spec</userinput>
 <computeroutput>
 * Package: foo
@@ -1169,8 +1094,7 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
 </computeroutput>
 <prompt>#</prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Starting at the top, we start the build with the usual command.
@@ -1222,9 +1146,7 @@ Wrote: /usr/src/redhat/SRPMS/foo-2.7-1.src.rpm
         <para>
           First, let's just look at each package's information:
 
-          <figure id="sc-rpm-subpack-package-queries">
-            <title>Queries of Each Subpackage</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qip foo-2.7-1.i386.rpm</userinput>
 <computeroutput>
 Name        : foo                   Distribution: (none)
@@ -1278,8 +1200,7 @@ Description :
 This is the long description for the bazlib...
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've used RPM's query capability to display a list of summary
@@ -1310,9 +1231,7 @@ This is the long description for the bazlib...
           information has been taken entirely from the main package's set of
           tags:
 
-          <figure id="sc-rpm-subpack-source-query">
-            <title>Querying the Source Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qip foo-2.7-1.src.rpm</userinput>
 <computeroutput>
 Name        : foo                   Distribution: (none)
@@ -1327,8 +1246,7 @@ This is the long description of the foo app, and the baz library needed to
 build it...
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           It's easy to see that if there was no <command>%files</command> list
@@ -1362,9 +1280,7 @@ build it...
             we defined for each package were actually used is to simply install
             each package:
 
-            <figure id="sc-rpm-subpack-pre-script-verification">
-              <title>Verifying the <command>%pre</command> Scripts</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -Uvh foo-2.7-1.i386.rpm</userinput>
 <computeroutput>
 foo                    This is the foo package preinstall script
@@ -1389,8 +1305,7 @@ bazlib                 This is the bazlib subpackage preinstall script
 ##################################################
 </computeroutput>
 <prompt># </prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             As expected, the unique <command>%pre</command> script for each
@@ -1398,9 +1313,7 @@ bazlib                 This is the bazlib subpackage preinstall script
             actually install the packages, we could have used RPM's
             <command>--scripts</command> option to display the scripts:
 
-            <figure id="sc-rpm-subpack-query-scripts">
-              <title>Viewing Subpackage Scripts With a Query Command</title>
-              <screen width="60">
+            <screen width="60">
 <prompt># </prompt><userinput>rpm -qp --scripts foo-2.7-1.i386.rpm</userinput>
 <computeroutput>
 preinstall script:
@@ -1416,8 +1329,7 @@ verify script:
 (none)
 </computeroutput>
 <prompt>#</prompt>
-              </screen>
-            </figure>
+            </screen>
           </para>
           <para>
             This approach might be a bit safer, particularly if installing the

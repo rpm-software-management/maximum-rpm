@@ -914,8 +914,7 @@ echo "This is not an i386"
 <computeroutput>
 %ifarch i386 alpha
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this case, the block following the conditional would be included

@@ -563,14 +563,11 @@
         format of the output is a bit cryptic, but it packs all the information
         you need into one line per file.  Here is the format:
 
-        <figure id="sc-rpm-verify-output-format">
-          <title>Output Format for <command>rpm -V</command></title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 SM5DLUGT c <userinput>file</userinput>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Where:
@@ -656,14 +653,11 @@ SM5DLUGT c <userinput>file</userinput>
         there is a problem.  Otherwise, a "<computeroutput>.</computeroutput>"
         will be printed in that flag's place.  Let's look at an example or two:
 
-        <figure id="sc-rpm-verify-example">
-          <title>Example of <command>rpm -V</command> Output</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 .M5....T   /usr/X11R6/lib/X11/fonts/misc/fonts.dir
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this case, the mode, MD5 checksum, and modification time for the
@@ -671,28 +665,22 @@ SM5DLUGT c <userinput>file</userinput>
         (Note the absence of a "<computeroutput>c</computeroutput>" between the
         attribute list and the filename).
 
-        <figure id="sc-rpm-verify-example2">
-          <title>Another Example of <command>rpm -V</command> Output</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 S.5....T c /etc/passwd
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Here, the size, checksum, and modification time of the system password
         file have all changed.  The "<computeroutput>c</computeroutput>"
         indicates that this is a config file.
 
-        <figure id="sc-rpm-verify-example3">
-          <title>Yet Another Example of <command>rpm -V</command> Output</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 missing    /var/spool/at/spool
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         This last example illustrates what RPM does when a file, that should be
@@ -704,19 +692,13 @@ missing    /var/spool/at/spool
           When <command>rpm -V</command> finds other problems, the output is a
           bit easier to understand:
 
-          <figure id="sc-rpm-verify-dependency-message">
-            <title>
-              Dependency-Related Message from <computeroutput>rpm
-              -V</computeroutput>
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -V blather</userinput>
 <computeroutput>
 Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           It's pretty easy to see that the <filename>blather</filename> package
@@ -764,13 +746,10 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           <command>rpm -V packagename</command> are <emphasis>not</emphasis> the
           same.  Let's verify the <filename>initscripts</filename> package:
 
-          <figure id="sc-rpm-verify-example-the-sequel">
-            <title>An <command>rpm -V</command> Example</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -V initscripts</userinput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           While it looks like RPM didn't do anything, the following steps were
@@ -823,9 +802,7 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
           while, but when it's done, you'll know exactly what's been changed on
           your system:
 
-          <figure id="sc-rpm-verify-all-packages">
-            <title>Verifying All Installed Packages</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Va</userinput>
 <computeroutput>
 .M5....T   /usr/X11R6/lib/X11/fonts/misc/fonts.dir
@@ -836,8 +813,7 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
 ..5.....   /usr/bin/loadkeys
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Don't be too surprised if <command>rpm -Va</command> turns up a
@@ -874,18 +850,13 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
           Now you can let RPM do at least part of that sleuthing for you.
           Simply direct RPM to verify the package owning the ailing program:
 
-          <figure id="sc-rpm-verify-f-option-example">
-            <title>
-              Package Verification Using the <command>-f</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt>% </prompt><userinput>rpm -Vf /sbin/cardmgr</userinput>
 <computeroutput>
 S.5....T c /etc/sysconfig/pcmcia
 </computeroutput>
 <prompt>% </prompt>
-            </screen>
-          </figure>
+          </screen>
 
           Hmmmm.  Looks like a config file was recently changed.
         </para>
@@ -895,16 +866,13 @@ S.5....T c /etc/sysconfig/pcmcia
           first things you try.  Here's an example of <command>rpm -Vf</command>
           not working out as well:
 
-          <figure id="sc-rpm-verify-f-option-not-owned">
-            <title>Specifying a Filename Not Part of Any Package</title>
-            <screen width="60">
+          <screen width="60">
 <prompt>% </prompt><userinput>rpm -Vf /etc/blunder</userinput>
 <computeroutput>
 file /etc/blunder is not owned by any package
 </computeroutput>
 <prompt>% </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           (Note that the issue surrounding RPM and symbolic links mentioned in
@@ -941,16 +909,10 @@ file /etc/blunder is not owned by any package
           This is where a CD full of package files can be worth its weight in
           gold.  Simply mount the CD and verify to your heart's content:
 
-          <figure id="sc-rpm-verify-package-based">
-            <title>
-              Verifying an Installed Package Against the Original
-              <filename>.rpm</filename> File
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vp /mnt/cdrom/RedHat/RPMS/i386/adduser-1.1-1.i386.rpm</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Whatever else might be wrong with this system, at least we can add new
@@ -980,32 +942,26 @@ file /etc/blunder is not owned by any package
           contain, strangely enough, shells.  Let's verify the proper
           installation of every shell-related package on the system:
 
-          <figure id="sc-rpm-verify-group-based">
-            <title>Verifying Packages Based on Group</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vg Shells</userinput>
 <computeroutput>
 missing    /etc/bashrc
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           One thing to keep in mind is that group specifications are
           case-sensitive.  Issuing the command <command>rpm -Vg shells</command>
           wouldn't verify many packages:
 
-          <figure id="sc-rpm-verify-group-oops">
-            <title>Group Specifications are Case-Sensitive</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vg shells</userinput>
 <computeroutput>
 group shells does not contain any packages
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -1025,9 +981,7 @@ group shells does not contain any packages
           this example, we've added the <command>-vv</command> option to so we
           can watch RPM at work:
 
-          <figure id="sc-rpm-verify-nodeps-setup">
-            <title>A More In-Depth View of Package Verification </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv rpm</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -1037,8 +991,7 @@ D: dependencies: looking for libdb.so.2
 D: dependencies: looking for libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we can see, there are three different capabilities that the
@@ -1068,19 +1021,14 @@ D: dependencies: looking for libc.so.5
           If we add the <command>--nodeps</command> option, the dependency
           verification of the three capabilities is no longer performed:
 
-          <figure id="sc-rpm-verify-nodeps-payoff">
-            <title>
-              Package Verification Using the <command>--nodeps</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv --nodeps rpm</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 2341208
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The line <computeroutput>D: verifying record number
@@ -1104,11 +1052,7 @@ D: verifying record number 2341208
           verified.  In the following example, the package verification script
           is executed:
 
-          <figure id="sc-rpm-verify-noscripts-setup">
-            <title>
-              Package Verification Showing Verification Script Being Run
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv bother</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -1120,28 +1064,21 @@ D: verify script found - running from file /var/tmp/rpm-321.vscript
 This is the bother 3.5 verification script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           While the actual script is not very interesting, it did execute when
           the package was being verified.  In the next example, we'll use the
           <command>--noscripts</command> option to prevent its execution:
 
-          <figure id="sc-rpm-verify-noscripts-payoff">
-            <title>
-              Package Verification Using the <command>--noscripts</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv --noscripts bother</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
 D: verifying record number 616728
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As expected, the output is identical to the prior example --- minus
@@ -1166,9 +1103,7 @@ D: verifying record number 616728
           performed.  In this example, the package has a file-related
           verification problem:
 
-          <figure id="sc-rpm-verify-nofiles-setup">
-            <title>A Package With a File-Related Verification Problem</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv bash</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -1178,16 +1113,13 @@ D: dependencies: looking for libtermcap.so.2
 missing    /etc/bashrc
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           When the <command>--nofiles</command> option is added, the missing
           file doesn't cause a message any more:
 
-          <figure id="sc-rpm-verify-nofiles-payoff">
-            <title>Using the <command>--nofiles</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv --nofiles bash</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -1196,8 +1128,7 @@ D: dependencies: looking for libc.so.5
 D: dependencies: looking for libtermcap.so.2
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This is not to say that the missing file problem is solved, just that
@@ -1217,33 +1148,23 @@ D: dependencies: looking for libtermcap.so.2
           include the <command>-v</command> option, you won't see much in the
           way of additional output:
 
-          <figure id="sc-rpm-verify-v-example">
-            <title>
-              Using the <command>-v</command> Option During Package Verification
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vv bash</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Even if there are verification errors, adding <command>-v</command>
           won't change the output:
 
-          <figure id="sc-rpm-verify-v-example2">
-            <title>
-              Lack of Additional Output From <command>-v</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vv apmd</userinput>
 <computeroutput>
 S.5....T   /etc/rc.d/init.d/apm
 S.5....T   /usr/X11R6/bin/xapm
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The only time that the <command>-v</command> option
@@ -1256,31 +1177,22 @@ S.5....T   /usr/X11R6/bin/xapm
             </para>
           </footnote>
 
-          <figure id="sc-rpm-verify-v-option-setup">
-            <title>Verifying a Package Containing a Verification Script</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -V bother</userinput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           But when <command>-v</command> is added, the script's
           non-error-related output is displayed:
 
-          <figure id="sc-rpm-verify-v-option-payoff">
-            <title>
-              Verification Script Output Displayed Using
-              <command>-v</command> Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vv bother</userinput>
 <computeroutput>
 This is the bother 3.5 verification script
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           If you're looking for more insight into RPM's inner workings, you'll
@@ -1300,9 +1212,7 @@ This is the bother 3.5 verification script
           information than we can get with <command>-v</command>.  By adding
           another <command>v</command>, that's just what we'll get:
 
-          <figure id="sc-rpm-verify-vv-option-example">
-            <title>Using the <command>-vv</command> Option</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Vvv rpm</userinput>
 <computeroutput>
 D: opening database in //var/lib/rpm/
@@ -1312,8 +1222,7 @@ D: dependencies: looking for libdb.so.2
 D: dependencies: looking for libc.so.5
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The lines starting with <computeroutput>D:</computeroutput> have been

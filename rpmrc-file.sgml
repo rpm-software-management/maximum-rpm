@@ -58,9 +58,7 @@
     <para>
       Here's an example of <command>--showrc</command>'s output:
 
-      <figure id="sc-rpmrc-file-showrc-output">
-        <title>Output From the <command>--showrc</command> Option</title>
-        <screen width="60">
+      <screen width="60">
 <prompt># </prompt><userinput>rpm --showrc</userinput>
 <computeroutput>
 ARCHITECTURE AND OS:
@@ -101,8 +99,7 @@ topdir               : /usr/src/redhat
 vendor               : (not set)
 </computeroutput>
 <prompt>#</prompt>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       As you can see, the <command>--showrc</command> option clearly displays
@@ -193,9 +190,7 @@ vendor               : (not set)
         After this stern warning, we should note that it's perfectly all right
         to look at it.  Here it is, in fact:
 
-        <figure id="sc-rpmrc-file-usr-lib-rpmrc-listing">
-          <title>Listing of <filename>/usr/lib/rpmrc</filename></title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #############################################################
 # Default values, often overridden in /etc/rpmrc
@@ -306,8 +301,7 @@ arch_compat: osfmach3_ppc: ppc
 
 arch_compat: usparc: sparc
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Quite a bunch of stuff, isn't it?  With the exception of the first five
@@ -401,14 +395,11 @@ arch_compat: usparc: sparc
       As you might have surmised from the example file we briefly reviewed, the
       basic syntax of an <filename>rpmrc</filename> file entry is:
 
-      <figure id="sc-rpmrc-file-rpmrc-entry-format">
-        <title><filename>rpmrc</filename> File Entry Format</title>
-        <screen width="60">
+      <screen width="60">
 <computeroutput>
 <symbol><replaceable>&lt;name&gt;</replaceable></symbol>:<symbol><replaceable>&lt;value&gt;</replaceable></symbol>
 </computeroutput>
-        </screen>
-      </figure>
+      </screen>
     </para>
     <para>
       The <symbol><replaceable>&lt;name&gt;</replaceable></symbol> part of the
@@ -446,14 +437,11 @@ arch_compat: usparc: sparc
         architecture names and numbers are then used internally by RPM whenever
         architecture-specific processing takes place.  This entry's format is:
 
-        <figure id="sc-rpmrc-file-arch-canon">
-          <title><command>arch_canon</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 arch_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><replaceable>&lt;string&gt;</replaceable></symbol> <symbol><replaceable>&lt;value&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is
@@ -490,14 +478,11 @@ arch_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><r
         whenever operating system-specific processing takes place.  This entry's
         format is:
 
-        <figure id="sc-rpmrc-file-os-canon-format">
-          <title><command>os_canon</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 os_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><replaceable>&lt;string&gt;</replaceable></symbol> <symbol><replaceable>&lt;value&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is
@@ -544,14 +529,11 @@ os_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><rep
         <symbol><replaceable>&lt;name&gt;:&lt;value&gt;</replaceable></symbol>
         format, the <command>buildarchtranslate</command> entry looks like this:
 
-        <figure id="sc-rpmrc-file-buildarchtranslate-format">
-          <title><command>buildarchtranslate</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 buildarchtranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><replaceable>&lt;string&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is
@@ -585,14 +567,11 @@ buildarchtranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <s
         <symbol><replaceable>&lt;name&gt;:&lt;value&gt;</replaceable></symbol>
         format, the <command>buildostranslate</command> entry looks like this:
 
-        <figure id="sc-rpmrc-file-buildostranslate-format">
-          <title><command>buildostranslate</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 buildostranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><replaceable>&lt;string&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is
@@ -618,14 +597,11 @@ buildostranslate:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <sym
         given package file is compatible with the system.  The format of the
         entry is:
 
-        <figure id="sc-rpmrc-file-arch-compat-format">
-          <title><command>arch_compat</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><replaceable>&lt;list&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is an
@@ -658,14 +634,11 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
         packages are installed; in this way, RPM can determine whether a given
         package file is compatible with the system.  The format of the entry is:
 
-        <figure id="sc-rpmrc-file-os-compat-format">
-          <title><command>os_compat</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 &lt;name&gt;:&lt;label&gt;: &lt;list&gt;
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The <symbol><replaceable>&lt;label&gt;</replaceable></symbol> is an
@@ -920,28 +893,22 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
         <symbol><replaceable>&lt;name&gt;:&lt;value&gt;</replaceable></symbol>
         format, the <command>optflags</command> entry looks like this:
 
-        <figure id="sc-rpmrc-file-optflags-format">
-          <title><command>optflags</command> Format</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 optflags:<symbol><replaceable>&lt;architecture&gt;</replaceable></symbol> <symbol><replaceable>&lt;value&gt;</replaceable></symbol>
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         For example, assume the following <command>optflags</command> entries
         were placed in an <filename>rpmrc</filename> file:
 
-        <figure id="sc-rpmrc-file-optflags-example">
-          <title><command>optflags</command> Examples</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 optflags: i386 -O2 -m486 -fno-strength-reduce
 optflags: sparc -O2
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         If RPM was running on an Intel 80386-compatible architecture, the
@@ -974,14 +941,11 @@ optflags: sparc -O2
         package.  The contact information is traditionally defined in the
         following format:
 
-        <figure id="sc-rpmrc-file-packager-example">
-          <title><command>packager</command> Example</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 packager:Erik Troan &lt;ewt@redhat.com&gt;
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
     </sect2>
 
@@ -1109,14 +1073,11 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
         the end of the path.  For example, on an Intel-based system, the actual
         path would be:
 
-        <figure id="sc-rpmrc-file-rpmdir-example">
-          <title><command>rpmdir</command> Example</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 /usr/src/redhat/RPMS/i386
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
     </sect2>
 

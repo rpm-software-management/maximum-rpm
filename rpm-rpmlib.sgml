@@ -100,16 +100,13 @@
             <secondary><function>rpmErrorCode()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmerrorcode">
-            <title><function>rpmErrorCode()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmErrorCode(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the error code set by the last rpmlib function
@@ -127,16 +124,13 @@ int rpmErrorCode(void);
             <secondary><function>rpmErrorString()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmerrorstring">
-            <title><function>rpmErrorString()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmErrorString(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the error string set by the last rpmlib
@@ -155,16 +149,13 @@ char *rpmErrorString(void);
             <secondary><function>rpmErrorSetCallback()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmerrorssetcallback">
-            <title><function>rpmErrorSetCallback()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function sets the current error callback function to the error
@@ -204,9 +195,7 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
             <secondary><function>rpmReadPackageInfo()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmreadpackageinfo">
-            <title><function>rpmReadPackageInfo()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -215,8 +204,7 @@ int rpmReadPackageInfo(int fd,
                        Header * signatures,
                        Header * hdr);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             Given an open package on <parameter>fd</parameter>, read in the
@@ -269,9 +257,7 @@ int rpmReadPackageInfo(int fd,
             <secondary><function>rpmReadPackageHeader()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmreadpackageheader">
-            <title><function>rpmReadPackageHeader()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -282,8 +268,7 @@ int rpmReadPackageHeader(int fd,
                          int * major,
                          int * minor);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             Given an open package on <parameter>fd</parameter>, read in the
@@ -362,16 +347,13 @@ int rpmReadPackageHeader(int fd,
             <secondary><function>rpmGetVar()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmgetvar">
-            <title><function>rpmGetVar()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetVar(int var);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the value of the variable specified in
@@ -392,16 +374,13 @@ char *rpmGetVar(int var);
             <secondary><function>rpmGetBooleanVar()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmgetbooleanvar">
-            <title><function>rpmGetBooleanVar()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmGetBooleanVar(int var);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function looks up the variable specified in
@@ -422,17 +401,14 @@ int rpmGetBooleanVar(int var);
             <secondary><function>rpmSetVar()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmsetvar">
-            <title><function>rpmSetVar()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmSetVar(int var,
                char *val);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function sets the variable specified in
@@ -469,9 +445,7 @@ the architecture and operating system information based on
             <secondary><function>rpmReadConfigFiles()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmreadconfigfiles">
-            <title><function>rpmReadConfigFiles()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -480,8 +454,7 @@ int rpmReadConfigFiles(char * file,
                        char * os,
                        int building);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function reads <filename>rpmrc</filename> files according to
@@ -539,16 +512,13 @@ int rpmReadConfigFiles(char * file,
             <secondary><function>rpmGetOsName()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmgetosname">
-            <title><function>rpmGetOsName()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetOsName(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the name of the operating system, as
@@ -566,16 +536,13 @@ char *rpmGetOsName(void);
             <secondary><function>rpmGetArchName()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmgetarchname">
-            <title><function>rpmGetArchName()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 char *rpmGetArchName(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the name of the architecture, as determined by
@@ -593,16 +560,13 @@ char *rpmGetArchName(void);
             <secondary><function>rpmShowRC()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmshowrc">
-            <title><function>rpmShowRC()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmShowRC(FILE *f);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function writes all variable names and their values to the file
@@ -620,16 +584,13 @@ int rpmShowRC(FILE *f);
             <secondary><function>rpmArchScore()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmarchscore">
-            <title><function>rpmArchScore()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmArchScore(char * arch);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the "distance" between the architecture whose
@@ -650,16 +611,13 @@ int rpmArchScore(char * arch);
             <secondary><function>rpmOsScore()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmosscore">
-            <title><function>rpmOsScore()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmOsScore(char * os);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the "distance" between the operating system
@@ -700,9 +658,7 @@ int rpmOsScore(char * os);
             <secondary><function>rpmdbOpen()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbopen">
-            <title><function>rpmdbOpen()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -711,8 +667,7 @@ int rpmdbOpen(char * root,
                int mode,
                int perms);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function opens the RPM database located in
@@ -739,16 +694,13 @@ int rpmdbOpen(char * root,
             <secondary><function>rpmdbClose()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbclose">
-            <title><function>rpmdbClose()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdbClose(rpmdb db);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function closes the RPM database specified by the
@@ -766,17 +718,14 @@ void rpmdbClose(rpmdb db);
             <secondary><function>rpmdbInit()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbinit">
-            <title><function>rpmdbInit()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmdbInit(char * root,
               int perms);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function creates a new RPM database to be located in
@@ -801,16 +750,13 @@ int rpmdbInit(char * root,
             <secondary><function>rpmdbRebuild()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbrebuild">
-            <title><function>rpmdbRebuild()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmdbRebuild(char * root);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function rebuilds the RPM database located in
@@ -855,16 +801,13 @@ int rpmdbRebuild(char * root);
             <secondary><function>rpmdbFirstRecNum()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfirstrecnum">
-            <title><function>rpmdbFirstRecNum()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 unsigned int rpmdbFirstRecNum(rpmdb db);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the record number of the first record in the
@@ -885,17 +828,14 @@ unsigned int rpmdbFirstRecNum(rpmdb db);
             <secondary><function>rpmdbNextRecNum()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbnextrecnum">
-            <title><function>rpmdbNextRecNum()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 unsigned int rpmdbNextRecNum(rpmdb db,
                              unsigned int lastOffset);  
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the record number of the record following the
@@ -917,17 +857,14 @@ unsigned int rpmdbNextRecNum(rpmdb db,
             <secondary><function>rpmdbGetRecord()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbgetrecord">
-            <title><function>rpmdbGetRecord()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 Header rpmdbGetRecord(rpmdb db,
                       unsigned int offset);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the record at the record number specified by
@@ -955,37 +892,27 @@ Header rpmdbGetRecord(rpmdb db,
           match the search term.  Here is the definition of the structure, as
           found in <filename>&lt;rpm/dbindex.h&gt;</filename>:
 
-          <figure id="sc-rpm-rpmlib-dbiindexset-struct">
-            <title>
-              Synopsis of the <structname>dbiIndexSet</structname> Structure
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 typedef struct {
     dbiIndexRecord * recs;
     int count;
 } dbiIndexSet;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Each <structname>dbiIndexRecord</structname> is also defined in
           <filename>&lt;rpm/dbindex.h&gt;</filename> as follows:
 
-          <figure id="sc-rpm-rpmlib-dbiindexrecord-struct">
-            <title>
-              Synopsis of the <structname>dbiIndexRecord</structname> Structure
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 typedef struct {
     unsigned int recOffset;
     unsigned int fileNumber;
 } dbiIndexRecord;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <structfield>recOffset</structfield> element is the offset of the
@@ -1010,17 +937,14 @@ typedef struct {
             <secondary><function>dbiFreeIndexRecord()</function></secondary>
             </indexterm>
 
-          <figure id="sc-rpm-rpmlib-dbifreeindexrecord">
-            <title><function>dbiFreeIndexRecord()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
 
 void dbiFreeIndexRecord(dbiIndexSet set);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function frees the database index set specified by
@@ -1038,9 +962,7 @@ void dbiFreeIndexRecord(dbiIndexSet set);
             <secondary><function>rpmdbFindByFile()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindbyfile">
-            <title><function>rpmdbFindByFile()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1049,8 +971,7 @@ int rpmdbFindByFile(rpmdb db,
                     char * filespec,
                     dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1096,9 +1017,7 @@ int rpmdbFindByFile(rpmdb db,
             <secondary><function>rpmdbFindByGroup()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindbygroup">
-            <title><function>rpmdbFindByGroup()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1107,8 +1026,7 @@ int rpmdbFindByGroup(rpmdb db,
                      char * group,
                      dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1154,9 +1072,7 @@ int rpmdbFindByGroup(rpmdb db,
             <secondary><function>rpmdbFindPackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindpackage">
-            <title><function>rpmdbFindPackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1165,8 +1081,7 @@ int rpmdbFindPackage(rpmdb db,
                      char * name,
                      dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1212,9 +1127,7 @@ int rpmdbFindPackage(rpmdb db,
             <secondary><function>rpmdbFindByProvides()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindbyprovides">
-            <title><function>rpmdbFindByProvides()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1223,8 +1136,7 @@ int rpmdbFindByProvides(rpmdb db,
                         char * provides,
                         dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1270,11 +1182,7 @@ int rpmdbFindByProvides(rpmdb db,
             <secondary><function>rpmdbFindByRequiredBy()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindbyrequiredby">
-            <title>
-              <function>rpmdbFindByRequiredBy()</function> Synopsis
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1283,8 +1191,7 @@ int rpmdbFindByRequiredBy(rpmdb db,
                           char * requires,
                           dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1330,9 +1237,7 @@ int rpmdbFindByRequiredBy(rpmdb db,
             <secondary><function>rpmdbFindByConflicts()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdbfindbyconflicts">
-            <title><function>rpmdbFindByConflicts()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/dbindex.h&gt;
@@ -1341,8 +1246,7 @@ int rpmdbFindByConflicts(rpmdb db,
                          char * conflicts,
                          dbiIndexSet * matches);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function searches the RPM database specified by
@@ -1403,11 +1307,7 @@ int rpmdbFindByConflicts(rpmdb db,
             <secondary><function>rpmInstallSourcePackage()</function></secondary>
 </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpminstallsourcepackage">
-            <title>
-              <function>rpmInstallSourcePackage()</function> Synopsis
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1417,8 +1317,7 @@ int rpmInstallSourcePackage(char * root,
                             rpmNotifyFunction notify,
                             char * labelFormat);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function installs the source package file specified by
@@ -1482,9 +1381,7 @@ int rpmInstallSourcePackage(char * root,
             <secondary><function>rpmInstallPackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpminstallpackage">
-            <title><function>rpmInstallPackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1497,8 +1394,7 @@ int rpmInstallPackage(char * rootdir,
                       char * labelFormat,
                       char * netsharedPath);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function installs the binary package specified by
@@ -1650,17 +1546,14 @@ int rpmInstallPackage(char * rootdir,
             <secondary><function>rpmNotifyFunction()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmnotifyfunction">
-            <title><function>rpmNotifyFunction()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 typedef void (*rpmNotifyFunction)(const unsigned long amount,
                                   const unsigned long total);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             A function can be passed to
@@ -1701,9 +1594,7 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
             <secondary><function>rpmRemovePackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmremovepackage">
-            <title><function>rpmRemovePackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -1712,8 +1603,7 @@ int rpmRemovePackage(char * root,
                      unsigned int offset,
                      int flags);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function removes the package at record number
@@ -1822,9 +1712,7 @@ int rpmRemovePackage(char * root,
             <secondary><function>rpmVerifyFile()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmverifyfile">
-            <title><function>rpmVerifyFile()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1834,8 +1722,7 @@ int rpmVerifyFile(char * root,
                   int filenum,
                   int * result);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function verifies the <parameter>filenum</parameter>'th file
@@ -1868,9 +1755,7 @@ int rpmVerifyFile(char * root,
             <secondary><function>rpmVerifyScript()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmverifyscript">
-            <title><function>rpmVerifyScript()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1879,8 +1764,7 @@ int rpmVerifyScript(char * root,
                     Header h,
                     int err);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function executes the <command>%verifyscript</command>
@@ -1954,16 +1838,13 @@ int rpmVerifyScript(char * root,
             <secondary><function>rpmdepDependencies()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepdependencies">
-            <title><function>rpmdepDependencies()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 rpmDependencies rpmdepDependencies(rpmdb db);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns an initialized
@@ -1985,9 +1866,7 @@ rpmDependencies rpmdepDependencies(rpmdb db);
             <secondary><function>rpmdepAddPackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepaddpackage">
-            <title><function>rpmdepAddPackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -1995,8 +1874,7 @@ rpmDependencies rpmdepDependencies(rpmdb db);
 void rpmdepAddPackage(rpmDependencies rpmdep,
                       Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function adds the installation of the package whose header is
@@ -2016,9 +1894,7 @@ void rpmdepAddPackage(rpmDependencies rpmdep,
             <secondary><function>rpmdepUpgradePackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepupgradepackage">
-            <title><function>rpmdepUpgradePackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2026,8 +1902,7 @@ void rpmdepAddPackage(rpmDependencies rpmdep,
 void rpmdepUpgradePackage(rpmDependencies rpmdep,
                           Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function adds the upgrading of the package whose header is
@@ -2049,17 +1924,14 @@ void rpmdepUpgradePackage(rpmDependencies rpmdep,
             <secondary><function>rpmdepRemovePackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepremovepackage">
-            <title><function>rpmdepRemovePackage()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepRemovePackage(rpmDependencies rpmdep,
                          int dboffset);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function adds the removal of the package whose RPM database
@@ -2079,11 +1951,7 @@ void rpmdepRemovePackage(rpmDependencies rpmdep,
             <secondary><function>rpmdepAvailablePackage()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepavailablepackage">
-            <title>
-              <function>rpmdepAvailablePackage()</function> Synopsis
-            </title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2092,8 +1960,7 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
                             Header h,
                             void * key);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function adds the package whose header is
@@ -2119,9 +1986,7 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
             <secondary><function>rpmdepCheck()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepcheck">
-            <title><function>rpmdepCheck()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -2129,8 +1994,7 @@ int rpmdepCheck(rpmDependencies rpmdep,
                 struct rpmDependencyConflict ** conflicts,
                 int * numConflicts);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function performs a dependency check on the
@@ -2155,17 +2019,14 @@ int rpmdepCheck(rpmDependencies rpmdep,
             <secondary><function>rpmdepFreeConflicts()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepfreeconflicts">
-            <title><function>rpmdepFreeConflicts()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
                          int numConflicts);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function frees the dependency conflict information of size
@@ -2184,16 +2045,13 @@ void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
             <secondary><function>rpmdepDone()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmdepdone">
-            <title><function>rpmdepDone()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmdepDone(rpmDependencies rpmdep);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function frees the <structname>rpmDependencies</structname>
@@ -2240,16 +2098,13 @@ void rpmdepDone(rpmDependencies rpmdep);
             <secondary><function>rpmIncreaseVerbosity()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmincreaseverbosity">
-            <title><function>rpmIncreaseVerbosity()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmIncreaseVerbosity(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function is used to increase the current verbosity level by
@@ -2266,16 +2121,13 @@ void rpmIncreaseVerbosity(void);
             <secondary><function>rpmSetVerbosity()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmsetverbosity">
-            <title><function>rpmSetVerbosity()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 void rpmSetVerbosity(int level);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function is used to set the current verbosity level to
@@ -2293,16 +2145,13 @@ void rpmSetVerbosity(int level);
             <secondary><function>rpmGetVerbosity()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmgetverbosity">
-            <title><function>rpmGetVerbosity()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmGetVerbosity(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the current verbosity level.
@@ -2318,16 +2167,13 @@ int rpmGetVerbosity(void);
             <secondary><function>rpmIsVerbose()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmisverbose">
-            <title><function>rpmIsVerbose()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmIsVerbose(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function checks the current verbosity level and returns
@@ -2346,16 +2192,13 @@ int rpmIsVerbose(void);
             <secondary><function>rpmIsDebug()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmisdebug">
-            <title><function>rpmIsDebug()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
 int rpmIsDebug(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function checks the current verbosity level and returns
@@ -2400,9 +2243,7 @@ int rpmIsDebug(void);
             <secondary><function>rpmVerifySignature()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmverifysignature">
-            <title><function>rpmVerifySignature()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 
@@ -2412,8 +2253,7 @@ int rpmVerifySignature(char *file,
                        int count,
                        char *result);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function verifies the signature of the package pointed to by
@@ -2474,17 +2314,14 @@ int rpmVerifySignature(char *file,
             <secondary><function>rpmFreeSignature()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-rpmfreesignature">
-            <title><function>rpmFreeSignature()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 void rpmFreeSignature(Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function frees the signature <parameter>h</parameter>.
@@ -2527,9 +2364,7 @@ void rpmFreeSignature(Header h);
             <secondary><function>headerRead()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerread">
-            <title><function>headerRead()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2537,8 +2372,7 @@ void rpmFreeSignature(Header h);
 Header headerRead(int fd,
                   int magicp);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function reads a header from file <parameter>fd</parameter>,
@@ -2565,9 +2399,7 @@ Header headerRead(int fd,
             <secondary><function>headerWrite()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerwrite">
-            <title><function>headerWrite()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2576,8 +2408,7 @@ void headerWrite(int fd,
                  Header h,
                  int magicp);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function writes the header <parameter>h</parameter>, to file
@@ -2601,17 +2432,14 @@ void headerWrite(int fd,
             <secondary><function>headerCopy()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headercopy">
-            <title><function>headerCopy()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 Header headerCopy(Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns a copy of header <parameter>h</parameter>.
@@ -2627,9 +2455,7 @@ Header headerCopy(Header h);
             <secondary><function>headerSizeof()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headersizeof">
-            <title><function>headerSizeof()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2637,8 +2463,7 @@ Header headerCopy(Header h);
 unsigned int headerSizeof(Header h,
                           int magicp);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns the number of bytes the header
@@ -2660,17 +2485,14 @@ unsigned int headerSizeof(Header h,
             <secondary><function>headerNew()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headernew">
-            <title><function>headerNew()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 Header headerNew(void);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns a new header.
@@ -2686,17 +2508,14 @@ Header headerNew(void);
             <secondary><function>headerFree()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerfree">
-            <title><function>headerFree()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 void headerFree(Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function deallocates the header specified by
@@ -2714,9 +2533,7 @@ void headerFree(Header h);
             <secondary><function>headerDump()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerdump">
-            <title><function>headerDump()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2725,8 +2542,7 @@ void headerDump(Header h,
                 FILE *f,
                 int flags);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function prints the structure of the header
@@ -2826,9 +2642,7 @@ void headerDump(Header h,
             <secondary><function>headerGetEntry()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headergetentry">
-            <title><function>headerGetEntry()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2839,8 +2653,7 @@ int headerGetEntry(Header h,
                    void **p,
                    int_32 *c);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function retrieves the entry matching
@@ -2869,9 +2682,7 @@ int headerGetEntry(Header h,
             <secondary><function>headerAddEntry()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headeraddentry">
-            <title><function>headerAddEntry()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2882,8 +2693,7 @@ int headerAddEntry(Header h,
                    void *p,
                    int_32 c);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function adds a new entry to the header
@@ -2920,9 +2730,7 @@ int headerAddEntry(Header h,
             <secondary><function>headerIsEntry()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerisentry">
-            <title><function>headerIsEntry()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -2930,8 +2738,7 @@ int headerAddEntry(Header h,
 int headerIsEntry(Header h,
                   int_32 tag);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns <returnvalue>1</returnvalue> if an entry with
@@ -2965,17 +2772,14 @@ int headerIsEntry(Header h,
             <secondary><function>headerInitIterator()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerinititerator">
-            <title><function>headerInitIterator()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 HeaderIterator headerInitIterator(Header h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function returns a newly-created iterator for the header
@@ -2992,9 +2796,7 @@ HeaderIterator headerInitIterator(Header h);
             <secondary><function>headerNextIterator()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headernextiterator">
-            <title><function>headerNextIterator()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
@@ -3005,8 +2807,7 @@ int headerNextIterator(HeaderIterator iter,
                        void **p,
                        int_32 *c);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function steps to the next entry in the header specified when
@@ -3035,17 +2836,14 @@ int headerNextIterator(HeaderIterator iter,
             <secondary><function>headerFreeIterator()</function></secondary>
           </indexterm>
 
-          <figure id="sc-rpm-rpmlib-headerfreeiterator">
-            <title><function>headerFreeIterator()</function> Synopsis</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;rpm/rpmlib.h&gt;
 #include &lt;rpm/header.h&gt;
 
 void headerFreeIterator(HeaderIterator iter);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
 
           <para>
             This function frees the resources used by the iterator
@@ -3074,9 +2872,7 @@ void headerFreeIterator(HeaderIterator iter);
           In this example, we'll use a number of rpmlib's header manipulation
           functions.
 
-          <figure id="sc-rpm-rpmlib-example1-listing">
-            <title>First Example Listing (1 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;errno.h&gt;
 #include &lt;fcntl.h&gt;
@@ -3086,16 +2882,13 @@ void headerFreeIterator(HeaderIterator iter);
 
 #include &lt;rpm/rpmlib.h&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've included <filename>rpmlib.h</filename>, which is necessary
           for all programs that use rpmlib.
 
-          <figure id="sc-rpm-rpmlib-example1-listing2">
-            <title>First Example Listing (2 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 void main(int argc, char ** argv)
 {
@@ -3108,8 +2901,7 @@ void main(int argc, char ** argv)
 
     int fd, stat;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we've defined the program's storage.  Note in particular the
@@ -3117,9 +2909,7 @@ void main(int argc, char ** argv)
           <structname>Header</structname>, and <structname>int_32</structname>
           datatypes.
 
-          <figure id="sc-rpm-rpmlib-example1-listing3">
-            <title>First Example Listing (3 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     if (argc == 1) {
         fd = 0;
@@ -3132,17 +2922,14 @@ void main(int argc, char ** argv)
         exit(1);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Standard stuff here.  The first argument is supposed to be an RPM
           package file.  It is opened here.  If there is no argument on the
           command line, the program will use stdin instead.
 
-          <figure id="sc-rpm-rpmlib-example1-isting4">
-            <title>First Example Listing (4 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     stat = rpmReadPackageInfo(fd, &amp;sig, &amp;h);
     if (stat) {
@@ -3152,8 +2939,7 @@ void main(int argc, char ** argv)
         exit(stat);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here things start to get interesting!  The signature and headers are
@@ -3163,9 +2949,7 @@ void main(int argc, char ** argv)
           rpmlib's header-related functions on them.  After a little bit of
           error checking, and it's time to move on&hellip;
 
-          <figure id="sc-rpm-rpmlib-example1-listing5">
-            <title>First Example Listing (5 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     headerGetEntry(h, RPMTAG_NAME, &amp;type, (void **) &amp;name, &amp;count);
 
@@ -3177,8 +2961,7 @@ void main(int argc, char ** argv)
         printf("There is a postinstall script for %s\n", name);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Now that we have the package's header, we get the package name
@@ -3187,41 +2970,33 @@ void main(int argc, char ** argv)
           post-install (<symbol>RPMTAG_POSTIN</symbol>) scripts.  If there are,
           we print out a message, along with the package name.
 
-          <figure id="sc-rpm-rpmlib-example1-listing6">
-            <title>First Example Listing (6 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     printf("Dumping signatures...\n");
     headerDump(sig, stdout, 1);
 
     rpmFreeSignature(sig);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Turning to the other <structname>Header</structname> structure we've
           read, we print out the package's signatures in human-readable form.
           When we're done, we free the block of signatures.
 
-          <figure id="sc-rpm-rpmlib-example1-listing7">
-            <title>First Example Listing (7 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     printf("Iterating through the header...\n");
 
     iter = headerInitIterator(h);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we set up an iterator for the package's header.  This will allow
           us to step through each entry in the header.
 
-          <figure id="sc-rpm-rpmlib-example1-listing8">
-            <title>First Example Listing (8 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     while (headerNextIterator(iter, &amp;itertag, &amp;type, p, &amp;count)) {
       switch (itertag) {
@@ -3234,8 +3009,7 @@ void main(int argc, char ** argv)
         break;
       }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This loop uses <function>headerNextIterator()</function> to return
@@ -3243,9 +3017,7 @@ void main(int argc, char ** argv)
           <command>switch</command> statement on the tag, we can perform
           different operations on each type of entry in the header.
 
-          <figure id="sc-rpm-rpmlib-example1-listing9">
-            <title>First Example Listing (9 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     }
 
@@ -3255,17 +3027,14 @@ void main(int argc, char ** argv)
 
 }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           This is the housecleaning section of the program.  First we free the
           iterator that we've been using, and finally the header itself.
           Running this program on a package gives us the following output:
 
-          <figure id="sc-rpm-rpmlib-example1-output">
-            <title>First Example Output</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>./dump amanda-client-2.3.0-2.i386.rpm</userinput>
 <computeroutput>
 There is a postinstall script for amanda-client
@@ -3284,8 +3053,7 @@ The Summary: Client-side Amanda package
 There are 11 files in this package
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
 
@@ -3299,9 +3067,7 @@ There are 11 files in this package
           database records, looking for a specific package.  That package's
           header is then dumped in its entirety.
 
-          <figure id="sc-rpm-rpmlib-example2-listing">
-            <title>Second Example Listing (1 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;errno.h&gt;
 #include &lt;fcntl.h&gt;
@@ -3312,16 +3078,13 @@ There are 11 files in this package
 
 #include &lt;rpm/rpmlib.h&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As before, this is the normal way of including all of rpmlib's
           definitions.
 
-          <figure id="sc-rpm-rpmlib-example2-listing2">
-            <title>Second Example Listing (2 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 void main(int argc, char ** argv)
 {
@@ -3333,17 +3096,14 @@ void main(int argc, char ** argv)
     char * name;
     rpmdb db;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here are the data declarations.  Note the declaration of
           <parameter>db</parameter>: this is how we will be accessing the RPM
           database.
 
-          <figure id="sc-rpm-rpmlib-example2-listing3">
-            <title>Second Example Listing (3 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     printf("The database path is: %s\n",
         rpmGetVar(RPMVAR_DBPATH) ? rpmGetVar(RPM_DBPATH) : "(none)");
@@ -3353,8 +3113,7 @@ void main(int argc, char ** argv)
     printf("The database path is: %s\n",
         rpmGetVar(RPMVAR_DBPATH) ? rpmGetVar(RPM_DBPATH) : "(none)");
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Before opening the RPM database, it's necessary to know where the
@@ -3369,37 +3128,29 @@ void main(int argc, char ** argv)
           core dumps if no database path has been set, and besides, it's more
           user-friendly.
 
-          <figure id="sc-rpm-rpmlib-example2-listing4">
-            <title>Second Example Listing (4 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     if (rpmdbOpen("", &amp;db, O_RDONLY, 0644) != 0) {
         fprintf(stderr, "cannot open /var/lib/rpm/packages.rpm\n");
         exit(1);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we're opening the RPM database, and doing some cursory error
           checking to make sure we should continue.
 
-          <figure id="sc-rpm-rpmlib-example2-listing5">
-            <title>Second Example Listing (5 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     offset = rpmdbFirstRecNum(db);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           We get the offset of the first database record&hellip;
 
-          <figure id="sc-rpm-rpmlib-example2-listing6">
-            <title>Second Example Listing (6 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     while (offset) {
 
@@ -3409,8 +3160,7 @@ void main(int argc, char ** argv)
         exit(1);
                 }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we start a <command>while</command> loop based on the record
@@ -3418,48 +3168,39 @@ void main(int argc, char ** argv)
           still an available record), we get the record.  If there's a problem
           getting the record, we exit.
 
-          <figure id="sc-rpm-rpmlib-example2-listing7">
-            <title>Second Example Listing (7 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
             headerGetEntry(h, RPMTAG_NAME, &amp;type, (void **) &amp;name, &amp;count);
             if (strcmp(name, argv[1]) == 0)
               headerDump(h, stdout, 1);
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Next, we get the package name entry from the record, and compare it
           with the name of the package we're interested in.  If it matches, we
           dump the contents of the entire record.
 
-          <figure id="sc-rpm-rpmlib-example2-listing8">
-            <title>Second Example Listing (8 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
         headerFree(h);
     
         offset = rpmdbNextRecNum(db, offset);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           At the end of the loop, we free the record, and get the offset to the
           next record.
 
-          <figure id="sc-rpm-rpmlib-example2-listing9">
-            <title>Second Example Listing (9 of 9)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 
     rpmdbClose(db);
 }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           At the end, we close the database, and exit.
@@ -3470,9 +3211,7 @@ void main(int argc, char ** argv)
           <filename>/var/lib/rpm</filename> after the <filename>rpmrc</filename>
           files are read.
 
-          <figure id="sc-rpm-rpmlib-example2-output">
-            <title>Second Example Output</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>./showdb amanda-client</userinput>
 <computeroutput>
 The database path is: (null)
@@ -3510,8 +3249,7 @@ Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As can be seen, everything that you could possibly want to know about
@@ -3526,9 +3264,7 @@ Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
           This example is similar in function to the previous one, except that
           it uses rpmlib's search functions to find the desired package record:
 
-          <figure id="sc-rpm-rpmlib-example3-listing">
-            <title>Third Example Listing (1 of 5)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 #include &lt;errno.h&gt;
 #include &lt;fcntl.h&gt;
@@ -3539,15 +3275,12 @@ Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
 
 #include &lt;rpm/rpmlib.h&gt;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here we include rpmlib's definitions.
 
-          <figure id="sc-rpm-rpmlib-example3-listing2">
-            <title>Third Example Listing (2 of 5)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 void main(int argc, char ** argv)
 {
@@ -3556,15 +3289,12 @@ void main(int argc, char ** argv)
     rpmdb db;
     dbiIndexSet matches;
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Here are the storage declarations.
 
-          <figure id="sc-rpm-rpmlib-example3-listing3">
-            <title>Third Example Listing (3 of 5)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     if (argc != 2) {
         fprintf(stderr, "showdb2 &lt;search term&gt;\n");
@@ -3578,16 +3308,13 @@ void main(int argc, char ** argv)
         exit(1);
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this section, we do some argument processing, processing the
           <filename>rpmrc</filename> files, and open the RPM database.
 
-          <figure id="sc-rpm-rpmlib-example3-listing4">
-            <title>Third Example Listing (4 of 5)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     stat = rpmdbFindPackage(db, argv[1], &amp;matches);
     printf("Status is: %d\n", stat);
@@ -3601,8 +3328,7 @@ void main(int argc, char ** argv)
       }
     }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In this section we use <function>rpmdbFindPackage()</function> to
@@ -3618,24 +3344,19 @@ void main(int argc, char ** argv)
           Once we're done with the record, we free it, as well as the list of
           matching records.
 
-          <figure id="sc-rpm-rpmlib-example3-listing5">
-            <title>Third Example Listing (5 of 5)</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
     rpmdbClose(db);
 }
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The last thing we do before exiting is to close the database.  Here's
           some sample output from the program.  Note the successful status, and
           the number of matches printed before the dump:
 
-          <figure id="sc-rpm-rpmlib-example3-output">
-            <title>Third Example Output</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>./showdb2 rpm</userinput>
 <computeroutput>
 Status is: 0
@@ -3665,8 +3386,7 @@ Entry      : 036 (1064)RPMVERSION  STRING_TYPE        0x00000b62 00000001
        Data: 000 2.2.9
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
       </sect2>
     </sect1>

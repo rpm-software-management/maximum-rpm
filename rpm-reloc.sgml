@@ -56,9 +56,7 @@
               Frowning, the sysadmin fires off a quick <command>df</command>
               command:
 
-              <figure id="sc-rpm-reloc-why-example">
-                <title>A Typical <command>df</command> Command</title>
-                <screen width="60">
+              <screen width="60">
 <prompt># </prompt><userinput>df</userinput>
 <computeroutput>
 Filesystem         1024-blocks  Used Available Capacity Mounted on
@@ -66,8 +64,7 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
 /dev/sda6             991995  365527   575218     39%   /usr
 </computeroutput>
 <prompt># </prompt>
-                </screen>
-              </figure>
+              </screen>
             </para>
             <para>
               Bottom line: There's no way 150MB of new software is going to fit
@@ -123,14 +120,11 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
         to step through an example.  Here's a sample <command>prefix</command>
         tag:
 
-        <figure id="sc-rpm-reloc-prefix-example">
-          <title>The <command>prefix</command> Tag</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 Prefix: /opt
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         In this example, the prefix path is defined as
@@ -139,14 +133,11 @@ Prefix: /opt
         the spec file contains the following line in its
         <command>%files</command> list:
 
-        <figure id="sc-rpm-reloc-prefix-setup">
-          <title>A File in the <command>%files</command> List</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 /opt/bin/baz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         If the package is installed without any relocation, this file will be
@@ -182,40 +173,31 @@ Prefix: /opt
         <filename>/usr/local/opt</filename>.  Following the steps above, we
         first remove the original prefix from the file's path:
 
-        <figure id="sc-rpm-reloc-prefix-setup-before">
-          <title>The <command>%files</command> List: Before</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 /opt/bin/baz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         becomes:
 
-        <figure id="sc-rpm-reloc-prefix-setup-after">
-          <title>The <command>%files</command> List: After</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 /bin/baz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
 
       <para>
         Next, we add the user-specified prefix to the front of the remaining
         part of the filename:
 
-        <figure id="sc-rpm-reloc-prefix-payoff">
-          <title>How the <command>%prefix</command> Tag Works</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 /usr/local/opt + /bin/baz = /usr/local/opt/bin/baz
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
 
       <para>
@@ -277,12 +259,7 @@ Prefix: /opt
           must start with the relocation prefix.  If this isn't done, the build
           will fail:
 
-          <figure id="sc-rpm-reloc-failure-example">
-            <title>
-              Package Build Failing Due to Improper Path in
-            <command>%files</command> List
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
@@ -296,8 +273,7 @@ File not found: /usr/doc/cdplayer-1.0-1
 Build failed.
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           In our example, the build proceeded normally until the time came to
@@ -461,9 +437,7 @@ Build failed.
         <filename>cdplayer</filename> application.  Let's start by reviewing the
         spec file for possible problems:
 
-        <figure id="sc-rpm-reloc-spec-review">
-          <title>Checking a Spec File for Relocatability</title>
-          <screen width="60">
+        <screen width="60">
 <computeroutput>
 #
 # Example spec file for cdplayer app...
@@ -478,8 +452,7 @@ Name: cdplayer
 %doc /usr/local/man/man1/cdp.1
 %config /etc/cdp-config
 </computeroutput>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         Everything looks all right, except for the <command>%files</command>
@@ -496,11 +469,7 @@ Name: cdplayer
         to <filename>/usr/local</filename>.  After these changes are made, let's
         try a build:
 
-        <figure id="sc-rpm-reloc-build-attempt">
-          <title>
-            Attempting a First Build Using the <command>%prefix</command> Tag
-          </title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
@@ -519,8 +488,7 @@ File not found: /usr/doc/cdplayer-1.0-1
 Build failed.
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The build proceeded normally up to the point of actually creating the
@@ -542,9 +510,7 @@ Build failed.
         Let's temporarily remove that line from the <command>%files</command>
         list and try again:
 
-        <figure id="sc-rpm-reloc-build-attempt2">
-          <title>A Second Build Attempt</title>
-          <screen width="60">
+        <screen width="60">
 <prompt># </prompt><userinput>rpm -ba cdplayer-1.0.spec</userinput>
 <computeroutput>
 * Package: cdplayer
@@ -580,8 +546,7 @@ Generating signature: 0
 Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 </computeroutput>
 <prompt># </prompt>
-          </screen>
-        </figure>
+        </screen>
       </para>
       <para>
         The build completed normally.  Note how the files to be placed in the
@@ -698,19 +663,13 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           properly.  We can do this by using the
           <command>--queryformat</command> option to RPM's query mode:
 
-          <figure id="sc-rpm-reloc-queryformat-test">
-            <title>
-              Using the <command>--queryformat</command> Option to Check
-              for a Default Prefix
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -qp --queryformat '%{DEFAULTPREFIX}\n' cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 /usr/local
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           The <command>DEFAULTPREFIX</command> tag directs RPM to display the
@@ -725,27 +684,19 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           different locations.  First, let's try a regular install with no
           prefix specified:
 
-          <figure id="sc-rpm-reloc-install-no-prefix">
-            <title>
-              Installing Our Package Without the <command>--prefix</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Uvh cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 cdplayer    ##################################################
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           That seemed to work well enough.  Let's see if the files went where we
           intended:
 
-          <figure id="sc-rpm-reloc-no-prefix-check">
-            <title>Checking the Results of Our "No Prefix" Install</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>ls -al /usr/local/bin</userinput>
 <computeroutput>
 total 558
@@ -758,27 +709,20 @@ total 9
 &hellip;
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Looks good.  Let's erase the package and reinstall it with a different
           prefix:
 
-          <figure id="sc-rpm-reloc-install-with-prefix">
-            <title>
-              Reinstalling the Package Using the <command>--prefix</command>
-              Option
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e cdplayer</userinput>
 <prompt># </prompt><userinput>rpm -Uvh --prefix /usr/foonly/blather cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 cdplayer    ##################################################
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           (We should mention that directories <filename>foonly</filename> and
@@ -791,27 +735,19 @@ cdplayer    ##################################################
           <command>INSTALLPREFIX</command> and using it displays the prefix
           under which a package was installed.  Let's give it a try:
 
-          <figure id="sc-rpm-reloc-queryformat-installprefix">
-            <title>
-              Using the <command>--queryformat</command> Option to Display the
-              Prefix a Package Was Installed Under
-            </title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{INSTALLPREFIX}\n' cdplayer</userinput>
 <computeroutput>
 /usr/foonly/blather
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As we can see, it displays the prefix we entered on the command line.
           Let's see if the files were installed as we directed:
 
-          <figure id="sc-rpm-reloc-with-prefix-check">
-            <title>Verifying That the Package Was Relocated</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/foonly/blather/</userinput>
 <prompt># </prompt><userinput>ls -al</userinput>
 <computeroutput>
@@ -820,16 +756,13 @@ drwxr-xr-x   2 root     root         1024 Oct  7 13:45 bin/
 drwxr-xr-x   3 root     root         1024 Oct  7 13:45 man/
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           So far, so good --- the proper directories are there.  Let's look at
           the <command>man</command> page first:
 
-          <figure id="sc-rpm-reloc-with-prefix-chec2">
-            <title>Verifying File Locations: Part I</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/foonly/blather/man/man1/</userinput>
 <prompt># </prompt><userinput>ls -al</userinput>
 <computeroutput>
@@ -837,15 +770,12 @@ total 5
 -rwxr-xr-x   1 root     root         4550 Oct  7 13:23 cdp.1*
 </computeroutput>
 <prompt>#</prompt>
-</screen>
-</figure>
+          </screen>
         </para>
         <para>
           That looks ok.  Now on to the files in <filename>bin</filename>:
 
-          <figure id="sc-rpm-reloc-with-prefix-check3">
-            <title>Verifying File Locations: Part II</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>cd /usr/foonly/blather/bin</userinput>
 <prompt># </prompt><userinput>ls -al</userinput>
 <computeroutput>
@@ -854,24 +784,20 @@ total 41
 lrwxrwxrwx   1 root     root           18 Oct  7 13:45 cdplay -&gt; /usr/local/bin/cdp
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Uh-oh.  That <filename>cdplay</filename> symlink isn't right.  What
           happened?  If we look at <filename>cdplayer</filename>'s makefile, we
           see the answer:
 
-          <figure id="sc-rpm-reloc-bad-symlink">
-            <title>A Symbolic Link Causes Trouble</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 install: cdp cdp.1.Z
 &hellip;
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Ah, when the software is installed during RPM's build process, the
@@ -885,26 +811,20 @@ ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
           Fortunately, this problem isn't that difficult to fix.  All we need to
           do is change the line in the makefile that creates the symlink from:
 
-          <figure id="sc-rpm-reloc-change-from">
-            <title>A Non-Relocatable Symlink</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           To:
 
-          <figure id="sc-rpm-reloc-change-to">
-            <title>A Relocatable Symlink</title>
-            <screen width="60">
+          <screen width="60">
 <computeroutput>
 ln -s ./cdp /usr/local/bin/cdplay
 </computeroutput>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Now <filename>cdplay</filename> will always point to
@@ -915,9 +835,7 @@ ln -s ./cdp /usr/local/bin/cdplay
           After rebuilding the package, let's see if our modifications have the
           desired effect.  First, a normal install with the default prefix:
 
-<figure id="sc-rpm-reloc-fixed-no-prefix-check">
-            <title>Installing the Fixed Package With No Prefix</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -Uvh cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
 cdplayer    ##################################################
@@ -928,16 +846,13 @@ cdplayer    ##################################################
 lrwxrwxrwx   1 root     root           18 Oct  8 22:32 cdplay -&gt; ./cdp*
 </computeroutput>
 <prompt># </prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           Next, we'll try a second install using the <command>--prefix</command>
           option (after we first delete the original package):
 
-          <figure id="sc-rpm-reloc-fixed-with-prefix-check">
-            <title>Installing the Fixed Package With a Prefix</title>
-            <screen width="60">
+          <screen width="60">
 <prompt># </prompt><userinput>rpm -e cdplayer</userinput>
 <prompt># </prompt><userinput>rpm -Uvh --prefix /a/dumb/prefix cdplayer-1.0-1.i386.rpm</userinput>
 <computeroutput>
@@ -949,8 +864,7 @@ cdplayer    ##################################################
 lrwxrwxrwx   1 root     root           30 Oct  8 22:34 cdplay -&gt; ./cdp*
 </computeroutput>
 <prompt>#</prompt>
-            </screen>
-          </figure>
+          </screen>
         </para>
         <para>
           As you can see, the trickiest part about building relocatable packages
