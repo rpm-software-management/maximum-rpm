@@ -1,78 +1,85 @@
-<chapter id="ch-rpm-resources">
-<title>RPM-related Resources</title>
+<appendix id="ch-rpm-resources">
+  <title>RPM-related Resources</title>
 
-<indexterm>
-<primary>RPM!resources related to</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+  <indexterm>
+    <primary>RPM!resources related to</primary>
+    <secondary></secondary>
+  </indexterm>
 
-There are a number of resources available to help you with RPM, over and
-above the RPM <tt?>man</tt?> page, and this book.  Here are some pointers to
-them.
+  <para>
+    There are a number of resources available to help you with RPM, over and
+    above the RPM <command>man</command> page, and this book.  Here are some
+    pointers to them.
+  </para>
 
-<sect1 id="s1-rpm-resources-">
-<title>Where to Get RPM</title>
-<indexterm>
-<primary>RPM!obtaining</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+  <sect1 id="s1-rpm-resources-where-to-get">
+    <title>Where to Get RPM</title>
+    <indexterm>
+      <primary>RPM!obtaining</primary>
+      <secondary></secondary>
+    </indexterm>
 
-Perhaps before asking, Where can I get RPM? it might be better to see if
-RPM is already installed on your system.  If you have Red Hat <!-- *** RED HAT *** -->Linux on your
-system, it's there already.  But be sure to check on other systems -- 
-people are porting RPM to different systems every day, and it just might be
-there waiting for you.
+    <para>
+      Perhaps before asking, Where can I get RPM? it might be better to see if
+      RPM is already installed on your system.  If you have &RHL; on your
+      system, it's there already.  But be sure to check on other systems ---
+      people are porting RPM to different systems every day, and it just might
+      be there waiting for you.
+    </para>
+    <para>
+      Here's a quick way to see if RPM is installed on your system:
 
-Here's a quick way to see if RPM is installed on your system:
-
-<figure id="sc-rpm-resources-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-% <userinput>rpm --version</userinput>
+      <figure id="sc-rpm-resources-install-check">
+        <title>An Easy Way to See If RPM Is Installed</title>
+        <screen width="60">
+<prompt>% </prompt><userinput>rpm --version</userinput>
+<computeroutput>
 RPM version 2.3
-%
-</screen>
-</figure>
-If this command doesn't work, it might be that your path doesn't include
-the directory where RPM resides.  Check the usual "binary" directories
-before declaring RPM a no-show!
+</computeroutput>
+<prompt>%</prompt>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      If this command doesn't work, it might be that your path doesn't include
+      the directory where RPM resides.  Check the usual "binary" directories
+      before declaring RPM a no-show!
+    </para>
 
-<sect2 id="s2-rpm-resources-">
-<title>FTP Sites</title>
-<indexterm>
-<primary>RPM!obtaining!FTP sites carrying</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+    <sect2 id="s2-rpm-resources-ftp-sites">
+      <title>FTP Sites</title>
+      <indexterm>
+        <primary>RPM!obtaining!FTP sites carrying</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-If you can't find RPM on your system, you'll have to grab a copy by FTP.
-RPM can be found practically anywhere Red Hat <!-- *** RED HAT *** -->Linux is available.  While
-the most obvious site, <tt?>ftp.redhat.com</tt?>, is certainly an option, it
-might not be your best choice.  For one, it can be <emphasis>very</emphasis> busy.  For
-another, unless your link to the Internet is near Red Hat's sprawling
-development campus in Durham, North Carolina, there's probably an FTP site
-that is closer to you.
+      <para>
+        If you can't find RPM on your system, you'll have to grab a copy by FTP.
+        RPM can be found practically anywhere &RHL; is available.  While the
+        most obvious site, <filename>ftp.redhat.com</filename>, is certainly an
+        option, it might not be your best choice.  For one, it can be
+        <emphasis>very</emphasis> busy.  For another, unless your link to the
+        Internet is near Red Hat's sprawling development campus in Durham, North
+        Carolina, there's probably an FTP site that is closer to you.
+      </para>
+      <para>
+        Here is a list of sites that mirror &RHI;'s main FTP site.  Be aware
+        that this list changes frequently, so don't be surprised if a particular
+        site no longer mirrors Red Hat, or has moved it from the paths listed
+        below:
+        <footnote>
+          <para>
+            An up-to-date copy of the list of mirror sites is always available
+            on <filename>ftp.redhat.com</filename>, in the file
+            <filename>MIRRORS</filename>.
+          </para>
+        </footnote>
 
-Here is a list of sites that mirror Red Hat <!-- *** RED HAT *** -->Software's main FTP site.  Be
-aware that this list changes frequently, so don't be surprised if a
-particular site no longer mirrors Red Hat, or has moved it from the
-paths listed below:
-<footnote>
-<para>
-An up-to-date copy of the list of
-mirror sites is always available on <tt?>ftp.redhat.com</tt?>, in the file
-<tt?>MIRRORS</tt?>.
-</para>
-</footnote>
-
-<figure id="sc-rpm-resources-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
+        <figure id="sc-rpm-resources-ftp-sites">
+          <title>FTP Sites Mirroring RPM Sources</title>
+          <screen width="60">
+<computeroutput>
 FTP Site                Directory
 ========                =========
 sunsite.doc.ic.ac.uk    /packages/linux/redhat
@@ -129,35 +136,32 @@ ftp.rge.com             /pub/systems/linux/redhat
 linuxwww.db.erau.edu    /pub/linux/distrib/redhat
 ftp.eit.com             /pub/mirrors/redhat
 ftp.real-time.com       /pub/redhat
-</screen>
-</figure>
-<indexterm>
-<primary>RPM!obtaining!FTP sites carrying|)</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+</computeroutput>
+          </screen>
+        </figure>
+      </para>
+    </sect2>
 
-</sect2>
+    <sect2 id="s2-rpm-resources-what-do-i-need">
+      <title>What Do I Need?</title>
+      <indexterm>
+        <primary>RPM!obtaining!files to download</primary>
+        <secondary></secondary>
+        <tertiary></tertiary>
+      </indexterm>
 
-<sect2 id="s2-rpm-resources-">
-<title>What Do I Need?</title>
-<indexterm>
-<primary>RPM!obtaining!files to download</primary>
-<secondary></secondary>
-<tertiary></tertiary>
-<see></see>
-</indexterm>
+      <para>
+        Once you find a nearby site with RPM, and have found the directory where
+        it's kept, you'll notice a variety of files, all starting with
+        "<filename>rpm</filename>".  What are they?  Which ones do you need?
+        Here's a representative list, along with the ways in which each file
+        would be used:
 
-Once you find a nearby site with RPM, and have found the directory where
-it's kept, you'll notice a variety of files, all starting with
-"<tt?>rpm</tt?>".  What are they?  Which ones do you need?  Here's a
-representative list, along with the ways in which each file would be used:
-
-<figure id="sc-rpm-resources-">
-<title>*** Enter New Title Here ***</title>
-<screen width="60">
-ftp&gt; <userinput>ls</userinput>
+        <figure id="sc-rpm-resources-directory-listing">
+          <title>A Typical RPM Directory Listing</title>
+          <screen width="60">
+<prompt>ftp&gt; </prompt><userinput>ls</userinput>
+<computeroutput>
 200 PORT command successful.
 150 Opening ASCII mode data connection for /bin/ls.
 total 2689
@@ -179,16 +183,20 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
 -rw-r--r--  1 root  97   54470 Jul 18 06:05 rpm-devel-2.2.2-1.sparc.rpm
 -rw-r--r--  1 root  97   35504 May  1 04:28 rpmbuild.ps.gz
 226 Transfer complete.
-ftp&gt;
-</screen>
-</figure>
-Although the version numbers may change, the types of files kept in this
-directory will not.  The files <tt?>RPM-HOWTO</tt?>, <tt?>paper.ps.gz</tt?>,
-and <tt?>rpmbuild.ps.gz</tt?> contain a variety of information concerning
-RPM.  As such they are valuable sources of supplemental information.  The
-remaining files contain RPM, packaged for various architectures, and in
-source form.  We'll look at them, grouped according to their contents.
-Here's the first group of files:
+</computeroutput>
+<prompt>ftp&gt;</prompt>
+          </screen>
+        </figure>
+      </para>
+      <para>
+        Although the version numbers may change, the types of files kept in this
+        directory will not.  The files <filename>RPM-HOWTO</filename>,
+        <filename>paper.ps.gz</filename>, and
+        <filename>rpmbuild.ps.gz</filename> contain a variety of information
+        concerning RPM.  As such they are valuable sources of supplemental
+        information.  The remaining files contain RPM, packaged for various
+        architectures, and in source form.  We'll look at them, grouped
+        according to their contents.  Here's the first group of files:
 
 <figure id="sc-rpm-resources-">
 <title>*** Enter New Title Here ***</title>
@@ -208,7 +216,7 @@ good.
 <para>
 If your goal is to install RPM on one of these systems, it
 might be a good idea to copy the appropriate binary package.  That way,
-once you have RPM running, you can reinstall it with the <tt?>--force</tt?>
+once you have RPM running, you can reinstall it with the <command>--force</command>
 option to ensure that RPM is properly installed and configured.
 </para>
 </footnote>
@@ -235,7 +243,7 @@ else there is here:
 </screen>
 </figure>
 The files above are binary package files that contain the
-<tt?>rpm-devel</tt?> subpackage.  The <tt?>rpm-devel</tt?> package contains
+<filename>rpm-devel</filename> subpackage.  The <filename>rpm-devel</filename> package contains
 header files and the RPM library, and is used for developing programs that
 can perform RPM-related functions.  These files cannot be used to get RPM
 running.  That leaves two files left:
@@ -247,10 +255,10 @@ running.  That leaves two files left:
 -rw-rw-r--  1 root  97  356943 Jul 18 06:05 rpm-2.2.2.tar.gz
 </screen>
 </figure>
-The first file is a gzipped <tt?>cpio</tt?> archive of the files comprising
-RPM.  After uncompressing the file, <tt?>cpio</tt?> can be used to extract
+The first file is a gzipped <command>cpio</command> archive of the files comprising
+RPM.  After uncompressing the file, <command>cpio</command> can be used to extract
 the files and place them on your system.  Note, however, that there is a
-<tt?>cpio</tt?> archive for the i386 architecture only.  To extract the
+<command>cpio</command> archive for the i386 architecture only.  To extract the
 files, issue the following command:
 
 <figure id="sc-rpm-resources-">
@@ -260,10 +268,10 @@ files, issue the following command:
 #
 </screen>
 </figure>
-(When actually issuing the command, <tt?><emphasis>file.cpio.gz</tt?></emphasis> should be
-replaced with the actual name of the <tt?>cpio</tt?> archive.)
+(When actually issuing the command, <filename><emphasis>file.cpio.gz</filename></emphasis> should be
+replaced with the actual name of the <command>cpio</command> archive.)
 
-Note that the archive should be extracted using GNU <tt?>cpio</tt?> version
+Note that the archive should be extracted using GNU <command>cpio</command> version
 2.4.1 or greater.  It may also be necessary to issue the following command
 prior to using RPM:
 
@@ -274,7 +282,7 @@ prior to using RPM:
 #
 </screen>
 </figure>
-The last file, <tt?>rpm-2.2.2.tar.gz</tt?>, contains the sources for RPM.
+The last file, <filename>rpm-2.2.2.tar.gz</filename>, contains the sources for RPM.
 Using it, you can build RPM from scratch.  This is the most involved
 option, but it is the only choice for people interested in porting RPM to a
 new architecture.  See chapter <xref linkend="rpm-miscellania"> for an example of
@@ -313,9 +321,9 @@ to connect with other that use RPM is to try one of the following mailing
 lists.
 
 <sect2 id="s2-rpm-resources-">
-<title>The <tt?>rpm-list</tt?> Mailing List</title>
+<title>The <filename>rpm-list</filename> Mailing List</title>
 <indexterm>
-<primary>RPM!mailing list!<tt?>rpm-list</tt?></primary>
+<primary>RPM!mailing list!<filename>rpm-list</filename></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
@@ -330,7 +338,7 @@ order to subscribe to the list, it's necessary to send a mail message to:
 rpm-list-request@redhat.com
 </screen>
 </figure>
-On the message's subject line, place the word <tt?>subscribe</tt?>.  After a
+On the message's subject line, place the word <command>subscribe</command>.  After a
 short delay, you should receive an automated response with general
 information about the mailing list.
 
@@ -346,28 +354,28 @@ As with other on-line forums, it's advisable to "lurk" for a while before
 sending anything to the list.  That way, you'll be able to see what types
 of questions are acceptable for the list.  Let the list's name be your
 guide; if the message you want to send doesn't have anything to do with
-RPM, you shouldn't send it to <tt?>rpm-list</tt?>!
+RPM, you shouldn't send it to <filename>rpm-list</filename>!
 
-In general, the flavor of <tt?>rpm-list</tt?> is a bit biased towards RPM's
+In general, the flavor of <filename>rpm-list</filename> is a bit biased towards RPM's
 development, building packages, and issues surrounding the porting of RPM
 to other systems.  If your question is more along the lines of, How do I
 use RPM to install new software? consider reviewing the first half of this
-book and lurking on <tt?>rpm-list</tt?> a while first.
+book and lurking on <filename>rpm-list</filename> a while first.
 
 </sect2>
 
 <sect2 id="s2-rpm-resources-">
-<title>The <tt?>redhat-list</tt?> Mailing List</title>
+<title>The <filename>redhat-list</filename> Mailing List</title>
 <indexterm>
-<primary>RPM!mailing list!<tt?>redhat-list</tt?></primary>
+<primary>RPM!mailing list!<filename>redhat-list</filename></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-The <tt?>redhat-list</tt?> mailing list is meant to serve as a forum for
+The <filename>redhat-list</filename> mailing list is meant to serve as a forum for
 users of Red Hat <!-- *** RED HAT *** -->Software's Linux operating system.  If your questions
-concerns the use of RPM on Red Hat <!-- *** RED HAT *** -->Linux, then the <tt?>redhat-list</tt?> is
+concerns the use of RPM on Red Hat <!-- *** RED HAT *** -->Linux, then the <filename>redhat-list</filename> is
 a good place to start.  To subscribe, send a message to:
 
 <figure id="sc-rpm-resources-">
@@ -376,9 +384,9 @@ a good place to start.  To subscribe, send a message to:
 redhat-list-request@redhat.com
 </screen>
 </figure>
-On the message's subject line, place the word <tt?>subscribe</tt?>.  After a
+On the message's subject line, place the word <command>subscribe</command>.  After a
 short delay, you should receive an automated response with general
-information about the mailing list.  As with <tt?>rpm-list</tt?>, it's best
+information about the mailing list.  As with <filename>rpm-list</filename>, it's best
 to lurk for a while before posting to the list
 
 To send messages to the list, address them to:
@@ -392,24 +400,24 @@ redhat-list@redhat.com
 </sect2>
 
 <sect2 id="s2-rpm-resources-">
-<title>The <tt?>redhat-digest</tt?> Mailing List</title>
+<title>The <filename>redhat-digest</filename> Mailing List</title>
 <indexterm>
-<primary>RPM!mailing list!<tt?>redhat-digest</tt?></primary>
+<primary>RPM!mailing list!<filename>redhat-digest</filename></primary>
 <secondary></secondary>
 <tertiary></tertiary>
 <see></see>
 </indexterm>
 
-Some people might find the number of messages on <tt?>redhat-list</tt?> more
+Some people might find the number of messages on <filename>redhat-list</filename> more
 than they can handle.  However, there is a digest version of the list
 available.  Each digest consists of one or more messages sent to
-<tt?>redhat-list</tt?>.  The digest is sent out when the collected messages
+<filename>redhat-list</filename>.  The digest is sent out when the collected messages
 reach a certain size.  Therefore, a digest might have one very long
 message, or twenty smaller ones.  In either case, you'll have the collected
 knowledge of the Red Hat <!-- *** RED HAT *** -->Software development team and their many customers
 delivered in one message.
 
-To subscribe to <tt?>redhat-digest</tt?>, send a message to:
+To subscribe to <filename>redhat-digest</filename>, send a message to:
 
 <figure id="sc-rpm-resources-">
 <title>*** Enter New Title Here ***</title>
@@ -417,7 +425,7 @@ To subscribe to <tt?>redhat-digest</tt?>, send a message to:
 redhat-digest-request@redhat.com
 </screen>
 </figure>
-On the message's subject line, place the word <tt?>subscribe</tt?>.  After a
+On the message's subject line, place the word <command>subscribe</command>.  After a
 short delay, you should receive an automated response with general
 information about the mailing list.
 
@@ -992,5 +1000,5 @@ Public License instead of this License.
 
 </sect1>
 
-</chapter>
+</appendix>
 
