@@ -127,8 +127,8 @@
         Yes!  RPM does this by running <command>ldd</command> on every
         executable program in a package's <command>%files</command> list.  Since
         <command>ldd</command> provides a list of the shared libraries each
-        program requires, both halves of the equation are complete --- that is,
-        the packages that make shared libraries available,
+        program requires, both halves of the equation are complete &mdash; that
+        is, the packages that make shared libraries available,
         <emphasis>and</emphasis> the packages that require those shared
         libraries, are tracked by RPM.  RPM can then take that information into
         account when packages are installed, upgraded, or erased.
@@ -165,7 +165,7 @@
 
         <sect3 id="s3-rpm-depend-find-requires">
           <title>
-            <filename>find-requires</filename> --- Automatically Determine
+            <filename>find-requires</filename> &mdash; Automatically Determine
             Shared Library Requirements
           </title>
           <indexterm>
@@ -210,7 +210,7 @@ done | sort -u | xargs -r -n 1 basename | sort -u
 
         <sect3 id="s3-rpm-depend-find-provides">
           <title>
-            <filename>find-provides</filename> --- Automatically Determine
+            <filename>find-provides</filename> &mdash; Automatically Determine
             Shared Library Sonames
           </title>
           <indexterm>
@@ -308,7 +308,7 @@ libc.so.5
         </para>
 
         <para>
-          OK, that's the first half of the equation --- RPM automatically
+          OK, that's the first half of the equation &mdash; RPM automatically
           detecting a package's shared library requirements.  Now let's look at
           the second half of the equation -- RPM detecting packages that provide
           shared libraries.  Since the <filename>libc</filename> package
@@ -360,7 +360,7 @@ libc.so.5
 
       <sect2 id="s2-rpm-depend-autoreqprov">
         <title>
-          The <command>autoreqprov</command> Tag --- Disable Automatic
+          The <command>autoreqprov</command> Tag &mdash; Disable Automatic
           Dependency Processing
         </title>
         <indexterm>
@@ -520,7 +520,7 @@ requires: bar, baz
             Continuing with our example, let's suppose that the required version
             of package <filename>bar</filename> actually needs to be at least
             2.7, and that the <filename>baz</filename> package must be version
-            2.1 --- no other version will do.  Here's what the
+            2.1 &mdash; no other version will do.  Here's what the
             <command>requires</command> tag line would look like:
 
             <screen width="60">
@@ -686,9 +686,9 @@ Requires: foo &gt;=S 42
           that information.
         </para>
         <para>
-          But wait --- We said earlier that manual dependency requirements are
-          <emphasis>always</emphasis> represented in terms of packages.  If RPM
-          doesn't require the package builder to use the
+          But wait &mdash; We said earlier that manual dependency requirements
+          are <emphasis>always</emphasis> represented in terms of packages.  If
+          RPM doesn't require the package builder to use the
           <command>provides</command> tag to provide the package name, then what
           is the <command>provides</command> tag used for?
         </para>
@@ -710,7 +710,7 @@ Requires: foo &gt;=S 42
           <para>
             In order to work properly, <command>sendmail</command> needs a local
             delivery agent to handle mail delivery.  There are a number of
-            different local delivery agents available ---
+            different local delivery agents available &mdash;
             <command>sendmail</command> will work just fine with any of them.
           </para>
           <para>

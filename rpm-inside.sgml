@@ -14,46 +14,46 @@
       <itemizedlist mark="bullet">
         <listitem>
           <para>
-            Comments --- Human-readable notes ignored by RPM.
+            Comments &mdash; Human&ndash;readable notes ignored by RPM.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            Tags --- Define data.
+            Tags &mdash; Define data.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            Scripts --- Contain commands to be executed at specific times.
+            Scripts &mdash; Contain commands to be executed at specific times.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            Macros --- A method of executing multiple commands easily.
+            Macros &mdash; A method of executing multiple commands easily.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            The <command>%files</command> list --- A list of files to be
+            The <command>%files</command> list &mdash; A list of files to be
             included in the package.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            Directives --- Used in the <command>%files</command> list to direct
-            RPM to handle certain files in a specific way.
+            Directives &mdash; Used in the <command>%files</command> list to
+            direct RPM to handle certain files in a specific way.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            Conditionals --- Permit operating system- or architecture-specific
-            preprocessing of the spec file.
+            Conditionals &mdash; Permit operating system- or
+            architecture-specific preprocessing of the spec file.
           </para>
         </listitem>
       </itemizedlist>
@@ -122,12 +122,12 @@ Vendor: White Socks Software, Inc.
       </para>
       <para>
         In this example, the tag is "<command>Vendor</command>".  Tags are not
-        case-sensitive --- they may be all uppercase, all lowercase, or anything
-        in-between.  The <command>Vendor</command> tag is used to define the
-        name of the organization producing the package.  The data in this
-        example is "<command>White Socks Software, Inc.</command>".  Therefore,
-        RPM will store <command>White Socks Software, Inc.</command> as the
-        vendor of the package.
+        case-sensitive &mdash; they may be all uppercase, all lowercase, or
+        anything in-between.  The <command>Vendor</command> tag is used to
+        define the name of the organization producing the package.  The data in
+        this example is "<command>White Socks Software, Inc.</command>".
+        Therefore, RPM will store <command>White Socks Software, Inc.</command>
+        as the vendor of the package.
       </para>
       <para>
         Note, also, that spacing between the tag, the colon, and the data is
@@ -144,8 +144,8 @@ VENDOR    :    White Socks Software, Inc.
       </para>
       <para>
         The bottom line is that you can make tag lines as neat or as ugly as you
-        like --- RPM won't mind either way.  Note, however, the tag's data may
-        need to be formatted in a particular fashion.  If there are any such
+        like &mdash; RPM won't mind either way.  Note, however, the tag's data
+        may need to be formatted in a particular fashion.  If there are any such
         restrictions, we'll mention them.  Below, we've grouped tags of similar
         functions together for easier reference, starting with the tags that are
         used to create the package name.
@@ -258,8 +258,8 @@ Version: 1.2
           <para>
             The <command>release</command> tag can be thought of as the
             <emphasis>package's</emphasis> version.  The release is
-            traditionally an integer --- for example, when a specific piece of
-            software at a particular version is first packaged, the release
+            traditionally an integer &mdash; for example, when a specific piece
+            of software at a particular version is first packaged, the release
             should be "<command>1</command>".  If it is necessary to repackage
             that software at the same version, the release should be
             incremented.  When a new version of the software becomes available,
@@ -768,10 +768,10 @@ Requires: playmidi =S 4
           </para>
           <para>
             The <command>conflicts</command> tag has the same format as the
-            <command>requires</command> tag --- namely, the tag is followed by a
-            real or virtual package name.  Like <command>requires</command>, the
-            <command>conflicts</command> tag also accepts version and release
-            specifications:
+            <command>requires</command> tag &mdash; namely, the tag is followed
+            by a real or virtual package name.  Like
+            <command>requires</command>, the <command>conflicts</command> tag
+            also accepts version and release specifications:
 
             <screen width="60">
 <computeroutput>
@@ -1726,8 +1726,8 @@ umask 022
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                <envar>RPM_SOURCE_DIR</envar> --- This environment variable gets
-                its value from the rpmrc file entry
+                <envar>RPM_SOURCE_DIR</envar> &mdash; This environment variable
+                gets its value from the rpmrc file entry
                 <command>sourcedir</command>, which in turn can get part of its
                 value from the <command>topdir</command> entry.  It is the path
                 RPM will prepend to the file, specified in the
@@ -1737,17 +1737,18 @@ umask 022
 
             <listitem>
               <para>
-                <envar>RPM_BUILD_DIR</envar> --- This variable is based on the
-                <command>builddir</command> rpmrc file entry, which in turn can
-                get part of its value from the <command>topdir</command> entry.
-                This environment variable translates to the path of RPM's build
-                directory, where most software will be unpacked and built.
+                <envar>RPM_BUILD_DIR</envar> &mdash; This variable is based on
+                the <command>builddir</command> rpmrc file entry, which in turn
+                can get part of its value from the <command>topdir</command>
+                entry.  This environment variable translates to the path of
+                RPM's build directory, where most software will be unpacked and
+                built.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <envar>RPM_DOC_DIR</envar> --- The value of this environment
+                <envar>RPM_DOC_DIR</envar> &mdash; The value of this environment
                 variable is based on the <command>defaultdocdir</command>
                 <filename>rpmrc</filename> file entry.  Files marked with the
                 <command>%doc</command> directive can be installed in a
@@ -1759,8 +1760,8 @@ umask 022
 
             <listitem>
               <para>
-                <envar>RPM_OPT_FLAGS</envar> --- This environment variable gets
-                its value from the <command>optflags</command>
+                <envar>RPM_OPT_FLAGS</envar> &mdash; This environment variable
+                gets its value from the <command>optflags</command>
                 <filename>rpmrc</filename> file entry.  It contains options that
                 can be passed on to the build procedures of the software being
                 packaged.  Normally this means either a configuration script or
@@ -1770,23 +1771,23 @@ umask 022
 
             <listitem>
               <para>
-                <envar>RPM_ARCH</envar> --- As one might infer from the example
-                above, this environment variable contains a string describing
-                the build system's architecture.
+                <envar>RPM_ARCH</envar> &mdash; As one might infer from the
+                example above, this environment variable contains a string
+                describing the build system's architecture.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <envar>RPM_OS</envar> --- This one contains the name of the
+                <envar>RPM_OS</envar> &mdash; This one contains the name of the
                 build system's operating system.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <envar>RPM_BUILD_ROOT</envar> --- This environment variable is
-                used to hold the "build root", into which the newly built
+                <envar>RPM_BUILD_ROOT</envar> &mdash; This environment variable
+                is used to hold the "build root", into which the newly built
                 software will be installed.  If no explicit build root has been
                 specified (either by command line option, spec file tag line, or
                 rpmrc file entry), this variable will be null.
@@ -1795,16 +1796,16 @@ umask 022
 
             <listitem>
               <para>
-                <envar>RPM_PACKAGE_NAME</envar> --- This environment variable
-                gets its value from the <command>name</command> tag line in the
-                package's spec file.  It contains the name of the software being
-                packaged.
+                <envar>RPM_PACKAGE_NAME</envar> &mdash; This environment
+                variable gets its value from the <command>name</command> tag
+                line in the package's spec file.  It contains the name of the
+                software being packaged.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <envar>RPM_PACKAGE_VERSION</envar> --- The
+                <envar>RPM_PACKAGE_VERSION</envar> &mdash; The
                 <command>version</command> tag line is the source of this
                 variable's translation.  Predictably, this environment variable
                 contains the software's version number.
@@ -1813,9 +1814,10 @@ umask 022
 
             <listitem>
               <para>
-                <envar>RPM_PACKAGE_RELEASE</envar> --- This environment variable
-                contains the package's release number.  Its value is obtained
-                from the <command>release</command> tag line in the spec file.
+                <envar>RPM_PACKAGE_RELEASE</envar> &mdash; This environment
+                variable contains the package's release number.  Its value is
+                obtained from the <command>release</command> tag line in the
+                spec file.
               </para>
             </listitem>
           </itemizedlist>
@@ -1910,8 +1912,8 @@ umask 022
             <command>%prep</command> script left off.  Once the
             <command>%prep</command> script has gotten everything ready for the
             build, the <command>%build</command> script is usually somewhat
-            anti-climactic --- normally invoking <command>make</command>, maybe
-            a configuration script, and little else.
+            anti-climactic &mdash; normally invoking <command>make</command>,
+            maybe a configuration script, and little else.
           </para>
           <para>
             Like <command>%prep</command> before it, the
@@ -2222,7 +2224,7 @@ rm -rf $RPM_BUILD_ROOT
 
       <sect2 id="s2-rpm-inside-verifyscript-script">
         <title>
-          Verification-Time Script --- The <command>%verifyscript</command>
+          Verification-Time Script &mdash; The <command>%verifyscript</command>
           Script
         </title>
         <!-- label: inside-verifyscript -->
@@ -2316,9 +2318,9 @@ done
       <para>
         These macros are used exclusively in the <command>%prep</command>
         script; it wouldn't make sense to use them anywhere else.  The use of
-        these macros is not mandatory --- It is certainly possible to write a
-        <command>%prep</command> script without them.  But in the vast majority
-        of cases they make life easier for the package builder.
+        these macros is not mandatory &mdash; It is certainly possible to write
+        a <command>%prep</command> script without them.  But in the vast
+        majority of cases they make life easier for the package builder.
       </para>
 
       <sect2 id="s2-rpm-inside-setup-macro">
@@ -2398,8 +2400,8 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-n-option">
           <title>
-            <command>-n <replaceable>&lt;name&gt;</replaceable></command> --- Set
-            Name of Build Directory
+            <command>-n <replaceable>&lt;name&gt;</replaceable></command>
+            &mdash; Set Name of Build Directory
           </title>
           <!-- label: inside-setup-n -->
           <indexterm>
@@ -2484,8 +2486,8 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-c-option">
           <title>
-            <command>-c</command> -- Create Directory (and change to it) Before
-            Unpacking
+            <command>-c</command> &mdash; Create Directory (and change to it)
+            Before Unpacking
           </title>
           <!-- label: inside-setup-c -->
           <indexterm>
@@ -2536,8 +2538,8 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-d-option">
           <title>
-            <command>-D</command> -- Do Not Delete Directory Before Unpacking
-            Sources
+            <command>-D</command> &mdash; Do Not Delete Directory Before
+            Unpacking Sources
           </title>
           <!-- label: inside-setup-D -->
           <indexterm>
@@ -2576,7 +2578,8 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-t-option">
           <title>
-            <command>-T</command> -- Do Not Perform Default Archive Unpacking
+            <command>-T</command> &mdash; Do Not Perform Default Archive
+            Unpacking
           </title>
           <!-- label: inside-setup-T -->
           <indexterm>
@@ -2609,8 +2612,9 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-b-option">
           <title>
-            <command>-b <replaceable>&lt;n&gt;</replaceable></command> --- Unpack
-            The <emphasis>n</emphasis>th Sources Before Changing Directory
+            <command>-b <replaceable>&lt;n&gt;</replaceable></command> &mdash;
+            Unpack The <emphasis>n</emphasis>th Sources Before Changing
+            Directory
           </title>
           <!-- label: inside-setup-b -->
           <indexterm>
@@ -2701,8 +2705,8 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-a-option">
           <title>
-            <command>-a <replaceable>&lt;n&gt;</replaceable></command> --- Unpack
-            The <emphasis>n</emphasis>th Sources After Changing Directory
+            <command>-a <replaceable>&lt;n&gt;</replaceable></command> &mdash;
+            Unpack The <emphasis>n</emphasis>th Sources After Changing Directory
           </title>
           <!-- label: inside-setup-a -->
           <indexterm>
@@ -3184,9 +3188,9 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 
         <sect3 id="s3-rpm-inside-patch-p-option">
           <title>
-            <command>-p <replaceable>&lt;#&gt;</replaceable></command> -- Strip
-            <command><replaceable>&lt;#&gt;</replaceable></command> leading slashes
-            and directories from patch filenames
+            <command>-p <replaceable>&lt;#&gt;</replaceable></command> &mdash;
+            Strip <command><replaceable>&lt;#&gt;</replaceable></command>
+            leading slashes and directories from patch filenames
           </title>
           <!-- label: inside-patch-p -->
           <indexterm>
@@ -3206,8 +3210,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 
         <sect3 id="s3-rpm-inside-b-option">
           <title>
-            <command>-b <replaceable>&lt;name&gt;</replaceable></command> -- Set the
-            backup file extension to
+            <command>-b <replaceable>&lt;name&gt;</replaceable></command>
+            &mdash; Set the backup file extension to
             <command><replaceable>&lt;name&gt;</replaceable></command>
           </title>
           <!-- label: inside-patch-b -->
@@ -3228,7 +3232,7 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
         </sect3>
 
         <sect3 id="s3-rpm-inside-e-option">
-          <title><command>-E</command> --- Remove Empty Output Files</title>
+          <title><command>-E</command> &mdash; Remove Empty Output Files</title>
           <!-- label: inside-patch-E -->
           <indexterm>
             <primary><command>%patch</command> macro</primary>
@@ -4014,8 +4018,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 
         <sect3 id="s3-rpm-inside-flist-f-option">
           <title>
-            <command>-f <replaceable>&lt;file&gt;</replaceable></command> --- Read
-            the <command>%files</command> List From
+            <command>-f <replaceable>&lt;file&gt;</replaceable></command>
+            &mdash; Read the <command>%files</command> List From
             <command><replaceable>&lt;file&gt;</replaceable></command>
           </title>
           <indexterm>
@@ -4099,9 +4103,10 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 
       <sect2 id="s2-rpm-inside-package-n-option">
         <title>
-          <command>-n <replaceable>&lt;string&gt;</replaceable></command> --- Use
-          <command><replaceable>&lt;string&gt;</replaceable></command> As the Entire
-          Subpackage Name
+          <command>-n <replaceable>&lt;string&gt;</replaceable></command>
+          &mdash; Use
+          <command><replaceable>&lt;string&gt;</replaceable></command> As the
+          Entire Subpackage Name
         </title>
         <!-- label: inside-package-n -->
         <indexterm>

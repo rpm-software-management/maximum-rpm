@@ -247,14 +247,14 @@ CPP=/lib/cpp                    # traditional
           <orderedlist>
             <listitem>
               <para>
-                <filename>config.h</filename> --- contains platform-specific
+                <filename>config.h</filename> &mdash; contains platform-specific
                 configuration information
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <filename>options.h</filename> --- contains site-specific
+                <filename>options.h</filename> &mdash; contains site-specific
                 configuration information
               </para>
             </listitem>
@@ -337,8 +337,8 @@ make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
           As we noted, amanda is constructed so that most of the time changes
           will only be necessary in <filename>tools/munge</filename>, and the
           two files in <filename>config</filename>.  Our situation was no
-          different --- after all was said and done, that was all we needed to
-          hack.
+          different &mdash; after all was said and done, that was all we needed
+          to hack.
         </para>
       </sect2>
 
@@ -779,7 +779,7 @@ the client and server packages!
           requires unique <command>summary</command>,
           <command>%description</command>, and <command>group</command> tags for
           each subpackage, so we've included them.  Of course, it would be a
-          good idea even if RPM <emphasis>didn't</emphasis> require them ---
+          good idea even if RPM <emphasis>didn't</emphasis> require them &mdash;
           we've used the tags to provide client-specific information.
         </para>
 
@@ -891,7 +891,7 @@ make install
             <command>%files</command> list for each package the spec file will
             build.  Since we're planning on a client and a server subpackage,
             we'll need two <command>%files</command> lists.  For the time being,
-            we'll just add the <command>%files</command> lines --- we'll be
+            we'll just add the <command>%files</command> lines &mdash; we'll be
             adding the actual filenames later:
 
             <screen width="60">
@@ -977,8 +977,8 @@ drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
 
         <para>
           After a quick look around, it seems like the sources were unpacked
-          properly.  But wait --- where are our carefully crafted configuration
-          files in <filename>config</filename>?  Why isn't
+          properly.  But wait &mdash; where are our carefully crafted
+          configuration files in <filename>config</filename>?  Why isn't
           <filename>tools/munge</filename> modified?
         </para>
       </sect2>
@@ -2459,22 +2459,22 @@ Source1: amanda-rpm-instructions.tar.gz
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <command>-T</command> --- Do not perform the default archive
-                  unpacking.
+                  <command>-T</command> &mdash; Do not perform the default
+                  archive unpacking.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <command>-D</command> --- Do not delete the directory before
-                  unpacking.
+                  <command>-D</command> &mdash; Do not delete the directory
+                  before unpacking.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <command>-a1</command> --- Unpack the archive specified by the
-                  <command>source1</command> tag after changing directory.
+                  <command>-a1</command> &mdash; Unpack the archive specified by
+                  the <command>source1</command> tag after changing directory.
                 </para>
               </listitem>
             </itemizedlist>

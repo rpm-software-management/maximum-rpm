@@ -98,7 +98,7 @@
 
           <row>
             <entry spanname="span12" align="center">
-              Verify---specific Options
+              Verify&ndash;specific Options
             </entry>
             <entry>
               Page
@@ -217,7 +217,7 @@
     </table>
 
     <sect1 id="s1-rpm-verify-what-it-does">
-      <title><command>rpm -V</command> --- What Does it Do?</title>
+      <title><command>rpm -V</command> &mdash; What Does it Do?</title>
       <!-- label: rpm-V -->
 
       <indexterm>
@@ -590,7 +590,8 @@
     </sect1>
 
     <sect1 id="s1-rpm-verify-output">
-      <title>When Verification Fails - <command>rpm -V</command> Output</title>
+      <title>When Verification Fails &mdash; <command>rpm -V</command>
+      Output</title>
 
       <indexterm>
         <primary><command>rpm -V</command></primary>
@@ -774,12 +775,12 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
         There are several ways to verify packages installed on your system.  If
         you've taken a look at RPM's query command, you'll find that many of
         them are similar.  Let's start with the simplest method of specifying
-        packages --- the package label.
+        packages &mdash; the package label.
       </para>
 
       <sect2 id="s2-rpm-verify-package-label">
         <title>
-          The Package Label --- Verify an Installed Package Against the RPM
+          The Package Label &mdash; Verify an Installed Package Against the RPM
           Database
         </title>
         <!-- label: verify-pkg-name -->
@@ -833,16 +834,17 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
         </para>
 
         <para>
-          In our example, each of these steps was performed without error ---
-          the package verified successfully.  Remember, with <command>rpm
-          -V</command> you'll only see output if a package fails to verify.
+          In our example, each of these steps was performed without error
+          &mdash; the package verified successfully.  Remember, with
+          <command>rpm -V</command> you'll only see output if a package fails to
+          verify.
         </para>
       </sect2>
 
       <sect2 id="s2-rpm-verify-a-option">
         <title>
-          <command>-a</command> --- Verify All Installed Packages Against the
-          RPM Database
+          <command>-a</command> &mdash; Verify All Installed Packages Against
+          the RPM Database
         </title>
         <!-- label: verify-a -->
 
@@ -874,9 +876,9 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
           Don't be too surprised if <command>rpm -Va</command> turns up a
           surprising number of files that failed verification.  RPM's
           verification process is <emphasis>very</emphasis> strict!  In many
-          cases, the changes flagged don't indicate problems --- they are only
-          an indication of your system's configuration being different than what
-          the builders of the installed packages had on
+          cases, the changes flagged don't indicate problems &mdash; they are
+          only an indication of your system's configuration being different than
+          what the builders of the installed packages had on
           <emphasis>their</emphasis> system.  Also, some attributes change
           during normal system operation.  However, it would be wise to check
           into each verification failure, just to make sure.
@@ -885,7 +887,7 @@ S.5....T   /usr/lib/rhs/glint/icon.pyc
 
       <sect2 id="s2-rpm-verify-f-option">
         <title>
-          <command>-f <replaceable>&lt;file&gt;</replaceable></command> ---
+          <command>-f <replaceable>&lt;file&gt;</replaceable></command> &mdash;
           Verify the Package Owning
           <command><replaceable>&lt;file&gt;</replaceable></command> Against the
           RPM Database
@@ -942,8 +944,8 @@ file /etc/blunder is not owned by any package
 
       <sect2 id="s2-rpm-verify-p-option">
         <title>
-          <command>-p <replaceable>&lt;file&gt;</replaceable></command> --- Verify
-          Against a Specific Package File
+          <command>-p <replaceable>&lt;file&gt;</replaceable></command> &mdash;
+          Verify Against a Specific Package File
         </title>
         <!-- label: verify-p -->
 
@@ -963,8 +965,8 @@ file /etc/blunder is not owned by any package
           Well, what if you didn't <emphasis>have</emphasis> an RPM database?
           While it isn't a common occurrence, power failures, hardware problems,
           and inadvertent deletions (along with non-existent backups) can leave
-          your system "sans database".  Then your system hiccups --- what do you
-          do now?
+          your system "sans database".  Then your system hiccups &mdash; what do
+          you do now?
         </para>
 
         <para>
@@ -987,7 +989,7 @@ file /etc/blunder is not owned by any package
 
       <sect2 id="s2-rpm-verify-g-option">
         <title>
-          <command>-g <replaceable>&lt;group&gt;</replaceable></command> ---
+          <command>-g <replaceable>&lt;group&gt;</replaceable></command> &mdash;
           Verify Packages Belonging To
           <command><replaceable>&lt;group&gt;</replaceable></command>
         </title>
@@ -1153,8 +1155,8 @@ D: verifying record number 616728
         </para>
 
         <para>
-          As expected, the output is identical to the prior example --- minus
-          the lines dealing with the verification script, of course.
+          As expected, the output is identical to the prior example &mdash;
+          minus the lines dealing with the verification script, of course.
         </para>
       </sect2>
 
@@ -1212,8 +1214,8 @@ D: dependencies: looking for libtermcap.so.2
       </sect2>
 
       <sect2 id="s2-rpm-verify-v-option">
-        <title><command>-v</command> --- Display Additional Information</title>
-        <!-- label: verify-v -->
+        <title><command>-v</command> &mdash; Display Additional
+        Information</title> <!-- label: verify-v -->
 
         <indexterm>
           <primary><command>-v</command> option</primary>
@@ -1281,8 +1283,8 @@ This is the bother 3.5 verification script
       </sect2>
 
       <sect2 id="s2-rpm-verify-vv-option">
-        <title><command>-vv</command> --- Display Debugging Information</title>
-        <!-- label: verify-vv -->
+        <title><command>-vv</command> &mdash; Display Debugging
+        Information</title> <!-- label: verify-vv -->
 
         <indexterm>
           <primary><command>-vv</command> option</primary>

@@ -10,8 +10,8 @@
     <para>
       Now that we've seen the design philosophy of RPM, let's look at the nuts
       and bolts of RPM's build process.  Building a package is similar to
-      compiling code --- there are inputs, an engine that does the dirty work,
-      and outputs.
+      compiling code &mdash; there are inputs, an engine that does the dirty
+      work, and outputs.
     </para>
 
     <sect1 id="s1-rpm-basics-inputs">
@@ -129,10 +129,10 @@
             you'll use to get the software to build.
           </para>
           <para>
-            If the software builds with no changes required, that's great --- you
-            won't need a patch.  But if you had to make any changes, you'll have
-            to create a set of patches.  To do so, simply clean the source
-            directory of any binaries.  Then, issue a recursive
+            If the software builds with no changes required, that's great
+            &mdash; you won't need a patch.  But if you had to make any changes,
+            you'll have to create a set of patches.  To do so, simply clean the
+            source directory of any binaries.  Then, issue a recursive
             <command>diff</command> command to compare the source tree you used
             for the build, against the original, unmodified source tree.  It's
             as easy as that!
@@ -329,7 +329,7 @@
               the package.  Additionally, a number of macros can be used to
               control file attributes when installed, as well as to denote which
               files are documentation, and which contain configuration
-              information.  The file list is very important --- if it is
+              information.  The file list is very important &mdash; if it is
               missing, no package will be built.
             </para>
           </sect3>

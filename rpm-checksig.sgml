@@ -40,7 +40,7 @@
           </row>
           <row>
             <entry spanname="span12" align="center">
-              Checksig---specific Options
+              Checksig&ndash;specific Options
             </entry>
             <entry>
               Page
@@ -104,8 +104,8 @@
     </table>
 
     <sect1 id="s1-rpm-checksig-what-it-does">
-      <title><command>rpm -K</command> --- What Does it Do?</title>
-      <!-- label: rpm-K -->
+      <title><command>rpm -K</command> &mdash; What Does it Do?</title> <!--
+      label: rpm-K -->
       <indexterm>
         <primary><command>rpm -K</command></primary>
         <secondary>what it does</secondary>
@@ -331,8 +331,8 @@ rpm-2.3-1.i386.rpm: size pgp md5 OK
       </para>
 
       <sect2 id="s2-rpm-checksig-v-option">
-        <title><command>-v</command> --- Display Additional Information</title>
-        <!-- label: checksig-v -->
+        <title><command>-v</command> &mdash; Display Additional
+        Information</title> <!-- label: checksig-v -->
         <indexterm>
           <primary><command>rpm -K</command></primary>
           <secondary>options</secondary>
@@ -474,11 +474,11 @@ rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
         </indexterm>
 
         <para>
-          Eventually it's going to happen --- you go to verify a package, and it
-          fails.  We'll look at an example of a package that fails verification
-          a bit later.  Before we do that, let's <emphasis>make</emphasis> a
-          package that won't verify, to demonstrate how sensitive RPM's
-          verification is.
+          Eventually it's going to happen &mdash; you go to verify a package,
+          and it fails.  We'll look at an example of a package that fails
+          verification a bit later.  Before we do that, let's
+          <emphasis>make</emphasis> a package that won't verify, to demonstrate
+          how sensitive RPM's verification is.
         </para>
         <para>
           First, we made a copy of a signed package,
@@ -569,7 +569,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
           OK</computeroutput> in big capital letters, it's obvious there's a
           problem.  Since the word <computeroutput>size</computeroutput> was
           printed in lowercase, the bogus package's size was OK, which makes
-          sense --- we only changed the value of one bit without adding or
+          sense &mdash; we only changed the value of one bit without adding or
           subtracting anything else.
         </para>
         <para>
@@ -583,7 +583,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
 
       <sect2 id="s2-rpm-checksig-nopgp-option">
         <title>
-          <command>--nopgp</command> --- Do Not Verify Any PGP Signatures
+          <command>--nopgp</command> &mdash; Do Not Verify Any PGP Signatures
         </title>
         <!-- label: checksig- -nopgp -->
         <indexterm>
@@ -602,7 +602,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
           to verify packages?
         </para>
         <para>
-          Certainly --- in fact, we've already done it, in <xref
+          Certainly &mdash; in fact, we've already done it, in <xref
           linkend="s2-rpm-checksig-missing-public-key">.  You lose the ability
           to verify the package's origins, as well as some level of confidence
           in the package's integrity, but the size and MD5 checksums still give
@@ -636,8 +636,8 @@ rpm-2.3-1.i386.rpm: size md5 OK
       </sect2>
 
       <sect2 id="s2-rpm-checksig-vv-option">
-        <title><command>-vv</command> --- Display Debugging Information</title>
-        <!-- label: checksig-vv -->
+        <title><command>-vv</command> &mdash; Display Debugging
+        Information</title> <!-- label: checksig-vv -->
         <indexterm>
           <primary><command>-vv</command> option</primary>
         </indexterm>

@@ -38,36 +38,36 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <filename>/usr/src/redhat/SOURCES</filename> --- Contains the
+              <filename>/usr/src/redhat/SOURCES</filename> &mdash; Contains the
               original sources, patches, and icon files.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <filename>/usr/src/redhat/SPECS</filename> --- Contains the spec
-              files used to control the build process.
+              <filename>/usr/src/redhat/SPECS</filename> &mdash; Contains the
+              spec files used to control the build process.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <filename>/usr/src/redhat/BUILD</filename> --- The directory in
-              which the sources are unpacked, and the software is built.
+              <filename>/usr/src/redhat/BUILD</filename> &mdash; The directory
+              in which the sources are unpacked, and the software is built.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <filename>/usr/src/redhat/RPMS</filename> --- Contains the binary
-              package files created by the build process.
+              <filename>/usr/src/redhat/RPMS</filename> &mdash; Contains the
+              binary package files created by the build process.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <filename>/usr/src/redhat/SRPMS</filename> --- Contains the source
-              package files created by the build process.
+              <filename>/usr/src/redhat/SRPMS</filename> &mdash; Contains the
+              source package files created by the build process.
             </para>
           </listitem>
         </itemizedlist>
@@ -528,8 +528,8 @@ make install
         <para>
           The <command>%files</command> section is different from the others, in
           that it contains a list of the files that are part of the package.
-          Always remember --- if it isn't in the file list, it won't be put in
-          the package!
+          Always remember &mdash; if it isn't in the file list, it won't be put
+          in the package!
 
           <screen width="60">
 <computeroutput>
@@ -987,7 +987,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </screen>
       </para>
       <para>
-        Everything went perfectly --- we now have binary and source package
+        Everything went perfectly &mdash; we now have binary and source package
         files ready to use.  But sometimes things don't go so well.
       </para>
     </sect1>
@@ -1077,9 +1077,9 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         <para>
           The first step is to find a test system.  If you thought of simply
           using the build system, <emphasis>bzzzzt</emphasis>, try again!  Think
-          about it --- in the course of building the package, the build system
-          actually had the application installed on it.  That is how RPM gets
-          the files that are to be packaged: by building the software,
+          about it &mdash; in the course of building the package, the build
+          system actually had the application installed on it.  That is how RPM
+          gets the files that are to be packaged: by building the software,
           installing it, and grabbing copies of the installed files, which are
           found using the <command>%files</command> list.
         </para>
@@ -1093,7 +1093,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </para>
         <para>
           Say, for example, that the software you're packaging installs a bunch
-          of files --- maybe a hundred.  What does this mean?  Well for one
+          of files &mdash; maybe a hundred.  What does this mean?  Well for one
           thing, it means that the package's <command>%files</command> list is
           going to be quite large.  For another thing, the sheer number of files
           makes it likely that you'll miss one or two.  What would happen then?
@@ -1104,9 +1104,9 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           next step in RPM's build process is to collect the files by reading
           the <command>%files</command> list, and to add each file listed to a
           <command>cpio</command> archive.  What happens to the files you've
-          missed?  Nothing --- they aren't added to the package file, but they
-          <emphasis>are</emphasis> on your build system, installed just where
-          they should be.
+          missed?  Nothing &mdash; they aren't added to the package file, but
+          they <emphasis>are</emphasis> on your build system, installed just
+          where they should be.
         </para>
         <para>
           Next, when the package is installed using

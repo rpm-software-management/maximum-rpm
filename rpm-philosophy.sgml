@@ -282,8 +282,8 @@
         </indexterm>
 
         <para>
-          Configuration files --- nearly every application has them.  They may
-          go by different names, but they all control the behavior of their
+          Configuration files &mdash; nearly every application has them.  They
+          may go by different names, but they all control the behavior of their
           application.  Users normally customize config files to their liking
           and would be upset if their customizations were lost during the
           installation, upgrade, or removal of a package.

@@ -46,11 +46,12 @@
       <para>
         Take the computer, for example.  While it needs things like electricity
         and a cool, dry place to operate, it also needs access to the other two
-        items --- information and programs --- in order to do its thing.  The
-        way to get information and programs into a computer is to place them in
-        the computer's mass storage.  These days, mass storage invariably means
-        a disk drive.  Putting information and programs on the disk drive means
-        that they are stored as files.  So much for the computer's part in this.
+        items &mdash; information and programs &mdash; in order to do its thing.
+        The way to get information and programs into a computer is to place them
+        in the computer's mass storage.  These days, mass storage invariably
+        means a disk drive.  Putting information and programs on the disk drive
+        means that they are stored as files.  So much for the computer's part in
+        this.
       </para>
       <para>
         OK, let's look at the information.  Does information have any particular
@@ -81,8 +82,8 @@
               control the program's behavior and permit some level of
               customization.  Like the information, these files must be in the
               proper format, named properly, and in the appropriate area on a
-              disk.  We'll be referring to them by their other name ---
-              <firstterm>config</firstterm> files --- throughout the book.
+              disk.  We'll be referring to them by their other name &mdash;
+              <firstterm>config</firstterm> files &mdash; throughout the book.
             </para>
           </listitem>
 
@@ -172,10 +173,10 @@
         <para>
           Normally, package management systems take all the various files
           containing programs, data, documentation, and configuration
-          information, and place them in one specially formatted file --- a
+          information, and place them in one specially formatted file &mdash; a
           package file.  In the case of RPM, the package file is sometimes
           called a "package", a ".rpm file", or even an "RPM".  All mean the
-          same thing --- a package containing software meant to be installed
+          same thing &mdash; a package containing software meant to be installed
           using RPM.
         </para>
         <para>
@@ -327,7 +328,7 @@
                   If this amount of detail is possible, then it should be
                   possible to see if the way a package is presently installed
                   varies from the way it was originally installed.  It's not at
-                  all unusual to make a mistake and delete one file --- or a
+                  all unusual to make a mistake and delete one file &mdash; or a
                   hundred.  Being able to tell if one or more packages are
                   missing files could greatly simplify the process of getting an
                   ailing system back on its feet again.
@@ -361,10 +362,10 @@
       </indexterm>
 
       <para>
-        Well, all that sounds great --- easy install, upgrade, and deletion of
-        packages; getting package information presented several different ways;
-        making sure packages are installed correctly; and even tracking changes
-        to config files.  But how do you do it?
+        Well, all that sounds great &mdash; easy install, upgrade, and deletion
+        of packages; getting package information presented several different
+        ways; making sure packages are installed correctly; and even tracking
+        changes to config files.  But how do you do it?
       </para>
       <para>
         As mentioned above, the obvious answer is to let the computer do it.
@@ -404,11 +405,11 @@
       </para>
       <para>
         In practice, no package management system uses one approach or the other
-        --- all are a mixture of the two.  The exact mix and design goals will
-        dictate how well a particular package management system meets the needs
-        of the people using it.  At the time &RHI; started work on their Linux
-        distribution, there were a number of package management systems in use,
-        each with a different approach to making package management easier.
+        &mdash; all are a mixture of the two.  The exact mix and design goals
+        will dictate how well a particular package management system meets the
+        needs of the people using it.  At the time &RHI; started work on their
+        Linux distribution, there were a number of package management systems in
+        use, each with a different approach to making package management easier.
       </para>
 
       <sect2 id="s2-intro-to-rpm-rpm-ancestors">

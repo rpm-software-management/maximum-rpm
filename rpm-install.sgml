@@ -315,7 +315,7 @@
     </table>
 
     <sect1 id="s1-rpm-install-rpm-i-what-does-it-do">
-      <title><command>rpm -i</command> --- What does it do?</title>
+      <title><command>rpm -i</command> &mdash; What does it do?</title>
       <indexterm>
         <primary><command>rpm -i</command></primary>
         <secondary>overview</secondary>
@@ -425,7 +425,7 @@
           managers, is the way it handles configuration files.  Since these
           files are normally changed to customize the behavior of installed
           software, simply overwriting a config file would tend to make people
-          angry --- all their customizations would be gone!  Instead, RPM
+          angry &mdash; all their customizations would be gone!  Instead, RPM
           analyzes the situation and attempts to do "the right thing" with
           config files, even if they weren't originally installed by RPM!
           <footnote>
@@ -517,8 +517,8 @@
       </para>
 
       <sect2 id="s2-rpm-install-urls">
-        <title>URLs --- Another Way to Specify Package Files</title>
-        <!-- label: rpm-install-install-urls -->
+        <title>URLs &mdash; Another Way to Specify Package Files</title> <!--
+        label: rpm-install-install-urls -->
         <indexterm>
           <primary>URL</primary>
         </indexterm>
@@ -1114,8 +1114,8 @@ error: cdp-0.33-3.i386.rpm cannot be installed
           different release), also installs a file <filename>cdp</filename> in
           <filename>/usr/bin</filename>.  Since there is a conflict, that means
           that the two package's <filename>cdp</filename> files must be
-          different --- their checksums don't match.  Because of this, RPM won't
-          let the second package install.  But with
+          different &mdash; their checksums don't match.  Because of this, RPM
+          won't let the second package install.  But with
           <command>--replacefiles</command>, we can force RPM to let the
           <filename>/usr/bin/cdp</filename> from <filename>cdp-0.33-3</filename>
           replace the <filename>/usr/bin/cdp</filename> from
@@ -1156,7 +1156,7 @@ Installing cdp-0.33-3.i386.rpm
                 Installing a newer version of a package without erasing the
                 older version.  A newer version of a package is a
                 <emphasis>wonderful</emphasis> source of file conflicts against
-                older versions --- the filenames remain the same, but the
+                older versions &mdash; the filenames remain the same, but the
                 contents change.  We used it in our example because it's an easy
                 way to show what happens when there are file conflicts.
                 However, it is usually a <emphasis>bad</emphasis> idea when it
@@ -1718,10 +1718,10 @@ Installing cdp-0.33-3.i386.rpm
           Some packages give the person installing them flexibility in
           determining where on their system they should be installed.  These are
           known as relocatable packages.  A relocatable package differs from a
-          package that cannot be relocated, in only one way --- the definition
-          of a default prefix.  Because of this, it takes a bit of additional
-          effort to determine if a package is relocatable.  But here's an RPM
-          command that can be used to find out:
+          package that cannot be relocated, in only one way &mdash; the
+          definition of a default prefix.  Because of this, it takes a bit of
+          additional effort to determine if a package is relocatable.  But
+          here's an RPM command that can be used to find out:
           <footnote>
             <para>
               We discuss RPM's query commands in <xref linkend="ch-rpm-query">.

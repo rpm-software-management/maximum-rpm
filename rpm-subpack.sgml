@@ -821,8 +821,8 @@ Group: bogus/junque
             If there was no need for a main package, we could simply remove the
             unnamed <command>%files</command> list.  Keep in mind that even if
             you do not create a main package, the tags defined in the main
-            package's preamble <emphasis>will</emphasis> appear somewhere ---
-            specifically, in the source package file.
+            package's preamble <emphasis>will</emphasis> appear somewhere
+            &mdash; specifically, in the source package file.
           </para>
 
           <para>

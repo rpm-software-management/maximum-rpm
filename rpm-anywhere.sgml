@@ -238,7 +238,7 @@ install: cdp cdp.1.Z
         before installing any files.  This is often necessary, as build roots
         are deleted, in most cases, after the software has been packaged.  This
         is why <command>install</command> is used with the <command>-d</command>
-        option --- to make sure the necessary directories have been created.
+        option &mdash; to make sure the necessary directories have been created.
       </para>
       <para>
         Let's see how it works:
@@ -529,7 +529,7 @@ rm -rf $RPM_BUILD_ROOT
         <para>
           That's all there is to it.  You may have noticed that we created a
           subdirectory to <filename>RPMS</filename> called
-          <filename>i386</filename> --- This is the architecture-specific
+          <filename>i386</filename> &mdash; This is the architecture-specific
           subdirectory for Intel x86-based systems, which is our example build
           system.
         </para>
@@ -637,7 +637,7 @@ Bad exit status
           </screen>
         </para>
         <para>
-          Things started off pretty well --- The <command>%prep</command>
+          Things started off pretty well &mdash; The <command>%prep</command>
           section of the spec file unpacked the sources into the new build area,
           as did the <command>%build</command> section.  The build was
           proceeding normally in the user-specified build area, and root access
@@ -725,7 +725,7 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
       </para>
 
       <sect2 id="s2-rpm-anywhere-attr-macro">
-        <title><command>%attr</command> --- How Does It Work?</title>
+        <title><command>%attr</command> &mdash; How Does It Work?</title>
 
         <para>
           The <command>%attr</command> macro has the following format:
@@ -816,13 +816,14 @@ lrwxrwxrwx   1 ed       ed             47 Sep 13 20:34 cdplay -&gt; ./cdp*
         <para>
           A couple points are worth noting here.  The line for
           <filename>README</filename> shows that multiple macros can be used on
-          a line --- in this case, one to set file attributes, and one to mark
-          the file as being documentation.  The <command>%attr</command> for
-          <filename>/usr/local/bin/cdp</filename> declares the file to be setuid
-          root.  If it sends a shiver down your spine to know that anybody can
-          create a package that will run setuid root when installed on your
-          system --- Good!  Just because RPM makes it easy to install software
-          doesn't mean that you should blindly install every package you find.
+          a line &mdash; in this case, one to set file attributes, and one to
+          mark the file as being documentation.  The <command>%attr</command>
+          for <filename>/usr/local/bin/cdp</filename> declares the file to be
+          setuid root.  If it sends a shiver down your spine to know that
+          anybody can create a package that will run setuid root when installed
+          on your system &mdash; Good!  Just because RPM makes it easy to
+          install software doesn't mean that you should blindly install every
+          package you find.
         </para>
         <para>
           A single RPM command can quickly point out areas of potential problems
@@ -842,8 +843,8 @@ lrwxrwxrwx-  root  root     47 Sep 13 21:32 /usr/local/bin/cdplay -&gt; ./cdp
           </screen>
         </para>
         <para>
-          Sure enough --- there's that setuid root file.  In this case we trust
-          the package builder, so let's install it:
+          Sure enough &mdash; there's that setuid root file.  In this case we
+          trust the package builder, so let's install it:
 
           <screen width="60">
 <prompt># </prompt><userinput>rpm -ivh cdplayer-1.0-1.i386.rpm</userinput>
@@ -862,8 +863,9 @@ group rot does not exist - using root
           for that file.  Must have been a typo.  We could pretend that RPM used
           advanced artificial intelligence technology to come to the same
           conclusion as we did and made the appropriate change, but in reality,
-          RPM simply used the only group identifier it could count on --- root.
-          RPM will do the same thing if it can't resolve a user specification.
+          RPM simply used the only group identifier it could count on &mdash;
+          root.  RPM will do the same thing if it can't resolve a user
+          specification.
         </para>
         <para>
           Let's look at some of the files the package installed, including that
@@ -880,7 +882,7 @@ lrwxrwxrwx   1 root     root           47 Sep 13 21:36 cdplay -&gt; ./cdp*
           </screen>
         </para>
         <para>
-          RPM did just what it was supposed to --- It gave the files the
+          RPM did just what it was supposed to &mdash; It gave the files the
           attributes specified by the <command>%attr</command> macros.
         </para>
       </sect2>
@@ -894,7 +896,7 @@ lrwxrwxrwx   1 root     root           47 Sep 13 21:36 cdplay -&gt; ./cdp*
           and we promised to explain why.  The reason is simply that, even if a
           package requires a certain user or group to own the package's files,
           the user may not have the same uid/gid from system to system.  There
-          --- wasn't that simple?
+          &mdash; wasn't that simple?
         </para>
         <para>
           In the next chapter, we'll discuss how to make your packaged software

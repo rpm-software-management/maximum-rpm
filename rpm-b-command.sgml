@@ -116,7 +116,7 @@
           </row>
           <row>
             <entry spanname="span12" align="center">
-              Build---specific Options
+              Build&ndash;specific Options
             </entry>
             <entry>
               Page
@@ -265,7 +265,7 @@
 
 
     <sect1 id="s1-rpm-b-command-what-it-does">
-      <title><command>rpm -b</command> --- What Does it Do?</title>
+      <title><command>rpm -b</command> &mdash; What Does it Do?</title>
       <indexterm>
         <primary><command>rpm -b</command></primary>
         <secondary>what it does</secondary>
@@ -317,7 +317,7 @@
 
       <sect2 id="s2-rpm-b-command-bp-option">
         <title>
-          <command>rpm -bp</command> --- Execute <command>%prep</command>
+          <command>rpm -bp</command> &mdash; Execute <command>%prep</command>
           </title>
         <!-- label: build-bp -->
         <indexterm>
@@ -434,7 +434,8 @@ total 216
         <para>
           We can see that <command>%setup</command>'s <command>chown</command>
           and <command>chmod</command> commands did what they were supposed to
-          --- the files are owned by root, with permissions set appropriately.
+          &mdash; the files are owned by root, with permissions set
+          appropriately.
         </para>
         <para>
           If not stopped by the <command>-bp</command> option, the next step in
@@ -446,7 +447,7 @@ total 216
 
       <sect2 id="s2-rpm-b-command-bc-option">
         <title>
-          <command>rpm -bc</command> --- Execute <command>%prep</command>,
+          <command>rpm -bc</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>
         </title>
         <!-- label: build-bc -->
@@ -525,7 +526,7 @@ make
 
       <sect2 id="s2-rpm-b-command-bi-option">
         <title>
-          <command>rpm -bi</command> --- Execute <command>%prep</command>,
+          <command>rpm -bi</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>
         </title>
         <!-- label: build-bi -->
@@ -628,7 +629,7 @@ make install
 
       <sect2 id="s2-rpm-b-command-bb-option">
         <title>
-          <command>rpm -bb</command> --- Execute <command>%prep</command>,
+          <command>rpm -bb</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>, package
           (bin)
         </title>
@@ -699,7 +700,7 @@ Executing: %clean
 
       <sect2 id="s2-rpm-b-command-ba-option">
         <title>
-          <command>rpm -ba</command> --- Execute <command>%prep</command>,
+          <command>rpm -ba</command> &mdash; Execute <command>%prep</command>,
           <command>%build</command>, <command>%install</command>, package
           (bin, src)
         </title>
@@ -810,7 +811,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 
       <sect2 id="s2-rpm-b-command-bl-option">
         <title>
-          <command>rpm -bl</command> --- Check <command>%files</command> list
+          <command>rpm -bl</command> &mdash; Check <command>%files</command> list
         </title>
         <!-- label: build-bl -->
         <indexterm>
@@ -966,7 +967,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
         </para>
         <para>
           Finally, RPM determines which shared libraries the listed files
-          require.  In this case, there are only two ---
+          require.  In this case, there are only two &mdash;
           <filename>libc.so.5</filename>, and
           <filename>libncurses.so.2.0</filename>.  While not strictly a part of
           the list-checking process, displaying shared library dependencies can
@@ -1057,7 +1058,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
 
       <sect2 id="s2-rpm-b-command-short-circuit-option">
         <title>
-          <command>--short-circuit</command> --- Force build to start at
+          <command>--short-circuit</command> &mdash; Force build to start at
           particular stage
         </title>
         <!-- label: build- -short-circuit -->
@@ -1080,7 +1081,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
         <para>
           One time that <command>--short-circuit</command> comes in handy is
           when you're trying to get software to build properly.  Just think what
-          it would be like --- you're hacking away at the sources, trying a
+          it would be like &mdash; you're hacking away at the sources, trying a
           build, getting an error, and hacking some more to fix that error.
           Without <command>--short-circuit</command>, you'd have to:
 
@@ -1254,9 +1255,10 @@ Bad exit status
 
       <sect2 id="s2-rpm-b-command-buildarch-option">
         <title>
-          <command>--buildarch <replaceable>&lt;arch&gt;</replaceable></command> ---
-          Perform Build For the
-          <command><replaceable>&lt;arch&gt;</replaceable></command> Architecture
+          <command>--buildarch <replaceable>&lt;arch&gt;</replaceable></command>
+          &mdash; Perform Build For the
+          <command><replaceable>&lt;arch&gt;</replaceable></command>
+          Architecture
         </title>
         <!-- label: build- -buildarch -->
         <indexterm>
@@ -1309,9 +1311,10 @@ i486
 
       <sect2 id="s2-rpm-b-command-buildos-option">
         <title>
-          <command>--buildos <replaceable>&lt;os&gt;</replaceable></command> ---
-          Perform Build For the
-          <command><replaceable>&lt;os&gt;</replaceable></command> Operating System
+          <command>--buildos <replaceable>&lt;os&gt;</replaceable></command>
+          &mdash; Perform Build For the
+          <command><replaceable>&lt;os&gt;</replaceable></command> Operating
+          System
         </title>
         <!-- label: build- -buildos -->
         <indexterm>
@@ -1359,7 +1362,8 @@ osf1
 
       <sect2 id="s2-rpm-b-command-sign-option">
         <title>
-          <command>--sign</command> --- Add a Digital Signature to the Package
+          <command>--sign</command> &mdash; Add a Digital Signature to the
+          Package
         </title>
         <!-- label: build- -sign -->
         <indexterm>
@@ -1429,7 +1433,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 
       <sect2 id="s2-rpm-b-command-test-option">
         <title>
-          <command>--test</command> --- Create, Save Build Scripts For Review
+          <command>--test</command> &mdash; Create, Save Build Scripts For
+          Review
         </title>
         <!-- label: build- -test -->
         <indexterm>
@@ -1524,8 +1529,8 @@ chmod -R a+rX,g-w,o-w .
           build, the <command>%prep</command> section consists of a single
           <command>%setup</command> macro.  In this file, we can see exactly how
           RPM expands that macro.  The remaining files follow the same basic
-          layout --- a section defining environment variables, followed by the
-          commands to be executed.
+          layout &mdash; a section defining environment variables, followed by
+          the commands to be executed.
         </para>
         <para>
           Note that the <command>--test</command> option will only create script
@@ -1546,7 +1551,7 @@ chmod -R a+rX,g-w,o-w .
       </sect2>
 
       <sect2 id="s2-rpm-b-command-clean-option">
-        <title><command>--clean</command> --- Clean up after build</title>
+        <title><command>--clean</command> &mdash; Clean up after build</title>
         <!-- label: build- -clean -->
         <indexterm>
           <primary><command>--clean</command> option</primary>
@@ -1610,8 +1615,8 @@ Executing: sweep
 
       <sect2 id="s2-rpm-b-command-buildroot-option">
         <title>
-          <command>--buildroot <replaceable>&lt;path&gt;</replaceable></command> ---
-          Execute <command>%install</command> using
+          <command>--buildroot <replaceable>&lt;path&gt;</replaceable></command>
+          &mdash; Execute <command>%install</command> using
           <command><replaceable>&lt;path&gt;</replaceable></command> as the root
         </title>
         <!-- label: build- -buildroot -->
@@ -1801,7 +1806,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
                   <footnote>
                     <para>
                       Or the <command>%clean</command> section, it doesn't
-                      matter --- the end result is the same.
+                      matter &mdash; the end result is the same.
                     </para>
                   </footnote>
                   , there is an <command>rm -rf $RPM_BUILD_ROOT</command>
@@ -1844,8 +1849,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 
       <sect2 id="s2-rpm-b-command-timecheck-option">
         <title>
-          <command>--timecheck <replaceable>&lt;secs&gt;</replaceable></command> ---
-          Print a warning if files to be packaged are over
+          <command>--timecheck <replaceable>&lt;secs&gt;</replaceable></command>
+          &mdash; Print a warning if files to be packaged are over
           <command><replaceable>&lt;secs&gt;</replaceable></command> old
         </title>
         <!-- label: build- -timecheck -->
@@ -1962,8 +1967,8 @@ timecheck: 3600
       </sect2>
 
       <sect2 id="s2-rpm-b-command-vv-option">
-        <title><command>-vv</command> --- Display debugging information</title>
-        <!-- label: build-vv -->
+        <title><command>-vv</command> &mdash; Display debugging
+        information</title> <!-- label: build-vv -->
         <indexterm>
           <primary><command>-vv</command> option</primary>
         </indexterm>
@@ -2026,7 +2031,8 @@ drwxrwxr-x root/users        0 Aug  4 22:30 1996 cdplayer-1.0/
 
       <sect2 id="s2-rpm-b-command-quiet-option">
         <title>
-          <command>--quiet</command> --- Produce as Little Output as Possible
+          <command>--quiet</command> &mdash; Produce as Little Output as
+          Possible
         </title>
         <!-- label: build- -quiet -->
         <indexterm>
@@ -2059,8 +2065,8 @@ volume.c:67: warning: implicit declaration of function `ioctl'
 
       <sect2 id="s2-rpm-b-command-rcfile-option">
         <title>
-          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command> ---
-          Set alternate <filename>rpmrc</filename> file to
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
+          &mdash; Set alternate <filename>rpmrc</filename> file to
           <command><replaceable>&lt;rcfile&gt;</replaceable></command>
         </title>
         <!-- label: build- -rcfile -->
@@ -2108,7 +2114,8 @@ volume.c:67: warning: implicit declaration of function `ioctl'
       </para>
 
       <sect2 id="s2-rpm-b-command-recompile-option">
-        <title><command>rpm --recompile</command> --- What Does it Do?</title>
+        <title><command>rpm --recompile</command> &mdash; What Does it
+        Do?</title>
         <indexterm>
           <primary><command>--recompile</command> option</primary>
         </indexterm>
@@ -2209,7 +2216,7 @@ Executing: sweep
       </sect2>
 
       <sect2 id="s2-rpm-b-command-rebuild-option">
-        <title><command>rpm --rebuild</command> --- What Does it Do?</title>
+        <title><command>rpm --rebuild</command> &mdash; What Does it Do?</title>
         <indexterm>
           <primary><command>--rebuild</command> option</primary>
         </indexterm>

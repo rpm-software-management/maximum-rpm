@@ -1915,55 +1915,56 @@ NoPatch: 2 3
           <orderedlist>
             <listitem>
               <para>
-                <command>owner</command> --- The file's owner.
+                <command>owner</command> &mdash; The file's owner.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>group</command> --- The file's group.
+                <command>group</command> &mdash; The file's group.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>mode</command> --- The file's mode.
+                <command>mode</command> &mdash; The file's mode.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>md5</command> --- The file's MD5 checksum.
+                <command>md5</command> &mdash; The file's MD5 checksum.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>size</command> --- The file's size.
+                <command>size</command> &mdash; The file's size.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>maj</command> --- The file's major number.
+                <command>maj</command> &mdash; The file's major number.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>min</command> --- The file's minor number.
+                <command>min</command> &mdash; The file's minor number.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>symlink</command> --- The file's symbolic link string.
+                <command>symlink</command> &mdash; The file's symbolic link
+                string.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>mtime</command> --- The file's modification time.
+                <command>mtime</command> &mdash; The file's modification time.
               </para>
             </listitem>
           </orderedlist>

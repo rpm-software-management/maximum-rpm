@@ -518,9 +518,9 @@ Build failed.
         The build proceeded normally up to the point of actually creating the
         binary package.  The <computeroutput>Package Prefix =
         usr/local</computeroutput> line confirms that RPM picked up our
-        <command>prefix</command> tag line.  But the build stopped --- and on a
-        file called <filename>/usr/doc/cdplayer-1.0-1</filename>.  But that file
-        isn't even in the <command>%files</command> list.  What's going on?
+        <command>prefix</command> tag line.  But the build stopped &mdash; and
+        on a file called <filename>/usr/doc/cdplayer-1.0-1</filename>.  But that
+        file isn't even in the <command>%files</command> list.  What's going on?
       </para>
 
       <para>
@@ -529,7 +529,7 @@ Build failed.
         linkend="s3-rpm-inside-flist-doc-directive">, we discussed how the
         <command>%doc</command> directive creates a directory under
         <filename>/usr/doc</filename>.  That's the file that killed the build
-        --- the directory created by the <command>%doc</command> directive.
+        &mdash; the directory created by the <command>%doc</command> directive.
       </para>
 
       <para>
@@ -798,8 +798,8 @@ drwxr-xr-x   3 root     root         1024 Oct  7 13:45 man/
         </para>
 
         <para>
-          So far, so good --- the proper directories are there.  Let's look at
-          the <command>man</command> page first:
+          So far, so good &mdash; the proper directories are there.  Let's look
+          at the <command>man</command> page first:
 
           <screen width="60">
 <prompt># </prompt><userinput>cd /usr/foonly/blather/man/man1/</userinput>

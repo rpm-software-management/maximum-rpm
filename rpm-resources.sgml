@@ -22,7 +22,7 @@
     <para>
       Perhaps before asking, Where can I get RPM? it might be better to see if
       RPM is already installed on your system.  If you have &RHL; on your
-      system, it's there already.  But be sure to check on other systems ---
+      system, it's there already.  But be sure to check on other systems &mdash;
       people are porting RPM to different systems every day, and it just might
       be there waiting for you.
     </para>
@@ -232,7 +232,7 @@ lrwxrwxrwx  1 root  root    24 Jan 22  1996 RPM-HOWTO.txt -&gt;
 
       <para>
         This is the source package file for RPM version 2.2.2, release 1.  Like
-        the binary packages, the source package requires RPM to install ---
+        the binary packages, the source package requires RPM to install &mdash;
         therefore, it cannot be used to perform an initial install of RPM.
         Let's see what else there is here:
 
@@ -457,7 +457,7 @@ redhat-list@redhat.com
       </para>
 
       <para>
-        As always, observe proper "netiquette" --- lurk before you leap!
+        As always, observe proper "netiquette" &mdash; lurk before you leap!
       </para>
     </sect2>
   </sect1>
@@ -537,9 +537,9 @@ http://www.redhat.com/
       <para>
         The licenses for most software are designed to take away your freedom to
         share and change it.  By contrast, the GNU General Public License is
-        intended to guarantee your freedom to share and change free software ---
-        to make sure the software is free for all its users.  This General
-        Public License applies to most of the Free Software Foundation's
+        intended to guarantee your freedom to share and change free software
+        &mdash; to make sure the software is free for all its users.  This
+        General Public License applies to most of the Free Software Foundation's
         software and to any other program whose authors commit to using it.
         (Some other Free Software Foundation software is covered by the GNU
         Library General Public License instead.)  You can apply it to your
@@ -1016,7 +1016,7 @@ details.
         The hypothetical commands "show w" and "show c" should show the
         appropriate parts of the General Public License.  Of course, the
         commands you use may be called something other than "show w" and "show
-        c"; they could even be mouse-clicks or menu items --- whatever suits
+        c"; they could even be mouse-clicks or menu items &mdash; whatever suits
         your program.
       </para>
 

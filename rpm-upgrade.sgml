@@ -43,7 +43,7 @@
 
           <row>
             <entry spanname="span12" align="center">
-              Upgrade---specific Options
+              Upgrade&ndash;specific Options
             </entry>
             <entry>
               Page
@@ -339,7 +339,7 @@
 
 
     <sect1 id="s1-rpm-upgrade-what-it-does">
-      <title><command>rpm -U</command> --- What Does it Do?</title>
+      <title><command>rpm -U</command> &mdash; What Does it Do?</title>
 
       <indexterm>
         <primary><command>rpm -U</command></primary>
@@ -399,8 +399,8 @@
         </indexterm>
         Likewise, erasing a package would also mean that config files could be
         erased.  Not a good situation!  However, RPM's approach to upgrades
-        makes it possible to handle even the most tricky situation --- having
-        multiple versions of a package install simultaneously.
+        makes it possible to handle even the most tricky situation &mdash;
+        having multiple versions of a package install simultaneously.
       </para>
 
       <sect2 id="s2-rpm-upgrade-config-file-magic">
@@ -572,8 +572,8 @@
           <para>
             In this case, RPM installs the new version, overwriting the modified
             original.  The same philosophy used in the first scenario applies
-            here -- although the file has not changed, perhaps some other aspect
-            of the file has, so the new version is installed.
+            here &mdash; although the file has not changed, perhaps some other
+            aspect of the file has, so the new version is installed.
           </para>
         </sect3>
 
@@ -594,10 +594,10 @@
             RPM is not able to analyze the contents of the files, and determine
             what is going on.  In this instance, it takes the best possible
             approach.  The new file is known to work properly with the rest of
-            the software in the new package --- at least the people building the
-            new package should have insured that it does.  The modified original
-            file is an unknown: it might work with the new package, it might
-            not.  So RPM installs the new file.
+            the software in the new package &mdash; at least the people building
+            the new package should have insured that it does.  The modified
+            original file is an unknown: it might work with the new package, it
+            might not.  So RPM installs the new file.
           </para>
 
           <para>
@@ -704,7 +704,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         <para>
           Well, in the example above, we didn't tell the whole story.  There was
           no older version of the <filename>eject</filename> package installed.
-          Yes, it's true --- <command>rpm -U</command> works just fine as a
+          Yes, it's true &mdash; <command>rpm -U</command> works just fine as a
           replacement for the normal install command <command>rpm -i</command>.
         </para>
 
@@ -810,7 +810,7 @@ error: cdp-0.33-2.i386.rpm cannot be installed
 
         <para>
           That didn't work very well.  At least it told us just what the problem
-          was --- we were trying to upgrade to an older version of a package
+          was &mdash; we were trying to upgrade to an older version of a package
           that is already installed.  Fortunately, there's a special option for
           just this situation: <command>--oldpackage</command>.  Let's give it a
           try:
@@ -928,8 +928,8 @@ This is the bother 2.7 postuninstall script
         </para>
 
         <para>
-          There are really no surprises there --- it worked just the way it was
-          meant to.  This time, let's use the <command>--noscripts</command>
+          There are really no surprises there &mdash; it worked just the way it
+          was meant to.  This time, let's use the <command>--noscripts</command>
           option when the time comes to perform the upgrade:
 
           <screen width="60">

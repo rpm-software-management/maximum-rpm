@@ -4,7 +4,7 @@
 
     <para>
       As with any other large, complex subject, there are always some leftovers
-      --- things that just don't seem to fit in any one category.  RPM is no
+      &mdash; things that just don't seem to fit in any one category.  RPM is no
       exception.  This chapter covers those aspects of RPM that can only be
       called "miscellania"&hellip;
     </para>
@@ -19,7 +19,8 @@
       </para>
 
       <sect2 id="s2-rpm-miscellania-rebuilddb">
-        <title><command>--rebuilddb</command> --- Rebuild RPM database</title>
+        <title><command>--rebuilddb</command> &mdash; Rebuild RPM
+        database</title>
         <indexterm>
           <primary><command>--rebuilddb</command> option</primary>
         </indexterm>
@@ -103,11 +104,12 @@ total 3531
         <para>
           You'll note that <filename>packages.rpm</filename> decreased in size.
           This is due to a side-effect of the <command>--rebuilddb</command>
-          option -- While it is going through the database, it is getting rid of
-          unused portions of the database.  Our example was performed on a newly
-          installed system where only one or two packages had been upgraded, so
-          the reduction in size was small.  For a system that has been through a
-          complete upgrade, the difference would be more dramatic.
+          option &mdash; While it is going through the database, it is getting
+          rid of unused portions of the database.  Our example was performed on
+          a newly installed system where only one or two packages had been
+          upgraded, so the reduction in size was small.  For a system that has
+          been through a complete upgrade, the difference would be more
+          dramatic.
         </para>
 
         <para>
@@ -122,7 +124,7 @@ total 3531
 
       <sect2 id="s2-rpm-miscellania-initdb-option">
         <title>
-          <command>--initdb</command> --- Create a New RPM Database
+          <command>--initdb</command> &mdash; Create a New RPM Database
         </title>
         <indexterm>
           <primary><command>--initdb</command> option</primary>
@@ -133,7 +135,7 @@ total 3531
           is one you'll probably never have to use.  The
           <command>--initdb</command> option is used to create a new RPM
           database.  That's why you'll probably not need it if you're already
-          using RPM --- you already have an RPM database.
+          using RPM &mdash; you already have an RPM database.
         </para>
 
         <para>
@@ -184,7 +186,7 @@ total 3559
 
         <para>
           Since an RPM database existed already, the <command>--initdb</command>
-          option did no harm to it --- there was no change to the database
+          option did no harm to it &mdash; there was no change to the database
           files.
         </para>
 
@@ -198,7 +200,8 @@ total 3559
 
       <sect2 id="s2-rpm-miscellania-quiet-option">
         <title>
-          <command>--quiet</command> --- Produce as little output as possible
+          <command>--quiet</command> &mdash; Produce as little output as
+          possible
         </title>
         <indexterm>
           <primary><command>--quiet</command> option</primary>
@@ -234,7 +237,7 @@ total 3559
       </sect2>
 
       <sect2 id="s2-rpm-miscellania-help-option">
-        <title><command>--help</command> --- Display a help message</title>
+        <title><command>--help</command> &mdash; Display a help message</title>
         <indexterm>
           <primary><command>--help</command> option</primary>
         </indexterm>
@@ -286,7 +289,7 @@ usage:
 
       <sect2 id="s2-rpm-miscellania-version-option">
         <title>
-          <command>--version</command> --- Display the current RPM version
+          <command>--version</command> &mdash; Display the current RPM version
         </title>
         <indexterm>
           <primary><command>--version</command> option</primary>
@@ -345,7 +348,7 @@ RPM version 2.3
       </para>
 
       <sect2 id="s2-rpm-miscellania-rpm2cpio-what-it-does">
-        <title><command>rpm2cpio</command> --- What does it do?</title>
+        <title><command>rpm2cpio</command> &mdash; What does it do?</title>
         <indexterm>
           <primary><command>rpm2cpio</command></primary>
           <secondary>what it does</secondary>
@@ -418,7 +421,7 @@ blah.cpio: ASCII cpio archive (SVR4 with CRC)
 
       <sect2 id="s2-rpm-miscellania-rpm2cpio-listing-files">
         <title>
-          A more real-world example --- Listing the files in a package file
+          A more real-world example &mdash; Listing the files in a package file
         </title>
         <indexterm>
           <primary><command>rpm2cpio</command></primary>
@@ -608,10 +611,10 @@ foo.bar: RPM v2 bin i386 eject-1.2-2
 
       <para>
         In this example, <filename>foo.bar</filename> is an RPM version 2 file,
-        containing an executable package -- hence, the
-        "<filename>bin</filename>" -- built for Intel processors -- the
-        "<filename>i386</filename>".  The package is eject version 1.2, release
-        2.
+        containing an executable package &mdash; hence, the
+        "<filename>bin</filename>" &mdash; built for Intel processors &mdash;
+        the "<filename>i386</filename>".  The package is eject version 1.2,
+        release 2.
       </para>
 
       <para>
@@ -628,9 +631,9 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
       </para>
 
       <para>
-        Well, it's a package file all right --- for version 1.0, release 3 of
-        the <filename>etcskel</filename> package.  It's in RPM version 2 format,
-        and built for Intel-based systems.  But what does the
+        Well, it's a package file all right &mdash; for version 1.0, release 3
+        of the <filename>etcskel</filename> package.  It's in RPM version 2
+        format, and built for Intel-based systems.  But what does the
         "<filename>src</filename>" mean?
       </para>
 

@@ -20,42 +20,46 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>--quiet</command> --- Print as little output as possible.
+              <command>--quiet</command> &mdash; Print as little output as
+              possible.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>-v</command> --- Be a little more verbose.
+              <command>-v</command> &mdash; Be a little more verbose.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>-vv</command> --- Be incredibly verbose (for debugging).
+              <command>-vv</command> &mdash; Be incredibly verbose (for
+              debugging).
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--root <replaceable>&lt;dir&gt;</replaceable></command>
-              --- Use <command><replaceable>&lt;dir&gt;</replaceable></command>
-              as the top level directory.
+              &mdash; Use
+              <command><replaceable>&lt;dir&gt;</replaceable></command> as the
+              top level directory.
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--dbpath <replaceable>&lt;dir&gt;</replaceable></command>
-              --- Use <command><replaceable>&lt;dir&gt;</replaceable></command>
-              as the directory for the database.
+              &mdash; Use
+              <command><replaceable>&lt;dir&gt;</replaceable></command> as the
+              directory for the database.
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--rcfile
-              <replaceable>&lt;file&gt;</replaceable></command> --- Use
+              <replaceable>&lt;file&gt;</replaceable></command> &mdash; Use
               <command><replaceable>&lt;file&gt;</replaceable></command> instead
               of <filename>/etc/rpmrc</filename> and
               <filename>$HOME/.rpmrc</filename>.
@@ -82,27 +86,27 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>--version</command> --- Print the version of rpm being
-              used.
+              <command>--version</command> &mdash; Print the version of rpm
+              being used.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--help</command> --- Print a help message.
+              <command>--help</command> &mdash; Print a help message.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--showrc</command> --- Show rcfile information.
+              <command>--showrc</command> &mdash; Show rcfile information.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--querytags</command> --- List the tags that can be used
-              with <command>--queryformat</command>.
+              <command>--querytags</command> &mdash; List the tags that can be
+              used with <command>--queryformat</command>.
             </para>
           </listitem>
         </itemizedlist>
@@ -144,20 +148,20 @@
             <listitem>
               <para>
                 <command><replaceable>&lt;packagename&gt;</replaceable></command>
-                --- Query the named package.
+                &mdash; Query the named package.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>-a</command> --- Query all packages.
+                <command>-a</command> &mdash; Query all packages.
               </para>
             </listitem>
 
             <listitem>
               <para>
                 <command>-f <replaceable>&lt;file&gt;</replaceable>+</command>
-                --- Query package owning
+                &mdash; Query package owning
                 <command><replaceable>&lt;file&gt;</replaceable></command>.
               </para>
             </listitem>
@@ -165,7 +169,7 @@
             <listitem>
               <para>
                 <command>-g <replaceable>&lt;group&gt;</replaceable>+</command>
-                --- Query packages with group
+                &mdash; Query packages with group
                 <command><replaceable>&lt;group&gt;</replaceable></command>.
               </para>
             </listitem>
@@ -173,8 +177,8 @@
             <listitem>
               <para>
                 <command>-p
-                <replaceable>&lt;packagefile&gt;</replaceable>+</command> ---
-                Query (uninstalled) package
+                <replaceable>&lt;packagefile&gt;</replaceable>+</command>
+                &mdash; Query (uninstalled) package
                 <command><replaceable>&lt;packagefile&gt;</replaceable></command>.
               </para>
             </listitem>
@@ -182,7 +186,7 @@
             <listitem>
               <para>
                 <command>--whatprovides
-                <replaceable>&lt;i&gt;</replaceable></command> --- Query
+                <replaceable>&lt;i&gt;</replaceable></command> &mdash; Query
                 packages that provide
                 <command><replaceable>&lt;i&gt;</replaceable></command>
                 capability.
@@ -192,7 +196,7 @@
             <listitem>
               <para>
                 <command>--whatrequires
-                <replaceable>&lt;i&gt;</replaceable></command> --- Query
+                <replaceable>&lt;i&gt;</replaceable></command> &mdash; Query
                 packages that require
                 <command><replaceable>&lt;i&gt;</replaceable></command>
                 capability.
@@ -214,70 +218,70 @@
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                <command>-i</command> --- Display package information.
+                <command>-i</command> &mdash; Display package information.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>-l</command> --- Display package file list.
+                <command>-l</command> &mdash; Display package file list.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>-s</command> --- Show file states (implies
+                <command>-s</command> &mdash; Show file states (implies
                 <command>-l</command>).
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>-d</command> --- List only documentation files (implies
-                <command>-l</command>).
+                <command>-d</command> &mdash; List only documentation files
+                (implies <command>-l</command>).
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>-c</command> --- List only configuration files (implies
-                <command>-l</command>).
+                <command>-c</command> &mdash; List only configuration files
+                (implies <command>-l</command>).
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--dump</command> --- Show all available information for
-                each file (must be used with <command>-l</command>,
+                <command>--dump</command> &mdash; Show all available information
+                for each file (must be used with <command>-l</command>,
                 <command>-c</command>, or <command>-d</command>).
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--provides</command> --- List capabilities that the
+                <command>--provides</command> &mdash; List capabilities that the
                 package provides.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--requires</command>, <command>-R</command> --- List
-                capabilities that the package requires.
+                <command>--requires</command>, <command>-R</command> &mdash;
+                List capabilities that the package requires.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--scripts</command> --- Print the various [un]install,
-                verification scripts.
+                <command>--scripts</command> &mdash; Print the various
+                [un]install, verification scripts.
               </para>
             </listitem>
 
             <listitem>
               <para>
                 <command>--queryformat
-                <replaceable>&lt;s&gt;</replaceable></command> --- Use
+                <replaceable>&lt;s&gt;</replaceable></command> &mdash; Use
                 <command><replaceable>&lt;s&gt;</replaceable></command> as the
                 header format (implies <command>-i</command>).
               </para>
@@ -285,8 +289,8 @@
 
             <listitem>
               <para>
-                <command>--qf <replaceable>&lt;s&gt;</replaceable></command> ---
-                Shorthand for <command>--queryformat</command>.
+                <command>--qf <replaceable>&lt;s&gt;</replaceable></command>
+                &mdash; Shorthand for <command>--queryformat</command>.
               </para>
             </listitem>
           </itemizedlist>
@@ -334,21 +338,22 @@
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                <command>--nodeps</command> --- Do not verify package
+                <command>--nodeps</command> &mdash; Do not verify package
                 dependencies.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--nofiles</command> --- Do not verify file attributes.
+                <command>--nofiles</command> &mdash; Do not verify file
+                attributes.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--noscripts</command> --- Do not execute the package's
-                verification script.
+                <command>--noscripts</command> &mdash; Do not execute the
+                package's verification script.
               </para>
             </listitem>
           </itemizedlist>
@@ -388,16 +393,17 @@
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                <command>-h</command>, <command>--hash</command> --- Print hash
-                marks as package installs (good with <command>-v</command>).
+                <command>-h</command>, <command>--hash</command> &mdash; Print
+                hash marks as package installs (good with
+                <command>-v</command>).
               </para>
             </listitem>
 
             <listitem>
               <para>
                 <command>--prefix
-                <replaceable>&lt;dir&gt;</replaceable></command> --- Relocate
-                the package to
+                <replaceable>&lt;dir&gt;</replaceable></command> &mdash;
+                Relocate the package to
                 <command><replaceable>&lt;dir&gt;</replaceable></command>, if
                 relocatable.
               </para>
@@ -405,14 +411,14 @@
 
             <listitem>
               <para>
-                <command>--excludedocs</command> --- Do not install
+                <command>--excludedocs</command> &mdash; Do not install
                 documentation.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--force</command> --- Shorthand for
+                <command>--force</command> &mdash; Shorthand for
                 <command>--replacepkgs</command> and <command>
                 --replacefiles</command>.
               </para>
@@ -420,62 +426,62 @@
 
             <listitem>
               <para>
-                <command>--ignorearch</command> --- Do not verify package
+                <command>--ignorearch</command> &mdash; Do not verify package
                 architecture.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--ignoreos</command> --- Do not verify package
+                <command>--ignoreos</command> &mdash; Do not verify package
                 operating system.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--includedocs</command> --- Install documentation.
+                <command>--includedocs</command> &mdash; Install documentation.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--nodeps</command> --- Do not check package
+                <command>--nodeps</command> &mdash; Do not check package
                 dependencies.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--noscripts</command> --- Do not execute any
+                <command>--noscripts</command> &mdash; Do not execute any
                 installation scripts.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--percent</command> --- Print percentages as package
-                installs.
+                <command>--percent</command> &mdash; Print percentages as
+                package installs.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--replacefiles</command> --- Install even if the
+                <command>--replacefiles</command> &mdash; Install even if the
                 package replaces installed files.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--replacepkgs</command> --- Reinstall if the package is
-                already present.
+                <command>--replacepkgs</command> &mdash; Reinstall if the
+                package is already present.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <command>--test</command> --- Do not install, but tell if it
+                <command>--test</command> &mdash; Do not install, but tell if it
                 would work or not.
               </para>
             </listitem>
@@ -516,15 +522,15 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>-h</command>, <command>--hash</command> --- Print hash
-              marks as package installs (good with <command>-v</command>).
+              <command>-h</command>, <command>--hash</command> &mdash; Print
+              hash marks as package installs (good with <command>-v</command>).
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--prefix <replaceable>&lt;dir&gt;</replaceable></command>
-              --- Relocate the package to
+              &mdash; Relocate the package to
               <command><replaceable>&lt;dir&gt;</replaceable></command>, if
               relocatable.
             </para>
@@ -532,13 +538,14 @@
 
           <listitem>
             <para>
-              <command>--excludedocs</command> --- Do not install documentation.
+              <command>--excludedocs</command> &mdash; Do not install
+              documentation.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--force</command> --- Shorthand for
+              <command>--force</command> &mdash; Shorthand for
               <command>--replacepkgs</command>,
               <command>--replacefiles</command>, and
               <command>--oldpackage</command>.
@@ -547,70 +554,70 @@
 
           <listitem>
             <para>
-              <command>--ignorearch</command> --- Do not verify package
+              <command>--ignorearch</command> &mdash; Do not verify package
               architecture.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--ignoreos</command> --- Do not verify package operating
-              system.
+              <command>--ignoreos</command> &mdash; Do not verify package
+              operating system.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--includedocs</command> --- Install documentation.
+              <command>--includedocs</command> &mdash; Install documentation.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--nodeps</command> --- Do not verify package
+              <command>--nodeps</command> &mdash; Do not verify package
               dependencies.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--noscripts</command> --- Do not execute any installation
-              scripts.
+              <command>--noscripts</command> &mdash; Do not execute any
+              installation scripts.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--percent</command> --- Print percentages as package
+              <command>--percent</command> &mdash; Print percentages as package
               installs.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--replacefiles</command> --- Install even if the package
-              replaces installed files.
+              <command>--replacefiles</command> &mdash; Install even if the
+              package replaces installed files.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--replacepkgs</command> --- Reinstall if the package is
-              already present.
+              <command>--replacepkgs</command> &mdash; Reinstall if the package
+              is already present.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--test</command> --- Do not install, but tell if it would
-              work or not.
+              <command>--test</command> &mdash; Do not install, but tell if it
+              would work or not.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--oldpackage</command> --- Upgrade to an old version of
-              the package (<command>--force</command> on upgrades does this
+              <command>--oldpackage</command> &mdash; Upgrade to an old version
+              of the package (<command>--force</command> on upgrades does this
               automatically).
             </para>
           </listitem>
@@ -651,15 +658,15 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>--nodeps</command> --- Do not verify package
+              <command>--nodeps</command> &mdash; Do not verify package
               dependencies.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--noscripts</command> --- Do not execute any installation
-              scripts.
+              <command>--noscripts</command> &mdash; Do not execute any
+              installation scripts.
             </para>
           </listitem>
         </itemizedlist>
@@ -698,39 +705,40 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>p</command> --- Prep (unpack sources and apply patches).
+              <command>p</command> &mdash; Prep (unpack sources and apply
+              patches).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>l</command> --- List check (do some cursory checks on
+              <command>l</command> &mdash; List check (do some cursory checks on
               <command>%files</command>).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>c</command> --- Compile (prep and compile).
+              <command>c</command> &mdash; Compile (prep and compile).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>i</command> --- Install (prep, compile, install).
+              <command>i</command> &mdash; Install (prep, compile, install).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>b</command> --- Binary package (prep, compile, install,
-              package).
+              <command>b</command> &mdash; Binary package (prep, compile,
+              install, package).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>a</command> --- Binary/source package (prep, compile,
+              <command>a</command> &mdash; Binary/source package (prep, compile,
               install, package).
             </para>
           </listitem>
@@ -747,27 +755,28 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>--short-circuit</command> --- Skip straight to specified
-              stage (only for <command>c</command> and <command>i</command>).
+              <command>--short-circuit</command> &mdash; Skip straight to
+              specified stage (only for <command>c</command> and
+              <command>i</command>).
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--clean</command> --- Remove build tree when done.
+              <command>--clean</command> &mdash; Remove build tree when done.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--sign</command> --- Generate PGP signature.
+              <command>--sign</command> &mdash; Generate PGP signature.
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--buildroot
-              <replaceable>&lt;s&gt;</replaceable></command> --- Use
+              <replaceable>&lt;s&gt;</replaceable></command> &mdash; Use
               <command><replaceable>&lt;s&gt;</replaceable></command> as the
               build root.
             </para>
@@ -776,7 +785,7 @@
           <listitem>
             <para>
               <command>--buildarch
-              <replaceable>&lt;s&gt;</replaceable></command> --- Use
+              <replaceable>&lt;s&gt;</replaceable></command> &mdash; Use
               <command><replaceable>&lt;s&gt;</replaceable></command> as the
               build architecture.
             </para>
@@ -785,23 +794,25 @@
           <listitem>
             <para>
               <command>--buildos <replaceable>&lt;s&gt;</replaceable></command>
-              --- Use <command><replaceable>&lt;s&gt;</replaceable></command> as
-              the build operating system.
+              &mdash; Use
+              <command><replaceable>&lt;s&gt;</replaceable></command> as the
+              build operating system.
             </para>
           </listitem>
 
           <listitem>
             <para>
-              <command>--test</command> --- Do not execute any stages.
+              <command>--test</command> &mdash; Do not execute any stages.
             </para>
           </listitem>
 
           <listitem>
             <para>
               <command>--timecheck
-              <replaceable>&lt;s&gt;</replaceable></command> --- Set the time
-              check to <command><replaceable>&lt;s&gt;</replaceable></command>
-              seconds (0 disables it).
+              <replaceable>&lt;s&gt;</replaceable></command> &mdash; Set the
+              time check to
+              <command><replaceable>&lt;s&gt;</replaceable></command> seconds (0
+              disables it).
             </para>
           </listitem>
         </itemizedlist>
@@ -954,8 +965,8 @@
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              <command>--nopgp</command> --- Skip any PGP signatures (size and
-              MD5 only).
+              <command>--nopgp</command> &mdash; Skip any PGP signatures (size
+              and MD5 only).
             </para>
           </listitem>
         </itemizedlist>

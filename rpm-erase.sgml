@@ -39,7 +39,7 @@
           </row>
           <row>
             <entry spanname="span12" align="center">
-              Erase---specific Options
+              Erase&ndash;specific Options
             </entry>
             <entry>
               Page
@@ -138,7 +138,7 @@
     </table>
 
     <sect1 id="s1-rpm-erase-what-does-it-do">
-      <title><command>rpm -e</command> --- What Does it Do?</title>
+      <title><command>rpm -e</command> &mdash; What Does it Do?</title>
       <indexterm>
         <primary><command>rpm -e</command></primary>
         <secondary>what it does</secondary>
@@ -320,8 +320,8 @@ D: removing file index for /usr/man/man1/eject.1
 
       <sect2 id="s2-rpm-erase-test-option">
         <title>
-          <command>--test</command> --- Go Through the Process of Erasing the
-          Package, But Do Not Erase It
+          <command>--test</command> &mdash; Go Through the Process of Erasing
+          the Package, But Do Not Erase It
         </title>
         <!-- label: erase- -test -->
         <indexterm>
@@ -483,8 +483,8 @@ removing these packages would break dependencies:
 
 <sect2 id="s2-rpm-erase-noscripts-option">
         <title>
-          <command>--noscripts</command> --- Do <emphasis>Not</emphasis> Execute
-          Pre- and Post-uninstall Scripts
+          <command>--noscripts</command> &mdash; Do <emphasis>Not</emphasis>
+          Execute Pre- and Post-uninstall Scripts
         </title>
         <!-- label: erase- -noscripts -->
         <indexterm>
@@ -513,8 +513,9 @@ removing these packages would break dependencies:
 
       <sect2 id="s2-rpm-erase-rcfile-option">
         <title>
-          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command> ---
-          Read <command><replaceable>&lt;rcfile&gt;</replaceable></command> For RPM
+          <command>--rcfile <replaceable>&lt;rcfile&gt;</replaceable></command>
+          &mdash; Read
+          <command><replaceable>&lt;rcfile&gt;</replaceable></command> For RPM
           Defaults
         </title>
         <!-- label: erase- -rcfile -->
@@ -540,8 +541,9 @@ removing these packages would break dependencies:
 
       <sect2 id="s2-rpm-erase-root-option">
         <title>
-          <command>--root <replaceable>&lt;path&gt;</replaceable></command> --- Use
-          <command><replaceable>&lt;path&gt;</replaceable></command> As the Root
+          <command>--root <replaceable>&lt;path&gt;</replaceable></command>
+          &mdash; Use <command><replaceable>&lt;path&gt;</replaceable></command>
+          As the Root
         </title>
         <!-- label: erase- -root -->
         <indexterm>
@@ -671,7 +673,7 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         <itemizedlist mark="bullet">
           <listitem>
             <para>
-              RPM: RPM will happily uninstall itself.  No problem --- you'll
+              RPM: RPM will happily uninstall itself.  No problem &mdash; you'll
               just re-install it with <command>rpm -i</command>&hellip; Oops!
             </para>
           </listitem>

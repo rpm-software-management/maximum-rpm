@@ -147,7 +147,7 @@
   <dedication>
     <blockquote>
       <para>
-        To Deb -- My lover, editor, indexer, and friend&hellip;
+        To Deb &mdash; My lover, editor, indexer, and friend&hellip;
       </para>
       <para>
         To Matt, who heard "Daddy can't play right now" far too often&hellip;
@@ -165,7 +165,7 @@
 
   <part>
     <title>
-      RPM and Computer Users -- How to Use RPM to Effectively Manage Your
+      RPM and Computer Users &mdash; How to Use RPM to Effectively Manage Your
       Computer
     </title>
 
@@ -189,7 +189,8 @@
 
   <part>
     <title>
-      RPM and Developers -- How to Distribute Your Software More Easily With RPM
+      RPM and Developers &mdash; How to Distribute Your Software More Easily
+      With RPM
     </title>
 
     &RPM-PHILOSOPHY;

@@ -238,8 +238,8 @@
 
         <sect3 id="s3-rpm-multi-xxx-canon">
           <title>
-            <command><replaceable>xxx</replaceable>_canon</command> --- Define
-            Canonical Platform Name and Number
+            <command><replaceable>xxx</replaceable>_canon</command> &mdash;
+            Define Canonical Platform Name and Number
           </title>
           <indexterm>
             <primary><filename>rpmrc</filename> file</primary>
@@ -313,7 +313,7 @@ os_canon:  Linux:  Linux  1
           </para>
 
           <para>
-            The description above is not 100% complete --- There is an
+            The description above is not 100% complete &mdash; There is an
             additional step performed during the time RPM gets the system
             information from <command>uname</command>, and compares it against a
             canonical name.  Next, let's look at the <filename>rpmrc</filename>
@@ -323,8 +323,8 @@ os_canon:  Linux:  Linux  1
 
         <sect3 id="s3-rpm-multi-buildxxxtranslate">
           <title>
-            <command>build<replaceable>xxx</replaceable>translate</command> ---
-            Define Build Platform
+            <command>build<replaceable>xxx</replaceable>translate</command>
+            &mdash; Define Build Platform
           </title>
           <indexterm>
             <primary><filename>rpmrc</filename> file</primary>
@@ -401,8 +401,8 @@ buildostranslate: Linux: Linux
 
         <sect3 id="s3-rpm-multi-xxx-compat">
           <title>
-            <command><replaceable>xxx</replaceable>_compat</command> --- Define
-            Compatible Architectures
+            <command><replaceable>xxx</replaceable>_compat</command> &mdash;
+            Define Compatible Architectures
           </title>
           <!-- label: multi-xxx_compat -->
           <indexterm>
@@ -552,8 +552,8 @@ os_compat: Linux: AIX
 
     <sect1 id="s1-rpm-multi-optflags">
       <title>
-        <command>optflags</command> --- The Other <filename>rpmrc</filename> File
-        Entry
+        <command>optflags</command> &mdash; The Other <filename>rpmrc</filename>
+        File Entry
       </title>
       <indexterm>
         <primary>platform-dependent</primary>
@@ -816,7 +816,7 @@ ExclusiveOS: Irix
           <title>Conditionals Are Block Structured</title>
 
           <para>
-            Every conditional is block-structured --- in other words, the
+            Every conditional is block-structured &mdash; in other words, the
             conditional begins at a certain point within the spec file and
             continues some number of lines until it is ended.  This forms a
             block that will be used or ignored, depending on the platform the
@@ -877,7 +877,7 @@ Summary: This is a package for some other operating system
           </indexterm>
 
           <para>
-            Conditionals can be nested --- That is, the block formed by one
+            Conditionals can be nested &mdash; That is, the block formed by one
             conditional can enclose another conditional.  Here's an example:
 
             <screen width="60">
@@ -904,7 +904,7 @@ echo "This is not an i386"
           <para>
             In this example, the first conditional block formed by the
               <command>%ifarch i386</command> line contains a complete
-              <command>%ifos --- %else --- %endif</command> conditional.
+              <command>%ifos &mdash; %else &mdash; %endif</command> conditional.
               Therefore, if the build system was Intel-based, the
               <command>%ifos</command> conditional would be tested.  If the
               build system was <emphasis>not</emphasis> Intel-based, the

@@ -11,7 +11,7 @@
       These functions are available for anyone to use, making it possible to add
       RPM functionality to new and existing programs.  Rather than continually
       refer to "the RPM library" throughout this chapter, we'll use the name of
-      the library's main include file --- rpmlib.
+      the library's main include file &mdash; rpmlib.
     </para>
 
     <sect1 id="s1-rpm-rpmlib-overview">
@@ -94,7 +94,7 @@
 
         <sect3 id="s3-rpm-rpmlib-rpmerrorcode">
           <title>
-            Return Error Code --- <function>rpmErrorCode()</function>
+            Return Error Code &mdash; <function>rpmErrorCode()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -118,7 +118,7 @@ int rpmErrorCode(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmerrorstring">
           <title>
-            Return Error String --- <function>rpmErrorString()</function>
+            Return Error String &mdash; <function>rpmErrorString()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -142,7 +142,7 @@ char *rpmErrorString(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmerrorsetcallback">
           <title>
-            Set Error CallBack Function ---
+            Set Error CallBack Function &mdash;
             <function>rpmErrorSetCallback()</function>
           </title>
           <indexterm>
@@ -189,7 +189,7 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
 
         <sect3 id="s3-rpm-rpmlib-rpmreadpackageinfo">
           <title>
-            Read Package Information ---
+            Read Package Information &mdash;
             <function>rpmReadPackageInfo()</function>
           </title>
           <indexterm>
@@ -232,20 +232,20 @@ int rpmReadPackageInfo(int fd,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- Success.
+                  <returnvalue>0</returnvalue> &mdash; Success.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- Bad magic numbers found in
-                  package.
+                  <returnvalue>1</returnvalue> &mdash; Bad magic numbers found
+                  in package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>2</returnvalue> --- Other error.
+                  <returnvalue>2</returnvalue> &mdash; Other error.
                 </para>
               </listitem>
             </itemizedlist>
@@ -254,7 +254,8 @@ int rpmReadPackageInfo(int fd,
 
         <sect3 id="s3-rpm-rpmlib-rpmreadpackageheader">
           <title>
-            Read Package Header --- <function>rpmReadPackageHeader()</function>
+            Read Package Header &mdash;
+            <function>rpmReadPackageHeader()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -301,20 +302,20 @@ int rpmReadPackageHeader(int fd,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- Success.
+                  <returnvalue>0</returnvalue> &mdash; Success.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- Bad magic numbers found in
-                  package.
+                  <returnvalue>1</returnvalue> &mdash; Bad magic numbers found
+                  in package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>2</returnvalue> --- Other error.
+                  <returnvalue>2</returnvalue> &mdash; Other error.
                 </para>
               </listitem>
             </itemizedlist>
@@ -347,7 +348,8 @@ int rpmReadPackageHeader(int fd,
 
         <sect3 id="s3-rpm-rpmlib-rpmgetvar">
           <title>
-            Return Value of RPM Variable --- <function>rpmGetVar()</function>
+            Return Value of RPM Variable &mdash;
+            <function>rpmGetVar()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -374,7 +376,7 @@ char *rpmGetVar(int var);
 
         <sect3 id="s3-rpm-rpmlib-rpmgetbooleanvar">
           <title>
-            Return Boolean Value Of RPM Variable ---
+            Return Boolean Value Of RPM Variable &mdash;
             <function>rpmGetBooleanVar()</function>
           </title>
           <indexterm>
@@ -404,7 +406,7 @@ int rpmGetBooleanVar(int var);
 
         <sect3 id="s3-rpm-rpmlib-rpmsetvar">
           <title>
-            Set Value Of RPM Variable --- <function>rpmSetVar()</function>
+            Set Value Of RPM Variable &mdash; <function>rpmSetVar()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -439,7 +441,7 @@ void rpmSetVar(int var,
 
         <para>
           The functions in this section are all related to
-          <filename>rpmrc</filename> information --- the
+          <filename>rpmrc</filename> information &mdash; the
           <filename>rpmrc</filename> files as well as the variables set from
           those files.  This information also includes the architecture and
           operating system information based on <filename>rpmrc</filename> file
@@ -448,7 +450,7 @@ void rpmSetVar(int var,
 
         <sect3 id="s3-rpm-rpmlib-rpmreadconfigfiles">
           <title>
-            Read <filename>rpmrc</filename> Files ---
+            Read <filename>rpmrc</filename> Files &mdash;
             <function>rpmReadConfigFiles()</function>
           </title>
           <indexterm>
@@ -518,7 +520,8 @@ int rpmReadConfigFiles(char * file,
 
         <sect3 id="s3-rpm-rpmlib-rpmgetosname">
           <title>
-            Return Operating System Name --- <function>rpmGetOsName()</function>
+            Return Operating System Name &mdash;
+            <function>rpmGetOsName()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -542,7 +545,8 @@ char *rpmGetOsName(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmgetarchname">
           <title>
-            Return Architecture Name --- <function>rpmGetArchName()</function>
+            Return Architecture Name &mdash;
+            <function>rpmGetArchName()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -565,7 +569,7 @@ char *rpmGetArchName(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmshowrc">
           <title>
-            Print all <filename>rpmrc</filename>-Derived Variables ---
+            Print all <filename>rpmrc</filename>-Derived Variables &mdash;
             <function>rpmShowRC()</function>
           </title>
           <indexterm>
@@ -590,7 +594,7 @@ int rpmShowRC(FILE *f);
 
         <sect3 id="s3-rpm-rpmlib-rpmarchscore">
           <title>
-            Return Architecture Compatibility Score ---
+            Return Architecture Compatibility Score &mdash;
             <function>rpmArchScore()</function>
           </title>
           <indexterm>
@@ -617,7 +621,7 @@ int rpmArchScore(char * arch);
 
         <sect3 id="s3-rpm-rpmlib-rpmosscore">
           <title>
-            Return Operating System Compatibility Score ---
+            Return Operating System Compatibility Score &mdash;
             <function>rpmOsScore()</function>
           </title>
           <indexterm>
@@ -666,7 +670,7 @@ int rpmOsScore(char * os);
 
         <sect3 id="s3-rpm-rpmlib-rpmdbopen">
           <title>
-            Open RPM Database --- <function>rpmdbOpen()</function>
+            Open RPM Database &mdash; <function>rpmdbOpen()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -704,7 +708,7 @@ int rpmdbOpen(char * root,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbclose">
           <title>
-            Close RPM Database --- <function>rpmdbClose()</function>
+            Close RPM Database &mdash; <function>rpmdbClose()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -728,7 +732,7 @@ void rpmdbClose(rpmdb db);
 
         <sect3 id="s3-rpm-rpmlib-rpmdbinit">
           <title>
-            Create RPM Database --- <function>rpmdbInit()</function>
+            Create RPM Database &mdash; <function>rpmdbInit()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -762,7 +766,7 @@ int rpmdbInit(char * root,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbrebuild">
           <title>
-            Rebuild RPM Database --- <function>rpmdbRebuild()</function>
+            Rebuild RPM Database &mdash; <function>rpmdbRebuild()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -815,7 +819,7 @@ int rpmdbRebuild(char * root);
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfirstrecnum">
           <title>
-            Begin RPM Database Traversal ---
+            Begin RPM Database Traversal &mdash;
             <function>rpmdbFirstRecNum()</function>
           </title>
           <indexterm>
@@ -843,7 +847,7 @@ unsigned int rpmdbFirstRecNum(rpmdb db);
 
         <sect3 id="s3-rpm-rpmlib-rpmdbnextrecnum">
           <title>
-            Traverse To Next RPM Database Record ---
+            Traverse To Next RPM Database Record &mdash;
             <function>rpmdbNextRecNum()</function>
           </title>
           <indexterm>
@@ -873,7 +877,7 @@ unsigned int rpmdbNextRecNum(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbgetrecord">
           <title>
-            Return Record From RPM Database ---
+            Return Record From RPM Database &mdash;
             <function>rpmdbGetRecord()</function>
           </title>
           <indexterm>
@@ -958,7 +962,8 @@ typedef struct {
 
         <sect3 id="s3-rpm-rpmlib-dbifreeindexrecord">
           <title>
-            Free Database Index --- <function>dbiFreeIndexRecord()</function>
+            Free Database Index &mdash;
+            <function>dbiFreeIndexRecord()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -982,7 +987,7 @@ void dbiFreeIndexRecord(dbiIndexSet set);
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfindbyfile">
           <title>
-            Search RPM Database By File ---
+            Search RPM Database By File &mdash;
             <function>rpmdbFindByFile()</function>
           </title>
           <indexterm>
@@ -1014,21 +1019,21 @@ int rpmdbFindByFile(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1038,7 +1043,7 @@ int rpmdbFindByFile(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbyfindbygroup">
           <title>
-            Search RPM Database By Group ---
+            Search RPM Database By Group &mdash;
             <function>rpmdbFindByGroup()</function>
           </title>
           <indexterm>
@@ -1070,21 +1075,21 @@ int rpmdbFindByGroup(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1094,7 +1099,7 @@ int rpmdbFindByGroup(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfindpackage">
           <title>
-            Search RPM Database By Package ---
+            Search RPM Database By Package &mdash;
             <function>rpmdbFindPackage()</function>
           </title>
           <indexterm>
@@ -1126,21 +1131,21 @@ int rpmdbFindPackage(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1150,7 +1155,7 @@ int rpmdbFindPackage(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfindbyprovides">
           <title>
-            Search RPM Database By Provides ---
+            Search RPM Database By Provides &mdash;
             <function>rpmdbFindByProvides()</function>
           </title>
           <indexterm>
@@ -1182,21 +1187,21 @@ int rpmdbFindByProvides(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1206,7 +1211,7 @@ int rpmdbFindByProvides(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfindbyrequiredby">
           <title>
-            Search RPM Database By Requires ---
+            Search RPM Database By Requires &mdash;
             <function>rpmdbFindByRequiredBy()</function>
           </title>
           <indexterm>
@@ -1238,21 +1243,21 @@ int rpmdbFindByRequiredBy(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1262,7 +1267,7 @@ int rpmdbFindByRequiredBy(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfindbyconflicts">
           <title>
-            Search RPM Database By Conflicts ---
+            Search RPM Database By Conflicts &mdash;
             <function>rpmdbFindByConflicts()</function>
           </title>
           <indexterm>
@@ -1294,21 +1299,21 @@ int rpmdbFindByConflicts(rpmdb db,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>-1</returnvalue> --- An error occurred reading a
-                  database record.
+                  <returnvalue>-1</returnvalue> &mdash; An error occurred
+                  reading a database record.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The search completed
+                  <returnvalue>0</returnvalue> &mdash; The search completed
                   normally.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The search term was not
+                  <returnvalue>1</returnvalue> &mdash; The search term was not
                   found.
                 </para>
               </listitem>
@@ -1333,7 +1338,7 @@ int rpmdbFindByConflicts(rpmdb db,
 
         <sect3 id="s3-rpm-rpmlib-rpminstallsourcepackage">
           <title>
-            Install Source Package File ---
+            Install Source Package File &mdash;
             <function>rpmInstallSourcePackage()</function>
           </title>
           <indexterm>
@@ -1386,21 +1391,21 @@ int rpmInstallSourcePackage(char * root,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The source package was
+                  <returnvalue>0</returnvalue> &mdash; The source package was
                   installed successfully.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The source package file
+                  <returnvalue>1</returnvalue> &mdash; The source package file
                   contained incorrect magic numbers.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>2</returnvalue> --- Another type of error
+                  <returnvalue>2</returnvalue> &mdash; Another type of error
                   occurred.
                 </para>
               </listitem>
@@ -1410,7 +1415,7 @@ int rpmInstallSourcePackage(char * root,
 
         <sect3 id="s3-rpm-rpmlib-rpminstallpackage">
           <title>
-            Install Binary Package File ---
+            Install Binary Package File &mdash;
             <function>rpmInstallPackage()</function>
           </title>
           <indexterm>
@@ -1459,14 +1464,14 @@ int rpmInstallPackage(char * rootdir,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_REPLACEPKG</symbol> --- Install the package
-                  even if it is already installed.
+                  <symbol>RPMINSTALL_REPLACEPKG</symbol> &mdash; Install the
+                  package even if it is already installed.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_REPLACEFILES</symbol> --- Install the
+                  <symbol>RPMINSTALL_REPLACEFILES</symbol> &mdash; Install the
                   package even if it will replace files owned by another
                   package.
                 </para>
@@ -1474,21 +1479,21 @@ int rpmInstallPackage(char * rootdir,
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_TEST</symbol> --- Perform all install-time
-                  checks, but do not actually install the package.
+                  <symbol>RPMINSTALL_TEST</symbol> &mdash; Perform all
+                  install-time checks, but do not actually install the package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_UPGRADE</symbol> --- Install the package,
-                  and remove all older versions of the package.
+                  <symbol>RPMINSTALL_UPGRADE</symbol> &mdash; Install the
+                  package, and remove all older versions of the package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_UPGRADETOOLD</symbol> --- Install the
+                  <symbol>RPMINSTALL_UPGRADETOOLD</symbol> &mdash; Install the
                   package, even if the package is an older version of an
                   already-installed package.
                 </para>
@@ -1496,30 +1501,30 @@ int rpmInstallPackage(char * rootdir,
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_NODOCS</symbol> --- Do not install the
+                  <symbol>RPMINSTALL_NODOCS</symbol> &mdash; Do not install the
                   package's documentation files.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_NOSCRIPTS</symbol> --- Do not execute the
-                  package's install- and erase-time (in the case of an upgrade)
-                  scripts.
+                  <symbol>RPMINSTALL_NOSCRIPTS</symbol> &mdash; Do not execute
+                  the package's install- and erase-time (in the case of an
+                  upgrade) scripts.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_NOARCH</symbol> --- Do not perform
+                  <symbol>RPMINSTALL_NOARCH</symbol> &mdash; Do not perform
                   architecture compatibility tests.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMINSTALL_NOOS</symbol> --- Do not perform operating
-                  system compatibility tests.
+                  <symbol>RPMINSTALL_NOOS</symbol> &mdash; Do not perform
+                  operating system compatibility tests.
                 </para>
               </listitem>
             </itemizedlist>
@@ -1556,21 +1561,21 @@ int rpmInstallPackage(char * rootdir,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The binary package was
+                  <returnvalue>0</returnvalue> &mdash; The binary package was
                   installed successfully.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The binary package file
+                  <returnvalue>1</returnvalue> &mdash; The binary package file
                   contained incorrect magic numbers.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>2</returnvalue> --- Another type of error
+                  <returnvalue>2</returnvalue> &mdash; Another type of error
                   occurred.
                 </para>
               </listitem>
@@ -1580,7 +1585,7 @@ int rpmInstallPackage(char * rootdir,
 
         <sect3 id="s3-rpm-rpmlib-rpmnotifyfunction">
           <title>
-            Track Package Installation Progress ---
+            Track Package Installation Progress &mdash;
             <function>rpmNotifyFunction()</function>
           </title>
           <!-- label: notify-function -->
@@ -1609,14 +1614,14 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
             <orderedlist>
               <listitem>
                 <para>
-                  <parameter>amount</parameter> --- The number of bytes of the
-                  install that have been completed so far.
+                  <parameter>amount</parameter> &mdash; The number of bytes of
+                  the install that have been completed so far.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <parameter>total</parameter> --- The total number of bytes
+                  <parameter>total</parameter> &mdash; The total number of bytes
                   that will be installed.
                 </para>
               </listitem>
@@ -1631,7 +1636,8 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
 
         <sect3 id="s3-rpm-rpmlib-rpmremovepackage">
           <title>
-            Remove Installed Package --- <function>rpmRemovePackage()</function>
+            Remove Installed Package &mdash;
+            <function>rpmRemovePackage()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -1672,15 +1678,15 @@ int rpmRemovePackage(char * root,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <symbol>RPMUNINSTALL_TEST</symbol> --- Perform all erase-time
-                  checks, but do not actually remove the package.
+                  <symbol>RPMUNINSTALL_TEST</symbol> &mdash; Perform all
+                  erase-time checks, but do not actually remove the package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMUNINSTALL_NOSCRIPTS</symbol> --- Do not execute the
-                  package's erase-time scripts.
+                  <symbol>RPMUNINSTALL_NOSCRIPTS</symbol> &mdash; Do not execute
+                  the package's erase-time scripts.
                 </para>
               </listitem>
             </itemizedlist>
@@ -1692,14 +1698,15 @@ int rpmRemovePackage(char * root,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <returnvalue>0</returnvalue> --- The package was removed
+                  <returnvalue>0</returnvalue> &mdash; The package was removed
                   successfully.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <returnvalue>1</returnvalue> --- The package removal failed.
+                  <returnvalue>1</returnvalue> &mdash; The package removal
+                  failed.
                 </para>
               </listitem>
             </itemizedlist>
@@ -1754,7 +1761,7 @@ int rpmRemovePackage(char * root,
 
         <sect3 id="s3-rpm-rpmlib-rpmverifyfile">
           <title>
-            Verify File --- <function>rpmVerifyFile()</function>
+            Verify File &mdash; <function>rpmVerifyFile()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -1799,7 +1806,7 @@ int rpmVerifyFile(char * root,
         <sect3 id="s3-rpm-rpmlib-rpmverifyscript">
           <title>
             Execute Package's <command>%verifyscript</command> Verification
-            Script --- <function>rpmVerifyScript()</function>
+            Script &mdash; <function>rpmVerifyScript()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -1880,13 +1887,13 @@ int rpmVerifyScript(char * root,
           <emphasis>and</emphasis> the <structname>rpmDependencies</structname>
           structure when they are no longer needed.  However,
           <function>free()</function> should <emphasis>not</emphasis> be used
-          --- special functions for this are provided, and will be discussed in
-          this section.
+          &mdash; special functions for this are provided, and will be discussed
+          in this section.
         </para>
 
         <sect3 id="s3-rpm-rpmlib-rpmdepdependencies">
           <title>
-            Create a New Dependency Data Structure ---
+            Create a New Dependency Data Structure &mdash;
             <function>rpmdepDependencies()</function>
           </title>
           <indexterm>
@@ -1914,7 +1921,7 @@ rpmDependencies rpmdepDependencies(rpmdb db);
 
         <sect3 id="s3-rpm-rpmlib-rpmdepaddpackage">
           <title>
-            Add a Package Install To the Dependency Data Structure ---
+            Add a Package Install To the Dependency Data Structure &mdash;
             <function>rpmdepAddPackage()</function>
           </title>
           <indexterm>
@@ -1942,7 +1949,7 @@ void rpmdepAddPackage(rpmDependencies rpmdep,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepupgradepackage">
           <title>
-            Add a Package Upgrade To the Dependency Data Structure ---
+            Add a Package Upgrade To the Dependency Data Structure &mdash;
             <function>rpmdepUpgradePackage()</function>
           </title>
           <indexterm>
@@ -1972,7 +1979,7 @@ void rpmdepUpgradePackage(rpmDependencies rpmdep,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepremovepackage">
           <title>
-            Add a Package Removal To the Dependency Data Structure ---
+            Add a Package Removal To the Dependency Data Structure &mdash;
             <function>rpmdepRemovePackage()</function>
           </title>
           <indexterm>
@@ -1999,7 +2006,7 @@ void rpmdepRemovePackage(rpmDependencies rpmdep,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepavailablepackage">
           <title>
-            Add an Available Package To the Dependency Data Structure ---
+            Add an Available Package To the Dependency Data Structure &mdash;
             <function>rpmdepAvailablePackage()</function>
           </title>
           <indexterm>
@@ -2036,7 +2043,8 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepcheck">
           <title>
-            Perform a Dependency Check --- <function>rpmdepCheck()</function>
+            Perform a Dependency Check &mdash;
+            <function>rpmdepCheck()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2069,7 +2077,7 @@ int rpmdepCheck(rpmDependencies rpmdep,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepfreeconflicts">
           <title>
-            Free Results of <function>rpmdepCheck()</function> ---
+            Free Results of <function>rpmdepCheck()</function> &mdash;
             <function>rpmdepFreeConflicts()</function>
           </title>
           <indexterm>
@@ -2095,7 +2103,7 @@ void rpmdepFreeConflicts(struct rpmDependencyConflict * conflicts,
 
         <sect3 id="s3-rpm-rpmlib-rpmdepdone">
           <title>
-            Free a Dependency Data Structure ---
+            Free a Dependency Data Structure &mdash;
             <function>rpmdepDone()</function>
           </title>
           <indexterm>
@@ -2150,7 +2158,7 @@ void rpmdepDone(rpmDependencies rpmdep);
 
         <sect3 id="s3-rpm-rpmlib-rpmincreaseverbosity">
           <title>
-            Increase Verbosity Level ---
+            Increase Verbosity Level &mdash;
             <function>rpmIncreaseVerbosity()</function>
           </title>
           <indexterm>
@@ -2174,7 +2182,7 @@ void rpmIncreaseVerbosity(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmsetverbosity">
           <title>
-            Set Verbosity Level --- <function>rpmSetVerbosity()</function>
+            Set Verbosity Level &mdash; <function>rpmSetVerbosity()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2198,7 +2206,8 @@ void rpmSetVerbosity(int level);
 
         <sect3 id="s3-rpm-rpmlib-rpmgetverbosity">
           <title>
-            Return Verbosity Level --- <function>rpmGetVerbosity()</function>
+            Return Verbosity Level &mdash;
+            <function>rpmGetVerbosity()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2220,7 +2229,7 @@ int rpmGetVerbosity(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmisverbose">
           <title>
-            Check Verbosity Level --- <function>rpmIsVerbose()</function>
+            Check Verbosity Level &mdash; <function>rpmIsVerbose()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2245,7 +2254,7 @@ int rpmIsVerbose(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmisdebug">
           <title>
-            Check Debug Level --- <function>rpmIsDebug()</function>
+            Check Debug Level &mdash; <function>rpmIsDebug()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2296,7 +2305,7 @@ int rpmIsDebug(void);
 
         <sect3 id="s3-rpm-rpmlib-rpmverifysignature">
           <title>
-            Verify A Package File's Signature ---
+            Verify A Package File's Signature &mdash;
             <function>rpmVerifySignature()</function>
           </title>
           <indexterm>
@@ -2338,29 +2347,29 @@ int rpmVerifySignature(char *file,
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <symbol>RPMSIG_OK</symbol> --- The signature verified
+                  <symbol>RPMSIG_OK</symbol> &mdash; The signature verified
                   correctly.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMSIG_UNKNOWN</symbol> --- The signature type is
+                  <symbol>RPMSIG_UNKNOWN</symbol> &mdash; The signature type is
                   unknown.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMSIG_BAD</symbol> --- The signature did not verify
-                  correctly.
+                  <symbol>RPMSIG_BAD</symbol> &mdash; The signature did not
+                  verify correctly.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <symbol>RPMSIG_NOKEY</symbol> --- The key required to check
-                  this signature is not available.
+                  <symbol>RPMSIG_NOKEY</symbol> &mdash; The key required to
+                  check this signature is not available.
                 </para>
               </listitem>
             </itemizedlist>
@@ -2369,8 +2378,8 @@ int rpmVerifySignature(char *file,
 
         <sect3 id="s3-rpm-rpmlib-rpmfreesignature">
           <title>
-            Free Signature Read By <function>rpmReadPackageInfo()</function> ---
-            <function>rpmFreeSignature()</function>
+            Free Signature Read By <function>rpmReadPackageInfo()</function>
+            &mdash; <function>rpmFreeSignature()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2422,7 +2431,7 @@ void rpmFreeSignature(Header h);
 
         <sect3 id="s3-rpm-rpmlib-headerread">
           <title>
-            Read A Header --- <function>headerRead()</function>
+            Read A Header &mdash; <function>headerRead()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2458,7 +2467,7 @@ Header headerRead(int fd,
 
         <sect3 id="s3-rpm-rpmlib-headerwrite">
           <title>
-            Write A Header --- <function>headerWrite()</function>
+            Write A Header &mdash; <function>headerWrite()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2491,7 +2500,7 @@ void headerWrite(int fd,
 
         <sect3 id="s3-rpm-rpmlib-headercopy">
           <title>
-            Copy A Header --- <function>headerCopy()</function>
+            Copy A Header &mdash; <function>headerCopy()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2514,7 +2523,8 @@ Header headerCopy(Header h);
 
         <sect3 id="s3-rpm-rpmlib-headersizeof">
           <title>
-            Calculate A Header's Size --- <function>headerSizeof()</function>
+            Calculate A Header's Size &mdash;
+            <function>headerSizeof()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2544,7 +2554,7 @@ unsigned int headerSizeof(Header h,
 
         <sect3 id="s3-rpm-rpmlib-headernew">
           <title>
-            Create A New Header --- <function>headerNew()</function>
+            Create A New Header &mdash; <function>headerNew()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2567,7 +2577,7 @@ Header headerNew(void);
 
         <sect3 id="s3-rpm-rpmlib-headerfree">
           <title>
-            Deallocate A Header --- <function>headerFree()</function>
+            Deallocate A Header &mdash; <function>headerFree()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2591,7 +2601,7 @@ void headerFree(Header h);
 
         <sect3 id="s3-rpm-rpmlib-headerdump">
           <title>
-            Print Header Structure In Human-Readable Form ---
+            Print Header Structure In Human-Readable Form &mdash;
             <function>headerDump()</function>
           </title>
           <indexterm>
@@ -2637,63 +2647,63 @@ void headerDump(Header h,
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                <symbol>RPM_NULL_TYPE</symbol> --- This type is not used.
+                <symbol>RPM_NULL_TYPE</symbol> &mdash; This type is not used.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_CHAR_TYPE</symbol> --- The entry contains a single
-                character.
+                <symbol>RPM_CHAR_TYPE</symbol> &mdash; The entry contains a
+                single character.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_INT8_TYPE</symbol> --- The entry contains an
+                <symbol>RPM_INT8_TYPE</symbol> &mdash; The entry contains an
                 eight-bit integer.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_INT16_TYPE</symbol> --- The entry contains a
+                <symbol>RPM_INT16_TYPE</symbol> &mdash; The entry contains a
                 sixteen-bit integer.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_INT32_TYPE</symbol> --- The entry contains a
+                <symbol>RPM_INT32_TYPE</symbol> &mdash; The entry contains a
                 thirty-two-bit integer.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_INT64_TYPE</symbol> --- The entry contains a
+                <symbol>RPM_INT64_TYPE</symbol> &mdash; The entry contains a
                 sixty-four-bit integer.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_STRING_TYPE</symbol> --- The entry contains a
+                <symbol>RPM_STRING_TYPE</symbol> &mdash; The entry contains a
                 null-terminated character string.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_BIN_TYPE</symbol> --- The entry contains binary data
-                that will not be interpreted by rpmlib.
+                <symbol>RPM_BIN_TYPE</symbol> &mdash; The entry contains binary
+                data that will not be interpreted by rpmlib.
               </para>
             </listitem>
 
             <listitem>
               <para>
-                <symbol>RPM_STRING_ARRAY_TYPE</symbol> --- The entry contains an
-                array of null-terminated strings.
+                <symbol>RPM_STRING_ARRAY_TYPE</symbol> &mdash; The entry
+                contains an array of null-terminated strings.
               </para>
             </listitem>
           </itemizedlist>
@@ -2701,7 +2711,7 @@ void headerDump(Header h,
 
         <sect3 id="s3-rpm-rpmlib-headergetentry">
           <title>
-            Get Entry From Header --- <function>headerGetEntry()</function>
+            Get Entry From Header &mdash; <function>headerGetEntry()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2742,7 +2752,7 @@ int headerGetEntry(Header h,
 
         <sect3 id="s3-rpm-rpmlib-headeraddentry">
           <title>
-            Add Entry To Header --- <function>headerAddEntry()</function>
+            Add Entry To Header &mdash; <function>headerAddEntry()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2792,7 +2802,7 @@ int headerAddEntry(Header h,
 
         <sect3 id="s3-rpm-rpmlib-headerisentry">
           <title>
-            Determine If Entry Is In Header ---
+            Determine If Entry Is In Header &mdash;
             <function>headerIsEntry()</function>
           </title>
           <indexterm>
@@ -2835,7 +2845,7 @@ int headerIsEntry(Header h,
 
         <sect3 id="s3-rpm-rpmlib-headerinititerator">
           <title>
-            Create an Iterator --- <function>headerInitIterator()</function>
+            Create an Iterator &mdash; <function>headerInitIterator()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2859,7 +2869,8 @@ HeaderIterator headerInitIterator(Header h);
 
         <sect3 id="s3-rpm-rpmlib-headernextiterator">
           <title>
-            Step To the Next Entry --- <function>headerNextIterator()</function>
+            Step To the Next Entry &mdash;
+            <function>headerNextIterator()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>
@@ -2900,7 +2911,7 @@ int headerNextIterator(HeaderIterator iter,
 
         <sect3 id="s3-rpm-rpmlib-headerfreeiterator">
           <title>
-            Free An Iterator --- <function>headerFreeIterator()</function>
+            Free An Iterator &mdash; <function>headerFreeIterator()</function>
           </title>
           <indexterm>
             <primary>rpmlib functions, list of</primary>

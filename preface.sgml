@@ -1,7 +1,7 @@
   <preface id="ch-preface">
     <title>Preface</title>
     <sect1 id="s1-preface-linux-and-rpm-history">
-      <title>Linux and RPM - A Brief History</title>
+      <title>Linux and RPM &mdash; A Brief History</title>
 
       <indexterm>
         <primary>Linux and RPM history</primary>
@@ -19,7 +19,7 @@
         and has taken the computing world by storm.
       </para>
       <para>
-        And for good reason --- With the addition of Linux, an Intel-based
+        And for good reason &mdash; With the addition of Linux, an Intel-based
         personal computer that had previously been prisoner of the dreaded
         Windows hourglass is transformed into a fully multitasking, network
         capable, personal <emphasis>workstation</emphasis>.  All for the cost of
@@ -79,7 +79,7 @@
         their products into the hands of their customers.  They also find that
         it can even make the process of <emphasis>building</emphasis> their
         software easier.  (Those of you that develop software for fun and
-        profit, stick around - the second half of this book will show you
+        profit, stick around &mdash; the second half of this book will show you
         everything you need to know to get your software "RPM-ized")
       </para>
       <para>
@@ -112,7 +112,7 @@
 <userinput>ls -FAl !*|less</userinput>
         </screen>
 
-         is serious magic (or maybe even a typing error), relax --- we'll
+         is serious magic (or maybe even a typing error), relax &mdash; we'll
          explain everything you'll need to know in the first section.
       </para>
       <para>

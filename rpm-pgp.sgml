@@ -356,7 +356,7 @@ pgp_path: /root/.pgp
 
       <sect2 id="s2-rpm-pgp-sign-option">
         <title>
-          <command>--sign</command> --- Sign a Package At Build-Time
+          <command>--sign</command> &mdash; Sign a Package At Build-Time
         </title>
         <indexterm>
           <primary><command>--sign</command> option</primary>
@@ -495,7 +495,7 @@ Wrote: /usr/src/redhat/SRPMS/bother-3.5-1.src.rpm
 
       <sect2 id="s2-rpm-pgp-resign-option">
         <title>
-          <command>--resign</command> -- Replace a Package's Signature(s)
+          <command>--resign</command> &mdash; Replace a Package's Signature(s)
         </title>
         <indexterm>
           <primary><command>--resign</command> option</primary>
@@ -594,7 +594,7 @@ blather-7.9-1.i386.rpm: RPM v3 bin i386 blather-7.9-1
 
       <sect2 id="s2-rpm-pgp-addsign-option">
         <title>
-          <command>--addsign</command> -- Add a Signature To a Package
+          <command>--addsign</command> &mdash; Add a Signature To a Package
         </title>
         <indexterm>
           <primary><command>--addsign</command> option</primary>

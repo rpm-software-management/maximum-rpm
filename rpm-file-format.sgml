@@ -67,7 +67,7 @@
     <para>
       A few notes are in order.  Normally, the package name is taken verbatim
       from the packaged software's name.  Occasionally, this approach won't work
-      --- usually this occurs when the software is split into multiple
+      &mdash; usually this occurs when the software is split into multiple
       "subpackages," each supporting a different set of functions.  An example
       of this situation would be the way <filename>ncurses</filename> was
       packaged on &RHL; Linux.  The package incorporating
@@ -95,47 +95,47 @@
       <itemizedlist mark="bullet">
         <listitem>
           <para>
-            <literal>i386</literal> --- The Intel x86 family of microprocessors,
-            starting with the 80386.
+            <literal>i386</literal> &mdash; The Intel x86 family of
+            microprocessors, starting with the 80386.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>alpha</literal> --- The Digital Alpha/AXP series of
+            <literal>alpha</literal> &mdash; The Digital Alpha/AXP series of
             microprocessors.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>sparc</literal> --- Sun Microsystem's SPARC series of
+            <literal>sparc</literal> &mdash; Sun Microsystem's SPARC series of
             chips.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>mips</literal> --- MIPS Technologies' processors.
+            <literal>mips</literal> &mdash; MIPS Technologies' processors.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>ppc</literal> --- The Power PC microprocessor family.
+            <literal>ppc</literal> &mdash; The Power PC microprocessor family.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>m68k</literal> --- Motorola's 68000 series of CISC
+            <literal>m68k</literal> &mdash; Motorola's 68000 series of CISC
             microprocessors.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <literal>SGI</literal> --- Equivalent to "MIPS".
+            <literal>SGI</literal> &mdash; Equivalent to "MIPS".
           </para>
         </listitem>
       </itemizedlist>
@@ -288,12 +288,12 @@ struct rpmlead {
         pieces of data that make up the lead.  In the following display, the
         number to the left of the colon is the byte offset, in hexadecimal, from
         the start of the file.  The eight groups of four characters show the hex
-        value of the bytes in the file --- two bytes per group of four
+        value of the bytes in the file &mdash; two bytes per group of four
         characters.  Finally, the characters on the right show the ASCII values
         of the data bytes.  When a data byte's value results in a non-printable
         character, a dot (".")  is inserted instead.  Here are the first
-        thirty-two bytes of a package file --- in this case, the package file
-        <filename>rpm-2.2.1-1.i386.rpm</filename>:
+        thirty-two bytes of a package file &mdash; in this case, the package
+        file <filename>rpm-2.2.1-1.i386.rpm</filename>:
 
         <screen width="60">
 <computeroutput>
@@ -401,7 +401,7 @@ rpm-2.2.1-1
         By looking at the C structure that defines the lead, and matching it
         with the bytes in an actual package file, it's trivial to extract the
         data from the lead.  From a programming standpoint, it's also easy to
-        manipulate data in the lead --- It's simply a matter of using the
+        manipulate data in the lead &mdash; It's simply a matter of using the
         element names from the structure.  But there's a problem.  And because
         of that problem the lead is no longer used internally by RPM.
       </para>
@@ -513,8 +513,8 @@ rpm-2.2.1-1
           manipulating information in a standard way.  The header structure's
           sole purpose in life is to contain zero or more pieces of data.  A
           file can have more than one header structure in it.  In fact, an RPM
-          package file has two --- the signature, and the header.  It was from
-          this header that the header structure got its name.
+          package file has two &mdash; the signature, and the header.  It was
+          from this header that the header structure got its name.
         </para>
         <para>
           There are three sections to each header structure.  The first section
@@ -532,8 +532,8 @@ rpm-2.2.1-1
           After the index comes the <firstterm>store</firstterm>.  It is in the
           store that the data items are kept.  The data in the store is packed
           together as closely as possible.  The order in which the data is
-          stored is immaterial --- a far cry from the C structure used in the
-          lead.
+          stored is immaterial &mdash; a far cry from the C structure used in
+          the lead.
         </para>
       </sect3>
 
@@ -565,7 +565,7 @@ rpm-2.2.1-1
           <para>
             The header structure's index is made up of zero or more index
             entries.  Each entry is sixteen bytes longs.  The first four bytes
-            contain a <firstterm>tag</firstterm> --- a numeric value that
+            contain a <firstterm>tag</firstterm> &mdash; a numeric value that
             identifies what type of data is pointed to by the entry.  The tag
             values change according to the header structure's position in the
             RPM file.  A list of the actual tag values, and what they represent,
@@ -915,11 +915,11 @@ rpm-2.2.1-1
           </screen>
         </para>
         <para>
-          It has a tag value of <literal>03ea</literal> (1002 in decimal --- a
-          PGP signature block) and is also a BIN data type.  The data starts 20
-          decimal bytes from the start of the data area, which would put it at
-          file offset b4 (in hex).  It's a biggie --- 152 bytes long!  Here's
-          the data, starting with <literal>8900</literal>:
+          It has a tag value of <literal>03ea</literal> (1002 in decimal &mdash;
+          a PGP signature block) and is also a BIN data type.  The data starts
+          20 decimal bytes from the start of the data area, which would put it
+          at file offset b4 (in hex).  It's a biggie &mdash; 152 bytes long!
+          Here's the data, starting with <literal>8900</literal>:
 
           <screen width="60">
 <computeroutput>
@@ -943,7 +943,7 @@ rpm-2.2.1-1
           round the size out so that it ends on an 8-byte boundary.  This means
           that the offset of the next section starts at offset 150, in hex.
           Say, wasn't the size in the size signature off by 150 hex?  Yes, the
-          size in the signature is the size of the file ---
+          size in the signature is the size of the file &mdash;
           <emphasis>less</emphasis> the size of the lead and the signature
           sections.
         </para>
@@ -967,7 +967,7 @@ rpm-2.2.1-1
         possible tag types, the header has more than <emphasis>sixty</emphasis>
         different tags.  The list of currently defined tags appears later in
         this appendix on <xref linkend="s3-rpm-file-format-header-tag-listing">.
-        Be aware that the list of tags changes frequently --- the definitive
+        Be aware that the list of tags changes frequently &mdash; the definitive
         list appears in the RPM sources in <filename>lib/rpmlib.h</filename>.
       </para>
 
@@ -1039,9 +1039,9 @@ rpm-2.2.1-1
           need to keep reading bytes until we reach a byte whose numeric value
           is zero.  We find the bytes <literal>72</literal>,
           <literal>70</literal>, <literal>6d</literal>, and
-          <literal>00</literal> --- a null.  Looking at the ASCII display on the
-          right, we find that the bytes form the string <literal>rpm</literal>,
-          which is the name of this package.
+          <literal>00</literal> &mdash; a null.  Looking at the ASCII display on
+          the right, we find that the bytes form the string
+          <literal>rpm</literal>, which is the name of this package.
         </para>
         <para>
           Now for a slightly more complicated example.  Let's look at the
@@ -1069,8 +1069,8 @@ rpm-2.2.1-1
           </screen>
         </para>
         <para>
-          The byte at offset 509 is 2f --- a "/".  Reading up to the first null
-          byte, we find that the first filename is
+          The byte at offset 509 is 2f &mdash; a "/".  Reading up to the first
+          null byte, we find that the first filename is
           <filename>/bin/rpm</filename>, followed by
           <filename>/etc/rpmrc</filename>.  This continues on for 22 more
           filenames.
@@ -1236,36 +1236,36 @@ rpm-2.2.1-1
       <itemizedlist mark="bullet">
         <listitem>
           <para>
-            <command>rpmlead</command> --- Extracts the lead section from a
+            <command>rpmlead</command> &mdash; Extracts the lead section from a
             package file.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <command>rpmsignature</command> --- Extracts the signature section
-            from a package file.
+            <command>rpmsignature</command> &mdash; Extracts the signature
+            section from a package file.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <command>rpmheader</command> --- Extracts the header from a package
-            file.
-          </para>
-        </listitem>
-
-        <listitem>
-          <para>
-            <command>rpmarchive</command> --- Extracts the archive from a
+            <command>rpmheader</command> &mdash; Extracts the header from a
             package file.
           </para>
         </listitem>
 
         <listitem>
           <para>
-            <command>dump</command> --- Displays a header structure in an easily
-            readable format.
+            <command>rpmarchive</command> &mdash; Extracts the archive from a
+            package file.
+          </para>
+        </listitem>
+
+        <listitem>
+          <para>
+            <command>dump</command> &mdash; Displays a header structure in an
+            easily readable format.
           </para>
         </listitem>
       </itemizedlist>

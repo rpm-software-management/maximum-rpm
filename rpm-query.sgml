@@ -343,7 +343,7 @@
     </table>
 
     <sect1 id="s1-rpm-query-what-it-does">
-      <title><command>rpm -q</command> --- What does it do?</title>
+      <title><command>rpm -q</command> &mdash; What does it do?</title>
       <indexterm>
         <primary><command>rpm -q</command></primary>
         <secondary>what it does</secondary>
@@ -554,7 +554,7 @@ package libc-5.2.1 is not installed
         </sect3>
 
         <sect3 id="s3-rpm-query-a-option">
-          <title><command>-a</command> --- Query All Installed Packages</title>
+          <title><command>-a</command> &mdash; Query All Installed Packages</title>
           <!-- label: query-a -->
           <indexterm>
             <primary><command>-a</command> option</primary>
@@ -611,8 +611,8 @@ SysVinit-2.64-2
 
         <sect3 id="s3-rpm-query-by-file">
           <title>
-            <command>-f <replaceable>&lt;file&gt;</replaceable></command> --- Query
-            the Package Owning
+            <command>-f <replaceable>&lt;file&gt;</replaceable></command>
+            &mdash; Query the Package Owning
             <command><replaceable>&lt;file&gt;</replaceable></command>
           </title>
           <!-- label: query-f -->
@@ -780,8 +780,8 @@ XFree86-3.1.2-5
 
         <sect3 id="s3-rpm-query-p-option">
           <title>
-            <command>-p <replaceable>&lt;file&gt;</replaceable></command> --- Query
-            a Specific RPM Package File
+            <command>-p <replaceable>&lt;file&gt;</replaceable></command>
+            &mdash; Query a Specific RPM Package File
           </title>
           <!-- label: query-p -->
           <indexterm>
@@ -835,8 +835,8 @@ rpm-2.3-1
           </para>
 
           <para>
-            There's one last trick up <command>-p</command>'s sleeve --- it can
-            also perform a query by reading a package from standard input.
+            There's one last trick up <command>-p</command>'s sleeve &mdash; it
+            can also perform a query by reading a package from standard input.
             Here's an example:
 
             <screen width="60">
@@ -969,7 +969,7 @@ kernelcfg-0.3-2
             </screen>
 
             There's only one package that requires
-            <filename>module-info</filename> ---
+            <filename>module-info</filename> &mdash;
             <filename>kernelcfg-0.3-2</filename>.
           </para>
         </sect3>
@@ -992,8 +992,8 @@ kernelcfg-0.3-2
         </para>
 
         <sect3 id="s3-rpm-query-i-option">
-          <title><command>-i</command> --- Display Package Information</title>
-          <!-- label: query-i -->
+          <title><command>-i</command> &mdash; Display Package
+          Information</title> <!-- label: query-i -->
           <indexterm>
             <primary><command>-i</command> option</primary>
           </indexterm>
@@ -1031,7 +1031,7 @@ name, version, and description.
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <computeroutput>Name</computeroutput> --- The name of the
+                  <computeroutput>Name</computeroutput> &mdash; The name of the
                   package you queried.  Usually (but not always) it bears some
                   resemblance to the name of the underlying software.
                 </para>
@@ -1039,7 +1039,7 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Version</computeroutput> --- The version
+                  <computeroutput>Version</computeroutput> &mdash; The version
                   number of the software, as specified by the software's
                   original creator.
                 </para>
@@ -1047,7 +1047,7 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Release</computeroutput> --- The number of
+                  <computeroutput>Release</computeroutput> &mdash; The number of
                   times a package consisting of this software has been packaged.
                   If the version number should change, the release number should
                   start over again at "<computeroutput>1</computeroutput>".
@@ -1064,17 +1064,17 @@ name, version, and description.
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <computeroutput>Install date</computeroutput> --- This is the
-                  time when the package was installed on your system.
+                  <computeroutput>Install date</computeroutput> &mdash; This is
+                  the time when the package was installed on your system.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <computeroutput>Group</computeroutput> --- In our example,
+                  <computeroutput>Group</computeroutput> &mdash; In our example,
                   this looks suspiciously like a path.  If you went searching
-                  madly for a directory tree by that name, you'd come up dry ---
-                  it isn't a set of directories at all.
+                  madly for a directory tree by that name, you'd come up dry
+                  &mdash; it isn't a set of directories at all.
                 </para>
 
                 <para>
@@ -1090,8 +1090,8 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Size</computeroutput> --- This is the size (in
-                  bytes) of every file in this package.  It might make your
+                  <computeroutput>Size</computeroutput> &mdash; This is the size
+                  (in bytes) of every file in this package.  It might make your
                   decision to erase an unused package easier if you see six or
                   more digits here.
                 </para>
@@ -1099,14 +1099,14 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Summary</computeroutput> --- This is a concise
-                  description of the packaged software.
+                  <computeroutput>Summary</computeroutput> &mdash; This is a
+                  concise description of the packaged software.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <computeroutput>Description</computeroutput> --- This is a
+                  <computeroutput>Description</computeroutput> &mdash; This is a
                   verbose description of the packaged software.  Some
                   descriptions might be more, well,
                   <emphasis>descriptive</emphasis> than others, but hopefully it
@@ -1117,7 +1117,7 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Distribution</computeroutput> --- The word
+                  <computeroutput>Distribution</computeroutput> &mdash; The word
                   "distribution" is really not the best name for this
                   field. "Product" might be a better choice.  In any case, this
                   is the name of the product this package is a part of.
@@ -1126,22 +1126,22 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Vendor</computeroutput> --- The organization
-                  responsible for building this package.
+                  <computeroutput>Vendor</computeroutput> &mdash; The
+                  organization responsible for building this package.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <computeroutput>Build Date</computeroutput> --- The time the
-                  package was created.
+                  <computeroutput>Build Date</computeroutput> &mdash; The time
+                  the package was created.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <computeroutput>Build Host</computeroutput> --- The name of
-                  the computer system that built the package.
+                  <computeroutput>Build Host</computeroutput> &mdash; The name
+                  of the computer system that built the package.
                   <footnote>
                     <para>
                       Note to software packagers: Choose your build machine
@@ -1154,8 +1154,8 @@ name, version, and description.
 
               <listitem>
                 <para>
-                  <computeroutput>Source RPM</computeroutput> --- The process of
-                  building a package results in two files:
+                  <computeroutput>Source RPM</computeroutput> &mdash; The
+                  process of building a package results in two files:
 
                   <orderedlist>
                     <listitem>
@@ -1188,8 +1188,8 @@ name, version, and description.
         </sect3>
 
         <sect3 id="s3-rpm-query-l-option">
-          <title><command>-l</command> --- Display the Package's File List</title>
-          <!-- label: query-l -->
+          <title><command>-l</command> &mdash; Display the Package's File
+          List</title> <!-- label: query-l -->
           <indexterm>
             <primary><command>-l</command> option</primary>
           </indexterm>
@@ -1202,8 +1202,8 @@ name, version, and description.
           </para>
 
           <para>
-            Here's a look at one of the smaller packages on &RHL; ---
-            <filename>adduser</filename>: 
+            Here's a look at one of the smaller packages on &RHL; &mdash;
+            <filename>adduser</filename>:
 
             <screen width="60">
 <prompt># </prompt><userinput>rpm -ql adduser</userinput>
@@ -1219,7 +1219,7 @@ name, version, and description.
 
           <sect4 id="s4-rpm-query-v-option">
             <title>
-              <command>-v</command> --- Display Additional Information
+              <command>-v</command> &mdash; Display Additional Information
             </title>
             <!-- label: query-v -->
             <indexterm>
@@ -1252,7 +1252,7 @@ name, version, and description.
 
         <sect3 id="s3-rpm-query-c-option">
           <title>
-            <command>-c</command> --- Display the Package's List of
+            <command>-c</command> &mdash; Display the Package's List of
             Configuration Files
           </title> 
           <!-- label: query-c -->
@@ -1316,7 +1316,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
         <sect3 id="s3-rpm-query-d-option">
           <title>
-            <command>-d</command> --- Display a List of the Package's
+            <command>-d</command> &mdash; Display a List of the Package's
             Documentation
           </title>
           <!-- label: query-d -->
@@ -1363,19 +1363,19 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
             <itemizedlist mark="bullet">
               <listitem>
                 <para>
-                  <command>q</command> --- Perform a query.
+                  <command>q</command> &mdash; Perform a query.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <command>d</command> --- List all documentation files.
+                  <command>d</command> &mdash; List all documentation files.
                 </para>
               </listitem>
 
               <listitem>
                 <para>
-                  <command>c</command> --- List all config files.
+                  <command>c</command> &mdash; List all config files.
                   <indexterm>
                     <primary>config files</primary>
                   </indexterm>
@@ -1384,7 +1384,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
               <listitem>
                 <para>
-                  <command>f</command> --- Query the package that owns the
+                  <command>f</command> &mdash; Query the package that owns the
                   specified file (<filename>/sbin/dump</filename>, in this
                   case).
                 </para>
@@ -1398,7 +1398,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
         <sect3 id="s3-rpm-query-s-option">
           <title>
-            <command>-s</command> --- Display the State of Each File in the
+            <command>-s</command> &mdash; Display the State of Each File in the
             Package
           </title>
           <!-- label: query-s -->
@@ -1418,7 +1418,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
             <orderedlist>
               <listitem>
                 <para>
-                  <computeroutput>normal</computeroutput> --- A file in the
+                  <computeroutput>normal</computeroutput> &mdash; A file in the
                   <computeroutput>normal</computeroutput> state has not been
                   modified by installing another package on the system.
                 </para>
@@ -1426,7 +1426,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
               <listitem>
                 <para>
-                  <computeroutput>replaced</computeroutput> --- Files in the
+                  <computeroutput>replaced</computeroutput> &mdash; Files in the
                   <computeroutput>replaced</computeroutput> state have been
                   modified by installing another package on the system.
                 </para>
@@ -1434,12 +1434,13 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
               <listitem>
                 <para>
-                  <computeroutput>not installed</computeroutput> --- A file is
-                  classified as <computeroutput>not installed</computeroutput>
-                  when it, er, isn't installed!  This state is normally seen
-                  only if the package was partially installed.  An example of a
-                  partially installed package would be one that was installed
-                  with the <command>--excludedocs</command>
+                  <computeroutput>not installed</computeroutput> &mdash; A file
+                  is classified as <computeroutput>not
+                  installed</computeroutput> when it, er, isn't installed!  This
+                  state is normally seen only if the package was partially
+                  installed.  An example of a partially installed package would
+                  be one that was installed with the
+                  <command>--excludedocs</command>
                   <indexterm>
                     <primary><command>--excludedocs</command></primary>
                   </indexterm>
@@ -1452,7 +1453,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
 
               <listitem>
                 <para>
-                  <computeroutput>net shared</computeroutput> --- The
+                  <computeroutput>net shared</computeroutput> &mdash; The
                   <computeroutput>net shared</computeroutput> state is used to
                   support client systems that NFS mount portions of their
                   filesystems from a server.  Since the server most likely
@@ -1815,7 +1816,7 @@ root root 0 0 0 X
 
         <sect3 id="s3-rpm-query-scripts-option">
           <title>
-            <command>--scripts</command> --- Show Scripts Associated With a
+            <command>--scripts</command> &mdash; Show Scripts Associated With a
             Package
           </title>
           <!-- label: query- -scripts -->
@@ -1925,7 +1926,8 @@ verify script:
 
         <sect3 id="s3-rpm-query-queryformat-option">
           <title>
-            <command>--queryformat</command> - Construct a Custom Query Response
+            <command>--queryformat</command> &mdash; Construct a Custom Query
+            Response
           </title>
           <!-- label: query- -queryformat -->
           <indexterm>
@@ -2047,49 +2049,53 @@ This is a test!</computeroutput><prompt>#</prompt>
               <itemizedlist mark="bullet">
                 <listitem>
                   <para>
-                    <command>\a</command> --- Produces a bell or similar alert.
+                    <command>\a</command> &mdash; Produces a bell or similar
+                    alert.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\b</command> --- Backspaces one character.
+                    <command>\b</command> &mdash; Backspaces one character.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\f</command> --- Outputs a form-feed character.
+                    <command>\f</command> &mdash; Outputs a form-feed character.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\n</command> --- Outputs a newline character sequence.
+                    <command>\n</command> &mdash; Outputs a newline character
+                    sequence.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\r</command> --- Outputs a carriage return character.
+                    <command>\r</command> &mdash; Outputs a carriage return
+                    character.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\t</command> --- Causes a horizontal tab.
+                    <command>\t</command> &mdash; Causes a horizontal tab.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\v</command> --- Causes a vertical tab.
+                    <command>\v</command> &mdash; Causes a vertical tab.
                   </para>
                 </listitem>
 
                 <listitem>
                   <para>
-                    <command>\\</command> --- Displays a backslash character.
+                    <command>\\</command> &mdash; Displays a backslash
+                    character.
                   </para>
                 </listitem>
               </itemizedlist>
@@ -2134,7 +2140,7 @@ This is a test!
                 </para>
               </footnote>
               But for now, let's look at the basic tag.  In fact, let's look at
-              three --- the tags that print the package name, version, and
+              three &mdash; the tags that print the package name, version, and
               release.
             </para>
 
@@ -2222,7 +2228,7 @@ rpm-2.3                 -1
             </sect5>
 
             <sect5 id="s5-rpm-query-queryformat-modifiers">
-              <title>Modifiers --- Making Data More Readable</title>
+              <title>Modifiers &mdash; Making Data More Readable</title>
               <indexterm>
                 <primary><command>--queryformat</command> option</primary>
                 <secondary>tags, modifiers</secondary>
@@ -2365,8 +2371,8 @@ adduser: /usr/sbin/adduser
             </para>
 
             <para>
-              Hey, not bad --- got it on the first try.  Now let's try it on a
-              package with more than one file:
+              Hey, not bad &mdash; got it on the first try.  Now let's try it on
+              a package with more than one file:
 
               <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: %{FILENAMES}\n' etcskel</userinput>
@@ -2404,9 +2410,9 @@ etcskel: /etc/skel/etc/skel/.Xclients/etc/skel/.Xdefaults/etc/skel/.ba
             </para>
 
             <para>
-              There was more output --- it went right off the screen in one long
-              line.  The problem?  We didn't include a newline escape sequence
-              inside the iterator.  Let's try it again:
+              There was more output &mdash; it went right off the screen in one
+              long line.  The problem?  We didn't include a newline escape
+              sequence inside the iterator.  Let's try it again:
 
               <screen width="60">
 <prompt># </prompt><userinput>rpm -q --queryformat '%{NAME}: [%{FILENAMES}\n]' etcskel</userinput>
@@ -2557,7 +2563,7 @@ RPMTAG_VERIFYSCRIPT
               The only hard-and-fast rule regarding tags is that if you include
               the <command>RPMTAG_</command> prefix, it
               <emphasis>must</emphasis> be all uppercase.  The fourth example
-              above shows the traditional way of specifying a tag --- prefix
+              above shows the traditional way of specifying a tag &mdash; prefix
               omitted, all uppercase.  The choice, however, is yours.
             </para>
 

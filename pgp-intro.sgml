@@ -14,7 +14,7 @@
   </para>
 
   <sect1 id="s1-pgp-intro-pgp-overview">
-    <title>PGP - Privacy for Regular People</title>
+    <title>PGP &mdash; Privacy for Regular People</title>
     <indexterm>
       <primary>PGP</primary>
       <secondary>overview of</secondary>
@@ -36,11 +36,11 @@
       <title>Keys your Locksmith Wouldn't Understand</title>
 
       <para>
-        As we mentioned above, PGP uses public key encryption to do some of
-        its magic.  You might guess from the name that this type of encryption
+        As we mentioned above, PGP uses public key encryption to do some of its
+        magic.  You might guess from the name that this type of encryption
         involves keys of some sort.  But, as you might imagine, these are not
         keys that you can copy down at the local hardware store.  They are
-        numbers --- really <emphasis>large</emphasis> numbers. Here's what a
+        numbers &mdash; really <emphasis>large</emphasis> numbers. Here's what a
         key might look like
         <footnote>
           <para>
@@ -85,9 +85,9 @@ HZR2wSWSBteKezB5uK47A6uhwtvPokV0Owk9xPmBV+LPXkW4
         key, as its name suggests, can be shared with anyone.  The key shown
         above is, in fact, a public key.  The private key, as
         <emphasis>its</emphasis> name suggests, should be kept a secret.  PGP
-        creates keys in pairs --- one private and one public.  A key pair must
-        remain a pair; if one is lost, the other by itself is useless.  Why?
-        Because the two keys have an interesting property that can be
+        creates keys in pairs &mdash; one private and one public.  A key pair
+        must remain a pair; if one is lost, the other by itself is useless.
+        Why?  Because the two keys have an interesting property that can be
         exploited in two ways:
 
         <itemizedlist mark="bullet">
@@ -202,10 +202,10 @@ rML3TxQSwdA=
 
       <para>
         Again, no.  In a perfect world, every .rpm file would be signed.
-        However, RPM has no formal requirement that this be the case.  There
-        is also no requirement that you do anything special with a signed .rpm
+        However, RPM has no formal requirement that this be the case.  There is
+        also no requirement that you do anything special with a signed .rpm
         file.  Think of it as an extra feature that you can take advantage of,
-        or not --- it's strictly your choice.
+        or not &mdash; it's strictly your choice.
       </para>
     </sect2>
 
@@ -259,7 +259,7 @@ rML3TxQSwdA=
         The reason is that PGP is very controversial stuff.
       </para>
       <para>
-        Why the controversy?  It centers on PGP's primary mission --- to
+        Why the controversy?  It centers on PGP's primary mission &mdash; to
         provide a means of communicating with others in complete privacy.  As
         we've discussed, PGP uses encryption to provide this privacy.  Good
         encryption.  <emphasis>Very</emphasis> good encryption.  Encryption so
@@ -295,9 +295,10 @@ rML3TxQSwdA=
           <itemizedlist mark="bullet">
             <listitem>
               <para>
-                PGP is free --- for non-commercial use only.  If you are going
-                to use PGP for business purposes, you should look into getting
-                a commercial copy.  PGP is marketed in the United States by:
+                PGP is free &mdash; for non-commercial use only.  If you are
+                going to use PGP for business purposes, you should look into
+                getting a commercial copy.  PGP is marketed in the United States
+                by:
               </para>
 
               <para>
