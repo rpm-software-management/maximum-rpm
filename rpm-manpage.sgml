@@ -100,6 +100,8 @@
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--noscripts</option></arg>
 	<arg><option>--notriggers</option></arg>
+	<sbr>
+	<arg><option>--repackage</option></arg>
 	<arg><option>--test</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
 	</cmdsynopsis>
@@ -272,6 +274,7 @@
     <arg><option>--prefix</option> <replaceable>NEWPATH</replaceable></arg>
     <arg><option>--relocate</option> <replaceable>OLDPATH</replaceable>=<replaceable>NEWPATH</replaceable></arg>
 	<sbr>
+    <arg><option>--repackage</option></arg>
     <arg><option>--replacefiles</option></arg>
     <arg><option>--replacepkgs</option></arg>
     <arg><option>--test</option></arg>
@@ -325,20 +328,20 @@
 
   <para>
     One of the following basic modes must be selected:
-	<emphasis>Initialize Database</emphasis>,
-	<emphasis>Rebuild Database</emphasis>,
-	<emphasis>Build Package</emphasis>,
-	<emphasis>Recompile Package</emphasis>,
-	<emphasis>Build Package from Tarball</emphasis>,
 	<emphasis>Query</emphasis>,
-	<emphasis>Show Querytags</emphasis>,
-	<emphasis>Install/Upgrade/Freshen</emphasis>,
-	<emphasis>Uninstall</emphasis>,
 	<emphasis>Verify</emphasis>,
 	<emphasis>Signature Check</emphasis>,
+	<emphasis>Install/Upgrade/Freshen</emphasis>,
+	<emphasis>Uninstall</emphasis>,
+	<emphasis>Build Package</emphasis>,
+	<emphasis>Build Package from Tarball</emphasis>,
+	<emphasis>Recompile Package</emphasis>,
+	<emphasis>Initialize Database</emphasis>,
+	<emphasis>Rebuild Database</emphasis>,
 	<emphasis>Resign</emphasis>,
 	<emphasis>Add Signature</emphasis>,
-	<emphasis>Set Owners/Groups</emphasis>, and
+	<emphasis>Set Owners/Groups</emphasis>,
+	<emphasis>Show Querytags</emphasis>, and
 	<emphasis>Show Configuration</emphasis>.
   </para>
 
@@ -555,17 +558,44 @@ systems of the binary package and host don't match.
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
+    <term><option>--nopre</option></term>
+    <term><option>--nopost</option></term>
+    <term><option>--nopreun</option></term>
+    <term><option>--nopostun</option></term>
     <listitem><para>
-	Don't execute the
-		<command>%pre</command> or
-		<command>%post</command>
+	Don't execute the scriptlet of the same name.
+	The <option>--noscripts</option> option is equivalent to
+	</para><para>
+		<option>--nopre</option>
+		<option>--nopost</option>
+		<option>--nopreun</option>
+		<option>--nopostun</option>
+	</para><para>
+	and turns off the execution of the corresponding
+		<command>%pre</command>,
+		<command>%post</command>,
+		<command>%preun</command>, and
+		<command>%postun</command>
 	scriptlet(s).
     </para></ListItem>
     </varlistentry><varlistentry>
     <term><option>--notriggers</option></term>
+    <term><option>--notriggerin</option></term>
+    <term><option>--notriggerun</option></term>
+    <term><option>--notriggerpostun</option></term>
     <listitem><para>
-	Don't execute scripts which are triggered by the installation
-	of this package.
+	Don't execute any trigger scriptlet of the named type.
+	The <option>--notriggers</option> option is equivalent to
+	</para><para>
+		<option>--notriggerin</option>
+		<option>--notriggerun</option>
+		<option>--notriggerpostun</option>
+	</para><para>
+	and turns off execution of the corresponding
+		<command>%triggerin</command>,
+		<command>%triggerun</command>, and
+		<command>%triggerpostun</command>
+	scriptlet(s).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--oldpackage</option></term>
@@ -595,6 +625,16 @@ systems of the binary package and host don't match.
 	This option can be used repeatedly if several
 	<replaceable>OLDPATH</replaceable>'s in the package are to
 	be relocated.
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--repackage</option></term>
+    <listitem><para>
+	Re-package the files before erasing. The previously installed
+	package will be named according to the macro
+		<command>%_repackage_name_fmt</command>
+	and will be created in the directory named by
+	the macro <command>%_repackage_dir</command> (default value
+	is <filename>/var/tmp</filename>).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--replacefiles</option></term>
@@ -992,12 +1032,15 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--noscripts</option></arg>
 	<arg><option>--notriggers</option></arg>
+	<arg><option>--repackage</option></arg>
 	<arg><option>--test</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
       </cmdsynopsis>
     </para>
 
     <para>
+	The following options may also be used:
+    </para>
     <variablelist>
     <varlistentry>
     <term><option>--allmatches</option></term>
@@ -1014,26 +1057,56 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
+    <term><option>--nopreun</option></term>
+    <term><option>--nopostun</option></term>
     <listitem><para>
-	Don't execute the
-	<command>%preun</command>, or
-	<command>%postun</command> scriptlet(s).
+	Don't execute the scriptlet of the same name.
+	The <option>--noscripts</option> option during package erase is
+	equivalent to
+	</para><para>
+		<option>--nopreun</option>
+		<option>--nopostun</option>
+	</para><para>
+	and turns off the execution of the corresponding
+		<command>%preun</command>, and
+		<command>%postun</command>
+	scriptlet(s).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--notriggers</option></term>
+    <term><option>--notriggerun</option></term>
+    <term><option>--notriggerpostun</option></term>
     <listitem><para>
-	Don't execute scripts which are triggered by the removal of
-	this package.
+	Don't execute any trigger scriptlet of the named type.
+	The <option>--notriggers</option> option is equivalent to
+	</para><para>
+		<option>--notriggerun</option>
+		<option>--notriggerpostun</option>
+	</para><para>
+	and turns off execution of the corresponding
+		<command>%triggerun</command>, and
+		<command>%triggerpostun</command>
+	scriptlet(s).
+    </para></listitem>
+    </varlistentry><varlistentry>
+    <term><option>--repackage</option></term>
+    <listitem><para>
+	Re-package the files before erasing. The previously installed
+	package will be named according to the macro
+		<command>%_repackage_name_fmt</command>
+	and will be created in the directory named by
+	the macro <command>%_repackage_dir</command> (default value
+	is <filename>/var/tmp</filename>).
     </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--test</option></term>
     <listitem><para>
 	Don't really uninstall anything, just go through the motions.
-	Useful in conjunction with the <option>-vv</option> option.
+	Useful in conjunction with the <option>-vv</option> option
+	for debugging.
     </para></listitem>
     </varlistentry>
     </variablelist>
-    </para>
   </refsect2>
 
   <refsect2><title>Build Options</title>
@@ -1402,6 +1475,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 
 <refsect1><title>See Also</title>
     <simplelist>
+      <member><command>popt</command>(3),</member>
       <member><command>rpm2cpio</command>(8),</member>
       <member>
 	<command>
