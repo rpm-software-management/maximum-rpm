@@ -1,0 +1,1431 @@
+  <appendix id="ch-queryformat-tags">
+    <title>Available Tags For <command>--queryformat</command></title>
+    <!-- label: queryformat-tags -->
+
+    <indexterm>
+      <primary><command>--queryformat</command> option!tags for</primary>
+      <secondary></secondary>
+      <tertiary></tertiary>
+    </indexterm>
+
+    <para>
+      The following tags were defined at the time this book was written.  For
+      the latest list of available queryformat tags, please issue the following
+      command:
+
+      <figure id="sc-queryformat-tags-querytags-example">
+        <title>
+          Using the <command>--querytags</command> Option to List Available Tags
+        </title>
+        <screen width="60">
+<computeroutput>
+rpm --querytags
+</computeroutput>
+        </screen>
+      </figure>
+    </para>
+    <para>
+      Keep in mind that the list of tags produced by the
+      <command>--querytags</command> option is the complete list of all tags
+      used by RPM internally; for instance, during package builds.  Because of
+      this, some tags do not produce meaningful output when used in a
+      <command>--queryformat</command> format string.
+    </para>
+
+    <sect1 id="s1-queryformat-tags-queryformat-tags">
+      <title>List of <command>--queryformat</command> Tags</title>
+
+      <para>
+        For every tag in this section, there can be as many as three different
+        pieces of information:
+
+        <orderedlist>
+          <listitem>
+            <para>
+              A short description of the tag.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              Whether the data specified by the tag is an array, and if so, how
+              many members are present in the array.
+            </para>
+          </listitem>
+
+          <listitem>
+            <para>
+              What modifiers can be used with the tag.
+            </para>
+          </listitem>
+        </orderedlist>
+      </para>
+
+      <sect2 id="s2-queryformat-tags-name">
+        <title>The <command>NAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>NAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The <command>NAME</command> tag is used to display the name of the
+          package.
+        </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-version">
+        <title>The <command>VERSION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>VERSION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The <command>VERSION</command> tag is used to display the version of
+          the packaged software.
+        </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-release">
+        <title>The <command>RELEASE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>RELEASE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>RELEASE</command> tag is used to display the release number
+        of the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-serial">
+        <title>The <command>SERIAL</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>SERIAL</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+        <para>
+          The <command>SERIAL</command> tag is used to display the serial number
+          of the package.
+        </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-summary">
+        <title>The <command>SUMMARY</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>SUMMARY</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>SUMMARY</command> tag is used to display a one-line
+        summation of the packaged software.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+    </sect2>
+
+      <sect2 id="s2-queryformat-tags-description">
+        <title>The <command>DESCRIPTION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>DESCRIPTION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>DESCRIPTION</command> tag is used to display a detailed
+        summation of the packaged software.
+      </para>
+        <para>
+          Array: No
+        </para>
+      <para>
+          Used with modifiers: N/A
+      </para>
+    </sect2>
+
+      <sect2 id="s2-queryformat-tags-buildtime">
+        <title>The <command>BUILDTIME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>BUILDTIME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>BUILDTIME</command> tag is used to display the time and
+        date the package was created.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: <command>:date</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-buildhost">
+        <title>The <command>BUILDHOST</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>BUILDHOST</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>BUILDHOST</command> tag is used to display the hostname of
+        the system that built the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-installtime">
+        <title>The <command>INSTALLTIME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>INSTALLTIME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>INSTALLTIME</command> tag is used to display the time and
+        date the package was installed.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: <command>:date</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-size">
+        <title>The <command>SIZE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>SIZE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>SIZE</command> tag is used to display the total size, in
+        bytes, of every file installed by this package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+        </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-distribution">
+        <title>The <command>DISTRIBUTION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>DISTRIBUTION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>DISTRIBUTION</command> tag is used to display the
+        distribution this package is a part of.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-vendor">
+        <title>The <command>VENDOR</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>VENDOR</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>VENDOR</command> tag is used to display the organization
+        responsible for marketing the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-gif">
+        <title>The <command>GIF</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>GIF</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>GIF</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-xpm">
+        <title>The <command>XPM</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>XPM</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>XPM</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-copyright">
+        <title>The <command>COPYRIGHT</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>COPYRIGHT</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>COPYRIGHT</command> tag is used to display the copyright
+        terms of the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-packager">
+        <title>The <command>PACKAGER</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>PACKAGER</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>PACKAGER</command> tag is used to display the person or
+        persons responsible for creating the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-group">
+        <title>The <command>GROUP</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>GROUP</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>GROUP</command> tag is used to display the group to which
+        the package belongs.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-changelog">
+        <title>The <command>CHANGELOG</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>CHANGELOG</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>CHANGELOG</command> tag is reserved for a future version of
+        RPM.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-source">
+        <title>The <command>SOURCE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>SOURCE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>SOURCE</command> tag is used to display the source archives
+        contained in the source package file.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per source)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-patch">
+        <title>The <command>PATCH</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>PATCH</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>PATCH</command> tag is used to display the patch files
+        contained in the source package file.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per patch)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-url">
+        <title>The <command>URL</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>URL</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>URL</command> tag is used to display the Uniform Resource
+        Locator that points to additional information on the packaged software.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-os">
+        <title>The <command>OS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>OS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>OS</command> tag is used to display the operating system
+        for which the package was built.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-arch">
+        <title>The <command>ARCH</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>ARCH</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>ARCH</command> tag is used to display the architecture for
+        which the package was built.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-prein">
+        <title>The <command>PREIN</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>PREIN</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>PREIN</command> tag is used to display the package's
+        pre-install script.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-postin">
+        <title>The <command>POSTIN</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>POSTIN</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>POSTIN</command> tag is used to display the package's
+        post-install script.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-preun">
+        <title>The <command>PREUN</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>PREUN</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>PREUN</command> tag is used to display the package's
+        pre-uninstall script.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-postun">
+        <title>The <command>POSTUN</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>POSTUN</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>POSTUN</command> tag is used to display the package's
+        post-uninstall script.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filename">
+        <title>The <command>FILENAMES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILENAMES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILENAMES</command> tag is used to display the names of the
+        files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filesizes">
+        <title>The <command>FILESIZES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILESIZES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILESIZES</command> tag is used to display the size, in
+        bytes, of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filestates">
+        <title>The <command>FILESTATES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILESTATES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILESTATES</command> tag is used to display the state of
+        each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+          <footnote>
+            <para>
+              Since there is no modifier to display the file states in
+              human-readable form, it will be necessary to manually interpret
+              the flag values, based on the
+              <command>RPMFILE_STATE_<replaceable>xxx</replaceable></command>
+              <command>#define</command>s contained in
+              <command>rpmlib.h</command>.  This file is part of the
+              <command>rpm-devel</command> package and is also present in the
+              RPM source package.
+            </para>
+          </footnote>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filemodes">
+        <title>The <command>FILEMODES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEMODES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEMODES</command> tag is used to display the permissions
+        of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: <command>:perms</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-fileuids">
+        <title>The <command>FILEUIDS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEUIDS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEUIDS</command> tag is used to display the user ID, in
+        numeric form, of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filegids">
+        <title>The <command>FILEGIDS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEGIDS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEGIDS</command> tag is used to display the group ID, in
+        numeric form, of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filerdevs">
+        <title>The <command>FILERDEVS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILERDEVS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILERDEVS</command> tag is used to display the major and
+        minor numbers for each of the files that comprise the package.  It will
+        only be non-zero for device special files.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filemtimes">
+        <title>The <command>FILEMTIMES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEMTIMES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEMTIMES</command> tag is used to display the
+        modification time and date for each of the files that comprise the
+        package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: <command>:date</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filemd5">
+        <title>The <command>FILEMD5S</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEMD5S</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEMD5S</command> tag is used to display the MD5 checksum
+        for each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filelinktos">
+        <title>The <command>FILELINKTOS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILELINKTOS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILELINKTOS</command> tag is used to display the link
+        string for symlinks.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-fileflags">
+        <title>The <command>FILEFLAGS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEFLAGS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEFLAGS</command> tag is used to indicate whether the
+        files that comprise the package have been flagged as being documentation
+        or configuration.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: <command>:fflags</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-root">
+        <title>The <command>ROOT</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>ROOT</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>ROOT</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-fileusername">
+        <title>The <command>FILEUSERNAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEUSERNAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEUSERNAME</command> tag is used to display the owner, in
+        alphanumeric form, of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-filegroupname">
+        <title>The <command>FILEGROUPNAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEGROUPNAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEGROUPNAME</command> tag is used to display the group,
+        in alphanumeric form, of each of the files that comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-exclude">
+        <title>The <command>EXCLUDE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUDE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUDE</command> tag is deprecated and should no longer be
+        used.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-exclusive">
+        <title>The <command>EXCLUSIVE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUSIVE</command> tag is deprecated and should no longer
+        be used.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-icon">
+        <title>The <command>ICON</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>ICON</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>ICON</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-sourcerpm">
+        <title>The <command>SOURCERPM</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>SOURCERPM</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>SOURCERPM</command> tag is used to display the name of the
+        source package from which this binary package was built.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-fileverifyflags">
+        <title>The <command>FILEVERIFYFLAGS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>FILEVERIFYFLAGS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>FILEVERIFYFLAGS</command> tag is used to display the
+        numeric value of the file verification flags for each of the files that
+        comprise the package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per file)
+        </para>
+        <para>
+          Used with modifiers: N/A
+          <footnote>
+            <para>
+              Since there is no modifier to display the verification flags in
+              human-readable form, it will be necessary to manually interpret
+              the flag values, based on the
+              <command>RPMVERIFY_<replaceable>xxx</replaceable></command>
+              <command>#define</command>s contained in
+              <command>rpmlib.h</command>.  This file is part of the
+              <command>rpm-devel</command> package and is also present in the
+              RPM source package.
+            </para>
+          </footnote>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-arhivesize">
+        <title>The <command>ARCHIVESIZE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>ARCHIVESIZE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>ARCHIVESIZE</command> tag is used to display the size, in
+        bytes, of the archive portion of the original package file.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-provides">
+        <title>The <command>PROVIDES</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>PROVIDES</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>PROVIDES</command> tag is used to display the capabilities
+        the package provides.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per provide)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-requireflags">
+        <title>The <command>REQUIREFLAGS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>REQUIREFLAGS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>REQUIREFLAGS</command> tag is used to display the
+        requirement flags for each capability the package requires.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per require)
+        </para>
+        <para>
+          Used with modifiers: <command>:depflags</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-requirename">
+        <title>The <command>REQUIRENAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>REQUIRENAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>REQUIRENAME</command> tag is used to display the
+        capabilities the package requires.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per require)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-requireversion">
+        <title>The <command>REQUIREVERSION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>REQUIREVERSION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>REQUIREVERSION</command> tag is used to display the
+        version-related aspect of each capbility the package requires.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per require)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-nosource">
+        <title>The <command>NOSOURCE</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>NOSOURCE</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>NOSOURCE</command> tag is used to display the source
+        archives that are not contained in the source package file.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per nosource)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-nopatch">
+        <title>The <command>NOPATCH</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>NOPATCH</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>NOPATCH</command> tag is used to display the patch files
+        that are not contained in the source package file.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per nopatch)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-conflictflags">
+        <title>The <command>CONFLICTFLAGS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>CONFLICTFLAGS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>CONFLICTFLAGS</command> tag is used to display the conflict
+        flags for each capability the package conflicts with.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per conflict)
+        </para>
+        <para>
+          Used with modifiers: <command>:depflags</command>
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-conflictname">
+        <title>The <command>CONFLICTNAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>CONFLICTNAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>CONFLICTNAME</command> tag is used to display the
+        capabilities that the package conflicts with.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per conflict)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-conflictversion">
+        <title>The <command>CONFLICTVERSION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>CONFLICTVERSION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>CONFLICTVERSION</command> tag is used to display the
+        version-related aspect of each capability the package conflicts with.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per conflict)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-defaultprefix">
+        <title>The <command>DEFAULTPREFIX</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>DEFAULTPREFIX</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>DEFAULTPREFIX</command> tag is used to display the path
+        that will, by default, be used to install a relocatable package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-buildroot">
+        <title>The <command>BUILDROOT</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>BUILDROOT</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>BUILDROOT</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-installprefix">
+        <title>The <command>INSTALLPREFIX</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>INSTALLPREFIX</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>INSTALLPREFIX</command> tag is used to display the actual
+        path used when a relocatable package was installed.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-excludearch">
+        <title>The <command>EXCLUDEARCH</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUDEARCH</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUDEARCH</command> tag is used to display the
+        architectures that should not install this package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per excludearch)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-excludeos">
+        <title>The <command>EXCLUDEOS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUDEOS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUDEOS</command> tag is used to display the operating
+        systems that should not install this package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per excludeos)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-exclusivearch">
+        <title>The <command>EXCLUSIVEARCH</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVEARCH</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUSIVEARCH</command> tag is used to display the
+        architectures that are the only ones that should install this package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per exclusivearch)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-exclusiveos">
+        <title>The <command>EXCLUSIVEOS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>EXCLUSIVEOS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>EXCLUSIVEOS</command> tag is used to display the operating
+        systems that are the only one that should install this package.
+      </para>
+        <para>
+          Array: Yes (Size: One entry per exclusiveos)
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-autoreqprov">
+        <title>The <command>AUTOREQPROV</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>AUTOREQPROV</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>AUTOREQPROV</command> tag is not available for use with
+        <command>--queryformat</command>.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-rpmversion">
+        <title>The <command>RPMVERSION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>RPMVERSION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>RPMVERSION</command> tag is used to display the version of
+        RPM that was used to build the package.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-triggerscripts">
+        <title>The <command>TRIGGERSCRIPTS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>TRIGGERSCRIPTS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>TRIGGERSCRIPTS</command> tag is reserved for a future
+        version of RPM.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-triggername">
+        <title>The <command>TRIGGERNAME</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>TRIGGERNAME</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>TRIGGERNAME</command> tag is reserved for a future version
+        of RPM.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-triggerversion">
+        <title>The <command>TRIGGERVERSION</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>TRIGGERVERSION</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>TRIGGERVERSION</command> tag is reserved for a future
+        version of RPM.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-triggerflags">
+        <title>The <command>TRIGGERFLAGS</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>TRIGGERFLAGS</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>TRIGGERFLAGS</command> tag is reserved for a future version
+        of RPM.
+      </para>
+      </sect2>
+
+      <sect2 id="s2-queryformat-tags-triggerindex">
+        <title>The <command>TRIGGERINDEX</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>TRIGGERINDEX</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>TRIGGERINDEX</command> tag is reserved for a future version
+        of RPM.
+      </para>
+    </sect2>
+
+
+      <sect2 id="s2-queryformat-tags-verifyscript">
+        <title>The <command>VERIFYSCRIPT</command> Tag</title>
+        <indexterm>
+          <primary><command>--queryformat</command> option!tags for!<command>VERIFYSCRIPT</command></primary>
+          <secondary></secondary>
+          <tertiary></tertiary>
+        </indexterm>
+
+      <para>
+        The <command>VERIFYSCRIPT</command> tag is used to display the script to
+        be used for package verification.
+      </para>
+        <para>
+          Array: No
+        </para>
+        <para>
+          Used with modifiers: N/A
+      </para>
+      </sect2>
+
+    </sect1>
+
+</appendix>

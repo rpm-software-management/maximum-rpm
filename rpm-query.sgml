@@ -2713,7 +2713,7 @@ RPMTAG_VERIFYSCRIPT
               tags that, for one reason or another, will not produce useful
               output when using in a format string.  For a comprehensive list of
               queryformat tags, please see Appendix <xref
-              linkend="queryformat-tags">.
+              linkend="ch-queryformat-tags">.
             </para>
           </sect4>
         </sect3>
