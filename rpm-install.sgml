@@ -1174,7 +1174,7 @@ Installing cdp-0.33-3.i386.rpm
                 However, it is usually a <emphasis>bad</emphasis> idea when it
                 comes to doing this as a way to upgrade packages.  RPM has a
                 special option for this (<command>rpm -U</command>) that is
-                discussed in chapter <xref linkend="rpm-U">.
+                discussed in chapter <xref linkend="ch-rpm-upgrade">.
               </para>
             </listitem>
 
@@ -1426,7 +1426,7 @@ Installing cdp-0.33-3.i386.rpm
            <footnote>
               <para>
                 For more information on erasing packages with <command>rpm
-                -e</command>, see chapter <xref linkend="rpm-e">.
+                -e</command>, see chapter <xref linkend="ch-rpm-erase">.
               </para>
            </footnote>
            Finally, we tried to find the file:
@@ -1754,7 +1754,8 @@ Installing cdp-0.33-3.i386.rpm
           command that can be used to find out:
           <footnote>
             <para>
-              We discuss RPM's query commands in chapter <xref linkend="rpm-q">.
+              We discuss RPM's query commands in chapter <xref
+              linkend="ch-rpm-query">.
             </para>
           </footnote>
 
@@ -1854,7 +1855,7 @@ total 5
             <para>
               It's possible to use RPM's query command to see if a package has
               pre- or post-install scripts.  See section <xref
-              linkend="query--scripts"> for more information.
+              linkend="s3-rpm-query-scripts-option"> for more information.
             </para>
           </footnote>
         </para>

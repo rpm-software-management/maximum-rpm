@@ -689,8 +689,8 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         Sure enough: <filename>.bashrc.rpmsave</filename> is a copy of your
         modified <filename>.bashrc</filename> file!  Remember, however, that
         this feature only works with config files.  Not sure how to determine
-        which files RPM thinks are config files?  Chapter <xref linkend="rpm-q">
-        will show you how.
+        which files RPM thinks are config files?  Chapter <xref
+        linkend="ch-rpm-query"> will show you how.
       </para>
     </sect1>
 
@@ -736,7 +736,7 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         you'd like to erase.
         <footnote>
           <para>
-            See chapter <xref linkend="rpm-q"> for more information on
+            See chapter <xref linkend="ch-rpm-query"> for more information on
             <command>rpm -q</command>.
           </para>
         </footnote>
