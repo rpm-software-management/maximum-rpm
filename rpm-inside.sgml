@@ -608,7 +608,7 @@ Group: Applications/Spreadsheets
             the RPM sources as well.  Check out the file
             <filename>groups</filename> in RPM's documentation directory
             (normally
-            <filename>/usr/doc/rpm-<userinput>&lt;version&gt;</userinput></filename>),
+            <filename>/usr/doc/rpm-<replaceable>&lt;version&gt;</replaceable></filename>),
             or in the top-level source directory.
           </para>
         </sect3>
@@ -1919,7 +1919,7 @@ umask 022
             <command>%prep</command>, <command>%build</command> changes
             directory into the software's top-level build directory (located in
             <envar>RPM_BUILD_DIR</envar>, or usually called
-            <command><userinput>&lt;name&gt;-&lt;version&gt;</userinput></command>).
+            <command><replaceable>&lt;name&gt;</replaceable>-<replaceable>&lt;version&gt;</replaceable></command>).
           </para>
           <para>
             Unlike <command>%prep</command>, there are no macros available for
@@ -2397,7 +2397,7 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-n-option">
           <title>
-            <command>-n <userinput>&lt;name&gt;</userinput></command> --- Set
+            <command>-n <replaceable>&lt;name&gt;</replaceable></command> --- Set
             Name of Build Directory
           </title>
           <!-- label: inside-setup-n -->
@@ -2413,7 +2413,7 @@ chmod -R a+rX,g-w,o-w .
             created such that the top-level directory was included in the tar
             file.  The name of the top-level directory was also identical to
             that of the <command>tar</command> file, which was in
-            <command><userinput>&lt;name&gt;-&lt;version&gt;</userinput></command>
+            <command><replaceable>&lt;name&gt;</replaceable>-<replaceable>&lt;version&gt;</replaceable></command>
             format.
           </para>
           <para>
@@ -2421,7 +2421,7 @@ chmod -R a+rX,g-w,o-w .
             sources unpack into a directory whose name is different than the
             original <command>tar</command> file.  Since RPM assumes the
             directory will be called
-            <command><userinput>&lt;name&gt;-&lt;version&gt;</userinput></command>,
+            <command><replaceable>&lt;name&gt;</replaceable>-<replaceable>&lt;version&gt;</replaceable></command>,
             when the directory is called something else, it's necessary to use
             <command>%setup</command>'s <command>-n</command> option.  Here's an
             example:
@@ -2608,7 +2608,7 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-b-option">
           <title>
-            <command>-b <userinput>&lt;n&gt;</userinput></command> --- Unpack
+            <command>-b <replaceable>&lt;n&gt;</replaceable></command> --- Unpack
             The <emphasis>n</emphasis>th Sources Before Changing Directory
           </title>
           <!-- label: inside-setup-b -->
@@ -2700,7 +2700,7 @@ chmod -R a+rX,g-w,o-w .
 
         <sect3 id="s3-rpm-inside-setup-a-option">
           <title>
-            <command>-a <userinput>&lt;n&gt;</userinput></command> --- Unpack
+            <command>-a <replaceable>&lt;n&gt;</replaceable></command> --- Unpack
             The <emphasis>n</emphasis>th Sources After Changing Directory
           </title>
           <!-- label: inside-setup-a -->
@@ -3183,8 +3183,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 
         <sect3 id="s3-rpm-inside-patch-p-option">
           <title>
-            <command>-p &lt;<userinput>#</userinput>&gt;</command> -- Strip
-            <command>&lt;<userinput>#</userinput>&gt;</command> leading slashes
+            <command>-p <replaceable>&lt;#&gt;</replaceable></command> -- Strip
+            <command><replaceable>&lt;#&gt;</replaceable></command> leading slashes
             and directories from patch filenames
           </title>
           <!-- label: inside-patch-p -->
@@ -3205,9 +3205,9 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
 
         <sect3 id="s3-rpm-inside-b-option">
           <title>
-            <command>-b <userinput>&lt;name&gt;</userinput></command> -- Set the
+            <command>-b <replaceable>&lt;name&gt;</replaceable></command> -- Set the
             backup file extension to
-            <command><userinput>&lt;name&gt;</userinput></command>
+            <command><replaceable>&lt;name&gt;</replaceable></command>
           </title>
           <!-- label: inside-patch-b -->
           <indexterm>
@@ -3613,7 +3613,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 
             <screen width="60">
 <computeroutput>
-%attr(&lt;mode&gt;, &lt;user&gt;, &lt;group&gt;) <userinput>file</userinput>
+%attr(<replaceable>&lt;mode&gt;</replaceable>, <replaceable>&lt;user&gt;</replaceable>, <replaceable>&lt;group&gt;</replaceable>) <replaceable>file</replaceable>
 </computeroutput>
             </screen>
           </para>
@@ -4013,9 +4013,9 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 
         <sect3 id="s3-rpm-inside-flist-f-option">
           <title>
-            <command>-f <userinput>&lt;file&gt;</userinput></command> --- Read
+            <command>-f <replaceable>&lt;file&gt;</replaceable></command> --- Read
             the <command>%files</command> List From
-            <command><userinput>&lt;file&gt;</userinput></command>
+            <command><replaceable>&lt;file&gt;</replaceable></command>
           </title>
           <indexterm>
             <primary>spec file</primary>
@@ -4098,8 +4098,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
 
       <sect2 id="s2-rpm-inside-package-n-option">
         <title>
-          <command>-n <userinput>&lt;string&gt;</userinput></command> --- Use
-          <command><userinput>&lt;string&gt;</userinput></command> As the Entire
+          <command>-n <replaceable>&lt;string&gt;</replaceable></command> --- Use
+          <command><replaceable>&lt;string&gt;</replaceable></command> As the Entire
           Subpackage Name
         </title>
         <!-- label: inside-package-n -->
