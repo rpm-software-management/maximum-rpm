@@ -16,8 +16,8 @@
       <member>
 	<cmdsynopsis>
 	<command>rpmdeps</command>
-	<arg choice="req"><option>-P|--provides</option></arg>
-	<arg choice="req"><option>-R|--requires</option></arg>
+	<arg choice="req"><option>{-P|--provides}</option></arg>
+	<arg choice="req"><option>{-R|--requires}</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>FILE</replaceable></arg>
 	</cmdsynopsis>
       </member>
