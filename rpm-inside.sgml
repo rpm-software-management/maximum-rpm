@@ -3659,7 +3659,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         </sect3>
 
 	<sect3 id="s3-rpm-inside-flist-defattr-directive">
-	  <title>The <command>%defattr</command></title>
+	  <title>The <command>%defattr</command> Directive</title>
 	  <!-- label: inside-defattr -->
 	  <indexterm>
 	    <primary><command>%defattr</command> Directive</primary>
