@@ -1,10 +1,11 @@
 Summary: The "Maximum RPM" book
 Name: maximum-rpm
 Version: 1.0
-Release: 0.1
+Release: 0.2
 License: OPL
 Group: Documentation
-Source: max-rpm.tar.gz
+Source: %{name}-%{version}.tar.gz
+BuildArch: noarch
 BuildRoot: %{_tmppath}/%{name}-root
 
 %description
@@ -16,20 +17,22 @@ anyone who needs to use RPM on his/her system. The second section covers
 all there is to know about build packages using RPM.
 
 %prep
-%setup -q -n max-rpm
+%setup -q
 
 %build
-./build
+./configure
+make
 
 %install
 rm -rf ${RPM_BUILD_ROOT}
+make DESTDIR="$RPM_BUILD_ROOT" install
 
 %clean
 rm -rf ${RPM_BUILD_ROOT}
 
 %files
 %defattr(-,root,root)
-%doc html
+%{_defaultdocdir}/%{name}-%{version}
 
 %changelog
 * Thu Apr  5 2001 Jeff Johnson <jbj@redhat.com>

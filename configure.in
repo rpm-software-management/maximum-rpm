@@ -1,0 +1,48 @@
+AC_INIT(max-rpm.sgml)
+
+AM_INIT_AUTOMAKE(maximum-rpm, 1.0)
+AC_SUBST(CC)
+
+AC_PATH_PROG(__JADE, jade)
+AC_PATH_PROG(__PERL, perl)
+
+if test -f /usr/bin/collateindex.pl ; then
+    COLLATEINDEX_PL=/usr/bin/collateindex.pl
+elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/bin/collateindex.pl ; then
+    COLLATEINDEX_PL=/usr/lib/sgml/stylesheets/nwalsh-modular/bin/collateindex.pl
+else
+    AC_ERROR(can't find collateindex.pl)
+fi
+AC_SUBST(COLLATEINDEX_PL)
+
+if test -f /usr/share/sgml/docbook/dsssl-stylesheets-1.59/test/docbook.css ; then
+    DOCBOOK_CSS=/usr/share/sgml/docbook/dsssl-stylesheets-1.59/test/docbook.css
+
+elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/test/docbook.css ; then
+    DOCBOOK_CSS=/usr/lib/sgml/stylesheets/nwalsh-modular/test/docbook.css
+else
+    AC_ERROR(can't find docbook.css)
+fi
+AC_SUBST(DOCBOOK_CSS)
+
+if test -f /usr/share/sgml/docbook/dsssl-stylesheets-1.59/html/docbook.dsl ; then
+    DOCBOOK_DSL=/usr/share/sgml/docbook/dsssl-stylesheets-1.59/html/docbook.dsl
+
+elif test -f usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl ; then
+    DOCBOOK_DSL=usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl
+else
+    AC_ERROR(can't find docbook.dsl)
+fi
+AC_SUBST(DOCBOOK_DSL)
+
+if test -d /usr/share/sgml/docbook/dsssl-stylesheets-1.59/images ; then
+    IMAGES_GIF=/usr/share/sgml/docbook/dsssl-stylesheets-1.59/images
+elif test -d /usr/lib/sgml/stylesheets/nwalsh-modular/images ; then
+    IMAGES_GIF=/usr/lib/sgml/stylesheets/nwalsh-modular/images
+else
+    AC_ERROR(can't find images/*.gif)
+fi
+AC_SUBST(IMAGES_GIF)
+
+AC_OUTPUT([Makefile maximum-rpm.spec redhat-html.dsl],
+	[echo timestamp > stamp-h.in])
