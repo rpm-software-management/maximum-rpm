@@ -1543,7 +1543,7 @@ Source1: bother-1.2.tar.gz
             <footnote>
               <para>
                 There is also an "international" version that may be used in
-                non-US countries.  See Appendix <xref linkend="pgp-intro">.
+                non-US countries.  See Appendix <xref linkend="ch-pgp-intro">.
               </para>
             </footnote>
             While it would be nice to create a PGP package file, the resulting

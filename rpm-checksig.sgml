@@ -150,10 +150,10 @@
         </para>
         <para>
           If PGP is new to you, a quick glance through Appendix <xref
-          linkend="pgp-intro"> should get you well on your way to understanding,
-          building, and installing PGP.  If, on the other hand, you've got PGP
-          already installed and have sent an encrypted message or two, you're
-          probably more than ready to continue with this chapter.
+          linkend="ch-pgp-intro"> should get you well on your way to
+          understanding, building, and installing PGP.  If, on the other hand,
+          you've got PGP already installed and have sent an encrypted message or
+          two, you're probably more than ready to continue with this chapter.
         </para>
       </sect2>
     </sect1>
