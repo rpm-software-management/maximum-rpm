@@ -27,6 +27,7 @@
         library contains all the functions required to implement all the basic
         functions contained in RPM.
       </para>
+
       <para>
         The remaining files define the various data structures, parameters, and
         symbols used by rpmlib:
@@ -177,6 +178,7 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
           The following functions are used to obtain information about a package
           file.
         </para>
+
         <para>
           It should be noted that most information is returned in the form of a
           <structname>Header</structname> structure.  This data structure is
@@ -215,6 +217,7 @@ int rpmReadPackageInfo(int fd,
             <parameter>fd</parameter> is left positioned at the start of the
             package's archive section.
           </para>
+
           <para>
             If either <parameter>signatures</parameter> or
             <parameter>hdr</parameter> are <symbol>NULL</symbol>, information
@@ -222,6 +225,7 @@ int rpmReadPackageInfo(int fd,
             the caller.  Otherwise, they will return the package's signatures
             and header, respectively.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -278,6 +282,7 @@ int rpmReadPackageHeader(int fd,
             <parameter>fd</parameter> is left positioned at the start of the
             package's archive section.
           </para>
+
           <para>
             If <parameter>hdr</parameter>, <parameter>isSource</parameter>,
             <parameter>major</parameter>, or <parameter>minor</parameter> are
@@ -289,6 +294,7 @@ int rpmReadPackageHeader(int fd,
             and minor revision number (<parameter>major</parameter> and
             <parameter>minor</parameter>, respectively).
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -330,6 +336,7 @@ int rpmReadPackageHeader(int fd,
           system information, as well as from <filename>rpmrc</filename> files.
           They control various aspects of RPM's operation.
         </para>
+
         <para>
           The variables have symbolic names in the form
           <symbol>RPMVAR_<replaceable>xxx</replaceable></symbol>, where
@@ -359,6 +366,7 @@ char *rpmGetVar(int var);
             This function returns the value of the variable specified in
             <parameter>var</parameter>.
           </para>
+
           <para>           
             On error, the function returns <symbol>NULL</symbol>.
           </para>
@@ -384,11 +392,13 @@ int rpmGetBooleanVar(int var);
 
           <para>
             This function looks up the variable specified in
-            <parameter>var</parameter> and returns a 0 or 1 depending on the
-            variable's value.
+            <parameter>var</parameter> and returns a
+            <returnvalue>0</returnvalue> or <returnvalue>1</returnvalue>
+            depending on the variable's value.
           </para>
+
           <para>
-            On error, the function returns 0.
+            On error, the function returns <returnvalue>0</returnvalue>.
           </para>
         </sect3>
 
@@ -429,10 +439,11 @@ void rpmSetVar(int var,
 
         <para>
           The functions in this section are all related to
-<filename>rpmrc</filename> information --- the <filename>rpmrc</filename> files
-as well as the variables set from those files.  This information also includes
-the architecture and operating system information based on
-<filename>rpmrc</filename> file entries.
+          <filename>rpmrc</filename> information --- the
+          <filename>rpmrc</filename> files as well as the variables set from
+          those files.  This information also includes the architecture and
+          operating system information based on <filename>rpmrc</filename> file
+          entries.
         </para>
 
         <sect3 id="s3-rpm-rpmlib-rpmreadconfigfiles">
@@ -482,6 +493,7 @@ int rpmReadConfigFiles(char * file,
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             Every <filename>rpmrc</filename> file entry is used with
             <function>rpmSetVar()</function> to set the appropriate RPM
@@ -494,6 +506,7 @@ int rpmReadConfigFiles(char * file,
             still go through the normal <filename>rpmrc</filename> translation
             process.
           </para>
+
           <para>
             The <parameter>building</parameter> argument should be set to 1 only
             if a package is being built when this function is called.  Since
@@ -570,7 +583,8 @@ int rpmShowRC(FILE *f);
 
           <para>
             This function writes all variable names and their values to the file
-            <parameter>f</parameter>.  Always returns 0.
+            <parameter>f</parameter>.  Always returns
+            <returnvalue>0</returnvalue>.
           </para>
         </sect3>
 
@@ -595,9 +609,9 @@ int rpmArchScore(char * arch);
           <para>
             This function returns the "distance" between the architecture whose
             name is specified in <parameter>arch</parameter>, and the current
-            architecture.  Returns 0 if the two architectures are incompatible.
-            The smaller the number returned, the more compatible the two
-            architectures are.
+            architecture.  Returns <returnvalue>0</returnvalue> if the two
+            architectures are incompatible.  The smaller the number returned,
+            the more compatible the two architectures are.
           </para>
         </sect3>
 
@@ -622,9 +636,9 @@ int rpmOsScore(char * os);
           <para>
             This function returns the "distance" between the operating system
             whose name is specified in <parameter>os</parameter>, and the
-            current operating system.  Returns 0 if the two operating systems
-            are incompatible.  The smaller the number returned, the more
-            compatible the two operating systems are.
+            current operating system.  Returns <returnvalue>0</returnvalue> if
+            the two operating systems are incompatible.  The smaller the number
+            returned, the more compatible the two operating systems are.
           </para>
         </sect3>
       </sect2>
@@ -643,6 +657,7 @@ int rpmOsScore(char * os);
           creating the database.  A function also exists to rebuild a database
           that has been corrupted.
         </para>
+
         <para>
           Every function that accesses the RPM database in some fashion makes
           use of the <structname>rpmdb</structname> structure.  This structure
@@ -680,8 +695,10 @@ int rpmdbOpen(char * root,
             <parameter>flags</parameter> and <parameter>mode</parameter>
             parameters, respectively.
           </para>
+
           <para>
-            The function returns 1 on error, 0 on success.
+            The function returns <returnvalue>1</returnvalue> on error,
+            <returnvalue>0</returnvalue> on success.
           </para>
         </sect3>
 
@@ -736,8 +753,10 @@ int rpmdbInit(char * root,
             <function>open(2)</function>'s <parameter>mode</parameter>
             parameter.
           </para>
+
           <para>
-            The function returns 1 on error, 0 on success.
+            The function returns <returnvalue>1</returnvalue> on error,
+            <returnvalue>0</returnvalue> on success.
           </para>
         </sect3>
 
@@ -764,8 +783,10 @@ int rpmdbRebuild(char * root);
             specified, it is prepended to <symbol>RPMVAR_DBPATH</symbol> prior
             to rebuilding.
           </para>
+
           <para>
-            The function returns 1 on error, 0 on success.
+            The function returns <returnvalue>1</returnvalue> on error,
+            <returnvalue>0</returnvalue> on success.
           </para>
         </sect3>
       </sect2>
@@ -783,6 +804,7 @@ int rpmdbRebuild(char * root);
           described in this section is a function to retrieve a database record
           by its record number.
         </para>
+
         <para>
           It should be noted that database records are returned in the form of a
           <structname>Header</structname> structure.  This data structure is
@@ -813,8 +835,9 @@ unsigned int rpmdbFirstRecNum(rpmdb db);
             This function returns the record number of the first record in the
             database specified by <parameter>db</parameter>.
           </para>
+
           <para>
-            On error, it returns 0.
+            On error, it returns <returnvalue>0</returnvalue>.
           </para>
         </sect3>
 
@@ -842,8 +865,9 @@ unsigned int rpmdbNextRecNum(rpmdb db,
             record number passed in <parameter>lastOffset</parameter>, in the
             database specified by <parameter>db</parameter>.
           </para>
+
           <para>
-            On error, this function returns 0.
+            On error, this function returns <returnvalue>0</returnvalue>.
           </para>
         </sect3>
 
@@ -871,6 +895,7 @@ Header rpmdbGetRecord(rpmdb db,
             <parameter>offset</parameter> from the database specified by
             <parameter>db</parameter>.
           </para>
+
           <para>
             This function returns <symbol>NULL</symbol> on error.
           </para>
@@ -901,6 +926,7 @@ typedef struct {
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Each <structname>dbiIndexRecord</structname> is also defined in
           <filename>&lt;rpm/dbindex.h&gt;</filename> as follows:
@@ -914,12 +940,14 @@ typedef struct {
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The <structfield>recOffset</structfield> element is the offset of the
           record from the start of the database file.  The
           <structfield>fileNumber</structfield> element is only used by
           <function>rpmdbFindByFile()</function>.
         </para>
+
         <para>
           Keep in mind that the
           <function>rpmdbFind<replaceable>xxx</replaceable></function> search
@@ -979,6 +1007,7 @@ int rpmdbFindByFile(rpmdb db,
             specified by <parameter>filespec</parameter>.  It returns matching
             records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1034,6 +1063,7 @@ int rpmdbFindByGroup(rpmdb db,
             group specified by <parameter>group</parameter>.  It returns
             matching records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1089,6 +1119,7 @@ int rpmdbFindPackage(rpmdb db,
             (not label) specified by <parameter>name</parameter>.  It returns
             matching records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1144,6 +1175,7 @@ int rpmdbFindByProvides(rpmdb db,
             provides information specified by <parameter>provides</parameter>.
             It returns matching records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1199,6 +1231,7 @@ int rpmdbFindByRequiredBy(rpmdb db,
             requires information specified by <parameter>requires</parameter>.
             It returns matching records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1254,6 +1287,7 @@ int rpmdbFindByConflicts(rpmdb db,
             conflicts information specified by <parameter>conflicts</parameter>.
             It returns matching records in <parameter>matches</parameter>.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1329,6 +1363,7 @@ int rpmInstallSourcePackage(char * root,
             complete path and filename of the just-installed spec file is
             returned.
           </para>
+
           <para>
             The <parameter>notify</parameter> parameter is used to specify a
             progress-tracking function that will be called during the
@@ -1336,6 +1371,7 @@ int rpmInstallSourcePackage(char * root,
             linkend="s3-rpm-rpmlib-rpmnotifyfunction"> for more information on
             this parameter.
           </para>
+
           <para>
             The <parameter>labelFormat</parameter> parameter can be used to
             specify how the package label should be formatted.  It is used when
@@ -1343,6 +1379,7 @@ int rpmInstallSourcePackage(char * root,
             proceed.  If <parameter>labelformat</parameter> is
             <symbol>NULL</symbol>, the package label is not printed.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1406,6 +1443,7 @@ int rpmInstallPackage(char * rootdir,
             <parameter>db</parameter> is updated to reflect the newly installed
             package.
           </para>
+
           <para>
             The <parameter>flags</parameter> parameter is used to control the
             installation behavior.  The flags are defined in
@@ -1414,6 +1452,7 @@ int rpmInstallPackage(char * rootdir,
             <symbol><replaceable>xxx</replaceable></symbol> is the name of the
             flag.
           </para>
+
           <para>
             The following flags are currently defined:
 
@@ -1485,6 +1524,7 @@ int rpmInstallPackage(char * rootdir,
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             The <parameter>notify</parameter> parameter is used to specify a
             progress tracking function that will be called during the
@@ -1492,6 +1532,7 @@ int rpmInstallPackage(char * rootdir,
             linkend="s3-rpm-rpmlib-rpmnotifyfunction"> for more information on
             this parameter.
           </para>
+
           <para>
             The <parameter>labelFormat</parameter> parameter can be used to
             specify how the package label should be formatted.  This information
@@ -1501,12 +1542,14 @@ int rpmInstallPackage(char * rootdir,
             <parameter>labelformat</parameter> is <symbol>NULL</symbol>, the
             package label is not printed.
           </para>
+
           <para>
             The <parameter>netsharedPath</parameter> parameter is used to
             specify that part of the local filesystem that is shared with other
             systems.  If there is more than one path that is shared, the paths
             should be separated with a colon.
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1579,6 +1622,7 @@ typedef void (*rpmNotifyFunction)(const unsigned long amount,
               </listitem>
             </orderedlist>
           </para>
+
           <para>
             This function permits the creation of a dynamically updating
             progress meter during package installation.
@@ -1612,6 +1656,7 @@ int rpmRemovePackage(char * root,
             specified, it is used as the path to a directory that will serve as
             the root directory while the package is being removed.
           </para>
+
           <para>
             The <parameter>flags</parameter> parameter is used to control the
             package removal behavior.  The flags that may be passed are defined
@@ -1620,6 +1665,7 @@ int rpmRemovePackage(char * root,
             <symbol><replaceable>xxx</replaceable></symbol> is the name of the
             flag.
           </para>
+
           <para>
             The following flags are currently defined:
 
@@ -1639,6 +1685,7 @@ int rpmRemovePackage(char * root,
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             This function returns the following status values:
 
@@ -1673,6 +1720,7 @@ int rpmRemovePackage(char * root,
           necessary to ensure that the files comprising a package have not been
           modified since they were installed.
         </para>
+
         <para>
           Verification takes place on three distinct levels:
 
@@ -1698,6 +1746,7 @@ int rpmRemovePackage(char * root,
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           Because of this, there are two functions to perform each specific
           verification operation.
@@ -1733,12 +1782,14 @@ int rpmVerifyFile(char * root,
             in <parameter>result</parameter>, and consist of a number of flags.
             Each flag that is set indicates a verification failure.
           </para>
+
           <para>
             The flags are defined in <filename>rpmlib.h</filename>, and are of
             the form <symbol>RPMVERIFY_<replaceable>xxx</replaceable></symbol>,
             where <symbol><replaceable>xxx</replaceable></symbol> is the name of
             the data that failed verification.
           </para>
+
           <para>
             This function returns <returnvalue>0</returnvalue> on success, and
             <returnvalue>1</returnvalue> on failure.
@@ -1771,10 +1822,11 @@ int rpmVerifyScript(char * root,
             verification script for the package whose header is
             <parameter>h</parameter>.  <parameter>err</parameter> must contain a
             valid file descriptor.  If <function>rpmIsVerbose()</function>
-            returns true, the <command>%verifyscript</command> verification
-            script will direct all status messages to
-            <parameter>err</parameter>.
+            returns <returnvalue>true</returnvalue>, the
+            <command>%verifyscript</command> verification script will direct all
+            status messages to <parameter>err</parameter>.
           </para>
+
           <para>
             This function returns <returnvalue>0</returnvalue> on success,
             <returnvalue>1</returnvalue> on failure.
@@ -1794,6 +1846,7 @@ int rpmVerifyScript(char * root,
           The functions in this section are used to perform the various
           dependency-related operations supported by rpmlib.
         </para>
+
         <para>
           Dependency processing is entirely separate from normal package-based
           operations.  The package installation and removal functions do not
@@ -1801,6 +1854,7 @@ int rpmVerifyScript(char * root,
           processing is somewhat different from other aspects of rpmlib's
           operation.
         </para>
+
         <para>
           Dependency processing centers around the
           <structname>rpmDependencies</structname> data structure.  The
@@ -1811,6 +1865,7 @@ int rpmVerifyScript(char * root,
           performed.  They do <emphasis>not</emphasis> perform the actual
           operation on the package.  This is an important point to keep in mind.
         </para>
+
         <para>
           Once the data structure has been completely populated, a dependency
           check function is called to determine if there are any
@@ -1819,6 +1874,7 @@ int rpmVerifyScript(char * root,
           <structname>rpmDependencyConflict</structname>, is defined in
           <filename>rpmlib.h</filename>.
         </para>
+
         <para>
           Note that it is necessary to free both the conflicts structure
           <emphasis>and</emphasis> the <structname>rpmDependencies</structname>
@@ -1968,6 +2024,7 @@ void rpmdepAvailablePackage(rpmDependencies rpmdep,
             <structname>rpmDependencies</structname> structure,
             <parameter>rpmdep</parameter>.
           </para>
+
           <para>
             The <parameter>key</parameter> parameter can be anything that
             uniquely identifies the package being added.  It will be returned as
@@ -2003,6 +2060,7 @@ int rpmdepCheck(rpmDependencies rpmdep,
             <parameter>numConflicts</parameter>, pointed to by
             <parameter>conflicts</parameter>.
           </para>
+
           <para>
             This function returns <returnvalue>0</returnvalue> on success, and
             <returnvalue>1</returnvalue> on error.
@@ -2074,6 +2132,7 @@ void rpmdepDone(rpmDependencies rpmdep);
           library can produce a wealth of diagnostic output, making it easy to
           see what is going on at any given time.
         </para>
+
         <para>
           There are several different verbosity levels defined in
           <filename>rpmlib.h</filename>.  Their symbolic names are of the form
@@ -2083,6 +2142,7 @@ void rpmdepDone(rpmDependencies rpmdep);
           verbosity levels <emphasis>increase</emphasis> with a
           <emphasis>decrease</emphasis> in verbosity.
         </para>
+
         <para>
           Unless otherwise set, the default verbosity level is
           <symbol>RPMMESS_NORMAL</symbol>.
@@ -2225,6 +2285,7 @@ int rpmIsDebug(void);
           cryptographically-derived data that can be used to prove the package's
           origin.
         </para>
+
         <para>
           Each type of signature has its own tag value.  These tag values are
           defined in <filename>rpmlib.h</filename> and are of the form
@@ -2261,6 +2322,7 @@ int rpmVerifySignature(char *file,
             stored in <parameter>result</parameter>, in a format suitable for
             printing.
           </para>
+
           <para>
             The <parameter>sigTag</parameter> parameter specifies the type of
             signature to be checked.  The <parameter>sig</parameter> parameter
@@ -2269,6 +2331,7 @@ int rpmVerifySignature(char *file,
             signature; at present, this parameter is only used for PGP-based
             signatures.
           </para>
+
           <para>
             This function returns the following values:
 
@@ -2342,12 +2405,14 @@ void rpmFreeSignature(Header h);
           The header is one of the key data structures in rpmlib.  The functions
           in this section perform basic manipulations of the header.
         </para>
+
         <para>
           The header is actually a data structure.  It is not necessary to fully
           understand the actual data structure.  However, it
           <emphasis>is</emphasis> necessary to understand the basic concepts on
           which the header is based.
         </para>
+
         <para>
           The header serves as a kind of miniature database.  The header can be
           searched for specific information, which can be retrieved easily.
@@ -2385,6 +2450,7 @@ Header headerRead(int fd,
             <function>headerRead()</function> will not check the header's magic
             numbers, and will return an error if they are present.
           </para>
+
           <para>
             On error, this function returns <symbol>NULL</symbol>.
           </para>
@@ -2667,6 +2733,7 @@ int headerGetEntry(Header h,
             issue a <function>free()</function> on <parameter>p</parameter> when
             done with the data.
           </para>
+
           <para>
             This function returns <returnvalue>1</returnvalue> on sucess, and
             <returnvalue>0</returnvalue> on failure.
@@ -2701,13 +2768,16 @@ int headerAddEntry(Header h,
             <parameter>tag</parameter> parameter, and the entry's type is
             specified by the <parameter>type</parameter> parameter.
           </para>
+
           <para>
             The entry's data is pointed to by <parameter>p</parameter>, and the
             size of the data is specified by <parameter>c</parameter>.
           </para>
+
           <para>
             This function always returns <returnvalue>1</returnvalue>.
           </para>
+
           <para>
             Note: In versions of RPM prior to 2.3.3,
             <function>headerAddEntry()</function> will only work successfully
@@ -2820,6 +2890,7 @@ int headerNextIterator(HeaderIterator iter,
             <function>free()</function> on <parameter>p</parameter> when done
             with the data.
           </para>
+
           <para>
             This function returns <returnvalue>1</returnvalue> if successful,
             and <returnvalue>0</returnvalue> if there are no more entries in the
@@ -2884,6 +2955,7 @@ void headerFreeIterator(HeaderIterator iter);
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we've included <filename>rpmlib.h</filename>, which is necessary
           for all programs that use rpmlib.
@@ -2903,6 +2975,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we've defined the program's storage.  Note in particular the
           <structname>HeaderIterator</structname>,
@@ -2924,6 +2997,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Standard stuff here.  The first argument is supposed to be an RPM
           package file.  It is opened here.  If there is no argument on the
@@ -2941,6 +3015,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here things start to get interesting!  The signature and headers are
           read from package file that was just opened.  If you noticed above,
@@ -2963,6 +3038,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Now that we have the package's header, we get the package name
           (specified by the <symbol>RPMTAG_NAME</symbol> above).  Next, we see
@@ -2979,6 +3055,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Turning to the other <structname>Header</structname> structure we've
           read, we print out the package's signatures in human-readable form.
@@ -2992,6 +3069,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we set up an iterator for the package's header.  This will allow
           us to step through each entry in the header.
@@ -3011,6 +3089,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           This loop uses <function>headerNextIterator()</function> to return
           each entry's tag, type, data, and size.  By using a
@@ -3029,6 +3108,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           This is the housecleaning section of the program.  First we free the
           iterator that we've been using, and finally the header itself.
@@ -3080,6 +3160,7 @@ There are 11 files in this package
 </computeroutput>
           </screen>
         </para>
+
         <para>
           As before, this is the normal way of including all of rpmlib's
           definitions.
@@ -3098,6 +3179,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here are the data declarations.  Note the declaration of
           <parameter>db</parameter>: this is how we will be accessing the RPM
@@ -3115,6 +3197,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Before opening the RPM database, it's necessary to know where the
           database resides.  This information is stored in
@@ -3137,6 +3220,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we're opening the RPM database, and doing some cursory error
           checking to make sure we should continue.
@@ -3147,6 +3231,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           We get the offset of the first database record&hellip;
 
@@ -3162,6 +3247,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we start a <command>while</command> loop based on the record
           offset.  As long as there is a non-zero offset (meaning that there is
@@ -3176,6 +3262,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Next, we get the package name entry from the record, and compare it
           with the name of the package we're interested in.  If it matches, we
@@ -3190,6 +3277,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           At the end of the loop, we free the record, and get the offset to the
           next record.
@@ -3202,9 +3290,11 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           At the end, we close the database, and exit.
         </para>
+
         <para>
           Here's the program's output, edited for brevity.  Notice that the
           database path changes from <computeroutput>(null)</computeroutput> to
@@ -3251,6 +3341,7 @@ Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As can be seen, everything that you could possibly want to know about
           an installed package is available using this method.
@@ -3277,6 +3368,7 @@ Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x0000141c 00000006
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here we include rpmlib's definitions.
 
@@ -3291,6 +3383,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Here are the storage declarations.
 
@@ -3310,6 +3403,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In this section, we do some argument processing, processing the
           <filename>rpmrc</filename> files, and open the RPM database.
@@ -3330,6 +3424,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           In this section we use <function>rpmdbFindPackage()</function> to
           search for the desired package.  After checking for successful status,
@@ -3340,6 +3435,7 @@ void main(int argc, char ** argv)
           to access all matches by stepping through the
           <structname>matches.recs</structname> array.
         </para>
+
         <para>
           Once we're done with the record, we free it, as well as the list of
           matching records.
@@ -3351,6 +3447,7 @@ void main(int argc, char ** argv)
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The last thing we do before exiting is to close the database.  Here's
           some sample output from the program.  Note the successful status, and
@@ -3372,7 +3469,7 @@ Entry      : 001 (1001)VERSION     STRING_TYPE        0x00000004 00000001
 Entry      : 002 (1002)RELEASE     STRING_TYPE        0x0000000a 00000001
        Data: 000 1
 Entry      : 003 (1004)SUMMARY     STRING_TYPE        0x0000000c 00000001
-       Data: 000 Red Hat <!-- *** RED HAT *** -->Package Manager
+       Data: 000 Red Hat Package Manager
 &hellip;
 Entry      : 034 (1049)REQUIRENAME STRING_ARRAY_TYPE  0x00000b40 00000003
        Data: 000 libz.so.1

@@ -11,6 +11,7 @@
       are to be installed on their systems.  However, package builders must
       first design their packages to give users this freedom.
     </para>
+
     <para>
       That's all well and good, but why would the ability to "relocate" a
       package be all that important?
@@ -66,6 +67,7 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
 <prompt># </prompt>
               </screen>
             </para>
+
             <para>
               Bottom line: There's no way 150MB of new software is going to fit
               on the root filesystem.
@@ -89,12 +91,14 @@ Filesystem         1024-blocks  Used Available Capacity Mounted on
         the package builder can make life easier for sysadmins everywhere.  But
         what exactly <emphasis>is</emphasis> a relocatable package?
       </para>
+
       <para>
         A relocatable package is a package that is standard in every way, save
         one.  The difference lies in the <command>prefix</command> tag.  When this tag
         is added to a spec file, RPM will attempt to build a relocatable
         package.
       </para>
+
       <para>
         Note the word "attempt".  There are a few conditions that must be met
         before a relocatable package can be built successfully, and this chapter
@@ -126,6 +130,7 @@ Prefix: /opt
 </computeroutput>
         </screen>
       </para>
+
       <para>
         In this example, the prefix path is defined as
         <filename>/opt</filename>.  This means that, by default, the package
@@ -139,11 +144,13 @@ Prefix: /opt
 </computeroutput>
         </screen>
       </para>
+
       <para>
         If the package is installed without any relocation, this file will be
         installed in <filename>/opt/bin</filename>.  This is identical to how a
         non-relocatable package is installed.
       </para>
+
       <para>
         However, if the package <emphasis>is</emphasis> to be relocated on
         installation, the path of every file in the <command>%files</command>
@@ -179,6 +186,7 @@ Prefix: /opt
 </computeroutput>
         </screen>
       </para>
+
       <para>
         becomes:
 
@@ -242,6 +250,7 @@ Prefix: /opt
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         Let's cover each of these issues, starting with the
         <command>%files</command> list.
@@ -275,6 +284,7 @@ Build failed.
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           In our example, the build proceeded normally until the time came to
           create the binary package file.  At that point RPM detected the
@@ -284,6 +294,7 @@ Build failed.
           (<filename>/usr/doc/cdplayer-1.0-1</filename>) path.  This stopped the
           build in its tracks.
         </para>
+
         <para>
           The fact that every file in a relocatable package must be installed
           under the directory specified in the <command>prefix</command> line,
@@ -293,6 +304,7 @@ Build failed.
             <primary>config files</primary>
           </indexterm>
         </para>
+
         <para>
           This question leads right into our next section.
         </para>
@@ -339,18 +351,21 @@ Build failed.
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           The first approach would certainly work from a purely technical
           standpoint, but not many people would be happy with a program that
           installed itself in <filename>/etc</filename>.  So this approach isn't
           viable.
         </para>
+
         <para>
           The second approach might be more appropriate, but it forces users to
           complete the install by having them create the config file themselves.
           If RPM's goal is to make software easier to install and remove, this
           is not a viable approach, either!
         </para>
+
         <para>
           The final approach might be the best.  Once the program is installed,
           when the rewritten software is first run, it could see that no
@@ -360,6 +375,7 @@ Build failed.
             <primary>config files</primary>
           </indexterm>
         </para>
+
         <para>
           However, even though this would work, when the time came to erase the
           package, the config file would be left behind.  RPM had never
@@ -367,6 +383,7 @@ Build failed.
           that this approach is probably more labor intensive than most package
           builders would like.
         </para>
+
         <para>
           None of these approaches are very appealing, are they?  Some software
           just doesn't relocate very well.  In general, any of the following
@@ -389,6 +406,7 @@ Build failed.
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           If these kinds of issues crop up, then making the software relocatable
           is going to be tough.  And there's still one issue left to consider.
@@ -404,6 +422,7 @@ Build failed.
           centers not on the relocatable software itself, but on other programs
           that reference the relocatable software.
         </para>
+
         <para>
           For example, there are times when a package needs to execute other
           programs.  This might include backup software that needs to send mail,
@@ -411,12 +430,14 @@ Build failed.
           underlying programs were relocatable, and not installed where other
           packages expect them, then they would be of little use.
         </para>
+
         <para>
           Granted, this isn't a common problem, but it can happen.  And for the
           package builder interested in building relocatable packages, it's an
           issue that needs to be explored.  Unfortunately, this type of problem
           can be the hardest to find.
         </para>
+
         <para>
           If, however, a software product has been found to be relocatable, the
           mechanics of actually building a relocatable package are pretty
@@ -454,6 +475,7 @@ Name: cdplayer
 </computeroutput>
         </screen>
       </para>
+
       <para>
         Everything looks all right, except for the <command>%files</command>
         list.  There are files in <filename>/usr/local/bin</filename>, a
@@ -462,6 +484,7 @@ Name: cdplayer
         <filename>/usr/local</filename> would work pretty well, except for that
         <filename>cdp-config</filename> file.
       </para>
+
       <para>
         For the sake of this first build, we'll declare the config file
         unnecessary and remove it from the <command>%files</command> list.
@@ -490,6 +513,7 @@ Build failed.
 <prompt># </prompt>
         </screen>
       </para>
+
       <para>
         The build proceeded normally up to the point of actually creating the
         binary package.  The <computeroutput>Package Prefix =
@@ -498,6 +522,7 @@ Build failed.
         file called <filename>/usr/doc/cdplayer-1.0-1</filename>.  But that file
         isn't even in the <command>%files</command> list.  What's going on?
       </para>
+
       <para>
         Take a closer look at the <command>%files</command> list.  See the line
         that reads <command>%doc README</command>?  In <xref
@@ -506,6 +531,7 @@ Build failed.
         <filename>/usr/doc</filename>.  That's the file that killed the build
         --- the directory created by the <command>%doc</command> directive.
       </para>
+
       <para>
         Let's temporarily remove that line from the <command>%files</command>
         list and try again:
@@ -548,6 +574,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 <prompt># </prompt>
         </screen>
       </para>
+
       <para>
         The build completed normally.  Note how the files to be placed in the
         binary package file are listed, minus the prefix of
@@ -586,6 +613,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           Both of these issues are due to the fact that the files' paths do not
           start with the default prefix path <filename>/usr/local</filename>.
@@ -605,6 +633,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
             </para>
           </footnote>
         </para>
+
         <para>
           This approach wouldn't work for <filename>/etc/cdp-config</filename>,
           though.  To package that file, we'd need to resort to more extreme
@@ -618,6 +647,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
             <primary>config files</primary>
           </indexterm>
         </para>
+
         <para>
           Of course, this approach has some problems.  First, you'll need to
           write a <command>%postun</command> script to undo what the
@@ -658,6 +688,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           build successfully, we can use it to show how to test a relocatable
           package.
         </para>
+
         <para>
           First, let's see if the binary package file's prefix has been recorded
           properly.  We can do this by using the
@@ -671,6 +702,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           The <command>DEFAULTPREFIX</command> tag directs RPM to display the
           prefix used during the build.  As we can see, it's
@@ -678,6 +710,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           <command>--queryformat</command> option is discussed in <xref
           linkend="s3-rpm-query-queryformat-option">.
         </para>
+
         <para>
           So it looks like we have a relocatable package.  Let's try a couple of
           installs and see if we really <emphasis>can</emphasis> install it in
@@ -692,6 +725,7 @@ cdplayer    ##################################################
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           That seemed to work well enough.  Let's see if the files went where we
           intended:
@@ -711,6 +745,7 @@ total 9
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Looks good.  Let's erase the package and reinstall it with a different
           prefix:
@@ -724,11 +759,13 @@ cdplayer    ##################################################
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           (We should mention that directories <filename>foonly</filename> and
           <filename>blather</filename> didn't exist prior to installing
           <filename>cdplayer</filename>.)
         </para>
+
         <para>
           RPM has another tag that can be used with the
           <command>--queryformat</command> option.  It's called
@@ -743,6 +780,7 @@ cdplayer    ##################################################
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As we can see, it displays the prefix we entered on the command line.
           Let's see if the files were installed as we directed:
@@ -758,6 +796,7 @@ drwxr-xr-x   3 root     root         1024 Oct  7 13:45 man/
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           So far, so good --- the proper directories are there.  Let's look at
           the <command>man</command> page first:
@@ -772,6 +811,7 @@ total 5
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           That looks ok.  Now on to the files in <filename>bin</filename>:
 
@@ -786,6 +826,7 @@ lrwxrwxrwx   1 root     root           18 Oct  7 13:45 cdplay -&gt; /usr/local/b
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Uh-oh.  That <filename>cdplay</filename> symlink isn't right.  What
           happened?  If we look at <filename>cdplayer</filename>'s makefile, we
@@ -799,6 +840,7 @@ ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Ah, when the software is installed during RPM's build process, the
           make file sets up the symbolic link.  Looking back at the
@@ -807,6 +849,7 @@ ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
           non-relocatable string.  This is why we mentioned absolute symlinks as
           a prime example of non-relocatable software.
         </para>
+
         <para>
           Fortunately, this problem isn't that difficult to fix.  All we need to
           do is change the line in the makefile that creates the symlink from:
@@ -817,6 +860,7 @@ ln -s /usr/local/bin/cdp /usr/local/bin/cdplay
 </computeroutput>
           </screen>
         </para>
+
         <para>
           To:
 
@@ -826,11 +870,13 @@ ln -s ./cdp /usr/local/bin/cdplay
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Now <filename>cdplay</filename> will always point to
           <filename>cdp</filename>, no matter where it's installed.  When
           building relocatable packages, relative symlinks are your friend!
         </para>
+
         <para>
           After rebuilding the package, let's see if our modifications have the
           desired effect.  First, a normal install with the default prefix:
@@ -848,6 +894,7 @@ lrwxrwxrwx   1 root     root           18 Oct  8 22:32 cdplay -&gt; ./cdp*
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Next, we'll try a second install using the <command>--prefix</command>
           option (after we first delete the original package):
@@ -866,12 +913,14 @@ lrwxrwxrwx   1 root     root           30 Oct  8 22:34 cdplay -&gt; ./cdp*
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As you can see, the trickiest part about building relocatable packages
           is making sure the software you're packaging is up to the task.  Once
           that part of the job is done, the actual modifications are
           straightforward.
         </para>
+
         <para>
           In the next chapter, we'll cover how packages can be built in
           non-standard directories, as well as how non-root users can build

@@ -12,12 +12,14 @@
       Since our goal was to introduce package building, we kept things as simple
       as possible.  However, things aren't always that simple in the real world.
     </para>
+
     <para>
       In this chapter, we'll package a more complex application that will call
       on most of RPM's capabilities.  We'll start with a general overview of the
       application and end with a completed package, just as you would if you
       were tasked with packaging an application that you'd not seen before.
     </para>
+
     <para>
       So without further ado, let's meet amanda&hellip;
     </para>
@@ -37,6 +39,7 @@
         program was developed at the University of Maryland by James Da Silva,
         and has subsequently been enhanced by many people around the world.
       </para>
+
       <para>
         The sources are available at <filename>ftp.cs.umd.edu</filename>, in
         directory <filename>/pub/amanda</filename>.  At the time of writing, the
@@ -44,6 +47,7 @@
         no surprise that the amanda source <command>tar</command> file is called
         amanda-2.3.0.tar.gz.
       </para>
+
       <para>
         As with most network-centric applications, amanda has a server
         component, and a client component.  An amanda server controls how the
@@ -53,6 +57,7 @@
         to the server.  A server can back itself up simply by having the client
         software installed and configured, just like any other client system.
       </para>
+
       <para>
         The software builds with <command>make</command>, and most customization
         is done in two <filename>.h</filename> files in the
@@ -60,6 +65,7 @@
         documentation is available in the <filename>doc</filename> subdirectory.
         All in all, amanda is a typical non-trivial application.
       </para>
+
       <para>
         Amanda can be built on several Unix-based operating systems.  In this
         chapter, we'll build and package amanda for &RHL; Linux version 4.0.
@@ -80,6 +86,7 @@
         customization implies that mistakes will be made, we'll start off by
         building amanda without any involvement on the part of RPM.
       </para>
+
       <para>
         But before we can build amanda, we have to get it and unpack it, first.
       </para>
@@ -97,6 +104,7 @@
           <filename>ftp.cs.umd.edu</filename>.  The sources are in
           <filename>/pub/amanda</filename>.
         </para>
+
         <para>
           After getting the sources, it's necessary to unpack them.  We'll
           unpack them into RPM's <filename>SOURCES</filename> directory, so that
@@ -117,6 +125,7 @@ amanda-2.3.0/tools/munge
 </computeroutput>
           </screen>
         </para>
+
         <para>
           As we saw, the sources unpacked into a directory called
           <filename>amanda-2.3.0</filename>.  Let's rename that directory to
@@ -151,6 +160,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Now why did we do that?  The reason lies in the fact that we will
           undoubtedly need to make changes to the original sources in order to
@@ -158,6 +168,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
           <filename>amanda-2.3.0</filename> directory, and leave the
           <filename>amanda-2.3.0-orig</filename> untouched.
         </para>
+
         <para>
           Since one of RPM's design features is to build packages from the
           original, unmodified sources, that means the changes we'll make will
@@ -166,6 +177,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
           simple recursive <command>diff</command> command to create our patches
           when the time comes.
         </para>
+
         <para>
           Now that our sources are unpacked, it's time to work on building the
           software.
@@ -187,6 +199,7 @@ drwxr-xr-x  11 adm      games        1024 May 19  1996 amanda-2.3.0-orig/
           <filename>tools/munge</filename> to point to <command>cpp</command>,
           the C preprocessor.
         </para>
+
         <para>
           Amanda uses CPP to create makefiles containing the appropriate
           configuration information.  This approach is a bit unusual, but not
@@ -207,6 +220,7 @@ CPP=cpp
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Since <command>cpp</command> exists in <filename>/lib</filename> on
           &RHL;, we need to change this part of <filename>munge</filename> to:
@@ -225,6 +239,7 @@ CPP=/lib/cpp                    # traditional
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Next, we need to take a look in <filename>config/</filename> and
           create two files:
@@ -254,6 +269,7 @@ CPP=/lib/cpp                    # traditional
           ready.  Now let's turn our attention to
           <filename>options.h</filename>.
         </para>
+
         <para>
           In the case of <filename>options.h</filename>, there's only one
           example file called <filename>options.h-vanilla</filename>.  As the
@@ -282,6 +298,7 @@ CPP=/lib/cpp                    # traditional
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           While the first change is pretty much standard fare for anyone used to
           building software, the last two changes are really due to RPM.  With
@@ -297,6 +314,7 @@ CPP=/lib/cpp                    # traditional
           to hack an installation script, RPM would pick up the changes as part
           of its patch handling.
         </para>
+
         <para>
           We'll spare you the usual discovery of typos, incompatibilities, and
           the resulting rebuilds.  After an undisclosed number of iterations,
@@ -314,6 +332,7 @@ make[1]: Leaving directory `/usr/src/redhat/SOURCES/amanda-2.3.0/man'
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           As we noted, amanda is constructed so that most of the time changes
           will only be necessary in <filename>tools/munge</filename>, and the
@@ -397,6 +416,7 @@ Installing Amanda man pages:
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           OK, no major problems there.  Amanda does require a bit of additional
           effort to get everything running, though.  Looking at
@@ -484,6 +504,7 @@ Installing Amanda man pages:
             </listitem>
           </itemizedlist>
         </para>
+
         <para>
           Once everything is ready, we run a few tests.  Everything performs
           flawlessly.
@@ -568,6 +589,7 @@ rm -f *~ Makefile.out
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             Looking in the <filename>tools</filename> and
             <filename>config</filename> directories where we did all our work,
@@ -590,12 +612,14 @@ rm -f *~ Makefile.out
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             We let <command>find</command> take a look at the whole directory
             tree, just in case there was something still out there that we'd
             forgotten about.  As you can see, the only save files are from the
             three files we've been working on.
           </para>
+
           <para>
             You'll note that we've left our modified <filename>munge</filename>
             file, as well as the <filename>config.h</filename> and
@@ -617,6 +641,7 @@ rm -f *~ Makefile.out
 <prompt>#</prompt>
             </screen>
           </para>
+
           <para>
             With that one command, we've compared each file in the untouched
             directory tree (<filename>amanda-2.3.0-orig</filename>) with the
@@ -658,6 +683,7 @@ diff -uNr amanda-2.3.0-orig/tools/munge amanda-2.3.0/tools/munge
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The patch file contains complete copies of our
             <filename>config.h</filename> and <filename>options.h</filename>
@@ -702,6 +728,7 @@ and a network.  You can use it for local backups as well.
 </computeroutput>
           </screen>
         </para>
+
         <para>
           That part was pretty easy.  We set the package's release number to 1.
           We'll undoubtedly be changing that as we continue work on the spec
@@ -710,12 +737,14 @@ and a network.  You can use it for local backups as well.
           the amanda project, making it easier for the user to get additional
           information on amanda.
         </para>
+
         <para>
           The <command>Source</command> tag above includes the name of the
           original source tar file and is preceded by the URL pointing to the
           file's primary location.  Again, this makes it easy for the user to
           grab a copy of the sources from the software's "birthplace".
         </para>
+
         <para>
           Finally, the patch file that we've just created gets a line of its own
           on the <command>Patch</command> tag line.  Next, let's take a look at
@@ -740,6 +769,7 @@ the client and server packages!
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The <command>%package</command> directive names the package.  Since we
           wanted the subpackages to be named
@@ -752,12 +782,14 @@ the client and server packages!
           good idea even if RPM <emphasis>didn't</emphasis> require them ---
           we've used the tags to provide client-specific information.
         </para>
+
         <para>
           The <command>requires</command> tag is the only other tag in the
           client subpackage.  Since amanda uses <command>dump</command> on the
           client system, we included this tag so that RPM will ensure that the
           <command>dump</command> package is present on client systems.
         </para>
+
         <para>
           Next, let's take a look at the tags for the server subpackage:
 
@@ -781,6 +813,7 @@ the client and server packages!
 </computeroutput>
           </screen>
         </para>
+
         <para>
           No surprises here, really.  You'll note that the server subpackage has
           no <command>requires</command> tag for the dump package.  The reason
@@ -790,6 +823,7 @@ the client and server packages!
           installed.  Since we've already made the client subpackage require
           <command>dump</command>, we've already covered the bases.
         </para>
+
         <para>
           Since an amanda server cannot back itself up without the client
           software, why don't we have the server subpackage require the client
@@ -823,16 +857,19 @@ make install
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The <command>%prep</command> script consists of one line containing
             the simplest flavor of <command>%setup</command> macro.  Since we
             only need <command>%setup</command> to unpack one set of sources,
             there are no options we need to add.
           </para>
+
           <para>
             The <command>%build</command> script is just as simple, with the
             single <command>make</command> command required to build amanda.
           </para>
+
           <para>
             Finally, the <command>%install</command> script maintains our
             singe-line trend for build-time scripts.  Here a simple
@@ -865,6 +902,7 @@ make install
 </computeroutput>
             </screen>
           </para>
+
           <para>
             There's certainly more to come, but this is enough to get us
             started.  And the first thing we want RPM to do is to unpack the
@@ -919,6 +957,7 @@ drwxr-xr-x 3/20              0 May 19 22:11 1996 amanda-2.3.0/tools/
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           By looking at the output, it would be pretty hard to miss the fact
           that the sources were unpacked.  If we look in RPM's default build
@@ -935,6 +974,7 @@ drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           After a quick look around, it seems like the sources were unpacked
           properly.  But wait --- where are our carefully crafted configuration
@@ -971,6 +1011,7 @@ drwxr-xr-x  11 root     root         1024 May 19  1996 amanda-2.3.0
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           Easy enough.  At the top of the spec file, along with the other tags,
           let's add:
@@ -981,6 +1022,7 @@ Patch: amanda-2.3.0-linux.patch
 </computeroutput>
           </screen>
         </para>
+
         <para>
           Then we'll make our <command>%prep</command> script look like this:
 
@@ -992,6 +1034,7 @@ Patch: amanda-2.3.0-linux.patch
 </computeroutput>
           </screen>
         </para>
+
         <para>
           There, that should do it.  Let's give that <command>-bp</command>
           option another try:
@@ -1031,6 +1074,7 @@ Patch #0:
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Not much difference, until the very end, where we see the patch being
           applied.  Let's take a look into the build area and see if our
@@ -1055,6 +1099,7 @@ total 58
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Much better.  Those zero-length <filename>.orig</filename> files are a
           dead giveaway that patch has been here, as are the dates on
@@ -1110,6 +1155,7 @@ make[1]: Leaving directory `/usr/src/redhat/BUILD/amanda-2.3.0/man'
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           As we thought, no surprises.  A quick look through the build area
           shows a full assortment of binaries, all ready to be installed.  So it
@@ -1177,6 +1223,7 @@ Executing: special doc
 <prompt># </prompt>
           </screen>
         </para>
+
         <para>
           Everything looks pretty good.  At this point, the amanda software,
           built by RPM, has been installed on the build system.  Since performed
@@ -1274,6 +1321,7 @@ Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-1.src.rpm
 <prompt># </prompt>
         </screen>
       </para>
+
       <para>
         Great!  Let's take a look at our handiwork:
 
@@ -1288,6 +1336,7 @@ total 2
 <prompt># </prompt>
         </screen>
       </para>
+
       <para>
         Hmmm, those binary packages look sort of small.  We'd better see what's
         in there:
@@ -1338,10 +1387,12 @@ the client and server packages!
 <prompt># </prompt>
         </screen>
       </para>
+
       <para>
         What do they mean, <computeroutput>(contains no files)</computeroutput>?
         The spec file has perfectly good <command>%files</command> lists&hellip;
       </para>
+
       <para>
         Oops.
       </para>
@@ -1373,12 +1424,14 @@ the client and server packages!
             would have had to get more recent output from the installation
             phase.
           </para>
+
           <para>
             It's time for more decisions.  We have one list of installed files,
             and two <command>%files</command> lists.  It would be silly to put
             all the files in both <command>%files</command> lists, so we have to
             decide which file goes where.
           </para>
+
           <para>
             This is where experience with the software really pays off, because
             the wrong decision made here can result in awkward, ill-featured
@@ -1403,12 +1456,14 @@ docs/WHATS.NEW
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The files in <filename>/usr/lib/amanda</filename> are all the
             client-side amanda programs, so that part was easy.  The remaining
             files are part of the original source archive.  Amanda doesn't
             install them, but they contain information that users should see.
           </para>
+
           <para>
             Realizing that RPM can't package these files specified as they are,
             let's leave the client <command>%files</command> list for a moment,
@@ -1454,6 +1509,7 @@ example
 </computeroutput>
             </screen>
           </para>
+
           <para>
             The files in <filename>/usr/sbin</filename> are programs that will
             be run by the amanda administrator in order to perform backups and
@@ -1462,6 +1518,7 @@ example
             Following that are a number of man pages: one for each program to be
             run by the amanda administrator, and one with an overview of amanda.
           </para>
+
           <para>
             Bringing up the rear are a number of files that are not installed,
             but would be handy for the amanda administrator to have available.
@@ -1471,6 +1528,7 @@ example
             <filename>example</filename> subdirectory, which contains a few
             example configuration files for the amanda server.
           </para>
+
           <para>
             As in the client <command>%files</command> list, these last files
             can't be packaged by RPM as we've listed them.  We need to use a few
@@ -1523,6 +1581,7 @@ example
             subpackages, we'll need to use the <command>%dir</command> directive
             to instruct RPM to package only the directory.
           </para>
+
           <para>
             After these changes, here's what the client
             <command>%files</command> list looks like now:
@@ -1546,6 +1605,7 @@ example
 </computeroutput>
             </screen>
           </para>
+
           <para>
             We've also applied the same directives to the server
             <command>%files</command> list:
@@ -1591,6 +1651,7 @@ example
 </computeroutput>
             </screen>
           </para>
+
           <para>
             You'll note that we neglected to use the <command>%doc</command>
             directive on the man page files.  The reason is that RPM
@@ -1661,6 +1722,7 @@ Wrote: /usr/src/redhat/SRPMS/amanda-2.3.0-6.src.rpm
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             If we take a quick look at the client and server subpackages, we
             find that, sure enough, this time they contain files:
@@ -1729,6 +1791,7 @@ the client and server packages!
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             We're finally ready to test these packages!
           </para>
@@ -1758,6 +1821,7 @@ amanda-server       ##################################################
 <prompt>#</prompt>
           </screen>
         </para>
+
         <para>
           Running some tests, it looks like everything is running well.  But
           back in <xref linkend="s2-rpm-build-testing-packages">, we mentioned
@@ -1785,6 +1849,7 @@ amanda-server       ##################################################
 <prompt># </prompt>
             </screen>
           </para>
+
           <para>
             The install went smoothly enough.  However, testing did not.  Why?
             Nothing was set up!  The server configuration files, the
@@ -1793,6 +1858,7 @@ amanda-server       ##################################################
             sense: we had gone through all those steps on the build system, but
             none of those steps can be packaged as files.
           </para>
+
           <para>
             After following the steps in the installation instructions,
             everything works.  While we could expect users to do most of the
@@ -1814,6 +1880,7 @@ amanda-server       ##################################################
           starting looking at things from a "package the software" point of
           view.
         </para>
+
         <para>
           The difference lies in looking at the packages from the user's
           perspective.  Does the package install easily, or does it require a
@@ -1821,6 +1888,7 @@ amanda-server       ##################################################
           it clean up after itself, or does it leave bits and pieces strewn
           throughout the filesystem?
         </para>
+
         <para>
           Let's put a bit more effort into this spec file, and make life easier
           on our users.
@@ -1851,6 +1919,7 @@ then
 </computeroutput>
             </screen>
           </para>
+
           <para>
             First, we start the script with a <command>%post</command>
             statement, and indicate that this script is for the
@@ -1861,6 +1930,7 @@ then
             indicating how many instances of this package will be installed
             after the current installation is complete.
           </para>
+
           <para>
             If the argument is equal to 1, that means that no other instances of
             the client subpackage are presently installed, and that this one is
@@ -1889,6 +1959,7 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             One of amanda's requirements is that the user ID running the dumps
             on the client needs to be able to read from every disk's device
@@ -1899,6 +1970,7 @@ fi
             <filename>bin</filename> to the <filename>disk</filename> group.
             Two lines of <command>sed</command>, and we're done!
           </para>
+
           <para>
             The next section is related to the last.  It also focuses on making
             sure <filename>bin</filename> can access everything it needs while
@@ -1913,6 +1985,7 @@ chmod g+w /etc/dumpdates
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Since amanda uses <command>dump</command> to obtain the backups, and
             since <command>dump</command> keeps track of the backups in
@@ -1923,6 +1996,7 @@ chmod g+w /etc/dumpdates
             and write, but we had to do it ourselves.  It's not a big problem,
             though.
           </para>
+
           <para>
             Next, we need to create the appropriate network-related entries, so
             that amanda clients can communicate with amanda servers, and vice
@@ -1942,18 +2016,21 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             By using <command>grep</command> to look for lines that begin with
             the letters <command>amanda</command>, we can easily see if
             <filename>/etc/services</filename> is already configured properly.
             It it isn't, we simply append a line to the end.
           </para>
+
           <para>
             We also added a comment so that sysadmins will know where the entry
             came from, and either take our word for it or issue an <command>rpm
             -q --scripts amanda-client</command> command and see for themselves.
             We did it all on one line because it makes the script simpler.
           </para>
+
           <para>
             Let's look at the rest of the network-related part of this script:
 
@@ -1979,12 +2056,14 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Here, we've used the same approach to add an entry to
             <filename>/etc/inetd.conf</filename>.  We then hup
             <command>inetd</command> so the change will take affect, and we're
             done!
           </para>
+
           <para>
             Oh, and that last <command>fi</command> at the end?  That's to close
               the <command>if [ "$1" = 1 ]</command> at the start of the
@@ -2013,12 +2092,14 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             That was short!  And this huge difference brings up a good point
             about writing install scripts: It's important to understand what you
             as the package builder should do for the user, and what they should
             do for themselves.
           </para>
+
           <para>
             In the case of the client package, every one of the steps performed
             by the post-install script was something that a fairly knowledgeable
@@ -2031,6 +2112,7 @@ fi
             package on twenty systems, and performing each of the steps we've
             automated, twenty times?  We thought not.
           </para>
+
           <para>
             There is one step that we did <emphasis>not</emphasis> automate for
             the client package.  The step we left out is the creation of a
@@ -2038,6 +2120,7 @@ fi
             name of the amanda server, we have no way of knowing what the file
             should look like.  Therefore, that's one step we can't automate.
           </para>
+
           <para>
             The server's post-install script is so short because there's little
             else that can be automated.  The other steps required to set up an
@@ -2101,6 +2184,7 @@ then
 </computeroutput>
             </screen>
           </para>
+
           <para>
             As before, we start out with a declaration of the type of script
             this is, and which subpackage it is for.  Following that we have an
@@ -2111,6 +2195,7 @@ then
             complete.  If this is the case, the remainder of the script needs to
             be run, since there are no other amanda client packages left.
           </para>
+
           <para>
             Next, we remove <filename>bin</filename> from the
             <filename>disk</filename> group:
@@ -2140,6 +2225,7 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             No surprises there.  Continuing our uninstall, we start on the
             network-related tasks:
@@ -2162,6 +2248,7 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             That's odd.  Why are we looking for a file from the server package?
             If you look back at the install scripts for the client and server
@@ -2169,6 +2256,7 @@ fi
             both the client and the server require the same entry in
             <filename>/etc/services</filename>.
           </para>
+
           <para>
             If an amanda server is going to back itself up, it also needs the
             amanda client software.  Therefore, both subpackages need to add an
@@ -2180,6 +2268,7 @@ fi
             the client, we look for a file from the server subpackage, and if
             it's there, we leave the entry alone.
           </para>
+
           <para>
             Granted, this is a somewhat unsightly way to see if a certain
             package is installed.  Some of you are probably even saying, "Why
@@ -2187,15 +2276,18 @@ fi
             amanda-server</command>, and decide what to do based on that."  And
             that would be the best way to do it, except for one small point:
           </para>
+
           <para>
             Only one invocation of RPM can run at any given time.
           </para>
+
           <para>
             Since RPM is running to perform the uninstall, if the
             uninstall-script were to attempt to run RPM again, it would fail.
             The reason it would fail is because only one copy of RPM can access
             the database at a time.  So we are stuck with our unsightly friend.
           </para>
+
           <para>
             Continuing the network-related uninstall tasks:
 
@@ -2220,6 +2312,7 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             Here, we're using <command>grep</command>'s ability to return lines
             that <emphasis>don't</emphasis> match the search string, in order to
@@ -2227,6 +2320,7 @@ fi
             <filename>/etc/inetd.conf</filename>.  After issuing a hup on inetd,
             we're done.
           </para>
+
           <para>
             On to the server.  If you've been noticing a pattern between the
             various scripts, you won't be disappointed here:
@@ -2259,6 +2353,7 @@ fi
 </computeroutput>
             </screen>
           </para>
+
           <para>
             By now the opening <command>if</command> statement is an old friend.
             As you might have expected, we are verifying whether the client
@@ -2266,6 +2361,7 @@ fi
             the client package isn't there, the entry is removed from
             <filename>/etc/services</filename>.  And that, is that.
           </para>
+
           <para>
             Obviously, these scripts must be carefully tested.  In the case of
             amanda, since the two subpackages have some measure of
@@ -2274,6 +2370,7 @@ fi
             <filename>/etc/services</filename> logic works properly in all
             cases.
           </para>
+
           <para>
             After a bit of testing, our install and uninstall scripts pass with
             flying colors.  From a technological standpoint, the client and
@@ -2292,6 +2389,7 @@ fi
             contain everything the user needs in order to deploy it effectively?
             Or will the user need to fiddle with it, guessing as they go?
           </para>
+
           <para>
             In the case of our amanda packages, it was obvious that some
             additional documentation was required so that the user would know
@@ -2302,6 +2400,7 @@ fi
             the post-install scripts.  No, an interim documente was required.
             Two, actually: one for the client, and one for the server.
           </para>
+
           <para>
             So two files were created, one to be added to each subpackage.  The
             question was, how to do it?  Essentially, there were two options:
@@ -2352,6 +2451,7 @@ Source1: amanda-rpm-instructions.tar.gz
 </computeroutput>
             </screen>
           </para>
+
           <para>
             While the <command>%setup</command> macro might look intimidating,
             it wasn't that hard to construct.  Here's what each options means:
@@ -2379,6 +2479,7 @@ Source1: amanda-rpm-instructions.tar.gz
               </listitem>
             </itemizedlist>
           </para>
+
           <para>
             Finally, two additions to the <command>%files</command> lists were
             required.  One for the client:
@@ -2389,6 +2490,7 @@ Source1: amanda-rpm-instructions.tar.gz
 </computeroutput>
             </screen>
           </para>
+
           <para>
             And one for the server:
 
@@ -2398,6 +2500,7 @@ Source1: amanda-rpm-instructions.tar.gz
 </computeroutput>
             </screen>
           </para>
+
           <para>
             At this point, the packages were complete.  Certainly there is
             software out there that doesn't require this level of effort to
