@@ -3,8 +3,8 @@
     <!-- label: rpm-basics -->
 
     <indexterm>
-      <primary>RPM!basics of developing with</primary>
-      <secondary></secondary>
+      <primary>RPM</primary>
+      <secondary>basics of developing with</secondary>
     </indexterm>
 
     <para>
@@ -17,8 +17,8 @@
     <sect1 id="s1-rpm-basics-inputs">
       <title>The Inputs</title>
       <indexterm>
-        <primary>RPM!inputs to</primary>
-        <secondary></secondary>
+        <primary>RPM</primary>
+        <secondary>inputs to</secondary>
       </indexterm>
 
       <para>
@@ -31,9 +31,9 @@
       <sect2 id="s2-rpm-basics-sources">
         <title>The Sources</title>
         <indexterm>
-          <primary>RPM!inputs to!sources</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>RPM</primary>
+          <secondary>inputs to</secondary>
+          <tertiary>sources</tertiary>
         </indexterm>
 
         <para>
@@ -55,9 +55,9 @@
       <sect2 id="s2-rpm-basics-patches">
         <title>The Patches</title>
         <indexterm>
-          <primary>RPM!inputs to!patches</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>RPM</primary>
+          <secondary>inputs to</secondary>
+          <tertiary>patches</tertiary>
         </indexterm>
 
         <para>
@@ -93,9 +93,8 @@
         <sect3 id="s3-rpm-basics-creating-patches">
           <title>Creating the Patches</title>
           <indexterm>
-            <primary>RPM!creating patches for</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>creating patches for</secondary>
           </indexterm>
 
           <para>
@@ -143,9 +142,9 @@
       <sect2 id="s2-rpm-basics-spec-file">
         <title>The Spec File</title>
         <indexterm>
-          <primary>RPM!inputs to!spec file</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>RPM</primary>
+          <secondary>inputs to</secondary>
+          <tertiary>spec file</tertiary>
         </indexterm>
 
         <para>
@@ -166,9 +165,9 @@
           <sect3 id="s3-rpm-basics-spec-preamble">
             <title>The Preamble</title>
             <indexterm>
-              <primary>RPM!spec file!preamble</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary>preamble</tertiary>
             </indexterm>
 
             <para>
@@ -184,9 +183,9 @@
           <sect3 id="s3-rpm-basics-spec-prep">
             <title>The Prep Section</title>
             <indexterm>
-              <primary>RPM!spec file!<command>%prep</command> section of</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary><command>%prep</command> section of</tertiary>
             </indexterm>
 
             <para>
@@ -209,9 +208,9 @@
           <sect3 id="s3-rpm-basics-spec-build">
             <title>The Build Section</title>
             <indexterm>
-              <primary>RPM!spec file!<command>%build</command> section of</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary><command>%build</command> section of</tertiary>
             </indexterm>
 
             <para>
@@ -228,9 +227,9 @@
           <sect3 id="s3-rpm-basics-spec-install">
             <title>The Install Section</title>
             <indexterm>
-              <primary>RPM!spec file!<command>%install</command> section of</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary><command>%install</command> section of</tertiary>
             </indexterm>
 
             <para>
@@ -247,9 +246,9 @@
           <sect3 id="s3-rpm-basics-spec-scripts">
             <title>Install and Uninstall Scripts</title>
             <indexterm>
-              <primary>RPM!spec file!scripts</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary>scripts</tertiary>
             </indexterm>
 
             <para>
@@ -319,9 +318,9 @@
           <sect3 id="s3-rpm-basics-spec-file-list">
             <title>The File List</title>
             <indexterm>
-              <primary>RPM!spec file!<command>%files</command> list</primary>
-              <secondary></secondary>
-              <tertiary></tertiary>
+              <primary>RPM</primary>
+              <secondary>spec file</secondary>
+              <tertiary><command>%files</command> list</tertiary>
             </indexterm>
 
             <para>
@@ -339,8 +338,8 @@
     <sect1 id="s1-rpm-basics-the-engine">
       <title>The Engine: RPM</title>
       <indexterm>
-        <primary>RPM!what it does</primary>
-        <secondary></secondary>
+        <primary>RPM</primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -401,8 +400,8 @@
     <sect1 id="s1-rpm-basics-outputs">
       <title>The Outputs</title>
       <indexterm>
-        <primary>RPM!outputs from</primary>
-        <secondary></secondary>
+        <primary>RPM</primary>
+        <secondary>outputs from</secondary>
       </indexterm>
 
       <para>
@@ -413,9 +412,9 @@
       <sect2 id="s2-rpm-basics-source-package-file">
         <title>The Source Package File</title>
         <indexterm>
-          <primary>RPM!outputs from!source package</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>RPM</primary>
+          <secondary>outputs from</secondary>
+          <tertiary>source package</tertiary>
         </indexterm>
 
         <para>
@@ -454,9 +453,9 @@
       <sect2 id="s2-rpm-basics-binary-package">
         <title>The Binary RPM</title>
         <indexterm>
-          <primary>RPM!outputs from!binary package</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>RPM</primary>
+          <secondary>outputs from</secondary>
+          <tertiary>binary package</tertiary>
         </indexterm>
 
         <para>

@@ -342,8 +342,8 @@ RPM version 2.3
     <sect1 id="s1-rpm-miscellania-rpm2cpio">
       <title>Using <command>rpm2cpio</command></title>
       <indexterm>
-        <primary><command>rpm2cpio</command>!use of</primary>
-        <secondary></secondary>
+        <primary><command>rpm2cpio</command></primary>
+        <secondary>use of</secondary>
       </indexterm>
 
       <para>
@@ -377,8 +377,8 @@ RPM version 2.3
       <sect2 id="s2-rpm-miscellania-rpm2cpio-what-it-does">
         <title><command>rpm2cpio</command> --- What does it do?</title>
         <indexterm>
-          <primary><command>rpm2cpio</command>!what it does</primary>
-          <secondary></secondary>
+          <primary><command>rpm2cpio</command></primary>
+          <secondary>what it does</secondary>
         </indexterm>
 
         <para>
@@ -460,8 +460,9 @@ blah.cpio: ASCII cpio archive (SVR4 with CRC)
           A more real-world example --- Listing the files in a package file
         </title>
         <indexterm>
-          <primary><command>rpm2cpio</command>!use of!listing files in package</primary>
-          <secondary></secondary>
+          <primary><command>rpm2cpio</command></primary>
+          <secondary>use of</secondary>
+          <tertiary>listing files in package</tertiary>
         </indexterm>
 
         <para>
@@ -497,9 +498,9 @@ usr/sbin/logrotate
       <sect2 id="s2-rpm-miscellania-rpm2cpio-extract">
         <title>Extracting one or more files from a package file</title>
         <indexterm>
-          <primary><command>rpm2cpio</command>!use of!extracting files in package</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm2cpio</command></primary>
+          <secondary>use of</secondary>
+          <tertiary>extracting files in package</tertiary>
         </indexterm>
 
         <para>
@@ -620,8 +621,8 @@ logrotate \- log file rotator
     <sect1 id="s1-rpm-miscellania-srpms">
       <title>Source Package Files and How To Use Them</title>
       <indexterm>
-        <primary>source package files!use of</primary>
-        <secondary></secondary>
+        <primary>source package files</primary>
+        <secondary>use of</secondary>
       </indexterm>
 
       <para>
@@ -736,8 +737,8 @@ etcskel-1.0-3.src.rpm: RPM v2 src i386 etcskel-1.0-3
       <sect2 id="s2-rpm-miscellania-srpms-what-can-i-do">
         <title>So what can I do with it?</title>
         <indexterm>
-          <primary>source package files!installing</primary>
-          <secondary></secondary>
+          <primary>source package files</primary>
+          <secondary>installing</secondary>
         </indexterm>
 
         <para>

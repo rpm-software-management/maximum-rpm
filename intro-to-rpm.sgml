@@ -2,16 +2,16 @@
     <title>An Introduction to Package Management</title>
 
     <indexterm>
-      <primary>package!management of!introduction</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
+      <primary>package</primary>
+      <secondary>management of</secondary>
+      <tertiary>introduction</tertiary>
     </indexterm>
 
     <sect1 id="s1-intro-to-rpm-what-are-packages">
       <title>What are Packages, and Why Manage Them?</title>
       <indexterm>
-        <primary>package!reasons for</primary>
-        <secondary></secondary>
+        <primary>package</primary>
+        <secondary>reasons for</secondary>
       </indexterm>
 
       <para>
@@ -151,8 +151,8 @@
       <sect2 id="s2-intro-to-rpm-enter-the-package">
         <title>Enter the Package</title>
         <indexterm>
-          <primary>package!what is it</primary>
-          <secondary></secondary>
+          <primary>package</primary>
+          <secondary>what is it</secondary>
         </indexterm>
 
         <para>
@@ -206,8 +206,8 @@
         <sect3 id="s3-intro-to-rpm-advantages-of-package">
           <title>Advantages of a Package</title>
           <indexterm>
-            <primary>package!advantages of</primary>
-            <secondary></secondary>
+            <primary>package</primary>
+            <secondary>advantages of</secondary>
           </indexterm>
 
           <para>
@@ -232,9 +232,9 @@
       <sect2 id="s2-intro-to-rpm-manage-your-packages">
         <title>Manage Your Packages, or They Will Manage You</title>
         <indexterm>
-          <primary>package!management of!reasons for</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package</primary>
+          <secondary>management of</secondary>
+          <tertiary>reasons for</tertiary>
         </indexterm>
 
         <para>
@@ -343,11 +343,6 @@
                   headache.  If it were possible to pay extra attention to these
                   files and make sure any changes made to them weren't lost,
                   life would certainly be a lot easier.
-                  <indexterm>
-                    <primary>package!management of!reasons for|)</primary>
-                    <secondary></secondary>
-                    <tertiary></tertiary>
-                  </indexterm>
                 </para>
               </listitem>
             </itemizedlist>
@@ -360,9 +355,9 @@
     <sect1 id="s1-intro-to-rpm-package-management-how">
       <title>Package Management: How to Do It?</title>
       <indexterm>
-        <primary>package!management of!how to</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package</primary>
+        <secondary>management of</secondary>
+        <tertiary>how to</tertiary>
       </indexterm>
 
       <para>
@@ -419,8 +414,8 @@
       <sect2 id="s2-intro-to-rpm-rpm-ancestors">
         <title>Ancestors of RPM</title>
         <indexterm>
-          <primary>RPM!ancestors of</primary>
-          <secondary></secondary>
+          <primary>RPM</primary>
+          <secondary>ancestors of</secondary>
         </indexterm>
 
         <para>
@@ -432,9 +427,9 @@
         <sect3 id="s3-intro-to-rpm-rpp">
           <title>RPP</title>
           <indexterm>
-            <primary>RPM!ancestors of!RPP</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>ancestors of</secondary>
+            <tertiary>RPP</tertiary>
           </indexterm>
 
           <para>
@@ -531,9 +526,9 @@
         <sect3 id="s3-intro-to-rpm-pms">
           <title>PMS</title>
           <indexterm>
-            <primary>RPM!ancestors of!PMS</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>ancestors of</secondary>
+            <tertiary>PMS</tertiary>
           </indexterm>
 
           <para>
@@ -567,9 +562,9 @@
         <sect3 id="s3-intro-to-rpm-pm">
           <title>PM</title>
           <indexterm>
-            <primary>RPM!ancestors of!PM</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>ancestors of</secondary>
+            <tertiary>PM</tertiary>
           </indexterm>
 
           <para>
@@ -599,9 +594,9 @@
         <sect3 id="s3-intro-to-rpm-rpmv1">
           <title>RPM Version 1</title>
           <indexterm>
-            <primary>RPM!ancestors of!RPM version 1</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>ancestors of</secondary>
+            <tertiary>RPM version 1</tertiary>
           </indexterm>
 
           <para>
@@ -741,9 +736,9 @@
         <sect3 id="s3-intro-to-rpm-rpmv2">
           <title>The RPM of Today: Version 2</title>
           <indexterm>
-            <primary>RPM!ancestors of!RPM version 2</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>RPM</primary>
+            <secondary>ancestors of</secondary>
+            <tertiary>RPM version 2</tertiary>
           </indexterm>
 
           <para>
@@ -791,8 +786,8 @@
     <sect1 id="s1-intro-to-rpm-rpm-design-goals">
       <title>RPM Design Goals</title>
       <indexterm>
-        <primary>RPM!design goals of</primary>
-        <secondary></secondary>
+        <primary>RPM</primary>
+        <secondary>design goals of</secondary>
       </indexterm>
 
       <para>
@@ -898,8 +893,8 @@
     <sect1 id="s1-intro-to-rpm-whats-in-package">
       <title>What's in a package?</title>
       <indexterm>
-        <primary>package!contents of</primary>
-        <secondary></secondary>
+        <primary>package</primary>
+        <secondary>contents of</secondary>
       </indexterm>
 
       <para>
@@ -920,8 +915,8 @@
       <sect2 id="s2-intro-to-rpm-package-labels">
         <title>RPM's Package Labels</title>
         <indexterm>
-          <primary>package!labels</primary>
-          <secondary></secondary>
+          <primary>package</primary>
+          <secondary>labels</secondary>
         </indexterm>
 
         <para>
@@ -998,8 +993,8 @@
       <sect2 id="s2-intro-to-rpm-labels-names">
         <title>Labels And Names: Similar, But Distinct</title>
         <indexterm>
-          <primary>package!labels vs. names</primary>
-          <secondary></secondary>
+          <primary>package</primary>
+          <secondary>labels vs. names</secondary>
         </indexterm>
 
         <para>
@@ -1021,8 +1016,8 @@
       <sect2 id="s2-intro-to-rpm-package-wide-information">
         <title>Package-wide Information</title>
         <indexterm>
-          <primary>information!package-wide</primary>
-          <secondary></secondary>
+          <primary>information</primary>
+          <secondary>package-wide</secondary>
         </indexterm>
 
         <para>
@@ -1075,8 +1070,8 @@
       <sect2 id="s2-intro-to-rpm-per-file-information">
         <title>Per-file Information</title>
         <indexterm>
-          <primary>information!per-file</primary>
-          <secondary></secondary>
+          <primary>information</primary>
+          <secondary>per-file</secondary>
         </indexterm>
 
         <para>

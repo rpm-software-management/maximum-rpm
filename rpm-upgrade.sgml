@@ -309,8 +309,8 @@
     <sect1 id="s1-rpm-upgrade-what-it-does">
       <title><command>rpm -U</command> --- What Does it Do?</title>
       <indexterm>
-        <primary><command>rpm -U</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -U</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -372,8 +372,8 @@
         <title>Config file magic</title>
         <!-- label: upgrade-magic -->
         <indexterm>
-          <primary><command>rpm -U</command>!config file handling</primary>
-          <secondary></secondary>
+          <primary><command>rpm -U</command></primary>
+          <secondary>config file handling</secondary>
         </indexterm>
         <indexterm>
           <primary>config files</primary>
@@ -589,8 +589,8 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
     <sect1 id="s1-rpm-upgrade-upgrading-a-package">
       <title>Upgrading a Package</title>
       <indexterm>
-        <primary><command>rpm -U</command>!basic command</primary>
-        <secondary></secondary>
+        <primary><command>rpm -U</command></primary>
+        <secondary>basic command</secondary>
       </indexterm>
 
       <para>
@@ -622,11 +622,8 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
       <sect2 id="s2-rpm-upgrade-secret">
         <title><command>rpm -U</command>'s Dirty Little Secret</title>
         <indexterm>
-          <primary>
-            <command>rpm -U</command>!as replacement for <command>rpm
-            -i</command>
-          </primary>
-          <secondary></secondary>
+          <primary><command>rpm -U</command></primary>
+          <secondary>as replacement for <command>rpm -i</command></secondary>
         </indexterm>
 
         <para>
@@ -650,8 +647,8 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
     <sect1 id="s1-rpm-upgrade-nearly-identical">
       <title>They're Nearly Identical&hellip;</title>
       <indexterm>
-        <primary><command>rpm -U</command>!options</primary>
-        <secondary></secondary>
+        <primary><command>rpm -U</command></primary>
+        <secondary>options</secondary>
       </indexterm>
 
       <para>

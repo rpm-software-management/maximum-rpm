@@ -3,8 +3,8 @@
     <!-- label: rpm-build -->
 
     <indexterm>
-      <primary>package building!simple example</primary>
-      <secondary></secondary>
+      <primary>package building</primary>
+      <secondary>simple example</secondary>
     </indexterm>
 
     <para>
@@ -18,9 +18,9 @@
     <sect1 id="s1-rpm-build-creating-build-directories">
       <title>Creating the Build Directory Structure</title>
       <indexterm>
-        <primary>package building!simple example!build directory, creating</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>simple example</secondary>
+        <tertiary>build directory, creating</tertiary>
       </indexterm>
 
       <para>
@@ -114,9 +114,9 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
     <sect1 id="s1-rpm-build-getting-sources">
       <title>Getting the Sources</title>
       <indexterm>
-        <primary>package building!simple example!sources, obtaining</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>simple example</secondary>
+        <tertiary>sources, obtaining</tertiary>
       </indexterm>
 
       <para>
@@ -137,9 +137,9 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
     <sect1 id="s1-rpm-build-creating-spec-file">
       <title>Creating the Spec File</title>
       <indexterm>
-        <primary>package building!simple example!spec file, creating</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>simple example</secondary>
+        <tertiary>spec file, creating</tertiary>
       </indexterm>
 
       <para>
@@ -152,9 +152,9 @@ drwxr-xr-x   2 root     root         1024 Aug  4 22:28 SRPMS/
       <sect2 id="s2-rpm-build-spec-file-preamble">
         <title>The Preamble</title>
         <indexterm>
-          <primary>package building!simple example!spec file, preamble</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>simple example</secondary>
+          <tertiary>spec file, preamble</tertiary>
         </indexterm>
 
         <para>
@@ -361,9 +361,9 @@ cannot be equaled with more mundane software...
       <sect2 id="s2-rpm-build-prep-section">
         <title>The <command>%prep</command> Section</title>
         <indexterm>
-          <primary>package building!simple example!spec file, <command>%prep</command> section</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>simple example</secondary>
+          <tertiary>spec file, <command>%prep</command> section</tertiary>
         </indexterm>
         <para>
           With the preamble, we provided a wealth of information.  The majority
@@ -468,9 +468,9 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
       <sect2 id="s2-rpm-build-build-section">
         <title>The <command>\%build</command> Section</title>
         <indexterm>
-          <primary>package building!simple example!spec file, <command>%build</command> section</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>simple example</secondary>
+          <tertiary>spec file, <command>%build</command> section</tertiary>
         </indexterm>
 
         <para>
@@ -504,9 +504,9 @@ make
       <sect2 id="s2-rpm-build-install-section">
         <title>The <command>\%install</command> Section</title>
         <indexterm>
-          <primary>package building!simple example!spec file, <command>%install</command> section</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>simple example</secondary>
+          <tertiary>spec file, <command>%install</command> section</tertiary>
         </indexterm>
 
         <para>
@@ -537,9 +537,9 @@ make install
       <sect2 id="s2-rpm-build-files-section">
         <title>The <command>\%files</command> Section</title>
         <indexterm>
-          <primary>package building!simple example!spec file, <command>%files</command> list</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary>package building</primary>
+          <secondary>simple example</secondary>
+          <tertiary>spec file, <command>%files</command> list</tertiary>
         </indexterm>
 
         <para>
@@ -585,9 +585,9 @@ make install
         <sect3 id="s3-rpm-build-creating-files-list">
           <title>How Do You Create the File List?</title>
           <indexterm>
-            <primary>package building!simple example!<command>%files</command> list, creating</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>simple example</secondary>
+            <tertiary><command>%files</command> list, creating</tertiary>
           </indexterm>
 
           <para>
@@ -638,9 +638,9 @@ make install
         <sect3 id="s3-rpm-build-install-uninstall-scripts">
           <title>The Install/Uninstall Scripts</title>
           <indexterm>
-            <primary>package building!simple example!scripts, install/uninstall</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>simple example</secondary>
+            <tertiary>scripts, install/uninstall</tertiary>
           </indexterm>
 
           <para>
@@ -686,9 +686,9 @@ make install
         <sect3 id="s3-rpm-build-clean-section">
           <title>The <command>%clean</command> Section</title>
           <indexterm>
-            <primary>package building!simple example!scripts, <command>%clean</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>package building</primary>
+            <secondary>simple example</secondary>
+            <tertiary>scripts, <command>%clean</command></tertiary>
           </indexterm>
 
           <para>
@@ -708,9 +708,9 @@ make install
     <sect1 id="s1-rpm-build-starting-build">
       <title>Starting the Build</title>
       <indexterm>
-        <primary>package building!simple example!package, building</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>simple example</secondary>
+        <tertiary>package, building</tertiary>
       </indexterm>
 
       <para>
@@ -1048,9 +1048,9 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
     <sect1 id="s1-rpm-build-when-things-go-wrong">
       <title>When Things Go Wrong</title>
       <indexterm>
-        <primary>package building!simple example!troubleshooting</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>package building</primary>
+        <secondary>simple example</secondary>
+        <tertiary>troubleshooting</tertiary>
       </indexterm>
 
       <para>

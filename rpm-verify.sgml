@@ -203,8 +203,8 @@
       <title><command>rpm -V</command> --- What Does it Do?</title>
       <!-- label: rpm-V -->
       <indexterm>
-        <primary>rpm -V@<command>rpm -V</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -V</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -282,8 +282,8 @@
       <sect2 id="s2-rpm-verify-what-does-it-verify">
         <title>What Does it Verify?</title>
         <indexterm>
-          <primary><command>rpm -V</command>!what it verifies</primary>
-          <secondary></secondary>
+          <primary><command>rpm -V</command></primary>
+          <secondary>what it verifies</secondary>
         </indexterm>
 
         <para>
@@ -364,14 +364,14 @@
         <sect3 id="s3-rpm-verify-file-ownership">
           <title>File Ownership</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified</primary>
-            <secondary></secondary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
           </indexterm>
 
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!file ownership</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>file ownership</tertiary>
           </indexterm>
 
           <para>
@@ -388,11 +388,9 @@
         <sect3 id="s3-rpm-verify-file-group">
           <title>File Group</title>
           <indexterm>
-            <primary>
-              <command>rpm -V</command>!attributes verified!file group
-            </primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>file group</tertiary>
           </indexterm>
 
           <para>
@@ -408,9 +406,9 @@
         <sect3 id="s3-rpm-verify-file-mode">
           <title>File Mode</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!file mode</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>file mode</tertiary>
           </indexterm>
 
           <para>
@@ -428,9 +426,9 @@
         <sect3 id="s3-rpm-verify-md5-checksum">
           <title>MD5 Checksum</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!MD5 checksum</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>MD5 checksum</tertiary>
           </indexterm>
 
           <para>
@@ -474,9 +472,9 @@
         <sect3 id="s3-rpm-verify-file-size">
           <title>File Size</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!file size</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>file size</tertiary>
           </indexterm>
 
           <para>
@@ -489,9 +487,9 @@
         <sect3 id="s3-rpm-verify-major-number">
           <title>Major Number</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!major number</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>major number</tertiary>
           </indexterm>
 
           <para>
@@ -508,9 +506,9 @@
         <sect3 id="s3-rpm-verify-minor-number">
           <title>Minor Number</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!minor number</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>minor number</tertiary>
           </indexterm>
 
           <para>
@@ -524,9 +522,9 @@
         <sect3 id="s3-rpm-verify-symbolic-link">
           <title>Symbolic Link</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!symbolic link</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>symbolic link</tertiary>
           </indexterm>
 
           <para>
@@ -538,9 +536,9 @@
         <sect3 id="s3-rpm-verify-modification-time">
           <title>Modification Time</title>
           <indexterm>
-            <primary><command>rpm -V</command>!attributes verified!modification time</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><command>rpm -V</command></primary>
+            <secondary>attributes verified</secondary>
+            <tertiary>modification time</tertiary>
           </indexterm>
 
           <para>
@@ -555,8 +553,8 @@
     <sect1 id="s1-rpm-verify-output">
       <title>When Verification Fails - <command>rpm -V</command> Output</title>
       <indexterm>
-        <primary><command>rpm -V</command>!output of</primary>
-        <secondary></secondary>
+        <primary><command>rpm -V</command></primary>
+        <secondary>output of</secondary>
       </indexterm>
 
       <para>
@@ -736,8 +734,8 @@ Unsatisfied dependencies for blather-7.9-1: bother &gt;= 3.1
     <sect1 id="s1-rpm-verify-what-to-verify">
       <title>Selecting What to Verify, and How</title>
       <indexterm>
-        <primary><command>rpm -V</command>!options</primary>
-        <secondary></secondary>
+        <primary><command>rpm -V</command></primary>
+        <secondary>options</secondary>
       </indexterm>
 
       <para>
@@ -1426,8 +1424,8 @@ D: dependencies: looking for libc.so.5
     <sect1 id="s1-rpm-verify-we-lied">
       <title>We've Lied to You&hellip;</title>
       <indexterm>
-        <primary><command>rpm -V</command>!verification, control of</primary>
-        <secondary></secondary>
+        <primary><command>rpm -V</command></primary>
+        <secondary>verification, control of</secondary>
       </indexterm>
 
       <para>

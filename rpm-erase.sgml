@@ -139,8 +139,8 @@
     <sect1 id="s1-rpm-erase-what-does-it-do">
       <title><command>rpm -e</command> --- What Does it Do?</title>
       <indexterm>
-        <primary><command>rpm -e</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -e</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -203,8 +203,8 @@
     <sect1 id="s1-rpm-erase-erasing-package">
       <title>Erasing a Package</title>
       <indexterm>
-        <primary><command>rpm -e</command>!basic command</primary>
-        <secondary></secondary>
+        <primary><command>rpm -e</command></primary>
+        <secondary>basic command</secondary>
       </indexterm>
       <para>
         The most basic erase command is:
@@ -239,8 +239,8 @@
         <title>Getting More Information With <command>-vv</command></title>
         <!-- label: rpm-e-vv --><!-- label: erase-vv -->
         <indexterm>
-          <primary><command>rpm -e</command>!options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -e</command></primary>
+          <secondary>options</secondary>
         </indexterm>
         <indexterm>
           <primary><command>-vv</command> option</primary>
@@ -643,8 +643,8 @@ removing these packages would break dependencies:
     <sect1 id="s1-rpm-erase-and-config-files">
       <title><command>rpm -e</command> and Config files</title>
       <indexterm>
-        <primary><command>rpm -e</command>!config file handling</primary>
-        <secondary></secondary>
+        <primary><command>rpm -e</command></primary>
+        <secondary>config file handling</secondary>
       </indexterm>
       <indexterm>
         <primary>config files</primary>
@@ -697,8 +697,8 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
     <sect1 id="s1-rpm-erase-watch-out">
       <title>Watch Out!</title>
       <indexterm>
-        <primary><command>rpm -e</command>!problems using</primary>
-        <secondary></secondary>
+        <primary><command>rpm -e</command></primary>
+        <secondary>problems using</secondary>
       </indexterm>
 
       <para>

@@ -107,8 +107,8 @@
       <title><command>rpm -K</command> --- What Does it Do?</title>
       <!-- label: rpm-K -->
       <indexterm>
-        <primary><command>rpm -K</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -K</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -138,8 +138,8 @@
       <sect2 id="s2-rpm-checksig-pgp-rpms-assistant">
         <title>Pretty Good Privacy: RPM's Assistant</title>
         <indexterm>
-          <primary><command>rpm -K</command>!additional software used by</primary>
-          <secondary></secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>additional software used by</secondary>
         </indexterm>
 
         <para>
@@ -162,8 +162,8 @@
       <title>Configuring PGP for <command>rpm -K</command></title>
       <!-- label: config-pgp-for-rpm -->
       <indexterm>
-        <primary><command>rpm -K</command>!configuring PGP for use by</primary>
-        <secondary></secondary>
+        <primary><command>rpm -K</command></primary>
+        <secondary>configuring PGP for use by</secondary>
       </indexterm>
 
       <para>
@@ -221,8 +221,8 @@
     <sect1 id="s1-rpm-checksig-using-rpm-k">
       <title>Using <command>rpm -K</command></title>
       <indexterm>
-        <primary><command>rpm -K</command>!basic use</primary>
-        <secondary></secondary>
+        <primary><command>rpm -K</command></primary>
+        <secondary>basic use</secondary>
       </indexterm>
 
       <para>
@@ -341,8 +341,8 @@ rpm-2.3-1.i386.rpm: size pgp md5 OK
         <title><command>-v</command> --- Display Additional Information</title>
         <!-- label: checksig-v -->
         <indexterm>
-          <primary><command>rpm -K</command>!options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>options</secondary>
         </indexterm>
         <indexterm>
           <primary><command>-v</command> option</primary>
@@ -407,8 +407,8 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
       <sect2 id="s2-rpm-checksig-when-not-signed">
         <title>When the Package is Not Signed</title>
         <indexterm>
-          <primary><command>rpm -K</command>!output when package unsigned</primary>
-          <secondary></secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>output when package unsigned</secondary>
         </indexterm>
 
         <para>
@@ -459,11 +459,8 @@ apmd-2.4-1.i386.rpm: No signature available
         <title>When You Are Missing the Correct Public Key</title>
         <!-- label: missing-keys -->
         <indexterm>
-          <primary>
-            <command>rpm -K</command>!output when missing public key
-          </primary>
-          <secondary>
-          </secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>output when missing public key</secondary>
         </indexterm>
 
         <para>
@@ -496,10 +493,8 @@ rpm-2.3-1.i386.rpm: size (PGP) md5 OK (MISSING KEYS)
       <sect2 id="s2-rpm-checksig-verification-failures">
         <title>When a Package Just Doesn't Verify</title>
         <indexterm>
-          <primary>
-            <command>rpm -K</command>!example of failed verification
-          </primary>
-          <secondary></secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>example of failed verification</secondary>
         </indexterm>
 
         <para>
@@ -630,8 +625,8 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
         </title>
         <!-- label: checksig- -nopgp -->
         <indexterm>
-          <primary><command>rpm -K</command>!options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -K</command></primary>
+          <secondary>options</secondary>
         </indexterm>
         <indexterm>
           <primary><command>--nopgp</command> option</primary>

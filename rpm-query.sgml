@@ -316,8 +316,8 @@
     <sect1 id="s1-rpm-query-what-it-does">
       <title><command>rpm -q</command> --- What does it do?</title>
       <indexterm>
-        <primary><command>rpm -q</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -q</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -377,13 +377,13 @@
       <sect2 id="s2-rpm-query-package-selection">
         <title>Query Commands, Part One: Package Selection</title>
         <indexterm>
-          <primary><command>rpm -q</command>!options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>options</secondary>
         </indexterm>
 
         <indexterm>
-          <primary><command>rpm -q</command>!package selection options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>package selection options</secondary>
         </indexterm>
 
         <para>
@@ -642,8 +642,8 @@ file /home/ed/.cshrc is not owned by any package
             <title>A Tricky Detail</title>
             <!-- label: -f:tricky -->
             <indexterm>
-              <primary><command>-f</command> option!hint when using</primary>
-              <secondary></secondary>
+              <primary><command>-f</command> option</primary>
+              <secondary>hint when using</secondary>
             </indexterm>
 
             <para>
@@ -997,8 +997,8 @@ kernelcfg-0.3-2
       <sect2 id="s2-rpm-query-information-selection">
         <title>Query Commands, Part Two: Information Selection</title>
         <indexterm>
-          <primary><command>rpm -q</command>!information selection options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>information selection options</secondary>
         </indexterm>
 
         <para>
@@ -1510,12 +1510,9 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
                       <para>
                         The <command>netsharedpath</command>
                         <indexterm>
-                          <primary>
-                            <filename>rpmrc</filename>
-                            file!entries!<command>netsharedpath</command>
-                          </primary>
-                          <secondary></secondary>
-                          <tertiary></tertiary>
+                          <primary><filename>rpmrc</filename> file</primary>
+                          <secondary>entries</secondary>
+                          <tertiary><command>netsharedpath</command></tertiary>
                         </indexterm>
                         <filename>rpmrc</filename> file entry has been changed
                         from its default (null) value.
@@ -2060,8 +2057,8 @@ verify script:
           <sect4 id="s4-rpm-query-queryformat-literal-text">
             <title>Literal text</title>
             <indexterm>
-              <primary><command>--queryformat</command> option!literal text in</primary>
-              <secondary></secondary>
+              <primary><command>--queryformat</command> option</primary>
+              <secondary>literal text in</secondary>
             </indexterm>
 
             <para>
@@ -2105,8 +2102,8 @@ This is a test!</computeroutput><prompt>#</prompt>
           <sect4 id="s4-rpm-query-queryformat-carriage-control">
             <title>Carriage Control Escape Sequences</title>
             <indexterm>
-              <primary><command>--queryformat</command> option!carriage control in</primary>
-              <secondary></secondary>
+              <primary><command>--queryformat</command> option</primary>
+              <secondary>carriage control in</secondary>
             </indexterm>
 
             <para>
@@ -2198,8 +2195,8 @@ This is a test!
           <sect4 id="s4-rpm-query-queryformat-tags">
             <title>Tags</title>
             <indexterm>
-              <primary><command>--queryformat</command> option!tags for</primary>
-              <secondary></secondary>
+              <primary><command>--queryformat</command> option</primary>
+              <secondary>tags for</secondary>
             </indexterm>
 
             <para>
@@ -2261,11 +2258,8 @@ rpm-2.3-1
             <sect5 id="s5-rpm-query-queryformat-widths">
               <title>Field Width and Justification</title>
                 <indexterm>
-                  <primary>
-                    queryformat@<command>--queryformat</command> option!tags,
-                    width and justification
-                  </primary>
-                <secondary></secondary>
+                  <primary><command>--queryformat</command> option</primary>
+                <secondary>tags, width and justification</secondary>
               </indexterm>
 
               <para>
@@ -2322,10 +2316,8 @@ rpm-2.3                 -1
             <sect5 id="s5-rpm-query-queryformat-modifiers">
               <title>Modifiers --- Making Data More Readable</title>
               <indexterm>
-                <primary>
-                  <command>--queryformat</command> option!tags, modifiers
-                </primary>
-                <secondary></secondary>
+                <primary><command>--queryformat</command> option</primary>
+                <secondary>tags, modifiers</secondary>
               </indexterm>
 
               <para>
@@ -2443,8 +2435,8 @@ pgp was installed on Tue Oct 22 19:39:09 1996
           <sect4 id="s4-rpm-query-queryformat-iterators">
             <title>Array Iterators</title>
             <indexterm>
-              <primary><command>--queryformat</command> option!tags, array iterators</primary>
-              <secondary></secondary>
+              <primary><command>--queryformat</command> option</primary>
+              <secondary>tags, array iterators</secondary>
             </indexterm>
 
             <para>
@@ -2594,11 +2586,8 @@ etcskel: /etc/skel(parallel array size mismatch)</computeroutput><prompt>#</prom
             <sect5 id="s5-rpm-query-interatoring-single-entry-tags">
               <title>Iterating Single-Entry Tags</title>
               <indexterm>
-                <primary>
-                  queryformat@<command>--queryformat</command> option!tags,
-                  iterating single-entry
-                </primary>
-                <secondary></secondary>
+                <primary><command>--queryformat</command> option</primary>
+                <secondary>tags, iterating single-entry</secondary>
               </indexterm>
 
               <para>
@@ -2634,11 +2623,8 @@ etcskel: /etc/skel/.xsession (9 bytes)
           <sect4 id="s4-rpm-query-queryformat-listing-tags">
             <title>In Case You Were Wondering&hellip;</title>
             <indexterm>
-              <primary>
-                queryformat@<command>--queryformat</command> option!tags,
-                listing available
-              </primary>
-              <secondary></secondary>
+              <primary><command>--queryformat</command> option</primary>
+              <secondary>tags, listing available</secondary>
             </indexterm>
 
             <para>
@@ -2857,8 +2843,8 @@ rpm-2.3-1
     <sect1 id="s1-rpm-query-handy-queries">
       <title>A Few Handy Queries</title>
       <indexterm>
-        <primary><command>rpm -q</command>!examples using</primary>
-        <secondary></secondary>
+        <primary><command>rpm -q</command></primary>
+        <secondary>examples using</secondary>
       </indexterm>
 
       <para>
@@ -2870,8 +2856,8 @@ rpm-2.3-1
       <sect2 id="s2-rpm-query-finding-config-files">
         <title>Finding Config Files Based on a Program Name</title>
         <indexterm>
-          <primary><command>rpm -q</command>!finding config files with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>finding config files with</secondary>
         </indexterm>
         <indexterm>
           <primary>config files</primary>
@@ -2903,8 +2889,8 @@ rpm-2.3-1
       <sect2 id="s2-rpm-query-uninstalled-packages">
         <title>Learning More About an Uninstalled Package</title>
         <indexterm>
-          <primary><command>rpm -q</command>!querying uninstalled packages with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>querying uninstalled packages with</secondary>
         </indexterm>
 
         <para>
@@ -2954,8 +2940,8 @@ including name, version, and description.
       <sect2 id="s2-rpm-query-finding-docs">
         <title>Finding Documentation for a Specific Package</title>
         <indexterm>
-          <primary><command>rpm -q</command>!finding documentation with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>finding documentation with</secondary>
         </indexterm>
 
         <para>
@@ -2994,8 +2980,8 @@ Description :GNU Bourne Again Shell (bash)
       <sect2 id="s2-rpm-query-similar-packages">
         <title>Finding Similar Packages</title>
         <indexterm>
-          <primary><command>rpm -q</command>!finding similar packages with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>finding similar packages with</secondary>
         </indexterm>
 
         <para>
@@ -3037,8 +3023,8 @@ Description :GNU Bourne Again Shell (bash)
         <title>Finding Recently Installed Packages, Part I</title>
         <!-- label: -F-example -->
         <indexterm>
-          <primary><command>rpm -q</command>!finding recently installed packages with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>finding recently installed packages with</secondary>
         </indexterm>
 
         <para>
@@ -3093,8 +3079,8 @@ setup-1.5-1 Tue Oct 15 17:23:21 1996
       <sect2 id="s2-rpm-query-largest-packages">
         <title>Finding the Largest Installed Packages</title>
         <indexterm>
-          <primary><command>rpm -q</command>!finding largest packages with</primary>
-          <secondary></secondary>
+          <primary><command>rpm -q</command></primary>
+          <secondary>finding largest packages with</secondary>
         </indexterm>
 
         <para>

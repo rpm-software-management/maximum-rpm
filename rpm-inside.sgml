@@ -2,8 +2,8 @@
     <title>Inside the Spec File</title>
 
     <indexterm>
-      <primary>spec file!contents of</primary>
-      <secondary></secondary>
+      <primary>spec file</primary>
+      <secondary>contents of</secondary>
     </indexterm>
 
     <para>
@@ -66,8 +66,8 @@
       <title>Comments: Notes Ignored by RPM</title>
       <!-- label: inside-comments -->
       <indexterm>
-        <primary>spec file!comments in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary>comments in</secondary>
       </indexterm>
 
       <para>
@@ -95,8 +95,8 @@
     <sect1 id="s1-rpm-inside-tags">
       <title>Tags: Data Definitions</title>
       <indexterm>
-        <primary>spec file!tags in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary>tags in</secondary>
       </indexterm>
 
       <para>
@@ -188,8 +188,8 @@ VENDOR    :    White Socks Software, Inc.
           <title>The <command>name</command> Tag</title>
           <!-- label: inside-name -->
           <indexterm>
-            <primary>tags!<command>name</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>name</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -221,8 +221,8 @@ Name: cdplayer
           <title>The <command>version</command> Tag</title>
           <!-- label: inside-version -->
           <indexterm>
-            <primary>tags!<command>version</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>version</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -271,8 +271,8 @@ Version: 1.2
           <title>The <command>release</command> Tag</title>
           <!-- label: inside-release -->
           <indexterm>
-            <primary>tags!<command>release</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>release</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -327,8 +327,8 @@ Release: 5
           <title>The <command>%description</Command> Tag</title>
           <!-- label: inside-description -->
           <indexterm>
-            <primary>tags!<command>%description</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>%description</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -421,8 +421,8 @@ more mundane software...
           <title>The <command>summary</command> Tag</title>
           <!-- label: inside-summary -->
           <indexterm>
-            <primary>tags!<command>summary</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>summary</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -452,8 +452,8 @@ Summary: A CD player app that rocks!
           <title>The <command>copyright</command> Tag</title>
           <!-- label: inside-copyright -->
           <indexterm>
-            <primary>tags!<command>copyright</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>copyright</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -482,8 +482,8 @@ Copyright: GPL
           <title>The <command>distribution</command> Tag</title>
           <!-- label: inside-distribution -->
           <indexterm>
-            <primary>tags!<command>distribution</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>distribution</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -514,8 +514,8 @@ Distribution: Doors '95
           <title>The <command>icon</command> Tag</title>
           <!-- label: inside-icon -->
           <indexterm>
-            <primary>tags!<command>icon</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>icon</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -551,8 +551,8 @@ Icon: foo.xpm
           <title>The <command>vendor</command> Tag</title>
           <!-- label: inside-vendor -->
           <indexterm>
-            <primary>tags!<command>vendor</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>vendor</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -579,8 +579,8 @@ Vendor: White Socks Software, Inc.
           <title>The <command>url</command> Tag</title>
           <!-- label: inside-url -->
           <indexterm>
-            <primary>tags!<command>url</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>url</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -616,8 +616,8 @@ URL: http://www.gnomovision.com/cdplayer.html
           <title>The <command>group</command> Tag</title>
           <!-- label: inside-group -->
           <indexterm>
-            <primary>tags!<command>group</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>group</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -682,8 +682,8 @@ Group: Applications/Spreadsheets
           <title>The <command>packager</command> Tag</title>
           <!-- label: inside-packager -->
           <indexterm>
-            <primary>tags!<command>packager</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>packager</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -738,8 +738,8 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           <title>The <command>provides</command> Tag</title>
           <!-- label: inside-provides -->
           <indexterm>
-            <primary>tags!<command>provides</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>provides</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -773,8 +773,8 @@ Provides: mail-reader
           <title>The <command>requires</command> Tag</title>
           <!-- label: inside-requires -->
           <indexterm>
-            <primary>tags!<command>requires</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>requires</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -827,8 +827,8 @@ Requires: playmidi =S 4
           <title>The <command>conflicts</command> Tag</title>
           <!-- label: inside-conflicts -->
           <indexterm>
-            <primary>tags!<command>conflicts</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>conflicts</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -883,8 +883,8 @@ Conflicts: playmidi =S 4
           <title>The <command>serial</command> Tag</title>
           <!-- label: inside-serial -->
           <indexterm>
-            <primary>tags!<command>serial</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>serial</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -966,8 +966,8 @@ Serial: 4
           <title>The <command>autoreqprov</command> Tag</title>
           <!-- label: inside-autoreqprov -->
           <indexterm>
-            <primary>tags!<command>autoreqprov</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>autoreqprov</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1076,8 +1076,8 @@ AutoReqProv: no
           <title>The <command>excludearch</command> Tag</title>
           <!-- label: inside-excludearch -->
           <indexterm>
-            <primary>tags!<command>excludearch</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>excludearch</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1162,8 +1162,8 @@ cdplayer-1.0.spec doesn't build on this architecture
           <title>The <command>exclusivearch</command> Tag</title>
           <!-- label: inside-exclusivearch -->
           <indexterm>
-            <primary>tags!<command>exclusivearch</command></primary>
-            <secondary></secondary>
+            <primary>tags</command></primary>
+            <secondary><command>exclusivearch</secondary>
           </indexterm>
 
           <indexterm>
@@ -1211,8 +1211,8 @@ ExclusiveArch: sparc alpha
           <title>The <command>excludeos</command> Tag</title>
           <!-- label: inside-excludeos -->
           <indexterm>
-            <primary>tags!<command>excludeos</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>excludeos</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1248,8 +1248,8 @@ ExcludeOS: linux irix
           <title>The <command>exclusiveos</command> Tag</title>
           <!-- label: inside-exclusiveos -->
           <indexterm>
-            <primary>tags!<command>exclusiveos</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>exclusiveos</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1294,8 +1294,8 @@ ExclusiveOS: linux
           <title>The <command>prefix</command> Tag</title>
           <!-- label: inside-prefix -->
           <indexterm>
-            <primary>tags!<command>prefix</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>prefix</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1352,8 +1352,8 @@ Prefix: /opt
           <title>The <command>buildroot</command> Tag</title>
           <!-- label: inside-buildroot -->
           <indexterm>
-            <primary>tags!<command>buildroot</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>buildroot</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1412,8 +1412,8 @@ BuildRoot: /tmp/cdplayer
           <title>The <command>source</command> Tag</title>
           <!-- label: inside-source -->
           <indexterm>
-            <primary>tags!<command>source</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>source</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1522,8 +1522,8 @@ Source1: bother-1.2.tar.gz
           <!-- label: rpm-nosource -->
           <!-- label: inside-nosource -->
           <indexterm>
-            <primary>tags!<command>nosource</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>nosource</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1624,8 +1624,8 @@ NoSource: 0, 3
           <title>The <command>patch</command> Tag</title>
           <!-- label: inside-patch -->
           <indexterm>
-            <primary>tags!<command>patch</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>patch</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1713,8 +1713,8 @@ Patch2: blather-4.5-somethingelse.patch
           <title>The <command>nopatch</command> Tag</title>
           <!-- label: inside-nopatch -->
           <indexterm>
-            <primary>tags!<command>nopatch</command></primary>
-            <secondary></secondary>
+            <primary>tags</primary>
+            <secondary><command>nopatch</command></secondary>
           </indexterm>
 
           <indexterm>
@@ -1762,8 +1762,8 @@ NoPatch: 2 3
     <sect1 id="s1-rpm-inside-scripts">
       <title>Scripts: RPM's Workhorse</title>
       <indexterm>
-        <primary>spec file!scripts in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary>scripts in</secondary>
       </indexterm>
 
       <para>
@@ -1791,8 +1791,8 @@ NoPatch: 2 3
         <title>Build-time Scripts</title>
         <!-- label: inside-scripts -->
         <indexterm>
-          <primary>scripts!build-time</primary>
-          <secondary></secondary>
+          <primary>scripts</primary>
+          <secondary>build-time</secondary>
         </indexterm>
 
         <para>
@@ -1868,9 +1868,9 @@ umask 022
             </screen>
           </figure>
           <indexterm>
-            <primary>scripts!build-time!environment variables in</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>scripts</primary>
+            <secondary>build-time</secondary>
+            <tertiary>environment variables in</tertiary>
           </indexterm>
         </para>
         <para>
@@ -2156,8 +2156,8 @@ rm -rf $RPM_BUILD_ROOT
         <title>Install/Erase-time Scripts</title>
         <!-- label: inside-install/erase -->
         <indexterm>
-          <primary>scripts!install/erase-time</primary>
-          <secondary></secondary>
+          <primary>scripts</primary>
+          <secondary>install/erase-time</secondary>
         </indexterm>
 
         <para>
@@ -2192,9 +2192,9 @@ rm -rf $RPM_BUILD_ROOT
             </listitem>
           </itemizedlist>
           <indexterm>
-            <primary>scripts!install/erase-time!environment variables in</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>scripts</primary>
+            <secondary>install/erase-time</secondary>
+            <tertiary>environment variables in</tertiary>
           </indexterm>
         </para>
 
@@ -2207,9 +2207,9 @@ rm -rf $RPM_BUILD_ROOT
 
         <para>
           <indexterm>
-            <primary>scripts!install/erase-time!arguments in</primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>scripts</primary>
+            <secondary>install/erase-time</secondary>
+            <tertiary>arguments in</tertiary>
           </indexterm>
           Unlike the build-time scripts, there <emphasis>is</emphasis> an
           argument defined.  The sole argument to these scripts, is a number
@@ -2386,8 +2386,8 @@ rm -rf $RPM_BUILD_ROOT
         </title>
         <!-- label: inside-verifyscript -->
         <indexterm>
-          <primary>scripts!verification-time</primary>
-          <secondary></secondary>
+          <primary>scripts</primary>
+          <secondary>verification-time</secondary>
         </indexterm>
 
         <indexterm>
@@ -2443,8 +2443,8 @@ done
       <title>Macros: Helpful Shorthand for Package Builders</title>
       <!-- label: rpm-macros -->
       <indexterm>
-        <primary>spec file!macros in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary>macros in</secondary>
       </indexterm>
 
       <para>
@@ -2574,8 +2574,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-n -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-n</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-n</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2666,8 +2666,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-c -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-c</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-c</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2724,8 +2724,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-D -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-D</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-D</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2768,8 +2768,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-T -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-T</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-T</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2807,8 +2807,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-b -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-b</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-b</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2919,8 +2919,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: inside-setup-a -->
           <indexterm>
-            <primary><command>%setup</command> macro!<command>-a</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary><command>-a</command> option</secondary>
           </indexterm>
 
           <para>
@@ -2991,8 +2991,8 @@ chmod -R a+rX,g-w,o-w .
           </title>
           <!-- label: multi-source-spec -->
           <indexterm>
-            <primary><command>%setup</command> macro!use in multi-source spec files</primary>
-            <secondary></secondary>
+            <primary><command>%setup</command> macro</primary>
+            <secondary>use in multi-source spec files</secondary>
           </indexterm>
 
           <para>
@@ -3428,8 +3428,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
           <title>Specifying Which <command>patch</command> Tag to Use</title>
           <!-- label: inside-patch-P -->
           <indexterm>
-            <primary><command>%patch</command> macro!<command>-P</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%patch</command> macro</primary>
+            <secondary><command>-P</command> option</secondary>
           </indexterm>
 
           <para>
@@ -3497,8 +3497,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
           </title>
           <!-- label: inside-patch-p -->
           <indexterm>
-            <primary><command>%patch</command> macro!<command>-p</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%patch</command> macro</primary>
+            <secondary><command>-p</command> option</secondary>
           </indexterm>
 
           <para>
@@ -3519,8 +3519,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
           </title>
           <!-- label: inside-patch-b -->
           <indexterm>
-            <primary><command>%patch</command> macro!<command>-b</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%patch</command> macro</primary>
+            <secondary><command>-b</command> option</secondary>
           </indexterm>
 
           <para>
@@ -3538,8 +3538,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
           <title><command>-E</command> --- Remove Empty Output Files</title>
           <!-- label: inside-patch-E -->
           <indexterm>
-            <primary><command>%patch</command> macro!<command>-E</command> option</primary>
-            <secondary></secondary>
+            <primary><command>%patch</command> macro</primary>
+            <secondary><command>-E</command> option</secondary>
           </indexterm>
 
           <para>
@@ -3559,8 +3559,8 @@ patch -p0  -s &lt; /usr/src/redhat/SOURCES/patch-zero
             An example of the <command>%patch</command> Macro in Action
           </title>
           <indexterm>
-            <primary><command>%patch</command> macro!example of</primary>
-            <secondary></secondary>
+            <primary><command>%patch</command> macro</primary>
+            <secondary>example of</secondary>
           </indexterm>
 
           <para>
@@ -3674,8 +3674,8 @@ patch -p1 -b .last-patch -s &lt; /usr/src/redhat/SOURCES/patch-two
           <sect4 id="s4-rpm-inside-patch-compressed">
             <title>Compressed Patch Files</title>
             <indexterm>
-              <primary><command>%patch</command> macro!compressed patches</primary>
-              <secondary></secondary>
+              <primary><command>%patch</command> macro</primary>
+              <secondary>compressed patches</secondary>
             </indexterm>
 
             <para>
@@ -3730,8 +3730,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
       <!-- label: rpm-files-list -->
       <!-- label: inside-files -->
       <indexterm>
-        <primary>spec file!<command>%files</command> list in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary><command>%files</command> list in</secondary>
       </indexterm>
 
       <para>
@@ -3768,8 +3768,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
     <sect1 id="s1-rpm-inside-files-list-directives">
       <title>Directives For the <command>%files</command> list</title>
       <indexterm>
-        <primary>spec file!<command>%files</command> list directives</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary><command>%files</command> list directives</secondary>
       </indexterm>
 
       <para>
@@ -4452,12 +4452,9 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             <command><userinput>&lt;file&gt;</userinput></command>
           </title>
           <indexterm>
-            <primary>
-              spec file!<command>%files</command> list in!<command>-f</command>
-              option
-            </primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary>spec file</primary>
+            <secondary><command>%files</command> list in</secondary>
+            <tertiary><command>-f</command> option</tertiary>
           </indexterm>
 
           <para>
@@ -4550,8 +4547,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
         </title>
         <!-- label: inside-package-n -->
         <indexterm>
-          <primary><command>%package</command> directive!<command>-n</command> option</primary>
-          <secondary></secondary>
+          <primary><command>%package</command> directive</primary>
+          <secondary><command>-n</command> option</secondary>
         </indexterm>
 
         <para>
@@ -4633,8 +4630,8 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
     <sect1 id="s1-rpm-inside-conditionals">
       <title>Conditionals</title>
       <indexterm>
-        <primary>spec file!conditionals in</primary>
-        <secondary></secondary>
+        <primary>spec file</primary>
+        <secondary>conditionals in</secondary>
       </indexterm>
 
       <para>

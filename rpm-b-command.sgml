@@ -267,8 +267,8 @@
     <sect1 id="s1-rpm-b-command-what-it-does">
       <title><command>rpm -b</command> --- What Does it Do?</title>
       <indexterm>
-        <primary><command>rpm -b</command>!what it does</primary>
-        <secondary></secondary>
+        <primary><command>rpm -b</command></primary>
+        <secondary>what it does</secondary>
       </indexterm>
 
       <para>
@@ -306,8 +306,8 @@
 
       <para>
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of</primary>
-          <secondary></secondary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
         </indexterm>
         There are a number of stages that RPM goes through during a build.  By
         specifying that the build process is to stop at a certain stage, the
@@ -322,9 +322,9 @@
           </title>
         <!-- label: build-bp -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>p</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>p</command></tertiary>
         </indexterm>
 
         <para>
@@ -464,9 +464,9 @@ total 216
         </title>
         <!-- label: build-bc -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>c</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>c</command></tertiary>
         </indexterm>
 
         <para>
@@ -549,9 +549,9 @@ make
         </title>
         <!-- label: build-bi -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>i</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>i</command></tertiary>
         </indexterm>
 
         <para>
@@ -662,9 +662,9 @@ make install
         </title>
         <!-- label: build-bb -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>b</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>b</command></tertiary>
         </indexterm>
 
         <figure id="sc-rpm-b-command-bb-output">
@@ -736,9 +736,9 @@ Executing: %clean
         </title>
         <!-- label: build-ba -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>a</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>a</command></tertiary>
         </indexterm>
 
         <para>
@@ -848,9 +848,9 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </title>
         <!-- label: build-bl -->
         <indexterm>
-          <primary><command>rpm -b</command>!build stages of!<command>l</command></primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>build stages of</secondary>
+          <tertiary><command>l</command></tertiary>
         </indexterm>
 
         <para>
@@ -1113,8 +1113,8 @@ Requires (2): libc.so.5 libncurses.so.2.0
         </title>
         <!-- label: build- -short-circuit -->
         <indexterm>
-          <primary><command>rpm -b</command>!options</primary>
-          <secondary></secondary>
+          <primary><command>rpm -b</command></primary>
+          <secondary>options</secondary>
         </indexterm>
         <indexterm>
           <primary><command>--short-circuit</command> option</primary>
@@ -1723,7 +1723,6 @@ Executing: sweep
         <!-- label: build- -buildroot -->
         <indexterm>
           <primary><command>--buildroot</command> option</primary>
-          <secondary></secondary>
         </indexterm>
 
         <para>
@@ -1891,8 +1890,8 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           <title>Using <command>--buildroot</command> Can Bite You!</title>
           <!-- label: buildroot-bite -->
           <indexterm>
-            <primary><command>--buildroot</command> option!warning</primary>
-            <secondary></secondary>
+            <primary><command>--buildroot</command> option</primary>
+            <secondary>warning</secondary>
           </indexterm>
 
           <para>
@@ -2223,8 +2222,8 @@ volume.c:67: warning: implicit declaration of function `ioctl'
     <sect1 id="s1-rpm-b-command-other-build-commands">
       <title>Other Build-related Commands</title>
       <indexterm>
-        <primary><command>rpm -b</command>!related commands</primary>
-        <secondary></secondary>
+        <primary><command>rpm -b</command></primary>
+        <secondary>related commands</secondary>
       </indexterm>
 
       <para>

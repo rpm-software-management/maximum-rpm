@@ -287,8 +287,8 @@
     <sect1 id="s1-rpm-install-rpm-i-what-does-it-do">
       <title><command>rpm -i</command> --- What does it do?</title>
       <indexterm>
-        <primary><command>rpm -i</command>!overview</primary>
-        <secondary></secondary>
+        <primary><command>rpm -i</command></primary>
+        <secondary>overview</secondary>
       </indexterm>
       <para>
         Of the many things RPM can do, probably the one that people think of
@@ -437,10 +437,6 @@
           wealth of information necessary for RPM to do its job.  For example,
           RPM uses the database when it checks for possible conflicts during an
           install.
-          <indexterm>
-            <primary><command>rpm -i</command>!overview|)</primary>
-            <secondary></secondary>
-          </indexterm>
         </para>
       </sect2>
     </sect1>
@@ -448,8 +444,8 @@
     <sect1 id="s1-rpm-install-performing-install">
       <title>Performing an Install</title>
       <indexterm>
-        <primary><command>rpm -i</command>!performing</primary>
-        <secondary></secondary>
+        <primary><command>rpm -i</command></primary>
+        <secondary>performing</secondary>
       </indexterm>
       <para>
         Let's have RPM install a package.  The only thing necessary is to give
@@ -499,13 +495,13 @@
         </indexterm>
 
         <indexterm>
-          <primary>URL!package specification using</primary>
-          <secondary></secondary>
+          <primary>URL</primary>
+          <secondary>package specification using</secondary>
         </indexterm>
 
         <indexterm>
-          <primary>FTP!package specification using</primary>
-          <secondary></secondary>
+          <primary>FTP</primary>
+          <secondary>package specification using</secondary>
         </indexterm>
         <para>
           If you've surfed the World Wide Web, you've no doubt noticed the way
@@ -561,13 +557,13 @@ ftp://ftp.redhat.com/pub/redhat/code/rpm/rpm-2.3-1.i386.rpm
           required) is not always available.  Therefore, the URL may also
           contain a
           <indexterm>
-            <primary>URL!specifying username and password with</primary>
-            <secondary></secondary>
+            <primary>URL</primary>
+            <secondary>specifying username and password with</secondary>
           </indexterm>
 
           <indexterm>
-            <primary>FTP!specifying username and password with</primary>
-            <secondary></secondary>
+            <primary>FTP</primary>
+            <secondary>specifying username and password with</secondary>
           </indexterm>
           username and password preceding the hostname:
 
@@ -609,13 +605,13 @@ ftp://smith@ftp.gnomovision.com/pub/rpms/foobar-1.0-1.i386.rpm
           Normally this is done for the sake of enhanced security.  Fortunately,
           there is a way to specify a non-standard
           <indexterm>
-            <primary>FTP!specifying non-standard port with</primary>
-            <secondary></secondary>
+            <primary>FTP</primary>
+            <secondary>specifying non-standard port with</secondary>
           </indexterm>
 
           <indexterm>
-            <primary>URL!specifying non-standard port with</primary>
-            <secondary></secondary>
+            <primary>URL</primary>
+            <secondary>specifying non-standard port with</secondary>
           </indexterm>
           port in a URL:
 
@@ -636,8 +632,8 @@ ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
       <sect2 id="s2-rpm-install-warning-message">
         <title>A warning message you might never see</title>
         <indexterm>
-          <primary><command>rpm -i</command>!warning message</primary>
-          <secondary></secondary>
+          <primary><command>rpm -i</command></primary>
+          <secondary>warning message</secondary>
         </indexterm>
         <para>
           Depending on circumstances, the following message might be rare or
@@ -712,8 +708,8 @@ ftp://ftp.gnomovision.com:1024/pub/rpms/foobar-1.0-1.i386.rpm
     <sect1 id="s1-rpm-install-handy-options">
       <title>Two handy options</title>
       <indexterm>
-        <primary><command>rpm -i</command>!options</primary>
-        <secondary></secondary>
+        <primary><command>rpm -i</command></primary>
+        <secondary>options</secondary>
       </indexterm>
       <para>
         There are two options to <command>rpm -i</command> that work so well,
@@ -1194,11 +1190,8 @@ Installing cdp-0.33-3.i386.rpm
         <sect3 id="s3-rpm-install-replacefiles-and-config-files">
           <title><command>--replacefiles</command> and Config Files</title>
           <indexterm>
-            <primary>
-              <command>--replacefiles</command> option!interaction with config
-              files
-            </primary>
-            <secondary></secondary>
+            <primary><command>--replacefiles</command> option</primary>
+            <secondary>interaction with config files</secondary>
           </indexterm>
 
           <indexterm>
@@ -1320,8 +1313,8 @@ fi
         <sect3 id="s3-rpm-install-replacefiles-trouble">
           <title><command>--replacefiles</command> Can Mean Trouble Down the Road</title>
           <indexterm>
-            <primary><command>--replacefiles</command> option!problems from using</primary>
-            <secondary></secondary>
+            <primary><command>--replacefiles</command> option</primary>
+            <secondary>problems from using</secondary>
           </indexterm>
 
           <para>
@@ -1638,9 +1631,9 @@ ls: /usr/man/man1/cdp.1: No such file or directory
           RPM-installed Linux system, there can be over 5,000 documentation
           files, using nearly 50 megabytes.
           <indexterm>
-            <primary><filename>rpmrc</filename> file!entries!<command>excludedocs</command></primary>
-            <secondary></secondary>
-            <tertiary></tertiary>
+            <primary><filename>rpmrc</filename> file</primary>
+            <secondary>entries</secondary>
+            <tertiary><command>excludedocs</command></tertiary>
           </indexterm>
         </para>
         <para>
@@ -1762,8 +1755,8 @@ Installing cdp-0.33-3.i386.rpm
           </footnote>
 
           <indexterm>
-            <primary><command>--queryformat</command> option!example</primary>
-            <secondary></secondary>
+            <primary><command>--queryformat</command> option</primary>
+            <secondary>example</secondary>
           </indexterm>
 
           <figure id="sc-rpm-install-prefix-find-out">

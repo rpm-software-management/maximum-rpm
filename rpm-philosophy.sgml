@@ -1,8 +1,8 @@
   <chapter id="ch-rpm-philosophy">
     <title>The Philosophy Behind RPM</title>
     <indexterm>
-      <primary>RPM!philosophy behind</primary>
-      <secondary></secondary>
+      <primary>RPM</primary>
+      <secondary>philosophy behind</secondary>
     </indexterm>
 
     <para>
@@ -23,9 +23,9 @@
     <sect1 id="s1-rpm-philosophy-pristine-sources">
       <title>Pristine Sources</title>
       <indexterm>
-        <primary>RPM!philosophy behind!pristine sources</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>philosophy behind</secondary>
+        <tertiary>pristine sources</tertiary>
       </indexterm>
 
       <para>
@@ -159,9 +159,9 @@
     <sect1 id="s1-rpm-philosophy-easy-builds">
       <title>Easy Builds</title>
       <indexterm>
-        <primary>RPM!philosophy behind!easy builds</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>philosophy behind</secondary>
+        <tertiary>easy builds</tertiary>
       </indexterm>
 
       <para>
@@ -211,14 +211,14 @@
     <sect1 id="s1-rpm-philosophy-multi-architecture">
       <title>Multi-architecture/operating system Support</title>
       <indexterm>
-        <primary>RPM!philosophy behind!multi-architecture</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>philosophy behind</secondary>
+        <tertiary>multi-architecture</tertiary>
       </indexterm>
       <indexterm>
-        <primary>RPM!philosophy behind!multi-operating system</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>philosophy behind</secondary>
+        <tertiary>multi-operating system</tertiary>
       </indexterm>
 
       <para>
@@ -239,9 +239,9 @@
     <sect1 id="s1-rpm-philosophy-easier-for-users">
       <title>Easier For Your Users</title>
       <indexterm>
-        <primary>RPM!philosophy behind!ease of use</primary>
-        <secondary></secondary>
-        <tertiary></tertiary>
+        <primary>RPM</primary>
+        <secondary>philosophy behind</secondary>
+        <tertiary>ease of use</tertiary>
       </indexterm>
 
       <para>
