@@ -24,9 +24,11 @@
 </computeroutput>
       </screen>
     </para>
+
     <para>
       Comments can be placed in any section of the spec file.
     </para>
+
     <para>
       See also: <xref linkend="s1-rpm-inside-comments">.
     </para>
@@ -48,6 +50,7 @@
 
       <sect3 id="s3-rpm-specref-name">
         <title>The <command>name</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -68,6 +71,7 @@ Name: cdplayer
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-name-tag">.
         </para>
@@ -75,6 +79,7 @@ Name: cdplayer
 
       <sect3 id="s3-rpm-specref-version">
         <title>The <command>version</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -95,6 +100,7 @@ Version: 1.2
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-version-tag">.
         </para>
@@ -102,6 +108,7 @@ Version: 1.2
 
       <sect3 id="s3-rpm-specref-release">
         <title>The <command>release</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -122,6 +129,7 @@ Release: 5
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-release-tag">.
         </para>
@@ -130,8 +138,10 @@ Release: 5
 
     <sect2 id="s2-rpm-specref-descriptive-tags">
       <title>Descriptive Tags</title>
+
       <sect3 id="s3-rpm-specref-description">
         <title>The <command>%description</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -162,6 +172,7 @@ more mundane software...
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The <command>%description</command> tag can be made specific to a
           particular subpackage by adding the subpackage name, and optionally,
@@ -175,10 +186,12 @@ more mundane software...
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The subpackage name and usage of the <command>-n</command> option must
           match those defined with the <command>%package</command> directive.
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-description-tag">.
         </para>
@@ -186,6 +199,7 @@ more mundane software...
 
       <sect3 id="s3-rpm-specref-summary">
         <title>The <command>summary</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -206,6 +220,7 @@ Summary: A CD player app that rocks!
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-summary-tag">.
         </para>
@@ -213,6 +228,7 @@ Summary: A CD player app that rocks!
 
       <sect3 id="s3-rpm-specref-copyright">
         <title>The <command>copyright</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -233,6 +249,7 @@ Copyright: GPL
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-copyright-tag">.
         </para>
@@ -240,6 +257,7 @@ Copyright: GPL
 
       <sect3 id="s3-rpm-specref-distribution">
         <title>The <command>distribution</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -260,6 +278,7 @@ Distribution: Doors '95
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-distribution-tag">.
         </para>
@@ -267,6 +286,7 @@ Distribution: Doors '95
 
       <sect3 id="s3-rpm-specref-icon">
         <title>The <command>icon</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -289,6 +309,7 @@ Icon: foo.xpm
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-icon-tag">.
         </para>
@@ -296,6 +317,7 @@ Icon: foo.xpm
 
       <sect3 id="s3-rpm-specref-vendor">
         <title>The <command>vendor</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -316,6 +338,7 @@ Vendor: White Socks Software, Inc.
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-vendor-tag">.
         </para>
@@ -323,6 +346,7 @@ Vendor: White Socks Software, Inc.
 
       <sect3 id="s3-rpm-specref-url">
         <title>The <command>url</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -344,6 +368,7 @@ URL: http://www.gnomovision.com/cdplayer.html
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-url-tag">.
         </para>
@@ -351,6 +376,7 @@ URL: http://www.gnomovision.com/cdplayer.html
 
       <sect3 id="s3-rpm-specref-group">
         <title>The <command>group</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -371,6 +397,7 @@ Group: Applications/Editors
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-group-tag">.
         </para>
@@ -378,6 +405,7 @@ Group: Applications/Editors
 
       <sect3 id="s3-rpm-specref-packager">
         <title>The <command>packager</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -398,6 +426,7 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-packager-tag">.
         </para>
@@ -406,8 +435,10 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
 
     <sect2 id="s2-rpm-specref-dependency-tags">
       <title>Dependency Tags</title>
+
       <sect3 id="s3-rpm-specref-provides">
         <title>The <command>provides</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -429,6 +460,7 @@ Provides: module-info
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-provides-tag">.
         </para>
@@ -436,6 +468,7 @@ Provides: module-info
 
       <sect3 id="s3-rpm-specref-requires">
         <title>The <command>requires</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -457,6 +490,7 @@ Requires: playmidi
 </computeroutput>
           </screen>
         </para>
+
         <para>
           A version may be specified, following the package specification.  The
           following comparison operators may be placed between the package and
@@ -468,6 +502,7 @@ Requires: playmidi
 </computeroutput>
           </screen>
         </para>
+
         <para>
           <screen width="60">
 <computeroutput>
@@ -475,6 +510,7 @@ Requires: playmidi &gt;= 2.3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           If the <command>Requires</command> tag needs to perform a comparison
           against a serial numbered defined with the <command>serial</command>
@@ -486,6 +522,7 @@ Requires: playmidi =S 4
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-requires-tag">.
         </para>
@@ -493,6 +530,7 @@ Requires: playmidi =S 4
 
       <sect3 id="s3-rpm-specref-serial">
         <title>The <command>serial</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -514,6 +552,7 @@ Serial: 4
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-serial-tag">.
         </para>
@@ -521,6 +560,7 @@ Serial: 4
 
       <sect3 id="s3-rpm-specref-conflicts">
         <title>The <command>conflicts</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -541,6 +581,7 @@ Conflicts: playmidi
 </computeroutput>
           </screen>
         </para>
+
         <para>
           A version may be specified, following the package specification.  The
           following comparison operators may be placed between the package and
@@ -552,6 +593,7 @@ Conflicts: playmidi
 </computeroutput>
           </screen>
         </para>
+
         <para>
           <screen width="60">
 <computeroutput>
@@ -559,6 +601,7 @@ Conflicts: playmidi &gt;= 2.3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           If the <command>conflicts</command> tag needs to perform a comparison
           against a serial numbered defined with the <command>serial</command>
@@ -570,6 +613,7 @@ Conflicts: playmidi =S 4
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-conflicts-tag">.
         </para>
@@ -577,6 +621,7 @@ Conflicts: playmidi =S 4
 
       <sect3 id="s3-rpm-specref-autoreqprov">
         <title>The <command>autoreqprov</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -599,6 +644,7 @@ AutoReqProv: no
 </computeroutput>
           </screen>
         </para>
+
         <para>
           (The number <literal>0</literal> may be used instead of
           <literal>no</literal>) Although RPM defaults to performing automatic
@@ -607,6 +653,7 @@ AutoReqProv: no
           <literal>no</literal> to <literal>yes</literal>.  (The number
           <literal>1</literal> may be used instead of <literal>yes</literal>)
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-autoreqprov-tag">.
         </para>
@@ -615,8 +662,10 @@ AutoReqProv: no
 
     <sect2 id="s2-rpm-specref-arch-os-specific-tag">
       <title>Architecture- and Operating System-Specific Tags</title>
+
       <sect3 id="s3-rpm-specref-excludearch">
         <title>The <command>excludearch</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -638,6 +687,7 @@ ExcludeArch: sparc alpha
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-excludearch-tag">.
         </para>
@@ -645,6 +695,7 @@ ExcludeArch: sparc alpha
 
       <sect3 id="s3-rpm-specref-exclusivearch">
         <title>The <command>exclusivearch</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -666,6 +717,7 @@ ExclusiveArch: sparc alpha
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-exclusivearch-tag">.
         </para>
@@ -673,6 +725,7 @@ ExclusiveArch: sparc alpha
 
       <sect3 id="s3-rpm-specref-excludeos">
         <title>The <command>excludeos</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -694,6 +747,7 @@ ExcludeOS: linux irix
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-excludeos">.
         </para>
@@ -701,6 +755,7 @@ ExcludeOS: linux irix
 
       <sect3 id="s3-rpm-specref-exclusiveos">
         <title>The <command>exclusiveos</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -722,6 +777,7 @@ ExclusiveOS: linux
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-exclusiveos-tag">.
         </para>
@@ -730,8 +786,10 @@ ExclusiveOS: linux
 
     <sect2 id="s2-rpm-specref-directory-related-tags">
       <title>Directory-related Tags</title>
+
       <sect3 id="s3-rpm-specref-prefix">
         <title>The <command>prefix</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -754,6 +812,7 @@ Prefix: /opt
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-prefix-tag">.
         </para>
@@ -761,6 +820,7 @@ Prefix: /opt
 
       <sect3 id="s3-rpm-specref-buildroot">
         <title>The <command>buildroot</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -782,6 +842,7 @@ BuildRoot: /tmp/cdplayer
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-buildroot-tag">.
         </para>
@@ -790,8 +851,10 @@ BuildRoot: /tmp/cdplayer
 
     <sect2 id="s2-rpm-specref-source-patch-tags">
       <title>Source and Patch Tags</title>
+
       <sect3 id="s3-rpm-specref-source">
         <title>The <command>source</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -810,6 +873,7 @@ BuildRoot: /tmp/cdplayer
           <literal>0</literal>.  When there is only one tag, it does not need to
           be numbered.
         </para>
+
         <para>
           By convention, the source filename is usually preceded by a URL
           pointing to the location of the original sources, but RPM does not
@@ -822,6 +886,7 @@ Source1: foo.tgz
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-source-tag">.
         </para>
@@ -829,6 +894,7 @@ Source1: foo.tgz
 
       <sect3 id="s3-rpm-specref-nosource">
         <title>The <command>nosource</command> Tag</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>tags in</secondary>
@@ -852,6 +918,7 @@ NoSource: 0, 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-nosource-tag">.
         </para>
@@ -859,10 +926,9 @@ NoSource: 0, 3
 
       <sect3 id="s3-rpm-specref-patch">
         <title>The <command>patch</command> Tag</title>
+
         <indexterm>
           <primary><command>patch</command> tag</primary>
-          <secondary></secondary>
-          <tertiary></tertiary>
         </indexterm>
 
         <para>
@@ -879,6 +945,7 @@ Patch: cdp-0.33-fsstnd.patch
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-patch-tag">.
         </para>
@@ -886,6 +953,7 @@ Patch: cdp-0.33-fsstnd.patch
 
       <sect3 id="s3-rpm-specref-nopatch">
         <title>The <command>nopatch</command> Tag</title>
+
         <indexterm>
           <primary><command>nopatch</command> tag</primary>
         </indexterm>
@@ -903,6 +971,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-nopatch-tag">.
         </para>
@@ -991,6 +1060,7 @@ NoPatch: 2 3
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         For more information on these environment variables, and build-time
         scripts in general, please see <xref
@@ -999,6 +1069,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-prep">
         <title>The <command>%prep</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1021,6 +1092,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-prep-script">.
         </para>
@@ -1028,6 +1100,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-build">
         <title>The <command>%build</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1050,6 +1123,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-build-script">.
         </para>
@@ -1057,6 +1131,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-install">
         <title>The <command>%install</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1079,6 +1154,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-install-script">.
         </para>
@@ -1086,6 +1162,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-clean">
         <title>The <command>%clean</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1110,6 +1187,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-clean-script">.
         </para>
@@ -1123,6 +1201,7 @@ NoPatch: 2 3
         These scripts are executed whenever the package is installed or erased.
         Each script can consist of any valid <command>sh</command> commands.
       </para>
+
       <para>
         Note: Each of the following scripts can be made specific to a particular
         subpackage by adding the subpackage name, and optionally, the
@@ -1136,10 +1215,12 @@ NoPatch: 2 3
 </computeroutput>
         </screen>
       </para>
+
       <para>
         The subpackage name and usage of the <command>-n</command> option must
         match those defined with the <command>%package</command> directive.
       </para>
+
       <para>
         Each script has the following environment variable defined:
 
@@ -1151,6 +1232,7 @@ NoPatch: 2 3
           </listitem>
         </itemizedlist>
       </para>
+
       <para>
         For more information on this environment variable please see <xref
         linkend="s2-rpm-inside-erase-time-scripts">.
@@ -1158,6 +1240,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-pre">
         <title>The <command>%pre</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1178,6 +1261,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-pre-script">.
         </para>
@@ -1185,6 +1269,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-post">
         <title>The <command>%post</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1205,6 +1290,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s4-rpm-inside-post-script">.
         </para>
@@ -1212,6 +1298,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-preun">
         <title>The <command>%preun</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1232,6 +1319,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-preun-script">.
         </para>
@@ -1239,6 +1327,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-postun">
         <title>The <command>%postun</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1259,6 +1348,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-postun-script">.
         </para>
@@ -1274,6 +1364,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-verifyscript">
         <title>The <command>%verifyscript</command> Script</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>scripts in</secondary>
@@ -1289,6 +1380,7 @@ NoPatch: 2 3
           package is verified using RPM's <command>-V</command> option.  The
           script can consist of any valid <command>sh</command> commands.
         </para>
+
         <para>
           See also: <xref linkend="s2-rpm-inside-verifyscript-script">.
         </para>
@@ -1305,6 +1397,7 @@ NoPatch: 2 3
 
     <sect2 id="s2-rpm-specref-setup">
       <title>The <command>%setup</command> Macro</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>macros in</secondary>
@@ -1327,6 +1420,7 @@ NoPatch: 2 3
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-setup-macro">.
       </para>
@@ -1336,6 +1430,7 @@ NoPatch: 2 3
           The <command>-n <replaceable>&lt;name&gt;</replaceable></command>
           Option
         </title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>macros in</secondary>
@@ -1351,11 +1446,8 @@ NoPatch: 2 3
           The <command>-n</command> option is used to set the name of the
           software's build directory.  This is necessary only when the source
           archive unpacks into a directory named other than
-          <command>
-            <replaceable>&lt;name&gt;</replaceable>
-            -
-            <replaceable>&lt;version&gt;</replaceable>
-          </command>.
+          <command><replaceable>&lt;name&gt;</replaceable>-
+          <replaceable>&lt;version&gt;</replaceable></command>.
 
           <screen width="60">
 <computeroutput>
@@ -1363,6 +1455,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-n-option">.
         </para>
@@ -1382,6 +1475,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-c-option">.
         </para>
@@ -1403,6 +1497,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-d-option">.
         </para>
@@ -1424,6 +1519,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-t-option">.
         </para>
@@ -1446,6 +1542,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-b-option">.
         </para>
@@ -1468,6 +1565,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-setup-a-option">.
         </para>
@@ -1476,6 +1574,7 @@ NoPatch: 2 3
 
     <sect2 id="s2-rpm-specref-patch-macro">
       <title>The <command>%patch</command> Macro</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>macros in</secondary>
@@ -1498,6 +1597,7 @@ NoPatch: 2 3
 </computeroutput>
         </screen>
       </para>
+
       <para>
         When there is more than one <command>patch</command> tag line in a spec
         file, they can be specified by appending the number of the
@@ -1510,6 +1610,7 @@ NoPatch: 2 3
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-patch-macro">.
       </para>
@@ -1518,6 +1619,7 @@ NoPatch: 2 3
         <title>
           The <command>-P <replaceable>&lt;n&gt;</replaceable></command> Option
         </title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>macros in</secondary>
@@ -1544,6 +1646,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-which-patch-tag">.
         </para>
@@ -1566,6 +1669,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-patch-p-option">.
         </para>
@@ -1590,6 +1694,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-b-option">.
         </para>
@@ -1604,6 +1709,7 @@ NoPatch: 2 3
           <command>patch</command> to remove any empty files after the patches
           have been applied.
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-e-option">.
         </para>
@@ -1613,6 +1719,7 @@ NoPatch: 2 3
 
   <sect1 id="s1-rpm-specref-files-list">
     <title>The <command>%files</command> List</title>
+
     <indexterm>
       <primary>spec file</primary>
       <secondary><command>%files</command> list in</secondary>
@@ -1633,6 +1740,7 @@ NoPatch: 2 3
 </computeroutput>
       </screen>
     </para>
+
     <para>
       The <command>%files</command> list can be made specific to a particular
       subpackage by adding the subpackage name, and optionally, the
@@ -1646,10 +1754,12 @@ NoPatch: 2 3
 </computeroutput>
       </screen>
     </para>
+
     <para>
       The subpackage name and usage of the <command>-n</command> option must
       match those defined with the <command>%package</command> directive.
     </para>
+
     <para>
       The <command>%files</command> list can also use the contents of a file as
       the list of files to be packaged.  This is done by using the
@@ -1661,6 +1771,7 @@ NoPatch: 2 3
 </computeroutput>
       </screen>
     </para>
+
     <para>
       See also: <xref linkend="s1-rpm-inside-files-list">.
     </para>
@@ -1683,6 +1794,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-doc">
         <title>The <command>%doc</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1703,6 +1815,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-doc-directive">.
         </para>
@@ -1710,6 +1823,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-config">
         <title>The <command>%config</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1730,6 +1844,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-config-directive">.
         </para>
@@ -1737,6 +1852,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-attr">
         <title>The <command>%attr</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1759,6 +1875,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           The user and group identifiers must be non-numeric.  Attributes that
           do not need to be set by <command>%attr</command> may be replaced with
@@ -1770,6 +1887,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-attr-directive">.
         </para>
@@ -1777,6 +1895,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-verify">
         <title>The <command>%verify</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1848,6 +1967,7 @@ NoPatch: 2 3
             </listitem>
           </orderedlist>
         </para>
+
         <para>
           If the keyword <command>not</command> precedes the list, every
           attribute <emphasis>except</emphasis> those listed will be verified.
@@ -1858,6 +1978,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-flist-verify-directive">.
         </para>
@@ -1866,8 +1987,10 @@ NoPatch: 2 3
 
     <sect2 id="s2-rpm-specref-directory-related-directives">
       <title>Directory-related Directives</title>
+
       <sect3 id="s3-rpm-specref-docdir">
         <title>The <command>%docdir</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1885,6 +2008,7 @@ NoPatch: 2 3
           packaged in this directory (and any subdirectories) will automatically
           be marked as documentation.
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-docdir-directive">.
         </para>
@@ -1892,6 +2016,7 @@ NoPatch: 2 3
 
       <sect3 id="s3-rpm-specref-dir">
         <title>The <command>%dir</command> Directive</title>
+
         <indexterm>
           <primary>spec file</primary>
           <secondary>directives in</secondary>
@@ -1913,6 +2038,7 @@ NoPatch: 2 3
 </computeroutput>
           </screen>
         </para>
+
         <para>
           See also: <xref linkend="s3-rpm-inside-dir-directive">.
         </para>
@@ -1922,10 +2048,9 @@ NoPatch: 2 3
 
   <sect1 id="s1-rpm-specref-package">
     <title>The <command>%package</command> Directive</title>
+
     <indexterm>
       <primary><command>%package</command> directive</primary>
-      <secondary></secondary>
-      <tertiary></tertiary>
     </indexterm>
 
     <para>
@@ -1941,6 +2066,7 @@ Name: foo
 </computeroutput>
       </screen>
     </para>
+
     <para>
       and a subpackage is defined with the following <command>%package</command>
       directive:
@@ -1951,15 +2077,18 @@ Name: foo
 </computeroutput>
       </screen>
     </para>
+
     <para>
       the subpackage name will be <filename>foo-bar</filename>.
     </para>
+
     <para>
       See also: <xref linkend="s1-rpm-inside-package-directive">.
     </para>
 
     <sect2 id="s2-rpm-specref-package-n-option">
       <title>The <command>%package -n</command> Option</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>directives in</secondary>
@@ -1984,9 +2113,11 @@ Name: foo
 </computeroutput>
         </screen>
       </para>
+
       <para>
         the subpackage name will be <filename>bar</filename>.
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-package-n-option">.
       </para>
@@ -2003,6 +2134,7 @@ Name: foo
       architecture or operating system specifiers, each separated by commas or
       whitespace.
     </para>
+
     <para>
       Conditionals may be nested within other conditionals, provided that the
       inner conditional is completely enclosed by the outer conditional.
@@ -2010,6 +2142,7 @@ Name: foo
 
     <sect2 id="s2-rpm-specref-ifarch">
       <title>The <command>%ifarch</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2032,6 +2165,7 @@ Name: foo
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-ifarch-conditional">.
       </para>
@@ -2039,6 +2173,7 @@ Name: foo
 
     <sect2 id="s2-rpm-specref-ifnarch">
       <title>The <command>%ifnarch</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2061,6 +2196,7 @@ Name: foo
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-ifnarch-conditional">.
       </para>
@@ -2068,6 +2204,7 @@ Name: foo
 
     <sect2 id="s2-rpm-specref-ifos">
       <title>The <command>%ifos</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2090,6 +2227,7 @@ Name: foo
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-ifos-conditional">.
       </para>
@@ -2097,6 +2235,7 @@ Name: foo
 
     <sect2 id="s2-rpm-specref-ifnos">
       <title>The <command>%ifnos</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2119,6 +2258,7 @@ Name: foo
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-ifnos-conditional">.
       </para>
@@ -2126,6 +2266,7 @@ Name: foo
 
     <sect2 id="s2-rpm-specref-else">
       <title>The <command>%else</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2152,6 +2293,7 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-else-conditional">.
       </para>
@@ -2159,6 +2301,7 @@ make RPM_OPT_FLAGS="$RPM_OPT_FLAGS"
 
     <sect2 id="s2-rpm-specref-endif">
       <title>The <command>%endif</command> Conditional</title>
+
       <indexterm>
         <primary>spec file</primary>
         <secondary>conditionals in</secondary>
@@ -2182,6 +2325,7 @@ make INTELFLAG=-DINTEL
 </computeroutput>
         </screen>
       </para>
+
       <para>
         See also: <xref linkend="s2-rpm-inside-endif-conditional">.
       </para>
