@@ -620,7 +620,7 @@ Requires: foo = 42:
 
               <screen width="60">
 <computeroutput>
-Requires: foo &gt;= 42
+Requires: foo &gt;= 42:
 </computeroutput>
               </screen>
             </para>
