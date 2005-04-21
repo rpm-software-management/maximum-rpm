@@ -576,9 +576,9 @@ Requires: bar &gt;= 2.7-4, baz = 2.1-1
 
             <para>
               When RPM can't decipher a package's version number, it's time to
-              pull out the <command>epoch</command> tag.  This tag is used to
+              pull out the <command>Epoch</command> tag.  This tag is used to
               help RPM determine version number ordering.  Here's a sample
-              <command>epoch</command> tag line:
+              <command>Epoch</command> tag line:
 
               <screen width="60">
 <computeroutput>
@@ -590,10 +590,13 @@ Epoch: 42
             <para>
               This line indicates that the package has an epoch number of 42.
               What does the 42 mean?  Only that this version of the package is
-              older than the same package with an epoch number of 41, but
-              younger than the same package with an epoch number of 43.  If you
+              newer than the same package with an epoch number of 41, but
+              older than the same package with an epoch number of 43.  If you
               think of epoch numbers as being nothing more than very simple
-              version numbers, you'll be on the mark.
+              version numbers, you'll be on the mark.  In other words,
+              <command>Epoch</command> is the <emphasis>most significant
+              component</emphasis> of a package's complete version identifier
+              with regards to RPM's version comparison algorithm.
             </para>
             <para>
               In order to direct RPM to look at the epoch number instead of the
@@ -650,7 +653,8 @@ Requires: foo &gt;=S 42
             special situations where one might want more fine grained control
             over them.  When multiple packages are being installed in a
             transaction, installation order and dependency loops are such
-            cases.
+            cases.  Erasure order of packages within a transaction is
+            the opposite of their installation order.
           </para>
 
           <para>
@@ -660,18 +664,9 @@ Requires: foo &gt;=S 42
             However, when the number of packages involved in a loop grows, the
             loops get more and more complex.  The special dependency types in
             this chapter are at best <emphasis>hints</emphasis> for RPM; as a
-            rule of thumb, it is best to try to avoid dependency loops
-            altogether.  However, in some rare cases, they may be desired.
-          </para>
-
-          <para>
-            Note that as of writing this, erasure ordering is not implemented
-            in RPM.  In other words, when multiple packages are being erased
-            in the same transaction, the order in which they are erased is
-            undefined.  This is something that one should take into account
-            when writing preuninstall and postuninstall scriptlets.  So for
-            now, the following applies only to <emphasis>install time
-            ordering</emphasis> only.
+            rule of thumb, it is best to try to
+            <emphasis>avoid dependency loops</emphasis> altogether.
+            However, in some rare cases, they may be desired.
           </para>
 
           <sect4 id="s3-rpm-depend-prereq">
@@ -686,26 +681,31 @@ Requires: foo &gt;=S 42
 
             <para>
               The <command>PreReq</command> tag is the same as
-              <command>Requires</command>, with one additional property.
-              Using it tells RPM that the package marked as
+              <command>Requires</command>, originally with one additional
+              property.  Using it used to tell RPM that the package marked as
               <command>PreReq</command> should be installed before the package
-              containing the dependency.
-            </para>
-
-            <!-- TODO: since which version of RPM does the following apply? -->
-            <para>
-              In recent versions of RPM, a plain <command>Requires</command>
-              is enough to ensure proper installation order <emphasis>if there
-              are no dependency loops</emphasis> present in the transaction.
-              However, one may want to use <command>PreReq</command> to ensure
-              that older versions of RPM also get the intended installation
-              order right, if it matters.
+              containing the dependency.  However, as of RPM version 4.4, this
+              special property is being phased out, and
+              <command>PreReq</command> and <command>Requires</command> will
+              soon have no functional differences.
             </para>
 
             <para>
-              When dependency loops are present, the <command>PreReq</command>
-              "wins" over the conventional <command>Requires</command> when
-              RPM determines the installation order in a transaction.
+              A plain <command>Requires</command> is enough to ensure proper
+              installation order <emphasis>if there are no dependency
+              loops</emphasis> present in the transaction.  If dependency
+              loops are present and cannot be avoided, packagers should strive
+              to construct them in a way that the order of installation of the
+              the this way interdependent packages does not matter.
+            </para>
+
+            <para>
+              Historically, in dependency loops
+              <command>PreReq</command> used to "win" over the conventional
+              <command>Requires</command> when RPM determined the
+              installation order in a transaction.  But as said above, this
+              functionality is being phased out, and one should no longer
+              assume things will work that way.
             </para>
 
           </sect4>
