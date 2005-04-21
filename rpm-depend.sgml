@@ -601,14 +601,15 @@ Epoch: 42
             <para>
               In order to direct RPM to look at the epoch number instead of the
               version number when doing dependency checking, it's necessary to
-              append an "<command>S</command>" to the end of the conditional
-              operator in the <command>Requires</command> tag line.  So if a
-              package requires package <filename>foo</filename> to have an epoch
-              number equal to 42, the following tag line would be used:
+	      use a "<command>:</command>" before the version in the
+	      <command>Requires</command> tag line.  So if a package
+	      requires package <filename>foo</filename> to have an
+	      epoch number equal to 42, the following tag line would
+	      be used:
 
               <screen width="60">
 <computeroutput>
-Requires: foo =S 42
+Requires: foo = 42:
 </computeroutput>
               </screen>
             </para>
@@ -619,11 +620,24 @@ Requires: foo =S 42
 
               <screen width="60">
 <computeroutput>
-Requires: foo &gt;=S 42
+Requires: foo &gt;= 42
 </computeroutput>
               </screen>
             </para>
             <para>
+              If the <filename>foo</filename> package needs to have version with
+	      an epoch number 42 and version 1.0, this line would work:
+
+              <screen width="60">
+<computeroutput>
+Requires: foo &gt;= 42:1.0
+</computeroutput>
+              </screen>
+	      You <emphasis>must</emphasis> include the epoch in a
+	      requires if it exists in the package.
+            </para>
+            <para>
+	       
               It might seem that using epoch numbers is a lot of extra trouble,
               and you're right.  But there is an alternative:
             </para>

@@ -532,7 +532,7 @@ Requires: playmidi &gt;= 2.3
 
           <screen width="60">
 <computeroutput>
-Requires: playmidi =S 4
+Requires: playmidi &gt;= 4:2.3
 </computeroutput>
           </screen>
         </para>
@@ -624,7 +624,7 @@ Conflicts: playmidi &gt;= 2.3
 
           <screen width="60">
 <computeroutput>
-Conflicts: playmidi =S 4
+Conflicts: playmidi = 4:
 </computeroutput>
           </screen>
         </para>
