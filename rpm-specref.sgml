@@ -556,10 +556,11 @@ Requires: playmidi &gt;= 4:2.3
         </indexterm>
 
         <para>
-          The <command>Epoch:</command> tag is used to define an epoch number
-          for a package.  It is also known as the <command>Serial:</command>
-          tag.  This is only necessary if RPM is unable to determine the
-          ordering of a package's version numbers.
+          The <command>Epoch:</command> tag is used to define an epoch
+          number for a package.  It replaces the now obsoleted
+          <command>Serial:</command> tag.  This is only necessary if
+          RPM is unable to determine the ordering of a package's
+          version numbers.
 
           <screen width="60">
 <computeroutput>
