@@ -1,5 +1,5 @@
 <!DOCTYPE style-sheet PUBLIC "-//James Clark//DTD DSSSL Style Sheet//EN" [
-<!ENTITY dbstyle SYSTEM "@DOCBOOK_DSL@" CDATA DSSSL>
+<!ENTITY dbstyle SYSTEM "@DOCBOOK_HTML_DSL@" CDATA DSSSL>
 ]>
 <style-sheet>
 <style-specification id="html" use="docbook">

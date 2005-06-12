@@ -1,4 +1,16 @@
-2005-04-21  Paul Nasrat  <pnasrat@redhat.com>
+2005-06-12  jbj  <jbj@wellfleet.jbj.org>
+
+	* aclocal.m4: egenerate with FC4 aclocal.
+
+2005-05-18  pauln  <pauln@wellfleet.jbj.org>
+
+	* rpm-specref.sgml: serial obsolete
+
+2005-04-29  pauln  <pauln@wellfleet.jbj.org>
+
+	* ChangeLog: changelog
+
+2005-04-21  pauln  <pauln@wellfleet.jbj.org>
 
 	* rpm-depend.sgml: fix typo
 
@@ -6,26 +18,26 @@
 
 	* rpm-depend.sgml: updates from Ville
 
-2005-03-30  Paul Nasrat  <pnasrat@redhat.com>
+2005-03-30  pauln  <pauln@wellfleet.jbj.org>
 
 	* aclocal.m4, rpm-inside.sgml, rpm-specref.sgml:
 	clarify macro expansion
 
-2004-10-14  Paul Nasrat  <pnasrat@redhat.com>
+2004-10-14  pauln  <pauln@wellfleet.jbj.org>
 
 	* rpm-depend.sgml:
 	Patch from Ville - explaining prereq, requires and requires(pre)
 
-2004-08-26  Paul Nasrat  <pnasrat@redhat.com>
+2004-08-26  pauln  <pauln@wellfleet.jbj.org>
 
 	* rpm-anywhere.sgml: rpmmacro not rpmrc
 
-2004-05-10  Paul Nasrat  <pnasrat@redhat.com>
+2004-05-10  pauln  <pauln@wellfleet.jbj.org>
 
 	* queryformat-tags.sgml, rpm-depend.sgml, rpm-file-format.sgml, rpm-inside.sgml, rpm-specref.sgml:
 	AutoReq and AutoProv updates from Ville
 
-2004-04-29  Paul Nasrat  <pnasrat@redhat.com>
+2004-04-29  pauln  <pauln@wellfleet.jbj.org>
 
 	* max-rpm.sgml, rpm-b-command.sgml, rpm-inside.sgml, rpm-specref.sgml:
 	Ville - document %check section
@@ -33,7 +45,7 @@
 	      - Fix documentation on --recompile
 	      - Other minor improvements
 
-2004-03-04  Paul Nasrat  <pnasrat@redhat.com>
+2004-03-04  pauln  <pauln@wellfleet.jbj.org>
 
 	* rpm-inside.sgml: Fix title
 
@@ -42,11 +54,11 @@
 
 	* .cvsignore: Add aclocal.m4 to be ignored
 
-2003-12-26  jbj  <jbj@redhat.com>
+2003-12-26  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Typos (#106415).
 
-2003-11-24  Paul Nasrat  <pnasrat@redhat.com>
+2003-11-24  pauln  <pauln@wellfleet.jbj.org>
 
 	* rpm-rw-build.sgml, rpm-specref.sgml, rpm-subpack.sgml, rpmbuild-manpage.sgml, rpmcache-manpage.sgml, rpmrc-file.sgml, xref.sgml, build, intro-to-rpm.sgml, max-rpm.sgml, preface.sgml, queryformat-tags.sgml, rpm-build.sgml, rpm-commands.sgml, rpm-depend.sgml, rpm-file-format.sgml, rpm-inside.sgml, rpm-manpage.sgml, rpm-miscellania.sgml, rpm-resources.sgml, rpm-rpmlib.sgml:
 	max-rpm rework http://freshrpms.net/docs/max-rpm/
@@ -54,65 +66,65 @@
 	Ville Skyttä - typos and sanity checking
 	Paul Nasrat - addition of %ghost
 
-2003-06-16  jbj  <jbj@redhat.com>
+2003-06-16  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml, rpmbuild-manpage.sgml, rpmgraph-manpage.sgml:
 	Corrections for PLD.
 
-2003-04-17  jbj  <jbj@redhat.com>
+2003-04-17  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: rpm-build, not rpmbuild, package.
 
-2003-01-28  jbj  <jbj@redhat.com>
+2003-01-28  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpmbuild-manpage.sgml: Change target_arch to target_cpu.
 
-2002-10-25  jbj  <jbj@redhat.com>
+2002-10-25  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: fix: gpg uses GNUPGHOME, not GPGPATH (#76691).
 
-2002-10-24  jbj  <jbj@redhat.com>
+2002-10-24  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpmdeps-manpage.sgml: Add curly brackets around {short|long} options.
 
 	* .cvsignore, Makefile.am, aclocal.m4, rpm-manpage.sgml, rpmcache-manpage.sgml, rpmdeps-manpage.sgml, rpmdeps8.sgml:
 	Add skeletal rpmdeps.8.
 
-2002-09-30  ed  <ed@redhat.com>
+2002-09-30  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-query.sgml: fixed typo in query chapter
 
-2002-08-19  ed  <ed@redhat.com>
+2002-08-19  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-inside.sgml, rpm-reloc.sgml: fixed a couple nits from readers...
 
-2002-07-05  jbj  <jbj@redhat.com>
+2002-07-05  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpmcache-manpage.sgml: Update rpmcache man page.
 
-2002-06-30  jbj  <jbj@redhat.com>
+2002-06-30  jbj  <jbj@wellfleet.jbj.org>
 
 	* Makefile.am, aclocal.m4, max-rpm.sgml, rpmcache-manpage.sgml, rpmcache8.sgml, rpmgraph-manpage.sgml, rpmgraph8.sgml, .cvsignore:
 	Preliminary rpmcache(8) and rpmgraph(8) man pages.
 
-2002-06-25  ed  <ed@redhat.com>
+2002-06-25  ed  <ed@wellfleet.jbj.org>
 
 	* aclocal.m4, max-rpm.sgml, rpm-manpage.sgml, rpm8.sgml, rpmbuild-manpage.sgml, rpmbuild8.sgml:
 	fixed up files related to man pages for more appropriate display in the book
 
-2002-06-13  ed  <ed@redhat.com>
+2002-06-13  ed  <ed@wellfleet.jbj.org>
 
 	* Makefile.am, configure.in:
 	fixed to work with newer docbook environment
 
-2002-06-10  jbj  <jbj@redhat.com>
+2002-06-10  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Document --import and pubkey management.
 
 	* rpm-manpage.sgml: Document file attribute opt outs in verify mode.
 	Document --nodigest/--nosignature/--nosuggest.
 
-2002-06-09  jbj  <jbj@redhat.com>
+2002-06-09  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml, rpmbuild-manpage.sgml:
 	Separate rpmbuild.8 from rpm.8 man pages.
@@ -120,68 +132,68 @@
 	* configure.in, missing, rpm-manpage.sgml, rpmbuild-manpage.sgml, aclocal.m4, autogen.sh:
 	Sanity (after refreshing rpm.8 and rpmbuild.8).
 
-2002-02-07  jbj  <jbj@redhat.com>
+2002-02-07  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml, rpmbuild-manpage.sgml: Sanity.
 
-2001-06-06  jbj  <jbj@redhat.com>
+2001-06-06  jbj  <jbj@wellfleet.jbj.org>
 
 	* .cvsignore, Makefile.am, max-rpm.sgml, rpm-anywhere.sgml, rpm-b-command.sgml, rpm-build.sgml, rpm-commands.sgml, rpm-inside.sgml, rpm-manpage.sgml, rpm-miscellania.sgml, rpm-multi.sgml, rpm-pgp.sgml, rpm-reloc.sgml, rpm-rw-build.sgml, rpm-subpack.sgml, rpm8.sgml, rpmbuild-manpage.sgml, rpmbuild8.sgml:
 	Split off rpmbuild from the rest of rpm.
 
-2001-05-22  jbj  <jbj@redhat.com>
+2001-05-22  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Correct --test option, should be --nobuild.
 
-2001-04-22  jbj  <jbj@redhat.com>
+2001-04-22  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Add --noscriptlet and --repackage options.
 
-2001-04-21  jbj  <jbj@redhat.com>
+2001-04-21  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Formatting changes.
 
 	* .cvsignore, Makefile.am, maximum-rpm.spec.in, rpm-manpage.sgml, rpm8.sgml:
 	Sanity.
 
-2001-04-12  jbj  <jbj@redhat.com>
+2001-04-12  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm8.sgml, .cvsignore, Makefile.am, max-rpm.sgml, rpm-manpage.sgml, rpm-specref.sgml:
 	Add rpm.8 man page to the appendix.
 
-2001-04-11  jbj  <jbj@redhat.com>
+2001-04-11  jbj  <jbj@wellfleet.jbj.org>
 
 	* rpm-manpage.sgml: Create.
 
-2001-04-06  jbj  <jbj@redhat.com>
+2001-04-06  jbj  <jbj@wellfleet.jbj.org>
 
 	* .cvsignore, Makefile.am, aclocal.m4, autogen.sh, configure.in, install-sh, maximum-rpm.spec, maximum-rpm.spec.in, missing, mkinstalldirs, redhat-html.dsl, redhat-html.dsl.in:
 	Use automake to build.
 
-2001-04-05  jbj  <jbj@redhat.com>
+2001-04-05  jbj  <jbj@wellfleet.jbj.org>
 
 	* maximum-rpm.spec, .cvsignore, build, redhat-html.dsl: Create.
 
-2000-06-02  ed  <ed@redhat.com>
+2000-06-02  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-upgrade.sgml, rpm-verify.sgml, rpm-b-command.sgml, rpm-checksig.sgml, rpm-erase.sgml, rpm-inside.sgml:
 	fixed up poor use of ndash entity...
 
-2000-06-01  ed  <ed@redhat.com>
+2000-06-01  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-erase.sgml, rpm-file-format.sgml, rpm-inside.sgml, rpm-install.sgml, rpm-miscellania.sgml, rpm-multi.sgml, rpm-pgp.sgml, rpm-philosophy.sgml, rpm-query.sgml, rpm-reloc.sgml, rpm-resources.sgml, rpm-rpmlib.sgml, rpm-rw-build.sgml, rpm-specref.sgml, rpm-subpack.sgml, rpm-upgrade.sgml, rpm-verify.sgml, intro-to-rpm.sgml, max-rpm.sgml, pgp-intro.sgml, preface.sgml, rpm-anywhere.sgml, rpm-b-command.sgml, rpm-basics.sgml, rpm-build.sgml, rpm-checksig.sgml, rpm-commands.sgml, rpm-depend.sgml:
 	moved to mdash and ndash entities...
 
-2000-04-19  ed  <ed@redhat.com>
+2000-04-19  ed  <ed@wellfleet.jbj.org>
 
 	* max-rpm.sgml: added new license text to replace rhdl
 
-2000-04-18  ed  <ed@redhat.com>
+2000-04-18  ed  <ed@wellfleet.jbj.org>
 
 	* fix-index:
 	Added quick perl hack to fix the index generated by collateindex.pl
 
-2000-04-07  ed  <ed@redhat.com>
+2000-04-07  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-verify.sgml, rpmrc-file.sgml, xref.sgml:
 	cleanup done -- now on to fixing licensing and bookinfo
@@ -189,34 +201,34 @@
 	* rpm-specref.sgml, rpm-subpack.sgml, rpm-upgrade.sgml:
 	more updates -- almost done
 
-2000-04-05  ed  <ed@redhat.com>
+2000-04-05  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-specref.sgml: more fixes
 
-2000-03-27  ed  <ed@redhat.com>
+2000-03-27  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-reloc.sgml, rpm-resources.sgml, rpm-rpmlib.sgml, rpm-rw-build.sgml:
 	nearly the last of the updates
 
-2000-03-21  ed  <ed@redhat.com>
+2000-03-21  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-pgp.sgml, rpm-philosophy.sgml, rpm-query.sgml: yet more updates
 
-2000-03-19  ed  <ed@redhat.com>
+2000-03-19  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-install.sgml, rpm-miscellania.sgml, rpm-multi.sgml: more updates
 
-2000-03-18  ed  <ed@redhat.com>
+2000-03-18  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-b-command.sgml, rpm-basics.sgml, rpm-build.sgml, rpm-checksig.sgml, rpm-depend.sgml, rpm-erase.sgml, rpm-file-format.sgml, rpm-inside.sgml:
 	more cleanups
 
-2000-02-21  ed  <ed@redhat.com>
+2000-02-21  ed  <ed@wellfleet.jbj.org>
 
 	* pgp-intro.sgml, preface.sgml, queryformat-tags.sgml, rpm-anywhere.sgml, max-rpm.sgml:
 	random cleanups
 
-2000-02-07  ed  <ed@redhat.com>
+2000-02-07  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-inside.sgml: first of replaceable markup
 
@@ -226,34 +238,34 @@
 	* intro-to-rpm.sgml, pgp-intro.sgml, preface.sgml, queryformat-tags.sgml, rpm-anywhere.sgml, rpm-b-command.sgml, rpm-build.sgml, rpm-checksig.sgml, rpm-depend.sgml, rpm-erase.sgml, rpm-file-format.sgml, rpm-inside.sgml, rpm-install.sgml, rpm-miscellania.sgml, rpm-multi.sgml, rpm-pgp.sgml, rpm-query.sgml, rpm-reloc.sgml, rpm-resources.sgml, rpm-rpmlib.sgml, rpm-rw-build.sgml, rpm-specref.sgml, rpm-subpack.sgml, rpm-upgrade.sgml, rpm-verify.sgml, rpmrc-file.sgml:
 	fixed xrefs and removed all figure markup
 
-2000-02-06  ed  <ed@redhat.com>
+2000-02-06  ed  <ed@wellfleet.jbj.org>
 
 	* intro-to-rpm.sgml: the first of many fixes
 
-2000-01-12  ed  <ed@redhat.com>
+2000-01-12  ed  <ed@wellfleet.jbj.org>
 
 	* max-rpm.sgml: dinked with collateindex
 
-1999-08-23  ed  <ed@redhat.com>
+1999-08-23  ed  <ed@wellfleet.jbj.org>
 
 	* max-rpm.sgml: small cleanups
 
-1999-08-13  ed  <ed@redhat.com>
+1999-08-13  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-file-format.sgml:
 	fixed problem with adept publisher puking on the word minor in emphasis tags
 
-1999-08-12  ed  <ed@redhat.com>
+1999-08-12  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-file-format.sgml, max-rpm.sgml, rpm-anywhere.sgml, rpm-b-command.sgml, rpm-build.sgml:
 	removed some old latex leftovers
 
-1999-07-27  ed  <ed@redhat.com>
+1999-07-27  ed  <ed@wellfleet.jbj.org>
 
 	* queryformat-tags.sgml, rpm-inside.sgml, rpm-resources.sgml, rpm-specref.sgml, xref.sgml, pgp-intro.sgml:
 	Indexing fixup, completed
 
-1999-07-26  ed  <ed@redhat.com>
+1999-07-26  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-anywhere.sgml, rpm-commands.sgml, rpm-depend.sgml, rpm-file-format.sgml, rpm-multi.sgml, rpm-pgp.sgml, rpm-reloc.sgml, rpm-rpmlib.sgml, rpm-rw-build.sgml, rpm-subpack.sgml, rpmrc-file.sgml:
 	Indexing fixup, continued
@@ -261,12 +273,12 @@
 	* rpm-upgrade.sgml, rpm-verify.sgml, intro-to-rpm.sgml, rpm-b-command.sgml, rpm-basics.sgml, rpm-build.sgml, rpm-checksig.sgml, rpm-erase.sgml, rpm-inside.sgml, rpm-install.sgml, rpm-miscellania.sgml, rpm-philosophy.sgml, rpm-query.sgml:
 	Indexing fixup
 
-1999-07-24  ed  <ed@redhat.com>
+1999-07-24  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-pgp.sgml, rpm-resources.sgml, xref.sgml, pgp-intro.sgml, rpm-b-command.sgml, rpm-checksig.sgml, rpm-inside.sgml:
 	WooHoo, first pass done\!
 
-1999-07-23  ed  <ed@redhat.com>
+1999-07-23  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-resources.sgml: started on resources
 
@@ -282,7 +294,7 @@
 	* queryformat-tags.sgml, rpm-commands.sgml, rpm-query.sgml:
 	what a night
 
-1999-07-22  ed  <ed@redhat.com>
+1999-07-22  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-install.sgml, rpm-multi.sgml, rpm-pgp.sgml, rpm-query.sgml, rpm-reloc.sgml, rpm-verify.sgml, rpmrc-file.sgml, rpm-b-command.sgml, rpm-checksig.sgml, rpm-commands.sgml, rpm-erase.sgml, rpm-inside.sgml:
 	finished rpmrc; added commands
@@ -297,7 +309,7 @@
 
 	* rpm-rpmlib.sgml: more work on rpm-rpmlib
 
-1999-07-21  ed  <ed@redhat.com>
+1999-07-21  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-rpmlib.sgml: more rpmlib fixups...
 
@@ -307,7 +319,7 @@
 	* rpm-install.sgml, rpm-multi.sgml, rpm-rw-build.sgml, rpm-b-command.sgml, rpm-inside.sgml:
 	finished rpm-multi; on to rpm-rw-build
 
-1999-07-20  ed  <ed@redhat.com>
+1999-07-20  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-multi.sgml, rpm-subpack.sgml, rpm-inside.sgml:
 	finished rpm-subpack; started rpm-multi
@@ -321,45 +333,45 @@
 	* rpm-anywhere.sgml, rpm-inside.sgml, rpm-reloc.sgml:
 	finished reloc, added anywhere
 
-1999-07-18  ed  <ed@redhat.com>
+1999-07-18  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-depend.sgml, rpm-inside.sgml, rpm-reloc.sgml: more work
 
-1999-07-16  ed  <ed@redhat.com>
+1999-07-16  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-build.sgml, rpm-depend.sgml, rpm-inside.sgml, rpm-verify.sgml:
 	finally finished rpm-inside, on to the next one
 
-1999-07-15  ed  <ed@redhat.com>
+1999-07-15  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-inside.sgml: more damn rpm-inside stuff
 
-1999-07-14  ed  <ed@redhat.com>
+1999-07-14  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-inside.sgml: more rpm-inside stuff
 
-1999-07-13  ed  <ed@redhat.com>
+1999-07-13  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-inside.sgml: first rpm-inside fixes
 
 	* rpm-b-command.sgml, rpm-inside.sgml:
 	finished rpm-b-command chapter, added rpm-inside
 
-1999-07-12  ed  <ed@redhat.com>
+1999-07-12  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-b-command.sgml: worked on -b chapter
 
-1999-07-11  ed  <ed@redhat.com>
+1999-07-11  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-b-command.sgml, rpm-basics.sgml, rpm-build.sgml:
 	more fixups, more new chapters
 
-1999-07-10  ed  <ed@redhat.com>
+1999-07-10  ed  <ed@wellfleet.jbj.org>
 
 	* intro-to-rpm.sgml, rpm-basics.sgml, rpm-checksig.sgml, rpm-erase.sgml, rpm-install.sgml, rpm-miscellania.sgml, rpm-philosophy.sgml, rpm-query.sgml, rpm-upgrade.sgml, rpm-verify.sgml:
 	table fixups, more chapters
 
-1999-07-09  ed  <ed@redhat.com>
+1999-07-09  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-checksig.sgml: checksig work
 
@@ -372,11 +384,11 @@
 
 	* rpm-verify.sgml: more verify updates
 
-1999-07-08  ed  <ed@redhat.com>
+1999-07-08  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-verify.sgml: more work on verify chapter
 
-1999-07-07  ed  <ed@redhat.com>
+1999-07-07  ed  <ed@wellfleet.jbj.org>
 
 	* rpm-verify.sgml: Added verify chapter
 
@@ -384,7 +396,7 @@
 
 	* rpm-query.sgml: Query chapter added
 
-1999-07-06  ed  <ed@redhat.com>
+1999-07-06  ed  <ed@wellfleet.jbj.org>
 
 	* intro-to-rpm.sgml, max-rpm.sgml, preface.sgml, rpm-erase.sgml, rpm-install.sgml, rpm-upgrade.sgml:
 	First new stuff, woohoo...

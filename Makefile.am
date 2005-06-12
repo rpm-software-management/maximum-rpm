@@ -6,7 +6,7 @@ hdir =		html
 perl =		@__PERL@
 collateindex =	@COLLATEINDEX_PL@
 redhat_dsl =	../redhat-html.dsl
-jade =		@__JADE@ -d $(redhat_dsl)
+jade =		@__JADE@
 
 EXTRA_DIST = \
 	ChangeLog \
@@ -57,7 +57,7 @@ EXTRA_DIST = \
 htmldir = 	/usr/share/doc/@PACKAGE@-@VERSION@
 html_DATA =	setup genhtml
 
-noinst_DATA =	setup genhtml ChangeLog
+noinst_DATA =	setup genhtml ChangeLog # max-rpm.tex
 
 $(hdir):
 	rm -rf $(hdir)
@@ -70,18 +70,30 @@ setup: $(hdir)
 
 temp-index.sgml: setup redhat-html.dsl $(EXTRA_DIST)
 	( cd $(hdir) ; \
-	  $(jade) -t sgml -ihtml -V html-index ../max-rpm.sgml ; \
+	  $(jade) -d $(redhat_dsl) -t sgml -ihtml -V html-index ../max-rpm.sgml ; \
 	  $(perl) $(collateindex) -o ../temp-index.sgml HTML.index ; \
 	)
 
 generated-index.sgml: temp-index.sgml fix-index
 	( cd $(hdir) ; \
 	  cat ../temp-index.sgml | ../fix-index > ../generated-index.sgml ; \
-	  $(jade) -t sgml -ihtml ../max-rpm.sgml ; \
+	  $(jade) -d $(redhat_dsl) -t sgml -ihtml ../max-rpm.sgml ; \
 	)
 
 genhtml: generated-index.sgml
 	touch genhtml
+
+max-rpm.tex: generated-index.sgml
+	$(jade) -d @DOCBOOK_PRINT_DSL@  -t tex max-rpm.sgml
+
+max-rpm.pdf: max-rpm.tex
+	pdfjadetex --output-format=pdf max-rpm.tex
+
+max-rpm.dvi: max-rpm.tex
+	jadetex --output-format=dvi max-rpm.tex
+
+max-rpm.ps: max-rpm.dvi
+	dvips -o max-rpm.ps max-rpm.dvi
 
 distclean-htmlPROGRAMS:
 	-rm -rf html

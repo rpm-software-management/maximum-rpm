@@ -19,6 +19,8 @@ config.status
 config.sub
 configure
 manpage.*
+max-rpm.pdf
+max-rpm.tex
 rpm.8
 rpmbuild.8
 rpmcache.8

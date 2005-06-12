@@ -16,14 +16,24 @@ fi
 AC_SUBST(COLLATEINDEX_PL)
 
 if test -f /usr/share/sgml/docbook/dsssl-stylesheets/html/docbook.dsl ; then
-    DOCBOOK_DSL=/usr/share/sgml/docbook/dsssl-stylesheets/html/docbook.dsl
+    DOCBOOK_HTML_DSL=/usr/share/sgml/docbook/dsssl-stylesheets/html/docbook.dsl
 
 elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl ; then
-    DOCBOOK_DSL=/usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl
+    DOCBOOK_HTML_DSL=/usr/lib/sgml/stylesheets/nwalsh-modular/html/docbook.dsl
 else
     AC_ERROR(can't find docbook.dsl)
 fi
-AC_SUBST(DOCBOOK_DSL)
+AC_SUBST(DOCBOOK_HTML_DSL)
+
+if test -f /usr/share/sgml/docbook/dsssl-stylesheets/print/docbook.dsl ; then
+    DOCBOOK_PRINT_DSL=/usr/share/sgml/docbook/dsssl-stylesheets/print/docbook.dsl
+
+elif test -f /usr/lib/sgml/stylesheets/nwalsh-modular/print/docbook.dsl ; then
+    DOCBOOK_PRINT_DSL=/usr/lib/sgml/stylesheets/nwalsh-modular/print/docbook.dsl
+else
+    AC_ERROR(can't find print/docbook.dsl)
+fi
+AC_SUBST(DOCBOOK_PRINT_DSL)
 
 if test -d /usr/share/sgml/docbook/dsssl-stylesheets/images ; then
     IMAGES_GIF=/usr/share/sgml/docbook/dsssl-stylesheets/images
