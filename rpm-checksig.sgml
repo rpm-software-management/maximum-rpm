@@ -9,12 +9,12 @@
     <table id="tb-rpm-checksig-command-syntax">
       <title><command>rpm -K</command> Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
         <tbody>
           <row>
             <entry spanname="spanall" align="center">
@@ -54,7 +54,7 @@
               Do not verify PGP signatures
             </entry>
             <entry>
-              <xref linkend="s2-rpm-checksig-nopgp-option">
+              <xref linkend="s2-rpm-checksig-nopgp-option"/>
             </entry>
           </row>
           <row>
@@ -73,7 +73,7 @@
               Display additional information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-checksig-v-option">
+              <xref linkend="s2-rpm-checksig-v-option"/>
             </entry>
           </row>
           <row>
@@ -84,7 +84,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-checksig-vv-option">
+              <xref linkend="s2-rpm-checksig-vv-option"/>
             </entry>
           </row>
           <row>
@@ -96,7 +96,7 @@
               <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-checksig-rcfile-option">
+              <xref linkend="s2-rpm-checksig-rcfile-option"/>
             </entry>
           </row>
         </tbody>
@@ -150,7 +150,7 @@
         </para>
         <para>
           If PGP is new to you, a quick glance through <xref
-          linkend="ch-pgp-intro"> should get you well on your way to
+          linkend="ch-pgp-intro"/> should get you well on your way to
           understanding, building, and installing PGP.  If, on the other hand,
           you've got PGP already installed and have sent an encrypted message or
           two, you're probably more than ready to continue with this chapter.
@@ -202,7 +202,7 @@
                       <para>
                         For more information on <filename>rpmrc</filename>
                         files, <filename>rpmrc</filename> file entries, and how
-                        to use them, please see <xref linkend="ch-rpmrc-file">.
+                        to use them, please see <xref linkend="ch-rpmrc-file"/>.
                       </para>
                     </footnote>
                   </para>
@@ -603,7 +603,7 @@ rpm-2.3-1.i386-bogus.rpm: size PGP MD5 NOT OK
         </para>
         <para>
           Certainly &mdash; in fact, we've already done it, in <xref
-          linkend="s2-rpm-checksig-missing-public-key">.  You lose the ability
+          linkend="s2-rpm-checksig-missing-public-key"/>.  You lose the ability
           to verify the package's origins, as well as some level of confidence
           in the package's integrity, but the size and MD5 checksums still give
           some measure of assurance as to the package's state.
@@ -710,7 +710,7 @@ MD5 sum OK: 8873682c5e036a307dee87d990e75349
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
     </sect1>

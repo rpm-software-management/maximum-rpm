@@ -472,7 +472,7 @@ rML3TxQSwdA=
 
         <screen width="60">
 <computeroutput>
-#if !defined(SYSV) && !defined(__ELF__)
+#if !defined(SYSV) &amp;&amp; !defined(__ELF__)
 </computeroutput>
         </screen>
       </para>
@@ -506,11 +506,11 @@ rML3TxQSwdA=
         After building and installing PGP, you're ready to start using RPM's
         package signature capabilities.  If your primary interest is in checking
         the signatures on packages built by someone else, <xref
-        linkend="ch-rpm-checksig"> will tell you everything you need to know.
+        linkend="ch-rpm-checksig"/> will tell you everything you need to know.
       </para>
       <para>
         On the other hand, if you are a package builder and would like to start
-        signing packages, <xref linkend="ch-rpm-pgp"> will have you signing
+        signing packages, <xref linkend="ch-rpm-pgp"/> will have you signing
         packages in no time.
       </para>
     </sect2>

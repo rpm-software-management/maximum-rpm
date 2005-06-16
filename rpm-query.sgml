@@ -10,12 +10,12 @@
     <table id="tb-rpm-query-q-syntax">
       <title><command>rpm -q</command> Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
 
         <tbody>
           <row>
@@ -43,7 +43,7 @@
               Query installed package(s)
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-package-label">
+              <xref linkend="s3-rpm-query-package-label"/>
             </entry>
           </row>
 
@@ -58,7 +58,7 @@
               OK)
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-p-option">
+              <xref linkend="s3-rpm-query-p-option"/>
             </entry>
           </row>
 
@@ -71,7 +71,7 @@
               <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-by-file">
+              <xref linkend="s3-rpm-query-by-file"/>
             </entry>
           </row>
 
@@ -83,7 +83,7 @@
               Query all installed packages
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-a-option">
+              <xref linkend="s3-rpm-query-a-option"/>
             </entry>
           </row>
 
@@ -96,7 +96,7 @@
               <command><replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-whatprovides-option">
+              <xref linkend="s3-rpm-query-whatprovides-option"/>
             </entry>
           </row>
 
@@ -109,7 +109,7 @@
               <command><replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-g-option">
+              <xref linkend="s3-rpm-query-g-option"/>
             </entry>
           </row>
 
@@ -122,7 +122,7 @@
               <command><replaceable>&lt;x&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-whatrequires">
+              <xref linkend="s3-rpm-query-whatrequires"/>
             </entry>
           </row>
 
@@ -143,7 +143,7 @@
               Display full package label
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-package-label">
+              <xref linkend="s3-rpm-query-package-label"/>
             </entry>
           </row>
 
@@ -155,7 +155,7 @@
               Display summary package information
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-i-option">
+              <xref linkend="s3-rpm-query-i-option"/>
             </entry>
           </row>
 
@@ -167,7 +167,7 @@
               Display list of files in package
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-l-option">
+              <xref linkend="s3-rpm-query-l-option"/>
             </entry>
           </row>
 
@@ -179,7 +179,7 @@
               Display list of configuration files
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-c-option">
+              <xref linkend="s3-rpm-query-c-option"/>
             </entry>
           </row>
 
@@ -191,7 +191,7 @@
               Display list of documentation files
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-d-option">
+              <xref linkend="s3-rpm-query-d-option"/>
             </entry>
           </row>
 
@@ -203,7 +203,7 @@
               Display list of files in package, with state
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-s-option">
+              <xref linkend="s3-rpm-query-s-option"/>
             </entry>
           </row>
 
@@ -215,7 +215,7 @@
               Display install, uninstall, verify scripts
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-scripts-option">
+              <xref linkend="s3-rpm-query-scripts-option"/>
             </entry>
           </row>
 
@@ -227,7 +227,7 @@
               Display queried data in custom format
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-queryformat-option">
+              <xref linkend="s3-rpm-query-queryformat-option"/>
             </entry>
           </row>
 
@@ -239,7 +239,7 @@
               Display all verifiable information for each file
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-dump-option">
+              <xref linkend="s3-rpm-query-dump-option"/>
             </entry>
           </row>
 
@@ -251,7 +251,7 @@
               Display capabilities package provides
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-provides-option">
+              <xref linkend="s3-rpm-query-provides-option"/>
             </entry>
           </row>
 
@@ -263,7 +263,7 @@
               Display capabilities package requires
             </entry>
             <entry>
-              <xref linkend="s3-rpm-query-requires-option">
+              <xref linkend="s3-rpm-query-requires-option"/>
             </entry>
           </row>
 
@@ -284,7 +284,7 @@
               Display additional information
             </entry>
             <entry>
-              <xref linkend="s4-rpm-query-v-option">
+              <xref linkend="s4-rpm-query-v-option"/>
             </entry>
           </row>
 
@@ -296,7 +296,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-query-vv-option">
+              <xref linkend="s2-rpm-query-vv-option"/>
             </entry>
           </row>
 
@@ -309,7 +309,7 @@
               <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-query-root-option">
+              <xref linkend="s2-rpm-query-root-option"/>
             </entry>
           </row>
 
@@ -322,7 +322,7 @@
               <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-query-rcfile-option">
+              <xref linkend="s2-rpm-query-rcfile-option"/>
             </entry>
           </row>
 
@@ -335,7 +335,7 @@
               find the RPM database
             </entry>
             <entry>
-              <xref linkend="s2-rpm-query-dbpath-option">
+              <xref linkend="s2-rpm-query-dbpath-option"/>
             </entry>
           </row>
         </tbody>
@@ -818,7 +818,7 @@ rpm-2.3-1
               <para>
                 On most Linux systems, the <command>file</command> command can
                 be used to obtain similar information.  See <xref
-                linkend="ch-rpm-file-format"> for details on how to add this
+                linkend="ch-rpm-file-format"/> for details on how to add this
                 capability to your system's <command>file</command> command.
               </para>
             </footnote>
@@ -830,7 +830,7 @@ rpm-2.3-1
             <indexterm>
               <primary>URL</primary>
             </indexterm>
-            to specify package files.  See <xref linkend="s2-rpm-install-urls">
+            to specify package files.  See <xref linkend="s2-rpm-install-urls"/>
             for more information on using URLs.
           </para>
 
@@ -1481,7 +1481,7 @@ lrwxrwxrwx-  root  root     30 Mar 21 00:29 /usr/X11R6/lib/X11/XF86Config -&gt; 
                           <para>
                             For more information on <filename>rpmrc</filename>
                             file entries, please refer to <xref
-                            linkend="ch-rpmrc-file">.
+                            linkend="ch-rpmrc-file"/>.
                           </para>
                         </footnote>
                       </para>
@@ -1909,7 +1909,7 @@ verify script:
                   <footnote>
                     <para>
                       For more information on package verification, please see
-                      <xref linkend="s1-rpm-verify-what-it-does">.
+                      <xref linkend="s1-rpm-verify-what-it-does"/>.
                     </para>
                   </footnote>
                 </para>
@@ -2575,7 +2575,7 @@ RPMTAG_VERIFYSCRIPT
               <computeroutput>(unknown)</computeroutput>.  There are also a few
               tags that, for one reason or another, will not produce useful
               output when using in a format string.  For a comprehensive list of
-              queryformat tags, please see <xref linkend="ch-queryformat-tags">.
+              queryformat tags, please see <xref linkend="ch-queryformat-tags"/>.
             </para>
           </sect4>
         </sect3>
@@ -2646,7 +2646,7 @@ rpm-2.3-1
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file"/>.
             </para>
           </footnote>
         </para>
@@ -2682,7 +2682,7 @@ rpm-2.3-1
           several sets of RPM options.  Software developer and package builders
           will be the people using <command>--rcfile</command>.  For more
           information on <filename>rpmrc</filename> files, see <xref
-          linkend="ch-rpmrc-file">.
+          linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
 

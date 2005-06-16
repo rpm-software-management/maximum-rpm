@@ -535,7 +535,7 @@ Build failed.
       <para>
         Take a closer look at the <command>%files</command> list.  See the line
         that reads <command>%doc README</command>?  In <xref
-        linkend="s3-rpm-inside-flist-doc-directive">, we discussed how the
+        linkend="s3-rpm-inside-flist-doc-directive"/>, we discussed how the
         <command>%doc</command> directive creates a directory under
         <filename>/usr/doc</filename>.  That's the file that killed the build
         &mdash; the directory created by the <command>%doc</command> directive.
@@ -594,7 +594,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         absolute path, and that path started with the prefix
         <filename>/usr/local</filename>, there was no problem.  A more complete
         discussion of the <command>%doc</command> directive can be found in
-        <xref linkend="s3-rpm-inside-flist-doc-directive">.
+        <xref linkend="s3-rpm-inside-flist-doc-directive"/>.
       </para>
 
       <sect2 id="s2-rpm-reloc-tying-loose-ends">
@@ -638,7 +638,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           <footnote>
             <para>
               For more information on the <command>%docdir</command> directive,
-              please see <xref linkend="s3-rpm-inside-docdir-directive">.
+              please see <xref linkend="s3-rpm-inside-docdir-directive"/>.
             </para>
           </footnote>
         </para>
@@ -666,7 +666,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
               Install and erase-time scripts have an environment variable,
               <envar>RPM_INSTALL_PREFIX</envar>, that can be used to write
               scripts that are able to act appropriately if the package is
-              relocated.  See <xref linkend="s2-rpm-inside-erase-time-scripts">
+              relocated.  See <xref linkend="s2-rpm-inside-erase-time-scripts"/>
               for more information.
             </para>
           </footnote>
@@ -717,7 +717,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
           prefix used during the build.  As we can see, it's
           <filename>/usr/local</filename>, just as we intended.  The
           <command>--queryformat</command> option is discussed in <xref
-          linkend="s3-rpm-query-queryformat-option">.
+          linkend="s3-rpm-query-queryformat-option"/>.
         </para>
 
         <para>

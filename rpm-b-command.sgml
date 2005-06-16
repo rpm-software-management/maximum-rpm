@@ -9,12 +9,12 @@
     <table id="tb-rpm-b-command-">
       <title>&rpmb; Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
         <tbody>
           <row>
             <entry spanname="spanall" align="center">
@@ -39,7 +39,7 @@
               Execute <command>%prep</command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-bp-option">
+              <xref linkend="s2-rpm-b-command-bp-option"/>
             </entry>
           </row>
           <row>
@@ -50,7 +50,7 @@
               Execute <command>%prep</command>, <command>%build</command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-bc-option">
+              <xref linkend="s2-rpm-b-command-bc-option"/>
             </entry>
           </row>
           <row>
@@ -62,7 +62,7 @@
               <command>%install</command>, <command>%check</command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-bi-option">
+              <xref linkend="s2-rpm-b-command-bi-option"/>
             </entry>
           </row>
           <row>
@@ -75,7 +75,7 @@
               package (bin)
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-bb-option">
+              <xref linkend="s2-rpm-b-command-bb-option"/>
             </entry>
           </row>
           <row>
@@ -88,7 +88,7 @@
               package (bin, src)
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-ba-option">
+              <xref linkend="s2-rpm-b-command-ba-option"/>
             </entry>
           </row>
           <row>
@@ -99,7 +99,7 @@
               Check <command>%files</command> list
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-bl-option">
+              <xref linkend="s2-rpm-b-command-bl-option"/>
             </entry>
           </row>
           <row>
@@ -133,7 +133,7 @@
               <command>-bi</command> only)
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-short-circuit-option">
+              <xref linkend="s2-rpm-b-command-short-circuit-option"/>
             </entry>
           </row>
           <row>
@@ -144,7 +144,7 @@
               Create, save build scripts for review
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-test-option">
+              <xref linkend="s2-rpm-b-command-test-option"/>
             </entry>
           </row>
           <row>
@@ -155,7 +155,7 @@
               Clean up after build
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-clean-option">
+              <xref linkend="s2-rpm-b-command-clean-option"/>
             </entry>
           </row>
           <row>
@@ -166,7 +166,7 @@
               Add a digital signature to the package
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-sign-option">
+              <xref linkend="s2-rpm-b-command-sign-option"/>
             </entry>
           </row>
           <row>
@@ -178,7 +178,7 @@
               <command><replaceable>&lt;root&gt;</replaceable></command> as the root
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-buildroot-option">
+              <xref linkend="s2-rpm-b-command-buildroot-option"/>
             </entry>
           </row>
           <row>
@@ -191,7 +191,7 @@
               architecture
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-buildarch-option">
+              <xref linkend="s2-rpm-b-command-buildarch-option"/>
             </entry>
           </row>
           <row>
@@ -204,7 +204,7 @@
               system
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-buildos-option">
+              <xref linkend="s2-rpm-b-command-buildos-option"/>
             </entry>
           </row>
           <row>
@@ -216,7 +216,7 @@
               <command><replaceable>&lt;secs&gt;</replaceable></command> old
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-timecheck-option">
+              <xref linkend="s2-rpm-b-command-timecheck-option"/>
             </entry>
           </row>
           <row>
@@ -235,7 +235,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-vv-option">
+              <xref linkend="s2-rpm-b-command-vv-option"/>
             </entry>
           </row>
           <row>
@@ -246,7 +246,7 @@
               Produce as little output as possible
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-quiet-option">
+              <xref linkend="s2-rpm-b-command-quiet-option"/>
             </entry>
           </row>
           <row>
@@ -258,7 +258,7 @@
               <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-b-command-rcfile-option">
+              <xref linkend="s2-rpm-b-command-rcfile-option"/>
             </entry>
           </row>
         </tbody>
@@ -300,7 +300,7 @@
         </orderedlist>
       </para>
       <para>
-        As we discussed in <xref linkend="ch-rpm-basics">, the spec file is one
+        As we discussed in <xref linkend="ch-rpm-basics"/>, the spec file is one
         of the inputs to RPM's build process.  It contains the information
         necessary for RPM to perform the build and package the software.
       </para>
@@ -337,7 +337,7 @@
         </para>
         <para>
           Here's a simple <command>%prep</command> section from the spec file we
-          used in <xref linkend="ch-rpm-build">:
+          used in <xref linkend="ch-rpm-build"/>:
 
           <screen width="60">
 <computeroutput>
@@ -981,7 +981,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
           package building roots.  When using the <command>-bl</command> option,
           however, RPM is simply making sure the files exist on the build
           system.  If the <command>--timecheck</command> option (described a bit
-          later, on <xref linkend="s2-rpm-b-command-timecheck-option">) is
+          later, on <xref linkend="s2-rpm-b-command-timecheck-option"/>) is
           present, the checks required by that option are performed here, as
           well.
         </para>
@@ -1152,7 +1152,7 @@ Requires (2): libc.so.5 libncurses.so.2.0
           won't be used in the next build.
           <footnote>
             <para>
-              As we mentioned in <xref linkend="ch-rpm-basics">, if the original
+              As we mentioned in <xref linkend="ch-rpm-basics"/>, if the original
               sources need to be modified, the modifications should be kept as a
               separate set of patches.  However, during development, it makes
               more sense to not generate patches every time a change to the
@@ -1331,7 +1331,7 @@ i486
         </para>
         <para>
           For more information on build packages for multiple architectures,
-          please see <xref linkend="ch-rpm-multi">.
+          please see <xref linkend="ch-rpm-multi"/>.
         </para>
       </sect2>
 
@@ -1382,7 +1382,7 @@ osf1
         <para>
           The package was indeed built for the specified operating system.  For
           more information on building packages for multiple operating systems,
-          please see <xref linkend="ch-rpm-multi">.
+          please see <xref linkend="ch-rpm-multi"/>.
         </para>
       </sect2>
 
@@ -1452,7 +1452,7 @@ Wrote: /usr/src/redhat/SRPMS/cdplayer-1.0-1.src.rpm
         </para>
         <para>
           For more information on signing packages, please see <xref
-          linkend="ch-rpm-pgp">.  Also, <xref linkend="ch-pgp-intro">
+          linkend="ch-rpm-pgp"/>.  Also, <xref linkend="ch-pgp-intro"/>
           contains information on obtaining and installing PGP.
         </para>
       </sect2>
@@ -1711,7 +1711,7 @@ Build failed.
           </screen>
         </para>
         <para>
-          <xref linkend="ch-rpm-anywhere"> has complete instructions on
+          <xref linkend="ch-rpm-anywhere"/> has complete instructions on
           the modifications necessary to configure a package to use an alternate
           build root, as well as methods to permit users to build packages
           without root access.  Assuming that the necessary modifications have
@@ -1991,7 +1991,7 @@ timecheck: 3600
         <para>
           This value can still be overridden by a value on the command line, if
           desired.  For more information on the use of
-          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
 
@@ -2114,7 +2114,7 @@ volume.c:67: warning: implicit declaration of function `ioctl'
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
     </sect1>

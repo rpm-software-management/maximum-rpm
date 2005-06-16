@@ -1,16 +1,16 @@
-<RefEntry id="rpmdeps.8">
-  <RefMeta>
-    <RefEntrytitle>rpmdeps</RefEntrytitle>
-    <ManVolNum>8</ManVolNum>
-    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
-  </RefMeta>
+<refentry id="rpmdeps.8">
+  <refmeta>
+    <refentrytitle>rpmdeps</refentrytitle>
+    <manvolnum>8</manvolnum>
+    <refmiscinfo>&FORMAL-RHI;</refmiscinfo>
+  </refmeta>
 
-<RefNameDiv>
-  <RefName>rpmdeps</RefName>
-  <RefPurpose>Generate RPM Package Dependencies</RefPurpose>
-</RefNameDiv>
+<refnamediv>
+  <refname>rpmdeps</refname>
+  <refpurpose>Generate RPM Package Dependencies</refpurpose>
+</refnamediv>
 
-<RefSynopsisDiv>
+<refsynopsisdiv>
   <para>
     <simplelist>
       <member>
@@ -23,7 +23,7 @@
       </member>
     </simplelist>
   </para>
-</RefSynopsisDiv>
+</refsynopsisdiv>
 
 <refsect1><title>Description</title>
   <para> <command>rpmdeps</command> generates package dependencies
@@ -47,4 +47,4 @@
       </simplelist>
 </refsect1>
 
-</RefEntry>
+</refentry>

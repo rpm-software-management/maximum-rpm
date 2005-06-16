@@ -9,12 +9,12 @@
     <table id="tb-rpm-erase-syntax">
       <title><command>rpm -e</command> Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
         <tbody>
           <row>
               <entry spanname="spanall" align="center">
@@ -53,7 +53,7 @@
               Perform erase tests only
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-test-option">
+              <xref linkend="s2-rpm-erase-test-option"/>
             </entry>
           </row>
           <row>
@@ -64,7 +64,7 @@
               Do not execute pre- and post-uninstall scripts
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-noscripts-option">
+              <xref linkend="s2-rpm-erase-noscripts-option"/>
             </entry>
           </row>
           <row>
@@ -75,7 +75,7 @@
               Do not check dependencies
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-nodeps-option">
+              <xref linkend="s2-rpm-erase-nodeps-option"/>
             </entry>
           </row>
           <row>
@@ -94,7 +94,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-vv-option">
+              <xref linkend="s2-rpm-erase-vv-option"/>
             </entry>
           </row>
           <row>
@@ -106,7 +106,7 @@
               <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-root-option">
+              <xref linkend="s2-rpm-erase-root-option"/>
             </entry>
           </row>
           <row>
@@ -118,7 +118,7 @@
               <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-rcfile-option">
+              <xref linkend="s2-rpm-erase-rcfile-option"/>
             </entry>
           </row>
           <row>
@@ -130,7 +130,7 @@
               the RPM database
             </entry>
             <entry>
-              <xref linkend="s2-rpm-erase-dbpath-option">
+              <xref linkend="s2-rpm-erase-dbpath-option"/>
             </entry>
           </row>
         </tbody>
@@ -284,7 +284,7 @@ D: removing file index for /usr/man/man1/eject.1
           that RPM is to actually erase the package.  If the number had been
           non-zero, RPM would only be performing a test of the package erasure.
           This happens when the <command>--test</command> option is used.  Refer
-          to <xref linkend="s2-rpm-erase-test-option"> for more information on
+          to <xref linkend="s2-rpm-erase-test-option"/> for more information on
           the use of the <command>--test</command> option with <command>rpm
           -e</command>.
         </para>
@@ -492,7 +492,7 @@ removing these packages would break dependencies:
         </indexterm>
 
         <para>
-          In <xref linkend="s2-rpm-erase-vv-option">, we used the
+          In <xref linkend="s2-rpm-erase-vv-option"/>, we used the
           <command>-vv</command> option to see what RPM was actually doing when
           it erased a package.  We noted that there were two scripts, a
           pre-uninstall and a post-uninstall, that were used to execute commands
@@ -535,7 +535,7 @@ removing these packages would break dependencies:
           several sets of RPM defaults.  Software developers and package
           builders will normally be the only people using the
           <command>--rcfile</command> option.  For more information on
-          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file">.
+          <filename>rpmrc</filename> files, see <xref linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
 
@@ -566,7 +566,7 @@ removing these packages would break dependencies:
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file"/>.
             </para>
           </footnote>
         </para>
@@ -651,7 +651,7 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         Sure enough: <filename>.bashrc.rpmsave</filename> is a copy of your
         modified <filename>.bashrc</filename> file!  Remember, however, that
         this feature only works with config files.  Not sure how to determine
-        which files RPM thinks are config files?  <xref linkend="ch-rpm-query">
+        which files RPM thinks are config files?  <xref linkend="ch-rpm-query"/>
         will show you how.
       </para>
     </sect1>
@@ -698,7 +698,7 @@ drwxr-xr-x   2 root     root         1024 May 13 13:18 .xfm
         you'd like to erase.
         <footnote>
           <para>
-            See <xref linkend="ch-rpm-query"> for more information on
+            See <xref linkend="ch-rpm-query"/> for more information on
             <command>rpm -q</command>.
           </para>
         </footnote>

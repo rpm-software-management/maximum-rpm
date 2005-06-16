@@ -394,7 +394,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
             <para>
               For more information on the environment variables used in the
               build-time scripts, please refer to <xref
-              linkend="s2-rpm-inside-build-time-scripts">.
+              linkend="s2-rpm-inside-build-time-scripts"/>.
             </para>
           </footnote>
         </para>
@@ -409,7 +409,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
           properly.  The <command>%prep</command> section is the appropriate
           place to patch the sources, but in this example, no patching is
           required.  Fear not, however, as we'll explore patching in all its
-          glory in <xref linkend="ch-rpm-rw-build">, when we build a more
+          glory in <xref linkend="ch-rpm-rw-build"/>, when we build a more
           complex package.
         </para>
 
@@ -445,7 +445,7 @@ zcat $RPM_SOURCE_DIR/cdplayer-1.0.tgz | tar -xvf -
             use the <command>%setup</command> macro instead.  The
             <command>%setup</command> macro has a number of options to handle
             many different situations.  For more information on this and other
-            macros, please see <xref linkend="s1-rpm-inside-macros">.
+            macros, please see <xref linkend="s1-rpm-inside-macros"/>.
           </para>
           <para>
             In our example here, the <command>%prep</command> section is
@@ -552,7 +552,7 @@ make install
           <filename>cdplayer-1.0-1</filename>.  It's also possible to mark files
           as documentation and have them installed in other directories.  This
           is covered in more detail in <xref
-          linkend="s3-rpm-inside-flist-doc-directive">.
+          linkend="s3-rpm-inside-flist-doc-directive"/>.
         </para>
         <para>
           The rest of the files in the example are shown with complete paths.
@@ -659,7 +659,7 @@ make install
           </para>
           <para>
             We'll see how these scripts are used in <xref
-            linkend="ch-rpm-rw-build">.
+            linkend="ch-rpm-rw-build"/>.
           </para>
         </sect3>
 

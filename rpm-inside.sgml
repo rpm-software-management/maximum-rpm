@@ -307,7 +307,7 @@ Release: 5
         </para>
 
         <sect3 id="s3-rpm-inside-description-tag">
-          <title>The <command>%description</Command> Tag</title>
+          <title>The <command>%description</command> Tag</title>
           <!-- label: inside-description -->
           <indexterm>
             <primary>tags</primary>
@@ -674,7 +674,7 @@ Packager: Fred Foonly &lt;fred@gnomovision.com&gt;
           using the following tags.  Note, however, that adding dependency
           information to a package requires some forethought.  For additional
           information on RPM's dependency processing, please review <xref
-          linkend="ch-rpm-depend">.
+          linkend="ch-rpm-depend"/>.
         </para>
 
         <sect3 id="s3-rpm-inside-provides-tag">
@@ -1027,7 +1027,7 @@ AutoProv: no
           tags, it's possible to support package building under multiple
           environments, all from a single set of sources, patches, and a single
           spec file.  For a more complete discussion of multi-architecture
-          package building, please see <xref linkend="ch-rpm-multi">.
+          package building, please see <xref linkend="ch-rpm-multi"/>.
         </para>
 
         <sect3 id="s3-rpm-inside-excludearch-tag">
@@ -1281,7 +1281,7 @@ Prefix: /opt
           </para>
           <para>
             For more information about creating relocatable packages, see <xref
-            linkend="ch-rpm-reloc">.
+            linkend="ch-rpm-reloc"/>.
           </para>
         </sect3>
 
@@ -1303,7 +1303,7 @@ Prefix: /opt
             actually used when the software is <emphasis>installed</emphasis>
             during the build process.  In order for a build root to be defined
             and actually used, a number of issues must be taken into account.
-            These issues are covered in <xref linkend="ch-rpm-anywhere">.  This
+            These issues are covered in <xref linkend="ch-rpm-anywhere"/>.  This
             is what a <command>buildroot</command> tag would look like:
 
             <screen width="60">
@@ -1464,7 +1464,7 @@ Source1: bother-1.2.tar.gz
             <footnote>
               <para>
                 There is also an "international" version that may be used in
-                non-US countries.  See <xref linkend="ch-pgp-intro">.
+                non-US countries.  See <xref linkend="ch-pgp-intro"/>.
               </para>
             </footnote>
             While it would be nice to create a PGP package file, the resulting
@@ -1730,7 +1730,7 @@ NoPatch: 2 3
           <command>--test</command> option
           <footnote>
             <para>
-              Described in <xref linkend="s2-rpm-b-command-test-option">.
+              Described in <xref linkend="s2-rpm-b-command-test-option"/>.
             </para>
           </footnote>
           , we can see the common portion of each script.  In the following
@@ -1804,7 +1804,7 @@ umask 022
                 <command>%doc</command> directive can be installed in a
                 subdirectory of <command>defaultdocdir</command>.  For more
                 information on the <command>%doc</command> directive, refer to
-                <xref linkend="s3-rpm-inside-flist-doc-directive">.
+                <xref linkend="s3-rpm-inside-flist-doc-directive"/>.
               </para>
             </listitem>
 
@@ -1939,7 +1939,7 @@ umask 022
             of all software being packaged.  Because of this, RPM has two macros
             that greatly simplify these routine functions.  More information on
             RPM's <command>%setup</command> and <command>%patch</command> macros
-            can be found in <xref linkend="s1-rpm-inside-macros">.
+            can be found in <xref linkend="s1-rpm-inside-macros"/>.
           </para>
           <para>
             The last item on the list can include creating directories or
@@ -2076,7 +2076,7 @@ rm -rf $RPM_BUILD_ROOT
                 Keep in mind that this command in a <command>%clean</command>
                 script can wreak havoc if used with a build root of, say,
                 <filename>/</filename>.  <xref
-                linkend="s3-rpm-b-command-buildroot-warning">
+                linkend="s3-rpm-b-command-buildroot-warning"/>
                 discusses this in more detail.
               </para>
             </footnote>
@@ -2344,7 +2344,7 @@ for n in ash bsh; do
     echo -n "Looking for $n in /etc/shells... "
     if ! grep "^/bin/${n}\$" /etc/shells &gt; /dev/null; then
         echo "missing"
-        echo "${n} missing from /etc/shells" &gt;&2
+        echo "${n} missing from /etc/shells" &gt;&amp;2
     else
         echo "found"
     fi
@@ -2562,7 +2562,7 @@ chmod -R a+rX,g-w,o-w .
             This makes <command>-n</command> unsuitable as a means of unpacking
             sources in directories other than the top-level build directory.  In
             the upcoming example on <xref
-            linkend="s3-rpm-inside-setup-multi-source">, we'll show a way around
+            linkend="s3-rpm-inside-setup-multi-source"/>, we'll show a way around
             this restriction.
           </para>
           <para>
@@ -3498,7 +3498,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           <para>
             This is not entirely the case when a relocatable package is being
             built.  For more information on relocatable packages, see <xref
-            linkend="ch-rpm-reloc">.
+            linkend="ch-rpm-reloc"/>.
           </para>
         </footnote>
       </para>
@@ -3625,7 +3625,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             changed by setting the <command>defaultdocdir</command>
             <filename>rpmrc</filename> file entry.  For more information on
             <filename>rpmrc</filename> files, please see <xref
-            linkend="ch-rpmrc-file">.
+            linkend="ch-rpmrc-file"/>.
           </para>
           <para>
             The file <filename>/usr/local/foonly/README</filename> was installed
@@ -3741,7 +3741,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
             permit users without root access to build packages.  The techniques
             for doing this (and a more in-depth discussion of the
             <command>%attr</command> directive) can be found in <xref
-            linkend="ch-rpm-anywhere">.
+            linkend="ch-rpm-anywhere"/>.
           </para>
         </sect3>
 
@@ -3815,7 +3815,7 @@ gzip -dc /usr/src/redhat/SOURCES/bother-3.5-hack.patch.gz | patch -p1  -s
           </indexterm>
 
           <para>
-            As we mentioned in <xref linkend="s1-rpm-inside-files-list">, if a
+            As we mentioned in <xref linkend="s1-rpm-inside-files-list"/>, if a
             file is specified in the <command>%files</command> list, that file
             will automatically be included in the package.  There are times
             when a file should be owned by the package but not installed - log
@@ -4167,7 +4167,7 @@ ls: /var/log/blather.log: No such file or directory
           </indexterm>
 
           <para>
-            As we mentioned in <xref linkend="s1-rpm-inside-files-list">, if a
+            As we mentioned in <xref linkend="s1-rpm-inside-files-list"/>, if a
             directory is specified in the <command>%files</command> list, the
             contents of that directory, and the contents of every directory
             under it, will automatically be included in the package.  While this
@@ -4406,7 +4406,7 @@ ls: /var/log/blather.log: No such file or directory
         </para>
         <para>
           For more information on building subpackages, please see <xref
-          linkend="ch-rpm-subpack">.
+          linkend="ch-rpm-subpack"/>.
         </para>
       </sect2>
     </sect1>
@@ -4470,7 +4470,7 @@ ls: /var/log/blather.log: No such file or directory
       </para>
       <para>
         We discuss multi-platform package building in depth in <xref
-        linkend="ch-rpm-multi">.  For now, let's take a quick look at RPM's
+        linkend="ch-rpm-multi"/>.  For now, let's take a quick look at RPM's
         conditionals.
       </para>
 

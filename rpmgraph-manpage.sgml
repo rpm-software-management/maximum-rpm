@@ -1,16 +1,16 @@
-<RefEntry id="rpmgraph.8">
-  <RefMeta>
-    <RefEntrytitle>rpmgraph</RefEntrytitle>
-    <ManVolNum>8</ManVolNum>
-    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
-  </RefMeta>
+<refentry id="rpmgraph.8">
+  <refmeta>
+    <refentrytitle>rpmgraph</refentrytitle>
+    <manvolnum>8</manvolnum>
+    <refmiscinfo>&FORMAL-RHI;</refmiscinfo>
+  </refmeta>
 
-<RefNameDiv>
-  <RefName>rpmgraph</RefName>
-  <RefPurpose>Display RPM Package Dependency Graph</RefPurpose>
-</RefNameDiv>
+<refnamediv>
+  <refname>rpmgraph</refname>
+  <refpurpose>Display RPM Package Dependency Graph</refpurpose>
+</refnamediv>
 
-<RefSynopsisDiv>
+<refsynopsisdiv>
   <para>
     <simplelist>
       <member>
@@ -21,7 +21,7 @@
       </member>
     </simplelist>
   </para>
-</RefSynopsisDiv>
+</refsynopsisdiv>
 
 <refsect1><title>Description</title>
   <para> &rpmg; uses <replaceable>PACKAGE_FILE</replaceable> arguments
@@ -51,7 +51,7 @@
       <member><command>dotty</command>(1),</member>
       <member>
 	<command>
-	<ulink URL="http://www.graphviz.org/">http://www.graphviz.org/</ulink>
+	<ulink url="http://www.graphviz.org/">http://www.graphviz.org/</ulink>
 	</command>
       </member>
     </simplelist>
@@ -63,4 +63,4 @@
       </simplelist>
 </refsect1>
 
-</RefEntry>
+</refentry>

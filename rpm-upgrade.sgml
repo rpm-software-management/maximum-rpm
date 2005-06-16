@@ -9,12 +9,12 @@
     <table id="tb-rpm-upgrade-syntax">
       <title><command>rpm -U</command> Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
         <tbody>
           <row>
             <entry spanname="spanall" align="center">
@@ -56,10 +56,10 @@
             </entry>
             <entry>
               Print hash marks ("<computeroutput>#</computeroutput>") during
-              upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-install-h">
+              <xref linkend="s2-rpm-install-install-h"/>
             </entry>
           </row>
 
@@ -71,7 +71,7 @@
               Permit "upgrading" to an older package
             </entry>
             <entry>
-              <xref linkend="s2-rpm-upgrade-oldpackage-option">
+              <xref linkend="s2-rpm-upgrade-oldpackage-option"/>
             </entry>
           </row>
 
@@ -80,10 +80,10 @@
               <command>--test</command>
             </entry>
             <entry>
-              Perform upgrade tests only<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Perform upgrade tests only<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-test-option">
+              <xref linkend="s2-rpm-install-test-option"/>
             </entry>
           </row>
 
@@ -92,10 +92,10 @@
               <command>--excludedocs</command>
             </entry>
             <entry>
-              Do not install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Do not install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-excludedocs-option">
+              <xref linkend="s2-rpm-install-excludedocs-option"/>
             </entry>
           </row>
 
@@ -104,10 +104,10 @@
               <command>--includedocs</command>
             </entry>
             <entry>
-              Install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Install documentation<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-includedocs">
+              <xref linkend="s2-rpm-install-includedocs"/>
             </entry>
           </row>
 
@@ -116,10 +116,10 @@
               <command>--replacepkgs</command>
             </entry>
             <entry>
-              Replace a package with a new copy of itself<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Replace a package with a new copy of itself<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-replacepkgs">
+              <xref linkend="s2-rpm-install-replacepkgs"/>
             </entry>
           </row>
 
@@ -128,10 +128,10 @@
               <command>--replacefiles</command>
             </entry>
             <entry>
-              Replace files owned by another package<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Replace files owned by another package<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-replacefiles-option">
+              <xref linkend="s2-rpm-install-replacefiles-option"/>
             </entry>
           </row>
 
@@ -143,7 +143,7 @@
               Ignore package and file conflicts
             </entry>
             <entry>
-              <xref linkend="s2-rpm-upgrade-force-option">
+              <xref linkend="s2-rpm-upgrade-force-option"/>
             </entry>
           </row>
 
@@ -152,10 +152,10 @@
               <command>--percent</command>
             </entry>
             <entry>
-              Print percentages during upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Print percentages during upgrade<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-percent">
+              <xref linkend="s2-rpm-install-percent"/>
             </entry>
           </row>
 
@@ -167,7 +167,7 @@
               Do not execute pre- and post-install scripts
             </entry>
             <entry>
-              <xref linkend="s2-rpm-upgrade-noscripts-option">
+              <xref linkend="s2-rpm-upgrade-noscripts-option"/>
             </entry>
           </row>
 
@@ -179,10 +179,10 @@
             <entry>
               Relocate package to
               <command><replaceable>&lt;path&gt;</replaceable></command> if
-              possible<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              possible<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-prefix">
+              <xref linkend="s2-rpm-install-prefix"/>
             </entry>
           </row>
 
@@ -191,10 +191,10 @@
               <command>--ignorearch</command>
             </entry>
             <entry>
-              Do not verify package architecture<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Do not verify package architecture<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-ignorearch">
+              <xref linkend="s2-rpm-install-ignorearch"/>
             </entry>
           </row>
 
@@ -203,10 +203,10 @@
               <command>--ignoreos</command>
             </entry>
             <entry>
-              Do not verify package operating system<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Do not verify package operating system<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-ignoreos">
+              <xref linkend="s2-rpm-install-ignoreos"/>
             </entry>
           </row>
 
@@ -215,10 +215,10 @@
               <command>--nodeps</command>
             </entry>
             <entry>
-              Do not check dependencies<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Do not check dependencies<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-nodeps">
+              <xref linkend="s2-rpm-install-nodeps"/>
             </entry>
           </row>
 
@@ -229,10 +229,10 @@
             </entry>
             <entry>
               Use <command><replaceable>&lt;host&gt;</replaceable></command> as
-              the FTP proxy<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              the FTP proxy<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-ftpproxy">
+              <xref linkend="s2-rpm-install-ftpproxy"/>
             </entry>
           </row>
 
@@ -243,10 +243,10 @@
             </entry>
             <entry>
               Use <command><replaceable>&lt;port&gt;</replaceable></command> as
-              the FTP port<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              the FTP port<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-ftpport">
+              <xref linkend="s2-rpm-install-ftpport"/>
             </entry>
           </row>
 
@@ -265,10 +265,10 @@
             </entry>
             <entry>
               Display additional information<footnoteref
-              linkend="fn-rpm-upgrade-tablefoot">
+              linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-more-feedback">
+              <xref linkend="s2-rpm-install-more-feedback"/>
             </entry>
           </row>
 
@@ -277,10 +277,10 @@
               <command>-vv</command>
             </entry>
             <entry>
-              Display debugging information<footnoteref linkend="fn-rpm-upgrade-tablefoot">
+              Display debugging information<footnoteref linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-vv-option">
+              <xref linkend="s2-rpm-install-vv-option"/>
             </entry>
           </row>
 
@@ -291,10 +291,10 @@
             <entry>
               Set alternate root to
               <command><replaceable>&lt;path&gt;</replaceable></command><footnoteref
-              linkend="fn-rpm-upgrade-tablefoot">
+              linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-root">
+              <xref linkend="s2-rpm-install-root"/>
             </entry>
           </row>
 
@@ -306,10 +306,10 @@
             <entry>
               Set alternate rpmrc file to
               <command><replaceable>&lt;rcfile&gt;</replaceable></command><footnoteref
-              linkend="fn-rpm-upgrade-tablefoot">
+              linkend="fn-rpm-upgrade-tablefoot"/>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-rcfile">
+              <xref linkend="s2-rpm-install-rcfile"/>
             </entry>
           </row>
 
@@ -325,12 +325,12 @@
                 <para>
                   This option behaves identically to the same option used with
                   <command>rpm -i</command>.  Please see <xref
-                  linkend="ch-rpm-install"> for more information on this option.
+                  linkend="ch-rpm-install"/> for more information on this option.
                 </para>
               </footnote>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-install-dbpath">
+              <xref linkend="s2-rpm-install-dbpath"/>
             </entry>
           </row>
         </tbody>
@@ -373,8 +373,8 @@
       <para>
         If it sounds to you like <command>rpm -U</command> is nothing more than
         an <command>rpm -i</command> command (see <xref
-        linkend="ch-rpm-install">) followed by the appropriate number of
-        <command>rpm -e</command> commands, (see <xref linkend="ch-rpm-erase">)
+        linkend="ch-rpm-install"/>) followed by the appropriate number of
+        <command>rpm -e</command> commands, (see <xref linkend="ch-rpm-erase"/>)
         you'd be exactly right.  In fact, we'll be referring back to those
         chapters as we discuss <command>rpm -U</command>, so if you haven't
         skimmed those chapters yet, you might want to do that now.
@@ -688,7 +688,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         <footnote>
           <para>
             For more information on RPM's use of URLs, please see <xref
-            linkend="s2-rpm-install-urls">.
+            linkend="s2-rpm-install-urls"/>.
           </para>
         </footnote>
       </para>
@@ -736,7 +736,7 @@ warning: /etc/skel/.bashrc saved as /etc/skel/.bashrc.rpmsave
         to a minimum, we'll discuss only those options that are unique to
         <command>rpm -U</command>, or that behave differently from the same
         option when used with <command>rpm -i</command>.  The table on <xref
-        linkend="tb-rpm-upgrade-syntax"> at the start of this chapter shows all
+        linkend="tb-rpm-upgrade-syntax"/> at the start of this chapter shows all
         valid options to RPM's upgrade command, and indicates which are
         identical to those used with <command>rpm -i</command>.
       </para>

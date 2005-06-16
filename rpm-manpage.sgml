@@ -1,16 +1,16 @@
-<RefEntry id="rpm.8">
-  <RefMeta>
-    <RefEntrytitle>rpm</RefEntrytitle>
-    <ManVolNum>8</ManVolNum>
-    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
-  </RefMeta>
+<refentry id="rpm.8">
+  <refmeta>
+    <refentrytitle>rpm</refentrytitle>
+    <manvolnum>8</manvolnum>
+    <refmiscinfo>&FORMAL-RHI;</refmiscinfo>
+  </refmeta>
 
-<RefNameDiv>
-  <RefName>&rpm;</RefName>
-  <RefPurpose>RPM Package Manager</RefPurpose>
-</RefNameDiv>
+<refnamediv>
+  <refname>&rpm;</refname>
+  <refpurpose>RPM Package Manager</refpurpose>
+</refnamediv>
 
-<RefSynopsisDiv>
+<refsynopsisdiv>
   <refsect2>
   <title>Querying and Verifying Packages:</title>
   <para>
@@ -94,7 +94,7 @@
 	<arg><option>--nodeps</option></arg>
 	<arg><option>--noscripts</option></arg>
 	<arg><option>--notriggers</option></arg>
-	<sbr>
+	<sbr/>
 	<arg><option>--repackage</option></arg>
 	<arg><option>--test</option></arg>
 	<arg rep="repeat" choice="plain"><replaceable>PACKAGE_NAME</replaceable></arg>
@@ -144,20 +144,20 @@
   <group choice="plain">
     <arg><option><replaceable>PACKAGE_NAME</replaceable></option></arg>
     <arg><option>-a,--all</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>-f,--file</option> <replaceable>FILE</replaceable></arg>
     <arg><option>-g,--group</option> <replaceable>GROUP</replaceable></arg>
     <arg><option>-p,--package</option> <replaceable>PACKAGE_FILE</replaceable></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--fileid</option> <replaceable>MD5</replaceable></arg>
     <arg><option>--hdrid</option> <replaceable>SHA1</replaceable></arg>
     <arg><option>--pkgid</option> <replaceable>MD5</replaceable></arg>
-	<sbr>
+	<sbr/>
 
     <arg><option>--querybynumber</option> <replaceable>HDRNUM</replaceable></arg>
     <arg><option>--tid</option> <replaceable>TID</replaceable></arg>
     <arg><option>--triggeredby</option> <replaceable>PACKAGE_NAME</replaceable></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--whatprovides</option> <replaceable>CAPABILITY</replaceable></arg>
     <arg><option>--whatrequires</option> <replaceable>CAPABILITY</replaceable></arg>
   </group>
@@ -184,14 +184,14 @@
     <arg><option>-d,--docfiles</option></arg>
     <arg><option>--dump</option></arg>
     <arg><option>--filesbypkg</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>-i,--info</option></arg>
     <arg><option>--last</option></arg>
     <arg><option>-l,--list</option></arg>
     <arg><option>--provides</option></arg>
     <arg><option>--qf,--queryformat</option> <replaceable>QUERYFMT</replaceable></arg>
     <arg><option>-R,--requires</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--scripts</option></arg>
     <arg><option>-s,--state</option></arg>
     <arg><option>--triggers,--triggerscripts</option></arg>
@@ -217,15 +217,15 @@
     <arg><option>--nodeps</option></arg>
     <arg><option>--nofiles</option></arg>
     <arg><option>--noscripts</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--nodigest</option></arg>
     <arg><option>--nosignature</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--nolinkto</option></arg>
     <arg><option>--nomd5</option></arg>
     <arg><option>--nosize</option></arg>
     <arg><option>--nouser</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--nogroup</option></arg>
     <arg><option>--nomtime</option></arg>
     <arg><option>--nomode</option></arg>
@@ -256,27 +256,27 @@
     <arg><option>--excludedocs</option></arg>
     <arg><option>--force</option></arg>
     <arg><option>-h,--hash</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--ignoresize</option></arg>
     <arg><option>--ignorearch</option></arg>
     <arg><option>--ignoreos</option></arg>
     <arg><option>--includedocs</option></arg>
     <arg><option>--justdb</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--nodigest</option></arg>
     <arg><option>--nosignature</option></arg>
     <arg><option>--nodeps</option></arg>
     <arg><option>--nosuggest</option></arg>
     <arg><option>--noorder</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--noscripts</option></arg>
     <arg><option>--notriggers</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--oldpackage</option></arg>
     <arg><option>--percent</option></arg>
     <arg><option>--prefix</option> <replaceable>NEWPATH</replaceable></arg>
     <arg><option>--relocate</option> <replaceable>OLDPATH</replaceable>=<replaceable>NEWPATH</replaceable></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--repackage</option></arg>
     <arg><option>--replacefiles</option></arg>
     <arg><option>--replacepkgs</option></arg>
@@ -290,7 +290,7 @@
     </simplelist>
   </para>
   </refsect2>
-</RefSynopsisDiv>
+</refsynopsisdiv>
 
 <refsect1><title>Description</title>
   <para>
@@ -583,7 +583,7 @@ systems of the binary package and host don't match.
 		<command>%preun</command>, and
 		<command>%postun</command>
 	scriptlet(s).
-    </para></ListItem>
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--notriggers</option></term>
     <term><option>--notriggerin</option></term>
@@ -763,7 +763,7 @@ systems of the binary package and host don't match.
     <para>
       <cmdsynopsis>
 	&rpm;
-	<arg choice="req"><option>-q|--query</option></arg
+	<arg choice="req"><option>-q|--query</option></arg>
 	<arg><synopfragmentref linkend="select-options">
 	    select-options
 	  </synopfragmentref></arg>
@@ -876,7 +876,7 @@ systems of the binary package and host don't match.
     <term><option><replaceable>PACKAGE_NAME</replaceable></option></term>
     <listitem><para>
 	Query installed package named <replaceable>PACKAGE_NAME</replaceable>.
-    </para></ListItem>
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-a, --all</option></term>
     <listitem><para>
@@ -897,7 +897,7 @@ systems of the binary package and host don't match.
     <term><option>-g, --group</option> <replaceable>GROUP</replaceable></term>
     <listitem><para>
 	Query packages with the group of <replaceable>GROUP</replaceable>.
-    </para></ListItem>
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--hdrid</option> <replaceable>SHA1</replaceable></term>
     <listitem><para>
@@ -982,7 +982,7 @@ systems of the binary package and host don't match.
     <term><option>--changelog</option></term>
     <listitem><para>
 	Display change information for the package.
-    </para></ListItem>
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>-c, --configfiles</option></term>
     <listitem><para>
@@ -1114,7 +1114,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     <term><option>--nofiles</option></term>
     <listitem><para>
 	Don't verify any attributes of package files.
-    </para></ListItem>
+    </para></listitem>
     </varlistentry><varlistentry>
     <term><option>--noscripts</option></term>
     <listitem><para>
@@ -1238,28 +1238,28 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
 
     <para>
 	Digital signatures cannot be verified without a public key.
-	An ASCII armored public key can be added to the &rpm database
+	An ASCII armored public key can be added to the &rpm; database
 	using <option>--import</option>. An imported public key is
 	carried in a header, and key ring management is performed
 	exactly like package management. For example, all currently imported
 	public keys can be displayed by:
     </para><para>
 <computeroutput>
-<command>&rpm -qa gpg-pubkey*</command>
+<command>&rpm; -qa gpg-pubkey*</command>
 </computeroutput>
     </para><para>
 	Details about a specific public key, when imported, can be displayed
 	by querying.  Here's information about the Red Hat GPG/DSA key:
     </para><para>
 <computeroutput>
-<command>&rpm -qi gpg-pubkey-db42a60e</command>
+<command>&rpm; -qi gpg-pubkey-db42a60e</command>
 </computeroutput>
     </para><para>
 	Finally, public keys can be erased after importing just like
 	packages. Here's how to remove the Red Hat GPG/DSA key
     </para><para>
 <computeroutput>
-<command>&rpm -e gpg-pubkey-db42a60e</command>
+<command>&rpm; -e gpg-pubkey-db42a60e</command>
 </computeroutput>
     </para>
   </refsect2>
@@ -1303,7 +1303,7 @@ path size mtime md5sum mode owner group isconfig isdoc rdev symlink
     <para>
 	If you want to be able to sign packages you create yourself, you
 	also need to create your own public and secret key pair (see the
-	GPG manual). You will also need to configure the &rpm macros
+	GPG manual). You will also need to configure the &rpm; macros
     <variablelist>
     <varlistentry>
     <term><command>%_signature</command></term>
@@ -1556,7 +1556,7 @@ rpm     exec --short-circuit    rpmb --short-circuit
       <member><command>rpmbuild</command>(8),</member>
       <member>
 	<command>
-	<ulink URL="http://www.rpm.org/">http://www.rpm.org/</ulink>
+	<ulink url="http://www.rpm.org/">http://www.rpm.org/</ulink>
 	</command>
       </member>
     </simplelist>
@@ -1570,4 +1570,4 @@ rpm     exec --short-circuit    rpmb --short-circuit
       </simplelist>
 </refsect1>
 
-  </RefEntry>
+  </refentry>

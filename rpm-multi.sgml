@@ -225,7 +225,7 @@
           following <filename>rpmrc</filename> file entries.  They can be
           overridden by entries in <filename>/etc/rpmrc</filename> or
           <filename>~/.rpmrc</filename>.  This is discussed more completely in
-          <xref linkend="ch-rpmrc-file">.
+          <xref linkend="ch-rpmrc-file"/>.
         </para>
 
         <para>

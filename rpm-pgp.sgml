@@ -17,7 +17,7 @@
 
     <para>
       On the other hand, if you feel you need a bit more information on PGP
-      before starting, please refer to <xref linkend="ch-pgp-intro"> for a brief
+      before starting, please refer to <xref linkend="ch-pgp-intro"/> for a brief
       introduction.  Once you feel comfortable with PGP, come on back and learn
       how easy signing packages is&hellip;
     </para>
@@ -226,7 +226,7 @@ drwxr-xr-x   5 root     root         1024 Oct 30 19:44 ..
           RPM's configuration process is quite straightforward.  It consists of
           adding a few <filename>rpmrc</filename> entries in a file of your
           choice.  For more information on rpmrc files in general, please see
-          <xref linkend="ch-rpmrc-file">.
+          <xref linkend="ch-rpmrc-file"/>.
         </para>
 
         <para>

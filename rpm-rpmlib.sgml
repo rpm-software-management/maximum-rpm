@@ -183,8 +183,8 @@ rpmErrorCallBackType rpmErrorSetCallback(rpmErrorCallBackType);
           It should be noted that most information is returned in the form of a
           <structname>Header</structname> structure.  This data structure is
           widely used throughout rpmlib.  We will discuss more header-related
-          functions in <xref linkend="s2-rpm-rpmlib-header-manipulation"> and
-          <xref linkend="s2-rpm-rpmlib-header-entry-manipulation">.
+          functions in <xref linkend="s2-rpm-rpmlib-header-manipulation"/> and
+          <xref linkend="s2-rpm-rpmlib-header-entry-manipulation"/>.
         </para>
 
         <sect3 id="s3-rpm-rpmlib-rpmreadpackageinfo">
@@ -813,8 +813,8 @@ int rpmdbRebuild(char * root);
           It should be noted that database records are returned in the form of a
           <structname>Header</structname> structure.  This data structure is
           widely used throughout rpmlib.  We will discuss more header-related
-          functions in <xref linkend="s2-rpm-rpmlib-header-manipulation"> and
-          <xref linkend="s2-rpm-rpmlib-header-entry-manipulation">.
+          functions in <xref linkend="s2-rpm-rpmlib-header-manipulation"/> and
+          <xref linkend="s2-rpm-rpmlib-header-entry-manipulation"/>.
         </para>
 
         <sect3 id="s3-rpm-rpmlib-rpmdbfirstrecnum">
@@ -1373,7 +1373,7 @@ int rpmInstallSourcePackage(char * root,
             The <parameter>notify</parameter> parameter is used to specify a
             progress-tracking function that will be called during the
             installation.  Please refer to <xref
-            linkend="s3-rpm-rpmlib-rpmnotifyfunction"> for more information on
+            linkend="s3-rpm-rpmlib-rpmnotifyfunction"/> for more information on
             this parameter.
           </para>
 
@@ -1534,7 +1534,7 @@ int rpmInstallPackage(char * rootdir,
             The <parameter>notify</parameter> parameter is used to specify a
             progress tracking function that will be called during the
             installation.  Please refer to <xref
-            linkend="s3-rpm-rpmlib-rpmnotifyfunction"> for more information on
+            linkend="s3-rpm-rpmlib-rpmnotifyfunction"/> for more information on
             this parameter.
           </para>
 

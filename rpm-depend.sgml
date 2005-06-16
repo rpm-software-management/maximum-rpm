@@ -923,7 +923,7 @@ Provides: lda
         These requirements can be viewed by using RPM's
         <command>--requires</command> query option.  A specific requirement can
         be viewed by using the <command>--whatrequires</command> query option.
-        Both options are fully described in <xref linkend="ch-rpm-query">.
+        Both options are fully described in <xref linkend="ch-rpm-query"/>.
       </para>
       <para>
         The capabilities a package provides, can come from three places:
@@ -954,7 +954,7 @@ Provides: lda
         The first two types of information can be viewed by using RPM's
         <command>--provides</command> query option.  A specific capability can
         be viewed by using the <command>--whatprovides</command> query option.
-        Both options are fully described in <xref linkend="ch-rpm-query">.
+        Both options are fully described in <xref linkend="ch-rpm-query"/>.
       </para>
       <para>
         The package name and version are not considered capabilities that are

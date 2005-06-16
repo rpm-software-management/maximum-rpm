@@ -249,7 +249,7 @@
         the lead.
         <footnote>
           <para>
-            Please refer to <xref linkend="s1-rpm-file-format-file-command"> for
+            Please refer to <xref linkend="s1-rpm-file-format-file-command"/> for
             a discussion on identifying RPM package files with the
             <command>file</command> command.
           </para>
@@ -259,7 +259,7 @@
         <footnote>
           <para>
             The header is discussed in <xref
-            linkend="s2-rpm-file-format-header">.
+            linkend="s2-rpm-file-format-header"/>.
           </para>
         </footnote>
       </para>
@@ -422,7 +422,7 @@ rpm-2.2.1-1
         </para>
         <para>
           Flip back to the lead's C structure in <xref
-          linkend="s2-rpm-file-format-the-lead">.  Say, for example, that
+          linkend="s2-rpm-file-format-the-lead"/>.  Say, for example, that
           some software comes along, and it has a long name.  A
           <emphasis>very</emphasis> long name.  A name so long, in fact, that
           the 66 bytes defined in the structure element
@@ -966,7 +966,7 @@ rpm-2.2.1-1
         header structure format.  Unlike the signature, which has only three
         possible tag types, the header has more than <emphasis>sixty</emphasis>
         different tags.  The list of currently defined tags appears later in
-        this appendix on <xref linkend="s3-rpm-file-format-header-tag-listing">.
+        this appendix on <xref linkend="s3-rpm-file-format-header-tag-listing"/>.
         Be aware that the list of tags changes frequently &mdash; the definitive
         list appears in the RPM sources in <filename>lib/rpmlib.h</filename>.
       </para>

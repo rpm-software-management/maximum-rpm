@@ -1,4 +1,6 @@
-<!DOCTYPE BOOK PUBLIC "-//OASIS//DTD DocBook V4.2//EN" [
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
+    [
 <!-- *************** Shorthand entities... *************** -->
 <!-- The generic term "Red Hat"... -->
 <!ENTITY RH "Red Hat">
@@ -58,67 +60,37 @@
 <!ENTITY XREF SYSTEM "xref.sgml">
 <!ENTITY GENERATED-INDEX SYSTEM "generated-index.sgml">
 ]>
-
-
-<Book id="index">
- <bookinfo>
+<book id="index">
+  <bookinfo>
     <title>Maximum RPM</title>
     <titleabbrev>Max. RPM</titleabbrev>
     <subtitle>Taking the RPM Package Manager to the Limit</subtitle>
     <revhistory>
       <revision>
-        <revnumber>
-          1.0
-        </revnumber>
-        <date>
-          17-February-1997
-        </date>
-        <revremark>
-          First edition (Produced/printed by Red Hat Software)
-        </revremark>
+        <revnumber> 1.0 </revnumber>
+        <date> 17-February-1997 </date>
+        <revremark> First edition (Produced/printed by Red Hat Software) </revremark>
       </revision>
       <revision>
-        <revnumber>
-          1.1
-        </revnumber>
-        <date>
-          ??-???-1997
-        </date>
-        <revremark>
-          Revised for production by Sams Publishing
-        </revremark>
+        <revnumber> 1.1 </revnumber>
+        <date> ??-???-1997 </date>
+        <revremark> Revised for production by Sams Publishing </revremark>
       </revision>
       <revision>
-        <revnumber>
-          1.2
-        </revnumber>
-        <date>
-          29-February-2000
-        </date>
-        <revremark>
-          Translated into DocBook
-        </revremark>
+        <revnumber> 1.2 </revnumber>
+        <date> 29-February-2000 </date>
+        <revremark> Translated into DocBook </revremark>
       </revision>
-       <revision>
-        <revnumber>
-          1.3
-        </revnumber>
-        <date>
-          05-March-2003
-        </date>
-        <revremark>
-          Start of the update process
-        </revremark>
+      <revision>
+        <revnumber> 1.3 </revnumber>
+        <date> 05-March-2003 </date>
+        <revremark> Start of the update process </revremark>
       </revision>
-   </revhistory>
+    </revhistory>
     <edition>2</edition>
     <isbn>
-      <remark>
-        The current ISBN is for the first edition, and will need to be
-        changed...
-      </remark>
-       1-888172-78-9
-    </isbn>
+      <remark> The current ISBN is for the first edition, and will need to be changed... </remark>
+      1-888172-78-9 </isbn>
     <printhistory>
       <para>First edition printed February, 1997</para>
       <para>Sams first edition printed ???, 1999</para>
@@ -147,46 +119,42 @@
         <affiliation>
           <orgname>Red Hat, Inc.</orgname>
         </affiliation>
-   <authorblurb>
-     <simpara><email>ed@redhat.com</email></simpara>
-    </authorblurb>
-   </author>
+        <authorblurb>
+          <simpara>
+            <email>ed@redhat.com</email>
+          </simpara>
+        </authorblurb>
+      </author>
       <othercredit>
-	<firstname>Paul</firstname>
-	<surname>Nasrat</surname>
-	<contrib>%ghost description</contrib>
+        <firstname>Paul</firstname>
+        <surname>Nasrat</surname>
+        <contrib>%ghost description</contrib>
       </othercredit>
       <othercredit>
-	<firstname>Matthias</firstname>
-	<surname>Saou</surname>
-	<contrib>Start of updates, epoch, rpmbuild, etc</contrib>
+        <firstname>Matthias</firstname>
+        <surname>Saou</surname>
+        <contrib>Start of updates, epoch, rpmbuild, etc</contrib>
       </othercredit>
       <othercredit>
-	<firstname>Ville</firstname>
-	<surname>Skytt&auml;</surname>
-	<contrib>Various typo fixes, %check section, documentation on --recompil</contrib>
+        <firstname>Ville</firstname>
+        <surname>Skytt&auml;</surname>
+        <contrib>Various typo fixes, %check section, documentation on --recompil</contrib>
       </othercredit>
-  </authorgroup>
-  <copyright>
-   <year>2000</year>
-   <holder>Red Hat, Inc.</holder>
-  </copyright>
-  <legalnotice>
-   <para>
-        Copyright &copy; 2000 by Red Hat, Inc. This material may be distributed
-        only subject to the terms and conditions set forth in the Open
-        Publication License, v1.0 or later (the latest version is presently
-        available at <ulink url="http://www.opencontent.org/openpub/">
-        http://www.opencontent.org/openpub/</ulink>).
-   </para>
-      <para>
-        Distribution of the work or derivative of the work in any standard
-        (paper) book form is prohibited unless prior permission is obtained from
-        the copyright holder.
-      </para>
-  </legalnotice>
- </bookinfo>
-<!--
+    </authorgroup>
+    <copyright>
+      <year>2000</year>
+      <holder>Red Hat, Inc.</holder>
+    </copyright>
+    <legalnotice>
+      <para> Copyright &copy; 2000 by Red Hat, Inc. This material may be distributed only
+        subject to the terms and conditions set forth in the Open Publication License, v1.0 or later
+        (the latest version is presently available at <ulink
+          url="http://www.opencontent.org/openpub/"> http://www.opencontent.org/openpub/</ulink>). </para>
+      <para> Distribution of the work or derivative of the work in any standard (paper) book form is
+        prohibited unless prior permission is obtained from the copyright holder. </para>
+    </legalnotice>
+  </bookinfo>
+  <!--
   <dedication>
     <blockquote>
       <para>
@@ -201,10 +169,7 @@
   <toc>
     <title>Table of Contents</title>
   </toc>
-
-<!-- The chapters start here... -->
-
-  &PREFACE;
+  <!-- The chapters start here... --> &PREFACE;
 
   <part>
     <title>
@@ -282,11 +247,11 @@
     &RPM-RESOURCES;
 
     &PGP-INTRO;
-
+<!--
     &XREF;
-
+-->
   </part>
-
+  
   <part>
     <title>RPM Man Pages</title>
 
@@ -298,6 +263,7 @@
 
   </part>
 
+<!--
   &GENERATED-INDEX;
-
+-->
 </book>

@@ -9,12 +9,12 @@
     <table id="tb-rpm-verify-rpm-v-syntax">
       <title><command>rpm -V</command> Command Syntax</title>
       <tgroup cols="3">
-        <colspec colnum="1" colname="option">
-        <colspec colnum="2" colname="description">
-        <colspec colnum="3" colname="pageref">
-        <spanspec namest="option" nameend="pageref" spanname="spanall">
-        <spanspec namest="option" nameend="description" spanname="span12">
-        <spanspec namest="description" nameend="pageref" spanname="span23">
+        <colspec colnum="1" colname="option"/>
+        <colspec colnum="2" colname="description"/>
+        <colspec colnum="3" colname="pageref"/>
+        <spanspec namest="option" nameend="pageref" spanname="spanall"/>
+        <spanspec namest="option" nameend="description" spanname="span12"/>
+        <spanspec namest="description" nameend="pageref" spanname="span23"/>
         <tbody>
 
           <row>
@@ -41,7 +41,7 @@
               Verify named package(s)
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-package-label">
+              <xref linkend="s2-rpm-verify-package-label"/>
             </entry>
           </row>
 
@@ -54,7 +54,7 @@
               <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-p-option">
+              <xref linkend="s2-rpm-verify-p-option"/>
             </entry>
           </row>
 
@@ -67,7 +67,7 @@
               <command><replaceable>&lt;file&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-f-option">
+              <xref linkend="s2-rpm-verify-f-option"/>
             </entry>
           </row>
 
@@ -79,7 +79,7 @@
               Verify all installed packages
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-a-option">
+              <xref linkend="s2-rpm-verify-a-option"/>
             </entry>
           </row>
 
@@ -92,7 +92,7 @@
               <command><replaceable>&lt;group&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-g-option">
+              <xref linkend="s2-rpm-verify-g-option"/>
             </entry>
           </row>
 
@@ -113,7 +113,7 @@
               Do not execute verification script
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-noscripts-option">
+              <xref linkend="s2-rpm-verify-noscripts-option"/>
             </entry>
           </row>
 
@@ -125,7 +125,7 @@
               Do not verify dependencies
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-nodeps-option">
+              <xref linkend="s2-rpm-verify-nodeps-option"/>
             </entry>
           </row>
 
@@ -137,7 +137,7 @@
               Do not verify file attributes
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-nofiles-option">
+              <xref linkend="s2-rpm-verify-nofiles-option"/>
             </entry>
           </row>
 
@@ -158,7 +158,7 @@
               Display additional information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-v-option">
+              <xref linkend="s2-rpm-verify-v-option"/>
             </entry>
           </row>
 
@@ -170,7 +170,7 @@
               Display debugging information
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-vv-option">
+              <xref linkend="s2-rpm-verify-vv-option"/>
             </entry>
           </row>
 
@@ -183,7 +183,7 @@
               <command><replaceable>&lt;path&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-root-option">
+              <xref linkend="s2-rpm-verify-root-option"/>
             </entry>
           </row>
 
@@ -196,7 +196,7 @@
               <command><replaceable>&lt;rcfile&gt;</replaceable></command>
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-rcfile-option">
+              <xref linkend="s2-rpm-verify-rcfile-option"/>
             </entry>
           </row>
 
@@ -209,7 +209,7 @@
               the RPM database
             </entry>
             <entry>
-              <xref linkend="s2-rpm-verify-dbpath-option">
+              <xref linkend="s2-rpm-verify-dbpath-option"/>
             </entry>
           </row>
         </tbody>
@@ -937,7 +937,7 @@ file /etc/blunder is not owned by any package
 
         <para>
           (Note that the issue surrounding RPM and symbolic links mentioned in
-          <xref linkend="s4-rpm-query-tricky-detail"> also applies to
+          <xref linkend="s4-rpm-query-tricky-detail"/> also applies to
           <command>rpm -Vf</command>.  Watch those symlinks!)
         </para>
       </sect2>
@@ -1380,7 +1380,7 @@ D: dependencies: looking for libc.so.5
           <footnote>
             <para>
               For more information on <filename>rpmrc</filename> file entries,
-              see <xref linkend="ch-rpmrc-file">.
+              see <xref linkend="ch-rpmrc-file"/>.
             </para>
           </footnote>
         </para>
@@ -1417,7 +1417,7 @@ D: dependencies: looking for libc.so.5
           several sets of RPM options.  Software developer and package builders
           will be the people using <command>--rcfile</command>.  For more
           information on <filename>rpmrc</filename> files, see <xref
-          linkend="ch-rpmrc-file">.
+          linkend="ch-rpmrc-file"/>.
         </para>
       </sect2>
     </sect1>
@@ -1670,7 +1670,7 @@ D: dependencies: looking for libc.so.5
             <command>%verify</command>
             <footnote>
               <para>
-                See <xref linkend="s3-rpm-inside-flist-verify-directive"> for
+                See <xref linkend="s3-rpm-inside-flist-verify-directive"/> for
                 details on <command>%verify</command>
               </para>
             </footnote>

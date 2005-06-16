@@ -1,16 +1,16 @@
-<RefEntry id="rpmcache.8">
-  <RefMeta>
-    <RefEntrytitle>rpmcache</RefEntrytitle>
-    <ManVolNum>8</ManVolNum>
-    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
-  </RefMeta>
+<refentry id="rpmcache.8">
+  <refmeta>
+    <refentrytitle>rpmcache</refentrytitle>
+    <manvolnum>8</manvolnum>
+    <refmiscinfo>&FORMAL-RHI;</refmiscinfo>
+  </refmeta>
 
-<RefNameDiv>
-  <RefName>rpmcache</RefName>
-  <RefPurpose>Cache RPM Package Headers for Solving Dependencies</RefPurpose>
-</RefNameDiv>
+<refnamediv>
+  <refname>rpmcache</refname>
+  <refpurpose>Cache RPM Package Headers for Solving Dependencies</refpurpose>
+</refnamediv>
 
-<RefSynopsisDiv>
+<refsynopsisdiv>
   <para>
     <simplelist>
       <member>
@@ -21,7 +21,7 @@
       </member>
     </simplelist>
   </para>
-</RefSynopsisDiv>
+</refsynopsisdiv>
 
 <refsect1><title>Description</title>
   <para> &rpmc; walks a file tree, possibly remotely using
@@ -174,4 +174,4 @@
       </simplelist>
 </refsect1>
 
-</RefEntry>
+</refentry>

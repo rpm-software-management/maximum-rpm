@@ -519,7 +519,7 @@ os_canon:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><rep
           <para>
             The <command>buildostranslate</command> <filename>rpmrc</filename>
             file entry is discussed on <xref
-            linkend="s2-rpmrc-file-buildostranslate">.
+            linkend="s2-rpmrc-file-buildostranslate"/>.
           </para>
         </footnote>
         If a match is found, then
@@ -734,7 +734,7 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
         The <command>buildroot</command> entry defines the path used as the root
         directory during the install phase of a package build.  For more
         information on using build roots, please see <xref
-        linkend="s1-rpm-anywhere-using-build-roots">.
+        linkend="s1-rpm-anywhere-using-build-roots"/>.
       </para>
     </sect2>
 
@@ -847,7 +847,7 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
         <command>excludedocs</command> entry's behavior.  For more information
         on the <command>--excludedocs</command> and
         <command>--includedocs</command> options, please refer to <xref
-        linkend="ch-rpm-install">.
+        linkend="ch-rpm-install"/>.
       </para>
     </sect2>
 
@@ -867,7 +867,7 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
       <para>
         The <command>ftpport</command> entry is used to define the port RPM
         should use when manipulating package files via FTP.  See <xref
-        linkend="s2-rpm-install-ftpport"> for more information on how FTP ports
+        linkend="s2-rpm-install-ftpport"/> for more information on how FTP ports
         are used by RPM.
       </para>
     </sect2>
@@ -888,7 +888,7 @@ arch_compat:<symbol><replaceable>&lt;label&gt;</replaceable></symbol>: <symbol><
       <para>
         The <command>ftpproxy</command> entry is used to define the hostname of
         the FTP proxy system RPM should use when manipulating package files via
-        FTP.  See <xref linkend="s2-rpm-install-ftpproxy"> for more information
+        FTP.  See <xref linkend="s2-rpm-install-ftpproxy"/> for more information
         on how FTP proxy systems are used by RPM.
       </para>
     </sect2>
@@ -1042,7 +1042,7 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
 
       <para>
         For more information on signing packages with PGP, please read <xref
-        linkend="ch-rpm-pgp">.
+        linkend="ch-rpm-pgp"/>.
       </para>
     </sect2>
 
@@ -1067,7 +1067,7 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
 
       <para>
         For more information on signing packages with PGP, please read <xref
-        linkend="ch-rpm-pgp">.
+        linkend="ch-rpm-pgp"/>.
       </para>
     </sect2>
 
@@ -1189,7 +1189,7 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
 
       <para>
         For more information on signing packages with PGP, please read <xref
-        linkend="ch-rpm-pgp">.
+        linkend="ch-rpm-pgp"/>.
       </para>
     </sect2>
 
@@ -1282,7 +1282,7 @@ packager:Erik Troan &lt;ewt@redhat.com&gt;
         number of seconds to apply to the <command>--timecheck</command> option
         when building packages.  For more information on the
         <command>--timecheck</command> option, please see <xref
-        linkend="s2-rpm-b-command-timecheck-option">.
+        linkend="s2-rpm-b-command-timecheck-option"/>.
       </para>
     </sect2>
 

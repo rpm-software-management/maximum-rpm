@@ -1,16 +1,16 @@
-<RefEntry id="rpmbuild.8">
-  <RefMeta>
-    <RefEntrytitle>rpmbuild</RefEntrytitle>
-    <ManVolNum>8</ManVolNum>
-    <RefMiscInfo>&FORMAL-RHI;</RefMiscInfo>
-  </RefMeta>
+<refentry id="rpmbuild.8">
+  <refmeta>
+    <refentrytitle>rpmbuild</refentrytitle>
+    <manvolnum>8</manvolnum>
+    <refmiscinfo>&FORMAL-RHI;</refmiscinfo>
+  </refmeta>
 
-<RefNameDiv>
-  <RefName>&rpmb;</RefName>
-  <RefPurpose>Build RPM Package(s)</RefPurpose>
-</RefNameDiv>
+<refnamediv>
+  <refname>&rpmb;</refname>
+  <refpurpose>Build RPM Package(s)</refpurpose>
+</refnamediv>
 
-<RefSynopsisDiv>
+<refsynopsisdiv>
   <refsect2>
   <title>Building Packages:</title>
   <para>
@@ -37,7 +37,7 @@
 	<cmdsynopsis>
 	&rpmb;
 	<arg choice="req"><option>--rebuild|--recompile</option></arg>
-	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
+	<arg rep="repeat" choice="plain"><replaceable>SOURCEPKG</replaceable></arg>
 	</cmdsynopsis>
       </member>
     </simplelist>
@@ -70,7 +70,7 @@
     <arg><option>--nobuild</option></arg>
     <arg><option>--rmsource</option></arg>
     <arg><option>--rmspec</option></arg>
-	<sbr>
+	<sbr/>
     <arg><option>--short-circuit</option></arg>
     <arg><option>--sign</option></arg>
     <arg><option>--target</option> <replaceable>PLATFORM</replaceable></arg>
@@ -83,7 +83,7 @@
     </simplelist>
   </para>
   </refsect2>
-</RefSynopsisDiv>
+</refsynopsisdiv>
 
 <refsect1><title>Description</title>
   <para>
@@ -242,7 +242,7 @@
     <term><option>-bs</option></term>
     <listitem><para>
 	Build just the source package.
-    </para></ListItem>
+    </para></listitem>
     </varlistentry>
     </variablelist>
     </para>
@@ -317,7 +317,7 @@
       <cmdsynopsis>
 	&rpmb;
 	<arg choice="req"><option>--rebuild|--recompile</option></arg>
-	<arg rep="repeat" choice="plain"<replaceable>SOURCEPKG</replaceable></arg>
+	<arg rep="repeat" choice="plain"><replaceable>SOURCEPKG</replaceable></arg>
       </cmdsynopsis>
     </para>
     <para>
@@ -412,7 +412,7 @@
       <member><command>rpm</command>(8),</member>
       <member>
 	<command>
-	<ulink URL="http://www.rpm.org/">http://www.rpm.org/</ulink>
+	<ulink url="http://www.rpm.org/">http://www.rpm.org/</ulink>
 	</command>
       </member>
     </simplelist>
@@ -426,4 +426,4 @@
       </simplelist>
 </refsect1>
 
-  </RefEntry>
+  </refentry>

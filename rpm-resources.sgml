@@ -215,7 +215,7 @@ RPM version 4.2
         sources for RPM.  Using it, you can build RPM from scratch.  This is the
         most involved option, but it is the only choice for people interested in
         porting RPM to a new architecture.  See <xref
-        linkend="ch-rpm-miscellania"> for an example of RPM being built from the
+        linkend="ch-rpm-miscellania"/> for an example of RPM being built from the
         sources.
       </para>
     </sect2>
