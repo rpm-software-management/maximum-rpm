@@ -1,5 +1,6 @@
 <!-- This file contains cross-reference information used to flesh out the index -->
 
+<index>
   <indexterm>
     <primary>options, command</primary>
     <see>the option itself</see>
@@ -447,3 +448,4 @@
     <primary>file, spec</primary>
     <see>spec file</see>
   </indexterm>
+</index>

@@ -150,7 +150,7 @@
   <para>
 	Yup. Please file bug reports and RFE's against the rpm-devel package
 	using bugzilla:
-	<ulink URL="http://bugzilla.redhat.com/">http://bugzilla.redhat.com/</ulink>
+	<ulink url="http://bugzilla.redhat.com/">http://bugzilla.redhat.com/</ulink>
   </para>
 </refsect1>
 
@@ -162,7 +162,7 @@
       <member><filename>~/.rpmmacros</filename></member>
       <member>
 	<command>
-	<ulink URL="http://www.rpm.org/">http://www.rpm.org/</ulink>
+	<ulink url="http://www.rpm.org/">http://www.rpm.org/</ulink>
 	</command>
       </member>
     </simplelist>

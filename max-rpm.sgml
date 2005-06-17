@@ -1,5 +1,5 @@
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
-    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+    "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
     [
 <!-- *************** Shorthand entities... *************** -->
 <!-- The generic term "Red Hat"... -->
@@ -154,7 +154,7 @@
         prohibited unless prior permission is obtained from the copyright holder. </para>
     </legalnotice>
   </bookinfo>
-  <!--
+<!--
   <dedication>
     <blockquote>
       <para>
@@ -229,6 +229,7 @@
 
   </part>
 
+
   <part>
     <title>
       Appendixes
@@ -247,11 +248,12 @@
     &RPM-RESOURCES;
 
     &PGP-INTRO;
-<!--
+
     &XREF;
--->
+
   </part>
-  
+
+<!--
   <part>
     <title>RPM Man Pages</title>
 
@@ -262,7 +264,7 @@
     &RPMGRAPH-MANPAGE;
 
   </part>
-
+-->
 <!--
   &GENERATED-INDEX;
 -->

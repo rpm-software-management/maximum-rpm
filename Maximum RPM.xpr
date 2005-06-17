@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <meta>
+        <lastOpenedFiles/>
+    </meta>
+    <projectTree name="Maximum%20RPM.xpr">
+        <folder name="/Users/jbj/Documents/Maximum RPM">
+            <file name="intro-to-rpm.sgml"/>
+            <file name="max-rpm.sgml"/>
+            <file name="pgp-intro.sgml"/>
+            <file name="preface.sgml"/>
+            <file name="queryformat-tags.sgml"/>
+            <file name="rpm-anywhere.sgml"/>
+            <file name="rpm-b-command.sgml"/>
+            <file name="rpm-basics.sgml"/>
+            <file name="rpm-build.sgml"/>
+            <file name="rpm-checksig.sgml"/>
+            <file name="rpm-commands.sgml"/>
+            <file name="rpm-depend.sgml"/>
+            <file name="rpm-erase.sgml"/>
+            <file name="rpm-file-format.sgml"/>
+            <file name="rpm-inside.sgml"/>
+            <file name="rpm-install.sgml"/>
+            <file name="rpm-manpage.sgml"/>
+            <file name="rpm-miscellania.sgml"/>
+            <file name="rpm-multi.sgml"/>
+            <file name="rpm-pgp.sgml"/>
+            <file name="rpm-philosophy.sgml"/>
+            <file name="rpm-query.sgml"/>
+            <file name="rpm-reloc.sgml"/>
+            <file name="rpm-resources.sgml"/>
+            <file name="rpm-rpmlib.sgml"/>
+            <file name="rpm-rw-build.sgml"/>
+            <file name="rpm-specref.sgml"/>
+            <file name="rpm-subpack.sgml"/>
+            <file name="rpm-upgrade.sgml"/>
+            <file name="rpm-verify.sgml"/>
+            <file name="rpm8.sgml"/>
+            <file name="rpmbuild-manpage.sgml"/>
+            <file name="rpmbuild8.sgml"/>
+            <file name="rpmcache-manpage.sgml"/>
+            <file name="rpmcache8.sgml"/>
+            <file name="rpmdeps-manpage.sgml"/>
+            <file name="rpmdeps8.sgml"/>
+            <file name="rpmgraph-manpage.sgml"/>
+            <file name="rpmgraph8.sgml"/>
+            <file name="rpmrc-file.sgml"/>
+            <file name="xref.sgml"/>
+        </folder>
+    </projectTree>
+</project>
