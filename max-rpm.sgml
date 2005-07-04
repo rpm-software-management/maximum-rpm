@@ -1,5 +1,5 @@
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
-    "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+    "http://www.oasis-open.org/docbook/xml/4.4/docbookx.dtd"
     [
 <!-- *************** Shorthand entities... *************** -->
 <!-- The generic term "Red Hat"... -->
@@ -138,7 +138,7 @@
       <othercredit>
         <firstname>Ville</firstname>
         <surname>Skytt&auml;</surname>
-        <contrib>Various typo fixes, %check section, documentation on --recompil</contrib>
+        <contrib>%check section, find-grained dependencies, autoreq, autoprov, various typo fixes</contrib>
       </othercredit>
     </authorgroup>
     <copyright>
